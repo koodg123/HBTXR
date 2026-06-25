@@ -1,0 +1,22 @@
+{
+  "generated_at": "2026-06-23T02:44:06",
+  "source_pdfs": [
+    "/mnt/data/(Genetic) Quantization-Aware Approximation for Non-Linear Operations in Transformers.pdf",
+    "/mnt/data/(Jetfire) Efficient and Accurate Transformer Pretraining with INT8 Data Flow and Per-Block Quantization.pdf",
+    "/mnt/data/(ViTCoD) Vision Transformer Acceleration via Dedicated Algorithm and Accelerator Co-Design.pdf",
+    "/mnt/data/An Integer-Only and Group-Vector Systolic Accelerator for Efficiently Mapping Vision Transformer on Edge.pdf",
+    "/mnt/data/Integer-only Quantized Transformers for Embedded FPGA-based Time-series Forecasting in AIoT.pdf",
+    "/mnt/data/Systolic Array-based Architecture for Low-Bit Integerized Vision Transformers.pdf",
+    "/mnt/data/Towards Fully 8-bit Integer Inference for the Transformer Model.pdf"
+  ],
+  "reports": [
+    "01_GQA_LUT_Genetic_Quantization_Aware_Approximation.md",
+    "02_Jetfire_INT8_Data_Flow_Per_Block_Quantization.md",
+    "03_ViTCoD_Vision_Transformer_Codesign.md",
+    "04_Integer_Only_Group_Vector_Systolic_Accelerator.md",
+    "05_Integer_Only_Quantized_Transformers_AIoT_Time_Series.md",
+    "06_Systolic_Array_Low_Bit_Integerized_ViT.md",
+    "07_Towards_Fully_8bit_Integer_Inference_Transformer.md"
+  ],
+  "notes": "No external code execution, model training, GPU benchmark reproduction, FPGA synthesis, or board execution was performed."
+}

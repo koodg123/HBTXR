@@ -1,0 +1,30 @@
+{
+  "source_archive": "/mnt/data/XR-Eye-Tracking.zip",
+  "output_dir": "/mnt/data/xr_eye_tracking_markdown_reports",
+  "num_papers": 21,
+  "reports": [
+    "00_markdown_prompt_template_analysis.md",
+    "00_XR_Eye_Tracking_Analysis_Index.md",
+    "01_EV-Eye_Rethinking_High_frequency_Eye_Tracking.md",
+    "02_3ET_Change_Based_ConvLSTM.md",
+    "03_Dual_Path_Enhancements_Event_Based_Eye_Tracking.md",
+    "04_E_Track_Event_Camera_XR.md",
+    "05_AISSM_Adaptive_Inference_State_Space_Modeling.md",
+    "06_Event_Based_Near_Eye_Gaze_Tracking_Beyond_10000Hz.md",
+    "07_EX_Gaze_Hybrid_Event_Frame_On_Device_XR.md",
+    "08_EyeGraph_Modularity_Aware_ST_Graph_Clustering.md",
+    "09_FACET_Fast_Accurate_Ellipse_Modeling.md",
+    "10_FAPNet_Frequency_Adaptive_Point_Based_Eye_Tracker.md",
+    "11_Inference_Time_Gaze_Refinement_Motion_Aware_Postprocessing.md",
+    "12_MambaPupil_Bidirectional_Selective_Recurrent_Model.md",
+    "13_Overcoming_Data_Scarcity_Synthetic_Unlabeled.md",
+    "14_Pei_Lightweight_Spatiotemporal_Network.md",
+    "15_DistillGaze_VFM_On_Device_Eye_Tracking.md",
+    "16_Retina_Low_Power_SNN_Speck.md",
+    "17_RITnet_Real_Time_Eye_Semantic_Segmentation.md",
+    "18_Swift_Eye_Anti_Blink_High_Frequency.md",
+    "19_TDTracker_Temporal_Dynamics_Event_Eye_Tracker.md",
+    "20_BRAT_Bidirectional_Relative_Positional_Attention.md",
+    "21_SEE_Submillisecond_SCNN_FPGA_Codesign.md"
+  ]
+}
