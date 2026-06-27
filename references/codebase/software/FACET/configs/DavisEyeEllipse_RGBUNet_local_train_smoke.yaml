@@ -1,0 +1,75 @@
+---
+dataloader:
+  train:
+    dataset:
+      type: DavisWithMaskDataset
+      root_path: /tmp/facet_unet_dataset_smoke
+      split: train
+      default_resolution: [256, 256]
+      events_interpolation: causal_linear
+      mode: rgb
+    batch_size: 2
+    shuffle: false
+    drop_last: false
+    num_workers: 0
+    persistent_workers: false
+    pin_memory: false
+
+  val:
+    dataset:
+      type: DavisWithMaskDataset
+      root_path: /tmp/facet_unet_dataset_smoke
+      split: val
+      default_resolution: [256, 256]
+      events_interpolation: causal_linear
+      mode: rgb
+    batch_size: 2
+    shuffle: false
+    drop_last: false
+    num_workers: 0
+    persistent_workers: false
+    pin_memory: false
+
+model:
+  type: UNet
+  n_channels: 1
+  n_classes: 2
+
+train:
+  max_epochs: 1
+  check_val_every_n_epoch: 1
+  optimizer:
+    learning_rate: 1.0e-3
+    weight_decay: 1.0e-5
+
+val:
+  ckpt_path:
+
+trainer:
+  accelerator: cpu
+  devices: 1
+  limit_train_batches: 2
+  limit_val_batches: 2
+  num_sanity_val_steps: 0
+  default_root_dir: /home/kjm26/project/PRJXR/HBTXR/references/codebase/software/FACET/runs/unet_train_smoke
+
+logger:
+  type: tensorboard
+  save_dir: /home/kjm26/project/PRJXR/HBTXR/references/codebase/software/FACET/runs/logs
+  name: RGBUNet_local_train_smoke
+
+callback:
+  - type: ModelCheckpoint
+    monitor: val_mean_distance
+    auto_insert_metric_name: true
+    save_top_k: 1
+    mode: min
+    every_n_epochs: 1
+    save_last: true
+    verbose: true
+    filename: "{epoch:02d}-{val_mean_distance:.4f}"
+
+  - type: TQDMProgressBar
+    refresh_rate: 1
+
+  - type: Timer

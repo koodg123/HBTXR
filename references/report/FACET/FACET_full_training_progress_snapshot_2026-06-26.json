@@ -1,0 +1,51 @@
+{
+  "generated_utc": "2026-06-27T01:37:05.019288+00:00",
+  "models": [
+    {
+      "name": "EPNet_full_unet",
+      "progress": {
+        "log": "/home/kjm26/project/PRJXR/HBTXR/references/report/FACET/EPNet_full_unet_gpu0_train_2026-06-26.log",
+        "exists": true,
+        "progress_found": true,
+        "size_bytes": 667149747,
+        "mtime": "2026-06-27T01:37:10.503776+00:00",
+        "epoch": 22,
+        "percent_text": 4,
+        "percent_precise": 4.0587669916243305,
+        "step": 1478,
+        "total_steps": 36415,
+        "steps_remaining": 34937,
+        "elapsed_text": "02:08",
+        "elapsed_seconds": 128,
+        "remaining_text": "50:30",
+        "remaining_seconds": 3030,
+        "rate_it_s": 11.53
+      },
+      "run_root": "/home/kjm26/project/PRJXR/HBTXR/references/codebase/software/FACET/runs/logs/EPNet_full_unet",
+      "checkpoint_count": 16
+    },
+    {
+      "name": "HBTXR_full_unet",
+      "progress": {
+        "log": "/home/kjm26/project/PRJXR/HBTXR/references/report/FACET/HBTXR_full_unet_gpu1_train_2026-06-26.log",
+        "exists": true,
+        "progress_found": true,
+        "size_bytes": 99530396,
+        "mtime": "2026-06-27T01:37:12.032833+00:00",
+        "epoch": 0,
+        "percent_text": 55,
+        "percent_precise": 54.52173763795205,
+        "step": 158830,
+        "total_steps": 291315,
+        "steps_remaining": 132485,
+        "elapsed_text": "8:02:33",
+        "elapsed_seconds": 28953,
+        "remaining_text": "6:42:30",
+        "remaining_seconds": 24150,
+        "rate_it_s": 5.49
+      },
+      "run_root": "/home/kjm26/project/PRJXR/HBTXR/references/codebase/software/FACET/runs/logs/HBTXR_full_unet",
+      "checkpoint_count": 0
+    }
+  ]
+}

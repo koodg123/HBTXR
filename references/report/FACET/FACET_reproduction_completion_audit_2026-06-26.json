@@ -1,0 +1,272 @@
+{
+  "generated_at": "2026-06-27T01:37:12.262755+00:00",
+  "plan_path": "/home/kjm26/project/PRJXR/HBTXR/references/report/FACET/FACET_reproduction_plan_2026-06-25.md",
+  "status_path": "/home/kjm26/project/PRJXR/HBTXR/references/report/FACET/FACET_reproduction_status_2026-06-26.json",
+  "plan_exists": true,
+  "status_overall": "incomplete",
+  "status_counts": {
+    "passed": 10,
+    "missing": 8
+  },
+  "can_mark_goal_complete": false,
+  "completion_decision": "incomplete",
+  "missing_expected_status_items": [],
+  "non_passed_status_items": [
+    {
+      "name": "Phase 4 full EPNet training completion",
+      "state": "missing",
+      "missing": [
+        "EPNet max_epochs=70 completion log"
+      ],
+      "note": "A checkpoint alone is not sufficient; this gate prevents intermediate epoch checkpoints from being treated as full reproduction completion."
+    },
+    {
+      "name": "Phase 4B full HBTXR checkpoint",
+      "state": "missing",
+      "missing": [
+        "full HBTXR training output"
+      ],
+      "note": ""
+    },
+    {
+      "name": "Phase 4B full HBTXR training completion",
+      "state": "missing",
+      "missing": [
+        "HBTXR max_epochs=70 completion log"
+      ],
+      "note": "A checkpoint alone is not sufficient; this gate prevents intermediate epoch checkpoints from being treated as full reproduction completion."
+    },
+    {
+      "name": "Phase 4 EPNet fpn_dw ablation checkpoint",
+      "state": "missing",
+      "missing": [
+        "EPNet fpn_dw ablation training output"
+      ],
+      "note": "The reproduction plan calls for fpn_2d baseline plus fpn_dw ablation for paper correspondence."
+    },
+    {
+      "name": "Phase 4 EPNet fpn_dw ablation completion",
+      "state": "missing",
+      "missing": [
+        "EPNet fpn_dw max_epochs=70 completion log"
+      ],
+      "note": "A checkpoint alone is not sufficient for the planned fpn_dw ablation."
+    },
+    {
+      "name": "Phase 4B HBTXR effective-batch-32 checkpoint",
+      "state": "missing",
+      "missing": [
+        "HBTXR effective-batch-32 training output"
+      ],
+      "note": "This stricter comparison run matches EPNet's effective batch size of 32."
+    },
+    {
+      "name": "Phase 4B HBTXR effective-batch-32 completion",
+      "state": "missing",
+      "missing": [
+        "HBTXR effective-batch-32 max_epochs=70 completion log"
+      ],
+      "note": "A checkpoint alone is not sufficient for the planned fair effective-batch comparison."
+    },
+    {
+      "name": "Phase 4 final evaluation artifacts",
+      "state": "missing",
+      "missing": [
+        "FACET_reproduction_results_*.json",
+        "FACET_reproduction_results_*.md",
+        "FACET_reproduction_summary_*.json",
+        "FACET_table2_comparison_*.md",
+        "FACET_hbtxr_reproduction_results_*.json",
+        "FACET_hbtxr_reproduction_results_*.md",
+        "FACET_epnet_vs_hbtxr_comparison_*.json",
+        "FACET_epnet_vs_hbtxr_comparison_*.md",
+        "FACET_epnet_fpn_dw_reproduction_results_*.json",
+        "FACET_epnet_fpn_dw_table2_comparison_*.md",
+        "FACET_hbtxr_effbs32_reproduction_results_*.json",
+        "FACET_hbtxr_effbs32_reproduction_results_*.md",
+        "FACET_epnet_vs_hbtxr_effbs32_comparison_*.json",
+        "FACET_epnet_vs_hbtxr_effbs32_comparison_*.md"
+      ],
+      "note": "Final reproduction requires both EPNet/FACET paper comparison and HBTXR-vs-EPNet comparison artifacts."
+    }
+  ],
+  "requirement_groups": [
+    {
+      "name": "Phase 1 subset EPNet baseline",
+      "state": "passed",
+      "items": [
+        {
+          "name": "Phase 1 subset DeanDataset",
+          "state": "passed",
+          "missing": [],
+          "note": ""
+        },
+        {
+          "name": "Phase 1 EPNet smoke checkpoint",
+          "state": "passed",
+          "missing": [],
+          "note": ""
+        }
+      ]
+    },
+    {
+      "name": "Phase 2 U-Net relabeling pipeline",
+      "state": "passed",
+      "items": [
+        {
+          "name": "Phase 2 U-Net labelled PNG dataset",
+          "state": "passed",
+          "missing": [],
+          "note": ""
+        },
+        {
+          "name": "Phase 2 U-Net smoke checkpoint",
+          "state": "passed",
+          "missing": [],
+          "note": ""
+        },
+        {
+          "name": "Phase 2 full U-Net checkpoint",
+          "state": "passed",
+          "missing": [],
+          "note": ""
+        }
+      ]
+    },
+    {
+      "name": "Phase 3 full DeanDataset expansion",
+      "state": "passed",
+      "items": [
+        {
+          "name": "Phase 3 full DeanDataset_full_unet",
+          "state": "passed",
+          "missing": [],
+          "note": ""
+        },
+        {
+          "name": "U-Net labelled subset visual samples",
+          "state": "passed",
+          "missing": [],
+          "note": ""
+        }
+      ]
+    },
+    {
+      "name": "Phase 4 full EPNet reproduction",
+      "state": "incomplete",
+      "items": [
+        {
+          "name": "Phase 4 full EPNet checkpoint",
+          "state": "passed",
+          "missing": [],
+          "note": ""
+        },
+        {
+          "name": "Phase 4 full EPNet training completion",
+          "state": "missing",
+          "missing": [
+            "EPNet max_epochs=70 completion log"
+          ],
+          "note": "A checkpoint alone is not sufficient; this gate prevents intermediate epoch checkpoints from being treated as full reproduction completion."
+        },
+        {
+          "name": "Phase 4 EPNet fpn_dw ablation checkpoint",
+          "state": "missing",
+          "missing": [
+            "EPNet fpn_dw ablation training output"
+          ],
+          "note": "The reproduction plan calls for fpn_2d baseline plus fpn_dw ablation for paper correspondence."
+        },
+        {
+          "name": "Phase 4 EPNet fpn_dw ablation completion",
+          "state": "missing",
+          "missing": [
+            "EPNet fpn_dw max_epochs=70 completion log"
+          ],
+          "note": "A checkpoint alone is not sufficient for the planned fpn_dw ablation."
+        },
+        {
+          "name": "Phase 4 final evaluation artifacts",
+          "state": "missing",
+          "missing": [
+            "FACET_reproduction_results_*.json",
+            "FACET_reproduction_results_*.md",
+            "FACET_reproduction_summary_*.json",
+            "FACET_table2_comparison_*.md",
+            "FACET_hbtxr_reproduction_results_*.json",
+            "FACET_hbtxr_reproduction_results_*.md",
+            "FACET_epnet_vs_hbtxr_comparison_*.json",
+            "FACET_epnet_vs_hbtxr_comparison_*.md",
+            "FACET_epnet_fpn_dw_reproduction_results_*.json",
+            "FACET_epnet_fpn_dw_table2_comparison_*.md",
+            "FACET_hbtxr_effbs32_reproduction_results_*.json",
+            "FACET_hbtxr_effbs32_reproduction_results_*.md",
+            "FACET_epnet_vs_hbtxr_effbs32_comparison_*.json",
+            "FACET_epnet_vs_hbtxr_effbs32_comparison_*.md"
+          ],
+          "note": "Final reproduction requires both EPNet/FACET paper comparison and HBTXR-vs-EPNet comparison artifacts."
+        }
+      ]
+    },
+    {
+      "name": "Phase 4B HBTXR parallel comparison",
+      "state": "incomplete",
+      "items": [
+        {
+          "name": "Phase 4B full HBTXR checkpoint",
+          "state": "missing",
+          "missing": [
+            "full HBTXR training output"
+          ],
+          "note": ""
+        },
+        {
+          "name": "Phase 4B full HBTXR training completion",
+          "state": "missing",
+          "missing": [
+            "HBTXR max_epochs=70 completion log"
+          ],
+          "note": "A checkpoint alone is not sufficient; this gate prevents intermediate epoch checkpoints from being treated as full reproduction completion."
+        },
+        {
+          "name": "Phase 4B HBTXR effective-batch-32 checkpoint",
+          "state": "missing",
+          "missing": [
+            "HBTXR effective-batch-32 training output"
+          ],
+          "note": "This stricter comparison run matches EPNet's effective batch size of 32."
+        },
+        {
+          "name": "Phase 4B HBTXR effective-batch-32 completion",
+          "state": "missing",
+          "missing": [
+            "HBTXR effective-batch-32 max_epochs=70 completion log"
+          ],
+          "note": "A checkpoint alone is not sufficient for the planned fair effective-batch comparison."
+        },
+        {
+          "name": "Phase 4 final evaluation artifacts",
+          "state": "missing",
+          "missing": [
+            "FACET_reproduction_results_*.json",
+            "FACET_reproduction_results_*.md",
+            "FACET_reproduction_summary_*.json",
+            "FACET_table2_comparison_*.md",
+            "FACET_hbtxr_reproduction_results_*.json",
+            "FACET_hbtxr_reproduction_results_*.md",
+            "FACET_epnet_vs_hbtxr_comparison_*.json",
+            "FACET_epnet_vs_hbtxr_comparison_*.md",
+            "FACET_epnet_fpn_dw_reproduction_results_*.json",
+            "FACET_epnet_fpn_dw_table2_comparison_*.md",
+            "FACET_hbtxr_effbs32_reproduction_results_*.json",
+            "FACET_hbtxr_effbs32_reproduction_results_*.md",
+            "FACET_epnet_vs_hbtxr_effbs32_comparison_*.json",
+            "FACET_epnet_vs_hbtxr_effbs32_comparison_*.md"
+          ],
+          "note": "Final reproduction requires both EPNet/FACET paper comparison and HBTXR-vs-EPNet comparison artifacts."
+        }
+      ]
+    }
+  ],
+  "completion_rule": "Goal completion requires the plan file to exist, every expected status item to be present and passed, grouped Phase 1-4B requirements to be passed, and final full-validation artifacts to be accepted by the status checker."
+}

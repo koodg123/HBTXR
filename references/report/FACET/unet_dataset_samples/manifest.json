@@ -1,0 +1,167 @@
+{
+  "source_root": "/home/kjm26/project/dataset/XR/EV_Eye/raw_data/DavisWithMaskDataset_labelled_subset",
+  "output_root": "/home/kjm26/project/PRJXR/HBTXR/references/report/FACET/unet_dataset_samples",
+  "num_records": 10,
+  "records": [
+    {
+      "split": "train",
+      "source_image": "/home/kjm26/project/dataset/XR/EV_Eye/raw_data/DavisWithMaskDataset_labelled_subset/train/data/left_user10_session_1_0_2_0000.png",
+      "source_mask": "/home/kjm26/project/dataset/XR/EV_Eye/raw_data/DavisWithMaskDataset_labelled_subset/train/label/left_user10_session_1_0_2_0000.png",
+      "frame": "/home/kjm26/project/PRJXR/HBTXR/references/report/FACET/unet_dataset_samples/train_00_left_user10_session_1_0_2_0000_frame.png",
+      "mask": "/home/kjm26/project/PRJXR/HBTXR/references/report/FACET/unet_dataset_samples/train_00_left_user10_session_1_0_2_0000_mask.png",
+      "overlay": "/home/kjm26/project/PRJXR/HBTXR/references/report/FACET/unet_dataset_samples/train_00_left_user10_session_1_0_2_0000_overlay.png",
+      "mask_pixels": 1219,
+      "ellipse": {
+        "x": 185.0,
+        "y": 127.0,
+        "a": 38.10108947753906,
+        "b": 39.0774040222168,
+        "ang": 45.0
+      }
+    },
+    {
+      "split": "train",
+      "source_image": "/home/kjm26/project/dataset/XR/EV_Eye/raw_data/DavisWithMaskDataset_labelled_subset/train/data/left_user28_session_2_0_2_0013.png",
+      "source_mask": "/home/kjm26/project/dataset/XR/EV_Eye/raw_data/DavisWithMaskDataset_labelled_subset/train/label/left_user28_session_2_0_2_0013.png",
+      "frame": "/home/kjm26/project/PRJXR/HBTXR/references/report/FACET/unet_dataset_samples/train_01_left_user28_session_2_0_2_0013_frame.png",
+      "mask": "/home/kjm26/project/PRJXR/HBTXR/references/report/FACET/unet_dataset_samples/train_01_left_user28_session_2_0_2_0013_mask.png",
+      "overlay": "/home/kjm26/project/PRJXR/HBTXR/references/report/FACET/unet_dataset_samples/train_01_left_user28_session_2_0_2_0013_overlay.png",
+      "mask_pixels": 393,
+      "ellipse": {
+        "x": 141.0,
+        "y": 118.0,
+        "a": 17.91200828552246,
+        "b": 26.208993911743164,
+        "ang": 35.52362823486328
+      }
+    },
+    {
+      "split": "train",
+      "source_image": "/home/kjm26/project/dataset/XR/EV_Eye/raw_data/DavisWithMaskDataset_labelled_subset/train/data/left_user45_session_2_0_1_0029.png",
+      "source_mask": "/home/kjm26/project/dataset/XR/EV_Eye/raw_data/DavisWithMaskDataset_labelled_subset/train/label/left_user45_session_2_0_1_0029.png",
+      "frame": "/home/kjm26/project/PRJXR/HBTXR/references/report/FACET/unet_dataset_samples/train_02_left_user45_session_2_0_1_0029_frame.png",
+      "mask": "/home/kjm26/project/PRJXR/HBTXR/references/report/FACET/unet_dataset_samples/train_02_left_user45_session_2_0_1_0029_mask.png",
+      "overlay": "/home/kjm26/project/PRJXR/HBTXR/references/report/FACET/unet_dataset_samples/train_02_left_user45_session_2_0_1_0029_overlay.png",
+      "mask_pixels": 356,
+      "ellipse": {
+        "x": 166.98345947265625,
+        "y": 78.9958267211914,
+        "a": 16.86139678955078,
+        "b": 24.899160385131836,
+        "ang": 64.09838104248047
+      }
+    },
+    {
+      "split": "train",
+      "source_image": "/home/kjm26/project/dataset/XR/EV_Eye/raw_data/DavisWithMaskDataset_labelled_subset/train/data/right_user19_session_2_0_1_0013.png",
+      "source_mask": "/home/kjm26/project/dataset/XR/EV_Eye/raw_data/DavisWithMaskDataset_labelled_subset/train/label/right_user19_session_2_0_1_0013.png",
+      "frame": "/home/kjm26/project/PRJXR/HBTXR/references/report/FACET/unet_dataset_samples/train_03_right_user19_session_2_0_1_0013_frame.png",
+      "mask": "/home/kjm26/project/PRJXR/HBTXR/references/report/FACET/unet_dataset_samples/train_03_right_user19_session_2_0_1_0013_mask.png",
+      "overlay": "/home/kjm26/project/PRJXR/HBTXR/references/report/FACET/unet_dataset_samples/train_03_right_user19_session_2_0_1_0013_overlay.png",
+      "mask_pixels": 773,
+      "ellipse": {
+        "x": 199.0,
+        "y": 111.0,
+        "a": 27.38312339782715,
+        "b": 34.120697021484375,
+        "ang": 124.53380584716797
+      }
+    },
+    {
+      "split": "train",
+      "source_image": "/home/kjm26/project/dataset/XR/EV_Eye/raw_data/DavisWithMaskDataset_labelled_subset/train/data/right_user3_session_2_0_2_0020.png",
+      "source_mask": "/home/kjm26/project/dataset/XR/EV_Eye/raw_data/DavisWithMaskDataset_labelled_subset/train/label/right_user3_session_2_0_2_0020.png",
+      "frame": "/home/kjm26/project/PRJXR/HBTXR/references/report/FACET/unet_dataset_samples/train_04_right_user3_session_2_0_2_0020_frame.png",
+      "mask": "/home/kjm26/project/PRJXR/HBTXR/references/report/FACET/unet_dataset_samples/train_04_right_user3_session_2_0_2_0020_mask.png",
+      "overlay": "/home/kjm26/project/PRJXR/HBTXR/references/report/FACET/unet_dataset_samples/train_04_right_user3_session_2_0_2_0020_overlay.png",
+      "mask_pixels": 802,
+      "ellipse": {
+        "x": 135.99082946777344,
+        "y": 92.00961303710938,
+        "a": 27.93869400024414,
+        "b": 34.78416061401367,
+        "ang": 36.59470748901367
+      }
+    },
+    {
+      "split": "val",
+      "source_image": "/home/kjm26/project/dataset/XR/EV_Eye/raw_data/DavisWithMaskDataset_labelled_subset/val/data/right_user35_session_2_0_2_0000.png",
+      "source_mask": "/home/kjm26/project/dataset/XR/EV_Eye/raw_data/DavisWithMaskDataset_labelled_subset/val/label/right_user35_session_2_0_2_0000.png",
+      "frame": "/home/kjm26/project/PRJXR/HBTXR/references/report/FACET/unet_dataset_samples/val_00_right_user35_session_2_0_2_0000_frame.png",
+      "mask": "/home/kjm26/project/PRJXR/HBTXR/references/report/FACET/unet_dataset_samples/val_00_right_user35_session_2_0_2_0000_mask.png",
+      "overlay": "/home/kjm26/project/PRJXR/HBTXR/references/report/FACET/unet_dataset_samples/val_00_right_user35_session_2_0_2_0000_overlay.png",
+      "mask_pixels": 766,
+      "ellipse": {
+        "x": 190.03480529785156,
+        "y": 138.04542541503906,
+        "a": 29.193796157836914,
+        "b": 31.739063262939453,
+        "ang": 133.92544555664062
+      }
+    },
+    {
+      "split": "val",
+      "source_image": "/home/kjm26/project/dataset/XR/EV_Eye/raw_data/DavisWithMaskDataset_labelled_subset/val/data/right_user40_session_2_0_1_0014.png",
+      "source_mask": "/home/kjm26/project/dataset/XR/EV_Eye/raw_data/DavisWithMaskDataset_labelled_subset/val/label/right_user40_session_2_0_1_0014.png",
+      "frame": "/home/kjm26/project/PRJXR/HBTXR/references/report/FACET/unet_dataset_samples/val_01_right_user40_session_2_0_1_0014_frame.png",
+      "mask": "/home/kjm26/project/PRJXR/HBTXR/references/report/FACET/unet_dataset_samples/val_01_right_user40_session_2_0_1_0014_mask.png",
+      "overlay": "/home/kjm26/project/PRJXR/HBTXR/references/report/FACET/unet_dataset_samples/val_01_right_user40_session_2_0_1_0014_overlay.png",
+      "mask_pixels": 433,
+      "ellipse": {
+        "x": 204.0,
+        "y": 90.0,
+        "a": 20.447410583496094,
+        "b": 25.314716339111328,
+        "ang": 132.2177276611328
+      }
+    },
+    {
+      "split": "val",
+      "source_image": "/home/kjm26/project/dataset/XR/EV_Eye/raw_data/DavisWithMaskDataset_labelled_subset/val/data/right_user44_session_2_0_2_0026.png",
+      "source_mask": "/home/kjm26/project/dataset/XR/EV_Eye/raw_data/DavisWithMaskDataset_labelled_subset/val/label/right_user44_session_2_0_2_0026.png",
+      "frame": "/home/kjm26/project/PRJXR/HBTXR/references/report/FACET/unet_dataset_samples/val_02_right_user44_session_2_0_2_0026_frame.png",
+      "mask": "/home/kjm26/project/PRJXR/HBTXR/references/report/FACET/unet_dataset_samples/val_02_right_user44_session_2_0_2_0026_mask.png",
+      "overlay": "/home/kjm26/project/PRJXR/HBTXR/references/report/FACET/unet_dataset_samples/val_02_right_user44_session_2_0_2_0026_overlay.png",
+      "mask_pixels": 611,
+      "ellipse": {
+        "x": 149.0,
+        "y": 99.0,
+        "a": 25.351526260375977,
+        "b": 29.0919132232666,
+        "ang": 46.572593688964844
+      }
+    },
+    {
+      "split": "val",
+      "source_image": "/home/kjm26/project/dataset/XR/EV_Eye/raw_data/DavisWithMaskDataset_labelled_subset/val/data/right_user5_session_1_0_2_0011.png",
+      "source_mask": "/home/kjm26/project/dataset/XR/EV_Eye/raw_data/DavisWithMaskDataset_labelled_subset/val/label/right_user5_session_1_0_2_0011.png",
+      "frame": "/home/kjm26/project/PRJXR/HBTXR/references/report/FACET/unet_dataset_samples/val_03_right_user5_session_1_0_2_0011_frame.png",
+      "mask": "/home/kjm26/project/PRJXR/HBTXR/references/report/FACET/unet_dataset_samples/val_03_right_user5_session_1_0_2_0011_mask.png",
+      "overlay": "/home/kjm26/project/PRJXR/HBTXR/references/report/FACET/unet_dataset_samples/val_03_right_user5_session_1_0_2_0011_overlay.png",
+      "mask_pixels": 483,
+      "ellipse": {
+        "x": 215.0,
+        "y": 116.0,
+        "a": 20.37049102783203,
+        "b": 28.75442886352539,
+        "ang": 154.60301208496094
+      }
+    },
+    {
+      "split": "val",
+      "source_image": "/home/kjm26/project/dataset/XR/EV_Eye/raw_data/DavisWithMaskDataset_labelled_subset/val/data/right_user9_session_2_0_2_0027.png",
+      "source_mask": "/home/kjm26/project/dataset/XR/EV_Eye/raw_data/DavisWithMaskDataset_labelled_subset/val/label/right_user9_session_2_0_2_0027.png",
+      "frame": "/home/kjm26/project/PRJXR/HBTXR/references/report/FACET/unet_dataset_samples/val_04_right_user9_session_2_0_2_0027_frame.png",
+      "mask": "/home/kjm26/project/PRJXR/HBTXR/references/report/FACET/unet_dataset_samples/val_04_right_user9_session_2_0_2_0027_mask.png",
+      "overlay": "/home/kjm26/project/PRJXR/HBTXR/references/report/FACET/unet_dataset_samples/val_04_right_user9_session_2_0_2_0027_overlay.png",
+      "mask_pixels": 856,
+      "ellipse": {
+        "x": 180.97454833984375,
+        "y": 143.9893798828125,
+        "a": 28.56128692626953,
+        "b": 36.273311614990234,
+        "ang": 28.29334259033203
+      }
+    }
+  ]
+}

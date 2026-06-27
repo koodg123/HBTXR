@@ -1,2 +1,32 @@
+# Python/runtime caches
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.ipynb_checkpoints/
 
-thrid/*/.git
+# Local virtual environments
+.venv/
+.*-venv/
+.facet-prep-venv/
+.facet-train-venv/
+
+# Training outputs and generated model artifacts
+runs/
+**/runs/
+*.ckpt
+*.pt
+*.pth
+*.onnx
+events.out.tfevents.*
+
+# Local logs
+*.log
+
+# Nested repository metadata from vendored references
+third/*/.git/
+references/codebase/software/FACET/.git/
+
+# Editor/OS files
+.idea/
+.vscode/
+.DS_Store

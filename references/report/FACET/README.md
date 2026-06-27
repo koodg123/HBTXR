@@ -1,0 +1,244 @@
+# FACET Reports
+
+Date: 2026-06-25
+
+이 디렉토리는 FACET 관련 분석, 재현 절차, 데이터셋 생성 기록, 검증 로그를 저장하는 기본 위치이다.
+
+기준 경로:
+
+- Report directory: `/home/kjm26/project/PRJXR/HBTXR/references/report/FACET`
+- Codebase: `/home/kjm26/project/PRJXR/HBTXR/references/codebase/software/FACET`
+- Paper: `/home/kjm26/project/PRJXR/HBTXR/references/papers/software/FACET_Fast_and_Accurate_Event-Based_Eye_Tracking_Using_Ellipse_Modeling_for_Extended_Reality.pdf`
+- EV-Eye raw data: `/home/kjm26/project/dataset/XR/EV_Eye/raw_data`
+- Generated DeanDataset: `/home/kjm26/project/dataset/XR/EV_Eye/raw_data/DeanDataset`
+
+## Standing Rule
+
+앞으로 이 프로젝트에서 FACET 관련 분석 문서, 재현 기록, 데이터셋 생성 기록, 검증 결과 문서는 모두 이 디렉토리 아래에 저장한다.
+
+## Documents
+
+- `FACET_code_and_paper_analysis.md`
+  - FACET 논문과 코드베이스의 구조, 모델, 데이터셋, 실행 흐름, paper-to-code 대응 분석.
+- `FACET_reproduction_dataset_flow_2026-06-25.md`
+  - 지금까지 대화에서 정리된 split 기준, `Data_davis_labelled_with_mask`와 `Data_davis`의 역할, `DeanDataset` 생성 결과, 샘플 시각화 결과, 남은 재현 한계.
+- `FACET_reproduction_plan_2026-06-25.md`
+  - FACET 논문 재현을 위한 단계별 실행 계획. subset EPNet baseline, U-Net 재학습, 전체 `Data_davis` 라벨 확장, full EPNet 재현 실험 기준을 포함.
+- `FACET_reproduction_plan_progress_audit_2026-06-26.md`
+  - `FACET_reproduction_plan_2026-06-25.md` 기준 Phase 1-4B 진행 상태를 최신 status checker와 monitor evidence에 매핑한 계획 대비 진행 audit 문서.
+- `FACET_missing_gate_action_tracker_2026-06-26.md`
+  - 최신 completion audit의 `missing 8` gate를 담당 training session, watcher, runner, 완료 증거 artifact와 매핑한 운영 추적 문서.
+- `FACET_missing_gate_summary_2026-06-26.md`
+  - `summarize_missing_gates_2026-06-26.py --output-md`로 생성한 no-log 현재 상태 요약 artifact. completion decision, missing gate, 다음 refresh due, structured progress snapshot을 포함.
+- `FACET_reproduction_execution_runbook_2026-06-25.md`
+  - Phase 2-4 full 실행 runbook. GPU preflight, full U-Net training, full expansion, full EPNet training, final evaluation command와 gate를 포함.
+- `FACET_reproduction_status_2026-06-25.md`
+  - FACET 재현 진행 상태 checker의 Markdown 출력. phase별 passed/missing/blocked gate와 완료 조건을 포함.
+- `FACET_reproduction_status_2026-06-25.json`
+  - FACET 재현 진행 상태 checker의 machine-readable JSON 출력.
+- `FACET_reproduction_status_2026-06-26.md`
+  - HBTXR 병렬 훈련 gate가 포함된 최신 FACET 재현 진행 상태 checker의 Markdown 출력.
+- `FACET_reproduction_status_2026-06-26.json`
+  - HBTXR 병렬 훈련 gate가 포함된 최신 FACET 재현 진행 상태 checker의 machine-readable JSON 출력.
+- `FACET_gpu_cudnn_diagnostic_2026-06-25.md`
+  - RTX 5080/CUDA/PyTorch GPU 인식 상태, cuDNN sublibrary mismatch 진단, `FACET_DISABLE_CUDNN=1` 우회, U-Net 임시 학습 checkpoint와 best checkpoint 기록.
+- `FACET_phase1_subset_smoke_2026-06-25.md`
+  - Phase 1 subset EPNet pipeline smoke 실행 로그. 코드 포터블성 수정, DataLoader/forward/loss/backward/validation_step 검증, checkpoint/log smoke, GPU 미가용 상태와 남은 한계를 포함.
+- `FACET_phase2_unet_dataset_prep_2026-06-25.md`
+  - Phase 2 U-Net 재학습 준비 로그. h5-to-PNG 변환 스크립트, local-safe U-Net config, smoke training, full labelled subset PNG dataset 생성 결과를 포함.
+- `FACET_phase3_full_expansion_prep_2026-06-25.md`
+  - Phase 3 full `Data_davis` label expansion 준비 로그. U-Net checkpoint 기반 full DeanDataset 생성 스크립트, 제한 smoke, `DavisEyeEllipseDataset` load 검증, full expansion 실행 템플릿을 포함.
+- `FACET_phase3_full_expansion_recovery_2026-06-25.md`
+  - Phase 3 full expansion 중 `exit code 137` 종료 원인 판단, resume 지원 패치, 현재 tmux 백그라운드 실행 상태, U-Net best validation accuracy snapshot을 포함.
+- `run_full_expansion_resume_2026-06-25.sh`
+  - `DeanDataset_full_unet` 생성을 `progress_state.json` 기준으로 재개하는 tmux용 실행 스크립트.
+- `FACET_phase4_evaluation_prep_2026-06-25.md`
+  - Phase 4 full EPNet 재현 평가 준비 로그. checkpoint 평가 스크립트, params/FLOPs/latency 측정, smoke Table II 비교 artifact를 포함.
+- `FACET_phase4_epnet_eval_smoke_2026-06-25.md`
+  - EPNet smoke checkpoint를 대상으로 생성한 JSON/Markdown 평가 산출물 중 Markdown 비교표.
+- `FACET_phase4_epnet_eval_smoke_2026-06-25.json`
+  - EPNet smoke checkpoint 평가 metric, params, FLOPs, latency, paper reference 값을 담은 machine-readable JSON.
+- `FACET_HBTXR_DeiT_training_plan_2026-06-25.md`
+  - GPT5.5-high sub-agent 분석을 반영한 HBTXR DeiT backbone 학습 가능화 계획. EPNet Neck 제외, EPHead/loss/metric 재사용, config와 smoke 검증 계획을 포함.
+- `FACET_HBTXR_independent_implementation_2026-06-25.md`
+  - EPNet 직접 import 없이 HBTXR 이름공간으로 head/loss/predict/metric을 복사 및 rename한 구현 기록. 주변 DavisEyeEllipse 모델 파일 조사와 HBTXR smoke 검증 결과를 포함.
+- `FACET_parallel_epnet_hbtxr_training_2026-06-26.md`
+  - `DeanDataset_full_unet` manifest 생성 이후 EPNet/FACET은 GPU0, HBTXR-DeiT는 GPU1에서 병렬 학습하도록 목표와 실행 배치를 추가한 운영 문서.
+- `FACET_phase4_full_training_launch_2026-06-26.md`
+  - full `DeanDataset_full_unet` 완료 수치, variable-size event cache loader fix, EPNet GPU0 및 HBTXR GPU1 병렬 훈련 시작 상태를 기록한 launch report.
+- `FACET_full_training_monitor_2026-06-26.md`
+  - EPNet/FACET GPU0 및 HBTXR-DeiT GPU1 full training의 최신 runtime snapshot, GPU utilization, status checker 결과, 남은 checkpoint/evaluation gate를 기록한 monitor report.
+- `FACET_full_training_progress_snapshot_2026-06-26.md`
+  - EPNet/FACET 및 HBTXR-DeiT full training 로그에서 파싱한 현재 epoch 진행률, step/s, epoch 잔여 시간, checkpoint count snapshot.
+- `FACET_hourly_status_refresh_guard_2026-06-26.md`
+  - 훈련 결과 모니터링을 1시간보다 자주 실행하지 않도록 status/progress refresh를 mtime 기준으로 guard하는 운영 스크립트와 검증 기록.
+- `FACET_full_training_eta_and_hbtxr_batch_risk_2026-06-26.md`
+  - 현재 live throughput 기준 EPNet/HBTXR 70 epoch ETA, HBTXR `batch_size: 2` 병목 리스크, batch-size probe/restart 판단 기준을 기록한 문서.
+- `probe_hbtxr_batch_size.py`
+  - FACET codebase script. HBTXR full training의 `batch_size: 2` 병목을 검증하기 위해 후보 batch size별 forward/backward CUDA peak memory와 throughput을 측정하는 보조 스크립트.
+- `FACET_epnet_toframestack_recovery_2026-06-26.md`
+  - EPNet full training 중 동일 timestamp event slice로 발생한 `ToFrameStack.normalize()` assertion crash의 원인, 패치, 검증, GPU0 재시작 상태를 기록한 recovery report.
+- `FACET_hbtxr_toframestack_recovery_2026-06-26.md`
+  - HBTXR full training 중 `ToFrameStack.normalize()`의 `Data is invalid` assertion으로 GPU1 run이 중단된 원인, robust timestamp normalization 패치, smoke 검증, GPU1 재시작 상태를 기록한 recovery report.
+- `FACET_epnet_invalid_ellipse_recovery_2026-06-26.md`
+  - EPNet full training 중 augmentation 이후 NaN ellipse label로 target 생성이 실패한 원인, invalid ellipse 방어 패치, dataset smoke 검증, EPNet/HBTXR 재시작 상태를 기록한 recovery report.
+- `FACET_hbtxr_batch_probe_2026-06-26.md`
+  - HBTXR full training의 batch size 및 mixed precision 후보를 GPU1에서 probe한 결과, `batch_size: 4` config 변경, HBTXR GPU1 재시작 상태, ETA 해석을 기록한 report.
+- `FACET_full_training_resume_support_2026-06-26.md`
+  - full EPNet/HBTXR 장기 훈련 중 crash 또는 수동 재시작 비용을 줄이기 위한 checkpoint resume 지원 패치와 검증 결과를 기록한 report.
+- `FACET_full_evaluation_gate_hardening_2026-06-26.md`
+  - full checkpoint 생성 이후 최종 평가 script가 FACET config를 안정적으로 찾도록 경로와 환경 변수를 보강한 기록.
+- `FACET_full_training_watchdog_2026-06-26.md`
+  - full EPNet/HBTXR 장기 훈련 tmux 세션이 사라질 때 completion marker가 없으면 기존 launcher로 자동 재시작하는 watchdog 구성과 검증 기록.
+- `FACET_followup_training_watchdog_2026-06-26.md`
+  - EPNet fpn_dw ablation과 HBTXR effective-batch-32 후속 실험 waiter/evaluation watcher를 1시간 주기로 감시하고 재시작하는 follow-up watchdog 구성 기록.
+- `FACET_full_training_step_checkpoint_recovery_2026-06-26.md`
+  - full EPNet/HBTXR 장기 훈련의 epoch 전 crash 손실을 줄이기 위해 future-run step checkpoint callback을 추가한 설정 보강과 검증 기록.
+- `FACET_final_evaluation_pairwise_comparison_2026-06-26.md`
+  - 최종 평가 runner가 HBTXR 단일 평가와 EPNet-vs-HBTXR pairwise 비교를 별도 artifact로 생성하도록 보강한 기록.
+- `FACET_epnet_fpn_dw_ablation_preparation_2026-06-26.md`
+  - Phase 4의 `mode: fpn_dw` ablation을 위해 full dataset config, GPU0 대기형 launcher, status gate를 추가한 기록.
+- `FACET_epnet_fpn_dw_waiter_launch_2026-06-26.md`
+  - EPNet fpn_dw ablation waiter/evaluation watcher tmux 세션 등록과 watcher root-missing 대기 보강을 기록한 문서.
+- `FACET_epnet_hbtxr_data_batch_consistency_2026-06-26.md`
+  - EPNet/FACET과 HBTXR가 같은 `DeanDataset_full_unet` split을 사용한다는 근거, step 수 차이가 batch size 차이라는 계산, 후속 fair effective batch HBTXR config를 기록한 문서.
+- `FACET_hbtxr_effbs32_waiter_launch_2026-06-26.md`
+  - HBTXR effective-batch-32 후속 실험 waiter/evaluation watcher tmux 세션 등록과 평가 artifact 경로를 기록한 문서.
+- `FACET_effbs32_status_gate_hardening_2026-06-26.md`
+  - HBTXR effective-batch-32 후속 실험의 checkpoint/completion/final artifact를 status checker 완료 기준에 추가한 기록.
+- `FACET_reproduction_summary_artifact_2026-06-26.md`
+  - 계획 문서가 요구한 `FACET_reproduction_results_<date>.md` 최종 summary artifact를 생성하기 위해 summary builder, 평가 runner 연동, status gate를 추가한 기록.
+- `FACET_evaluation_watcher_idempotency_2026-06-26.md`
+  - 최종 평가 watcher와 runner가 summary/pairwise artifact 기준으로 일관되게 완료를 판단하고, 이미 존재하는 평가 JSON/Markdown은 재평가하지 않도록 보강한 기록.
+- `FACET_evaluation_runner_completion_gate_2026-06-26.md`
+  - 최종 평가 runner가 수동 실행되더라도 각 training log의 strict `max_epochs=70` completion marker 없이는 final evaluation artifact를 만들지 않도록 보강한 기록.
+- `FACET_final_artifact_content_validation_2026-06-26.md`
+  - 최종 평가 artifact가 파일명만으로 통과하지 않도록 `check_reproduction_status.py`에 full validation JSON, pairwise JSON, summary JSON 내용 검증을 추가한 기록.
+- `FACET_markdown_artifact_content_validation_2026-06-26.md`
+  - 최종 Markdown report artifact도 파일 존재만으로 통과하지 않고 역할별 필수 heading/table term을 포함해야 하도록 content 검증을 추가한 기록.
+- `FACET_final_artifact_numeric_validation_2026-06-26.md`
+  - 최종 evaluation JSON이 required metric key만 갖고 `null`/비수치 값을 포함해도 통과하지 않도록 metric, params, FLOPs, latency의 finite numeric 검증을 추가한 기록.
+- `FACET_final_artifact_context_validation_2026-06-26.md`
+  - 최종 artifact 파일명 pattern과 JSON 내부 config/model type 또는 pairwise label이 일치해야 통과하도록 context 검증을 추가한 기록.
+- `FACET_final_artifact_date_consistency_2026-06-26.md`
+  - wildcard로 선택된 최종 JSON/Markdown artifact들이 모두 같은 `YYYY-MM-DD` suffix를 가진 하나의 결과 묶음인지 검증하도록 보강한 기록.
+- `FACET_artifact_validation_cli_2026-06-26.md`
+  - runner/watchdog skip 조건도 파일 존재가 아니라 content-valid JSON 기준으로 판단하도록 `validate_reproduction_artifact.py` CLI와 연동한 기록.
+- `FACET_artifact_checkpoint_path_validation_2026-06-26.md`
+  - 최종 evaluation/comparison JSON이 실제 존재하는 checkpoint 파일을 가리켜야 통과하도록 artifact validator를 강화한 기록.
+- `FACET_status_summary_sync_2026-06-26.md`
+  - 최종 평가 runner가 evaluation 후 summary/status를 순차 동기화하도록 `sync_reproduction_status_summary.py`를 추가하고 세 runner에 연결한 기록.
+- `FACET_summary_content_validation_2026-06-26.md`
+  - `build_reproduction_summary.py`가 smoke/partial/stale JSON을 `available`로 표시하지 않도록 content validation을 적용한 기록.
+- `FACET_summary_label_validation_2026-06-26.md`
+  - 최종 summary JSON이 계획상의 모든 model result label과 pairwise comparison label을 포함해야 통과하도록 `validate_summary_json()`을 강화한 기록.
+- `FACET_summary_entry_path_validation_2026-06-26.md`
+  - 최종 summary JSON의 각 result/comparison entry가 label에 맞는 expected artifact filename pattern과 실제 파일을 가리켜야 통과하도록 강화한 기록.
+- `FACET_artifact_validation_smoke_test_2026-06-26.md`
+  - smoke evaluation JSON이 최종 artifact로 통과하지 않고 summary도 `partial`로 남는지 반복 검증하는 `/tmp` 기반 smoke test 추가 기록.
+- `FACET_watcher_role_scoping_2026-06-26.md`
+  - baseline/fpn_dw/effbs32 watcher가 전체 summary 완료 전에도 자기 역할의 평가 artifact가 있으면 불필요하게 재시작하지 않도록 완료 판정을 분리한 기록.
+- `FACET_training_completion_marker_hardening_2026-06-26.md`
+  - `max_epochs=70` 설정 문자열만으로 full training 완료를 오판하지 않도록 status checker 및 shell watcher/waiter 완료 marker를 강화하고 `/tmp` 기반 smoke test를 추가한 기록.
+- `FACET_pairwise_input_validation_2026-06-26.md`
+  - pairwise comparison이 smoke/partial/stale evaluation JSON으로 생성되지 않도록 `compare_model_evaluation_results.py`와 effbs32 runner 입력 검증을 강화한 기록.
+- `FACET_comparison_row_validation_2026-06-26.md`
+  - 최종 pairwise comparison JSON이 계획상의 전체 metric row를 포함하고 각 row의 left/right/delta가 finite numeric 값인지 검증하도록 강화한 기록.
+- `FACET_pairwise_input_validation_smoke_test_2026-06-26.md`
+  - pairwise comparison이 smoke evaluation JSON을 기본 모드에서 거부하고 `--allow-invalid-inputs` 디버그 모드에서만 `/tmp` 결과를 생성하는지 검증하는 smoke test 추가 기록.
+- `FACET_validation_smoke_suite_2026-06-26.md`
+  - final artifact validation 관련 Python/shell 정적 검증, completion marker, evaluation runner, hourly guard routing 회귀 smoke를 한 번에 실행하는 validation suite 추가 기록.
+- `FACET_hourly_monitoring_routing_hardening_2026-06-26.md`
+  - routine watchdog/checkpoint watcher loop가 status/progress artifact를 직접 갱신하지 않고 hourly refresh guard를 경유하도록 보강한 작업 기록과 검증 결과.
+- `FACET_comment_translation_2026-06-26.md`
+  - FACET 코드베이스 내 Chinese/Korean 주석과 설명성 docstring을 영어로 번역한 작업 기록과 검증 결과.
+- `FACET_reproduction_completion_audit_tool_2026-06-26.md`
+  - active FACET 재현 목표를 완료 처리할 수 있는지 판정하는 audit 도구의 목적, 입력/출력, 현재 incomplete 판정, 검증 결과를 기록한 문서.
+- `FACET_reproduction_completion_audit_2026-06-26.md`
+  - `FACET_reproduction_plan_2026-06-25.md`와 최신 status JSON을 대조해 Phase 1-4B requirement group별 완료 여부를 기록한 Markdown audit 결과.
+- `FACET_reproduction_completion_audit_2026-06-26.json`
+  - 동일 완료 audit의 machine-readable JSON 결과. `can_mark_goal_complete`와 `completion_decision`을 포함한다.
+- `FACET_resolution_contract_correction_2026-06-27.md`
+  - 논문 `64x64` 표기가 입력 해상도가 아니라 최종 feature map/heatmap/metric 해상도임을 정리하고, HBTXR 설정을 `256x256` 입력과 `64x64` 출력 계약으로 되돌린 기록.
+- `run_epnet_full_unet_gpu0_when_ready_2026-06-26.sh`
+  - `DeanDataset_full_unet/manifest.json` 생성 후 EPNet/FACET full training을 GPU0에서 시작하는 tmux용 대기 스크립트.
+- `run_epnet_fpn_dw_full_unet_gpu0_after_baseline_2026-06-26.sh`
+  - 현재 EPNet fpn_2d baseline 완료와 GPU0 유휴 상태를 1시간 간격으로 기다린 뒤, `DavisEyeEllipse_EPNet_fpn_dw_full_unet.yaml`로 fpn_dw ablation을 시작하는 대기 스크립트.
+- `run_epnet_fpn_dw_checkpoint_evaluation_2026-06-26.sh`
+  - EPNet fpn_dw full checkpoint가 생성된 후 Table II 형식의 ablation 평가 JSON/Markdown을 생성하는 평가 스크립트.
+- `watch_epnet_fpn_dw_checkpoints_and_evaluate_2026-06-26.sh`
+  - EPNet fpn_dw checkpoint와 completion marker를 1시간 간격으로 감시하고, routine status refresh는 hourly guard를 경유하며, 준비되면 fpn_dw 평가 스크립트를 자동 실행하는 watcher.
+- `run_hbtxr_full_unet_gpu1_when_ready_2026-06-26.sh`
+  - `DeanDataset_full_unet/manifest.json` 생성 후 HBTXR full training을 GPU1에서 시작하는 tmux용 대기 스크립트.
+- `run_hbtxr_full_unet_effbs32_gpu1_after_baseline_2026-06-26.sh`
+  - 현재 HBTXR baseline 완료와 GPU1 유휴 상태를 1시간 간격으로 기다린 뒤, `DavisEyeEllipse_HBTXR_full_unet_effbs32.yaml`로 effective batch size 32 후속 공정 비교 실험을 시작하는 대기 스크립트.
+- `run_hbtxr_effbs32_checkpoint_evaluation_2026-06-26.sh`
+  - HBTXR effective-batch-32 checkpoint가 생성된 후 단일 평가와 EPNet-vs-HBTXR-effbs32 pairwise 비교 artifact를 생성하는 평가 스크립트.
+- `watch_hbtxr_effbs32_checkpoints_and_evaluate_2026-06-26.sh`
+  - HBTXR effective-batch-32 checkpoint와 completion marker를 1시간 간격으로 감시하고, routine status refresh는 hourly guard를 경유하며, 준비되면 평가 스크립트를 자동 실행하는 watcher.
+- `run_full_checkpoint_evaluation_2026-06-26.sh`
+  - EPNet/FACET 및 HBTXR full checkpoint가 생성된 후 두 모델의 full validation metric, params/FLOPs/latency, paper Table II 비교 artifact를 생성하는 평가 스크립트.
+- `watch_full_checkpoints_and_evaluate_2026-06-26.sh`
+  - full EPNet/HBTXR checkpoint 생성을 주기적으로 감시하고, routine status/progress refresh는 hourly guard를 경유하며, 둘 다 준비되면 평가 스크립트를 자동 실행하는 watcher 스크립트.
+- `watch_full_training_jobs_2026-06-26.sh`
+  - full EPNet/HBTXR training tmux 세션과 evaluation watcher 세션을 감시하고, 중단 시 resume-capable launcher로 재시작하며, routine refresh는 hourly guard를 경유하는 watchdog 스크립트.
+- `watch_followup_training_jobs_2026-06-26.sh`
+  - EPNet fpn_dw 및 HBTXR effective-batch-32 후속 실험 waiter/evaluation watcher 세션을 1시간 간격으로 감시하고 필요 시 재시작하며, routine refresh는 hourly guard를 경유하는 watchdog 스크립트.
+- `run_hbtxr_batch_probe_gpu0_when_free_2026-06-26.sh`
+  - GPU0이 비었을 때 HBTXR 후보 batch size별 CUDA memory/throughput probe를 실행하는 대기 스크립트. 현재 EPNet GPU0 학습을 방해하지 않기 위해 아직 실행하지 않음.
+- `run_hbtxr_batch_probe_gpu1_now_2026-06-26.sh`
+  - HBTXR full training을 잠시 중단한 뒤 GPU1에서 batch size 후보를 즉시 probe하는 스크립트. `batch_size: 4` 선택 근거를 생성함.
+- `build_reproduction_summary.py`
+  - FACET codebase script. 개별 evaluation JSON과 pairwise comparison JSON을 묶어 `FACET_reproduction_summary_<date>.json` 및 `FACET_reproduction_results_<date>.md`를 생성하는 최종 summary builder.
+- `validate_reproduction_artifact.py`
+  - FACET codebase script. evaluation/comparison/summary JSON이 full `DeanDataset_full_unet` 재현 artifact로 유효한지 검사하고 runner/watchdog skip 조건에 사용되는 CLI.
+- `sync_reproduction_status_summary.py`
+  - FACET codebase script. 최종 평가 후 `FACET_reproduction_summary_<date>`와 `FACET_reproduction_status_<date>`를 같은 산출물 시점으로 동기화하는 CLI.
+- `audit_reproduction_completion_2026-06-26.py`
+  - FACET report script. 계획 문서와 status JSON을 Phase 1-4B requirement group으로 묶어 goal completion 가능 여부를 JSON/Markdown으로 산출하는 audit CLI.
+- `test_artifact_validation_smoke_2026-06-26.sh`
+  - FACET report script. smoke JSON이 artifact validator와 summary builder에서 거부되는지 `/tmp` 출력만 사용해 검증하는 회귀 테스트.
+- `test_training_completion_marker_2026-06-26.sh`
+  - FACET report script. `max_epochs=70` 설정 문자열은 거부하고 실제 Lightning completion marker만 수용하는지 `/tmp` 합성 로그로 검증하는 회귀 테스트.
+- `test_evaluation_runner_completion_gate_2026-06-26.sh`
+  - FACET report script. 최종 평가 runner들이 completion marker gate를 기본 활성화하고 expected training log를 확인하는지 정적으로 검증하는 회귀 테스트.
+- `test_pairwise_input_validation_smoke_2026-06-26.sh`
+  - FACET report script. pairwise comparison 입력 검증이 smoke JSON을 기본 모드에서 거부하는지 `/tmp` 출력만 사용해 검증하는 회귀 테스트.
+- `test_hourly_refresh_guard_routing_2026-06-26.sh`
+  - FACET report script. routine watcher들이 status/progress artifact를 직접 갱신하지 않고 hourly refresh guard를 경유하는지 정적으로 검증하는 회귀 테스트.
+- `test_hourly_guard_skip_order_2026-06-26.sh`
+  - FACET report script. hourly refresh guard의 skip branch가 status/progress/audit refresh 호출보다 먼저 종료되는지 정적으로 검증하는 회귀 테스트.
+- `test_monitoring_interval_defaults_2026-06-26.sh`
+  - FACET report script. routine watcher/waiter 및 hourly guard interval 기본값이 3600초로 유지되는지 정적으로 검증하는 회귀 테스트.
+- `test_next_hourly_refresh_once_2026-06-26.sh`
+  - FACET report script. one-shot refresh helper가 남은 interval만큼 대기하고 `--force` 없이 hourly guard를 호출하는지 정적으로 검증하는 회귀 테스트.
+- `test_completion_audit_fail_gate_2026-06-26.sh`
+  - FACET report script. 현재 incomplete status에서 completion audit의 `--fail-on-incomplete`가 nonzero로 종료하고 `/tmp` audit JSON/Markdown을 남기는지 검증하는 회귀 테스트.
+- `test_completion_audit_pass_gate_2026-06-26.sh`
+  - FACET report script. 합성 all-passed status에서 completion audit가 `can_mark_goal_complete: true`와 `completion_decision: complete`를 산출하는지 검증하는 회귀 테스트.
+- `run_validation_smoke_suite_2026-06-26.sh`
+  - FACET report script. artifact validation, pairwise input validation, completion marker smoke와 관련 정적 검증을 한 번에 실행하는 회귀 검증 suite.
+- `run_hourly_status_refresh_guard_2026-06-26.sh`
+  - FACET report script. 최신 status/progress artifact가 1시간보다 새로우면 refresh를 skip하고, 명시적 `--force`일 때만 즉시 갱신하는 guarded refresh 스크립트. 실제 refresh가 발생하면 completion audit과 missing-gate summary artifact까지 갱신한다.
+- `run_next_hourly_refresh_once_2026-06-26.sh`
+  - FACET report script. 최신 status/progress artifact mtime 기준으로 다음 hourly refresh 가능 시점까지 대기한 뒤 hourly guard와 completion check를 호출하는 one-shot 예약 스크립트.
+- `start_next_hourly_refresh_once_2026-06-26.sh`
+  - FACET report script. `facet_next_hourly_refresh_once` tmux 세션이 이미 있으면 새 one-shot 예약을 만들지 않고, 없을 때만 다음 hourly refresh 예약 세션을 시작하는 launcher.
+- `summarize_missing_gates_2026-06-26.py`
+  - FACET report script. 훈련 로그를 직접 스캔하지 않고 status/progress/audit JSON만 읽어 현재 missing gate, completion decision, artifact age, 다음 refresh due/state를 출력하거나 `--output-md`로 저장하는 보조 도구. `--include-runtime`을 주면 tmux/process 상태도 로그 스캔 없이 포함하되, sandbox에서 host runtime을 볼 수 없으면 `unavailable`로 표시한다.
+- `test_missing_gate_summary_2026-06-26.sh`
+  - FACET report script. missing gate summary 도구가 completion decision, EPNet completion gate, no-log-scan 경계를 출력하는지 검증하는 smoke test.
+- `run_guarded_missing_gate_summary_2026-06-26.sh`
+  - FACET report script. hourly refresh guard를 `--force` 없이 먼저 실행한 뒤 no-log missing gate summary Markdown artifact를 갱신하는 운영 wrapper. 이미 guard를 실행한 caller는 `FACET_SKIP_HOURLY_GUARD=1`로 summary만 갱신할 수 있다.
+- `test_guarded_missing_gate_summary_2026-06-26.sh`
+  - FACET report script. guarded summary wrapper가 hourly guard를 강제하지 않고 summary artifact를 생성하도록 연결됐는지 정적으로 검증하는 smoke test.
+- `check_goal_completion_after_guard_2026-06-26.sh`
+  - FACET report script. guarded summary 실행 후 completion audit JSON의 `can_mark_goal_complete`와 `completion_decision`을 확인하고, 완료가 아니면 기본적으로 nonzero로 종료하는 goal completion gate. 이미 summary를 갱신한 caller는 `FACET_SKIP_GUARDED_SUMMARY=1`로 audit만 확인할 수 있다.
+- `test_goal_completion_check_2026-06-26.sh`
+  - FACET report script. goal completion gate가 guarded summary를 먼저 실행하고 incomplete 상태에서 fail-closed 하는지 검증하는 smoke test.
+- `test_followup_waiter_completion_gate_2026-06-26.sh`
+  - FACET report script. EPNet fpn_dw와 HBTXR effective-batch-32 waiter가 baseline `max_epochs=70` completion marker를 기본적으로 요구하는지 정적으로 검증하는 smoke test.
+- `unet_dataset_samples/`
+  - U-Net labelled subset의 frame/mask/overlay 시각 검증 샘플 10개와 manifest.
+- `FACET_conversation_summary_2026-06-25.md`
+  - 이번 FACET 분석 대화의 결정 사항과 생성/수정된 산출물 요약.
