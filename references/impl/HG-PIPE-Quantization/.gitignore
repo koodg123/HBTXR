@@ -1,0 +1,22 @@
+.venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+hgpipe_quantization.egg-info/
+build/
+dist/
+*.log
+
+# Large model and dataset artifacts
+*.pth
+*.pt
+*.ckpt
+*.onnx
+*.npz
+
+# Large generated trace dumps
+reports/fakequant_trace.json
+reports/fakequant_graph_trace.json
+reports/torch_int_case_trace.json

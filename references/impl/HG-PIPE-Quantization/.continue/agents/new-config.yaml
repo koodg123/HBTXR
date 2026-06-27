@@ -1,0 +1,8 @@
+name: Local Config
+version: 1.0.0
+schema: v1
+models:
+  - title: "QWOPUS 3.5 Coder"
+    provider: "openai"
+    model: "qwopus3.5-9b-coder-mtp"
+    apiBase: "http://localhost:9401/v1"

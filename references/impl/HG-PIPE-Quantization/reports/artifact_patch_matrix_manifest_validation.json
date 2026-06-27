@@ -1,0 +1,402 @@
+{
+  "duplicate_pairs": [],
+  "errors": [
+    "integer_label_dtype_rows",
+    "integer_patch_dtype_rows",
+    "label_files",
+    "loadable_label_files",
+    "loadable_patch_input_files",
+    "matching_sample_count_rows",
+    "patch_input_files",
+    "valid_label_shape_rows",
+    "valid_patch_shape_rows"
+  ],
+  "existing_label_files": 0,
+  "existing_patch_input_files": 0,
+  "expected_rows": 9,
+  "integer_label_dtype_rows": 0,
+  "integer_patch_dtype_rows": 0,
+  "invalid_entries": [
+    {
+      "errors": [
+        "patch_input_missing",
+        "label_missing",
+        "patch_input_shape",
+        "label_shape",
+        "patch_input_dtype",
+        "label_dtype",
+        "sample_count"
+      ],
+      "labels": {
+        "dtype": null,
+        "error": "missing",
+        "integer_dtype": false,
+        "loadable": false,
+        "samples": null,
+        "shape": null,
+        "valid_shape": false
+      },
+      "labels_npy": "configs/configs/patch_inputs/deit_tiny_patch16_224_int8_labels.npy",
+      "manifest_index": 0,
+      "model": "deit_tiny_patch16_224",
+      "patch_input": {
+        "dtype": null,
+        "error": "missing",
+        "integer_dtype": false,
+        "loadable": false,
+        "samples": null,
+        "shape": null,
+        "valid_shape": false
+      },
+      "patch_inputs_npy": "configs/configs/patch_inputs/deit_tiny_patch16_224_int8_patch_inputs.npy",
+      "precision": "int8"
+    },
+    {
+      "errors": [
+        "patch_input_missing",
+        "label_missing",
+        "patch_input_shape",
+        "label_shape",
+        "patch_input_dtype",
+        "label_dtype",
+        "sample_count"
+      ],
+      "labels": {
+        "dtype": null,
+        "error": "missing",
+        "integer_dtype": false,
+        "loadable": false,
+        "samples": null,
+        "shape": null,
+        "valid_shape": false
+      },
+      "labels_npy": "configs/configs/patch_inputs/deit_tiny_patch16_224_int4_labels.npy",
+      "manifest_index": 1,
+      "model": "deit_tiny_patch16_224",
+      "patch_input": {
+        "dtype": null,
+        "error": "missing",
+        "integer_dtype": false,
+        "loadable": false,
+        "samples": null,
+        "shape": null,
+        "valid_shape": false
+      },
+      "patch_inputs_npy": "configs/configs/patch_inputs/deit_tiny_patch16_224_int4_patch_inputs.npy",
+      "precision": "int4"
+    },
+    {
+      "errors": [
+        "patch_input_missing",
+        "label_missing",
+        "patch_input_shape",
+        "label_shape",
+        "patch_input_dtype",
+        "label_dtype",
+        "sample_count"
+      ],
+      "labels": {
+        "dtype": null,
+        "error": "missing",
+        "integer_dtype": false,
+        "loadable": false,
+        "samples": null,
+        "shape": null,
+        "valid_shape": false
+      },
+      "labels_npy": "configs/configs/patch_inputs/deit_tiny_patch16_224_w4a8_labels.npy",
+      "manifest_index": 2,
+      "model": "deit_tiny_patch16_224",
+      "patch_input": {
+        "dtype": null,
+        "error": "missing",
+        "integer_dtype": false,
+        "loadable": false,
+        "samples": null,
+        "shape": null,
+        "valid_shape": false
+      },
+      "patch_inputs_npy": "configs/configs/patch_inputs/deit_tiny_patch16_224_w4a8_patch_inputs.npy",
+      "precision": "w4a8"
+    },
+    {
+      "errors": [
+        "patch_input_missing",
+        "label_missing",
+        "patch_input_shape",
+        "label_shape",
+        "patch_input_dtype",
+        "label_dtype",
+        "sample_count"
+      ],
+      "labels": {
+        "dtype": null,
+        "error": "missing",
+        "integer_dtype": false,
+        "loadable": false,
+        "samples": null,
+        "shape": null,
+        "valid_shape": false
+      },
+      "labels_npy": "configs/configs/patch_inputs/deit_small_patch16_224_int8_labels.npy",
+      "manifest_index": 3,
+      "model": "deit_small_patch16_224",
+      "patch_input": {
+        "dtype": null,
+        "error": "missing",
+        "integer_dtype": false,
+        "loadable": false,
+        "samples": null,
+        "shape": null,
+        "valid_shape": false
+      },
+      "patch_inputs_npy": "configs/configs/patch_inputs/deit_small_patch16_224_int8_patch_inputs.npy",
+      "precision": "int8"
+    },
+    {
+      "errors": [
+        "patch_input_missing",
+        "label_missing",
+        "patch_input_shape",
+        "label_shape",
+        "patch_input_dtype",
+        "label_dtype",
+        "sample_count"
+      ],
+      "labels": {
+        "dtype": null,
+        "error": "missing",
+        "integer_dtype": false,
+        "loadable": false,
+        "samples": null,
+        "shape": null,
+        "valid_shape": false
+      },
+      "labels_npy": "configs/configs/patch_inputs/deit_small_patch16_224_int4_labels.npy",
+      "manifest_index": 4,
+      "model": "deit_small_patch16_224",
+      "patch_input": {
+        "dtype": null,
+        "error": "missing",
+        "integer_dtype": false,
+        "loadable": false,
+        "samples": null,
+        "shape": null,
+        "valid_shape": false
+      },
+      "patch_inputs_npy": "configs/configs/patch_inputs/deit_small_patch16_224_int4_patch_inputs.npy",
+      "precision": "int4"
+    },
+    {
+      "errors": [
+        "patch_input_missing",
+        "label_missing",
+        "patch_input_shape",
+        "label_shape",
+        "patch_input_dtype",
+        "label_dtype",
+        "sample_count"
+      ],
+      "labels": {
+        "dtype": null,
+        "error": "missing",
+        "integer_dtype": false,
+        "loadable": false,
+        "samples": null,
+        "shape": null,
+        "valid_shape": false
+      },
+      "labels_npy": "configs/configs/patch_inputs/deit_small_patch16_224_w4a8_labels.npy",
+      "manifest_index": 5,
+      "model": "deit_small_patch16_224",
+      "patch_input": {
+        "dtype": null,
+        "error": "missing",
+        "integer_dtype": false,
+        "loadable": false,
+        "samples": null,
+        "shape": null,
+        "valid_shape": false
+      },
+      "patch_inputs_npy": "configs/configs/patch_inputs/deit_small_patch16_224_w4a8_patch_inputs.npy",
+      "precision": "w4a8"
+    },
+    {
+      "errors": [
+        "patch_input_missing",
+        "label_missing",
+        "patch_input_shape",
+        "label_shape",
+        "patch_input_dtype",
+        "label_dtype",
+        "sample_count"
+      ],
+      "labels": {
+        "dtype": null,
+        "error": "missing",
+        "integer_dtype": false,
+        "loadable": false,
+        "samples": null,
+        "shape": null,
+        "valid_shape": false
+      },
+      "labels_npy": "configs/configs/patch_inputs/vit_tiny_patch16_224_int8_labels.npy",
+      "manifest_index": 6,
+      "model": "vit_tiny_patch16_224",
+      "patch_input": {
+        "dtype": null,
+        "error": "missing",
+        "integer_dtype": false,
+        "loadable": false,
+        "samples": null,
+        "shape": null,
+        "valid_shape": false
+      },
+      "patch_inputs_npy": "configs/configs/patch_inputs/vit_tiny_patch16_224_int8_patch_inputs.npy",
+      "precision": "int8"
+    },
+    {
+      "errors": [
+        "patch_input_missing",
+        "label_missing",
+        "patch_input_shape",
+        "label_shape",
+        "patch_input_dtype",
+        "label_dtype",
+        "sample_count"
+      ],
+      "labels": {
+        "dtype": null,
+        "error": "missing",
+        "integer_dtype": false,
+        "loadable": false,
+        "samples": null,
+        "shape": null,
+        "valid_shape": false
+      },
+      "labels_npy": "configs/configs/patch_inputs/vit_tiny_patch16_224_int4_labels.npy",
+      "manifest_index": 7,
+      "model": "vit_tiny_patch16_224",
+      "patch_input": {
+        "dtype": null,
+        "error": "missing",
+        "integer_dtype": false,
+        "loadable": false,
+        "samples": null,
+        "shape": null,
+        "valid_shape": false
+      },
+      "patch_inputs_npy": "configs/configs/patch_inputs/vit_tiny_patch16_224_int4_patch_inputs.npy",
+      "precision": "int4"
+    },
+    {
+      "errors": [
+        "patch_input_missing",
+        "label_missing",
+        "patch_input_shape",
+        "label_shape",
+        "patch_input_dtype",
+        "label_dtype",
+        "sample_count"
+      ],
+      "labels": {
+        "dtype": null,
+        "error": "missing",
+        "integer_dtype": false,
+        "loadable": false,
+        "samples": null,
+        "shape": null,
+        "valid_shape": false
+      },
+      "labels_npy": "configs/configs/patch_inputs/vit_tiny_patch16_224_w4a8_labels.npy",
+      "manifest_index": 8,
+      "model": "vit_tiny_patch16_224",
+      "patch_input": {
+        "dtype": null,
+        "error": "missing",
+        "integer_dtype": false,
+        "loadable": false,
+        "samples": null,
+        "shape": null,
+        "valid_shape": false
+      },
+      "patch_inputs_npy": "configs/configs/patch_inputs/vit_tiny_patch16_224_w4a8_patch_inputs.npy",
+      "precision": "w4a8"
+    }
+  ],
+  "loadable_label_files": 0,
+  "loadable_patch_input_files": 0,
+  "manifest": "configs/artifact_patch_matrix_manifest.template.json",
+  "matching_sample_count_rows": 0,
+  "missing_label_files": [
+    "configs/configs/patch_inputs/deit_tiny_patch16_224_int8_labels.npy",
+    "configs/configs/patch_inputs/deit_tiny_patch16_224_int4_labels.npy",
+    "configs/configs/patch_inputs/deit_tiny_patch16_224_w4a8_labels.npy",
+    "configs/configs/patch_inputs/deit_small_patch16_224_int8_labels.npy",
+    "configs/configs/patch_inputs/deit_small_patch16_224_int4_labels.npy",
+    "configs/configs/patch_inputs/deit_small_patch16_224_w4a8_labels.npy",
+    "configs/configs/patch_inputs/vit_tiny_patch16_224_int8_labels.npy",
+    "configs/configs/patch_inputs/vit_tiny_patch16_224_int4_labels.npy",
+    "configs/configs/patch_inputs/vit_tiny_patch16_224_w4a8_labels.npy"
+  ],
+  "missing_pairs": [],
+  "missing_patch_input_files": [
+    "configs/configs/patch_inputs/deit_tiny_patch16_224_int8_patch_inputs.npy",
+    "configs/configs/patch_inputs/deit_tiny_patch16_224_int4_patch_inputs.npy",
+    "configs/configs/patch_inputs/deit_tiny_patch16_224_w4a8_patch_inputs.npy",
+    "configs/configs/patch_inputs/deit_small_patch16_224_int8_patch_inputs.npy",
+    "configs/configs/patch_inputs/deit_small_patch16_224_int4_patch_inputs.npy",
+    "configs/configs/patch_inputs/deit_small_patch16_224_w4a8_patch_inputs.npy",
+    "configs/configs/patch_inputs/vit_tiny_patch16_224_int8_patch_inputs.npy",
+    "configs/configs/patch_inputs/vit_tiny_patch16_224_int4_patch_inputs.npy",
+    "configs/configs/patch_inputs/vit_tiny_patch16_224_w4a8_patch_inputs.npy"
+  ],
+  "paper_equivalent_rows": 9,
+  "passed": false,
+  "patch_input_width": 150528,
+  "present_pairs": [
+    {
+      "model": "deit_small_patch16_224",
+      "precision": "int4"
+    },
+    {
+      "model": "deit_small_patch16_224",
+      "precision": "int8"
+    },
+    {
+      "model": "deit_small_patch16_224",
+      "precision": "w4a8"
+    },
+    {
+      "model": "deit_tiny_patch16_224",
+      "precision": "int4"
+    },
+    {
+      "model": "deit_tiny_patch16_224",
+      "precision": "int8"
+    },
+    {
+      "model": "deit_tiny_patch16_224",
+      "precision": "w4a8"
+    },
+    {
+      "model": "vit_tiny_patch16_224",
+      "precision": "int4"
+    },
+    {
+      "model": "vit_tiny_patch16_224",
+      "precision": "int8"
+    },
+    {
+      "model": "vit_tiny_patch16_224",
+      "precision": "w4a8"
+    }
+  ],
+  "rows": 9,
+  "schema": "hgpipe_artifact_patch_matrix_v1",
+  "status": "failed",
+  "unexpected_pairs": [],
+  "valid_flow_rows": 9,
+  "valid_label_shape_rows": 0,
+  "valid_patch_shape_rows": 0
+}

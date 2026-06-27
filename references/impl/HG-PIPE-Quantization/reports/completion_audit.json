@@ -1,0 +1,127 @@
+{
+  "complete": 14,
+  "fully_complete": false,
+  "incomplete": 0,
+  "items": [
+    {
+      "detail": "contracts=97 has_required_fields=True",
+      "evidence": "/home/user/project/PRJXR/impl_repos/HGPIPE/HG-PIPE-Quantization/reports/quant_contracts.json",
+      "requirement": "scale/scalar, dtype, range, zero-point policy contract export",
+      "status": "complete"
+    },
+    {
+      "detail": "count=97 expected=97 passed=97 mismatches=0",
+      "evidence": "/home/user/project/PRJXR/impl_repos/HGPIPE/HG-PIPE-Quantization/reports/verification.json",
+      "requirement": "core quantization kernels",
+      "status": "complete"
+    },
+    {
+      "detail": "count=268 expected=268 passed=268 mismatches=0",
+      "evidence": "/home/user/project/PRJXR/impl_repos/HGPIPE/HG-PIPE-Quantization/reports/graph_verification.json",
+      "requirement": "artifact component graph",
+      "status": "complete"
+    },
+    {
+      "detail": "count=293 expected=293 passed=293 mismatches=0",
+      "evidence": "/home/user/project/PRJXR/impl_repos/HGPIPE/HG-PIPE-Quantization/reports/e2e_graph_verification.json",
+      "requirement": "single-input end-to-end graph",
+      "status": "complete"
+    },
+    {
+      "detail": "count=293 expected=293 passed=293 mismatches=0",
+      "evidence": "/home/user/project/PRJXR/impl_repos/HGPIPE/HG-PIPE-Quantization/reports/torch_int_verification.json",
+      "requirement": "torch.int end-to-end graph",
+      "status": "complete"
+    },
+    {
+      "detail": "count=60 expected=60 passed=60 mismatches=0",
+      "evidence": "/home/user/project/PRJXR/impl_repos/HGPIPE/HG-PIPE-Quantization/reports/fakequant_verification.json",
+      "requirement": "FakeQuant LUT cases",
+      "status": "complete"
+    },
+    {
+      "detail": "count=293 expected=293 passed=293 mismatches=0",
+      "evidence": "/home/user/project/PRJXR/impl_repos/HGPIPE/HG-PIPE-Quantization/reports/fakequant_graph_verification.json",
+      "requirement": "FakeQuant graph",
+      "status": "complete"
+    },
+    {
+      "detail": "passed=True mismatches=0 top1_equal=True",
+      "evidence": "/home/user/project/PRJXR/impl_repos/HGPIPE/HG-PIPE-Quantization/reports/run_compare_result.json",
+      "requirement": "torch.int versus FakeQuant graph final-output comparison",
+      "status": "complete"
+    },
+    {
+      "detail": "scale=1.0 scale_paper_equivalent=False comparison_passed=True bridge_paper_equivalent=False",
+      "evidence": "/home/user/project/PRJXR/impl_repos/HGPIPE/HG-PIPE-Quantization/reports/input_scale_estimate.json, /home/user/project/PRJXR/impl_repos/HGPIPE/HG-PIPE-Quantization/reports/run_compare_image_result.json",
+      "requirement": "experimental explicit-scale image bridge",
+      "status": "complete"
+    },
+    {
+      "detail": "rows=9 expected=9 required_fields=9/9 full_val=9/9 cuda=9/9 pretrained=9/9 provenance=9/9 valid_metrics=9/9 missing_pairs=[]",
+      "evidence": "/home/user/project/PRJXR/impl_repos/HGPIPE/HG-PIPE-Quantization/reports/imagenet_accuracy_int8_int4.json, /home/user/project/PRJXR/impl_repos/HGPIPE/HG-PIPE-Quantization/reports/imagenet_accuracy_w4a8.json",
+      "requirement": "PyTorch timm ImageNet fake-quant evaluation reports",
+      "status": "complete"
+    },
+    {
+      "detail": "status=incomplete present=1/5 missing=4 ready=False",
+      "evidence": "/home/user/project/PRJXR/impl_repos/HGPIPE/HG-PIPE-Quantization/reports/paper_equivalence_assets.json",
+      "requirement": "paper-equivalence asset preflight report",
+      "status": "complete"
+    },
+    {
+      "detail": "rows=1 required_fields=1/1 experimental_rows=1 artifact_patch_rows=0 covered_rows=1/1 valid_metrics=1/1",
+      "evidence": "/home/user/project/PRJXR/impl_repos/HGPIPE/HG-PIPE-Quantization/reports/artifact_imagenet_accuracy.json",
+      "requirement": "artifact-backed image-batch report",
+      "status": "complete"
+    },
+    {
+      "detail": "status=failed rows=1/9 missing_pairs=9 paper_equivalent_rows=0 errors=['evaluation_mode', 'missing_pairs', 'paper_equivalent', 'quantization_flow', 'row_count', 'unexpected_pairs']",
+      "evidence": "/home/user/project/PRJXR/impl_repos/HGPIPE/HG-PIPE-Quantization/reports/artifact_imagenet_validation.json",
+      "requirement": "artifact ImageNet paper-equivalence validator report",
+      "status": "complete"
+    },
+    {
+      "detail": "status=failed rows=9/9 missing_pairs=0 existing_patch_inputs=0 existing_labels=0 errors=['integer_label_dtype_rows', 'integer_patch_dtype_rows', 'label_files', 'loadable_label_files', 'loadable_patch_input_files', 'matching_sample_count_rows', 'patch_input_files', 'valid_label_shape_rows', 'valid_patch_shape_rows']",
+      "evidence": "/home/user/project/PRJXR/impl_repos/HGPIPE/HG-PIPE-Quantization/reports/artifact_patch_matrix_manifest_validation.json",
+      "requirement": "artifact patch matrix manifest preflight report",
+      "status": "complete"
+    },
+    {
+      "detail": "rows=1 expected=9 artifact_rows=0 missing_pairs=[('deit_small_patch16_224', 'int4'), ('deit_small_patch16_224', 'int8'), ('deit_small_patch16_224', 'w4a8'), ('deit_tiny_patch16_224', 'int4'), ('deit_tiny_patch16_224', 'int8'), ('deit_tiny_patch16_224', 'w4a8'), ('vit_tiny_patch16_224', 'int4'), ('vit_tiny_patch16_224', 'int8'), ('vit_tiny_patch16_224', 'w4a8')]",
+      "evidence": "/home/user/project/PRJXR/impl_repos/HGPIPE/HG-PIPE-Quantization/reports/artifact_imagenet_accuracy.json",
+      "requirement": "artifact-backed HG-PIPE ImageNet paper-equivalence report",
+      "status": "partial"
+    }
+  ],
+  "missing": 0,
+  "partial": 1,
+  "passed": true,
+  "refresh": {
+    "device": "default",
+    "files": [
+      "verification.json",
+      "verification.md",
+      "graph_verification.json",
+      "e2e_graph_verification.json",
+      "torch_int_verification.json",
+      "fakequant_verification.json",
+      "fakequant_graph_verification.json",
+      "quant_contracts.json",
+      "run_compare_result.json",
+      "run_compare_result.md",
+      "paper_equivalence_assets.json",
+      "paper_equivalence_assets.md",
+      "artifact_imagenet_validation.json",
+      "artifact_imagenet_validation.md",
+      "artifact_patch_matrix_manifest_validation.json",
+      "artifact_patch_matrix_manifest_validation.md"
+    ],
+    "reports_dir": "/home/user/project/PRJXR/impl_repos/HGPIPE/HG-PIPE-Quantization/reports"
+  },
+  "residual_limits": [
+    "Source-backed HG-PIPE LUT contracts expose zero_point=None because affine zero-point artifacts are absent.",
+    "Artifact-backed arbitrary ImageNet accuracy is not paper-equivalent without the original preprocessing/calibration/QAT export flow."
+  ],
+  "total": 15
+}

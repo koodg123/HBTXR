@@ -1,0 +1,16 @@
+data: /datasets/imagenet
+split: val
+models:
+  - deit_tiny_patch16_224
+  - deit_small_patch16_224
+  - vit_tiny_patch16_224
+precisions:
+  - fp32
+  - int8
+  - int4
+  - w4a8
+batch_size: 128
+workers: 8
+device: cuda
+pretrained: true
+output: reports/imagenet_accuracy.json

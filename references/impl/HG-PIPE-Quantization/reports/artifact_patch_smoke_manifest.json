@@ -1,0 +1,13 @@
+{
+  "entries": [
+    {
+      "labels_npy": "smoke_patch_labels.npy",
+      "model": "deit_tiny_patch16_224",
+      "paper_equivalent": false,
+      "patch_inputs_npy": "smoke_patch_inputs.npy",
+      "precision": "int8",
+      "quantization_flow": "torch_int"
+    }
+  ],
+  "schema": "hgpipe_artifact_patch_matrix_v1_smoke"
+}

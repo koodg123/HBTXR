@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="141c31ec-10d2-4fef-bd2c-2cccde6aefdd" name="Changes" comment="" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ExternalProjectsData">
+    <projectState path="$PROJECT_DIR$">
+      <ProjectState />
+    </projectState>
+  </component>
+  <component name="ExternalProjectsManager">
+    <system id="SBT">
+      <state>
+        <projects_view>
+          <tree_state>
+            <expand>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="SPINAL" type="f1a62948:ProjectNode" />
+              </path>
+            </expand>
+            <select />
+          </tree_state>
+        </projects_view>
+      </state>
+    </system>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Scala Object" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;hguq&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/hguq/HG-PIPE.git&quot;,
+    &quot;accountId&quot;: &quot;0c310aac-3f3d-4967-af94-b3e9c6bfc8c7&quot;
+  }
+}</component>
+  <component name="ProjectCodeStyleSettingsMigration">
+    <option name="version" value="2" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 0
+}</component>
+  <component name="ProjectId" id="2ahjlotVaqN4spO3XmTAHXHeWHB" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Application.generate_whole_network_verilog.executor": "Run",
+    "Application.launch_spinal_server.executor": "Run",
+    "Application.simulate_one_block.executor": "Run",
+    "Application.simulate_whole_network.executor": "Run",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "git-widget-placeholder": "main",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "C:/projects/AAAProjects/PROJ15_HG_PIPE_GITHUB/HG-PIPE/SPINAL",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\projects\AAAProjects\PROJ15_HG_PIPE_GITHUB\HG-PIPE\SPINAL" />
+    </key>
+    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="network" />
+      <recent name="block" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="network" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Application.generate_whole_network_verilog">
+    <configuration name="gen_network_verilog" type="Application" factoryName="Application" temporary="true">
+      <option name="MAIN_CLASS_NAME" value="network.gen_network_verilog" />
+      <module name="SPINAL" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="block.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="generate_whole_network_verilog" type="Application" factoryName="Application" temporary="true">
+      <option name="MAIN_CLASS_NAME" value="network.generate_whole_network_verilog" />
+      <module name="SPINAL" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="network.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="launch_spinal_server" type="Application" factoryName="Application" temporary="true">
+      <option name="MAIN_CLASS_NAME" value="server.launch_spinal_server" />
+      <module name="SPINAL" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="server.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="simulate_one_block" type="Application" factoryName="Application" temporary="true">
+      <option name="MAIN_CLASS_NAME" value="network.simulate_one_block" />
+      <module name="SPINAL" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="block.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="simulate_whole_network" type="Application" factoryName="Application" temporary="true">
+      <option name="MAIN_CLASS_NAME" value="network.simulate_whole_network" />
+      <module name="SPINAL" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="network.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.generate_whole_network_verilog" />
+        <item itemvalue="Application.simulate_whole_network" />
+        <item itemvalue="Application.launch_spinal_server" />
+        <item itemvalue="Application.simulate_one_block" />
+        <item itemvalue="Application.gen_network_verilog" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="ScalaProjectSettings">
+    <option name="migrateConfigurationsNotificationShown" value="true" />
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-jdk-9823dce3aa75-b114ca120d71-intellij.indexing.shared.core-IU-242.21829.142" />
+        <option value="bundled-js-predefined-d6986cc7102b-7c0b70fcd90d-JavaScript-IU-242.21829.142" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="141c31ec-10d2-4fef-bd2c-2cccde6aefdd" name="Changes" comment="" />
+      <created>1704777859983</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1704777859983</updated>
+      <workItem from="1704777861052" duration="7750000" />
+      <workItem from="1704952768776" duration="3090000" />
+      <workItem from="1709280278547" duration="350000" />
+      <workItem from="1709281156098" duration="116000" />
+      <workItem from="1709281287030" duration="4521000" />
+      <workItem from="1710512224694" duration="644000" />
+      <workItem from="1710597759116" duration="2713000" />
+      <workItem from="1712390249750" duration="1085000" />
+      <workItem from="1717740404389" duration="337000" />
+      <workItem from="1717849721486" duration="861000" />
+      <workItem from="1718011374832" duration="25000" />
+      <workItem from="1721219318927" duration="2003000" />
+      <workItem from="1732690782831" duration="1404000" />
+      <workItem from="1732698141021" duration="18789000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="UnknownFeatures">
+    <option featureType="com.intellij.fileTypeFactory" implementationName="*.v" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/to_vivado.py</url>
+          <line>14</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+</project>

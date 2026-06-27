@@ -1,11 +1,11 @@
 # FACET Full Training Progress Snapshot
 
-Generated UTC: `2026-06-27T01:37:05.019288+00:00`
+Generated UTC: `2026-06-27T03:37:47.683771+00:00`
 
 | Model | Epoch | Step | Epoch progress | Rate | Epoch remaining | Checkpoints |
 |---|---:|---:|---:|---:|---:|---:|
-| EPNet_full_unet | 22 | 1478 / 36415 | 4.06% | 11.53 it/s | 50:30 | 16 |
-| HBTXR_full_unet | 0 | 158830 / 291315 | 54.52% | 5.49 it/s | 6:42:30 | 0 |
+| EPNet_full_unet | 24 | 6110 / 36415 | 16.78% | 11.54 it/s | 43:46 | 16 |
+| HBTXR_full_unet | 0 | 198631 / 291315 | 68.18% | 5.49 it/s | 4:41:29 | 0 |
 
 ## Notes
 

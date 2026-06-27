@@ -1,0 +1,16 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "hgpipe-quantization"
+version = "0.1.0"
+description = "Bit-exact Python reconstruction of HG-PIPE table-based quantization kernels."
+requires-python = ">=3.10"
+dependencies = ["numpy>=1.20"]
+
+[project.scripts]
+hgpipe-quant = "hgpipe_quantization.cli:main"
+
+[tool.setuptools.packages.find]
+include = ["hgpipe_quantization*"]

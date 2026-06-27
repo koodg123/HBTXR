@@ -1,0 +1,1 @@
+# Please follow the instructions in the README.md file to test the design on FPGA. The testbench jupyter notebook is provided in the "notebooks" directory.

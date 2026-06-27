@@ -1,0 +1,51 @@
+[
+  {
+    "contract": {
+      "channels": 768,
+      "cls_slot": true,
+      "image_size": 224,
+      "observed_max": 127,
+      "observed_min": -102,
+      "patch_size": 16,
+      "signed_max": 127,
+      "signed_min": -128,
+      "tokens": 196
+    },
+    "device": "default",
+    "evaluation_mode": "hgpipe_artifact_graph_experimental",
+    "image_shape": [
+      1,
+      3,
+      224,
+      224
+    ],
+    "images_npy": "reports/smoke_artifact_images.npy",
+    "labels_npy": "reports/smoke_artifact_labels.npy",
+    "labels_shape": [
+      1
+    ],
+    "model": "hgpipe_artifact_reference_graph",
+    "paper_equivalent": false,
+    "precision": "explicit_scale_patch_input",
+    "provenance_note": "Experimental artifact-backed image bridge; not paper-equivalent without original calibration/QAT/export flow.",
+    "quantization_flow": "input_bridge_explicit_scale",
+    "runner_comparison_mismatches": 0,
+    "runner_comparison_passed": true,
+    "samples": 1,
+    "samples_detail": [
+      {
+        "comparison_mismatches": 0,
+        "comparison_passed": true,
+        "fakequant_top1": 21,
+        "index": 0,
+        "label": 0,
+        "top1_hit": false,
+        "top5_hit": false,
+        "torch_int_top1": 21
+      }
+    ],
+    "scale": 1.0,
+    "top1": 0.0,
+    "top5": 0.0
+  }
+]

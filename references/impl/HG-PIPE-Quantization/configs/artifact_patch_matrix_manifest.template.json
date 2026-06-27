@@ -1,0 +1,78 @@
+{
+  "description": "Fill these paths with already-quantized HG-PIPE patch input batches. paper_equivalent=true is a caller assertion that the tensors came from the original or accepted HG-PIPE preprocessing/calibration flow.",
+  "entries": [
+    {
+      "labels_npy": "patch_inputs/deit_tiny_patch16_224_int8_labels.npy",
+      "model": "deit_tiny_patch16_224",
+      "paper_equivalent": true,
+      "patch_inputs_npy": "patch_inputs/deit_tiny_patch16_224_int8_patch_inputs.npy",
+      "precision": "int8",
+      "quantization_flow": "torch_int"
+    },
+    {
+      "labels_npy": "patch_inputs/deit_tiny_patch16_224_int4_labels.npy",
+      "model": "deit_tiny_patch16_224",
+      "paper_equivalent": true,
+      "patch_inputs_npy": "patch_inputs/deit_tiny_patch16_224_int4_patch_inputs.npy",
+      "precision": "int4",
+      "quantization_flow": "torch_int"
+    },
+    {
+      "labels_npy": "patch_inputs/deit_tiny_patch16_224_w4a8_labels.npy",
+      "model": "deit_tiny_patch16_224",
+      "paper_equivalent": true,
+      "patch_inputs_npy": "patch_inputs/deit_tiny_patch16_224_w4a8_patch_inputs.npy",
+      "precision": "w4a8",
+      "quantization_flow": "torch_int"
+    },
+    {
+      "labels_npy": "patch_inputs/deit_small_patch16_224_int8_labels.npy",
+      "model": "deit_small_patch16_224",
+      "paper_equivalent": true,
+      "patch_inputs_npy": "patch_inputs/deit_small_patch16_224_int8_patch_inputs.npy",
+      "precision": "int8",
+      "quantization_flow": "torch_int"
+    },
+    {
+      "labels_npy": "patch_inputs/deit_small_patch16_224_int4_labels.npy",
+      "model": "deit_small_patch16_224",
+      "paper_equivalent": true,
+      "patch_inputs_npy": "patch_inputs/deit_small_patch16_224_int4_patch_inputs.npy",
+      "precision": "int4",
+      "quantization_flow": "torch_int"
+    },
+    {
+      "labels_npy": "patch_inputs/deit_small_patch16_224_w4a8_labels.npy",
+      "model": "deit_small_patch16_224",
+      "paper_equivalent": true,
+      "patch_inputs_npy": "patch_inputs/deit_small_patch16_224_w4a8_patch_inputs.npy",
+      "precision": "w4a8",
+      "quantization_flow": "torch_int"
+    },
+    {
+      "labels_npy": "patch_inputs/vit_tiny_patch16_224_int8_labels.npy",
+      "model": "vit_tiny_patch16_224",
+      "paper_equivalent": true,
+      "patch_inputs_npy": "patch_inputs/vit_tiny_patch16_224_int8_patch_inputs.npy",
+      "precision": "int8",
+      "quantization_flow": "torch_int"
+    },
+    {
+      "labels_npy": "patch_inputs/vit_tiny_patch16_224_int4_labels.npy",
+      "model": "vit_tiny_patch16_224",
+      "paper_equivalent": true,
+      "patch_inputs_npy": "patch_inputs/vit_tiny_patch16_224_int4_patch_inputs.npy",
+      "precision": "int4",
+      "quantization_flow": "torch_int"
+    },
+    {
+      "labels_npy": "patch_inputs/vit_tiny_patch16_224_w4a8_labels.npy",
+      "model": "vit_tiny_patch16_224",
+      "paper_equivalent": true,
+      "patch_inputs_npy": "patch_inputs/vit_tiny_patch16_224_w4a8_patch_inputs.npy",
+      "precision": "w4a8",
+      "quantization_flow": "torch_int"
+    }
+  ],
+  "schema": "hgpipe_artifact_patch_matrix_v1"
+}

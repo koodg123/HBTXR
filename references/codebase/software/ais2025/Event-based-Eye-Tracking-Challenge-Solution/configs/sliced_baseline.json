@@ -1,0 +1,22 @@
+{
+    "data_dir": "/data/cls2-pool1/hanh/event_data/event_data",
+    "metadata_dir": "/data/cls2-pool1/hanh/event_data/metadata",
+    "cache_dir": "/data/cls2-pool1/hanh/event_data/cache",
+    "model": "CNN_GRU_base",
+    "val_interval": 2,
+    "save_k_best": 2,
+    "pixel_tolerances": [5,10,15],
+    "sensor_width": 640,
+    "sensor_height": 480,
+    "train_stride": 15,
+    "val_stride": 30,
+    "train_length": 30,
+    "val_length": 30,
+    "test_length": 30,
+    "test_stride": 30,
+    "n_time_bins": 4,
+    "voxel_grid_ch_normaization": false,
+    "loss": "weighted_mse",
+    "log_dir": "./logs",
+    "checkpoint": null
+}

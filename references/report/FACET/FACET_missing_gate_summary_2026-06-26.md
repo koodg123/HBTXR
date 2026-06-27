@@ -1,8 +1,8 @@
 # FACET Missing Gate Summary
 
-generated_local: `2026-06-27 10:37:12 +0900`
+generated_local: `2026-06-27 12:37:55 +0900`
 latest_artifact: `/home/kjm26/project/PRJXR/HBTXR/references/report/FACET/FACET_reproduction_completion_audit_2026-06-26.json`
-latest_artifact_mtime: `2026-06-27 10:37:12 +0900`
+latest_artifact_mtime: `2026-06-27 12:37:55 +0900`
 refresh_min_interval_seconds: `3600`
 latest_artifact_age_seconds: `0`
 refresh_next_due_in_seconds: `3600`
@@ -32,7 +32,7 @@ completion_decision: `incomplete`
 
 | Model | Epoch | Step | Progress | Rate | Remaining | Checkpoints |
 |---|---:|---:|---:|---:|---:|---:|
-| EPNet_full_unet | 22 | 1478 / 36415 | 4.06% | 11.53 it/s | 50:30 | 16 |
-| HBTXR_full_unet | 0 | 158830 / 291315 | 54.52% | 5.49 it/s | 6:42:30 | 0 |
+| EPNet_full_unet | 24 | 6110 / 36415 | 16.78% | 11.54 it/s | 43:46 | 16 |
+| HBTXR_full_unet | 0 | 198631 / 291315 | 68.18% | 5.49 it/s | 4:41:29 | 0 |
 
 This summary only reads status/progress/audit JSON artifacts. It does not scan training logs.

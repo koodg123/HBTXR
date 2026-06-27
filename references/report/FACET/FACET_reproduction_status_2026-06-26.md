@@ -14,7 +14,7 @@ Overall status: `incomplete`
 - state: `passed`
 - evidence:
   - `{'python_import_check': {'returncode': 0, 'stdout': '2.12.1+cu130\nTrue', 'stderr': ''}}`
-  - `{'nvidia_smi': {'returncode': 0, 'stdout': '0, NVIDIA GeForce RTX 5080, 16303 MiB, 4240 MiB\n1, NVIDIA GeForce RTX 5080, 16303 MiB, 11358 MiB', 'stderr': ''}}`
+  - `{'nvidia_smi': {'returncode': 0, 'stdout': '0, NVIDIA GeForce RTX 5080, 16303 MiB, 4239 MiB\n1, NVIDIA GeForce RTX 5080, 16303 MiB, 11357 MiB', 'stderr': ''}}`
 
 ### Phase 1 subset DeanDataset
 

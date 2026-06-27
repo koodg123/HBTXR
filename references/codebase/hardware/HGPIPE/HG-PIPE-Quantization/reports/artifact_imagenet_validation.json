@@ -1,0 +1,76 @@
+{
+  "artifact_rows": 0,
+  "errors": [
+    "evaluation_mode",
+    "missing_pairs",
+    "paper_equivalent",
+    "quantization_flow",
+    "row_count",
+    "unexpected_pairs"
+  ],
+  "expected_rows": 9,
+  "missing_pairs": [
+    {
+      "model": "deit_small_patch16_224",
+      "precision": "int4"
+    },
+    {
+      "model": "deit_small_patch16_224",
+      "precision": "int8"
+    },
+    {
+      "model": "deit_small_patch16_224",
+      "precision": "w4a8"
+    },
+    {
+      "model": "deit_tiny_patch16_224",
+      "precision": "int4"
+    },
+    {
+      "model": "deit_tiny_patch16_224",
+      "precision": "int8"
+    },
+    {
+      "model": "deit_tiny_patch16_224",
+      "precision": "w4a8"
+    },
+    {
+      "model": "vit_tiny_patch16_224",
+      "precision": "int4"
+    },
+    {
+      "model": "vit_tiny_patch16_224",
+      "precision": "int8"
+    },
+    {
+      "model": "vit_tiny_patch16_224",
+      "precision": "w4a8"
+    }
+  ],
+  "paper_equivalent_rows": 0,
+  "passed": false,
+  "present_pairs": [],
+  "quant_flow_rows": 0,
+  "report": "reports/artifact_imagenet_accuracy.json",
+  "required_fields": [
+    "evaluation_mode",
+    "model",
+    "paper_equivalent",
+    "precision",
+    "quantization_flow",
+    "samples",
+    "top1",
+    "top5"
+  ],
+  "rows": 1,
+  "rows_with_required_fields": 1,
+  "status": "failed",
+  "unexpected_pairs": [
+    {
+      "model": "hgpipe_artifact_reference_graph",
+      "precision": "explicit_scale_patch_input"
+    }
+  ],
+  "valid_metric_rows": 1,
+  "valid_sample_rows": 1
+}

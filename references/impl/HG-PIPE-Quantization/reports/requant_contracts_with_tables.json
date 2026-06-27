@@ -1,0 +1,6146 @@
+[
+  {
+    "input_dtype": {
+      "bits": 11,
+      "qmax": 1023,
+      "qmin": -1024,
+      "signed": true
+    },
+    "kind": "requant_table",
+    "name": "attn_0_aq",
+    "observed_range": {
+      "cursor": {
+        "max": 147.0,
+        "min": -117.0
+      },
+      "input": {
+        "max": 489.0,
+        "min": -567.0
+      },
+      "output": {
+        "max": 3.0,
+        "min": -4.0
+      }
+    },
+    "output_dtype": {
+      "bits": 3,
+      "qmax": 3,
+      "qmin": -4,
+      "signed": true
+    },
+    "params": {
+      "bound": 63,
+      "effective_divisor": 4,
+      "input_dtype": {
+        "bits": 11,
+        "qmax": 1023,
+        "qmin": -1024,
+        "signed": true
+      },
+      "name": "attn_0_aq",
+      "observed_range": null,
+      "offset": 101,
+      "output_dtype": {
+        "bits": 3,
+        "qmax": 3,
+        "qmin": -4,
+        "signed": true
+      },
+      "scalars": [
+        101,
+        2,
+        63
+      ],
+      "shift_scale": 2,
+      "table_sizes": [
+        64
+      ],
+      "tables": [
+        [
+          -4,
+          -3,
+          -3,
+          -3,
+          -3,
+          -3,
+          -3,
+          -3,
+          -2,
+          -2,
+          -2,
+          -2,
+          -2,
+          -2,
+          -2,
+          -1,
+          -1,
+          -1,
+          -1,
+          -1,
+          -1,
+          -1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3
+        ]
+      ],
+      "zero_point": null
+    },
+    "stat_key": "attn0.aq"
+  },
+  {
+    "input_dtype": {
+      "bits": 11,
+      "qmax": 1023,
+      "qmin": -1024,
+      "signed": true
+    },
+    "kind": "requant_table",
+    "name": "attn_0_kq",
+    "observed_range": {
+      "cursor": {
+        "max": 152.0,
+        "min": -93.0
+      },
+      "input": {
+        "max": 524.0,
+        "min": -456.0
+      },
+      "output": {
+        "max": 3.0,
+        "min": -4.0
+      }
+    },
+    "output_dtype": {
+      "bits": 3,
+      "qmax": 3,
+      "qmin": -4,
+      "signed": true
+    },
+    "params": {
+      "bound": 63,
+      "effective_divisor": 4,
+      "input_dtype": {
+        "bits": 11,
+        "qmax": 1023,
+        "qmin": -1024,
+        "signed": true
+      },
+      "name": "attn_0_kq",
+      "observed_range": null,
+      "offset": 85,
+      "output_dtype": {
+        "bits": 3,
+        "qmax": 3,
+        "qmin": -4,
+        "signed": true
+      },
+      "scalars": [
+        85,
+        2,
+        63
+      ],
+      "shift_scale": 2,
+      "table_sizes": [
+        64
+      ],
+      "tables": [
+        [
+          -4,
+          -3,
+          -3,
+          -3,
+          -3,
+          -3,
+          -3,
+          -2,
+          -2,
+          -2,
+          -2,
+          -2,
+          -2,
+          -1,
+          -1,
+          -1,
+          -1,
+          -1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3
+        ]
+      ],
+      "zero_point": null
+    },
+    "stat_key": "attn0.kq"
+  },
+  {
+    "input_dtype": {
+      "bits": 11,
+      "qmax": 1023,
+      "qmin": -1024,
+      "signed": true
+    },
+    "kind": "requant_table",
+    "name": "attn_0_qq",
+    "observed_range": {
+      "cursor": {
+        "max": 121.0,
+        "min": -116.0
+      },
+      "input": {
+        "max": 397.0,
+        "min": -549.0
+      },
+      "output": {
+        "max": 3.0,
+        "min": -4.0
+      }
+    },
+    "output_dtype": {
+      "bits": 3,
+      "qmax": 3,
+      "qmin": -4,
+      "signed": true
+    },
+    "params": {
+      "bound": 63,
+      "effective_divisor": 4,
+      "input_dtype": {
+        "bits": 11,
+        "qmax": 1023,
+        "qmin": -1024,
+        "signed": true
+      },
+      "name": "attn_0_qq",
+      "observed_range": null,
+      "offset": 88,
+      "output_dtype": {
+        "bits": 3,
+        "qmax": 3,
+        "qmin": -4,
+        "signed": true
+      },
+      "scalars": [
+        88,
+        2,
+        63
+      ],
+      "shift_scale": 2,
+      "table_sizes": [
+        64
+      ],
+      "tables": [
+        [
+          -4,
+          -3,
+          -3,
+          -3,
+          -3,
+          -3,
+          -3,
+          -2,
+          -2,
+          -2,
+          -2,
+          -2,
+          -2,
+          -1,
+          -1,
+          -1,
+          -1,
+          -1,
+          -1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3
+        ]
+      ],
+      "zero_point": null
+    },
+    "stat_key": "attn0.qq"
+  },
+  {
+    "input_dtype": {
+      "bits": 11,
+      "qmax": 1023,
+      "qmin": -1024,
+      "signed": true
+    },
+    "kind": "requant_table",
+    "name": "attn_0_vq",
+    "observed_range": {
+      "cursor": {
+        "max": 88.0,
+        "min": -56.0
+      },
+      "input": {
+        "max": 548.0,
+        "min": -604.0
+      },
+      "output": {
+        "max": 3.0,
+        "min": -4.0
+      }
+    },
+    "output_dtype": {
+      "bits": 3,
+      "qmax": 3,
+      "qmin": -4,
+      "signed": true
+    },
+    "params": {
+      "bound": 63,
+      "effective_divisor": 8,
+      "input_dtype": {
+        "bits": 11,
+        "qmax": 1023,
+        "qmin": -1024,
+        "signed": true
+      },
+      "name": "attn_0_vq",
+      "observed_range": null,
+      "offset": 162,
+      "output_dtype": {
+        "bits": 3,
+        "qmax": 3,
+        "qmin": -4,
+        "signed": true
+      },
+      "scalars": [
+        162,
+        3,
+        63
+      ],
+      "shift_scale": 3,
+      "table_sizes": [
+        64
+      ],
+      "tables": [
+        [
+          -4,
+          -3,
+          -3,
+          -3,
+          -3,
+          -3,
+          -2,
+          -2,
+          -2,
+          -2,
+          -2,
+          -2,
+          -1,
+          -1,
+          -1,
+          -1,
+          -1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          2,
+          2,
+          2,
+          2,
+          2,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3
+        ]
+      ],
+      "zero_point": null
+    },
+    "stat_key": "attn0.vq"
+  },
+  {
+    "input_dtype": {
+      "bits": 11,
+      "qmax": 1023,
+      "qmin": -1024,
+      "signed": true
+    },
+    "kind": "requant_table",
+    "name": "attn_10_aq",
+    "observed_range": {
+      "cursor": {
+        "max": 143.0,
+        "min": -108.0
+      },
+      "input": {
+        "max": 440.0,
+        "min": -565.0
+      },
+      "output": {
+        "max": 3.0,
+        "min": -4.0
+      }
+    },
+    "output_dtype": {
+      "bits": 3,
+      "qmax": 3,
+      "qmin": -4,
+      "signed": true
+    },
+    "params": {
+      "bound": 63,
+      "effective_divisor": 4,
+      "input_dtype": {
+        "bits": 11,
+        "qmax": 1023,
+        "qmin": -1024,
+        "signed": true
+      },
+      "name": "attn_10_aq",
+      "observed_range": null,
+      "offset": 135,
+      "output_dtype": {
+        "bits": 3,
+        "qmax": 3,
+        "qmin": -4,
+        "signed": true
+      },
+      "scalars": [
+        135,
+        2,
+        63
+      ],
+      "shift_scale": 2,
+      "table_sizes": [
+        64
+      ],
+      "tables": [
+        [
+          -4,
+          -3,
+          -3,
+          -3,
+          -3,
+          -3,
+          -3,
+          -3,
+          -3,
+          -3,
+          -2,
+          -2,
+          -2,
+          -2,
+          -2,
+          -2,
+          -2,
+          -2,
+          -2,
+          -2,
+          -1,
+          -1,
+          -1,
+          -1,
+          -1,
+          -1,
+          -1,
+          -1,
+          -1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3
+        ]
+      ],
+      "zero_point": null
+    },
+    "stat_key": "attn10.aq"
+  },
+  {
+    "input_dtype": {
+      "bits": 10,
+      "qmax": 511,
+      "qmin": -512,
+      "signed": true
+    },
+    "kind": "requant_table",
+    "name": "attn_10_kq",
+    "observed_range": {
+      "cursor": {
+        "max": 127.0,
+        "min": -70.0
+      },
+      "input": {
+        "max": 397.0,
+        "min": -389.0
+      },
+      "output": {
+        "max": 3.0,
+        "min": -4.0
+      }
+    },
+    "output_dtype": {
+      "bits": 3,
+      "qmax": 3,
+      "qmin": -4,
+      "signed": true
+    },
+    "params": {
+      "bound": 63,
+      "effective_divisor": 4,
+      "input_dtype": {
+        "bits": 10,
+        "qmax": 511,
+        "qmin": -512,
+        "signed": true
+      },
+      "name": "attn_10_kq",
+      "observed_range": null,
+      "offset": 112,
+      "output_dtype": {
+        "bits": 3,
+        "qmax": 3,
+        "qmin": -4,
+        "signed": true
+      },
+      "scalars": [
+        112,
+        2,
+        63
+      ],
+      "shift_scale": 2,
+      "table_sizes": [
+        64
+      ],
+      "tables": [
+        [
+          -4,
+          -3,
+          -3,
+          -3,
+          -3,
+          -3,
+          -3,
+          -3,
+          -3,
+          -2,
+          -2,
+          -2,
+          -2,
+          -2,
+          -2,
+          -2,
+          -1,
+          -1,
+          -1,
+          -1,
+          -1,
+          -1,
+          -1,
+          -1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3
+        ]
+      ],
+      "zero_point": null
+    },
+    "stat_key": "attn10.kq"
+  },
+  {
+    "input_dtype": {
+      "bits": 12,
+      "qmax": 2047,
+      "qmin": -2048,
+      "signed": true
+    },
+    "kind": "requant_table",
+    "name": "attn_10_qq",
+    "observed_range": {
+      "cursor": {
+        "max": 223.0,
+        "min": -149.0
+      },
+      "input": {
+        "max": 1616.0,
+        "min": -1360.0
+      },
+      "output": {
+        "max": 3.0,
+        "min": -4.0
+      }
+    },
+    "output_dtype": {
+      "bits": 3,
+      "qmax": 3,
+      "qmin": -4,
+      "signed": true
+    },
+    "params": {
+      "bound": 63,
+      "effective_divisor": 8,
+      "input_dtype": {
+        "bits": 12,
+        "qmax": 2047,
+        "qmin": -2048,
+        "signed": true
+      },
+      "name": "attn_10_qq",
+      "observed_range": null,
+      "offset": 173,
+      "output_dtype": {
+        "bits": 3,
+        "qmax": 3,
+        "qmin": -4,
+        "signed": true
+      },
+      "scalars": [
+        173,
+        3,
+        63
+      ],
+      "shift_scale": 3,
+      "table_sizes": [
+        64
+      ],
+      "tables": [
+        [
+          -4,
+          -3,
+          -3,
+          -3,
+          -3,
+          -3,
+          -3,
+          -2,
+          -2,
+          -2,
+          -2,
+          -2,
+          -2,
+          -1,
+          -1,
+          -1,
+          -1,
+          -1,
+          -1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          1,
+          1,
+          1,
+          1,
+          1,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3
+        ]
+      ],
+      "zero_point": null
+    },
+    "stat_key": "attn10.qq"
+  },
+  {
+    "input_dtype": {
+      "bits": 10,
+      "qmax": 511,
+      "qmin": -512,
+      "signed": true
+    },
+    "kind": "requant_table",
+    "name": "attn_10_vq",
+    "observed_range": {
+      "cursor": {
+        "max": 104.0,
+        "min": -53.0
+      },
+      "input": {
+        "max": 305.0,
+        "min": -323.0
+      },
+      "output": {
+        "max": 3.0,
+        "min": -4.0
+      }
+    },
+    "output_dtype": {
+      "bits": 3,
+      "qmax": 3,
+      "qmin": -4,
+      "signed": true
+    },
+    "params": {
+      "bound": 63,
+      "effective_divisor": 4,
+      "input_dtype": {
+        "bits": 10,
+        "qmax": 511,
+        "qmin": -512,
+        "signed": true
+      },
+      "name": "attn_10_vq",
+      "observed_range": null,
+      "offset": 114,
+      "output_dtype": {
+        "bits": 3,
+        "qmax": 3,
+        "qmin": -4,
+        "signed": true
+      },
+      "scalars": [
+        114,
+        2,
+        63
+      ],
+      "shift_scale": 2,
+      "table_sizes": [
+        64
+      ],
+      "tables": [
+        [
+          -4,
+          -3,
+          -3,
+          -3,
+          -3,
+          -3,
+          -3,
+          -3,
+          -3,
+          -2,
+          -2,
+          -2,
+          -2,
+          -2,
+          -2,
+          -2,
+          -2,
+          -1,
+          -1,
+          -1,
+          -1,
+          -1,
+          -1,
+          -1,
+          -1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3
+        ]
+      ],
+      "zero_point": null
+    },
+    "stat_key": "attn10.vq"
+  },
+  {
+    "input_dtype": {
+      "bits": 10,
+      "qmax": 511,
+      "qmin": -512,
+      "signed": true
+    },
+    "kind": "requant_table",
+    "name": "attn_11_aq",
+    "observed_range": {
+      "cursor": {
+        "max": 124.0,
+        "min": -103.0
+      },
+      "input": {
+        "max": 397.0,
+        "min": -511.0
+      },
+      "output": {
+        "max": 3.0,
+        "min": -4.0
+      }
+    },
+    "output_dtype": {
+      "bits": 3,
+      "qmax": 3,
+      "qmin": -4,
+      "signed": true
+    },
+    "params": {
+      "bound": 63,
+      "effective_divisor": 4,
+      "input_dtype": {
+        "bits": 10,
+        "qmax": 511,
+        "qmin": -512,
+        "signed": true
+      },
+      "name": "attn_11_aq",
+      "observed_range": null,
+      "offset": 102,
+      "output_dtype": {
+        "bits": 3,
+        "qmax": 3,
+        "qmin": -4,
+        "signed": true
+      },
+      "scalars": [
+        102,
+        2,
+        63
+      ],
+      "shift_scale": 2,
+      "table_sizes": [
+        64
+      ],
+      "tables": [
+        [
+          -4,
+          -3,
+          -3,
+          -3,
+          -3,
+          -3,
+          -3,
+          -3,
+          -2,
+          -2,
+          -2,
+          -2,
+          -2,
+          -2,
+          -2,
+          -1,
+          -1,
+          -1,
+          -1,
+          -1,
+          -1,
+          -1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3
+        ]
+      ],
+      "zero_point": null
+    },
+    "stat_key": "attn11.aq"
+  },
+  {
+    "input_dtype": {
+      "bits": 10,
+      "qmax": 511,
+      "qmin": -512,
+      "signed": true
+    },
+    "kind": "requant_table",
+    "name": "attn_11_kq",
+    "observed_range": {
+      "cursor": {
+        "max": 102.0,
+        "min": -63.0
+      },
+      "input": {
+        "max": 334.0,
+        "min": -326.0
+      },
+      "output": {
+        "max": 3.0,
+        "min": -4.0
+      }
+    },
+    "output_dtype": {
+      "bits": 3,
+      "qmax": 3,
+      "qmin": -4,
+      "signed": true
+    },
+    "params": {
+      "bound": 63,
+      "effective_divisor": 4,
+      "input_dtype": {
+        "bits": 10,
+        "qmax": 511,
+        "qmin": -512,
+        "signed": true
+      },
+      "name": "attn_11_kq",
+      "observed_range": null,
+      "offset": 77,
+      "output_dtype": {
+        "bits": 3,
+        "qmax": 3,
+        "qmin": -4,
+        "signed": true
+      },
+      "scalars": [
+        77,
+        2,
+        63
+      ],
+      "shift_scale": 2,
+      "table_sizes": [
+        64
+      ],
+      "tables": [
+        [
+          -4,
+          -3,
+          -3,
+          -3,
+          -3,
+          -3,
+          -2,
+          -2,
+          -2,
+          -2,
+          -2,
+          -1,
+          -1,
+          -1,
+          -1,
+          -1,
+          -1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          1,
+          1,
+          1,
+          1,
+          1,
+          2,
+          2,
+          2,
+          2,
+          2,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3
+        ]
+      ],
+      "zero_point": null
+    },
+    "stat_key": "attn11.kq"
+  },
+  {
+    "input_dtype": {
+      "bits": 12,
+      "qmax": 2047,
+      "qmin": -2048,
+      "signed": true
+    },
+    "kind": "requant_table",
+    "name": "attn_11_qq",
+    "observed_range": {
+      "cursor": {
+        "max": 166.0,
+        "min": -168.0
+      },
+      "input": {
+        "max": 1145.0,
+        "min": -1526.0
+      },
+      "output": {
+        "max": 3.0,
+        "min": -4.0
+      }
+    },
+    "output_dtype": {
+      "bits": 3,
+      "qmax": 3,
+      "qmin": -4,
+      "signed": true
+    },
+    "params": {
+      "bound": 63,
+      "effective_divisor": 8,
+      "input_dtype": {
+        "bits": 12,
+        "qmax": 2047,
+        "qmin": -2048,
+        "signed": true
+      },
+      "name": "attn_11_qq",
+      "observed_range": null,
+      "offset": 189,
+      "output_dtype": {
+        "bits": 3,
+        "qmax": 3,
+        "qmin": -4,
+        "signed": true
+      },
+      "scalars": [
+        189,
+        3,
+        63
+      ],
+      "shift_scale": 3,
+      "table_sizes": [
+        64
+      ],
+      "tables": [
+        [
+          -4,
+          -3,
+          -3,
+          -3,
+          -3,
+          -3,
+          -3,
+          -3,
+          -2,
+          -2,
+          -2,
+          -2,
+          -2,
+          -2,
+          -1,
+          -1,
+          -1,
+          -1,
+          -1,
+          -1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3
+        ]
+      ],
+      "zero_point": null
+    },
+    "stat_key": "attn11.qq"
+  },
+  {
+    "input_dtype": {
+      "bits": 10,
+      "qmax": 511,
+      "qmin": -512,
+      "signed": true
+    },
+    "kind": "requant_table",
+    "name": "attn_11_vq",
+    "observed_range": {
+      "cursor": {
+        "max": 97.0,
+        "min": -51.0
+      },
+      "input": {
+        "max": 281.0,
+        "min": -311.0
+      },
+      "output": {
+        "max": 3.0,
+        "min": -4.0
+      }
+    },
+    "output_dtype": {
+      "bits": 3,
+      "qmax": 3,
+      "qmin": -4,
+      "signed": true
+    },
+    "params": {
+      "bound": 63,
+      "effective_divisor": 4,
+      "input_dtype": {
+        "bits": 10,
+        "qmax": 511,
+        "qmin": -512,
+        "signed": true
+      },
+      "name": "attn_11_vq",
+      "observed_range": null,
+      "offset": 110,
+      "output_dtype": {
+        "bits": 3,
+        "qmax": 3,
+        "qmin": -4,
+        "signed": true
+      },
+      "scalars": [
+        110,
+        2,
+        63
+      ],
+      "shift_scale": 2,
+      "table_sizes": [
+        64
+      ],
+      "tables": [
+        [
+          -4,
+          -3,
+          -3,
+          -3,
+          -3,
+          -3,
+          -3,
+          -3,
+          -2,
+          -2,
+          -2,
+          -2,
+          -2,
+          -2,
+          -2,
+          -2,
+          -1,
+          -1,
+          -1,
+          -1,
+          -1,
+          -1,
+          -1,
+          -1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3
+        ]
+      ],
+      "zero_point": null
+    },
+    "stat_key": "attn11.vq"
+  },
+  {
+    "input_dtype": {
+      "bits": 11,
+      "qmax": 1023,
+      "qmin": -1024,
+      "signed": true
+    },
+    "kind": "requant_table",
+    "name": "attn_1_aq",
+    "observed_range": {
+      "cursor": {
+        "max": 93.0,
+        "min": -68.0
+      },
+      "input": {
+        "max": 583.0,
+        "min": -702.0
+      },
+      "output": {
+        "max": 3.0,
+        "min": -4.0
+      }
+    },
+    "output_dtype": {
+      "bits": 3,
+      "qmax": 3,
+      "qmin": -4,
+      "signed": true
+    },
+    "params": {
+      "bound": 63,
+      "effective_divisor": 8,
+      "input_dtype": {
+        "bits": 11,
+        "qmax": 1023,
+        "qmin": -1024,
+        "signed": true
+      },
+      "name": "attn_1_aq",
+      "observed_range": null,
+      "offset": 162,
+      "output_dtype": {
+        "bits": 3,
+        "qmax": 3,
+        "qmin": -4,
+        "signed": true
+      },
+      "scalars": [
+        162,
+        3,
+        63
+      ],
+      "shift_scale": 3,
+      "table_sizes": [
+        64
+      ],
+      "tables": [
+        [
+          -4,
+          -3,
+          -3,
+          -3,
+          -3,
+          -3,
+          -3,
+          -2,
+          -2,
+          -2,
+          -2,
+          -2,
+          -1,
+          -1,
+          -1,
+          -1,
+          -1,
+          -1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          1,
+          1,
+          1,
+          1,
+          1,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3
+        ]
+      ],
+      "zero_point": null
+    },
+    "stat_key": "attn1.aq"
+  },
+  {
+    "input_dtype": {
+      "bits": 10,
+      "qmax": 511,
+      "qmin": -512,
+      "signed": true
+    },
+    "kind": "requant_table",
+    "name": "attn_1_kq",
+    "observed_range": {
+      "cursor": {
+        "max": 215.0,
+        "min": -184.0
+      },
+      "input": {
+        "max": 363.0,
+        "min": -434.0
+      },
+      "output": {
+        "max": 3.0,
+        "min": -4.0
+      }
+    },
+    "output_dtype": {
+      "bits": 3,
+      "qmax": 3,
+      "qmin": -4,
+      "signed": true
+    },
+    "params": {
+      "bound": 63,
+      "effective_divisor": 2,
+      "input_dtype": {
+        "bits": 10,
+        "qmax": 511,
+        "qmin": -512,
+        "signed": true
+      },
+      "name": "attn_1_kq",
+      "observed_range": null,
+      "offset": 67,
+      "output_dtype": {
+        "bits": 3,
+        "qmax": 3,
+        "qmin": -4,
+        "signed": true
+      },
+      "scalars": [
+        67,
+        1,
+        63
+      ],
+      "shift_scale": 1,
+      "table_sizes": [
+        64
+      ],
+      "tables": [
+        [
+          -4,
+          -3,
+          -3,
+          -3,
+          -3,
+          -3,
+          -3,
+          -3,
+          -3,
+          -3,
+          -2,
+          -2,
+          -2,
+          -2,
+          -2,
+          -2,
+          -2,
+          -2,
+          -2,
+          -2,
+          -1,
+          -1,
+          -1,
+          -1,
+          -1,
+          -1,
+          -1,
+          -1,
+          -1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3
+        ]
+      ],
+      "zero_point": null
+    },
+    "stat_key": "attn1.kq"
+  },
+  {
+    "input_dtype": {
+      "bits": 10,
+      "qmax": 511,
+      "qmin": -512,
+      "signed": true
+    },
+    "kind": "requant_table",
+    "name": "attn_1_qq",
+    "observed_range": {
+      "cursor": {
+        "max": 130.0,
+        "min": -80.0
+      },
+      "input": {
+        "max": 432.0,
+        "min": -408.0
+      },
+      "output": {
+        "max": 3.0,
+        "min": -4.0
+      }
+    },
+    "output_dtype": {
+      "bits": 3,
+      "qmax": 3,
+      "qmin": -4,
+      "signed": true
+    },
+    "params": {
+      "bound": 63,
+      "effective_divisor": 4,
+      "input_dtype": {
+        "bits": 10,
+        "qmax": 511,
+        "qmin": -512,
+        "signed": true
+      },
+      "name": "attn_1_qq",
+      "observed_range": null,
+      "offset": 91,
+      "output_dtype": {
+        "bits": 3,
+        "qmax": 3,
+        "qmin": -4,
+        "signed": true
+      },
+      "scalars": [
+        91,
+        2,
+        63
+      ],
+      "shift_scale": 2,
+      "table_sizes": [
+        64
+      ],
+      "tables": [
+        [
+          -4,
+          -3,
+          -3,
+          -3,
+          -3,
+          -3,
+          -3,
+          -2,
+          -2,
+          -2,
+          -2,
+          -2,
+          -2,
+          -1,
+          -1,
+          -1,
+          -1,
+          -1,
+          -1,
+          -1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3
+        ]
+      ],
+      "zero_point": null
+    },
+    "stat_key": "attn1.qq"
+  },
+  {
+    "input_dtype": {
+      "bits": 10,
+      "qmax": 511,
+      "qmin": -512,
+      "signed": true
+    },
+    "kind": "requant_table",
+    "name": "attn_1_vq",
+    "observed_range": {
+      "cursor": {
+        "max": 158.0,
+        "min": -91.0
+      },
+      "input": {
+        "max": 503.0,
+        "min": -492.0
+      },
+      "output": {
+        "max": 3.0,
+        "min": -4.0
+      }
+    },
+    "output_dtype": {
+      "bits": 3,
+      "qmax": 3,
+      "qmin": -4,
+      "signed": true
+    },
+    "params": {
+      "bound": 63,
+      "effective_divisor": 4,
+      "input_dtype": {
+        "bits": 10,
+        "qmax": 511,
+        "qmin": -512,
+        "signed": true
+      },
+      "name": "attn_1_vq",
+      "observed_range": null,
+      "offset": 131,
+      "output_dtype": {
+        "bits": 3,
+        "qmax": 3,
+        "qmin": -4,
+        "signed": true
+      },
+      "scalars": [
+        131,
+        2,
+        63
+      ],
+      "shift_scale": 2,
+      "table_sizes": [
+        64
+      ],
+      "tables": [
+        [
+          -4,
+          -3,
+          -3,
+          -3,
+          -3,
+          -3,
+          -3,
+          -3,
+          -3,
+          -3,
+          -2,
+          -2,
+          -2,
+          -2,
+          -2,
+          -2,
+          -2,
+          -2,
+          -2,
+          -1,
+          -1,
+          -1,
+          -1,
+          -1,
+          -1,
+          -1,
+          -1,
+          -1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3
+        ]
+      ],
+      "zero_point": null
+    },
+    "stat_key": "attn1.vq"
+  },
+  {
+    "input_dtype": {
+      "bits": 10,
+      "qmax": 511,
+      "qmin": -512,
+      "signed": true
+    },
+    "kind": "requant_table",
+    "name": "attn_2_aq",
+    "observed_range": {
+      "cursor": {
+        "max": 271.0,
+        "min": -243.0
+      },
+      "input": {
+        "max": 246.0,
+        "min": -268.0
+      },
+      "output": {
+        "max": 3.0,
+        "min": -4.0
+      }
+    },
+    "output_dtype": {
+      "bits": 3,
+      "qmax": 3,
+      "qmin": -4,
+      "signed": true
+    },
+    "params": {
+      "bound": 63,
+      "effective_divisor": 1,
+      "input_dtype": {
+        "bits": 10,
+        "qmax": 511,
+        "qmin": -512,
+        "signed": true
+      },
+      "name": "attn_2_aq",
+      "observed_range": null,
+      "offset": 25,
+      "output_dtype": {
+        "bits": 3,
+        "qmax": 3,
+        "qmin": -4,
+        "signed": true
+      },
+      "scalars": [
+        25,
+        0,
+        63
+      ],
+      "shift_scale": 0,
+      "table_sizes": [
+        64
+      ],
+      "tables": [
+        [
+          -4,
+          -3,
+          -3,
+          -3,
+          -3,
+          -3,
+          -3,
+          -3,
+          -2,
+          -2,
+          -2,
+          -2,
+          -2,
+          -2,
+          -2,
+          -1,
+          -1,
+          -1,
+          -1,
+          -1,
+          -1,
+          -1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3
+        ]
+      ],
+      "zero_point": null
+    },
+    "stat_key": "attn2.aq"
+  },
+  {
+    "input_dtype": {
+      "bits": 9,
+      "qmax": 255,
+      "qmin": -256,
+      "signed": true
+    },
+    "kind": "requant_table",
+    "name": "attn_2_kq",
+    "observed_range": {
+      "cursor": {
+        "max": 167.0,
+        "min": -111.0
+      },
+      "input": {
+        "max": 135.0,
+        "min": -143.0
+      },
+      "output": {
+        "max": 3.0,
+        "min": -4.0
+      }
+    },
+    "output_dtype": {
+      "bits": 3,
+      "qmax": 3,
+      "qmin": -4,
+      "signed": true
+    },
+    "params": {
+      "bound": 63,
+      "effective_divisor": 1,
+      "input_dtype": {
+        "bits": 9,
+        "qmax": 255,
+        "qmin": -256,
+        "signed": true
+      },
+      "name": "attn_2_kq",
+      "observed_range": null,
+      "offset": 32,
+      "output_dtype": {
+        "bits": 3,
+        "qmax": 3,
+        "qmin": -4,
+        "signed": true
+      },
+      "scalars": [
+        32,
+        0,
+        63
+      ],
+      "shift_scale": 0,
+      "table_sizes": [
+        64
+      ],
+      "tables": [
+        [
+          -4,
+          -3,
+          -3,
+          -3,
+          -3,
+          -3,
+          -3,
+          -3,
+          -3,
+          -3,
+          -2,
+          -2,
+          -2,
+          -2,
+          -2,
+          -2,
+          -2,
+          -2,
+          -2,
+          -1,
+          -1,
+          -1,
+          -1,
+          -1,
+          -1,
+          -1,
+          -1,
+          -1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3
+        ]
+      ],
+      "zero_point": null
+    },
+    "stat_key": "attn2.kq"
+  },
+  {
+    "input_dtype": {
+      "bits": 9,
+      "qmax": 255,
+      "qmin": -256,
+      "signed": true
+    },
+    "kind": "requant_table",
+    "name": "attn_2_qq",
+    "observed_range": {
+      "cursor": {
+        "max": 96.0,
+        "min": -50.0
+      },
+      "input": {
+        "max": 145.0,
+        "min": -147.0
+      },
+      "output": {
+        "max": 3.0,
+        "min": -4.0
+      }
+    },
+    "output_dtype": {
+      "bits": 3,
+      "qmax": 3,
+      "qmin": -4,
+      "signed": true
+    },
+    "params": {
+      "bound": 63,
+      "effective_divisor": 2,
+      "input_dtype": {
+        "bits": 9,
+        "qmax": 255,
+        "qmin": -256,
+        "signed": true
+      },
+      "name": "attn_2_qq",
+      "observed_range": null,
+      "offset": 48,
+      "output_dtype": {
+        "bits": 3,
+        "qmax": 3,
+        "qmin": -4,
+        "signed": true
+      },
+      "scalars": [
+        48,
+        1,
+        63
+      ],
+      "shift_scale": 1,
+      "table_sizes": [
+        64
+      ],
+      "tables": [
+        [
+          -4,
+          -3,
+          -3,
+          -3,
+          -3,
+          -3,
+          -3,
+          -3,
+          -2,
+          -2,
+          -2,
+          -2,
+          -2,
+          -2,
+          -1,
+          -1,
+          -1,
+          -1,
+          -1,
+          -1,
+          -1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3
+        ]
+      ],
+      "zero_point": null
+    },
+    "stat_key": "attn2.qq"
+  },
+  {
+    "input_dtype": {
+      "bits": 10,
+      "qmax": 511,
+      "qmin": -512,
+      "signed": true
+    },
+    "kind": "requant_table",
+    "name": "attn_2_vq",
+    "observed_range": {
+      "cursor": {
+        "max": 109.0,
+        "min": -66.0
+      },
+      "input": {
+        "max": 341.0,
+        "min": -358.0
+      },
+      "output": {
+        "max": 3.0,
+        "min": -4.0
+      }
+    },
+    "output_dtype": {
+      "bits": 3,
+      "qmax": 3,
+      "qmin": -4,
+      "signed": true
+    },
+    "params": {
+      "bound": 63,
+      "effective_divisor": 4,
+      "input_dtype": {
+        "bits": 10,
+        "qmax": 511,
+        "qmin": -512,
+        "signed": true
+      },
+      "name": "attn_2_vq",
+      "observed_range": null,
+      "offset": 95,
+      "output_dtype": {
+        "bits": 3,
+        "qmax": 3,
+        "qmin": -4,
+        "signed": true
+      },
+      "scalars": [
+        95,
+        2,
+        63
+      ],
+      "shift_scale": 2,
+      "table_sizes": [
+        64
+      ],
+      "tables": [
+        [
+          -4,
+          -3,
+          -3,
+          -3,
+          -3,
+          -3,
+          -3,
+          -3,
+          -2,
+          -2,
+          -2,
+          -2,
+          -2,
+          -2,
+          -1,
+          -1,
+          -1,
+          -1,
+          -1,
+          -1,
+          -1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3
+        ]
+      ],
+      "zero_point": null
+    },
+    "stat_key": "attn2.vq"
+  },
+  {
+    "input_dtype": {
+      "bits": 9,
+      "qmax": 255,
+      "qmin": -256,
+      "signed": true
+    },
+    "kind": "requant_table",
+    "name": "attn_3_aq",
+    "observed_range": {
+      "cursor": {
+        "max": 80.0,
+        "min": -56.0
+      },
+      "input": {
+        "max": 118.0,
+        "min": -154.0
+      },
+      "output": {
+        "max": 3.0,
+        "min": -4.0
+      }
+    },
+    "output_dtype": {
+      "bits": 3,
+      "qmax": 3,
+      "qmin": -4,
+      "signed": true
+    },
+    "params": {
+      "bound": 63,
+      "effective_divisor": 2,
+      "input_dtype": {
+        "bits": 9,
+        "qmax": 255,
+        "qmin": -256,
+        "signed": true
+      },
+      "name": "attn_3_aq",
+      "observed_range": null,
+      "offset": 43,
+      "output_dtype": {
+        "bits": 3,
+        "qmax": 3,
+        "qmin": -4,
+        "signed": true
+      },
+      "scalars": [
+        43,
+        1,
+        63
+      ],
+      "shift_scale": 1,
+      "table_sizes": [
+        64
+      ],
+      "tables": [
+        [
+          -4,
+          -3,
+          -3,
+          -3,
+          -3,
+          -3,
+          -3,
+          -2,
+          -2,
+          -2,
+          -2,
+          -2,
+          -2,
+          -1,
+          -1,
+          -1,
+          -1,
+          -1,
+          -1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3
+        ]
+      ],
+      "zero_point": null
+    },
+    "stat_key": "attn3.aq"
+  },
+  {
+    "input_dtype": {
+      "bits": 10,
+      "qmax": 511,
+      "qmin": -512,
+      "signed": true
+    },
+    "kind": "requant_table",
+    "name": "attn_3_kq",
+    "observed_range": {
+      "cursor": {
+        "max": 141.0,
+        "min": -107.0
+      },
+      "input": {
+        "max": 235.0,
+        "min": -261.0
+      },
+      "output": {
+        "max": 3.0,
+        "min": -4.0
+      }
+    },
+    "output_dtype": {
+      "bits": 3,
+      "qmax": 3,
+      "qmin": -4,
+      "signed": true
+    },
+    "params": {
+      "bound": 63,
+      "effective_divisor": 2,
+      "input_dtype": {
+        "bits": 10,
+        "qmax": 511,
+        "qmin": -512,
+        "signed": true
+      },
+      "name": "attn_3_kq",
+      "observed_range": null,
+      "offset": 48,
+      "output_dtype": {
+        "bits": 3,
+        "qmax": 3,
+        "qmin": -4,
+        "signed": true
+      },
+      "scalars": [
+        48,
+        1,
+        63
+      ],
+      "shift_scale": 1,
+      "table_sizes": [
+        64
+      ],
+      "tables": [
+        [
+          -4,
+          -3,
+          -3,
+          -3,
+          -3,
+          -3,
+          -3,
+          -2,
+          -2,
+          -2,
+          -2,
+          -2,
+          -2,
+          -2,
+          -1,
+          -1,
+          -1,
+          -1,
+          -1,
+          -1,
+          -1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3
+        ]
+      ],
+      "zero_point": null
+    },
+    "stat_key": "attn3.kq"
+  },
+  {
+    "input_dtype": {
+      "bits": 10,
+      "qmax": 511,
+      "qmin": -512,
+      "signed": true
+    },
+    "kind": "requant_table",
+    "name": "attn_3_qq",
+    "observed_range": {
+      "cursor": {
+        "max": 95.0,
+        "min": -63.0
+      },
+      "input": {
+        "max": 306.0,
+        "min": -327.0
+      },
+      "output": {
+        "max": 3.0,
+        "min": -4.0
+      }
+    },
+    "output_dtype": {
+      "bits": 3,
+      "qmax": 3,
+      "qmin": -4,
+      "signed": true
+    },
+    "params": {
+      "bound": 63,
+      "effective_divisor": 4,
+      "input_dtype": {
+        "bits": 10,
+        "qmax": 511,
+        "qmin": -512,
+        "signed": true
+      },
+      "name": "attn_3_qq",
+      "observed_range": null,
+      "offset": 77,
+      "output_dtype": {
+        "bits": 3,
+        "qmax": 3,
+        "qmin": -4,
+        "signed": true
+      },
+      "scalars": [
+        77,
+        2,
+        63
+      ],
+      "shift_scale": 2,
+      "table_sizes": [
+        64
+      ],
+      "tables": [
+        [
+          -4,
+          -3,
+          -3,
+          -3,
+          -3,
+          -3,
+          -2,
+          -2,
+          -2,
+          -2,
+          -2,
+          -2,
+          -1,
+          -1,
+          -1,
+          -1,
+          -1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          1,
+          1,
+          1,
+          1,
+          1,
+          2,
+          2,
+          2,
+          2,
+          2,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3
+        ]
+      ],
+      "zero_point": null
+    },
+    "stat_key": "attn3.qq"
+  },
+  {
+    "input_dtype": {
+      "bits": 10,
+      "qmax": 511,
+      "qmin": -512,
+      "signed": true
+    },
+    "kind": "requant_table",
+    "name": "attn_3_vq",
+    "observed_range": {
+      "cursor": {
+        "max": 121.0,
+        "min": -68.0
+      },
+      "input": {
+        "max": 370.0,
+        "min": -386.0
+      },
+      "output": {
+        "max": 3.0,
+        "min": -4.0
+      }
+    },
+    "output_dtype": {
+      "bits": 3,
+      "qmax": 3,
+      "qmin": -4,
+      "signed": true
+    },
+    "params": {
+      "bound": 63,
+      "effective_divisor": 4,
+      "input_dtype": {
+        "bits": 10,
+        "qmax": 511,
+        "qmin": -512,
+        "signed": true
+      },
+      "name": "attn_3_vq",
+      "observed_range": null,
+      "offset": 117,
+      "output_dtype": {
+        "bits": 3,
+        "qmax": 3,
+        "qmin": -4,
+        "signed": true
+      },
+      "scalars": [
+        117,
+        2,
+        63
+      ],
+      "shift_scale": 2,
+      "table_sizes": [
+        64
+      ],
+      "tables": [
+        [
+          -4,
+          -3,
+          -3,
+          -3,
+          -3,
+          -3,
+          -3,
+          -3,
+          -3,
+          -2,
+          -2,
+          -2,
+          -2,
+          -2,
+          -2,
+          -2,
+          -2,
+          -1,
+          -1,
+          -1,
+          -1,
+          -1,
+          -1,
+          -1,
+          -1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3
+        ]
+      ],
+      "zero_point": null
+    },
+    "stat_key": "attn3.vq"
+  },
+  {
+    "input_dtype": {
+      "bits": 11,
+      "qmax": 1023,
+      "qmin": -1024,
+      "signed": true
+    },
+    "kind": "requant_table",
+    "name": "attn_4_aq",
+    "observed_range": {
+      "cursor": {
+        "max": 159.0,
+        "min": -115.0
+      },
+      "input": {
+        "max": 507.0,
+        "min": -591.0
+      },
+      "output": {
+        "max": 3.0,
+        "min": -4.0
+      }
+    },
+    "output_dtype": {
+      "bits": 3,
+      "qmax": 3,
+      "qmin": -4,
+      "signed": true
+    },
+    "params": {
+      "bound": 63,
+      "effective_divisor": 4,
+      "input_dtype": {
+        "bits": 11,
+        "qmax": 1023,
+        "qmin": -1024,
+        "signed": true
+      },
+      "name": "attn_4_aq",
+      "observed_range": null,
+      "offset": 132,
+      "output_dtype": {
+        "bits": 3,
+        "qmax": 3,
+        "qmin": -4,
+        "signed": true
+      },
+      "scalars": [
+        132,
+        2,
+        63
+      ],
+      "shift_scale": 2,
+      "table_sizes": [
+        64
+      ],
+      "tables": [
+        [
+          -4,
+          -3,
+          -3,
+          -3,
+          -3,
+          -3,
+          -3,
+          -3,
+          -3,
+          -3,
+          -2,
+          -2,
+          -2,
+          -2,
+          -2,
+          -2,
+          -2,
+          -2,
+          -2,
+          -1,
+          -1,
+          -1,
+          -1,
+          -1,
+          -1,
+          -1,
+          -1,
+          -1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3
+        ]
+      ],
+      "zero_point": null
+    },
+    "stat_key": "attn4.aq"
+  },
+  {
+    "input_dtype": {
+      "bits": 10,
+      "qmax": 511,
+      "qmin": -512,
+      "signed": true
+    },
+    "kind": "requant_table",
+    "name": "attn_4_kq",
+    "observed_range": {
+      "cursor": {
+        "max": 189.0,
+        "min": -118.0
+      },
+      "input": {
+        "max": 305.0,
+        "min": -309.0
+      },
+      "output": {
+        "max": 3.0,
+        "min": -4.0
+      }
+    },
+    "output_dtype": {
+      "bits": 3,
+      "qmax": 3,
+      "qmin": -4,
+      "signed": true
+    },
+    "params": {
+      "bound": 63,
+      "effective_divisor": 2,
+      "input_dtype": {
+        "bits": 10,
+        "qmax": 511,
+        "qmin": -512,
+        "signed": true
+      },
+      "name": "attn_4_kq",
+      "observed_range": null,
+      "offset": 73,
+      "output_dtype": {
+        "bits": 3,
+        "qmax": 3,
+        "qmin": -4,
+        "signed": true
+      },
+      "scalars": [
+        73,
+        1,
+        63
+      ],
+      "shift_scale": 1,
+      "table_sizes": [
+        64
+      ],
+      "tables": [
+        [
+          -4,
+          -3,
+          -3,
+          -3,
+          -3,
+          -3,
+          -3,
+          -3,
+          -3,
+          -3,
+          -3,
+          -2,
+          -2,
+          -2,
+          -2,
+          -2,
+          -2,
+          -2,
+          -2,
+          -2,
+          -2,
+          -1,
+          -1,
+          -1,
+          -1,
+          -1,
+          -1,
+          -1,
+          -1,
+          -1,
+          -1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          3,
+          3
+        ]
+      ],
+      "zero_point": null
+    },
+    "stat_key": "attn4.kq"
+  },
+  {
+    "input_dtype": {
+      "bits": 11,
+      "qmax": 1023,
+      "qmin": -1024,
+      "signed": true
+    },
+    "kind": "requant_table",
+    "name": "attn_4_qq",
+    "observed_range": {
+      "cursor": {
+        "max": 160.0,
+        "min": -105.0
+      },
+      "input": {
+        "max": 527.0,
+        "min": -534.0
+      },
+      "output": {
+        "max": 3.0,
+        "min": -4.0
+      }
+    },
+    "output_dtype": {
+      "bits": 3,
+      "qmax": 3,
+      "qmin": -4,
+      "signed": true
+    },
+    "params": {
+      "bound": 63,
+      "effective_divisor": 4,
+      "input_dtype": {
+        "bits": 11,
+        "qmax": 1023,
+        "qmin": -1024,
+        "signed": true
+      },
+      "name": "attn_4_qq",
+      "observed_range": null,
+      "offset": 116,
+      "output_dtype": {
+        "bits": 3,
+        "qmax": 3,
+        "qmin": -4,
+        "signed": true
+      },
+      "scalars": [
+        116,
+        2,
+        63
+      ],
+      "shift_scale": 2,
+      "table_sizes": [
+        64
+      ],
+      "tables": [
+        [
+          -4,
+          -3,
+          -3,
+          -3,
+          -3,
+          -3,
+          -3,
+          -3,
+          -3,
+          -2,
+          -2,
+          -2,
+          -2,
+          -2,
+          -2,
+          -2,
+          -2,
+          -1,
+          -1,
+          -1,
+          -1,
+          -1,
+          -1,
+          -1,
+          -1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3
+        ]
+      ],
+      "zero_point": null
+    },
+    "stat_key": "attn4.qq"
+  },
+  {
+    "input_dtype": {
+      "bits": 10,
+      "qmax": 511,
+      "qmin": -512,
+      "signed": true
+    },
+    "kind": "requant_table",
+    "name": "attn_4_vq",
+    "observed_range": {
+      "cursor": {
+        "max": 133.0,
+        "min": -66.0
+      },
+      "input": {
+        "max": 403.0,
+        "min": -395.0
+      },
+      "output": {
+        "max": 3.0,
+        "min": -4.0
+      }
+    },
+    "output_dtype": {
+      "bits": 3,
+      "qmax": 3,
+      "qmin": -4,
+      "signed": true
+    },
+    "params": {
+      "bound": 63,
+      "effective_divisor": 4,
+      "input_dtype": {
+        "bits": 10,
+        "qmax": 511,
+        "qmin": -512,
+        "signed": true
+      },
+      "name": "attn_4_vq",
+      "observed_range": null,
+      "offset": 132,
+      "output_dtype": {
+        "bits": 3,
+        "qmax": 3,
+        "qmin": -4,
+        "signed": true
+      },
+      "scalars": [
+        132,
+        2,
+        63
+      ],
+      "shift_scale": 2,
+      "table_sizes": [
+        64
+      ],
+      "tables": [
+        [
+          -4,
+          -3,
+          -3,
+          -3,
+          -3,
+          -3,
+          -3,
+          -3,
+          -3,
+          -3,
+          -2,
+          -2,
+          -2,
+          -2,
+          -2,
+          -2,
+          -2,
+          -2,
+          -2,
+          -1,
+          -1,
+          -1,
+          -1,
+          -1,
+          -1,
+          -1,
+          -1,
+          -1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3
+        ]
+      ],
+      "zero_point": null
+    },
+    "stat_key": "attn4.vq"
+  },
+  {
+    "input_dtype": {
+      "bits": 10,
+      "qmax": 511,
+      "qmin": -512,
+      "signed": true
+    },
+    "kind": "requant_table",
+    "name": "attn_5_aq",
+    "observed_range": {
+      "cursor": {
+        "max": 100.0,
+        "min": -72.0
+      },
+      "input": {
+        "max": 310.0,
+        "min": -381.0
+      },
+      "output": {
+        "max": 3.0,
+        "min": -4.0
+      }
+    },
+    "output_dtype": {
+      "bits": 3,
+      "qmax": 3,
+      "qmin": -4,
+      "signed": true
+    },
+    "params": {
+      "bound": 63,
+      "effective_divisor": 4,
+      "input_dtype": {
+        "bits": 10,
+        "qmax": 511,
+        "qmin": -512,
+        "signed": true
+      },
+      "name": "attn_5_aq",
+      "observed_range": null,
+      "offset": 93,
+      "output_dtype": {
+        "bits": 3,
+        "qmax": 3,
+        "qmin": -4,
+        "signed": true
+      },
+      "scalars": [
+        93,
+        2,
+        63
+      ],
+      "shift_scale": 2,
+      "table_sizes": [
+        64
+      ],
+      "tables": [
+        [
+          -4,
+          -3,
+          -3,
+          -3,
+          -3,
+          -3,
+          -3,
+          -2,
+          -2,
+          -2,
+          -2,
+          -2,
+          -2,
+          -2,
+          -1,
+          -1,
+          -1,
+          -1,
+          -1,
+          -1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3
+        ]
+      ],
+      "zero_point": null
+    },
+    "stat_key": "attn5.aq"
+  },
+  {
+    "input_dtype": {
+      "bits": 10,
+      "qmax": 511,
+      "qmin": -512,
+      "signed": true
+    },
+    "kind": "requant_table",
+    "name": "attn_5_kq",
+    "observed_range": {
+      "cursor": {
+        "max": 212.0,
+        "min": -144.0
+      },
+      "input": {
+        "max": 361.0,
+        "min": -352.0
+      },
+      "output": {
+        "max": 3.0,
+        "min": -4.0
+      }
+    },
+    "output_dtype": {
+      "bits": 3,
+      "qmax": 3,
+      "qmin": -4,
+      "signed": true
+    },
+    "params": {
+      "bound": 63,
+      "effective_divisor": 2,
+      "input_dtype": {
+        "bits": 10,
+        "qmax": 511,
+        "qmin": -512,
+        "signed": true
+      },
+      "name": "attn_5_kq",
+      "observed_range": null,
+      "offset": 64,
+      "output_dtype": {
+        "bits": 3,
+        "qmax": 3,
+        "qmin": -4,
+        "signed": true
+      },
+      "scalars": [
+        64,
+        1,
+        63
+      ],
+      "shift_scale": 1,
+      "table_sizes": [
+        64
+      ],
+      "tables": [
+        [
+          -4,
+          -3,
+          -3,
+          -3,
+          -3,
+          -3,
+          -3,
+          -3,
+          -3,
+          -3,
+          -2,
+          -2,
+          -2,
+          -2,
+          -2,
+          -2,
+          -2,
+          -2,
+          -2,
+          -1,
+          -1,
+          -1,
+          -1,
+          -1,
+          -1,
+          -1,
+          -1,
+          -1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3
+        ]
+      ],
+      "zero_point": null
+    },
+    "stat_key": "attn5.kq"
+  },
+  {
+    "input_dtype": {
+      "bits": 11,
+      "qmax": 1023,
+      "qmin": -1024,
+      "signed": true
+    },
+    "kind": "requant_table",
+    "name": "attn_5_qq",
+    "observed_range": {
+      "cursor": {
+        "max": 141.0,
+        "min": -118.0
+      },
+      "input": {
+        "max": 463.0,
+        "min": -570.0
+      },
+      "output": {
+        "max": 3.0,
+        "min": -4.0
+      }
+    },
+    "output_dtype": {
+      "bits": 3,
+      "qmax": 3,
+      "qmin": -4,
+      "signed": true
+    },
+    "params": {
+      "bound": 63,
+      "effective_divisor": 4,
+      "input_dtype": {
+        "bits": 11,
+        "qmax": 1023,
+        "qmin": -1024,
+        "signed": true
+      },
+      "name": "attn_5_qq",
+      "observed_range": null,
+      "offset": 101,
+      "output_dtype": {
+        "bits": 3,
+        "qmax": 3,
+        "qmin": -4,
+        "signed": true
+      },
+      "scalars": [
+        101,
+        2,
+        63
+      ],
+      "shift_scale": 2,
+      "table_sizes": [
+        64
+      ],
+      "tables": [
+        [
+          -4,
+          -3,
+          -3,
+          -3,
+          -3,
+          -3,
+          -3,
+          -3,
+          -2,
+          -2,
+          -2,
+          -2,
+          -2,
+          -2,
+          -2,
+          -1,
+          -1,
+          -1,
+          -1,
+          -1,
+          -1,
+          -1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3
+        ]
+      ],
+      "zero_point": null
+    },
+    "stat_key": "attn5.qq"
+  },
+  {
+    "input_dtype": {
+      "bits": 10,
+      "qmax": 511,
+      "qmin": -512,
+      "signed": true
+    },
+    "kind": "requant_table",
+    "name": "attn_5_vq",
+    "observed_range": {
+      "cursor": {
+        "max": 116.0,
+        "min": -70.0
+      },
+      "input": {
+        "max": 345.0,
+        "min": -399.0
+      },
+      "output": {
+        "max": 3.0,
+        "min": -4.0
+      }
+    },
+    "output_dtype": {
+      "bits": 3,
+      "qmax": 3,
+      "qmin": -4,
+      "signed": true
+    },
+    "params": {
+      "bound": 63,
+      "effective_divisor": 4,
+      "input_dtype": {
+        "bits": 10,
+        "qmax": 511,
+        "qmin": -512,
+        "signed": true
+      },
+      "name": "attn_5_vq",
+      "observed_range": null,
+      "offset": 121,
+      "output_dtype": {
+        "bits": 3,
+        "qmax": 3,
+        "qmin": -4,
+        "signed": true
+      },
+      "scalars": [
+        121,
+        2,
+        63
+      ],
+      "shift_scale": 2,
+      "table_sizes": [
+        64
+      ],
+      "tables": [
+        [
+          -4,
+          -3,
+          -3,
+          -3,
+          -3,
+          -3,
+          -3,
+          -3,
+          -3,
+          -3,
+          -2,
+          -2,
+          -2,
+          -2,
+          -2,
+          -2,
+          -2,
+          -2,
+          -1,
+          -1,
+          -1,
+          -1,
+          -1,
+          -1,
+          -1,
+          -1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3
+        ]
+      ],
+      "zero_point": null
+    },
+    "stat_key": "attn5.vq"
+  },
+  {
+    "input_dtype": {
+      "bits": 11,
+      "qmax": 1023,
+      "qmin": -1024,
+      "signed": true
+    },
+    "kind": "requant_table",
+    "name": "attn_6_aq",
+    "observed_range": {
+      "cursor": {
+        "max": 122.0,
+        "min": -108.0
+      },
+      "input": {
+        "max": 391.0,
+        "min": -527.0
+      },
+      "output": {
+        "max": 3.0,
+        "min": -4.0
+      }
+    },
+    "output_dtype": {
+      "bits": 3,
+      "qmax": 3,
+      "qmin": -4,
+      "signed": true
+    },
+    "params": {
+      "bound": 63,
+      "effective_divisor": 4,
+      "input_dtype": {
+        "bits": 11,
+        "qmax": 1023,
+        "qmin": -1024,
+        "signed": true
+      },
+      "name": "attn_6_aq",
+      "observed_range": null,
+      "offset": 98,
+      "output_dtype": {
+        "bits": 3,
+        "qmax": 3,
+        "qmin": -4,
+        "signed": true
+      },
+      "scalars": [
+        98,
+        2,
+        63
+      ],
+      "shift_scale": 2,
+      "table_sizes": [
+        64
+      ],
+      "tables": [
+        [
+          -4,
+          -3,
+          -3,
+          -3,
+          -3,
+          -3,
+          -3,
+          -2,
+          -2,
+          -2,
+          -2,
+          -2,
+          -2,
+          -2,
+          -1,
+          -1,
+          -1,
+          -1,
+          -1,
+          -1,
+          -1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3
+        ]
+      ],
+      "zero_point": null
+    },
+    "stat_key": "attn6.aq"
+  },
+  {
+    "input_dtype": {
+      "bits": 10,
+      "qmax": 511,
+      "qmin": -512,
+      "signed": true
+    },
+    "kind": "requant_table",
+    "name": "attn_6_kq",
+    "observed_range": {
+      "cursor": {
+        "max": 139.0,
+        "min": -71.0
+      },
+      "input": {
+        "max": 478.0,
+        "min": -364.0
+      },
+      "output": {
+        "max": 3.0,
+        "min": -4.0
+      }
+    },
+    "output_dtype": {
+      "bits": 3,
+      "qmax": 3,
+      "qmin": -4,
+      "signed": true
+    },
+    "params": {
+      "bound": 63,
+      "effective_divisor": 4,
+      "input_dtype": {
+        "bits": 10,
+        "qmax": 511,
+        "qmin": -512,
+        "signed": true
+      },
+      "name": "attn_6_kq",
+      "observed_range": null,
+      "offset": 81,
+      "output_dtype": {
+        "bits": 3,
+        "qmax": 3,
+        "qmin": -4,
+        "signed": true
+      },
+      "scalars": [
+        81,
+        2,
+        63
+      ],
+      "shift_scale": 2,
+      "table_sizes": [
+        64
+      ],
+      "tables": [
+        [
+          -4,
+          -3,
+          -3,
+          -3,
+          -3,
+          -3,
+          -2,
+          -2,
+          -2,
+          -2,
+          -2,
+          -2,
+          -1,
+          -1,
+          -1,
+          -1,
+          -1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          2,
+          2,
+          2,
+          2,
+          2,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3
+        ]
+      ],
+      "zero_point": null
+    },
+    "stat_key": "attn6.kq"
+  },
+  {
+    "input_dtype": {
+      "bits": 11,
+      "qmax": 1023,
+      "qmin": -1024,
+      "signed": true
+    },
+    "kind": "requant_table",
+    "name": "attn_6_qq",
+    "observed_range": {
+      "cursor": {
+        "max": 127.0,
+        "min": -106.0
+      },
+      "input": {
+        "max": 398.0,
+        "min": -534.0
+      },
+      "output": {
+        "max": 3.0,
+        "min": -4.0
+      }
+    },
+    "output_dtype": {
+      "bits": 3,
+      "qmax": 3,
+      "qmin": -4,
+      "signed": true
+    },
+    "params": {
+      "bound": 63,
+      "effective_divisor": 4,
+      "input_dtype": {
+        "bits": 11,
+        "qmax": 1023,
+        "qmin": -1024,
+        "signed": true
+      },
+      "name": "attn_6_qq",
+      "observed_range": null,
+      "offset": 111,
+      "output_dtype": {
+        "bits": 3,
+        "qmax": 3,
+        "qmin": -4,
+        "signed": true
+      },
+      "scalars": [
+        111,
+        2,
+        63
+      ],
+      "shift_scale": 2,
+      "table_sizes": [
+        64
+      ],
+      "tables": [
+        [
+          -4,
+          -3,
+          -3,
+          -3,
+          -3,
+          -3,
+          -3,
+          -3,
+          -3,
+          -2,
+          -2,
+          -2,
+          -2,
+          -2,
+          -2,
+          -2,
+          -1,
+          -1,
+          -1,
+          -1,
+          -1,
+          -1,
+          -1,
+          -1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3
+        ]
+      ],
+      "zero_point": null
+    },
+    "stat_key": "attn6.qq"
+  },
+  {
+    "input_dtype": {
+      "bits": 10,
+      "qmax": 511,
+      "qmin": -512,
+      "signed": true
+    },
+    "kind": "requant_table",
+    "name": "attn_6_vq",
+    "observed_range": {
+      "cursor": {
+        "max": 112.0,
+        "min": -63.0
+      },
+      "input": {
+        "max": 329.0,
+        "min": -370.0
+      },
+      "output": {
+        "max": 3.0,
+        "min": -4.0
+      }
+    },
+    "output_dtype": {
+      "bits": 3,
+      "qmax": 3,
+      "qmin": -4,
+      "signed": true
+    },
+    "params": {
+      "bound": 63,
+      "effective_divisor": 4,
+      "input_dtype": {
+        "bits": 10,
+        "qmax": 511,
+        "qmin": -512,
+        "signed": true
+      },
+      "name": "attn_6_vq",
+      "observed_range": null,
+      "offset": 120,
+      "output_dtype": {
+        "bits": 3,
+        "qmax": 3,
+        "qmin": -4,
+        "signed": true
+      },
+      "scalars": [
+        120,
+        2,
+        63
+      ],
+      "shift_scale": 2,
+      "table_sizes": [
+        64
+      ],
+      "tables": [
+        [
+          -4,
+          -3,
+          -3,
+          -3,
+          -3,
+          -3,
+          -3,
+          -3,
+          -3,
+          -3,
+          -2,
+          -2,
+          -2,
+          -2,
+          -2,
+          -2,
+          -2,
+          -2,
+          -1,
+          -1,
+          -1,
+          -1,
+          -1,
+          -1,
+          -1,
+          -1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3
+        ]
+      ],
+      "zero_point": null
+    },
+    "stat_key": "attn6.vq"
+  },
+  {
+    "input_dtype": {
+      "bits": 11,
+      "qmax": 1023,
+      "qmin": -1024,
+      "signed": true
+    },
+    "kind": "requant_table",
+    "name": "attn_7_aq",
+    "observed_range": {
+      "cursor": {
+        "max": 74.0,
+        "min": -48.0
+      },
+      "input": {
+        "max": 436.0,
+        "min": -541.0
+      },
+      "output": {
+        "max": 3.0,
+        "min": -4.0
+      }
+    },
+    "output_dtype": {
+      "bits": 3,
+      "qmax": 3,
+      "qmin": -4,
+      "signed": true
+    },
+    "params": {
+      "bound": 63,
+      "effective_divisor": 8,
+      "input_dtype": {
+        "bits": 11,
+        "qmax": 1023,
+        "qmin": -1024,
+        "signed": true
+      },
+      "name": "attn_7_aq",
+      "observed_range": null,
+      "offset": 162,
+      "output_dtype": {
+        "bits": 3,
+        "qmax": 3,
+        "qmin": -4,
+        "signed": true
+      },
+      "scalars": [
+        162,
+        3,
+        63
+      ],
+      "shift_scale": 3,
+      "table_sizes": [
+        64
+      ],
+      "tables": [
+        [
+          -4,
+          -3,
+          -3,
+          -3,
+          -3,
+          -3,
+          -3,
+          -2,
+          -2,
+          -2,
+          -2,
+          -2,
+          -1,
+          -1,
+          -1,
+          -1,
+          -1,
+          -1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          1,
+          1,
+          1,
+          1,
+          1,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3
+        ]
+      ],
+      "zero_point": null
+    },
+    "stat_key": "attn7.aq"
+  },
+  {
+    "input_dtype": {
+      "bits": 10,
+      "qmax": 511,
+      "qmin": -512,
+      "signed": true
+    },
+    "kind": "requant_table",
+    "name": "attn_7_kq",
+    "observed_range": {
+      "cursor": {
+        "max": 110.0,
+        "min": -69.0
+      },
+      "input": {
+        "max": 348.0,
+        "min": -365.0
+      },
+      "output": {
+        "max": 3.0,
+        "min": -4.0
+      }
+    },
+    "output_dtype": {
+      "bits": 3,
+      "qmax": 3,
+      "qmin": -4,
+      "signed": true
+    },
+    "params": {
+      "bound": 63,
+      "effective_divisor": 4,
+      "input_dtype": {
+        "bits": 10,
+        "qmax": 511,
+        "qmin": -512,
+        "signed": true
+      },
+      "name": "attn_7_kq",
+      "observed_range": null,
+      "offset": 92,
+      "output_dtype": {
+        "bits": 3,
+        "qmax": 3,
+        "qmin": -4,
+        "signed": true
+      },
+      "scalars": [
+        92,
+        2,
+        63
+      ],
+      "shift_scale": 2,
+      "table_sizes": [
+        64
+      ],
+      "tables": [
+        [
+          -4,
+          -3,
+          -3,
+          -3,
+          -3,
+          -3,
+          -3,
+          -2,
+          -2,
+          -2,
+          -2,
+          -2,
+          -2,
+          -2,
+          -1,
+          -1,
+          -1,
+          -1,
+          -1,
+          -1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3
+        ]
+      ],
+      "zero_point": null
+    },
+    "stat_key": "attn7.kq"
+  },
+  {
+    "input_dtype": {
+      "bits": 10,
+      "qmax": 511,
+      "qmin": -512,
+      "signed": true
+    },
+    "kind": "requant_table",
+    "name": "attn_7_qq",
+    "observed_range": {
+      "cursor": {
+        "max": 150.0,
+        "min": -77.0
+      },
+      "input": {
+        "max": 471.0,
+        "min": -436.0
+      },
+      "output": {
+        "max": 3.0,
+        "min": -4.0
+      }
+    },
+    "output_dtype": {
+      "bits": 3,
+      "qmax": 3,
+      "qmin": -4,
+      "signed": true
+    },
+    "params": {
+      "bound": 63,
+      "effective_divisor": 4,
+      "input_dtype": {
+        "bits": 10,
+        "qmax": 511,
+        "qmin": -512,
+        "signed": true
+      },
+      "name": "attn_7_qq",
+      "observed_range": null,
+      "offset": 129,
+      "output_dtype": {
+        "bits": 3,
+        "qmax": 3,
+        "qmin": -4,
+        "signed": true
+      },
+      "scalars": [
+        129,
+        2,
+        63
+      ],
+      "shift_scale": 2,
+      "table_sizes": [
+        64
+      ],
+      "tables": [
+        [
+          -4,
+          -3,
+          -3,
+          -3,
+          -3,
+          -3,
+          -3,
+          -3,
+          -3,
+          -3,
+          -2,
+          -2,
+          -2,
+          -2,
+          -2,
+          -2,
+          -2,
+          -2,
+          -2,
+          -1,
+          -1,
+          -1,
+          -1,
+          -1,
+          -1,
+          -1,
+          -1,
+          -1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3
+        ]
+      ],
+      "zero_point": null
+    },
+    "stat_key": "attn7.qq"
+  },
+  {
+    "input_dtype": {
+      "bits": 10,
+      "qmax": 511,
+      "qmin": -512,
+      "signed": true
+    },
+    "kind": "requant_table",
+    "name": "attn_7_vq",
+    "observed_range": {
+      "cursor": {
+        "max": 115.0,
+        "min": -65.0
+      },
+      "input": {
+        "max": 349.0,
+        "min": -373.0
+      },
+      "output": {
+        "max": 3.0,
+        "min": -4.0
+      }
+    },
+    "output_dtype": {
+      "bits": 3,
+      "qmax": 3,
+      "qmin": -4,
+      "signed": true
+    },
+    "params": {
+      "bound": 63,
+      "effective_divisor": 4,
+      "input_dtype": {
+        "bits": 10,
+        "qmax": 511,
+        "qmin": -512,
+        "signed": true
+      },
+      "name": "attn_7_vq",
+      "observed_range": null,
+      "offset": 113,
+      "output_dtype": {
+        "bits": 3,
+        "qmax": 3,
+        "qmin": -4,
+        "signed": true
+      },
+      "scalars": [
+        113,
+        2,
+        63
+      ],
+      "shift_scale": 2,
+      "table_sizes": [
+        64
+      ],
+      "tables": [
+        [
+          -4,
+          -3,
+          -3,
+          -3,
+          -3,
+          -3,
+          -3,
+          -3,
+          -3,
+          -2,
+          -2,
+          -2,
+          -2,
+          -2,
+          -2,
+          -2,
+          -2,
+          -1,
+          -1,
+          -1,
+          -1,
+          -1,
+          -1,
+          -1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3
+        ]
+      ],
+      "zero_point": null
+    },
+    "stat_key": "attn7.vq"
+  },
+  {
+    "input_dtype": {
+      "bits": 10,
+      "qmax": 511,
+      "qmin": -512,
+      "signed": true
+    },
+    "kind": "requant_table",
+    "name": "attn_8_aq",
+    "observed_range": {
+      "cursor": {
+        "max": 103.0,
+        "min": -75.0
+      },
+      "input": {
+        "max": 307.0,
+        "min": -405.0
+      },
+      "output": {
+        "max": 3.0,
+        "min": -4.0
+      }
+    },
+    "output_dtype": {
+      "bits": 3,
+      "qmax": 3,
+      "qmin": -4,
+      "signed": true
+    },
+    "params": {
+      "bound": 63,
+      "effective_divisor": 4,
+      "input_dtype": {
+        "bits": 10,
+        "qmax": 511,
+        "qmin": -512,
+        "signed": true
+      },
+      "name": "attn_8_aq",
+      "observed_range": null,
+      "offset": 107,
+      "output_dtype": {
+        "bits": 3,
+        "qmax": 3,
+        "qmin": -4,
+        "signed": true
+      },
+      "scalars": [
+        107,
+        2,
+        63
+      ],
+      "shift_scale": 2,
+      "table_sizes": [
+        64
+      ],
+      "tables": [
+        [
+          -4,
+          -3,
+          -3,
+          -3,
+          -3,
+          -3,
+          -3,
+          -3,
+          -2,
+          -2,
+          -2,
+          -2,
+          -2,
+          -2,
+          -2,
+          -2,
+          -1,
+          -1,
+          -1,
+          -1,
+          -1,
+          -1,
+          -1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3
+        ]
+      ],
+      "zero_point": null
+    },
+    "stat_key": "attn8.aq"
+  },
+  {
+    "input_dtype": {
+      "bits": 10,
+      "qmax": 511,
+      "qmin": -512,
+      "signed": true
+    },
+    "kind": "requant_table",
+    "name": "attn_8_kq",
+    "observed_range": {
+      "cursor": {
+        "max": 106.0,
+        "min": -72.0
+      },
+      "input": {
+        "max": 345.0,
+        "min": -367.0
+      },
+      "output": {
+        "max": 3.0,
+        "min": -4.0
+      }
+    },
+    "output_dtype": {
+      "bits": 3,
+      "qmax": 3,
+      "qmin": -4,
+      "signed": true
+    },
+    "params": {
+      "bound": 63,
+      "effective_divisor": 4,
+      "input_dtype": {
+        "bits": 10,
+        "qmax": 511,
+        "qmin": -512,
+        "signed": true
+      },
+      "name": "attn_8_kq",
+      "observed_range": null,
+      "offset": 80,
+      "output_dtype": {
+        "bits": 3,
+        "qmax": 3,
+        "qmin": -4,
+        "signed": true
+      },
+      "scalars": [
+        80,
+        2,
+        63
+      ],
+      "shift_scale": 2,
+      "table_sizes": [
+        64
+      ],
+      "tables": [
+        [
+          -4,
+          -3,
+          -3,
+          -3,
+          -3,
+          -3,
+          -3,
+          -2,
+          -2,
+          -2,
+          -2,
+          -2,
+          -1,
+          -1,
+          -1,
+          -1,
+          -1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          1,
+          1,
+          1,
+          1,
+          1,
+          2,
+          2,
+          2,
+          2,
+          2,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3
+        ]
+      ],
+      "zero_point": null
+    },
+    "stat_key": "attn8.kq"
+  },
+  {
+    "input_dtype": {
+      "bits": 10,
+      "qmax": 511,
+      "qmin": -512,
+      "signed": true
+    },
+    "kind": "requant_table",
+    "name": "attn_8_qq",
+    "observed_range": {
+      "cursor": {
+        "max": 137.0,
+        "min": -85.0
+      },
+      "input": {
+        "max": 442.0,
+        "min": -447.0
+      },
+      "output": {
+        "max": 3.0,
+        "min": -4.0
+      }
+    },
+    "output_dtype": {
+      "bits": 3,
+      "qmax": 3,
+      "qmin": -4,
+      "signed": true
+    },
+    "params": {
+      "bound": 63,
+      "effective_divisor": 4,
+      "input_dtype": {
+        "bits": 10,
+        "qmax": 511,
+        "qmin": -512,
+        "signed": true
+      },
+      "name": "attn_8_qq",
+      "observed_range": null,
+      "offset": 109,
+      "output_dtype": {
+        "bits": 3,
+        "qmax": 3,
+        "qmin": -4,
+        "signed": true
+      },
+      "scalars": [
+        109,
+        2,
+        63
+      ],
+      "shift_scale": 2,
+      "table_sizes": [
+        64
+      ],
+      "tables": [
+        [
+          -4,
+          -3,
+          -3,
+          -3,
+          -3,
+          -3,
+          -3,
+          -3,
+          -2,
+          -2,
+          -2,
+          -2,
+          -2,
+          -2,
+          -2,
+          -2,
+          -1,
+          -1,
+          -1,
+          -1,
+          -1,
+          -1,
+          -1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3
+        ]
+      ],
+      "zero_point": null
+    },
+    "stat_key": "attn8.qq"
+  },
+  {
+    "input_dtype": {
+      "bits": 10,
+      "qmax": 511,
+      "qmin": -512,
+      "signed": true
+    },
+    "kind": "requant_table",
+    "name": "attn_8_vq",
+    "observed_range": {
+      "cursor": {
+        "max": 108.0,
+        "min": -59.0
+      },
+      "input": {
+        "max": 321.0,
+        "min": -344.0
+      },
+      "output": {
+        "max": 3.0,
+        "min": -4.0
+      }
+    },
+    "output_dtype": {
+      "bits": 3,
+      "qmax": 3,
+      "qmin": -4,
+      "signed": true
+    },
+    "params": {
+      "bound": 63,
+      "effective_divisor": 4,
+      "input_dtype": {
+        "bits": 10,
+        "qmax": 511,
+        "qmin": -512,
+        "signed": true
+      },
+      "name": "attn_8_vq",
+      "observed_range": null,
+      "offset": 111,
+      "output_dtype": {
+        "bits": 3,
+        "qmax": 3,
+        "qmin": -4,
+        "signed": true
+      },
+      "scalars": [
+        111,
+        2,
+        63
+      ],
+      "shift_scale": 2,
+      "table_sizes": [
+        64
+      ],
+      "tables": [
+        [
+          -4,
+          -3,
+          -3,
+          -3,
+          -3,
+          -3,
+          -3,
+          -3,
+          -3,
+          -2,
+          -2,
+          -2,
+          -2,
+          -2,
+          -2,
+          -2,
+          -1,
+          -1,
+          -1,
+          -1,
+          -1,
+          -1,
+          -1,
+          -1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3
+        ]
+      ],
+      "zero_point": null
+    },
+    "stat_key": "attn8.vq"
+  },
+  {
+    "input_dtype": {
+      "bits": 11,
+      "qmax": 1023,
+      "qmin": -1024,
+      "signed": true
+    },
+    "kind": "requant_table",
+    "name": "attn_9_aq",
+    "observed_range": {
+      "cursor": {
+        "max": 82.0,
+        "min": -56.0
+      },
+      "input": {
+        "max": 486.0,
+        "min": -618.0
+      },
+      "output": {
+        "max": 3.0,
+        "min": -4.0
+      }
+    },
+    "output_dtype": {
+      "bits": 3,
+      "qmax": 3,
+      "qmin": -4,
+      "signed": true
+    },
+    "params": {
+      "bound": 63,
+      "effective_divisor": 8,
+      "input_dtype": {
+        "bits": 11,
+        "qmax": 1023,
+        "qmin": -1024,
+        "signed": true
+      },
+      "name": "attn_9_aq",
+      "observed_range": null,
+      "offset": 174,
+      "output_dtype": {
+        "bits": 3,
+        "qmax": 3,
+        "qmin": -4,
+        "signed": true
+      },
+      "scalars": [
+        174,
+        3,
+        63
+      ],
+      "shift_scale": 3,
+      "table_sizes": [
+        64
+      ],
+      "tables": [
+        [
+          -4,
+          -3,
+          -3,
+          -3,
+          -3,
+          -3,
+          -3,
+          -2,
+          -2,
+          -2,
+          -2,
+          -2,
+          -2,
+          -1,
+          -1,
+          -1,
+          -1,
+          -1,
+          -1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          2,
+          2,
+          2,
+          2,
+          2,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3
+        ]
+      ],
+      "zero_point": null
+    },
+    "stat_key": "attn9.aq"
+  },
+  {
+    "input_dtype": {
+      "bits": 10,
+      "qmax": 511,
+      "qmin": -512,
+      "signed": true
+    },
+    "kind": "requant_table",
+    "name": "attn_9_kq",
+    "observed_range": {
+      "cursor": {
+        "max": 143.0,
+        "min": -75.0
+      },
+      "input": {
+        "max": 475.0,
+        "min": -394.0
+      },
+      "output": {
+        "max": 3.0,
+        "min": -4.0
+      }
+    },
+    "output_dtype": {
+      "bits": 3,
+      "qmax": 3,
+      "qmin": -4,
+      "signed": true
+    },
+    "params": {
+      "bound": 63,
+      "effective_divisor": 4,
+      "input_dtype": {
+        "bits": 10,
+        "qmax": 511,
+        "qmin": -512,
+        "signed": true
+      },
+      "name": "attn_9_kq",
+      "observed_range": null,
+      "offset": 97,
+      "output_dtype": {
+        "bits": 3,
+        "qmax": 3,
+        "qmin": -4,
+        "signed": true
+      },
+      "scalars": [
+        97,
+        2,
+        63
+      ],
+      "shift_scale": 2,
+      "table_sizes": [
+        64
+      ],
+      "tables": [
+        [
+          -4,
+          -3,
+          -3,
+          -3,
+          -3,
+          -3,
+          -3,
+          -3,
+          -2,
+          -2,
+          -2,
+          -2,
+          -2,
+          -2,
+          -1,
+          -1,
+          -1,
+          -1,
+          -1,
+          -1,
+          -1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3
+        ]
+      ],
+      "zero_point": null
+    },
+    "stat_key": "attn9.kq"
+  },
+  {
+    "input_dtype": {
+      "bits": 11,
+      "qmax": 1023,
+      "qmin": -1024,
+      "signed": true
+    },
+    "kind": "requant_table",
+    "name": "attn_9_qq",
+    "observed_range": {
+      "cursor": {
+        "max": 109.0,
+        "min": -75.0
+      },
+      "input": {
+        "max": 724.0,
+        "min": -745.0
+      },
+      "output": {
+        "max": 3.0,
+        "min": -4.0
+      }
+    },
+    "output_dtype": {
+      "bits": 3,
+      "qmax": 3,
+      "qmin": -4,
+      "signed": true
+    },
+    "params": {
+      "bound": 63,
+      "effective_divisor": 8,
+      "input_dtype": {
+        "bits": 11,
+        "qmax": 1023,
+        "qmin": -1024,
+        "signed": true
+      },
+      "name": "attn_9_qq",
+      "observed_range": null,
+      "offset": 152,
+      "output_dtype": {
+        "bits": 3,
+        "qmax": 3,
+        "qmin": -4,
+        "signed": true
+      },
+      "scalars": [
+        152,
+        3,
+        63
+      ],
+      "shift_scale": 3,
+      "table_sizes": [
+        64
+      ],
+      "tables": [
+        [
+          -4,
+          -3,
+          -3,
+          -3,
+          -3,
+          -3,
+          -2,
+          -2,
+          -2,
+          -2,
+          -2,
+          -1,
+          -1,
+          -1,
+          -1,
+          -1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          1,
+          1,
+          1,
+          1,
+          1,
+          2,
+          2,
+          2,
+          2,
+          2,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3
+        ]
+      ],
+      "zero_point": null
+    },
+    "stat_key": "attn9.qq"
+  },
+  {
+    "input_dtype": {
+      "bits": 10,
+      "qmax": 511,
+      "qmin": -512,
+      "signed": true
+    },
+    "kind": "requant_table",
+    "name": "attn_9_vq",
+    "observed_range": {
+      "cursor": {
+        "max": 105.0,
+        "min": -58.0
+      },
+      "input": {
+        "max": 313.0,
+        "min": -339.0
+      },
+      "output": {
+        "max": 3.0,
+        "min": -4.0
+      }
+    },
+    "output_dtype": {
+      "bits": 3,
+      "qmax": 3,
+      "qmin": -4,
+      "signed": true
+    },
+    "params": {
+      "bound": 63,
+      "effective_divisor": 4,
+      "input_dtype": {
+        "bits": 10,
+        "qmax": 511,
+        "qmin": -512,
+        "signed": true
+      },
+      "name": "attn_9_vq",
+      "observed_range": null,
+      "offset": 107,
+      "output_dtype": {
+        "bits": 3,
+        "qmax": 3,
+        "qmin": -4,
+        "signed": true
+      },
+      "scalars": [
+        107,
+        2,
+        63
+      ],
+      "shift_scale": 2,
+      "table_sizes": [
+        64
+      ],
+      "tables": [
+        [
+          -4,
+          -3,
+          -3,
+          -3,
+          -3,
+          -3,
+          -3,
+          -3,
+          -2,
+          -2,
+          -2,
+          -2,
+          -2,
+          -2,
+          -2,
+          -2,
+          -1,
+          -1,
+          -1,
+          -1,
+          -1,
+          -1,
+          -1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3
+        ]
+      ],
+      "zero_point": null
+    },
+    "stat_key": "attn9.vq"
+  }
+]

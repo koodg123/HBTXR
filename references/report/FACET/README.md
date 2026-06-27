@@ -84,6 +84,10 @@ Date: 2026-06-25
   - EPNet full training 중 augmentation 이후 NaN ellipse label로 target 생성이 실패한 원인, invalid ellipse 방어 패치, dataset smoke 검증, EPNet/HBTXR 재시작 상태를 기록한 recovery report.
 - `FACET_hbtxr_batch_probe_2026-06-26.md`
   - HBTXR full training의 batch size 및 mixed precision 후보를 GPU1에서 probe한 결과, `batch_size: 4` config 변경, HBTXR GPU1 재시작 상태, ETA 해석을 기록한 report.
+- `FACET_hbtxr_img64_patch4_training_launch_2026-06-27.md`
+  - HBTXR 훈련 시간을 줄이기 위한 `img_size=64`, `patch_size=4` 저해상도 ablation config, 해상도 계약, GPU1 launcher, smoke 검증 계획을 기록한 문서.
+- `FACET_hbtxr_img128_patch4_training_launch_2026-06-27.md`
+  - HBTXR 중간 해상도 실험을 위한 `img_size=128`, `patch_size=4`, `32x32` heatmap ablation config, GPU0 launcher, smoke 검증 계획을 기록한 문서.
 - `FACET_full_training_resume_support_2026-06-26.md`
   - full EPNet/HBTXR 장기 훈련 중 crash 또는 수동 재시작 비용을 줄이기 위한 checkpoint resume 지원 패치와 검증 결과를 기록한 report.
 - `FACET_full_evaluation_gate_hardening_2026-06-26.md`
@@ -170,6 +174,10 @@ Date: 2026-06-25
   - EPNet fpn_dw checkpoint와 completion marker를 1시간 간격으로 감시하고, routine status refresh는 hourly guard를 경유하며, 준비되면 fpn_dw 평가 스크립트를 자동 실행하는 watcher.
 - `run_hbtxr_full_unet_gpu1_when_ready_2026-06-26.sh`
   - `DeanDataset_full_unet/manifest.json` 생성 후 HBTXR full training을 GPU1에서 시작하는 tmux용 대기 스크립트.
+- `run_hbtxr_img64_patch4_gpu1_2026-06-27.sh`
+  - `DavisEyeEllipse_HBTXR_full_unet_img64_patch4.yaml`로 HBTXR `64x64` 입력, `patch_size=4`, `16x16` heatmap ablation을 GPU1에서 시작하는 실행 스크립트.
+- `run_hbtxr_img128_patch4_gpu0_2026-06-27.sh`
+  - `DavisEyeEllipse_HBTXR_full_unet_img128_patch4.yaml`로 HBTXR `128x128` 입력, `patch_size=4`, `32x32` heatmap ablation을 GPU0에서 시작하는 실행 스크립트.
 - `run_hbtxr_full_unet_effbs32_gpu1_after_baseline_2026-06-26.sh`
   - 현재 HBTXR baseline 완료와 GPU1 유휴 상태를 1시간 간격으로 기다린 뒤, `DavisEyeEllipse_HBTXR_full_unet_effbs32.yaml`로 effective batch size 32 후속 공정 비교 실험을 시작하는 대기 스크립트.
 - `run_hbtxr_effbs32_checkpoint_evaluation_2026-06-26.sh`
