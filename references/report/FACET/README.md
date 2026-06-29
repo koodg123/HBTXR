@@ -88,6 +88,20 @@ Date: 2026-06-25
   - HBTXR 훈련 시간을 줄이기 위한 `img_size=64`, `patch_size=4` 저해상도 ablation config, 해상도 계약, GPU1 launcher, smoke 검증 계획을 기록한 문서.
 - `FACET_hbtxr_img128_patch4_training_launch_2026-06-27.md`
   - HBTXR 중간 해상도 실험을 위한 `img_size=128`, `patch_size=4`, `32x32` heatmap ablation config, GPU0 launcher, smoke 검증 계획을 기록한 문서.
+- `HBTXR_val_motion_eval_2026-06-28.md`
+  - `HBTXR_full_unet_img64_patch4` best checkpoint를 `DeanDataset_full_unet/val`에서 샘플 단위로 평가하고, repeated-run CI를 제외한 subject-wise error/IoU, velocity 기반 motion distribution, subject/motion별 pixel error, annotation precision 및 pseudo-label noise를 정리한 보고서.
+- `HBTXR_val_motion_eval_detailed_no_ci_2026-06-29.md`
+  - 위 val motion 평가 산출물을 기반으로 (6) repeated-run CI를 제외한 reviewer-response용 상세 보고서. (1) subject-wise pixel error/IoU distribution, (2) subject-wise motion distribution, (3) subject-wise mean/median/P95/P99 pixel error, (4) motion-wise mean/median/P95/P99 pixel error, (7) annotation precision 및 label noise를 표/그림/해석 형태로 정리.
+- `HBTXR_val_motion_eval/`
+  - 위 보고서의 원천 CSV와 figure 산출물 디렉토리. `hbtxr_val_predictions_with_metadata.csv`, subject/motion 통계표, label precision/noise 표, box plot 및 motion distribution figure를 포함.
+- `HBTXR_subject_independent_img64_patch4_plan_2026-06-28.md`
+  - HBTXR `img_size=64`, `patch_size=4` subject-independent 실험 계획. 중복 없는 subject split을 train 1-32 / val 33-36 / test 37-48로 정의하고, val/test motion 평가 산출물 계획을 기록.
+- `HBTXR_subject_independent_img64_patch4_launch_status_2026-06-28.md`
+  - subject-independent 재분할 생성, 새 config, GPU1 훈련 시작, 평가 watcher 구동, smoke 검증 결과 및 최종 val/test 보고서 생성 대기 상태를 기록.
+- `HBTXR_subject_independent_4state_counts_2026-06-29.md`
+  - `DeanDataset_full_unet_subject_independent` 기준 48개 subject별 `Sample Counts`, `Fixation`, `Saccade`, `Smooth`, `Blink` 4-state count 표와 velocity/session/blink 분류 기준을 정리한 보고서.
+- `HBTXR_subject_independent_frame_event_4state_counts_2026-06-29.md`
+  - `DeanDataset_full_unet_subject_independent`의 valid frame-event pair 구조를 기준으로 Frame-aligned label sample과 Event window sample을 분리 표기한 subject별 4-state count 보고서. raw frame 대비 valid pair coverage CSV도 함께 기록.
 - `FACET_full_training_resume_support_2026-06-26.md`
   - full EPNet/HBTXR 장기 훈련 중 crash 또는 수동 재시작 비용을 줄이기 위한 checkpoint resume 지원 패치와 검증 결과를 기록한 report.
 - `FACET_full_evaluation_gate_hardening_2026-06-26.md`
@@ -178,6 +192,14 @@ Date: 2026-06-25
   - `DavisEyeEllipse_HBTXR_full_unet_img64_patch4.yaml`로 HBTXR `64x64` 입력, `patch_size=4`, `16x16` heatmap ablation을 GPU1에서 시작하는 실행 스크립트.
 - `run_hbtxr_img128_patch4_gpu0_2026-06-27.sh`
   - `DavisEyeEllipse_HBTXR_full_unet_img128_patch4.yaml`로 HBTXR `128x128` 입력, `patch_size=4`, `32x32` heatmap ablation을 GPU0에서 시작하는 실행 스크립트.
+- `run_hbtxr_subject_independent_img64_patch4_gpu1_2026-06-28.sh`
+  - `DeanDataset_full_unet_subject_independent`와 `DavisEyeEllipse_HBTXR_subject_independent_img64_patch4.yaml`로 HBTXR subject-independent `64x64`, `patch_size=4` 실험을 GPU1에서 시작하는 실행 스크립트.
+- `run_hbtxr_subject_independent_img64_patch4_eval_after_training_2026-06-28.sh`
+  - 위 subject-independent 훈련 종료 후 best checkpoint를 선택하고 val/test split에 대해 subject-wise 및 motion-wise 평가 보고서와 CSV/figure 산출물을 생성한 뒤 artifact validator를 실행하는 watcher 스크립트.
+- `validate_hbtxr_motion_eval_artifacts.py`
+  - FACET codebase script. HBTXR subject/motion 평가 산출물의 Markdown report 섹션, 필수 CSV, figure, sample count, motion-state coverage를 검증하는 최종 artifact validator.
+- `build_hbtxr_subject_independent_results_report.py`
+  - FACET codebase script. HBTXR subject-independent val/test 개별 motion-eval CSV와 validator JSON을 묶어 최종 `HBTXR_subject_independent_img64_patch4_results_2026-06-28.md` 종합 보고서를 생성하는 builder.
 - `run_hbtxr_full_unet_effbs32_gpu1_after_baseline_2026-06-26.sh`
   - 현재 HBTXR baseline 완료와 GPU1 유휴 상태를 1시간 간격으로 기다린 뒤, `DavisEyeEllipse_HBTXR_full_unet_effbs32.yaml`로 effective batch size 32 후속 공정 비교 실험을 시작하는 대기 스크립트.
 - `run_hbtxr_effbs32_checkpoint_evaluation_2026-06-26.sh`

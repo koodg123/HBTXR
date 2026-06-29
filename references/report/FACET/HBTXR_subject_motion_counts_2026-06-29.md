@@ -1,0 +1,77 @@
+# HBTXR Subject Motion Counts
+
+Source: `/home/kjm26/project/dataset/XR/EV_Eye/subject-motion-analysis/reports/tbl_3state_counts.csv` and `cache/inventory.csv`.
+
+Motion-state rule: I-VT velocity labels from `src/ivt_states.py`; `Saccade` if speed is above the 90th percentile of saccade-session speed, otherwise `Fixation` for saccade-session frames and `Smooth` for smooth-session frames.
+
+`raw_gt_samples` is all annotated GT samples for sessions 102/201/202. `classified_samples` is the subset with non-null velocity, so it can be labeled as Fixation/Saccade/Smooth. The difference is 29 samples overall.
+
+## By Split
+
+| split | raw_gt_samples | classified_samples | Fixation | Saccade | Smooth | raw_frames_all_sessions |
+| --- | --- | --- | --- | --- | --- | --- |
+| train | 5929 | 5920 | 2598 | 524 | 2798 | 992510 |
+| val | 844 | 834 | 335 | 103 | 396 | 124575 |
+| test | 2238 | 2228 | 935 | 186 | 1107 | 373463 |
+
+## By Subject
+
+| split | subject | raw_gt_samples | classified_samples | Fixation | Saccade | Smooth | raw_frames_all_sessions |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| train | 1 | 206 | 203 | 87 | 19 | 97 | 30981 |
+| train | 2 | 236 | 235 | 124 | 1 | 110 | 31345 |
+| train | 3 | 167 | 167 | 82 | 6 | 79 | 31432 |
+| train | 4 | 196 | 196 | 88 | 21 | 87 | 30538 |
+| train | 5 | 166 | 166 | 75 | 21 | 70 | 30728 |
+| train | 6 | 196 | 196 | 90 | 10 | 96 | 31118 |
+| train | 7 | 201 | 201 | 90 | 12 | 99 | 30695 |
+| train | 8 | 199 | 199 | 93 | 11 | 95 | 31204 |
+| train | 9 | 203 | 203 | 92 | 4 | 107 | 31151 |
+| train | 10 | 190 | 190 | 89 | 20 | 81 | 31471 |
+| train | 11 | 205 | 205 | 80 | 17 | 108 | 31512 |
+| train | 12 | 209 | 208 | 86 | 24 | 98 | 30981 |
+| train | 13 | 210 | 210 | 86 | 26 | 98 | 31059 |
+| train | 14 | 195 | 195 | 85 | 16 | 94 | 31570 |
+| train | 15 | 183 | 182 | 85 | 23 | 74 | 31188 |
+| train | 16 | 179 | 179 | 68 | 24 | 87 | 30432 |
+| train | 17 | 172 | 172 | 67 | 43 | 62 | 31143 |
+| train | 18 | 114 | 114 | 41 | 9 | 64 | 30768 |
+| train | 19 | 202 | 202 | 93 | 9 | 100 | 31506 |
+| train | 20 | 185 | 183 | 66 | 33 | 84 | 30929 |
+| train | 21 | 95 | 95 | 46 | 10 | 39 | 31129 |
+| train | 22 | 198 | 197 | 88 | 13 | 96 | 31057 |
+| train | 23 | 194 | 194 | 92 | 6 | 96 | 30654 |
+| train | 24 | 153 | 153 | 66 | 2 | 85 | 31312 |
+| train | 25 | 198 | 198 | 84 | 19 | 95 | 30813 |
+| train | 26 | 179 | 179 | 72 | 20 | 87 | 30817 |
+| train | 27 | 189 | 189 | 85 | 15 | 89 | 30697 |
+| train | 28 | 196 | 196 | 90 | 13 | 93 | 30655 |
+| train | 29 | 173 | 173 | 67 | 28 | 78 | 30571 |
+| train | 30 | 201 | 201 | 98 | 3 | 100 | 30850 |
+| train | 31 | 193 | 193 | 84 | 15 | 94 | 30993 |
+| train | 32 | 146 | 146 | 59 | 31 | 56 | 31211 |
+| val | 33 | 216 | 214 | 87 | 31 | 96 | 30842 |
+| val | 34 | 199 | 196 | 82 | 23 | 91 | 30908 |
+| val | 35 | 217 | 214 | 82 | 27 | 105 | 31561 |
+| val | 36 | 212 | 210 | 84 | 22 | 104 | 31264 |
+| test | 37 | 178 | 176 | 74 | 17 | 85 | 31237 |
+| test | 38 | 191 | 189 | 74 | 26 | 89 | 30554 |
+| test | 39 | 144 | 140 | 54 | 20 | 66 | 30497 |
+| test | 40 | 204 | 203 | 90 | 7 | 106 | 31421 |
+| test | 41 | 198 | 198 | 81 | 20 | 97 | 31332 |
+| test | 42 | 195 | 194 | 81 | 23 | 90 | 31267 |
+| test | 43 | 191 | 191 | 92 | 6 | 93 | 31273 |
+| test | 44 | 207 | 207 | 84 | 23 | 100 | 30985 |
+| test | 45 | 180 | 180 | 66 | 13 | 101 | 31240 |
+| test | 46 | 163 | 163 | 71 | 15 | 77 | 31318 |
+| test | 47 | 207 | 207 | 90 | 15 | 102 | 31088 |
+| test | 48 | 180 | 180 | 78 | 1 | 101 | 31251 |
+
+## Totals
+
+- raw_gt_samples: 9011
+- classified_samples: 8982
+- Fixation: 3868
+- Saccade: 813
+- Smooth: 4301
+- raw_frames_all_sessions: 1490548
