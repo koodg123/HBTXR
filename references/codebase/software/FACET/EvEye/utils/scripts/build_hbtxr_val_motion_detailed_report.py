@@ -9,8 +9,9 @@ import pandas as pd
 
 
 REPORT_ROOT = Path("references/report/FACET")
-EVAL_DIR = REPORT_ROOT / "HBTXR_val_motion_eval"
-REPORT_PATH = REPORT_ROOT / "HBTXR_val_motion_eval_detailed_no_ci_2026-06-29.md"
+EVALUATION_ROOT = REPORT_ROOT / "evaluation"
+EVAL_DIR = EVALUATION_ROOT / "HBTXR_val_motion_eval"
+REPORT_PATH = EVALUATION_ROOT / "HBTXR_val_motion_eval_detailed_no_ci_2026-06-29.md"
 
 
 def fmt(v: float, ndigits: int = 3) -> str:
@@ -270,9 +271,9 @@ def main() -> None:
     lines.append("")
     lines.append("- Main evaluator: `references/codebase/software/FACET/EvEye/utils/scripts/evaluate_hbtxr_val_motion.py`.")
     lines.append("- Detailed report builder: `references/codebase/software/FACET/EvEye/utils/scripts/build_hbtxr_val_motion_detailed_report.py`.")
-    lines.append("- CSV output directory: `references/report/FACET/HBTXR_val_motion_eval/`.")
-    lines.append("- Figure output directory: `references/report/FACET/HBTXR_val_motion_eval/figures/`.")
-    lines.append("- Prior short report: `references/report/FACET/HBTXR_val_motion_eval_2026-06-28.md`.")
+    lines.append("- CSV output directory: `references/report/FACET/evaluation/HBTXR_val_motion_eval/`.")
+    lines.append("- Figure output directory: `references/report/FACET/evaluation/HBTXR_val_motion_eval/figures/`.")
+    lines.append("- Prior short report: `references/report/FACET/evaluation/HBTXR_val_motion_eval_2026-06-28.md`.")
     lines.append("")
 
     REPORT_PATH.write_text("\n".join(lines) + "\n", encoding="utf-8")

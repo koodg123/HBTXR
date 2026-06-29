@@ -69,7 +69,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument(
         "--output-dir",
         type=Path,
-        default=Path("references/report/FACET/HBTXR_val_motion_eval"),
+        default=Path("references/report/FACET/evaluation/HBTXR_val_motion_eval"),
     )
     parser.add_argument("--split", choices=("train", "val", "test"), default="val")
     parser.add_argument("--run-name", default="HBTXR_full_unet_img64_patch4")

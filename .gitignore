@@ -26,6 +26,9 @@ events.out.tfevents.*
 references/report/FACET/HBTXR_val_motion_eval/hbtxr_val_predictions_with_metadata.csv
 references/report/FACET/HBTXR_val_motion_eval/hbtxr_val_sample_predictions.csv
 references/report/FACET/HBTXR_val_motion_eval/hbtxr_val_sample_metadata.csv
+references/report/FACET/evaluation/HBTXR_val_motion_eval/hbtxr_val_predictions_with_metadata.csv
+references/report/FACET/evaluation/HBTXR_val_motion_eval/hbtxr_val_sample_predictions.csv
+references/report/FACET/evaluation/HBTXR_val_motion_eval/hbtxr_val_sample_metadata.csv
 
 # Nested repository metadata from vendored references
 third/*/.git/

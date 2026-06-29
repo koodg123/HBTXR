@@ -53,7 +53,7 @@ EXPECTED_COUNTS = {
 
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser()
-    parser.add_argument("--report-root", type=Path, default=Path("references/report/FACET"))
+    parser.add_argument("--report-root", type=Path, default=Path("references/report/FACET/evaluation"))
     parser.add_argument("--run-name", default="HBTXR_subject_independent_img64_patch4")
     parser.add_argument("--date", default="2026-06-28")
     parser.add_argument("--splits", nargs="+", default=["val", "test"], choices=["train", "val", "test"])
