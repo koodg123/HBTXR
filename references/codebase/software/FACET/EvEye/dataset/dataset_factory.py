@@ -19,6 +19,9 @@ from EvEye.dataset.DavisEyeCenter.MemmapDavisEyeCenterDataset import (
 )
 from EvEye.dataset.DavisEyeCenter.TestTextDavisEyeDataset import TestTextDavisEyeDataset
 from EvEye.dataset.DavisEyeEllipse.DavisEyeEllipseDataset import DavisEyeEllipseDataset
+from EvEye.dataset.DavisEyeEllipse.DavisEyeEllipseCenterSequenceDataset import (
+    DavisEyeEllipseCenterSequenceDataset,
+)
 
 DATASET_CLASSES: dict[str, Type[Dataset]] = dict(
     DavisWithMaskDataset=DavisWithMaskDataset,
@@ -29,6 +32,7 @@ DATASET_CLASSES: dict[str, Type[Dataset]] = dict(
     MemmapDavisEyeCenterDataset=MemmapDavisEyeCenterDataset,
     TestTextDavisEyeDataset=TestTextDavisEyeDataset,
     DavisEyeEllipseDataset=DavisEyeEllipseDataset,
+    DavisEyeEllipseCenterSequenceDataset=DavisEyeEllipseCenterSequenceDataset,
 )
 
 

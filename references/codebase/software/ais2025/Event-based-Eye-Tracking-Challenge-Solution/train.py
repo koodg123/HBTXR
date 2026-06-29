@@ -83,17 +83,22 @@ def main(args):
     label_transform = transforms.Compose([
         ScaleLabel(factor),
         TemporalSubsample(temp_subsample_factor),
-        NormalizeLabel(pseudo_width=640*factor, pseudo_height=480*factor)
+        NormalizeLabel(
+            pseudo_width=args.sensor_width * factor,
+            pseudo_height=args.sensor_height * factor,
+        )
     ])
 
     # Then we define the raw event recording and label dataset, the raw events spatial coordinates are also downsampled
     train_data_orig = ThreeETplus_Eyetracking(save_to=args.data_dir, split="train", \
                     transform=transforms.Downsample(spatial_factor=factor), 
                     target_transform=label_transform, dataset=args.dataset,
+                    data_list_dir=args.data_list_dir,
                     temp_subsample_factor=temp_subsample_factor)
     val_data_orig = ThreeETplus_Eyetracking(save_to=args.data_dir, split="val", \
                     transform=transforms.Downsample(spatial_factor=factor),
                     target_transform=label_transform, dataset=args.dataset,
+                    data_list_dir=args.data_list_dir,
                     temp_subsample_factor=temp_subsample_factor)
 
     slicing_time_window = args.train_length*int(10000/temp_subsample_factor) #microseconds
@@ -106,7 +111,8 @@ def main(args):
 
     post_slicer_transform = transforms.Compose([
         SliceLongEventsToShort(time_window=int(10000/temp_subsample_factor), overlap=0, include_incomplete=True),
-        EventSlicesToMap(sensor_size=(int(640*factor), int(480*factor), 2), \
+        EventSlicesToMap(
+                                sensor_size=(int(args.sensor_width * factor), int(args.sensor_height * factor), 2), \
                                 n_time_bins=args.n_time_bins, per_channel_normalize=args.voxel_grid_ch_normaization,
                                 map_type=args.map_type)
     ])
@@ -159,6 +165,7 @@ if __name__ == "__main__":
     parser.add_argument("--n_time_bins", type=int)
     parser.add_argument("--map_type", type=str)
     parser.add_argument("--dataset", type=str)
+    parser.add_argument("--data_list_dir", type=str)
     parser.add_argument("--spatial_factor", type=float)
     parser.add_argument("--temporal_subsample_factor", type=float)
     parser.add_argument("--device", type=int, nargs="+", default=[0])
@@ -175,4 +182,3 @@ if __name__ == "__main__":
     torch.backends.cudnn.enabled = True
 
     main(args)
-

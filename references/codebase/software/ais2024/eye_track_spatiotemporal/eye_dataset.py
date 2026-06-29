@@ -166,12 +166,15 @@ class EyeTrackingDataset(Dataset):
                  temporal_flip=True, 
                  temporal_scale=True, 
                  temporal_shift=True,
+                 sensor_size=(640, 480),
+                 data_list_dir=None,
                  test_on_val=False):
         self.mode = mode
         self.time_window = time_window
         self.frames_per_segment = frames_per_segment
         self.time_window_per_segment = time_window * frames_per_segment
         self.spatial_downsample = spatial_downsample
+        self.sensor_width, self.sensor_height = sensor_size
         self.events_interpolation = events_interpolation
         assert time_window == 10000
         
@@ -180,6 +183,7 @@ class EyeTrackingDataset(Dataset):
         self.temporal_shift = temporal_shift
         
         self.test_on_val = test_on_val
+        self.data_list_dir = Path(data_list_dir) if data_list_dir else None
         
         root_path = Path(root_path)
         if mode in ['train', 'val']:
@@ -198,7 +202,12 @@ class EyeTrackingDataset(Dataset):
         self.num_frames_list, self.num_segments_list = [], []
         
         dir_paths = natsorted(base_path.glob('*'))
-        if mode == 'train':
+        if self.data_list_dir is not None:
+            list_name = "val" if mode == "test" and test_on_val else mode
+            with (self.data_list_dir / f"{list_name}_files.txt").open() as f:
+                allowed = {line.strip() for line in f if line.strip()}
+            dir_paths = [dir_path for dir_path in dir_paths if dir_path.name in allowed]
+        elif mode == 'train':
             dir_paths = [dir_path for dir_path in dir_paths if dir_path.name not in val_files]
         elif mode == 'val' or (mode == 'test' and test_on_val):
             dir_paths = [dir_path for dir_path in dir_paths if dir_path.name in val_files]
@@ -232,7 +241,13 @@ class EyeTrackingDataset(Dataset):
         
         # spatial affine transformation
         augment_flag = (mode == 'train') and spatial_affine
-        self.augment = EventRandomAffine((480, 640), augment_flag=augment_flag)
+        self.augment = EventRandomAffine(
+            (
+                self.sensor_height // self.spatial_downsample[1],
+                self.sensor_width // self.spatial_downsample[0],
+            ),
+            augment_flag=augment_flag,
+        )
             
     def __len__(self):
         if self.mode == 'test':
@@ -244,7 +259,10 @@ class EyeTrackingDataset(Dataset):
         num_frames = self.frames_per_segment if self.mode != 'test' else self.num_frames_list[index]
         
         event = events_to_frames(event, 
-                                 (480 // self.spatial_downsample[1], 640 // self.spatial_downsample[0]), 
+                                 (
+                                     self.sensor_height // self.spatial_downsample[1],
+                                     self.sensor_width // self.spatial_downsample[0],
+                                 ),
                                  num_frames, self.spatial_downsample, self.time_window, 
                                  mode=self.events_interpolation)
         

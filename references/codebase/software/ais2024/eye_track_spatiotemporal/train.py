@@ -130,7 +130,9 @@ class CustomModule(LightningModule):
 
 @hydra.main(version_base='1.1', config_path=".", config_name="config.yaml")
 def main(config: OC):
-    data_path = Path(__file__).parent / 'event_data'
+    data_path = Path(
+        config.trainer.get("data_path", Path(__file__).parent / "event_data")
+    )
     module = CustomModule(data_path, config)
 
     checkpoint_callback = ModelCheckpoint(

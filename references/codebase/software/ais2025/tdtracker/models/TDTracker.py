@@ -44,15 +44,18 @@ class Model(nn.Module):
         self.layernorm = nn.LayerNorm(2048)
         self.gru = nn.GRU(input_size=2048, hidden_size=128, num_layers=1, batch_first=True, bidirectional=True)
         self.mamba = ResidualBlock(MambaConfig(d_model=2 * 128))
+        output_width = int(getattr(args, "sensor_width", 640) * getattr(args, "spatial_factor", 0.125))
+        output_height = int(getattr(args, "sensor_height", 480) * getattr(args, "spatial_factor", 0.125))
+
         self.fc_1 = nn.Sequential(nn.Linear(128 * 2, 128),
                                 nn.ReLU(),
                                 nn.Dropout(0.5),
-                                nn.Linear(128, 80),
+                                nn.Linear(128, output_width),
                                 )
         self.fc_2 = nn.Sequential(nn.Linear(128 * 2, 128),
                                 nn.ReLU(),
                                 nn.Dropout(0.5),
-                                nn.Linear(128, 60),
+                                nn.Linear(128, output_height),
                                 )
     def forward(self, x,y=None):
         batch_size, seq_len, channels, height, width = x.shape

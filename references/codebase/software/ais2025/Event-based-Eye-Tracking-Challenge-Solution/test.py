@@ -29,12 +29,17 @@ def test(args, model):
             label_transform = transforms.Compose([
                 ScaleLabel(factor),
                 TemporalSubsample(temp_subsample_factor),
-                NormalizeLabel(pseudo_width=640*factor, pseudo_height=480*factor)
+                NormalizeLabel(
+                    pseudo_width=args.sensor_width * factor,
+                    pseudo_height=args.sensor_height * factor,
+                )
             ])
 
             test_data_orig = ThreeETplus_Eyetracking(save_to=args.data_dir, split="test", \
                             transform=transforms.Downsample(spatial_factor=factor),
-                            target_transform=label_transform, ind=i)
+                            target_transform=label_transform,
+                            data_list_dir=args.data_list_dir,
+                            ind=i)
 
             slicing_time_window = args.test_length*int(10000/temp_subsample_factor) #microseconds
             test_stride_time = int(10000/temp_subsample_factor*args.test_stride) #microseconds
@@ -43,7 +48,7 @@ def test(args, model):
 
             post_slicer_transform = transforms.Compose([
                 SliceLongEventsToShort(time_window=int(10000/temp_subsample_factor), overlap=0, include_incomplete=True),
-                EventSlicesToMap(sensor_size=(int(640*factor), int(480*factor), 2), \
+                EventSlicesToMap(sensor_size=(int(args.sensor_width * factor), int(args.sensor_height * factor), 2), \
                                         n_time_bins=args.n_time_bins, per_channel_normalize=args.voxel_grid_ch_normaization,
                                         map_type=args.map_type),
             ])
@@ -74,8 +79,9 @@ def test(args, model):
                         output = model(data)
                     end = time.time()
                     cuda_times.append((end - start) * 1000)
-                output = output * torch.tensor((640*factor, 480*factor)).to("cuda:0")
-                output = output * 0.125 / factor
+                output = output * torch.tensor(
+                    (args.sensor_width * factor, args.sensor_height * factor)
+                ).to("cuda:0")
                 outputs_list.append(output.detach().cpu())
                 targets_list.append(target.detach().cpu())
             outputs_list = torch.cat(outputs_list, dim=0)
@@ -109,12 +115,16 @@ def test(args, model):
         label_transform = transforms.Compose([
             ScaleLabel(factor),
             TemporalSubsample(temp_subsample_factor),
-            NormalizeLabel(pseudo_width=640*factor, pseudo_height=480*factor)
+            NormalizeLabel(
+                pseudo_width=args.sensor_width * factor,
+                pseudo_height=args.sensor_height * factor,
+            )
         ])
 
         test_data_orig = ThreeETplus_Eyetracking(save_to=args.data_dir, split="test", \
                         transform=transforms.Downsample(spatial_factor=factor),
-                        target_transform=label_transform)
+                        target_transform=label_transform,
+                        data_list_dir=args.data_list_dir)
 
         slicing_time_window = args.test_length*int(10000/temp_subsample_factor) #microseconds
         test_stride_time = int(10000/temp_subsample_factor*args.test_stride) #microseconds
@@ -123,7 +133,7 @@ def test(args, model):
 
         post_slicer_transform = transforms.Compose([
             SliceLongEventsToShort(time_window=int(10000/temp_subsample_factor), overlap=0, include_incomplete=True),
-            EventSlicesToMap(sensor_size=(int(640*factor), int(480*factor), 2), \
+            EventSlicesToMap(sensor_size=(int(args.sensor_width * factor), int(args.sensor_height * factor), 2), \
                                     n_time_bins=args.n_time_bins, per_channel_normalize=args.voxel_grid_ch_normaization,
                                     map_type=args.map_type),
         ])
@@ -163,8 +173,9 @@ def test(args, model):
                 # torch.cuda.synchronize()
                 # curr_time = starter.elapsed_time(ender)
                 cuda_times.append((end - start) * 1000)
-            output = output * torch.tensor((640*factor, 480*factor)).to("cuda:0")
-            output = output * 0.125 / factor
+            output = output * torch.tensor(
+                (args.sensor_width * factor, args.sensor_height * factor)
+            ).to("cuda:0")
             outputs_list.append(output.detach().cpu())
             targets_list.append(target.detach().cpu())
         outputs_list = torch.cat(outputs_list, dim=0)

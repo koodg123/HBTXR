@@ -1,0 +1,26 @@
+dataset:
+  time_window: 10000
+  frames_per_segment: 50
+  spatial_downsample: [1, 1]
+  sensor_size: [64, 64]
+  data_list_dir: /home/kjm26/project/PRJXR/HBTXR/references/codebase/software/ais2024/eye_track_spatiotemporal/event_data_hbtxr_img64/dataset
+  events_interpolation: causal_linear
+  spatial_affine: true
+  temporal_flip: true
+  temporal_scale: true
+  temporal_shift: false
+
+model:
+  channels: [2, 8, 16, 32, 48, 64, 80, 96, 112, 128, 256]
+  n_depthwise_layers: 4
+  t_kernel_size: 5
+  detector_head: true
+  detector_depthwise: true
+  norms: mixed
+
+trainer:
+  data_path: /home/kjm26/project/PRJXR/HBTXR/references/codebase/software/ais2024/eye_track_spatiotemporal/event_data_hbtxr_img64
+  epochs: 70
+  batch_size: 32
+  device: 0
+  activity_regularization: 0

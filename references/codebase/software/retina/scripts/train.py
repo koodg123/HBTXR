@@ -72,7 +72,11 @@ def launch_fire(
         quant_params = params["quant_params"] 
  
         # verify conflicts
-        if dataset_params["dataset_name"] != "ini-30": dataset_params["input_channel"] = 1
+        if dataset_params["dataset_name"] not in {
+            "ini-30",
+            "hbtxr-dean-subject-independent",
+        }:
+            dataset_params["input_channel"] = 1
 
         # save configs
         yaml.dump(training_params, open(f"{out_dir}/training_params.yaml", "w"))

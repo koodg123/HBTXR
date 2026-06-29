@@ -91,7 +91,19 @@ def main(args):
 
         model = eval(args.architecture)(args).to(args.device)
 
-        summary(model, input_data=torch.ones((1,1,3,int(640*args.spatial_factor), int(480*args.spatial_factor))).to(args.device), verbose=2)
+        summary(
+            model,
+            input_data=torch.ones(
+                (
+                    1,
+                    1,
+                    3,
+                    int(args.sensor_width * args.spatial_factor),
+                    int(args.sensor_height * args.spatial_factor),
+                )
+            ).to(args.device),
+            verbose=2,
+        )
 
         optimizer = optim.Adam(model.parameters(), lr=args.lr)
         scheduler = torch.optim.lr_scheduler.ExponentialLR(optimizer, args.gamma, -1, verbose = True)
@@ -120,10 +132,12 @@ def main(args):
         # Then we define the raw event recording and label dataset, the raw events spatial coordinates are also downsampled
         train_data_orig = ThreeETplus_Eyetracking(save_to=args.data_dir, split="train", \
                         transform=transforms.Downsample(spatial_factor=factor),
-                        target_transform=label_transform)
+                        target_transform=label_transform,
+                        data_list_dir=args.data_list_dir)
         val_data_orig = ThreeETplus_Eyetracking(save_to=args.data_dir, split="val", \
                         transform=transforms.Downsample(spatial_factor=factor),
-                        target_transform=label_transform)
+                        target_transform=label_transform,
+                        data_list_dir=args.data_list_dir)
 
         # Then we slice the event recordings into sub-sequences.
         # The time-window is determined by the sequence length (train_length, val_length)

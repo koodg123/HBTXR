@@ -1,0 +1,89 @@
+---
+dataloader:
+  train:
+    dataset:
+      type: DavisEyeEllipseCenterSequenceDataset
+      root_path: /home/kjm26/project/dataset/XR/EV_Eye/raw_data/DeanDataset_full_unet_subject_independent
+      split: train
+      frames_per_segment: 50
+      stride: 50
+      sensor_size: [346, 260, 2]
+      events_interpolation: causal_linear_ori
+      pupil_area: 200
+      default_resolution: [64, 64]
+      temporal_transform: true
+    batch_size: 32
+    shuffle: true
+    drop_last: false
+    num_workers: 8
+    persistent_workers: true
+    pin_memory: true
+
+  val:
+    dataset:
+      type: DavisEyeEllipseCenterSequenceDataset
+      root_path: /home/kjm26/project/dataset/XR/EV_Eye/raw_data/DeanDataset_full_unet_subject_independent
+      split: val
+      frames_per_segment: 50
+      stride: 50
+      sensor_size: [346, 260, 2]
+      events_interpolation: causal_linear_ori
+      pupil_area: 200
+      default_resolution: [64, 64]
+      temporal_transform: false
+    batch_size: 32
+    shuffle: false
+    drop_last: false
+    num_workers: 8
+    persistent_workers: true
+    pin_memory: true
+
+model:
+  type: TennSt
+  channels: [2, 8, 16, 32, 48, 64, 80, 96, 112, 128, 256]
+  t_kernel_size: 5
+  n_depthwise_layers: 4
+  detector_head: true
+  detector_depthwise: true
+  full_conv3d: false
+  norms: mixed
+  activity_regularization: 0
+
+train:
+  max_epochs: 70
+  check_val_every_n_epoch: 1
+  optimizer:
+    learning_rate: 1.0e-3
+    weight_decay: 1.0e-5
+
+val:
+  ckpt_path:
+
+trainer:
+  accelerator: auto
+  devices: auto
+  default_root_dir: /home/kjm26/project/PRJXR/HBTXR/references/codebase/software/FACET/runs/subject_independent_tennst_img64
+
+logger:
+  type: tensorboard
+  save_dir: /home/kjm26/project/PRJXR/HBTXR/references/codebase/software/FACET/runs/logs
+  name: TennSt_subject_independent_img64
+
+callback:
+  - type: ModelCheckpoint
+    monitor: val_distance
+    auto_insert_metric_name: true
+    save_top_k: 3
+    mode: min
+    every_n_epochs: 1
+    save_last: true
+    verbose: true
+    filename: "{epoch:02d}-{val_distance:.4f}"
+
+  - type: TQDMProgressBar
+    refresh_rate: 1
+
+  - type: Timer
+
+  - type: LearningRateMonitor
+    logging_interval: epoch

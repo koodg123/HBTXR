@@ -41,6 +41,7 @@ class ThreeETplus_Eyetracking(Dataset):
         self,
         save_to: str,
         split: str = "train",
+        data_list_dir: str = "./dataset",
         transform: Optional[Callable] = None,
         target_transform: Optional[Callable] = None,
         transforms: Optional[Callable] = None,
@@ -53,7 +54,6 @@ class ThreeETplus_Eyetracking(Dataset):
         )
 
         data_dir = save_to
-        data_list_dir = './dataset'
         # Load filenames from the provided lists
         if split == "train":
             filenames = self.load_filenames(os.path.join(data_list_dir, "train_files.txt"))

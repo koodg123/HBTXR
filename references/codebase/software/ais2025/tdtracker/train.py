@@ -32,7 +32,13 @@ def parse_args():
     parser.add_argument('--sensor_width', type=int, default=640, help='sensor width')
     parser.add_argument('--sensor_height', type=int, default=480, help='sensor height')
     parser.add_argument('--spatial_factor', type=float, default=0.125, help='spatial factor')
-    parser.add_argument('--pixel_tolerances', default=[1, 3, 5, 10, 15], type=int,  help='pixel_tolerances')
+    parser.add_argument(
+        "--pixel_tolerances",
+        default=[1, 3, 5, 10, 15],
+        nargs="+",
+        type=int,
+        help="pixel_tolerances",
+    )
     parser.add_argument('--epoch', default=1000, type=int, help='number of epoch in training')
     parser.add_argument('--loss', default='weighted_mse', type=str, help='loss')
     parser.add_argument('--learning_rate', default=0.002, type=float, help='learning rate in training')

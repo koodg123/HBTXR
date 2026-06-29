@@ -3,12 +3,15 @@ import pytorch_lightning as pl
 from torch.utils.data import DataLoader
 from data.datasets.ini_30.helper import get_ini_30_dataset
 from data.datasets.synthetic_3et.helper import get_3et_dataset
+from data.datasets.hbtxr_dean.helper import get_hbtxr_dean_dataset
 
 def select_dataset(dataset_name):
     if dataset_name == "ini-30":
         return get_ini_30_dataset
     elif dataset_name == "3et-data":
         return get_3et_dataset
+    elif dataset_name == "hbtxr-dean-subject-independent":
+        return get_hbtxr_dean_dataset
     else:
         raise NotImplementedError(f"Dataset {dataset_name} is not implemented")
 
@@ -44,4 +47,3 @@ class EyeTrackingDataModule(pl.LightningDataModule):
 
     def test_dataloader(self): 
         return None  # Placeholder for test dataloader
-
