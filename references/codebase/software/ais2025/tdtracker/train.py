@@ -9,6 +9,7 @@ from metrics import *
 from tqdm import tqdm
 import random
 from torch.utils.tensorboard import SummaryWriter
+from timm.scheduler.step_lr import StepLRScheduler
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 ROOT_DIR = BASE_DIR
 sys.path.append(os.path.join(ROOT_DIR, 'models'))
@@ -44,6 +45,7 @@ def parse_args():
     parser.add_argument('--learning_rate', default=0.002, type=float, help='learning rate in training')
     parser.add_argument('--optimizer', type=str, default='Adam', help='optimizer for training')
     parser.add_argument('--decay_rate', type=float, default=1e-4, help='decay rate')
+    parser.add_argument('--num_workers', type=int, default=4, help='number of DataLoader workers')
     return parser.parse_args()
 
 
@@ -86,7 +88,7 @@ def validate(net, val_loader, criterion):
 
     return total_loss / len(val_loader), metrics
 
-def train(net, trainloader, optimizer, criterion,device,lr_scheduler,epoch):
+def train(net, trainloader, optimizer, criterion,device,epoch):
     net.train()
     total_loss = 0.0
     total_p_corr_all = {f'p{p}_all': 0 for p in args.pixel_tolerances}
@@ -101,8 +103,6 @@ def train(net, trainloader, optimizer, criterion,device,lr_scheduler,epoch):
         logits,prob = decode_batch_sa_simdr(predict_w,predict_h)
         loss.backward()
         optimizer.step()
-        if lr_scheduler is not None:
-            lr_scheduler.step(epoch + batch_idx / iters)
         total_loss += loss.item()
         p_corr, batch_size = p_acc(label[:, :,:2], logits[:, :],
                                    width_scale=args.sensor_width * args.spatial_factor,
@@ -164,12 +164,12 @@ def main(args):
     F_train = torch.from_numpy(F_train)
     L_train = torch.from_numpy(L_train)
     dataset = torch.utils.data.TensorDataset(F_train, L_train)
-    trainDataLoader = torch.utils.data.DataLoader(dataset, batch_size=args.batch_size, shuffle=True, num_workers=0, drop_last=False)
+    trainDataLoader = torch.utils.data.DataLoader(dataset, batch_size=args.batch_size, shuffle=True, num_workers=args.num_workers, drop_last=False)
 
     F_test = torch.from_numpy(F_test)
     L_test = torch.from_numpy(L_test)
     dataset = torch.utils.data.TensorDataset(F_test, L_test)
-    valDataLoader = torch.utils.data.DataLoader(dataset, batch_size=args.batch_size, shuffle=False, num_workers=0, drop_last=False)
+    valDataLoader = torch.utils.data.DataLoader(dataset, batch_size=args.batch_size, shuffle=False, num_workers=args.num_workers, drop_last=False)
 
     '''MODEL LOADING'''
 
@@ -181,15 +181,35 @@ def main(args):
     if not args.use_cpu:
         classifier = classifier.cuda()
 
-    optimizer = torch.optim.AdamW(classifier.parameters(), lr=args.learning_rate, weight_decay=1e-4)
-    scheduler = torch.optim.lr_scheduler.CosineAnnealingWarmRestarts(optimizer, T_0=8, T_mult=2, eta_min=1e-6, last_epoch=-1, verbose=False)
+    if args.optimizer == "Adam":
+        optimizer = torch.optim.Adam(
+            classifier.parameters(),
+            lr=args.learning_rate,
+            weight_decay=args.decay_rate,
+        )
+    elif args.optimizer == "AdamW":
+        optimizer = torch.optim.AdamW(
+            classifier.parameters(),
+            lr=args.learning_rate,
+            weight_decay=args.decay_rate,
+        )
+    else:
+        raise ValueError(f"Unsupported optimizer: {args.optimizer}")
+    scheduler = StepLRScheduler(
+        optimizer,
+        decay_t=10,
+        decay_rate=0.7,
+        warmup_lr_init=1e-5,
+        warmup_t=5,
+    )
     '''TRANING'''
     logger.info('Start training...')
     best_p = 100
     writer = SummaryWriter(args.eyetracking_log_path + args.log_name)
     for epoch in range(0, args.epoch):
         classifier = classifier.train()
-        net, train_loss, metrics = train(classifier, trainDataLoader, optimizer, criterion,'cuda',scheduler,epoch)
+        net, train_loss, metrics = train(classifier, trainDataLoader, optimizer, criterion,'cuda',epoch)
+        scheduler.step(epoch=epoch)
         writer.add_scalar('Train/Pixel_Accuracy/tr_p3_acc_all', metrics['tr_p_acc_all']['tr_p3_acc_all'], epoch)
         writer.add_scalar('Train/Pixel_Accuracy/tr_p5_acc_all', metrics['tr_p_acc_all']['tr_p5_acc_all'], epoch)
         writer.add_scalar('Train/Pixel_Accuracy/tr_p10_acc_all', metrics['tr_p_acc_all']['tr_p10_acc_all'], epoch)

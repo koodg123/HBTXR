@@ -16,4 +16,5 @@ python3 train.py \
   --epoch 70 \
   --learning_rate 0.001 \
   --optimizer Adam \
-  --decay_rate 1e-5
+  --decay_rate 1e-5 \
+  --num_workers 4

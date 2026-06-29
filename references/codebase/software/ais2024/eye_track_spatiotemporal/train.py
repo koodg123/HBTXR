@@ -9,9 +9,9 @@ import torch
 from lightning import LightningModule, Trainer
 from lightning.pytorch.callbacks import ModelCheckpoint
 from omegaconf import OmegaConf as OC
-from pl_bolts.optimizers.lr_scheduler import LinearWarmupCosineAnnealingLR
-from torch.optim import AdamW
+from torch.optim import Adam, AdamW
 from torch.utils.data import DataLoader
+from timm.scheduler.step_lr import StepLRScheduler
 
 import losses
 from eye_dataset import EyeTrackingDataset
@@ -39,6 +39,7 @@ class CustomModule(LightningModule):
         self.config = config
         
         self.batch_size = config.trainer.batch_size
+        self.num_workers = config.trainer.get("num_workers", 4)
         epochs = config.trainer.epochs
         detector_head = config.model.detector_head
         activity_regularization = config.trainer.activity_regularization
@@ -113,19 +114,52 @@ class CustomModule(LightningModule):
         self._log('val_distance', distance)
             
     def configure_optimizers(self):
-        optimizer = AdamW(self.model.parameters(), lr=0.002, weight_decay=0.001)
-        scheduler = LinearWarmupCosineAnnealingLR(optimizer, round(self.total_train_steps * 0.025), self.total_train_steps, eta_min=1e-5)
-        
-        scheduler = {'scheduler': scheduler, 
-                     'interval': 'step', 
-                     'frequency': 1}
-        return [optimizer], [scheduler]
+        optimizer_name = self.config.trainer.get("optimizer", "AdamW")
+        learning_rate = self.config.trainer.get("learning_rate", 0.002)
+        weight_decay = self.config.trainer.get("weight_decay", 0.001)
+        if optimizer_name == "Adam":
+            optimizer = Adam(
+                self.model.parameters(),
+                lr=learning_rate,
+                weight_decay=weight_decay,
+            )
+        elif optimizer_name == "AdamW":
+            optimizer = AdamW(
+                self.model.parameters(),
+                lr=learning_rate,
+                weight_decay=weight_decay,
+            )
+        else:
+            raise ValueError(f"Unsupported optimizer: {optimizer_name}")
+        scheduler = StepLRScheduler(
+            optimizer,
+            decay_t=10,
+            decay_rate=0.7,
+            warmup_lr_init=1e-5,
+            warmup_t=5,
+        )
+        return {"optimizer": optimizer, "lr_scheduler": scheduler}
+
+    def lr_scheduler_step(self, scheduler, metric):
+        scheduler.step(epoch=self.current_epoch)
             
     def train_dataloader(self):
-        return DataLoader(self.trainset, shuffle=True, drop_last=True, batch_size=self.batch_size)
+        return DataLoader(
+            self.trainset,
+            shuffle=True,
+            drop_last=True,
+            batch_size=self.batch_size,
+            num_workers=self.num_workers,
+        )
 
     def val_dataloader(self):
-        return DataLoader(self.valset, shuffle=False, drop_last=False, batch_size=self.batch_size)
+        return DataLoader(
+            self.valset,
+            shuffle=False,
+            drop_last=False,
+            batch_size=self.batch_size,
+            num_workers=self.num_workers,
+        )
     
 
 @hydra.main(version_base='1.1', config_path=".", config_name="config.yaml")

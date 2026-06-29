@@ -12,6 +12,60 @@ All targets are prepared against the same experimental contract as
 - Input resolution: 64x64
 - Event input: two polarity channels where the target model supports it
 - Main comparable metric: center pixel error in 64x64 coordinates
+- Batch size: 32
+- DataLoader workers: 4
+- Epochs: 70
+- Optimizer target: Adam
+- Learning rate: 1e-3
+- Weight decay: 1e-5
+
+## Scheduler Inventory
+
+The optimizer-level options and scheduler were aligned to HBTXR where the local
+code exposes a train loop or Lightning scheduler hook.
+
+| Target | Optimizer after alignment | Scheduler currently used |
+|---|---|---|
+| HBTXR reference | Adam, lr 1e-3, weight_decay 1e-5 | `timm.scheduler.StepLRScheduler(decay_t=10, decay_rate=0.7, warmup_lr_init=1e-5, warmup_t=5)` |
+| EPNet/FECET | Adam, lr 1e-3, weight_decay 1e-5 | Same FACET `StepLRScheduler` |
+| FACET TennSt | Adam, lr 1e-3, weight_decay 1e-5 | Same FACET `StepLRScheduler` |
+| Retina | Adam, lr 1e-3, weight_decay 1e-5 | Same HBTXR `StepLRScheduler` |
+| TDTracker | Adam, lr 1e-3, weight_decay 1e-5 | Same HBTXR `StepLRScheduler` |
+| ERVT | Adam, lr 1e-3, weight_decay 1e-5 | Same HBTXR `StepLRScheduler` |
+| TENNs-Eye | Adam, lr 1e-3, weight_decay 1e-5 | Same HBTXR `StepLRScheduler` |
+| BRAT/CNN_GRU_base | Adam, lr 1e-3, weight_decay 1e-5 | Same HBTXR `StepLRScheduler` |
+
+## Complexity Inventory
+
+Measured on 2026-06-30 with:
+
+```bash
+/home/kjm26/project/PRJXR/HBTXR/.facet-train-venv/bin/python \
+  references/codebase/software/FACET/EvEye/utils/scripts/measure_hbtxr_target_complexity.py
+```
+
+Detailed outputs:
+
+- `references/report/HBTXR_target_model_complexity_2026-06-30.md`
+- `references/report/HBTXR_target_model_complexity_2026-06-30.csv`
+
+| Target | Input shape | Params | MACs | FLOPs |
+|---|---:|---:|---:|---:|
+| HBTXR | 1x2x64x64 | 4,368,393 | 1,111,665,456 | 2,223,330,912 |
+| EPNet/FECET | 1x2x64x64 | 3,898,280 | 215,312,088 | 430,624,176 |
+| FACET TennSt | 1x2x50x64x64 | 808,771 | 922,099,200 | 1,844,198,400 |
+| Retina | 1x2x64x64 | 59,572 | 21,492,072 | 42,984,144 |
+| TDTracker | 1x100x2x64x64 | 3,246,880 | 23,269,558,144 | 46,539,116,288 |
+| ERVT | 1x30x3x64x64 | 143,938 | 1,387,069,440 | 2,774,138,880 |
+| TENNs-Eye | 1x2x50x64x64 | 808,771 | 922,099,200 | 1,844,198,400 |
+| BRAT/CNN_GRU_base | 1x30x2x64x64 | 12,892,898 | 4,509,919,680 | 9,019,839,360 |
+
+Notes:
+
+- MACs were measured with `thop.profile` on CPU dummy inputs.
+- FLOPs are reported as `2 * MACs`.
+- `EPNet/FECET` is listed this way because no separate `FECET` model path was
+  found under `references/codebase/software`; the FACET EPNet baseline is used.
 
 ## Priority 1: FACET/FECET EPNet
 
@@ -68,6 +122,7 @@ Difference from original:
 - Original Retina supports 64x64 2-channel input but only `ini-30` and `3et-data`
   helpers.
 - New helper reads FACET/HBTXR cache directly and emits Retina bbox labels.
+- The HBTXR config sets Adam, lr 1e-3, and weight decay 1e-5.
 
 Difference from HBTXR:
 
@@ -100,6 +155,7 @@ Difference from original:
 
 - Original uses `train_aug.h5` and `test_aug.h5` with 80x60 output.
 - TDTracker head/loss/decoder were patched to infer output width/height from config.
+- The HBTXR runner uses Adam, lr 1e-3, and weight decay 1e-5.
 
 Difference from HBTXR:
 
@@ -130,6 +186,7 @@ Difference from original:
 
 - Original assumes 640x480 source with `spatial_factor=0.125`, effective 80x60.
 - New config uses exported 64x64 events with `spatial_factor=1.0`.
+- The HBTXR config uses Adam, lr 1e-3, and weight decay 1e-5.
 
 Difference from HBTXR:
 
@@ -160,6 +217,8 @@ Difference from original:
 
 - Original uses hardcoded validation files and 640x480-derived downsampling.
 - Dataset now supports `sensor_size` and `data_list_dir` for HBTXR split lists.
+- The HBTXR config uses Adam, lr 1e-3, and weight decay 1e-5 instead of the
+  original AdamW, lr 2e-3, weight decay 1e-3 default.
 
 Difference from HBTXR:
 
@@ -190,6 +249,7 @@ Difference from original:
 
 - Original `CNN_GRU_base` config assumes 3ET+ 640x480 and challenge scaling.
 - Train/test scaling now uses `sensor_width` and `sensor_height` from config.
+- The HBTXR config uses Adam, lr 1e-3, and weight decay 1e-5.
 
 Difference from HBTXR:
 

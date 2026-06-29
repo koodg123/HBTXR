@@ -14,7 +14,7 @@ dataloader:
     batch_size: 32
     shuffle: true
     drop_last: false
-    num_workers: 8
+    num_workers: 4
     persistent_workers: true
     pin_memory: true
 
@@ -32,7 +32,7 @@ dataloader:
     batch_size: 32
     shuffle: false
     drop_last: false
-    num_workers: 8
+    num_workers: 4
     persistent_workers: true
     pin_memory: true
 

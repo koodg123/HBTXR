@@ -23,6 +23,7 @@ from dataset import ThreeETplus_Eyetracking, ScaleLabel, NormalizeLabel, \
 import tonic.transforms as transforms
 from tonic import SlicedDataset, MemoryCachedDataset
 from torchinfo import summary
+from timm.scheduler.step_lr import StepLRScheduler
 
 def train(model, train_loader, val_loader, criterion, optimizer, scheduler, args):
     best_val_p10 = 0
@@ -51,7 +52,7 @@ def train(model, train_loader, val_loader, criterion, optimizer, scheduler, args
             mlflow.log_metrics(val_metrics['val_p_error_all'], step=epoch)
         # Print progress
         print(f"Epoch {epoch+1}/{args.num_epochs}: Train Loss: {train_loss:.4f}")
-        scheduler.step()
+        scheduler.step(epoch=epoch)
 
     return model
 
@@ -105,8 +106,18 @@ def main(args):
             verbose=2,
         )
 
-        optimizer = optim.Adam(model.parameters(), lr=args.lr)
-        scheduler = torch.optim.lr_scheduler.ExponentialLR(optimizer, args.gamma, -1, verbose = True)
+        optimizer = optim.Adam(
+            model.parameters(),
+            lr=args.lr,
+            weight_decay=getattr(args, "weight_decay", 0.0),
+        )
+        scheduler = StepLRScheduler(
+            optimizer,
+            decay_t=10,
+            decay_rate=0.7,
+            warmup_lr_init=1e-5,
+            warmup_t=5,
+        )
 
         if args.loss == "mse":
             criterion = nn.MSELoss()
@@ -170,9 +181,9 @@ def main(args):
 
         # Finally we wrap the dataset with pytorch dataloader
         train_loader = DataLoader(train_data, batch_size=args.batch_size, shuffle=True, \
-                                  num_workers=int(os.cpu_count()-2), pin_memory=True)
+                                  num_workers=args.num_workers, pin_memory=True)
         val_loader = DataLoader(val_data, batch_size=args.batch_size, shuffle=False, \
-                                num_workers=int(os.cpu_count()-2))
+                                num_workers=args.num_workers)
 
         # Train your model
         model = train(model, train_loader, val_loader, criterion, optimizer, scheduler, args)

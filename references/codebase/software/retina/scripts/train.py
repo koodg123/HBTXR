@@ -66,6 +66,7 @@ def launch_fire(
         params = load_yaml_config(path_to_config)
         training_params = params["training_params"]
         training_params["out_dir"] = out_dir
+        num_workers = training_params.get("num_workers", num_workers)
         dataset_params = params["dataset_params"]  
         if ini30_val_idx is not None:
             dataset_params["ini30_val_idx"] = ini30_val_idx

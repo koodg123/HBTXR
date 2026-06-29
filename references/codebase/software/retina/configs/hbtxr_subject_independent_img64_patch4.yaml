@@ -1,10 +1,12 @@
 training_params:
   arch_name: retina_ann
   lr_model: 0.001
+  weight_decay: 0.00001
   num_epochs: 70
   batch_size: 32
+  num_workers: 4
   optimizer: Adam
-  scheduler: StepLR
+  scheduler: HBTXRStepLR
 
   lr_model_lpf: 0.0001
   lr_model_lpf_tau: 0.001

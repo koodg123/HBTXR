@@ -22,5 +22,10 @@ trainer:
   data_path: /home/kjm26/project/PRJXR/HBTXR/references/codebase/software/ais2024/eye_track_spatiotemporal/event_data_hbtxr_img64
   epochs: 70
   batch_size: 32
+  num_workers: 4
   device: 0
+  optimizer: Adam
+  scheduler: HBTXRStepLR
+  learning_rate: 0.001
+  weight_decay: 0.00001
   activity_regularization: 0

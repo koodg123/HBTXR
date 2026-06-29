@@ -1,6 +1,7 @@
 import torch, pdb, os
 from sinabs import SNNAnalyzer
 from torch.optim.lr_scheduler import StepLR, ReduceLROnPlateau
+from timm.scheduler.step_lr import StepLRScheduler
 import pytorch_lightning as pl
 from pytorch_lightning.utilities.model_summary import ModelSummary
 
@@ -27,6 +28,7 @@ class EyeTrackingModelModule(pl.LightningModule):
 
         # learning rate
         self.lr_model = training_params["lr_model"] 
+        self.weight_decay = training_params.get("weight_decay", 0.0)
 
         # Initialize Low Pass Filter (LPF) 
         if self.training_params["arch_name"] =="retina_snn":
@@ -124,14 +126,29 @@ class EyeTrackingModelModule(pl.LightningModule):
             ]
 
         if self.training_params["optimizer"] == "Adam": 
-            self.optimizer = torch.optim.Adam(param_list, lr=self.lr_model)
+            self.optimizer = torch.optim.Adam(
+                param_list, lr=self.lr_model, weight_decay=self.weight_decay
+            )
         elif self.training_params["optimizer"] == "SGD":
-            self.optimizer = torch.optim.SGD(param_list, lr=self.lr_model, momentum=0.9)
+            self.optimizer = torch.optim.SGD(
+                param_list,
+                lr=self.lr_model,
+                momentum=0.9,
+                weight_decay=self.weight_decay,
+            )
         else:
             raise NotImplementedError
 
         # Scheduler setup
-        if self.training_params["scheduler"] == "StepLR":
+        if self.training_params["scheduler"] == "HBTXRStepLR":
+            self.scheduler = StepLRScheduler(
+                self.optimizer,
+                decay_t=10,
+                decay_rate=0.7,
+                warmup_lr_init=1e-5,
+                warmup_t=5,
+            )
+        elif self.training_params["scheduler"] == "StepLR":
             self.scheduler = StepLR(self.optimizer, step_size=1, gamma=0.8)
         elif self.training_params["scheduler"] == "ReduceLROnPlateau":
             self.scheduler = ReduceLROnPlateau(self.optimizer, "min", patience=5)
@@ -139,6 +156,12 @@ class EyeTrackingModelModule(pl.LightningModule):
             raise NotImplementedError
 
         return {"optimizer": self.optimizer, "lr_scheduler": self.scheduler}
+
+    def lr_scheduler_step(self, scheduler, metric):
+        if isinstance(scheduler, StepLRScheduler):
+            scheduler.step(epoch=self.current_epoch)
+        else:
+            scheduler.step()
 
     def compute_loss(self, outputs, labels):
         loss_dict = {}
