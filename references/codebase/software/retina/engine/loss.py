@@ -306,13 +306,13 @@ class BboxLoss(nn.Module):
             
         box_predictions = self.square_results(predictions) 
         box_targets = target
-        iou_b1 = intersection_over_union(box_targets, box_predictions).sum()
+        iou_b1 = intersection_over_union(box_targets, box_predictions).mean()
         self.box_loss = 1 - iou_b1
 
         # point loss 
         pred_point = box_predictions[..., :2] + (box_predictions[..., 2:] - box_predictions[..., :2]) / 2 
         target_point = box_targets[..., :2] + (box_targets[..., 2:] - box_targets[..., :2]) / 2
-        self.point_loss = torch.nn.PairwiseDistance(p=2)(pred_point, target_point).sum() 
+        self.point_loss = torch.nn.PairwiseDistance(p=2)(pred_point, target_point).mean()
 
         loss = {
             "box_loss": self.box_loss * self.w_box_loss,
