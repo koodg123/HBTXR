@@ -5,15 +5,17 @@ ROOT="/home/user/project/PRJXR/HBTXR"
 PY="${ROOT}/.venv/bin/python"
 DATASET_ROOT="/mnt/d/dataset/EV_Eye/target_data/DeanDataset_full_unet_subject_independent"
 LOG_DIR="${ROOT}/references/report/HBTXR_runs/logs"
+ERVT_NUM_WORKERS="${ERVT_NUM_WORKERS:-8}"
 mkdir -p "${LOG_DIR}"
 LOG="${LOG_DIR}/ervt_train_$(date +%Y%m%d_%H%M%S).log"
 
-exec >>"${LOG}" 2>&1
+exec > >(tee -a "${LOG}") 2>&1
 
 echo "[ERVT] log=${LOG}"
 echo "[ERVT] start=$(date -Is)"
 echo "[ERVT] root=${ROOT}"
 echo "[ERVT] dataset=${DATASET_ROOT}"
+echo "[ERVT] num_workers=${ERVT_NUM_WORKERS}"
 cd "${ROOT}"
 
 while true; do
@@ -36,8 +38,14 @@ done
 
 nvidia-smi || true
 
+EXTRA_ARGS=()
+if [[ "${ERVT_DISABLE_CUDNN:-0}" == "1" ]]; then
+  EXTRA_ARGS+=(--disable-cudnn)
+fi
+
 exec "${PY}" references/codebase/software/ais2024/ERVT/train_hbtxr_subject_independent.py \
   --root-path "${DATASET_ROOT}" \
   --device cuda:0 \
   --batch-size 32 \
-  --num-workers 4
+  --num-workers "${ERVT_NUM_WORKERS}" \
+  "${EXTRA_ARGS[@]}"

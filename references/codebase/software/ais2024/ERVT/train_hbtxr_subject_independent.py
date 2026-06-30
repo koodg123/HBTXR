@@ -196,8 +196,9 @@ def main() -> int:
     )
     from model.RVT import RVT  # noqa: PLC0415
 
-    if args.disable_cudnn:
-        torch.backends.cudnn.enabled = False
+    cudnn_enabled = not args.disable_cudnn
+    torch.backends.cudnn.enabled = cudnn_enabled
+    torch.backends.cudnn.benchmark = cudnn_enabled
     torch.set_float32_matmul_precision("medium")
     torch.manual_seed(int(cfg.get("seed", 42)))
 
@@ -240,6 +241,15 @@ def main() -> int:
     best_distance = float("inf")
     print(f"[ERVT] output_dir={out_dir}", flush=True)
     print(f"[ERVT] train_segments={len(train_loader.dataset)} val_segments={len(val_loader.dataset)}", flush=True)
+    print(
+        "[ERVT] "
+        f"device={device} "
+        f"batch_size={batch_size} "
+        f"num_workers={num_workers} "
+        f"cudnn_enabled={torch.backends.cudnn.enabled} "
+        f"cudnn_benchmark={torch.backends.cudnn.benchmark}",
+        flush=True,
+    )
     print("[ERVT] note=in_channels set to 2 for direct HBTXR two-polarity event frames", flush=True)
 
     for epoch in range(epochs):
