@@ -17,7 +17,7 @@ from pathlib import Path
 import torch
 import yaml
 import pytorch_lightning as pl
-from pytorch_lightning.callbacks import ModelCheckpoint
+from pytorch_lightning.callbacks import ModelCheckpoint, TQDMProgressBar
 
 
 def install_optional_dependency_stubs() -> None:
@@ -92,6 +92,9 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--max-epochs", type=int, default=None)
     parser.add_argument("--batch-size", type=int, default=None)
     parser.add_argument("--num-workers", type=int, default=None)
+    parser.add_argument("--ckpt-path", type=Path, default=None)
+    parser.add_argument("--progress-refresh-rate", type=int, default=1)
+    parser.add_argument("--disable-cudnn", action="store_true")
     parser.add_argument("--run-name", default="Retina_subject_independent_img64")
     parser.add_argument(
         "--output-root",
@@ -122,9 +125,8 @@ def main() -> int:
     if training_params["arch_name"] != "retina_ann":
         raise ValueError("This HBTXR runner supports only retina_ann")
 
-    # The local Torch/CUDA stack can report a cuDNN sublibrary mismatch on
-    # this small ANN model. Disable cuDNN and use native CUDA kernels.
-    torch.backends.cudnn.enabled = False
+    torch.backends.cudnn.enabled = not args.disable_cudnn
+    print(f"cudnn_enabled={torch.backends.cudnn.enabled}", flush=True)
 
     if args.max_epochs is not None:
         training_params["num_epochs"] = args.max_epochs
@@ -132,6 +134,8 @@ def main() -> int:
         training_params["batch_size"] = args.batch_size
     if args.num_workers is not None:
         training_params["num_workers"] = args.num_workers
+    if args.ckpt_path is not None:
+        training_params["resume_from_checkpoint"] = str(args.ckpt_path)
 
     timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
     out_dir = args.output_root / f"{args.run_name}_{timestamp}"
@@ -185,6 +189,8 @@ def main() -> int:
         filename="{epoch:02d}-{val_loss:.4f}",
     )
     callbacks = [checkpoint]
+    if args.progress_refresh_rate > 0:
+        callbacks.append(TQDMProgressBar(refresh_rate=args.progress_refresh_rate))
 
     trainer = pl.Trainer(
         max_epochs=int(training_params["num_epochs"]),
@@ -192,11 +198,17 @@ def main() -> int:
         devices=[args.device] if torch.cuda.is_available() else "auto",
         num_sanity_val_steps=0,
         callbacks=callbacks,
+        enable_progress_bar=args.progress_refresh_rate > 0,
         logger=False,
         fast_dev_run=args.fast_dev_run,
         log_every_n_steps=50,
     )
-    trainer.fit(module, train_dataloaders=train_loader, val_dataloaders=val_loader)
+    trainer.fit(
+        module,
+        train_dataloaders=train_loader,
+        val_dataloaders=val_loader,
+        ckpt_path=str(args.ckpt_path) if args.ckpt_path is not None else None,
+    )
     trainer.validate(module, dataloaders=val_loader)
     return 0
 

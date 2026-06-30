@@ -306,7 +306,7 @@ class BboxLoss(nn.Module):
             
         box_predictions = self.square_results(predictions) 
         box_targets = target
-        iou_b1 = intersection_over_union(box_targets, box_predictions).sum()
+        iou_b1 = intersection_over_union(box_targets, box_predictions).mean()
         self.box_loss = 1 - iou_b1
 
         # point loss 

@@ -37,8 +37,8 @@ training_params:
 
 dataset_params:
   dataset_name: hbtxr-dean-subject-independent
-  root_path: /home/kjm26/project/dataset/XR/EV_Eye/raw_data/DeanDataset_full_unet_subject_independent
-  facet_root: /home/kjm26/project/PRJXR/HBTXR/references/codebase/software/FACET
+  root_path: /mnt/d/dataset/EV_Eye/target_data/DeanDataset_full_unet_subject_independent
+  facet_root: /home/user/project/PRJXR/HBTXR/references/codebase/software/FACET
   events_interpolation: causal_linear_ori
   pupil_area: 200
 
