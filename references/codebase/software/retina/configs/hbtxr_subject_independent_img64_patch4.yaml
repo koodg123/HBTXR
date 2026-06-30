@@ -4,7 +4,7 @@ training_params:
   weight_decay: 0.00001
   num_epochs: 70
   batch_size: 32
-  num_workers: 4
+  num_workers: 8
   optimizer: Adam
   scheduler: HBTXRStepLR
 
