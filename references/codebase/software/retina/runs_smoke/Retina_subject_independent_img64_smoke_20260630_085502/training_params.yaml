@@ -1,0 +1,40 @@
+arch_name: retina_ann
+lr_model: 0.001
+weight_decay: 1.0e-05
+num_epochs: 70
+batch_size: 2
+num_workers: 0
+optimizer: Adam
+scheduler: HBTXRStepLR
+lr_model_lpf: 0.0001
+lr_model_lpf_tau: 0.001
+lpf_tau_mem_syn:
+- 5.0
+- 5.0
+lpf_kernel_size: 30
+lpf_init: 0.01
+lpf_train: true
+reset_states_sinabs: true
+w_spike_loss: 0
+w_synap_loss: 0
+spike_multi: false
+spike_reset: false
+spike_surrogate: true
+spike_window: 0.5
+synops_lim:
+- 1000
+- 1000000
+w_input_loss: 0
+w_fire_loss: 0
+firing_lim:
+- 0.3
+- 0.4
+verify_hardware_compatibility: false
+w_euclidian_loss: 1
+w_box_loss: 7.5
+w_conf_loss: 7.5
+SxS_Grid: 4
+num_classes: 0
+num_boxes: 1
+bbox_w: 5
+out_dir: references/codebase/software/retina/runs_smoke/Retina_subject_independent_img64_smoke_20260630_085502
