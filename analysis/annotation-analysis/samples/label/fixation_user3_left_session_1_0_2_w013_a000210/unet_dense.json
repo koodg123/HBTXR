@@ -1,0 +1,103 @@
+{
+  "unet_centers": [
+    {
+      "idx": 205,
+      "ts": 1659072171688925,
+      "valid": true,
+      "cx": 214.184,
+      "cy": 130.126,
+      "area": 958,
+      "src_gif": "/mnt/e/DATASET/eveye/processed_data/Data_davis_predict/user3/user3/left/session_1_0_2/predict/000205_1659072171688925_mask.gif"
+    },
+    {
+      "idx": 206,
+      "ts": 1659072171728925,
+      "valid": true,
+      "cx": 214.21,
+      "cy": 130.192,
+      "area": 951,
+      "src_gif": "/mnt/e/DATASET/eveye/processed_data/Data_davis_predict/user3/user3/left/session_1_0_2/predict/000206_1659072171728925_mask.gif"
+    },
+    {
+      "idx": 207,
+      "ts": 1659072171768925,
+      "valid": true,
+      "cx": 214.234,
+      "cy": 130.163,
+      "area": 949,
+      "src_gif": "/mnt/e/DATASET/eveye/processed_data/Data_davis_predict/user3/user3/left/session_1_0_2/predict/000207_1659072171768925_mask.gif"
+    },
+    {
+      "idx": 208,
+      "ts": 1659072171808925,
+      "valid": true,
+      "cx": 214.213,
+      "cy": 129.954,
+      "area": 961,
+      "src_gif": "/mnt/e/DATASET/eveye/processed_data/Data_davis_predict/user3/user3/left/session_1_0_2/predict/000208_1659072171808925_mask.gif"
+    },
+    {
+      "idx": 209,
+      "ts": 1659072171848925,
+      "valid": true,
+      "cx": 214.216,
+      "cy": 129.84,
+      "area": 970,
+      "src_gif": "/mnt/e/DATASET/eveye/processed_data/Data_davis_predict/user3/user3/left/session_1_0_2/predict/000209_1659072171848925_mask.gif"
+    },
+    {
+      "idx": 210,
+      "ts": 1659072171888925,
+      "valid": true,
+      "cx": 214.231,
+      "cy": 129.685,
+      "area": 978,
+      "src_gif": "/mnt/e/DATASET/eveye/processed_data/Data_davis_predict/user3/user3/left/session_1_0_2/predict/000210_1659072171888925_mask.gif"
+    },
+    {
+      "idx": 211,
+      "ts": 1659072171928925,
+      "valid": true,
+      "cx": 214.225,
+      "cy": 129.618,
+      "area": 984,
+      "src_gif": "/mnt/e/DATASET/eveye/processed_data/Data_davis_predict/user3/user3/left/session_1_0_2/predict/000211_1659072171928925_mask.gif"
+    },
+    {
+      "idx": 212,
+      "ts": 1659072171968925,
+      "valid": true,
+      "cx": 214.119,
+      "cy": 129.754,
+      "area": 991,
+      "src_gif": "/mnt/e/DATASET/eveye/processed_data/Data_davis_predict/user3/user3/left/session_1_0_2/predict/000212_1659072171968925_mask.gif"
+    },
+    {
+      "idx": 213,
+      "ts": 1659072172008925,
+      "valid": true,
+      "cx": 214.13,
+      "cy": 129.781,
+      "area": 989,
+      "src_gif": "/mnt/e/DATASET/eveye/processed_data/Data_davis_predict/user3/user3/left/session_1_0_2/predict/000213_1659072172008925_mask.gif"
+    },
+    {
+      "idx": 214,
+      "ts": 1659072172048925,
+      "valid": true,
+      "cx": 214.087,
+      "cy": 129.821,
+      "area": 1004,
+      "src_gif": "/mnt/e/DATASET/eveye/processed_data/Data_davis_predict/user3/user3/left/session_1_0_2/predict/000214_1659072172048925_mask.gif"
+    },
+    {
+      "idx": 215,
+      "ts": 1659072172088925,
+      "valid": true,
+      "cx": 214.145,
+      "cy": 129.864,
+      "area": 1011,
+      "src_gif": "/mnt/e/DATASET/eveye/processed_data/Data_davis_predict/user3/user3/left/session_1_0_2/predict/000215_1659072172088925_mask.gif"
+    }
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "key": "fixation_user6_left_session_1_0_2_w146_a002110",
+  "motion": "fixation",
+  "K": 11,
+  "user": "user6",
+  "eye": "left",
+  "session": "session_1_0_2",
+  "source": {
+    "frames_dir": "/mnt/e/DATASET/eveye/raw_data/Data_davis/user6/left/session_1_0_2/frames",
+    "events_txt": "/mnt/e/DATASET/eveye/raw_data/Data_davis/user6/left/session_1_0_2/events/events.txt",
+    "via_csv": "/mnt/e/DATASET/eveye/raw_data/Data_davis/user6/left/session_1_0_2/user_6.csv",
+    "predict_dir": "/mnt/e/DATASET/eveye/processed_data/Data_davis_predict/user6/user6/left/session_1_0_2/predict",
+    "mask_h5": "/mnt/e/DATASET/eveye/raw_data/Data_davis_labelled_with_mask/left/user6_session_1_0_2.h5"
+  },
+  "ts_lo": 1657785300075959,
+  "ts_hi": 1657785300475959,
+  "collected_at": "2026-07-01 02:52:28"
+}

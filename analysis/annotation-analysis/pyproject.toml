@@ -1,0 +1,27 @@
+[project]
+name = "eveye-annotation-analysis"
+version = "0.1.0"
+description = "EV-Eye annotation precision / label noise / label uncertainty audit toolkit"
+requires-python = ">=3.9"
+dependencies = [
+    "numpy>=1.21",
+    "pillow>=9.0",
+    "h5py>=3.2",
+    "scipy>=1.7",
+    "pandas>=1.3",
+    "opencv-python>=4.5",
+    "matplotlib>=3.4",
+    "tqdm>=4.61",
+]
+
+# Usage with uv:
+#   cd <this dir>            # .../analysis/annotation-analysis
+#   uv sync                  # creates .venv from these deps
+#   cd scripts
+#   uv run python 07_collect_samples.py --root <eveye> --out ../samples --dry-run --max-users 3
+#
+# Scripts import the sibling module `evlib`, so always run from the `scripts/` dir
+# (cwd = scripts) as shown above.
+
+[tool.uv]
+package = false

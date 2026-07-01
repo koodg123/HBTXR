@@ -1,0 +1,17 @@
+{
+  "root": "/mnt/e/DATASET/eveye",
+  "out": "../samples",
+  "test_users": "",
+  "kf": 11,
+  "ks": 7,
+  "nf": 45,
+  "nsm": 45,
+  "nsac": 70,
+  "vfix": 0.6,
+  "vsac": 4.0,
+  "event_pad_us": 0,
+  "copy_masks": false,
+  "max_users": 3,
+  "seed": 20260630,
+  "dry_run": true
+}

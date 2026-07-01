@@ -1,0 +1,18 @@
+{
+  "key": "saccade_user6_right_session_1_0_2_w116_a001410",
+  "motion": "saccade",
+  "K": 7,
+  "user": "user6",
+  "eye": "right",
+  "session": "session_1_0_2",
+  "source": {
+    "frames_dir": "/mnt/e/DATASET/eveye/raw_data/Data_davis/user6/right/session_1_0_2/frames",
+    "events_txt": "/mnt/e/DATASET/eveye/raw_data/Data_davis/user6/right/session_1_0_2/events/events.txt",
+    "via_csv": "/mnt/e/DATASET/eveye/raw_data/Data_davis/user6/right/session_1_0_2/user_6.csv",
+    "predict_dir": "/mnt/e/DATASET/eveye/processed_data/Data_davis_predict/user6/user6/right/session_1_0_2/predict",
+    "mask_h5": "/mnt/e/DATASET/eveye/raw_data/Data_davis_labelled_with_mask/right/user6_session_1_0_2.h5"
+  },
+  "ts_lo": 1657785272113915,
+  "ts_hi": 1657785272353915,
+  "collected_at": "2026-07-01 02:54:14"
+}

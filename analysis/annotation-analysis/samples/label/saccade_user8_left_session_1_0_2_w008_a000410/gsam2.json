@@ -1,0 +1,221 @@
+{
+  "prompt": "black pupil.",
+  "gsam2_centers": [
+    {
+      "valid": true,
+      "cx": 179.34,
+      "cy": 119.49,
+      "area": 517,
+      "det_score": 0.4367,
+      "sam_score": 0.9593,
+      "box": [
+        166.5,
+        106.1,
+        192.9,
+        132.9
+      ],
+      "repeats": [
+        [
+          179.3,
+          119.39
+        ],
+        [
+          179.34,
+          119.52
+        ],
+        [
+          179.36,
+          119.45
+        ],
+        [
+          179.35,
+          119.4
+        ],
+        [
+          180.33,
+          119.46
+        ]
+      ],
+      "idx": 407,
+      "mislabel": false,
+      "mislabel_reason": "ok",
+      "e_unet": 1.18
+    },
+    {
+      "valid": true,
+      "cx": 179.55,
+      "cy": 119.18,
+      "area": 510,
+      "det_score": 0.4705,
+      "sam_score": 0.958,
+      "box": [
+        166.8,
+        105.9,
+        193.0,
+        132.7
+      ],
+      "repeats": [
+        [
+          179.52,
+          119.31
+        ],
+        [
+          179.59,
+          119.23
+        ],
+        [
+          179.58,
+          119.27
+        ],
+        [
+          179.61,
+          119.1
+        ],
+        [
+          180.7,
+          119.2
+        ]
+      ],
+      "idx": 408,
+      "mislabel": false,
+      "mislabel_reason": "ok",
+      "e_unet": 1.0
+    },
+    {
+      "valid": true,
+      "cx": 179.82,
+      "cy": 119.13,
+      "area": 506,
+      "det_score": 0.4393,
+      "sam_score": 0.9591,
+      "box": [
+        167.2,
+        105.8,
+        193.1,
+        132.6
+      ],
+      "repeats": [
+        [
+          179.84,
+          119.13
+        ],
+        [
+          179.89,
+          119.18
+        ],
+        [
+          179.88,
+          119.13
+        ],
+        [
+          179.96,
+          118.99
+        ],
+        [
+          181.04,
+          119.07
+        ]
+      ],
+      "idx": 409,
+      "mislabel": false,
+      "mislabel_reason": "ok",
+      "e_unet": 0.96
+    },
+    {
+      "valid": true,
+      "cx": 180.09,
+      "cy": 119.07,
+      "area": 505,
+      "det_score": 0.4272,
+      "sam_score": 0.96,
+      "box": [
+        167.5,
+        105.8,
+        193.2,
+        132.5
+      ],
+      "repeats": [
+        [
+          180.0,
+          119.03
+        ],
+        [
+          180.05,
+          119.05
+        ],
+        [
+          180.01,
+          119.08
+        ],
+        [
+          180.09,
+          118.98
+        ],
+        [
+          181.18,
+          119.0
+        ]
+      ],
+      "idx": 410,
+      "mislabel": false,
+      "mislabel_reason": "ok",
+      "e_unet": 0.93
+    },
+    {
+      "valid": true,
+      "cx": 182.5,
+      "cy": 120.49,
+      "area": 353,
+      "det_score": 0.3538,
+      "sam_score": 0.9428,
+      "box": [
+        169.7,
+        112.0,
+        195.8,
+        131.2
+      ],
+      "repeats": [
+        [
+          181.99,
+          120.27
+        ],
+        [
+          182.63,
+          120.89
+        ],
+        [
+          182.59,
+          120.52
+        ],
+        [
+          182.62,
+          120.96
+        ],
+        [
+          183.63,
+          120.77
+        ]
+      ],
+      "idx": 411,
+      "mislabel": false,
+      "mislabel_reason": "ok",
+      "e_unet": 1.19
+    },
+    {
+      "valid": false,
+      "reason": "no_detection",
+      "idx": 412,
+      "mislabel": false,
+      "mislabel_reason": "invalid",
+      "e_unet": null
+    },
+    {
+      "valid": false,
+      "reason": "no_detection",
+      "idx": 413,
+      "mislabel": false,
+      "mislabel_reason": "invalid",
+      "e_unet": null
+    }
+  ]
+}

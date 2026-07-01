@@ -1,0 +1,30 @@
+# Python environments (5.5G + 1.3G + 505M; recreate via uv, see docs/15 section 3)
+.venv/
+.venv-*/
+__pycache__/
+*.pyc
+*.pyo
+
+# Model weights (13G; NOT versioned). Fetch via weights/download_weights.sh,
+# manifest weights/ANNOTATOR_WEIGHTS.md. Keep only manifests/scripts.
+weights/*
+!weights/*.md
+!weights/*.sh
+
+# Bulk generated data (regenerable from label JSONs + raw /mnt/e via scripts):
+# samples/frame 241M APS PNGs; perframe 242M/38k; event 28M; masks 9337 files; overlay 33M.
+samples/frame/
+samples/perframe/
+samples/event/
+samples/label/*/gsam2_masks/
+samples/label/*/unet_masks/
+overlay/
+
+# ultralytics / YOLOE auto-downloads (land in CWD: mobileclip 599M, yoloe .pt 27M)
+mobileclip_blt.ts
+yoloe*.pt
+*.engine
+
+# misc
+*.log
+.DS_Store

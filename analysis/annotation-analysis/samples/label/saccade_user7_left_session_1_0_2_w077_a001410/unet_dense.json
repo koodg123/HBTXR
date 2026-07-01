@@ -1,0 +1,67 @@
+{
+  "unet_centers": [
+    {
+      "idx": 1407,
+      "ts": 1657787001317322,
+      "valid": true,
+      "cx": 120.968,
+      "cy": 76.179,
+      "area": 340,
+      "src_gif": "/mnt/e/DATASET/eveye/processed_data/Data_davis_predict/user7/user7/left/session_1_0_2/predict/001407_1657787001317322_mask.gif"
+    },
+    {
+      "idx": 1408,
+      "ts": 1657787001357322,
+      "valid": true,
+      "cx": 120.784,
+      "cy": 76.067,
+      "area": 343,
+      "src_gif": "/mnt/e/DATASET/eveye/processed_data/Data_davis_predict/user7/user7/left/session_1_0_2/predict/001408_1657787001357322_mask.gif"
+    },
+    {
+      "idx": 1409,
+      "ts": 1657787001397322,
+      "valid": true,
+      "cx": 120.699,
+      "cy": 76.135,
+      "area": 349,
+      "src_gif": "/mnt/e/DATASET/eveye/processed_data/Data_davis_predict/user7/user7/left/session_1_0_2/predict/001409_1657787001397322_mask.gif"
+    },
+    {
+      "idx": 1410,
+      "ts": 1657787001437322,
+      "valid": true,
+      "cx": 120.506,
+      "cy": 76.2,
+      "area": 360,
+      "src_gif": "/mnt/e/DATASET/eveye/processed_data/Data_davis_predict/user7/user7/left/session_1_0_2/predict/001410_1657787001437322_mask.gif"
+    },
+    {
+      "idx": 1411,
+      "ts": 1657787001477322,
+      "valid": true,
+      "cx": 120.429,
+      "cy": 76.351,
+      "area": 359,
+      "src_gif": "/mnt/e/DATASET/eveye/processed_data/Data_davis_predict/user7/user7/left/session_1_0_2/predict/001411_1657787001477322_mask.gif"
+    },
+    {
+      "idx": 1412,
+      "ts": 1657787001517322,
+      "valid": true,
+      "cx": 113.303,
+      "cy": 79.591,
+      "area": 337,
+      "src_gif": "/mnt/e/DATASET/eveye/processed_data/Data_davis_predict/user7/user7/left/session_1_0_2/predict/001412_1657787001517322_mask.gif"
+    },
+    {
+      "idx": 1413,
+      "ts": 1657787001557322,
+      "valid": true,
+      "cx": 112.118,
+      "cy": 80.135,
+      "area": 347,
+      "src_gif": "/mnt/e/DATASET/eveye/processed_data/Data_davis_predict/user7/user7/left/session_1_0_2/predict/001413_1657787001557322_mask.gif"
+    }
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "anchor_idx": 1010,
+  "anchor_ts": 1659091064890549,
+  "ellipse_cx_cy_rx_ry_theta": [
+    190.0,
+    131.0,
+    20.344,
+    19.0,
+    0.033
+  ],
+  "quality": {
+    "good": true,
+    "frontal": true,
+    "good_illumination": true
+  },
+  "source_csv": "/mnt/e/DATASET/eveye/raw_data/Data_davis/user9/left/session_1_0_2/user_9.csv"
+}

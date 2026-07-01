@@ -1,0 +1,18 @@
+{
+  "key": "smooth_pursuit_user2_left_session_2_0_1_w112_a001010",
+  "motion": "smooth_pursuit",
+  "K": 11,
+  "user": "user2",
+  "eye": "left",
+  "session": "session_2_0_1",
+  "source": {
+    "frames_dir": "/mnt/e/DATASET/eveye/raw_data/Data_davis/user2/left/session_2_0_1/frames",
+    "events_txt": "/mnt/e/DATASET/eveye/raw_data/Data_davis/user2/left/session_2_0_1/events/events.txt",
+    "via_csv": "/mnt/e/DATASET/eveye/raw_data/Data_davis/user2/left/session_2_0_1/user_2.csv",
+    "predict_dir": "/mnt/e/DATASET/eveye/processed_data/Data_davis_predict/user2/user2/left/session_2_0_1/predict",
+    "mask_h5": "/mnt/e/DATASET/eveye/raw_data/Data_davis_labelled_with_mask/left/user2_session_2_0_1.h5"
+  },
+  "ts_lo": 1658496536027301,
+  "ts_hi": 1658496536427301,
+  "collected_at": "2026-07-01 02:55:21"
+}

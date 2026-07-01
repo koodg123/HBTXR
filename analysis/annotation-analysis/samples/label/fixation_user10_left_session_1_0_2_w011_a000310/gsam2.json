@@ -1,0 +1,157 @@
+{
+  "prompt": "black pupil.",
+  "gsam2_centers": [
+    {
+      "valid": true,
+      "cx": 148.11,
+      "cy": 121.32,
+      "area": 998,
+      "det_score": 0.3051,
+      "sam_score": 0.9605,
+      "box": [
+        130.0,
+        101.2,
+        167.1,
+        142.4
+      ],
+      "repeats": [
+        [
+          148.11,
+          121.32
+        ],
+        [
+          148.2,
+          121.34
+        ],
+        [
+          148.20999999999998,
+          121.32
+        ],
+        [
+          148.31,
+          121.17
+        ],
+        [
+          149.21,
+          121.35
+        ]
+      ],
+      "idx": 305,
+      "mislabel": false,
+      "mislabel_reason": "ok",
+      "e_unet": 1.27
+    },
+    {
+      "valid": true,
+      "cx": 147.25,
+      "cy": 121.33,
+      "area": 992,
+      "det_score": 0.2841,
+      "sam_score": 0.9588,
+      "box": [
+        129.2,
+        101.2,
+        166.4,
+        142.1
+      ],
+      "repeats": [
+        [
+          147.16,
+          121.23
+        ],
+        [
+          147.28,
+          121.42
+        ],
+        [
+          147.26999999999998,
+          121.31
+        ],
+        [
+          147.38,
+          121.15
+        ],
+        [
+          148.5,
+          121.28
+        ]
+      ],
+      "idx": 306,
+      "mislabel": false,
+      "mislabel_reason": "ok",
+      "e_unet": 1.34
+    },
+    {
+      "valid": false,
+      "reason": "no_detection",
+      "idx": 307,
+      "mislabel": false,
+      "mislabel_reason": "invalid",
+      "e_unet": null
+    },
+    {
+      "valid": false,
+      "reason": "no_detection",
+      "idx": 308,
+      "mislabel": false,
+      "mislabel_reason": "invalid",
+      "e_unet": null
+    },
+    {
+      "valid": false,
+      "reason": "no_detection",
+      "idx": 309,
+      "mislabel": false,
+      "mislabel_reason": "invalid",
+      "e_unet": null
+    },
+    {
+      "valid": false,
+      "reason": "no_detection",
+      "idx": 310,
+      "mislabel": false,
+      "mislabel_reason": "invalid",
+      "e_unet": null
+    },
+    {
+      "valid": false,
+      "reason": "no_detection",
+      "idx": 311,
+      "mislabel": false,
+      "mislabel_reason": "invalid",
+      "e_unet": null
+    },
+    {
+      "valid": false,
+      "reason": "no_detection",
+      "idx": 312,
+      "mislabel": false,
+      "mislabel_reason": "invalid",
+      "e_unet": null
+    },
+    {
+      "valid": false,
+      "reason": "no_detection",
+      "idx": 313,
+      "mislabel": false,
+      "mislabel_reason": "invalid",
+      "e_unet": null
+    },
+    {
+      "valid": false,
+      "reason": "no_detection",
+      "idx": 314,
+      "mislabel": false,
+      "mislabel_reason": "invalid",
+      "e_unet": null
+    },
+    {
+      "valid": false,
+      "reason": "no_detection",
+      "idx": 315,
+      "mislabel": false,
+      "mislabel_reason": "invalid",
+      "e_unet": null
+    }
+  ]
+}

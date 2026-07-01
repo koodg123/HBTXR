@@ -1,0 +1,285 @@
+{
+  "prompt": "black pupil.",
+  "gsam2_centers": [
+    {
+      "valid": false,
+      "reason": "no_detection",
+      "idx": 2405,
+      "mislabel": false,
+      "mislabel_reason": "invalid",
+      "e_unet": null
+    },
+    {
+      "valid": false,
+      "reason": "no_detection",
+      "idx": 2406,
+      "mislabel": false,
+      "mislabel_reason": "invalid",
+      "e_unet": null
+    },
+    {
+      "valid": true,
+      "cx": 111.58,
+      "cy": 103.26,
+      "area": 264,
+      "det_score": 0.4028,
+      "sam_score": 0.9521,
+      "box": [
+        102.8,
+        92.3,
+        121.0,
+        114.8
+      ],
+      "repeats": [
+        [
+          111.66,
+          103.18
+        ],
+        [
+          111.66,
+          103.33
+        ],
+        [
+          111.6,
+          103.29
+        ],
+        [
+          111.7,
+          103.19
+        ],
+        [
+          112.63999999999999,
+          103.22
+        ]
+      ],
+      "idx": 2407,
+      "mislabel": false,
+      "mislabel_reason": "ok",
+      "e_unet": 0.95
+    },
+    {
+      "valid": true,
+      "cx": 111.62,
+      "cy": 103.23,
+      "area": 263,
+      "det_score": 0.4116,
+      "sam_score": 0.9529,
+      "box": [
+        102.9,
+        92.2,
+        120.9,
+        114.8
+      ],
+      "repeats": [
+        [
+          111.65,
+          103.12
+        ],
+        [
+          111.7,
+          103.25
+        ],
+        [
+          111.62,
+          103.23
+        ],
+        [
+          111.78,
+          103.23
+        ],
+        [
+          112.68,
+          103.21
+        ]
+      ],
+      "idx": 2408,
+      "mislabel": false,
+      "mislabel_reason": "ok",
+      "e_unet": 0.9
+    },
+    {
+      "valid": false,
+      "reason": "no_detection",
+      "idx": 2409,
+      "mislabel": false,
+      "mislabel_reason": "invalid",
+      "e_unet": null
+    },
+    {
+      "valid": true,
+      "cx": 111.77,
+      "cy": 103.25,
+      "area": 263,
+      "det_score": 0.4015,
+      "sam_score": 0.9509,
+      "box": [
+        103.1,
+        92.1,
+        121.1,
+        114.7
+      ],
+      "repeats": [
+        [
+          111.77,
+          103.25
+        ],
+        [
+          111.81,
+          103.41
+        ],
+        [
+          111.82,
+          103.38
+        ],
+        [
+          111.85,
+          103.24
+        ],
+        [
+          112.88,
+          103.36
+        ]
+      ],
+      "idx": 2410,
+      "mislabel": false,
+      "mislabel_reason": "ok",
+      "e_unet": 0.95
+    },
+    {
+      "valid": true,
+      "cx": 111.78,
+      "cy": 103.23,
+      "area": 261,
+      "det_score": 0.4007,
+      "sam_score": 0.9517,
+      "box": [
+        102.9,
+        92.0,
+        121.1,
+        114.6
+      ],
+      "repeats": [
+        [
+          111.78,
+          103.11
+        ],
+        [
+          111.79,
+          103.29
+        ],
+        [
+          111.83,
+          103.24
+        ],
+        [
+          111.91,
+          103.11
+        ],
+        [
+          112.88,
+          103.24
+        ]
+      ],
+      "idx": 2411,
+      "mislabel": false,
+      "mislabel_reason": "ok",
+      "e_unet": 1.01
+    },
+    {
+      "valid": false,
+      "reason": "no_detection",
+      "idx": 2412,
+      "mislabel": false,
+      "mislabel_reason": "invalid",
+      "e_unet": null
+    },
+    {
+      "valid": true,
+      "cx": 112.0,
+      "cy": 102.62,
+      "area": 254,
+      "det_score": 0.2005,
+      "sam_score": 0.8202,
+      "box": [
+        97.0,
+        86.9,
+        128.8,
+        118.8
+      ],
+      "repeats": [
+        [
+          111.94,
+          102.65
+        ],
+        [
+          112.05,
+          102.65
+        ],
+        [
+          112.04,
+          102.58
+        ],
+        [
+          111.9,
+          102.68
+        ],
+        [
+          112.9,
+          102.68
+        ]
+      ],
+      "idx": 2413,
+      "mislabel": false,
+      "mislabel_reason": "ok",
+      "e_unet": 0.96
+    },
+    {
+      "valid": false,
+      "reason": "no_detection",
+      "idx": 2414,
+      "mislabel": false,
+      "mislabel_reason": "invalid",
+      "e_unet": null
+    },
+    {
+      "valid": true,
+      "cx": 112.46,
+      "cy": 100.37,
+      "area": 241,
+      "det_score": 0.2081,
+      "sam_score": 0.8489,
+      "box": [
+        98.6,
+        85.7,
+        127.3,
+        115.5
+      ],
+      "repeats": [
+        [
+          112.4,
+          100.11
+        ],
+        [
+          112.48,
+          100.41
+        ],
+        [
+          112.35,
+          100.46
+        ],
+        [
+          112.42,
+          100.37
+        ],
+        [
+          113.28,
+          100.53
+        ]
+      ],
+      "idx": 2415,
+      "mislabel": false,
+      "mislabel_reason": "ok",
+      "e_unet": 1.11
+    }
+  ]
+}
