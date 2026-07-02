@@ -1,0 +1,23 @@
+{
+ "box": [
+  53,
+  28,
+  293,
+  188
+ ],
+ "crop_resolution": [
+  240,
+  160
+ ],
+ "orig": [
+  346,
+  260
+ ],
+ "n_windows": 483,
+ "n_aps_frames": 4669,
+ "n_event_windows": 483,
+ "centers_clipped": 0,
+ "frames_with_marker_band_content": 4669,
+ "event_kept_frac": 0.6041,
+ "note": "markers excluded by capping box bottom below cy=189; native crop resolution"
+}

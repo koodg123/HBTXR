@@ -20,6 +20,12 @@ samples/label/*/gsam2_masks/
 samples/label/*/unet_masks/
 overlay/
 
+# Cropped Eye-ROI dataset bulk (135M+, regenerable via src/crop_dataset.py).
+# Keep README.md, meta.json, and _qc*/ overlays; drop per-window aps/events/labels.
+datasets/*/*/aps/
+datasets/*/*/events.npz
+datasets/*/*/labels.json
+
 # ultralytics / YOLOE auto-downloads (land in CWD: mobileclip 599M, yoloe .pt 27M)
 mobileclip_blt.ts
 yoloe*.pt
