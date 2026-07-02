@@ -16,6 +16,7 @@ from EvEye.dataset.DavisEyeEllipse.DavisEyeEllipseDataset import (
 )
 from EvEye.dataset.DavisEyeEllipse.utils import cal_ellipse_area, convert_to_ellipse
 from EvEye.utils.cache.MemmapCacheStructedEvents import load_memmap
+from EvEye.utils.tonic.functional.ToFrameStack import to_frame_stack_numpy
 
 
 def natural_key(path: Path):
@@ -43,6 +44,8 @@ class DavisEyeEllipseFrameDataset(Dataset):
         use_cached_frame=False,
         cached_frame_name="cached_frame",
         use_cached_aps=False,
+        use_cached_events=False,
+        sensor_wh=(240, 160),
     ):
         super().__init__()
         self.root_path = Path(root_path)
@@ -57,23 +60,34 @@ class DavisEyeEllipseFrameDataset(Dataset):
         self.channels = channels
         self.use_cached_frame = use_cached_frame
         self.use_cached_aps = use_cached_aps
+        self.use_cached_events = use_cached_events
+        self.sensor_wh = tuple(sensor_wh)                          # crop (W, H) for event rendering
         self.ellipse_data_path = self.ellipse_path / "ellipses_batch_0.memmap"
         self.ellipse_info_path = self.ellipse_path / "ellipses_batch_info_0.txt"
         self.frame_data_path = self.frame_path / "frames_batch_0.memmap"
         self.frame_info_path = self.frame_path / "frames_batch_info_0.txt"
-        if self.channels not in (1, 3):
+        if not self.use_cached_events and self.channels not in (1, 3):
             raise ValueError(f"channels must be 1 or 3, got {self.channels}")
 
         self.ellipses = self._load_ellipses()
         self.transform = self.get_transforms()
         self.cached_frames = self._load_cached_frames() if self.use_cached_frame else None
         self.aps_paths = self._load_aps_paths() if self.use_cached_aps else None
+        self.ev_mm, self.ev_idx = self._load_events() if self.use_cached_events else (None, None)
         self.num_samples = len(self.ellipses)
         if self.use_cached_aps:
             if len(self.aps_paths) != self.num_samples:
                 raise ValueError(
                     f"cached_aps frame count mismatch for split={self.split}: "
                     f"aps={len(self.aps_paths)}, ellipses={self.num_samples}"
+                )
+            self.session_records = []
+            self.cumulative_counts = np.array([], dtype=np.int64)
+        elif self.use_cached_events:
+            if len(self.ev_idx) != self.num_samples:
+                raise ValueError(
+                    f"cached_events frame count mismatch for split={self.split}: "
+                    f"events={len(self.ev_idx)}, ellipses={self.num_samples}"
                 )
             self.session_records = []
             self.cumulative_counts = np.array([], dtype=np.int64)
@@ -100,7 +114,7 @@ class DavisEyeEllipseFrameDataset(Dataset):
                 )
 
     def _load_ellipses(self):
-        if self.use_cached_aps:                                    # crop dataset: plain .npy [t,x,y,a,b,ang] (crop coords)
+        if self.use_cached_aps or self.use_cached_events:          # crop dataset: plain .npy [t,x,y,a,b,ang] (crop coords)
             return np.load(self.root_path / self.split / "cached_ellipse" / "ellipse_records.npy")
         return load_memmap(self.ellipse_data_path, self.ellipse_info_path)
 
@@ -110,6 +124,26 @@ class DavisEyeEllipseFrameDataset(Dataset):
         aps_root = self.root_path / self.split / "cached_aps"
         return [aps_root / str(r["key"]) / f"{int(r['idx']):06d}_{int(r['t'])}.png" for r in fi]
 
+    _EV_DT = np.dtype([("t", "<i8"), ("x", "<i8"), ("y", "<i8"), ("p", "<i8")])
+
+    def _load_events(self):
+        """cached_data (single batch) memmap + per-frame [start,end] indices, aligned to ellipse_records."""
+        d = self.root_path / self.split / "cached_data"
+        idx = np.load(d / "events_indices_0.npy")
+        n = int(idx[-1, 1]) if len(idx) else 0
+        mm = np.memmap(d / "events_batch_0.memmap", dtype=self._EV_DT, mode="r", shape=(n,))
+        return mm, idx
+
+    def _render_event(self, ev):
+        """crop events (t,x,y,p) -> 2-channel polarity frame (Hc, Wc, 2), 0..255 float (causal_linear, matches ref)."""
+        w, h = self.sensor_wh
+        if len(ev) == 0:
+            return np.zeros((h, w, 2), np.float32)
+        fs = to_frame_stack_numpy(ev, (w, h, 2), 1, "causal_linear",
+                                  int(ev["t"][0]), int(ev["t"][-1]), 10).squeeze(0)  # (2, Hc, Wc)
+        np.clip(fs, 0, 255, out=fs)
+        return np.moveaxis(fs, 0, -1).astype(np.float32)           # (Hc, Wc, 2)
+
     def _load_cached_frames(self):
         return load_memmap(self.frame_data_path, self.frame_info_path)
 
@@ -117,6 +151,7 @@ class DavisEyeEllipseFrameDataset(Dataset):
         state = self.__dict__.copy()
         state["ellipses"] = None
         state["cached_frames"] = None
+        state["ev_mm"] = None
         return state
 
     def _ensure_memmaps(self):
@@ -124,6 +159,8 @@ class DavisEyeEllipseFrameDataset(Dataset):
             self.ellipses = self._load_ellipses()
         if self.use_cached_frame and self.cached_frames is None:
             self.cached_frames = self._load_cached_frames()
+        if self.use_cached_events and self.ev_mm is None:
+            self.ev_mm, self.ev_idx = self._load_events()
 
     def _load_session_records(self, progress_state_name: str):
         progress_path = self.root_path / progress_state_name
@@ -232,6 +269,10 @@ class DavisEyeEllipseFrameDataset(Dataset):
         if self.use_cached_aps:
             frame = self._load_frame(self.aps_paths[index])       # crop 240x160 grayscale PNG
             image_shape = frame.shape                              # (160, 240) -> Resize handles anisotropic remap
+        elif self.use_cached_events:
+            s, e = self.ev_idx[index]
+            frame = self._render_event(self.ev_mm[int(s):int(e)])  # (160, 240, 2) polarity frame
+            image_shape = frame.shape[:2]                          # (160, 240)
         elif self.use_cached_frame:
             frame = np.asarray(self.cached_frames[index])
             image_shape = (260, 346)
@@ -265,10 +306,14 @@ class DavisEyeEllipseFrameDataset(Dataset):
         else:
             close = 1
 
-        frame = frame.astype(np.float32) / 255.0
-        if self.channels == 1:
+        if self.use_cached_events:
+            frame = frame.astype(np.float32) / 255.0
+            frame = np.moveaxis(frame, -1, 0)                      # (H, W, 2) -> (2, H, W)
+        elif self.channels == 1:
+            frame = frame.astype(np.float32) / 255.0
             frame = np.expand_dims(frame, axis=0)
         else:
+            frame = frame.astype(np.float32) / 255.0
             frame = np.repeat(np.expand_dims(frame, axis=0), 3, axis=0)
 
         down_ratio = 4
