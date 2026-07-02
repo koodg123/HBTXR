@@ -1,0 +1,32 @@
+{
+ "source": "EV-Eye Data_davis + events + GSAM2(ROI+geom) labels; Eye-ROI crop (marker-excluded)",
+ "label_source": "gsam2_roi_geom",
+ "modalities": [
+  "events",
+  "aps"
+ ],
+ "labels": [
+  "ellipse",
+  "mask",
+  "motion"
+ ],
+ "crop_box": [
+  53,
+  28,
+  293,
+  188
+ ],
+ "resolution": [
+  240,
+  160
+ ],
+ "native": [
+  346,
+  260
+ ],
+ "split_policy": "leak_free_32_36_48 (PoC: audit users 1-10 as train)",
+ "counts": {
+  "train": 4669
+ },
+ "note": "Phase-0 PoC from audit set"
+}

@@ -25,6 +25,12 @@ overlay/
 datasets/*/*/aps/
 datasets/*/*/events.npz
 datasets/*/*/labels.json
+datasets/*/_qc_masks/          # 121M all-frame mask montages (regenerable via src/render_all_masks.py)
+datasets/*/*/cached_data/
+datasets/*/*/cached_aps/
+datasets/*/*/cached_ellipse/
+datasets/*/*/cached_mask/
+datasets/*/*/labels_original/
 
 # ultralytics / YOLOE auto-downloads (land in CWD: mobileclip 599M, yoloe .pt 27M)
 mobileclip_blt.ts
