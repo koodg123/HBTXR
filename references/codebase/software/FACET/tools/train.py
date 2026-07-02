@@ -28,6 +28,12 @@ def main(config: str) -> None:
     } or runtime_cfg.get("disable_cudnn", False)
     if disable_cudnn:
         torch.backends.cudnn.enabled = False
+    else:
+        torch.backends.cudnn.enabled = runtime_cfg.get("cudnn_enabled", True)
+        torch.backends.cudnn.benchmark = runtime_cfg.get("cudnn_benchmark", False)
+        torch.backends.cudnn.deterministic = runtime_cfg.get(
+            "cudnn_deterministic", False
+        )
 
     if os.environ.get("SM_CHANNEL_ROOT"):
         config["dataloader"]["train"]["dataset"]["root_path"] = os.environ[
