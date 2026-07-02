@@ -46,6 +46,9 @@ class DavisEyeEllipseFrameDataset(Dataset):
         use_cached_aps=False,
         use_cached_events=False,
         sensor_wh=(240, 160),
+        event_accum="frame",
+        n_events=2500,
+        dt_us=80000,
     ):
         super().__init__()
         self.root_path = Path(root_path)
@@ -62,6 +65,9 @@ class DavisEyeEllipseFrameDataset(Dataset):
         self.use_cached_aps = use_cached_aps
         self.use_cached_events = use_cached_events
         self.sensor_wh = tuple(sensor_wh)                          # crop (W, H) for event rendering
+        self.event_accum = event_accum                            # "frame" | "count" | "time" (backward within window)
+        self.n_events = int(n_events)
+        self.dt_us = int(dt_us)
         self.ellipse_data_path = self.ellipse_path / "ellipses_batch_0.memmap"
         self.ellipse_info_path = self.ellipse_path / "ellipses_batch_info_0.txt"
         self.frame_data_path = self.frame_path / "frames_batch_0.memmap"
@@ -74,6 +80,9 @@ class DavisEyeEllipseFrameDataset(Dataset):
         self.cached_frames = self._load_cached_frames() if self.use_cached_frame else None
         self.aps_paths = self._load_aps_paths() if self.use_cached_aps else None
         self.ev_mm, self.ev_idx = self._load_events() if self.use_cached_events else (None, None)
+        self.win_start, self.frame_ts = (
+            self._load_event_meta() if (self.use_cached_events and self.event_accum != "frame") else (None, None)
+        )
         self.num_samples = len(self.ellipses)
         if self.use_cached_aps:
             if len(self.aps_paths) != self.num_samples:
@@ -143,6 +152,38 @@ class DavisEyeEllipseFrameDataset(Dataset):
                                   int(ev["t"][0]), int(ev["t"][-1]), 10).squeeze(0)  # (2, Hc, Wc)
         np.clip(fs, 0, 255, out=fs)
         return np.moveaxis(fs, 0, -1).astype(np.float32)           # (Hc, Wc, 2)
+
+    def _load_event_meta(self):
+        """Per-frame window-start index + frame timestamp (backward accumulation is bounded to same window)."""
+        fi = np.load(self.root_path / self.split / "labels_original" / "frame_index.npy")
+        keys = fi["key"]
+        win_start = np.arange(len(keys)); start = 0
+        for i in range(len(keys)):
+            if i > 0 and keys[i] != keys[i - 1]:
+                start = i
+            win_start[i] = start
+        return win_start, fi["t"].astype(np.int64)
+
+    def _ev_backward(self, index):
+        """Accumulate events backward within the same window until n_events (count) or dt_us (time)."""
+        lo = int(self.win_start[index]); t_cur = int(self.frame_ts[index])
+        chunks, total = [], 0
+        for j in range(index, lo - 1, -1):
+            s, e = self.ev_idx[j]
+            if e <= s:
+                continue
+            ev_j = self.ev_mm[int(s):int(e)]
+            chunks.append(ev_j); total += int(e - s)
+            if self.event_accum == "count" and total >= self.n_events:
+                break
+            if self.event_accum == "time" and t_cur - int(ev_j["t"][0]) >= self.dt_us:
+                break
+        if not chunks:
+            return np.zeros(0, self._EV_DT)
+        ev = np.concatenate(chunks[::-1])                          # oldest -> newest (chronological)
+        if self.event_accum == "count":
+            return ev[-self.n_events:]
+        return ev[ev["t"] >= t_cur - self.dt_us]
 
     def _load_cached_frames(self):
         return load_memmap(self.frame_data_path, self.frame_info_path)
@@ -270,8 +311,12 @@ class DavisEyeEllipseFrameDataset(Dataset):
             frame = self._load_frame(self.aps_paths[index])       # crop 240x160 grayscale PNG
             image_shape = frame.shape                              # (160, 240) -> Resize handles anisotropic remap
         elif self.use_cached_events:
-            s, e = self.ev_idx[index]
-            frame = self._render_event(self.ev_mm[int(s):int(e)])  # (160, 240, 2) polarity frame
+            if self.event_accum == "frame":
+                s, e = self.ev_idx[index]
+                ev = self.ev_mm[int(s):int(e)]
+            else:
+                ev = self._ev_backward(index)                      # count/time backward within window
+            frame = self._render_event(ev)                         # (160, 240, 2) polarity frame
             image_shape = frame.shape[:2]                          # (160, 240)
         elif self.use_cached_frame:
             frame = np.asarray(self.cached_frames[index])
