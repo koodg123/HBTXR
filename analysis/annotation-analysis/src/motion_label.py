@@ -27,8 +27,13 @@ def label_window(key):
     p = S.parse_key(key)
     sess = p["session"]
     smooth_task = sess in SMOOTH_SESSIONS
-    u = {c["idx"]: c for c in json.load(open(f"{S.LAB}/{key}/unet_dense.json"))["unet_centers"]}
-    g = {c["idx"]: c for c in json.load(open(f"{S.LAB}/{key}/gsam2.json"))["gsam2_centers"]}
+    def _load(path, field):
+        try:
+            return {c["idx"]: c for c in json.load(open(path))[field]}
+        except (FileNotFoundError, KeyError):
+            return {}
+    u = _load(f"{S.LAB}/{key}/unet_dense.json", "unet_centers")   # empty for 33-48 (no U-Net predict)
+    g = _load(f"{S.LAB}/{key}/gsam2.json", "gsam2_centers")
     idxs = sorted(set(u) | set(g))
     areas = [g[i]["area"] for i in idxs if g.get(i) and g[i].get("valid") and not g[i].get("mislabel") and g[i].get("area")]
     med_area = float(np.median(areas)) if areas else 0.0
@@ -36,12 +41,18 @@ def label_window(key):
     out, prev = {}, None
     for i in idxs:
         uc, gc = u.get(i), g.get(i)
-        # velocity from U-Net (dense) consecutive valid
+        # velocity from GSAM2 (dense, primary label source -> works for all subjects incl. no-UNet 33-48;
+        # GSAM2 F2F jitter ~0.21px in fixation so I-VT is clean), U-Net fallback only where GSAM2 invalid.
         v = None
-        if uc and uc.get("valid"):
+        vc = None
+        if gc and gc.get("valid") and not gc.get("mislabel"):
+            vc = (gc["cx"], gc["cy"])
+        elif uc and uc.get("valid"):
+            vc = (uc["cx"], uc["cy"])
+        if vc is not None:
             if prev and i - prev[0] == 1:
-                v = ((uc["cx"] - prev[1]) ** 2 + (uc["cy"] - prev[2]) ** 2) ** 0.5
-            prev = (i, uc["cx"], uc["cy"])
+                v = ((vc[0] - prev[1]) ** 2 + (vc[1] - prev[2]) ** 2) ** 0.5
+            prev = (i, vc[0], vc[1])
         else:
             prev = None
         # blink
@@ -62,7 +73,7 @@ def label_window(key):
 
 
 def main():
-    motion = {r["key"]: r["motion"] for r in csv.DictReader(open(f"{S.AA}/samples/manifest_windows.csv"))}
+    motion = {r["key"]: r["motion"] for r in csv.DictReader(open(f"{S.SAMPLES}/manifest_windows.csv"))}
     from collections import Counter, defaultdict
     per_win_frames = defaultdict(Counter)   # window-motion -> per-frame class counts
     tot = Counter()

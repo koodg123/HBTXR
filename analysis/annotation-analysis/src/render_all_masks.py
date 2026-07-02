@@ -12,8 +12,8 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import io_schema as S
 import motion_label as ML
 
-FRAME = f"{S.AA}/samples/frame"
-EVENT = f"{S.AA}/samples/event"
+FRAME = f"{S.SAMPLES}/frame"
+EVENT = f"{S.SAMPLES}/event"
 BOX = (53, 28, 293, 188)
 MCOL = {0: (0, 200, 0), 1: (0, 0, 230), 2: (230, 120, 0), 3: (0, 220, 220)}  # fix/sac/smooth/blink (BGR)
 

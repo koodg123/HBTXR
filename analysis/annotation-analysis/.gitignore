@@ -20,6 +20,11 @@ samples/label/*/gsam2_masks/
 samples/label/*/unet_masks/
 overlay/
 
+# Val/test sample trees for Dataset_sample_gsam2_subject_independent (regenerable via
+# scripts/07+08+14; ~126M). Target dataset itself lives on /mnt/e (outside repo).
+samples_val/
+samples_test/
+
 # Cropped Eye-ROI dataset bulk (135M+, regenerable via src/crop_dataset.py).
 # Keep README.md, meta.json, and _qc*/ overlays; drop per-window aps/events/labels.
 datasets/*/*/aps/
@@ -40,3 +45,4 @@ yoloe*.pt
 # misc
 *.log
 .DS_Store
+scratch_*

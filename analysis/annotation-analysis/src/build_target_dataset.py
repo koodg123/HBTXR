@@ -20,8 +20,8 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import io_schema as S
 import motion_label as ML
 
-FRAME = f"{S.AA}/samples/frame"
-EVENT = f"{S.AA}/samples/event"
+FRAME = f"{S.SAMPLES}/frame"
+EVENT = f"{S.SAMPLES}/event"
 MOT_DT = np.dtype([("t", "<i8"), ("motion", "u1"), ("velocity", "<f4"), ("blink", "?"), ("conf", "u1")])
 EV_DT = np.dtype([("t", "<i8"), ("x", "<i8"), ("y", "<i8"), ("p", "<i8")])
 EL_DT = np.dtype([("t", "<i8"), ("x", "<f8"), ("y", "<f8"), ("a", "<f8"), ("b", "<f8"), ("ang", "<f8")])
@@ -84,7 +84,10 @@ def build(box, out_root, split="train", batch_size=5000, limit=0):
         box_ids.setdefault(key, len(box_ids))
         gt = json.load(open(f"{S.LAB}/{key}/gt.json")); ai = gt["anchor_idx"]
         gsx = {c["idx"]: c for c in json.load(open(f"{S.LAB}/{key}/gsam2.json"))["gsam2_centers"]}
-        unet = {c["idx"]: c for c in json.load(open(f"{S.LAB}/{key}/unet_dense.json"))["unet_centers"]}
+        try:
+            unet = {c["idx"]: c for c in json.load(open(f"{S.LAB}/{key}/unet_dense.json"))["unet_centers"]}
+        except (FileNotFoundError, KeyError):
+            unet = {}                                          # 33-48 have no U-Net predict; GSAM2 is primary
         mot = ML.label_window(key)
         conf = 0 if sess == "1_0_1" else 1
         ev = np.load(f"{EVENT}/{key}.npz")

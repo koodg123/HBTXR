@@ -15,7 +15,8 @@ import os, re, glob, json, csv, math
 import numpy as np
 
 AA = "/home/user/project/PRJXR-HBTXR/HBTXR/analysis/annotation-analysis"
-LAB = f"{AA}/samples/label"
+SAMPLES = os.environ.get("AA_SAMPLES") or f"{AA}/samples"   # override sample root for val/test builds
+LAB = f"{SAMPLES}/label"
 RES = f"{AA}/results"
 OUT = f"{AA}/results/precision"           # scalars json + summaries
 FIG = f"{AA}/fig"
