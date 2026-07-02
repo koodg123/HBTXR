@@ -1,0 +1,3 @@
+pair,valid,abstain,Pn_all_10px,Pn_all_5px,Pn_all_1px,median_px
+gsam2_vs_human,479,4,0.9917,0.9917,0.735,0.773
+pred_vs_human,483,0,0.7412,0.4431,0.0248,5.698

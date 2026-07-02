@@ -1,0 +1,4 @@
+pair,radial_rms,var_x,var_y,ba_bias_x,ba_bias_y,IoU_vs_gt
+human-gsam2,0.864,0.178,0.195,0.479,0.379,0.914
+human-unet,1.752,0.275,0.466,1.017,1.138,0.853
+gsam2-unet,1.167,0.14,0.367,0.535,0.755,0.91

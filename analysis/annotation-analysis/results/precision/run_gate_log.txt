@@ -1,0 +1,9 @@
+[DONE] E0 schema: data+code verified -> results/e0_schema_report.md
+[DONE] E0.2 align: 6663 rows / 483 anchors, out_of_frame=0
+[DONE] La.1 GSAM2 repeats: perturbation sigma (precision floor proxy)
+[SKIP] La.2-human: human labels sparse -> improved GSAM2 proxy (decision 4)
+[DONE] La.3 raster floor: mask DERIVED from ellipse (not human precision)
+[DONE] Lb.2 3CH{h,gsam2,unet}: U-Net~derived-human; sigma_human=bracket[3CH, Human-GSAM2 RMS]
+[DONE] Lc.1 P_n: inter-method + model, abstain separated
+[OPTIMISTIC] STEP5 corrected error: users 1-10 = TRAIN subj (test=37-48) -> NOT subject-independent
+[DONE] figures: fig_3ch.png, fig_budget.png
