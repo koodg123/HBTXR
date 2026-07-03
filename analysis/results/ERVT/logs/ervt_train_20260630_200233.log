@@ -1,0 +1,87 @@
+[ERVT] log=/home/user/project/PRJXR/HBTXR/references/report/HBTXR_runs/logs/ervt_train_20260630_200233.log
+[ERVT] start=2026-06-30T20:02:33+09:00
+[ERVT] root=/home/user/project/PRJXR/HBTXR
+[ERVT] dataset=/mnt/d/dataset/EV_Eye/target_data/DeanDataset_full_unet_subject_independent
+[ERVT] num_workers=8
+cuda_ok 2.11.0+cu128 12.8 NVIDIA GeForce RTX 5070
+Tue Jun 30 20:02:35 2026       
++-----------------------------------------------------------------------------------------+
+| NVIDIA-SMI 590.44.01              Driver Version: 591.44         CUDA Version: 13.1     |
++-----------------------------------------+------------------------+----------------------+
+| GPU  Name                 Persistence-M | Bus-Id          Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp   Perf          Pwr:Usage/Cap |           Memory-Usage | GPU-Util  Compute M. |
+|                                         |                        |               MIG M. |
+|=========================================+========================+======================|
+|   0  NVIDIA GeForce RTX 5070        On  |   00000000:02:00.0  On |                  N/A |
+|  0%   37C    P0             41W /  250W |    2702MiB /  12227MiB |     14%      Default |
+|                                         |                        |                  N/A |
++-----------------------------------------+------------------------+----------------------+
+
++-----------------------------------------------------------------------------------------+
+| Processes:                                                                              |
+|  GPU   GI   CI              PID   Type   Process name                        GPU Memory |
+|        ID   ID                                                               Usage      |
+|=========================================================================================|
+|    0   N/A  N/A         2704615      C   /python3.12                           N/A      |
++-----------------------------------------------------------------------------------------+
+[ERVT] output_dir=/home/user/project/PRJXR/HBTXR/references/codebase/software/ais2024/ERVT/runs/ERVT_subject_independent_img64_20260630_200242
+[ERVT] train_segments=64211 val_segments=4076
+[ERVT] device=cuda:0 batch_size=32 num_workers=8 cudnn_enabled=True cudnn_benchmark=True
+[ERVT] note=in_channels set to 2 for direct HBTXR two-polarity event frames
+/home/user/project/PRJXR/HBTXR/.venv/lib/python3.12/site-packages/albumentations/core/validation.py:114: UserWarning: ShiftScaleRotate is a special case of Affine transform. Please use Affine transform instead.
+  original_init(self, **validated_kwargs)
+/home/user/project/PRJXR/HBTXR/.venv/lib/python3.12/site-packages/albumentations/core/validation.py:114: UserWarning: ShiftScaleRotate is a special case of Affine transform. Please use Affine transform instead.
+  original_init(self, **validated_kwargs)
+/home/user/project/PRJXR/HBTXR/.venv/lib/python3.12/site-packages/albumentations/core/validation.py:114: UserWarning: ShiftScaleRotate is a special case of Affine transform. Please use Affine transform instead.
+  original_init(self, **validated_kwargs)
+/home/user/project/PRJXR/HBTXR/.venv/lib/python3.12/site-packages/albumentations/core/validation.py:114: UserWarning: ShiftScaleRotate is a special case of Affine transform. Please use Affine transform instead.
+  original_init(self, **validated_kwargs)
+/home/user/project/PRJXR/HBTXR/.venv/lib/python3.12/site-packages/albumentations/core/validation.py:114: UserWarning: ShiftScaleRotate is a special case of Affine transform. Please use Affine transform instead.
+  original_init(self, **validated_kwargs)
+/home/user/project/PRJXR/HBTXR/.venv/lib/python3.12/site-packages/albumentations/core/validation.py:114: UserWarning: ShiftScaleRotate is a special case of Affine transform. Please use Affine transform instead.
+  original_init(self, **validated_kwargs)
+/home/user/project/PRJXR/HBTXR/.venv/lib/python3.12/site-packages/albumentations/core/validation.py:114: UserWarning: ShiftScaleRotate is a special case of Affine transform. Please use Affine transform instead.
+  original_init(self, **validated_kwargs)
+/home/user/project/PRJXR/HBTXR/.venv/lib/python3.12/site-packages/albumentations/core/validation.py:114: UserWarning: ShiftScaleRotate is a special case of Affine transform. Please use Affine transform instead.
+  original_init(self, **validated_kwargs)
+[ERVT] epoch=1/70 train_loss=0.151716 train_p10=0.3931 train_distance=12.3429 val_loss=0.103762 val_p10=0.6494 val_distance=8.6180
+[ERVT] epoch=2/70 train_loss=0.147293 train_p10=0.4028 train_distance=11.9769 val_loss=0.104250 val_p10=0.6424 val_distance=8.6451
+[ERVT] epoch=3/70 train_loss=0.147847 train_p10=0.4007 train_distance=12.0205 val_loss=0.110809 val_p10=0.5914 val_distance=9.2541
+[ERVT] epoch=4/70 train_loss=0.147628 train_p10=0.4014 train_distance=12.0024 val_loss=0.103765 val_p10=0.6511 val_distance=8.6238
+[ERVT] epoch=5/70 train_loss=0.147593 train_p10=0.4016 train_distance=12.0031 val_loss=0.104675 val_p10=0.6398 val_distance=8.6675
+[ERVT] epoch=6/70 train_loss=0.147545 train_p10=0.4014 train_distance=11.9976 val_loss=0.103521 val_p10=0.6555 val_distance=8.6020
+[ERVT] epoch=7/70 train_loss=0.147451 train_p10=0.4015 train_distance=11.9931 val_loss=0.104091 val_p10=0.6469 val_distance=8.6509
+[ERVT] epoch=8/70 train_loss=0.147361 train_p10=0.4021 train_distance=11.9828 val_loss=0.103884 val_p10=0.6475 val_distance=8.6280
+[ERVT] epoch=9/70 train_loss=0.147341 train_p10=0.4019 train_distance=11.9845 val_loss=0.104391 val_p10=0.6445 val_distance=8.6733
+[ERVT] epoch=10/70 train_loss=0.147233 train_p10=0.4024 train_distance=11.9750 val_loss=0.104033 val_p10=0.6471 val_distance=8.6427
+[ERVT] epoch=11/70 train_loss=0.147098 train_p10=0.4033 train_distance=11.9643 val_loss=0.103661 val_p10=0.6503 val_distance=8.6112
+[ERVT] epoch=12/70 train_loss=0.147034 train_p10=0.4034 train_distance=11.9597 val_loss=0.103360 val_p10=0.6562 val_distance=8.5869
+[ERVT] epoch=13/70 train_loss=0.147030 train_p10=0.4036 train_distance=11.9569 val_loss=0.103563 val_p10=0.6515 val_distance=8.5945
+[ERVT] epoch=14/70 train_loss=0.147078 train_p10=0.4034 train_distance=11.9610 val_loss=0.104044 val_p10=0.6468 val_distance=8.6426
+[ERVT] epoch=15/70 train_loss=0.147095 train_p10=0.4024 train_distance=11.9659 val_loss=0.103889 val_p10=0.6486 val_distance=8.6321
+[ERVT] epoch=16/70 train_loss=0.147076 train_p10=0.4030 train_distance=11.9630 val_loss=0.103953 val_p10=0.6484 val_distance=8.6391
+[ERVT] epoch=17/70 train_loss=0.147041 train_p10=0.4030 train_distance=11.9602 val_loss=0.105021 val_p10=0.6393 val_distance=8.7359
+[ERVT] epoch=18/70 train_loss=0.146959 train_p10=0.4037 train_distance=11.9521 val_loss=0.104587 val_p10=0.6433 val_distance=8.6961
+[ERVT] epoch=19/70 train_loss=0.147042 train_p10=0.4032 train_distance=11.9613 val_loss=0.103900 val_p10=0.6491 val_distance=8.6339
+[ERVT] epoch=20/70 train_loss=0.147011 train_p10=0.4032 train_distance=11.9559 val_loss=0.103674 val_p10=0.6501 val_distance=8.6004
+[ERVT] epoch=21/70 train_loss=0.147004 train_p10=0.4037 train_distance=11.9559 val_loss=0.103480 val_p10=0.6529 val_distance=8.5909
+[ERVT] epoch=22/70 train_loss=0.146999 train_p10=0.4035 train_distance=11.9562 val_loss=0.103815 val_p10=0.6481 val_distance=8.6201
+[ERVT] epoch=23/70 train_loss=0.147032 train_p10=0.4035 train_distance=11.9583 val_loss=0.103790 val_p10=0.6491 val_distance=8.6210
+[ERVT] epoch=24/70 train_loss=0.147047 train_p10=0.4033 train_distance=11.9602 val_loss=0.104336 val_p10=0.6448 val_distance=8.6714
+[ERVT] epoch=25/70 train_loss=0.146959 train_p10=0.4039 train_distance=11.9505 val_loss=0.103786 val_p10=0.6483 val_distance=8.6193
+[ERVT] epoch=26/70 train_loss=0.146983 train_p10=0.4032 train_distance=11.9554 val_loss=0.103695 val_p10=0.6507 val_distance=8.6161
+[ERVT] epoch=27/70 train_loss=0.147024 train_p10=0.4029 train_distance=11.9589 val_loss=0.104021 val_p10=0.6445 val_distance=8.6272
+[ERVT] epoch=28/70 train_loss=0.146972 train_p10=0.4032 train_distance=11.9561 val_loss=0.103758 val_p10=0.6489 val_distance=8.6202
+[ERVT] epoch=29/70 train_loss=0.146983 train_p10=0.4037 train_distance=11.9538 val_loss=0.103767 val_p10=0.6498 val_distance=8.6225
+[ERVT] epoch=30/70 train_loss=0.147008 train_p10=0.4040 train_distance=11.9572 val_loss=0.103971 val_p10=0.6481 val_distance=8.6394
+[ERVT] epoch=31/70 train_loss=0.147007 train_p10=0.4034 train_distance=11.9566 val_loss=0.103621 val_p10=0.6505 val_distance=8.6055
+[ERVT] epoch=32/70 train_loss=0.146918 train_p10=0.4039 train_distance=11.9510 val_loss=0.104011 val_p10=0.6475 val_distance=8.6424
+[ERVT] epoch=33/70 train_loss=0.147046 train_p10=0.4032 train_distance=11.9616 val_loss=0.104016 val_p10=0.6473 val_distance=8.6422
+[ERVT] epoch=34/70 train_loss=0.146982 train_p10=0.4034 train_distance=11.9554 val_loss=0.104032 val_p10=0.6467 val_distance=8.6399
+[ERVT] epoch=35/70 train_loss=0.146990 train_p10=0.4034 train_distance=11.9572 val_loss=0.103627 val_p10=0.6511 val_distance=8.6095
+[ERVT] epoch=36/70 train_loss=0.146924 train_p10=0.4032 train_distance=11.9526 val_loss=0.104111 val_p10=0.6470 val_distance=8.6518
+[ERVT] epoch=37/70 train_loss=0.146958 train_p10=0.4037 train_distance=11.9552 val_loss=0.103798 val_p10=0.6490 val_distance=8.6230
+[ERVT] epoch=38/70 train_loss=0.146976 train_p10=0.4033 train_distance=11.9556 val_loss=0.103706 val_p10=0.6497 val_distance=8.6140
+[ERVT] epoch=39/70 train_loss=0.146976 train_p10=0.4037 train_distance=11.9547 val_loss=0.103922 val_p10=0.6472 val_distance=8.6309
+[ERVT] epoch=40/70 train_loss=0.146945 train_p10=0.4033 train_distance=11.9533 val_loss=0.103770 val_p10=0.6492 val_distance=8.6209
+[ERVT] epoch=41/70 train_loss=0.146945 train_p10=0.4036 train_distance=11.9520 val_loss=0.103599 val_p10=0.6512 val_distance=8.6059
