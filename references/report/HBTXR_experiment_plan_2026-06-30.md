@@ -39,7 +39,7 @@ evidence showed completion through at least epoch 36 with a best recorded
    - Risk: upstream Retina has optional dependencies for spiking, wandb, and
      ONNX export; the HBTXR runner avoids those paths for `retina_ann`.
 
-2. EPNet/FECET
+2. EPNet
    - Reason: strongest direct FACET-style CNN baseline for the same split and
      resolution.
    - Purpose: compare HBTXR against a FACET-native CNN/FPN baseline.

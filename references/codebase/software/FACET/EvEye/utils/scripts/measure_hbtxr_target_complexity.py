@@ -185,7 +185,7 @@ def build_brat() -> tuple[torch.nn.Module, torch.Tensor]:
 
 BUILDERS = {
     "HBTXR": lambda: build_facet_model("DavisEyeEllipse_HBTXR_subject_independent_img64_patch4.yaml"),
-    "EPNet_FECET": lambda: build_facet_model("DavisEyeEllipse_EPNet_subject_independent_img64.yaml"),
+    "EPNet": lambda: build_facet_model("DavisEyeEllipse_EPNet_subject_independent_img64.yaml"),
     "FACET_TennSt": lambda: build_facet_model("DavisEyeEllipse_TennSt_subject_independent_img64.yaml"),
     "Retina": build_retina,
     "TDTracker": build_tdtracker,
@@ -246,7 +246,7 @@ def write_outputs(rows: list[dict[str, str]], output_csv: Path, output_md: Path)
             "Notes:",
             "- MACs are measured with `thop.profile` on CPU dummy inputs.",
             "- FLOPs are reported as `2 * MACs` for multiply-add operations.",
-            "- `EPNet_FECET` is used because no separate `FECET` model path was found in `references/codebase/software`.",
+            "- `EPNet` is the FACET-native CNN/FPN ellipse baseline for this comparison.",
         ]
     )
     output_md.write_text("\n".join(lines) + "\n")

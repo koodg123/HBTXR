@@ -25,11 +25,12 @@ SPLIT_TO_SUBDIR = {"train": "train", "val": "train", "test": "test"}
 
 
 def _session_id(session_path: str, fallback: int) -> str:
-    match = re.search(r"user(\d+).*/session_([0-9_]+)$", session_path)
+    match = re.search(r"user(\d+)/(left|right)/session_([0-9_]+)$", session_path)
     if not match:
         return f"record_{fallback:05d}"
-    user, session = match.groups()
-    return f"user{int(user):02d}_{session}"
+    user, eye, session = match.groups()
+    eye_code = "L" if eye == "left" else "R"
+    return f"user{int(user):02d}_{eye_code}_{session}"
 
 
 def _session_ranges(root_path: Path) -> dict[str, list[tuple[str, int, int]]]:
@@ -144,6 +145,7 @@ def export_threeet_tree(
     output_dir: Path,
     frame_dt_us: int,
     max_frames_per_split: int | None,
+    splits: tuple[str, ...] = ("train", "val", "test"),
 ) -> None:
     output_dir.mkdir(parents=True, exist_ok=True)
     dataset_dir = output_dir / "dataset"
@@ -151,7 +153,7 @@ def export_threeet_tree(
     ranges = _session_ranges(root_path)
 
     list_files = {"train": [], "val": [], "test": []}
-    for split in ("train", "val", "test"):
+    for split in splits:
         dataset = _make_dataset(root_path, split)
         data_path = dataset.data_path
         ellipse_path = dataset.ellipse_path
@@ -188,6 +190,8 @@ def export_threeet_tree(
             list_files[split].append(session_id)
 
     for split, records in list_files.items():
+        if split not in splits:
+            continue
         with (dataset_dir / f"{split}_files.txt").open("w") as f:
             f.write("\n".join(records))
             if records:
@@ -207,6 +211,13 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--frame-dt-us", type=int, default=10000)
     parser.add_argument("--max-sequences-per-split", type=int)
     parser.add_argument("--max-frames-per-split", type=int)
+    parser.add_argument(
+        "--splits",
+        nargs="+",
+        choices=["train", "val", "test"],
+        default=["train", "val", "test"],
+        help="Splits to export for threeet-tree format. tdtracker-h5 always exports all splits.",
+    )
     return parser.parse_args()
 
 
@@ -230,6 +241,7 @@ def main() -> None:
             output_dir,
             args.frame_dt_us,
             args.max_frames_per_split,
+            tuple(args.splits),
         )
 
 

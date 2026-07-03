@@ -2,7 +2,10 @@ import os
 import sys
 import numpy as np
 import h5py
-import open3d as o3d
+try:
+    import open3d as o3d
+except ModuleNotFoundError:
+    o3d = None
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 sys.path.append(BASE_DIR)
 
@@ -33,4 +36,3 @@ def getDataFiles(list_filename):
 
 def loadDataFile(filename):
     return load_h5(filename)
-

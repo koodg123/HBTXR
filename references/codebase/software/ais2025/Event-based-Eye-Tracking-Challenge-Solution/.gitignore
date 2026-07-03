@@ -157,6 +157,12 @@ cython_debug/
 *.hdf5
 *.pth
 
+# HBTXR generated training artifacts
+event_data_hbtxr_img64/
+metadata_hbtxr_img64/
+cache_hbtxr_img64/
+logs_hbtxr_img64/
+
 # PyCharm
 #  JetBrains specific template is maintained in a separate JetBrains.gitignore that can
 #  be found at https://github.com/github/gitignore/blob/main/Global/JetBrains.gitignore

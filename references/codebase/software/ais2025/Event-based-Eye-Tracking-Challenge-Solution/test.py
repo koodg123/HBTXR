@@ -233,6 +233,10 @@ if __name__ == "__main__":
     else:
         raise ValueError("Please provide a JSON configuration file.")
 
+    disable_cudnn = os.environ.get("BRAT_DISABLE_CUDNN", "").lower() in {"1", "true", "yes"}
+    torch.backends.cudnn.enabled = not disable_cudnn
+    torch.backends.cudnn.benchmark = not disable_cudnn
+
     # also dump the args to a JSON file in MLflow artifact
     print(json.dumps(config, sort_keys=False))
 

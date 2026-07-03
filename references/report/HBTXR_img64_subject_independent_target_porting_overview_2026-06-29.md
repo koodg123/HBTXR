@@ -32,7 +32,7 @@ Common target contract:
 
 | Requested target | Local codebase | Local status | Same split/resolution readiness |
 |---|---|---|---|
-| FECET | `references/codebase/software/FACET` | Name `FECET` not found; treated as FACET alias/typo | High, because FACET already owns `DavisEyeEllipseDataset` and EPNet/HBTXR configs |
+| EPNet | `references/codebase/software/FACET` | FACET-native ellipse model | High, because FACET already owns `DavisEyeEllipseDataset` and EPNet/HBTXR configs |
 | TennSt | `FACET/EvEye/model/DavisEyeCenter/TennSt.py`, plus `ais2024/eye_track_spatiotemporal` | Two implementations exist | Medium, but requires sequence/center-label adapter |
 | Retina | `references/codebase/software/retina` | Local repo exists | Medium, config already supports 64x64/2-channel, but dataset helper must be added |
 | EX-Gaze | `references/codebase/software/EX-Gaze` | Local repo exists | Medium-low, requires MMEngine annotation and event representation export |
@@ -57,7 +57,7 @@ All non-FACET targets need at least one of these adapters:
 
 ## Recommended Implementation Order
 
-1. FACET/FECET alias: create an EPNet subject-independent img64 config mirroring HBTXR. This is the lowest-risk baseline.
+1. FACET EPNet: create an EPNet subject-independent img64 config mirroring HBTXR. This is the lowest-risk baseline.
 2. Retina: add a new dataset helper because the model config already uses 64x64, 2-channel inputs.
 3. AIS2024 ERVT and TENNs-Eye: export HBTXR split to 3ET-style H5/list format.
 4. TDTracker: export HBTXR split to `train.h5`, `val.h5`, `test.h5` with `frames` and `label` datasets.
@@ -67,6 +67,5 @@ All non-FACET targets need at least one of these adapters:
 
 ## Blocking Questions
 
-- Does `FECET` mean `FACET`? No `FECET` directory or class was found locally.
 - `BRAT (AIS2025)` is user-confirmed as `references/codebase/software/ais2025/Event-based-Eye-Tracking-Challenge-Solution`; its internal model/config names do not contain `BRAT`, so use this mapping consistently in future documents.
 - Should models that output only center coordinates be compared against HBTXR ellipse-center pixel error only, or should ellipse IoU also be required? Center-only models cannot produce ellipse IoU without an extra shape head or heuristic ellipse reconstruction.

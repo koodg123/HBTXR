@@ -6,6 +6,7 @@ from __future__ import print_function
 import math
 import logging
 import numpy as np
+import os
 from os.path import join
 import lightning
 import torch
@@ -23,9 +24,44 @@ from lightning.pytorch.utilities.types import (
 from functools import partial
 from timm.scheduler.step_lr import StepLRScheduler
 
-# from DCNv2.dcn_v2_onnx import DCN
+_DCN_IMPL = os.environ.get("ELNET_DCN_IMPL", "torchvision").lower()
 
-from DCNv2.dcn_v2 import DCN
+if _DCN_IMPL == "native":
+    from DCNv2.dcn_v2 import DCN
+elif _DCN_IMPL == "torchvision":
+    from EvEye.model.DavisEyeEllipse.ElNet.torchvision_dcn import DCN
+elif _DCN_IMPL == "conv2d":
+    logging.getLogger(__name__).warning(
+        "ELNET_DCN_IMPL=conv2d uses a plain Conv2d fallback. "
+        "This is not a deformable-conv reproduction."
+    )
+
+    class DCN(nn.Conv2d):
+        def __init__(
+            self,
+            in_channels,
+            out_channels,
+            kernel_size,
+            stride=1,
+            padding=0,
+            dilation=1,
+            deformable_groups=1,
+            bias=True,
+        ):
+            super().__init__(
+                in_channels,
+                out_channels,
+                kernel_size=kernel_size,
+                stride=stride,
+                padding=padding,
+                dilation=dilation,
+                bias=bias,
+            )
+else:
+    raise ValueError(
+        "ELNET_DCN_IMPL must be one of: torchvision, native, conv2d. "
+        f"Got {_DCN_IMPL!r}."
+    )
 
 from EvEye.model.DavisEyeEllipse.EPNet.Loss import *
 from EvEye.model.DavisEyeEllipse.EPNet.Predict import *

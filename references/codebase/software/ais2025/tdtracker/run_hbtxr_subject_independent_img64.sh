@@ -1,7 +1,9 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-python3 train.py \
+export CUDA_VISIBLE_DEVICES="${GPU:-0}"
+
+"${PYTHON:-python3}" train.py \
   --gpu "${GPU:-0}" \
   --train_h5_path "${HBTXR_TDTRACKER_DIR:-./data/hbtxr_img64}/train_hbtxr_img64_seq100.h5" \
   --test_h5_path "${HBTXR_TDTRACKER_DIR:-./data/hbtxr_img64}/val_hbtxr_img64_seq100.h5" \

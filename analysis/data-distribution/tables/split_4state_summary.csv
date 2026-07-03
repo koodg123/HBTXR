@@ -1,0 +1,10 @@
+condition,split,n_subj,Fixation_%,Saccade_%,Smooth_%,Blink_%,total
+frame_before,Train,36,63.23,0.0,34.5,2.27,1117057
+frame_before,Val,4,62.74,0.0,35.3,1.96,125145
+frame_before,Test,12,62.88,0.0,35.17,1.95,373444
+event_before,Train,36,53.98,8.42,28.5,9.1,2336271
+event_before,Val,4,51.81,8.69,30.83,8.67,250306
+event_before,Test,12,51.6,8.6,30.18,9.63,746947
+after_emulated,Train,36,56.88,9.33,31.51,2.27,1117057
+after_emulated,Val,4,55.62,9.35,33.08,1.96,125146
+after_emulated,Test,12,55.98,9.33,32.74,1.95,373446

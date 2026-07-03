@@ -27,7 +27,7 @@ code exposes a train loop or Lightning scheduler hook.
 | Target | Optimizer after alignment | Scheduler currently used |
 |---|---|---|
 | HBTXR reference | Adam, lr 1e-3, weight_decay 1e-5 | `timm.scheduler.StepLRScheduler(decay_t=10, decay_rate=0.7, warmup_lr_init=1e-5, warmup_t=5)` |
-| EPNet/FECET | Adam, lr 1e-3, weight_decay 1e-5 | Same FACET `StepLRScheduler` |
+| EPNet | Adam, lr 1e-3, weight_decay 1e-5 | Same FACET `StepLRScheduler` |
 | FACET TennSt | Adam, lr 1e-3, weight_decay 1e-5 | Same FACET `StepLRScheduler` |
 | Retina | Adam, lr 1e-3, weight_decay 1e-5 | Same HBTXR `StepLRScheduler` |
 | TDTracker | Adam, lr 1e-3, weight_decay 1e-5 | Same HBTXR `StepLRScheduler` |
@@ -52,7 +52,7 @@ Detailed outputs:
 | Target | Input shape | Params | MACs | FLOPs |
 |---|---:|---:|---:|---:|
 | HBTXR | 1x2x64x64 | 4,368,393 | 1,111,665,456 | 2,223,330,912 |
-| EPNet/FECET | 1x2x64x64 | 3,898,280 | 215,312,088 | 430,624,176 |
+| EPNet | 1x2x64x64 | 3,898,280 | 215,312,088 | 430,624,176 |
 | FACET TennSt | 1x2x50x64x64 | 808,771 | 922,099,200 | 1,844,198,400 |
 | Retina | 1x2x64x64 | 59,572 | 21,492,072 | 42,984,144 |
 | TDTracker | 1x100x2x64x64 | 3,246,880 | 23,269,558,144 | 46,539,116,288 |
@@ -64,10 +64,7 @@ Notes:
 
 - MACs were measured with `thop.profile` on CPU dummy inputs.
 - FLOPs are reported as `2 * MACs`.
-- `EPNet/FECET` is listed this way because no separate `FECET` model path was
-  found under `references/codebase/software`; the FACET EPNet baseline is used.
-
-## Priority 1: FACET/FECET EPNet
+## Priority 1: FACET EPNet
 
 Status: ready by config.
 
