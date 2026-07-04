@@ -9,6 +9,7 @@ __pycache__/
 .*-venv/
 .facet-prep-venv/
 .facet-train-venv/
+tmp/venvs/
 
 # Training outputs and generated model artifacts
 runs/
