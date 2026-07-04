@@ -21,6 +21,7 @@ Date: 2026-07-04
 - `EV_Eye_EX_Gaze_hybrid_train_ready_dryrun_2026-07-04.json`
 - `EV_Eye_hybrid_cu128_training_launch_2026-07-04.md`
 - `run_ev_eye_hybrid_train_ready_gpu0_2026-07-04.sh`
+- `../FACET/planning/EV_EX_Gaze_Swift_Eye_training_status_and_plan_2026-07-04.md`
 
 ## Local Mapping
 

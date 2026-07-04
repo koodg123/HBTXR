@@ -79,3 +79,13 @@ Status: not ready for immediate training.
 
 Blocking work: rotated bbox image/annotation export and 64x64 MMRotate config.
 
+## Current Follow-up Plan
+
+- `../FACET/planning/EV_EX_Gaze_Swift_Eye_training_status_and_plan_2026-07-04.md`
+
+Key current decision:
+
+- Treat Swift-Eye as an event-only baseline that consumes event-derived images.
+- Preserve the HBTXR subject-independent split.
+- Export 64x64 DOTA-style images/annotations before attempting training.
+- Do not modify system driver, system CUDA, or system cuDNN.

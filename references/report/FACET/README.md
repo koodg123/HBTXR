@@ -20,7 +20,7 @@ FACET-related analysis documents, reproduction records, dataset generation recor
 | Directory | Purpose | Tracked files |
 |---|---|---:|
 | `analysis/` | Code/paper analysis, implementation notes, environment diagnostics, and contract clarifications. | 9 |
-| `planning/` | Reproduction plans, runbooks, experiment plans, and plan-progress audits. | 8 |
+| `planning/` | Reproduction plans, runbooks, experiment plans, and plan-progress audits. | 9 |
 | `datasets/` | Dataset construction notes, split/count reports, subject-motion tables, and sample visualizations. | 46 |
 | `training/` | Training launch reports, monitoring notes, recovery reports, checkpoints/status gates, and probe summaries. | 30 |
 | `evaluation/` | Evaluation reports, validation notes, comparison artifacts, CSV summaries, and figures. | 40 |
