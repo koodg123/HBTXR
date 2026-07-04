@@ -51,8 +51,8 @@ Date: 2026-07-04
 
 | Model | Target Root | Exists Now |
 |---|---|---:|
-| EV-Eye | `/home/kjm26/project/dataset/XR/EV_Eye/target_data/EV_Eye_Hybrid_frame128_event64_subject_independent` | False |
-| EX-Gaze | `/home/kjm26/project/dataset/XR/EV_Eye/target_data/EX_Gaze_Hybrid_frame128_event64_subject_independent` | False |
+| EV-Eye | `/home/kjm26/project/dataset/XR/EV_Eye/target_data/EV_Eye_Hybrid_frame128_event64_subject_independent` | True |
+| EX-Gaze | `/home/kjm26/project/dataset/XR/EV_Eye/target_data/EX_Gaze_Hybrid_frame128_event64_subject_independent` | True |
 
 ## Execution Judgment
 
