@@ -9,6 +9,7 @@ __pycache__/
 .*-venv/
 .facet-prep-venv/
 .facet-train-venv/
+.uv-cache/
 
 # Training outputs and generated model artifacts
 runs/
@@ -37,6 +38,8 @@ analysis/RESULTS/**/*_test_sample_predictions.csv
 analysis/RESULTS/**/*_test_joined_motion_error.csv
 analysis/RESULTS/**/*_test_predictions_with_metadata.csv
 analysis/RESULTS/**/*_raw_test_predictions.csv
+analysis/RESULTS/EV-Eye_Hybrid_frame128_event64_train_ready/
+analysis/RESULTS/EX-Gaze_Hybrid_frame128_event64_train_ready/
 
 # Large generated BRAT/3ET exports and caches
 references/codebase/software/ais2025/Event-based-Eye-Tracking-Challenge-Solution/event_data_hbtxr_img64_fulltest/**/*.h5
