@@ -1,0 +1,283 @@
+{
+  "source_root": "/home/kjm26/project/dataset/XR/EV_Eye/raw_data/DeanDataset_full_unet_subject_independent",
+  "raw_davis_root": "/home/kjm26/project/dataset/XR/EV_Eye/raw_data/Data_davis",
+  "target_dirs": {
+    "EV-Eye": "/home/kjm26/project/dataset/XR/EV_Eye/target_data/EV_Eye_Hybrid_frame128_event64_subject_independent",
+    "EX-Gaze": "/home/kjm26/project/dataset/XR/EV_Eye/target_data/EX_Gaze_Hybrid_frame128_event64_subject_independent"
+  },
+  "target_exists": {
+    "EV-Eye": false,
+    "EX-Gaze": false
+  },
+  "manifest_split_counts": {
+    "train": 968873,
+    "val": 122776,
+    "test": 366171
+  },
+  "manifest_split_subjects": {
+    "train": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19,
+      20,
+      21,
+      22,
+      23,
+      24,
+      25,
+      26,
+      27,
+      28,
+      29,
+      30,
+      31,
+      32
+    ],
+    "val": [
+      33,
+      34,
+      35,
+      36
+    ],
+    "test": [
+      37,
+      38,
+      39,
+      40,
+      41,
+      42,
+      43,
+      44,
+      45,
+      46,
+      47,
+      48
+    ]
+  },
+  "progress_splits": {
+    "train": {
+      "sessions": 256,
+      "subjects": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28,
+        29,
+        30,
+        31,
+        32
+      ],
+      "valid": 968873,
+      "skipped": 23637,
+      "skip_no_ellipse": 23618,
+      "skip_no_events": 19
+    },
+    "val": {
+      "sessions": 32,
+      "subjects": [
+        33,
+        34,
+        35,
+        36
+      ],
+      "valid": 122776,
+      "skipped": 1799,
+      "skip_no_ellipse": 1790,
+      "skip_no_events": 9
+    },
+    "test": {
+      "sessions": 96,
+      "subjects": [
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        45,
+        46,
+        47,
+        48
+      ],
+      "valid": 366171,
+      "skipped": 7292,
+      "skip_no_ellipse": 7273,
+      "skip_no_events": 19
+    }
+  },
+  "cache": {
+    "train": {
+      "event_info": {
+        "Data shape": "(24967082,)",
+        "Data dtype": "[('t', '<i8'), ('x', '<i8'), ('y', '<i8'), ('p', '<i8')]"
+      },
+      "ellipse_info": {
+        "Data shape": "(968873,)",
+        "Data dtype": "[('t', '<i8'), ('x', '<f8'), ('y', '<f8'), ('a', '<f8'), ('b', '<f8'), ('ang', '<f8')]"
+      },
+      "event_indices_shape": [
+        5000,
+        2
+      ],
+      "first_event_index_rows": [
+        [
+          0,
+          468
+        ],
+        [
+          468,
+          1764
+        ],
+        [
+          1764,
+          3872
+        ]
+      ]
+    },
+    "val": {
+      "event_info": {
+        "Data shape": "(24972206,)",
+        "Data dtype": "[('t', '<i8'), ('x', '<i8'), ('y', '<i8'), ('p', '<i8')]"
+      },
+      "ellipse_info": {
+        "Data shape": "(122776,)",
+        "Data dtype": "[('t', '<i8'), ('x', '<f8'), ('y', '<f8'), ('a', '<f8'), ('b', '<f8'), ('ang', '<f8')]"
+      },
+      "event_indices_shape": [
+        5000,
+        2
+      ],
+      "first_event_index_rows": [
+        [
+          0,
+          851
+        ],
+        [
+          851,
+          2548
+        ],
+        [
+          2548,
+          5045
+        ]
+      ]
+    },
+    "test": {
+      "event_info": {
+        "Data shape": "(24986507,)",
+        "Data dtype": "[('t', '<i8'), ('x', '<i8'), ('y', '<i8'), ('p', '<i8')]"
+      },
+      "ellipse_info": {
+        "Data shape": "(366171,)",
+        "Data dtype": "[('t', '<i8'), ('x', '<f8'), ('y', '<f8'), ('a', '<f8'), ('b', '<f8'), ('ang', '<f8')]"
+      },
+      "event_indices_shape": [
+        5000,
+        2
+      ],
+      "first_event_index_rows": [
+        [
+          0,
+          676
+        ],
+        [
+          676,
+          2193
+        ],
+        [
+          2193,
+          4558
+        ]
+      ]
+    }
+  },
+  "raw_frame_checks": {
+    "train": {
+      "status": "ok",
+      "frames_dir": "/home/kjm26/project/dataset/XR/EV_Eye/raw_data/Data_davis/user1/left/session_1_0_1/frames",
+      "first_frame": "000001_1657710786177477.png"
+    },
+    "val": {
+      "status": "ok",
+      "frames_dir": "/home/kjm26/project/dataset/XR/EV_Eye/raw_data/Data_davis/user33/left/session_1_0_1/frames",
+      "first_frame": "000001_1658285628730570.png"
+    },
+    "test": {
+      "status": "ok",
+      "frames_dir": "/home/kjm26/project/dataset/XR/EV_Eye/raw_data/Data_davis/user37/left/session_1_0_1/frames",
+      "first_frame": "000001_1658305231950654.png"
+    }
+  },
+  "motion_labels": {
+    "path": "/home/kjm26/project/PRJXR/HBTXR/analysis/motion-label-packages/outputs/RowLabels_test37_48_motion_NoBlink.csv",
+    "exists": true,
+    "rows": 366190
+  },
+  "hbtxr_reference_package": {
+    "path": "/home/kjm26/project/PRJXR/HBTXR/analysis/RESULTS/HBTXR_subject37_48_error_distribution",
+    "files": {
+      "metadata": "/home/kjm26/project/PRJXR/HBTXR/analysis/RESULTS/HBTXR_subject37_48_error_distribution/HBTXR_subject_independent_img64_patch4_test_sample_metadata.csv",
+      "predictions": "/home/kjm26/project/PRJXR/HBTXR/analysis/RESULTS/HBTXR_subject37_48_error_distribution/HBTXR_subject_independent_img64_patch4_test_sample_predictions.csv",
+      "joined_motion_error": "/home/kjm26/project/PRJXR/HBTXR/analysis/RESULTS/HBTXR_subject37_48_error_distribution/HBTXR_subject37_48_test_joined_motion_error.csv"
+    },
+    "exists": {
+      "metadata": true,
+      "predictions": true,
+      "joined_motion_error": true
+    },
+    "rows": {
+      "metadata": 366171,
+      "predictions": 366171,
+      "joined_motion_error": 360495
+    }
+  },
+  "contracts": {
+    "event_input": "2 x 64 x 64 event frame, generated from cached events",
+    "frame_input": "1 x 128 x 128 grayscale frame, generated from Data_davis frames",
+    "ellipse_source": "cached_ellipse original coordinates: t,x,y,a,b,ang in 346x260 sensor coordinates",
+    "motion_join_key": "(subject, eye, session_code, frame_idx)",
+    "exgaze_patch_contract": "2 x 64 x 64 event volume -> 8 x 2 x 16 x 16 patches"
+  }
+}

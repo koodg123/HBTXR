@@ -6,6 +6,8 @@ Date: 2026-07-04
 
 - `EV_Eye_EX_Gaze_hybrid_frame128_event64_plan_2026-07-04.md`
 - `EV_Eye_EX_Gaze_hybrid_conversation_progress_2026-07-04.md`
+- `EV_Eye_EX_Gaze_hybrid_preflight_2026-07-04.md`
+- `EV_Eye_EX_Gaze_hybrid_preflight_2026-07-04.json`
 
 ## Local Mapping
 
