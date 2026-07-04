@@ -9,6 +9,7 @@ Date: 2026-07-04
 - `EV_Eye_EX_Gaze_hybrid_preflight_2026-07-04.md`
 - `EV_Eye_EX_Gaze_hybrid_smoke_export_2026-07-04.md`
 - `EV_Eye_EX_Gaze_hybrid_smoke_validation_2026-07-04.md`
+- `EV_Eye_EX_Gaze_hybrid_loader_smoke_2026-07-04.md`
 
 ## Local Mapping
 
