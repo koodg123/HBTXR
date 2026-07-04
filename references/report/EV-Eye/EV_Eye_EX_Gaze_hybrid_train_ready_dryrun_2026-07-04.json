@@ -1,0 +1,425 @@
+{
+  "configs": [
+    {
+      "config": "/home/kjm26/project/PRJXR/HBTXR/analysis/configs/EV_Eye_Hybrid_frame128_event64_subject_independent_train_ready.json",
+      "experiment_name": "EV_Eye_Hybrid_frame128_event64_subject_independent",
+      "dataset_root": "/home/kjm26/project/dataset/XR/EV_Eye/target_data/EV_Eye_Hybrid_frame128_event64_subject_independent/train_ready",
+      "source_root": "/home/kjm26/project/dataset/XR/EV_Eye/raw_data/DeanDataset_full_unet_subject_independent",
+      "splits": {
+        "train": {
+          "manifest": "/home/kjm26/project/dataset/XR/EV_Eye/target_data/EV_Eye_Hybrid_frame128_event64_subject_independent/train_ready/train/labels.csv",
+          "rows": 968873,
+          "expected": 968873,
+          "subjects": "1-32"
+        },
+        "val": {
+          "manifest": "/home/kjm26/project/dataset/XR/EV_Eye/target_data/EV_Eye_Hybrid_frame128_event64_subject_independent/train_ready/val/labels.csv",
+          "rows": 122776,
+          "expected": 122776,
+          "subjects": "33-36"
+        },
+        "test": {
+          "manifest": "/home/kjm26/project/dataset/XR/EV_Eye/target_data/EV_Eye_Hybrid_frame128_event64_subject_independent/train_ready/test/labels.csv",
+          "rows": 366171,
+          "expected": 366171,
+          "subjects": "37-48"
+        }
+      },
+      "training": {
+        "epochs": 70,
+        "batch_size": 32,
+        "num_workers": 4,
+        "optimizer": "Adam",
+        "learning_rate": 0.001,
+        "weight_decay": 1e-05,
+        "scheduler": {
+          "type": "StepLR",
+          "step_size": 10,
+          "gamma": 0.7,
+          "warmup_lr": 1e-05,
+          "warmup_epochs": 5
+        }
+      },
+      "gpu_plan": {
+        "intended_gpu": 0,
+        "launch_status": "not_launched"
+      }
+    },
+    {
+      "config": "/home/kjm26/project/PRJXR/HBTXR/analysis/configs/EX_Gaze_Hybrid_frame128_event64_subject_independent_train_ready.json",
+      "experiment_name": "EX_Gaze_Hybrid_frame128_event64_subject_independent",
+      "dataset_root": "/home/kjm26/project/dataset/XR/EV_Eye/target_data/EX_Gaze_Hybrid_frame128_event64_subject_independent/train_ready",
+      "source_root": "/home/kjm26/project/dataset/XR/EV_Eye/raw_data/DeanDataset_full_unet_subject_independent",
+      "splits": {
+        "train": {
+          "manifest": "/home/kjm26/project/dataset/XR/EV_Eye/target_data/EX_Gaze_Hybrid_frame128_event64_subject_independent/train_ready/train/labels.csv",
+          "rows": 968873,
+          "expected": 968873,
+          "subjects": "1-32"
+        },
+        "val": {
+          "manifest": "/home/kjm26/project/dataset/XR/EV_Eye/target_data/EX_Gaze_Hybrid_frame128_event64_subject_independent/train_ready/val/labels.csv",
+          "rows": 122776,
+          "expected": 122776,
+          "subjects": "33-36"
+        },
+        "test": {
+          "manifest": "/home/kjm26/project/dataset/XR/EV_Eye/target_data/EX_Gaze_Hybrid_frame128_event64_subject_independent/train_ready/test/labels.csv",
+          "rows": 366171,
+          "expected": 366171,
+          "subjects": "37-48"
+        }
+      },
+      "training": {
+        "epochs": 70,
+        "batch_size": 32,
+        "num_workers": 4,
+        "optimizer": "Adam",
+        "learning_rate": 0.001,
+        "weight_decay": 1e-05,
+        "scheduler": {
+          "type": "StepLR",
+          "step_size": 10,
+          "gamma": 0.7,
+          "warmup_lr": 1e-05,
+          "warmup_epochs": 5
+        }
+      },
+      "gpu_plan": {
+        "intended_gpu": 1,
+        "launch_status": "not_launched"
+      }
+    }
+  ],
+  "live_loader": {
+    "tag": "train_ready",
+    "batch_size": 4,
+    "live": true,
+    "ev_eye_root": "/home/kjm26/project/dataset/XR/EV_Eye/target_data/EV_Eye_Hybrid_frame128_event64_subject_independent/train_ready",
+    "ex_gaze_root": "/home/kjm26/project/dataset/XR/EV_Eye/target_data/EX_Gaze_Hybrid_frame128_event64_subject_independent/train_ready",
+    "source_root": "/home/kjm26/project/dataset/XR/EV_Eye/raw_data/DeanDataset_full_unet_subject_independent",
+    "splits": {
+      "train": {
+        "ev_frame": {
+          "shape": [
+            4,
+            1,
+            128,
+            128
+          ],
+          "dtype": "float32",
+          "min": 0.01568627543747425,
+          "max": 1.0
+        },
+        "ev_mask": {
+          "shape": [
+            4,
+            128,
+            128
+          ],
+          "dtype": "int64",
+          "min": 0.0,
+          "max": 1.0
+        },
+        "ev_event": {
+          "shape": [
+            4,
+            2,
+            64,
+            64
+          ],
+          "dtype": "float32",
+          "min": 0.0,
+          "max": 1400.0
+        },
+        "ev_ellipse128": {
+          "shape": [
+            4,
+            5
+          ],
+          "dtype": "float32",
+          "min": -43.18632125854492,
+          "max": 66.94973754882812
+        },
+        "ex_frame": {
+          "shape": [
+            4,
+            1,
+            128,
+            128
+          ],
+          "dtype": "float32",
+          "min": 0.01568627543747425,
+          "max": 1.0
+        },
+        "ex_input_volume": {
+          "shape": [
+            4,
+            2,
+            64,
+            64
+          ],
+          "dtype": "float32",
+          "min": 0.0,
+          "max": 1400.0
+        },
+        "ex_event_patches": {
+          "shape": [
+            4,
+            8,
+            2,
+            16,
+            16
+          ],
+          "dtype": "float32",
+          "min": 0.0,
+          "max": 10.0
+        },
+        "ex_pre_state": {
+          "shape": [
+            4,
+            5
+          ],
+          "dtype": "float32",
+          "min": -43.18632125854492,
+          "max": 33.47486877441406
+        },
+        "ex_pupil": {
+          "shape": [
+            4,
+            5
+          ],
+          "dtype": "float32",
+          "min": -43.18632125854492,
+          "max": 66.94973754882812
+        },
+        "ex_sample_regions": {
+          "shape": [
+            4,
+            8,
+            4
+          ],
+          "dtype": "int64",
+          "min": 19.0,
+          "max": 46.0
+        },
+        "ev_len": 968873,
+        "ex_len": 968873
+      },
+      "val": {
+        "ev_frame": {
+          "shape": [
+            4,
+            1,
+            128,
+            128
+          ],
+          "dtype": "float32",
+          "min": 0.0117647061124444,
+          "max": 0.9764705896377563
+        },
+        "ev_mask": {
+          "shape": [
+            4,
+            128,
+            128
+          ],
+          "dtype": "int64",
+          "min": 0.0,
+          "max": 1.0
+        },
+        "ev_event": {
+          "shape": [
+            4,
+            2,
+            64,
+            64
+          ],
+          "dtype": "float32",
+          "min": 0.0,
+          "max": 1540.0
+        },
+        "ev_ellipse128": {
+          "shape": [
+            4,
+            5
+          ],
+          "dtype": "float32",
+          "min": -45.35780334472656,
+          "max": 64.5840072631836
+        },
+        "ex_frame": {
+          "shape": [
+            4,
+            1,
+            128,
+            128
+          ],
+          "dtype": "float32",
+          "min": 0.0117647061124444,
+          "max": 0.9764705896377563
+        },
+        "ex_input_volume": {
+          "shape": [
+            4,
+            2,
+            64,
+            64
+          ],
+          "dtype": "float32",
+          "min": 0.0,
+          "max": 1540.0
+        },
+        "ex_event_patches": {
+          "shape": [
+            4,
+            8,
+            2,
+            16,
+            16
+          ],
+          "dtype": "float32",
+          "min": 0.0,
+          "max": 15.0
+        },
+        "ex_pre_state": {
+          "shape": [
+            4,
+            5
+          ],
+          "dtype": "float32",
+          "min": -45.35780334472656,
+          "max": 32.2920036315918
+        },
+        "ex_pupil": {
+          "shape": [
+            4,
+            5
+          ],
+          "dtype": "float32",
+          "min": -45.35780334472656,
+          "max": 64.5840072631836
+        },
+        "ex_sample_regions": {
+          "shape": [
+            4,
+            8,
+            4
+          ],
+          "dtype": "int64",
+          "min": 12.0,
+          "max": 46.0
+        },
+        "ev_len": 122776,
+        "ex_len": 122776
+      },
+      "test": {
+        "ev_frame": {
+          "shape": [
+            4,
+            1,
+            128,
+            128
+          ],
+          "dtype": "float32",
+          "min": 0.027450980618596077,
+          "max": 1.0
+        },
+        "ev_mask": {
+          "shape": [
+            4,
+            128,
+            128
+          ],
+          "dtype": "int64",
+          "min": 0.0,
+          "max": 1.0
+        },
+        "ev_event": {
+          "shape": [
+            4,
+            2,
+            64,
+            64
+          ],
+          "dtype": "float32",
+          "min": 0.0,
+          "max": 1489.0
+        },
+        "ev_ellipse128": {
+          "shape": [
+            4,
+            5
+          ],
+          "dtype": "float32",
+          "min": -39.17824172973633,
+          "max": 60.008060455322266
+        },
+        "ex_frame": {
+          "shape": [
+            4,
+            1,
+            128,
+            128
+          ],
+          "dtype": "float32",
+          "min": 0.027450980618596077,
+          "max": 1.0
+        },
+        "ex_input_volume": {
+          "shape": [
+            4,
+            2,
+            64,
+            64
+          ],
+          "dtype": "float32",
+          "min": 0.0,
+          "max": 1489.0
+        },
+        "ex_event_patches": {
+          "shape": [
+            4,
+            8,
+            2,
+            16,
+            16
+          ],
+          "dtype": "float32",
+          "min": 0.0,
+          "max": 8.0
+        },
+        "ex_pre_state": {
+          "shape": [
+            4,
+            5
+          ],
+          "dtype": "float32",
+          "min": -39.17824172973633,
+          "max": 30.004030227661133
+        },
+        "ex_pupil": {
+          "shape": [
+            4,
+            5
+          ],
+          "dtype": "float32",
+          "min": -39.17824172973633,
+          "max": 60.008060455322266
+        },
+        "ex_sample_regions": {
+          "shape": [
+            4,
+            8,
+            4
+          ],
+          "dtype": "int64",
+          "min": 19.0,
+          "max": 42.0
+        },
+        "ev_len": 366171,
+        "ex_len": 366171
+      }
+    }
+  }
+}

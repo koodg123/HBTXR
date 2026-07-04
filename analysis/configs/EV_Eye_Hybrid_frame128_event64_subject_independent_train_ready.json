@@ -1,0 +1,57 @@
+{
+  "experiment_name": "EV_Eye_Hybrid_frame128_event64_subject_independent",
+  "model_family": "EV-Eye-adapted",
+  "status": "train-ready-dryrun-only",
+  "dataset": {
+    "storage_mode": "compact_manifest_live_loader",
+    "tag": "train_ready",
+    "source_root": "/home/kjm26/project/dataset/XR/EV_Eye/raw_data/DeanDataset_full_unet_subject_independent",
+    "dataset_root": "/home/kjm26/project/dataset/XR/EV_Eye/target_data/EV_Eye_Hybrid_frame128_event64_subject_independent/train_ready",
+    "splits": {
+      "train": {
+        "manifest": "train/labels.csv",
+        "subjects": "1-32",
+        "samples": 968873
+      },
+      "val": {
+        "manifest": "val/labels.csv",
+        "subjects": "33-36",
+        "samples": 122776
+      },
+      "test": {
+        "manifest": "test/labels.csv",
+        "subjects": "37-48",
+        "samples": 366171
+      }
+    },
+    "inputs": {
+      "frame": "1x128x128 float32 live-resized from Data_davis frame",
+      "event": "2x64x64 float32 live-binned from FACET cached events",
+      "mask": "128x128 int64 live-rasterized from ellipse",
+      "ellipse": "[x,y,a,b,angle] in 128x128 frame coordinates"
+    }
+  },
+  "training": {
+    "epochs": 70,
+    "batch_size": 32,
+    "num_workers": 4,
+    "optimizer": "Adam",
+    "learning_rate": 0.001,
+    "weight_decay": 0.00001,
+    "scheduler": {
+      "type": "StepLR",
+      "step_size": 10,
+      "gamma": 0.7,
+      "warmup_lr": 0.00001,
+      "warmup_epochs": 5
+    }
+  },
+  "gpu_plan": {
+    "intended_gpu": 0,
+    "launch_status": "not_launched"
+  },
+  "notes": [
+    "This config records the HBTXR-matched training contract before implementation of the final training loop.",
+    "EV-Eye original U-Net is frame-mask segmentation. The adapted path must decide whether the event branch is auxiliary input, fusion input, or an ablation-only channel."
+  ]
+}
