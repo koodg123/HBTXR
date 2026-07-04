@@ -1,0 +1,419 @@
+{
+  "artifact": "second_goal_paper_ref_experiment_trace",
+  "contract_version": 1,
+  "date": "2026-06-21",
+  "execution_state": "paused_by_user_directive",
+  "execute_supported": false,
+  "allowed_while_paused": true,
+  "do_not_execute_until_user_resumes": true,
+  "direct_submission_comparison_allowed": false,
+  "paper_level_completion_allowed": false,
+  "software_promotion_allowed": false,
+  "prompt_pack": {
+    "idea_gen_phase": "P1",
+    "domain": "Research Workflow",
+    "parent_skill": "paper-idea-generator",
+    "worker_skill": "ablation-study-designer",
+    "caveman_plugin": "caveman",
+    "objective": "Bind PAPER_REF per-paper analysis evidence to each current HGTXR-SW second-goal experiment without running train/eval jobs.",
+    "source_artifacts": [
+      "anlaysis/paper-ref/papers/index.md",
+      "anlaysis/paper-ref/PAPER_REF_DETAILED_EXPERIMENT_MAP.md",
+      "docs/resources/second_goal_paper_ref_current_ablation_plan_2026_06_20.md",
+      "docs/resources/second_goal_experiment_queue_2026_06_20.md",
+      "docs/resources/second_goal_current_result_synthesis_2026_06_20.md"
+    ],
+    "target": "HGTXR-SW raw event-count track model on manifest1 train/val/test splits",
+    "constraints": [
+      "Experiments remain paused until explicit user resume.",
+      "No test-derived target override may be used for training.",
+      "Current software promotion uses center/P10/P5 gates until the paper metric/protocol bridge is unblocked.",
+      "XR-63 oracle is diagnostic only and cannot be promoted as a trained result."
+    ],
+    "required_artifact": "Machine-readable PAPER_REF-to-experiment trace, human summary, and checker.",
+    "verification_evidence": [
+      "PAPER_REF analysis paths exist.",
+      "Current experiment IDs and priorities match the XR-64-first queue.",
+      "Each experiment has paper evidence, axis coverage, required proof, and rejection rules.",
+      "Validation commands are no-execute only."
+    ],
+    "risks_and_missing_inputs": [
+      "XR-64 train/val eval rows and override JSON files remain missing.",
+      "XR-64A/B post-run summaries are absent.",
+      "Paper-frame metric/protocol evidence is still blocked."
+    ]
+  },
+  "current_gates": {
+    "center_lt": 16.468481131962367,
+    "p10_gt": 35.02295998845781,
+    "p5_gt": 12.133503770828247
+  },
+  "source_artifacts": {
+    "paper_ref_index": "anlaysis/paper-ref/papers/index.md",
+    "paper_ref_map": "anlaysis/paper-ref/PAPER_REF_DETAILED_EXPERIMENT_MAP.md",
+    "paper_ref_ablation_plan": "docs/resources/second_goal_paper_ref_current_ablation_plan_2026_06_20.md",
+    "experiment_queue": "docs/resources/second_goal_experiment_queue_2026_06_20.json",
+    "ablation_evidence_checklist": "docs/resources/second_goal_ablation_evidence_checklist_2026_06_21.json",
+    "current_result_synthesis": "docs/resources/second_goal_current_result_synthesis_2026_06_20.json",
+    "objective_trace": "docs/resources/second_goal_objective_trace_2026_06_20.json",
+    "resume_readiness_matrix": "docs/resources/second_goal_resume_readiness_matrix_2026_06_21.json",
+    "status_reporter": "scripts/external/report_second_goal_status.py"
+  },
+  "paper_groups": {
+    "geometry_state_supervision": {
+      "papers": [
+        "anlaysis/paper-ref/papers/facet-fast-and-accurate-event-based-eye-tracking-using-ellipse-modeling-for-extended-reality/analysis.md",
+        "anlaysis/paper-ref/papers/e-track-eye-tracking-with-event-camera-for-extended-reality-xr-applications/analysis.md",
+        "anlaysis/paper-ref/papers/etracker-a-mobile-gaze-tracking-system-with-near-eye-display-based-on-a-combined-gaze-tracking-algorithm/analysis.md",
+        "anlaysis/paper-ref/papers/real-time-gaze-tracking-with-event-driven-eye-segmentation/analysis.md"
+      ],
+      "current_use": "Center/geometry guard and override-loss support for XR-64A/B; not a standalone geometry-only replay."
+    },
+    "teacher_distillation": {
+      "papers": [
+        "anlaysis/paper-ref/papers/modeling-state-shifting-via-local-global-distillation-for-event-frame-gaze-tracking/analysis.md",
+        "anlaysis/paper-ref/papers/ev-eye-rethinking-high-frequency-eye-tracking-through-the-lenses-of-event-cameras/analysis.md"
+      ],
+      "current_use": "Teacher-target construction and future self-supervised distillation after a leakage-safe XR-64 checkpoint exists."
+    },
+    "temporal_robustness": {
+      "papers": [
+        "anlaysis/paper-ref/papers/3et-efficient-event-based-eye-tracking-using-a-change-based-convlstm-network/analysis.md",
+        "anlaysis/paper-ref/papers/s3-event-based-eye-tracking-ais-2024-challenge-survey/analysis.md",
+        "anlaysis/paper-ref/papers/s4-event-based-eye-tracking-2025-event-based-vision-workshop/analysis.md"
+      ],
+      "current_use": "XR-65 temporal-lite residual only after XR-64 non-collapse evidence exists."
+    },
+    "local_fallback_blink": {
+      "papers": [
+        "anlaysis/paper-ref/papers/ex-gaze-high-frequency-and-low-latency-gaze-tracking-with-hybrid-event-frame-cameras-for-on-device-extended-reality/analysis.md",
+        "anlaysis/paper-ref/papers/swift-eye-towards-anti-blink-pupil-tracking-for-precise-and-robust-high-frequency-near-eye-movement-analysis-with-event-cameras/analysis.md",
+        "anlaysis/paper-ref/papers/e-bts-a-low-power-event-driven-blink-tracking-system-with-hardware-software-co-optimized-design-for-real-time-driver-drowsiness-detection/analysis.md",
+        "anlaysis/paper-ref/papers/an-efficient-eye-tracking-system-based-on-event-camera-and-scnn-akf-fusion/analysis.md"
+      ],
+      "current_use": "XR-66 confidence/fallback diagnostic; no blind local-crop training."
+    },
+    "dense_refinement": {
+      "papers": [
+        "anlaysis/paper-ref/papers/timelens-xl-real-time-event-based-video-frame-interpolation-with-large-motion/analysis.md",
+        "anlaysis/paper-ref/papers/eyetraes-fine-grained-low-latency-eye-tracking-via-adaptive-event-slicing/analysis.md"
+      ],
+      "current_use": "XR-67 only if dense or continuous trajectories become available."
+    },
+    "deployment_distillation": {
+      "papers": [
+        "anlaysis/paper-ref/papers/retina-low-power-eye-tracking-with-event-camera-and-spiking-hardware/analysis.md",
+        "anlaysis/paper-ref/papers/see-co-designing-a-sub-millisecond-latency-event-based-eye-tracking-system-with-submanifold-sparse-cnn/analysis.md",
+        "anlaysis/paper-ref/papers/janeeye-a-12-nm-2k-fps-18-9-uj-per-frame-event-based-eye-tracking-accelerator/analysis.md",
+        "anlaysis/paper-ref/papers/eyecod-eye-tracking-system-acceleration-via-flatcam-based-algorithm-accelerator-co-design/analysis.md",
+        "anlaysis/paper-ref/papers/event-based-low-power-spiking-gaze-estimation/analysis.md"
+      ],
+      "current_use": "XR-68 sparse/quant/distilled edge branch only after an improved full-width teacher exists."
+    }
+  },
+  "experiment_traces": [
+    {
+      "id": "XR-64-prep",
+      "priority": "P0",
+      "status": "blocked_by_pause_and_missing_generated_artifacts",
+      "paper_groups": [
+        "teacher_distillation",
+        "geometry_state_supervision"
+      ],
+      "axes": [
+        "teacher_model_training",
+        "data_protocol",
+        "loss"
+      ],
+      "paper_basis_summary": "Use train/val-only teacher eval rows and target overrides to convert XR-63 complementary-leader headroom into leakage-safe supervision.",
+      "required_evidence": [
+        "8 train/val eval_rows.json files",
+        "6 train/val override JSON files",
+        "strict check_xr64_resume_artifacts.py ready_to_train",
+        "leakage_risk none"
+      ],
+      "rejection_rules": [
+        "test-derived override is used",
+        "generated artifacts are incomplete",
+        "subset artifacts are treated as ready_to_train"
+      ],
+      "dependencies": []
+    },
+    {
+      "id": "XR-64A",
+      "priority": "P0",
+      "status": "waiting_for_XR-64-prep",
+      "paper_groups": [
+        "geometry_state_supervision",
+        "teacher_distillation"
+      ],
+      "axes": [
+        "head",
+        "loss",
+        "lr",
+        "teacher_model_training"
+      ],
+      "paper_basis_summary": "Conservative teacher-target branch using geometry/state guard to improve center or threshold metrics without test leakage.",
+      "required_evidence": [
+        "trained checkpoint",
+        "full-test eval_summary.json",
+        "full-test eval_rows.json",
+        "metric_track_center_px",
+        "metric_track_p10_pct",
+        "metric_track_p5_pct",
+        "metric_track_p1_pct",
+        "override provenance",
+        "teacher provenance",
+        "ablation attribution report"
+      ],
+      "rejection_rules": [
+        "test override path is non-null",
+        "center/P10/P5 all fail active gates",
+        "override provenance is invalid"
+      ],
+      "dependencies": [
+        "XR-64-prep"
+      ]
+    },
+    {
+      "id": "XR-64B",
+      "priority": "P0",
+      "status": "waiting_for_XR-64-prep",
+      "paper_groups": [
+        "teacher_distillation",
+        "geometry_state_supervision"
+      ],
+      "axes": [
+        "head",
+        "loss",
+        "lr",
+        "teacher_model_training"
+      ],
+      "paper_basis_summary": "Threshold-priority teacher-target branch for P10/P5 recovery with explicit center/P5 collapse guard.",
+      "required_evidence": [
+        "trained checkpoint",
+        "full-test eval_summary.json",
+        "full-test eval_rows.json",
+        "metric_track_center_px",
+        "metric_track_p10_pct",
+        "metric_track_p5_pct",
+        "metric_track_p1_pct",
+        "center/P5 tradeoff report",
+        "override provenance",
+        "teacher provenance",
+        "ablation attribution report"
+      ],
+      "rejection_rules": [
+        "test override path is non-null",
+        "P10/P5 improvement is paired with undocumented center collapse",
+        "override provenance is invalid"
+      ],
+      "dependencies": [
+        "XR-64-prep"
+      ]
+    },
+    {
+      "id": "XR-64C",
+      "priority": "P1",
+      "status": "conditional_after_XR-64A_B",
+      "paper_groups": [
+        "teacher_distillation"
+      ],
+      "axes": [
+        "loss",
+        "lr",
+        "teacher_model_training"
+      ],
+      "paper_basis_summary": "Min-error teacher-target pressure diagnostic to test transfer limit and overfit boundary.",
+      "required_evidence": [
+        "validation transfer report",
+        "full-test center/P10/P5/P1",
+        "overfit report",
+        "override provenance"
+      ],
+      "rejection_rules": [
+        "uses test-derived target selection",
+        "overfits validation without full-test movement",
+        "is promoted without beating a full-test gate"
+      ],
+      "dependencies": [
+        "XR-64-prep",
+        "XR-64A_or_XR-64B_evidence"
+      ]
+    },
+    {
+      "id": "XR-65",
+      "priority": "P1",
+      "status": "conditional_after_XR-64_non_collapse",
+      "paper_groups": [
+        "temporal_robustness",
+        "teacher_distillation"
+      ],
+      "axes": [
+        "head",
+        "loss",
+        "lr",
+        "self_supervised_distillation"
+      ],
+      "paper_basis_summary": "Temporal-lite residual and state distillation only after XR-64 yields a non-collapsing teacher-target checkpoint.",
+      "required_evidence": [
+        "XR-64 non-collapse checkpoint",
+        "temporal gain report",
+        "same-scene comparison",
+        "center drift report",
+        "full-test center/P10/P5/P1"
+      ],
+      "rejection_rules": [
+        "XR-64 checkpoint is absent",
+        "manifest temporal sparsity makes the signal untestable",
+        "validation center worsens beyond the stop rule"
+      ],
+      "dependencies": [
+        "XR-64A_or_XR-64B_non_collapse"
+      ]
+    },
+    {
+      "id": "XR-66",
+      "priority": "P1",
+      "status": "conditional_after_XR-64_diagnostics",
+      "paper_groups": [
+        "local_fallback_blink"
+      ],
+      "axes": [
+        "head",
+        "loss",
+        "data_protocol"
+      ],
+      "paper_basis_summary": "Confidence-gated local event update diagnostic with fallback; training is allowed only if bucket evidence shows a reliable subset.",
+      "required_evidence": [
+        "confidence bucket report",
+        "fallback comparison",
+        "local subset center delta",
+        "aggregate gate impact report"
+      ],
+      "rejection_rules": [
+        "confidence remains saturated",
+        "fallback state is worse",
+        "blind local crop is trained without diagnostic support"
+      ],
+      "dependencies": [
+        "XR-64_diagnostic_evidence"
+      ]
+    },
+    {
+      "id": "XR-67",
+      "priority": "P2",
+      "status": "blocked_by_dense_trajectory_absence",
+      "paper_groups": [
+        "dense_refinement"
+      ],
+      "axes": [
+        "data_protocol",
+        "post_process"
+      ],
+      "paper_basis_summary": "Dense trajectory refinement and jitter control are valid only when dense or continuous trajectories exist.",
+      "required_evidence": [
+        "dense segment count",
+        "same-scene before/after center/P10/P5/P1",
+        "jitter proxy report"
+      ],
+      "rejection_rules": [
+        "dense trajectories remain absent",
+        "postprocess is evaluated on a different scene set",
+        "jitter improves while center/P10/P5 collapse"
+      ],
+      "dependencies": [
+        "dense_or_continuous_trajectory_evidence"
+      ]
+    },
+    {
+      "id": "XR-68",
+      "priority": "P2",
+      "status": "blocked_until_stable_full_width_teacher",
+      "paper_groups": [
+        "deployment_distillation",
+        "teacher_distillation"
+      ],
+      "axes": [
+        "optimizer",
+        "self_supervised_distillation",
+        "hardware_export"
+      ],
+      "paper_basis_summary": "Sparse/quant/distilled edge branch is downstream of a stable improved full-width teacher.",
+      "required_evidence": [
+        "stable improved full-width teacher",
+        "student accuracy report",
+        "teacher-student tolerance report",
+        "latency/resource report"
+      ],
+      "rejection_rules": [
+        "software teacher does not beat current gates",
+        "compression starts before accuracy stabilizes",
+        "latency is mixed with software accuracy promotion"
+      ],
+      "dependencies": [
+        "XR-64_or_later_improved_teacher"
+      ]
+    }
+  ],
+  "axis_coverage": {
+    "head": [
+      "XR-64A",
+      "XR-64B",
+      "XR-65",
+      "XR-66"
+    ],
+    "loss": [
+      "XR-64-prep",
+      "XR-64A",
+      "XR-64B",
+      "XR-64C",
+      "XR-65",
+      "XR-66"
+    ],
+    "lr": [
+      "XR-64A",
+      "XR-64B",
+      "XR-64C",
+      "XR-65"
+    ],
+    "optimizer": [
+      "XR-68"
+    ],
+    "self_supervised_distillation": [
+      "XR-65",
+      "XR-68"
+    ],
+    "teacher_model_training": [
+      "XR-64-prep",
+      "XR-64A",
+      "XR-64B",
+      "XR-64C"
+    ],
+    "data_protocol": [
+      "XR-64-prep",
+      "XR-66",
+      "XR-67"
+    ],
+    "hardware_export": [
+      "XR-68"
+    ]
+  },
+  "current_state": {
+    "xr64_ready_to_train": false,
+    "xr64_can_run_lane": false,
+    "missing_eval_rows": 8,
+    "missing_overrides": 6,
+    "xr64_postrun_candidate_count": 0,
+    "completion_allowed": false,
+    "completion_blocker_count": 28,
+    "direct_submission_comparison_allowed": false
+  },
+  "validation_commands": [
+    "python3 -m json.tool docs/resources/second_goal_paper_ref_experiment_trace_2026_06_21.json",
+    "python3 -m py_compile scripts/external/check_second_goal_paper_ref_experiment_trace.py",
+    ".venv/bin/python scripts/external/check_second_goal_paper_ref_experiment_trace.py --format summary",
+    ".venv/bin/python scripts/external/check_paper_ref_analysis_coverage.py --format summary",
+    ".venv/bin/python -m pytest -q tests/test_second_goal_paper_ref_experiment_trace.py"
+  ]
+}

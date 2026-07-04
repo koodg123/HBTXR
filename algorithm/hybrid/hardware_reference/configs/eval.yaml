@@ -1,0 +1,5 @@
+extends: base.yaml
+experiment:
+  name: hgtxr_eval
+  output_dir: runs/eval
+

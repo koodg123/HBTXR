@@ -1,0 +1,7460 @@
+[
+  {
+    "input_dtype": {
+      "bits": 11,
+      "qmax": 1023,
+      "qmin": -1024,
+      "signed": true
+    },
+    "kind": "requant_table",
+    "name": "attn_0_aq",
+    "observed_range": {
+      "cursor": {
+        "max": 147.0,
+        "min": -117.0
+      },
+      "input": {
+        "max": 489.0,
+        "min": -567.0
+      },
+      "output": {
+        "max": 3.0,
+        "min": -4.0
+      }
+    },
+    "output_dtype": {
+      "bits": 3,
+      "qmax": 3,
+      "qmin": -4,
+      "signed": true
+    },
+    "params": {
+      "bound": 63,
+      "effective_divisor": 4,
+      "input_dtype": {
+        "bits": 11,
+        "qmax": 1023,
+        "qmin": -1024,
+        "signed": true
+      },
+      "name": "attn_0_aq",
+      "observed_range": null,
+      "offset": 101,
+      "output_dtype": {
+        "bits": 3,
+        "qmax": 3,
+        "qmin": -4,
+        "signed": true
+      },
+      "scalars": [
+        101,
+        2,
+        63
+      ],
+      "shift_scale": 2,
+      "table_sizes": [
+        64
+      ],
+      "zero_point": null
+    },
+    "stat_key": "attn0.aq"
+  },
+  {
+    "input_dtype": {
+      "bits": 11,
+      "qmax": 1023,
+      "qmin": -1024,
+      "signed": true
+    },
+    "kind": "requant_table",
+    "name": "attn_0_kq",
+    "observed_range": {
+      "cursor": {
+        "max": 152.0,
+        "min": -93.0
+      },
+      "input": {
+        "max": 524.0,
+        "min": -456.0
+      },
+      "output": {
+        "max": 3.0,
+        "min": -4.0
+      }
+    },
+    "output_dtype": {
+      "bits": 3,
+      "qmax": 3,
+      "qmin": -4,
+      "signed": true
+    },
+    "params": {
+      "bound": 63,
+      "effective_divisor": 4,
+      "input_dtype": {
+        "bits": 11,
+        "qmax": 1023,
+        "qmin": -1024,
+        "signed": true
+      },
+      "name": "attn_0_kq",
+      "observed_range": null,
+      "offset": 85,
+      "output_dtype": {
+        "bits": 3,
+        "qmax": 3,
+        "qmin": -4,
+        "signed": true
+      },
+      "scalars": [
+        85,
+        2,
+        63
+      ],
+      "shift_scale": 2,
+      "table_sizes": [
+        64
+      ],
+      "zero_point": null
+    },
+    "stat_key": "attn0.kq"
+  },
+  {
+    "input_dtype": {
+      "bits": 11,
+      "qmax": 1023,
+      "qmin": -1024,
+      "signed": true
+    },
+    "kind": "requant_table",
+    "name": "attn_0_qq",
+    "observed_range": {
+      "cursor": {
+        "max": 121.0,
+        "min": -116.0
+      },
+      "input": {
+        "max": 397.0,
+        "min": -549.0
+      },
+      "output": {
+        "max": 3.0,
+        "min": -4.0
+      }
+    },
+    "output_dtype": {
+      "bits": 3,
+      "qmax": 3,
+      "qmin": -4,
+      "signed": true
+    },
+    "params": {
+      "bound": 63,
+      "effective_divisor": 4,
+      "input_dtype": {
+        "bits": 11,
+        "qmax": 1023,
+        "qmin": -1024,
+        "signed": true
+      },
+      "name": "attn_0_qq",
+      "observed_range": null,
+      "offset": 88,
+      "output_dtype": {
+        "bits": 3,
+        "qmax": 3,
+        "qmin": -4,
+        "signed": true
+      },
+      "scalars": [
+        88,
+        2,
+        63
+      ],
+      "shift_scale": 2,
+      "table_sizes": [
+        64
+      ],
+      "zero_point": null
+    },
+    "stat_key": "attn0.qq"
+  },
+  {
+    "input_dtype": {
+      "bits": 11,
+      "qmax": 1023,
+      "qmin": -1024,
+      "signed": true
+    },
+    "kind": "requant_table",
+    "name": "attn_0_vq",
+    "observed_range": {
+      "cursor": {
+        "max": 88.0,
+        "min": -56.0
+      },
+      "input": {
+        "max": 548.0,
+        "min": -604.0
+      },
+      "output": {
+        "max": 3.0,
+        "min": -4.0
+      }
+    },
+    "output_dtype": {
+      "bits": 3,
+      "qmax": 3,
+      "qmin": -4,
+      "signed": true
+    },
+    "params": {
+      "bound": 63,
+      "effective_divisor": 8,
+      "input_dtype": {
+        "bits": 11,
+        "qmax": 1023,
+        "qmin": -1024,
+        "signed": true
+      },
+      "name": "attn_0_vq",
+      "observed_range": null,
+      "offset": 162,
+      "output_dtype": {
+        "bits": 3,
+        "qmax": 3,
+        "qmin": -4,
+        "signed": true
+      },
+      "scalars": [
+        162,
+        3,
+        63
+      ],
+      "shift_scale": 3,
+      "table_sizes": [
+        64
+      ],
+      "zero_point": null
+    },
+    "stat_key": "attn0.vq"
+  },
+  {
+    "input_dtype": {
+      "bits": 11,
+      "qmax": 1023,
+      "qmin": -1024,
+      "signed": true
+    },
+    "kind": "requant_table",
+    "name": "attn_10_aq",
+    "observed_range": {
+      "cursor": {
+        "max": 143.0,
+        "min": -108.0
+      },
+      "input": {
+        "max": 440.0,
+        "min": -565.0
+      },
+      "output": {
+        "max": 3.0,
+        "min": -4.0
+      }
+    },
+    "output_dtype": {
+      "bits": 3,
+      "qmax": 3,
+      "qmin": -4,
+      "signed": true
+    },
+    "params": {
+      "bound": 63,
+      "effective_divisor": 4,
+      "input_dtype": {
+        "bits": 11,
+        "qmax": 1023,
+        "qmin": -1024,
+        "signed": true
+      },
+      "name": "attn_10_aq",
+      "observed_range": null,
+      "offset": 135,
+      "output_dtype": {
+        "bits": 3,
+        "qmax": 3,
+        "qmin": -4,
+        "signed": true
+      },
+      "scalars": [
+        135,
+        2,
+        63
+      ],
+      "shift_scale": 2,
+      "table_sizes": [
+        64
+      ],
+      "zero_point": null
+    },
+    "stat_key": "attn10.aq"
+  },
+  {
+    "input_dtype": {
+      "bits": 10,
+      "qmax": 511,
+      "qmin": -512,
+      "signed": true
+    },
+    "kind": "requant_table",
+    "name": "attn_10_kq",
+    "observed_range": {
+      "cursor": {
+        "max": 127.0,
+        "min": -70.0
+      },
+      "input": {
+        "max": 397.0,
+        "min": -389.0
+      },
+      "output": {
+        "max": 3.0,
+        "min": -4.0
+      }
+    },
+    "output_dtype": {
+      "bits": 3,
+      "qmax": 3,
+      "qmin": -4,
+      "signed": true
+    },
+    "params": {
+      "bound": 63,
+      "effective_divisor": 4,
+      "input_dtype": {
+        "bits": 10,
+        "qmax": 511,
+        "qmin": -512,
+        "signed": true
+      },
+      "name": "attn_10_kq",
+      "observed_range": null,
+      "offset": 112,
+      "output_dtype": {
+        "bits": 3,
+        "qmax": 3,
+        "qmin": -4,
+        "signed": true
+      },
+      "scalars": [
+        112,
+        2,
+        63
+      ],
+      "shift_scale": 2,
+      "table_sizes": [
+        64
+      ],
+      "zero_point": null
+    },
+    "stat_key": "attn10.kq"
+  },
+  {
+    "input_dtype": {
+      "bits": 12,
+      "qmax": 2047,
+      "qmin": -2048,
+      "signed": true
+    },
+    "kind": "requant_table",
+    "name": "attn_10_qq",
+    "observed_range": {
+      "cursor": {
+        "max": 223.0,
+        "min": -149.0
+      },
+      "input": {
+        "max": 1616.0,
+        "min": -1360.0
+      },
+      "output": {
+        "max": 3.0,
+        "min": -4.0
+      }
+    },
+    "output_dtype": {
+      "bits": 3,
+      "qmax": 3,
+      "qmin": -4,
+      "signed": true
+    },
+    "params": {
+      "bound": 63,
+      "effective_divisor": 8,
+      "input_dtype": {
+        "bits": 12,
+        "qmax": 2047,
+        "qmin": -2048,
+        "signed": true
+      },
+      "name": "attn_10_qq",
+      "observed_range": null,
+      "offset": 173,
+      "output_dtype": {
+        "bits": 3,
+        "qmax": 3,
+        "qmin": -4,
+        "signed": true
+      },
+      "scalars": [
+        173,
+        3,
+        63
+      ],
+      "shift_scale": 3,
+      "table_sizes": [
+        64
+      ],
+      "zero_point": null
+    },
+    "stat_key": "attn10.qq"
+  },
+  {
+    "input_dtype": {
+      "bits": 10,
+      "qmax": 511,
+      "qmin": -512,
+      "signed": true
+    },
+    "kind": "requant_table",
+    "name": "attn_10_vq",
+    "observed_range": {
+      "cursor": {
+        "max": 104.0,
+        "min": -53.0
+      },
+      "input": {
+        "max": 305.0,
+        "min": -323.0
+      },
+      "output": {
+        "max": 3.0,
+        "min": -4.0
+      }
+    },
+    "output_dtype": {
+      "bits": 3,
+      "qmax": 3,
+      "qmin": -4,
+      "signed": true
+    },
+    "params": {
+      "bound": 63,
+      "effective_divisor": 4,
+      "input_dtype": {
+        "bits": 10,
+        "qmax": 511,
+        "qmin": -512,
+        "signed": true
+      },
+      "name": "attn_10_vq",
+      "observed_range": null,
+      "offset": 114,
+      "output_dtype": {
+        "bits": 3,
+        "qmax": 3,
+        "qmin": -4,
+        "signed": true
+      },
+      "scalars": [
+        114,
+        2,
+        63
+      ],
+      "shift_scale": 2,
+      "table_sizes": [
+        64
+      ],
+      "zero_point": null
+    },
+    "stat_key": "attn10.vq"
+  },
+  {
+    "input_dtype": {
+      "bits": 10,
+      "qmax": 511,
+      "qmin": -512,
+      "signed": true
+    },
+    "kind": "requant_table",
+    "name": "attn_11_aq",
+    "observed_range": {
+      "cursor": {
+        "max": 124.0,
+        "min": -103.0
+      },
+      "input": {
+        "max": 397.0,
+        "min": -511.0
+      },
+      "output": {
+        "max": 3.0,
+        "min": -4.0
+      }
+    },
+    "output_dtype": {
+      "bits": 3,
+      "qmax": 3,
+      "qmin": -4,
+      "signed": true
+    },
+    "params": {
+      "bound": 63,
+      "effective_divisor": 4,
+      "input_dtype": {
+        "bits": 10,
+        "qmax": 511,
+        "qmin": -512,
+        "signed": true
+      },
+      "name": "attn_11_aq",
+      "observed_range": null,
+      "offset": 102,
+      "output_dtype": {
+        "bits": 3,
+        "qmax": 3,
+        "qmin": -4,
+        "signed": true
+      },
+      "scalars": [
+        102,
+        2,
+        63
+      ],
+      "shift_scale": 2,
+      "table_sizes": [
+        64
+      ],
+      "zero_point": null
+    },
+    "stat_key": "attn11.aq"
+  },
+  {
+    "input_dtype": {
+      "bits": 10,
+      "qmax": 511,
+      "qmin": -512,
+      "signed": true
+    },
+    "kind": "requant_table",
+    "name": "attn_11_kq",
+    "observed_range": {
+      "cursor": {
+        "max": 102.0,
+        "min": -63.0
+      },
+      "input": {
+        "max": 334.0,
+        "min": -326.0
+      },
+      "output": {
+        "max": 3.0,
+        "min": -4.0
+      }
+    },
+    "output_dtype": {
+      "bits": 3,
+      "qmax": 3,
+      "qmin": -4,
+      "signed": true
+    },
+    "params": {
+      "bound": 63,
+      "effective_divisor": 4,
+      "input_dtype": {
+        "bits": 10,
+        "qmax": 511,
+        "qmin": -512,
+        "signed": true
+      },
+      "name": "attn_11_kq",
+      "observed_range": null,
+      "offset": 77,
+      "output_dtype": {
+        "bits": 3,
+        "qmax": 3,
+        "qmin": -4,
+        "signed": true
+      },
+      "scalars": [
+        77,
+        2,
+        63
+      ],
+      "shift_scale": 2,
+      "table_sizes": [
+        64
+      ],
+      "zero_point": null
+    },
+    "stat_key": "attn11.kq"
+  },
+  {
+    "input_dtype": {
+      "bits": 12,
+      "qmax": 2047,
+      "qmin": -2048,
+      "signed": true
+    },
+    "kind": "requant_table",
+    "name": "attn_11_qq",
+    "observed_range": {
+      "cursor": {
+        "max": 166.0,
+        "min": -168.0
+      },
+      "input": {
+        "max": 1145.0,
+        "min": -1526.0
+      },
+      "output": {
+        "max": 3.0,
+        "min": -4.0
+      }
+    },
+    "output_dtype": {
+      "bits": 3,
+      "qmax": 3,
+      "qmin": -4,
+      "signed": true
+    },
+    "params": {
+      "bound": 63,
+      "effective_divisor": 8,
+      "input_dtype": {
+        "bits": 12,
+        "qmax": 2047,
+        "qmin": -2048,
+        "signed": true
+      },
+      "name": "attn_11_qq",
+      "observed_range": null,
+      "offset": 189,
+      "output_dtype": {
+        "bits": 3,
+        "qmax": 3,
+        "qmin": -4,
+        "signed": true
+      },
+      "scalars": [
+        189,
+        3,
+        63
+      ],
+      "shift_scale": 3,
+      "table_sizes": [
+        64
+      ],
+      "zero_point": null
+    },
+    "stat_key": "attn11.qq"
+  },
+  {
+    "input_dtype": {
+      "bits": 10,
+      "qmax": 511,
+      "qmin": -512,
+      "signed": true
+    },
+    "kind": "requant_table",
+    "name": "attn_11_vq",
+    "observed_range": {
+      "cursor": {
+        "max": 97.0,
+        "min": -51.0
+      },
+      "input": {
+        "max": 281.0,
+        "min": -311.0
+      },
+      "output": {
+        "max": 3.0,
+        "min": -4.0
+      }
+    },
+    "output_dtype": {
+      "bits": 3,
+      "qmax": 3,
+      "qmin": -4,
+      "signed": true
+    },
+    "params": {
+      "bound": 63,
+      "effective_divisor": 4,
+      "input_dtype": {
+        "bits": 10,
+        "qmax": 511,
+        "qmin": -512,
+        "signed": true
+      },
+      "name": "attn_11_vq",
+      "observed_range": null,
+      "offset": 110,
+      "output_dtype": {
+        "bits": 3,
+        "qmax": 3,
+        "qmin": -4,
+        "signed": true
+      },
+      "scalars": [
+        110,
+        2,
+        63
+      ],
+      "shift_scale": 2,
+      "table_sizes": [
+        64
+      ],
+      "zero_point": null
+    },
+    "stat_key": "attn11.vq"
+  },
+  {
+    "input_dtype": {
+      "bits": 11,
+      "qmax": 1023,
+      "qmin": -1024,
+      "signed": true
+    },
+    "kind": "requant_table",
+    "name": "attn_1_aq",
+    "observed_range": {
+      "cursor": {
+        "max": 93.0,
+        "min": -68.0
+      },
+      "input": {
+        "max": 583.0,
+        "min": -702.0
+      },
+      "output": {
+        "max": 3.0,
+        "min": -4.0
+      }
+    },
+    "output_dtype": {
+      "bits": 3,
+      "qmax": 3,
+      "qmin": -4,
+      "signed": true
+    },
+    "params": {
+      "bound": 63,
+      "effective_divisor": 8,
+      "input_dtype": {
+        "bits": 11,
+        "qmax": 1023,
+        "qmin": -1024,
+        "signed": true
+      },
+      "name": "attn_1_aq",
+      "observed_range": null,
+      "offset": 162,
+      "output_dtype": {
+        "bits": 3,
+        "qmax": 3,
+        "qmin": -4,
+        "signed": true
+      },
+      "scalars": [
+        162,
+        3,
+        63
+      ],
+      "shift_scale": 3,
+      "table_sizes": [
+        64
+      ],
+      "zero_point": null
+    },
+    "stat_key": "attn1.aq"
+  },
+  {
+    "input_dtype": {
+      "bits": 10,
+      "qmax": 511,
+      "qmin": -512,
+      "signed": true
+    },
+    "kind": "requant_table",
+    "name": "attn_1_kq",
+    "observed_range": {
+      "cursor": {
+        "max": 215.0,
+        "min": -184.0
+      },
+      "input": {
+        "max": 363.0,
+        "min": -434.0
+      },
+      "output": {
+        "max": 3.0,
+        "min": -4.0
+      }
+    },
+    "output_dtype": {
+      "bits": 3,
+      "qmax": 3,
+      "qmin": -4,
+      "signed": true
+    },
+    "params": {
+      "bound": 63,
+      "effective_divisor": 2,
+      "input_dtype": {
+        "bits": 10,
+        "qmax": 511,
+        "qmin": -512,
+        "signed": true
+      },
+      "name": "attn_1_kq",
+      "observed_range": null,
+      "offset": 67,
+      "output_dtype": {
+        "bits": 3,
+        "qmax": 3,
+        "qmin": -4,
+        "signed": true
+      },
+      "scalars": [
+        67,
+        1,
+        63
+      ],
+      "shift_scale": 1,
+      "table_sizes": [
+        64
+      ],
+      "zero_point": null
+    },
+    "stat_key": "attn1.kq"
+  },
+  {
+    "input_dtype": {
+      "bits": 10,
+      "qmax": 511,
+      "qmin": -512,
+      "signed": true
+    },
+    "kind": "requant_table",
+    "name": "attn_1_qq",
+    "observed_range": {
+      "cursor": {
+        "max": 130.0,
+        "min": -80.0
+      },
+      "input": {
+        "max": 432.0,
+        "min": -408.0
+      },
+      "output": {
+        "max": 3.0,
+        "min": -4.0
+      }
+    },
+    "output_dtype": {
+      "bits": 3,
+      "qmax": 3,
+      "qmin": -4,
+      "signed": true
+    },
+    "params": {
+      "bound": 63,
+      "effective_divisor": 4,
+      "input_dtype": {
+        "bits": 10,
+        "qmax": 511,
+        "qmin": -512,
+        "signed": true
+      },
+      "name": "attn_1_qq",
+      "observed_range": null,
+      "offset": 91,
+      "output_dtype": {
+        "bits": 3,
+        "qmax": 3,
+        "qmin": -4,
+        "signed": true
+      },
+      "scalars": [
+        91,
+        2,
+        63
+      ],
+      "shift_scale": 2,
+      "table_sizes": [
+        64
+      ],
+      "zero_point": null
+    },
+    "stat_key": "attn1.qq"
+  },
+  {
+    "input_dtype": {
+      "bits": 10,
+      "qmax": 511,
+      "qmin": -512,
+      "signed": true
+    },
+    "kind": "requant_table",
+    "name": "attn_1_vq",
+    "observed_range": {
+      "cursor": {
+        "max": 158.0,
+        "min": -91.0
+      },
+      "input": {
+        "max": 503.0,
+        "min": -492.0
+      },
+      "output": {
+        "max": 3.0,
+        "min": -4.0
+      }
+    },
+    "output_dtype": {
+      "bits": 3,
+      "qmax": 3,
+      "qmin": -4,
+      "signed": true
+    },
+    "params": {
+      "bound": 63,
+      "effective_divisor": 4,
+      "input_dtype": {
+        "bits": 10,
+        "qmax": 511,
+        "qmin": -512,
+        "signed": true
+      },
+      "name": "attn_1_vq",
+      "observed_range": null,
+      "offset": 131,
+      "output_dtype": {
+        "bits": 3,
+        "qmax": 3,
+        "qmin": -4,
+        "signed": true
+      },
+      "scalars": [
+        131,
+        2,
+        63
+      ],
+      "shift_scale": 2,
+      "table_sizes": [
+        64
+      ],
+      "zero_point": null
+    },
+    "stat_key": "attn1.vq"
+  },
+  {
+    "input_dtype": {
+      "bits": 10,
+      "qmax": 511,
+      "qmin": -512,
+      "signed": true
+    },
+    "kind": "requant_table",
+    "name": "attn_2_aq",
+    "observed_range": {
+      "cursor": {
+        "max": 271.0,
+        "min": -243.0
+      },
+      "input": {
+        "max": 246.0,
+        "min": -268.0
+      },
+      "output": {
+        "max": 3.0,
+        "min": -4.0
+      }
+    },
+    "output_dtype": {
+      "bits": 3,
+      "qmax": 3,
+      "qmin": -4,
+      "signed": true
+    },
+    "params": {
+      "bound": 63,
+      "effective_divisor": 1,
+      "input_dtype": {
+        "bits": 10,
+        "qmax": 511,
+        "qmin": -512,
+        "signed": true
+      },
+      "name": "attn_2_aq",
+      "observed_range": null,
+      "offset": 25,
+      "output_dtype": {
+        "bits": 3,
+        "qmax": 3,
+        "qmin": -4,
+        "signed": true
+      },
+      "scalars": [
+        25,
+        0,
+        63
+      ],
+      "shift_scale": 0,
+      "table_sizes": [
+        64
+      ],
+      "zero_point": null
+    },
+    "stat_key": "attn2.aq"
+  },
+  {
+    "input_dtype": {
+      "bits": 9,
+      "qmax": 255,
+      "qmin": -256,
+      "signed": true
+    },
+    "kind": "requant_table",
+    "name": "attn_2_kq",
+    "observed_range": {
+      "cursor": {
+        "max": 167.0,
+        "min": -111.0
+      },
+      "input": {
+        "max": 135.0,
+        "min": -143.0
+      },
+      "output": {
+        "max": 3.0,
+        "min": -4.0
+      }
+    },
+    "output_dtype": {
+      "bits": 3,
+      "qmax": 3,
+      "qmin": -4,
+      "signed": true
+    },
+    "params": {
+      "bound": 63,
+      "effective_divisor": 1,
+      "input_dtype": {
+        "bits": 9,
+        "qmax": 255,
+        "qmin": -256,
+        "signed": true
+      },
+      "name": "attn_2_kq",
+      "observed_range": null,
+      "offset": 32,
+      "output_dtype": {
+        "bits": 3,
+        "qmax": 3,
+        "qmin": -4,
+        "signed": true
+      },
+      "scalars": [
+        32,
+        0,
+        63
+      ],
+      "shift_scale": 0,
+      "table_sizes": [
+        64
+      ],
+      "zero_point": null
+    },
+    "stat_key": "attn2.kq"
+  },
+  {
+    "input_dtype": {
+      "bits": 9,
+      "qmax": 255,
+      "qmin": -256,
+      "signed": true
+    },
+    "kind": "requant_table",
+    "name": "attn_2_qq",
+    "observed_range": {
+      "cursor": {
+        "max": 96.0,
+        "min": -50.0
+      },
+      "input": {
+        "max": 145.0,
+        "min": -147.0
+      },
+      "output": {
+        "max": 3.0,
+        "min": -4.0
+      }
+    },
+    "output_dtype": {
+      "bits": 3,
+      "qmax": 3,
+      "qmin": -4,
+      "signed": true
+    },
+    "params": {
+      "bound": 63,
+      "effective_divisor": 2,
+      "input_dtype": {
+        "bits": 9,
+        "qmax": 255,
+        "qmin": -256,
+        "signed": true
+      },
+      "name": "attn_2_qq",
+      "observed_range": null,
+      "offset": 48,
+      "output_dtype": {
+        "bits": 3,
+        "qmax": 3,
+        "qmin": -4,
+        "signed": true
+      },
+      "scalars": [
+        48,
+        1,
+        63
+      ],
+      "shift_scale": 1,
+      "table_sizes": [
+        64
+      ],
+      "zero_point": null
+    },
+    "stat_key": "attn2.qq"
+  },
+  {
+    "input_dtype": {
+      "bits": 10,
+      "qmax": 511,
+      "qmin": -512,
+      "signed": true
+    },
+    "kind": "requant_table",
+    "name": "attn_2_vq",
+    "observed_range": {
+      "cursor": {
+        "max": 109.0,
+        "min": -66.0
+      },
+      "input": {
+        "max": 341.0,
+        "min": -358.0
+      },
+      "output": {
+        "max": 3.0,
+        "min": -4.0
+      }
+    },
+    "output_dtype": {
+      "bits": 3,
+      "qmax": 3,
+      "qmin": -4,
+      "signed": true
+    },
+    "params": {
+      "bound": 63,
+      "effective_divisor": 4,
+      "input_dtype": {
+        "bits": 10,
+        "qmax": 511,
+        "qmin": -512,
+        "signed": true
+      },
+      "name": "attn_2_vq",
+      "observed_range": null,
+      "offset": 95,
+      "output_dtype": {
+        "bits": 3,
+        "qmax": 3,
+        "qmin": -4,
+        "signed": true
+      },
+      "scalars": [
+        95,
+        2,
+        63
+      ],
+      "shift_scale": 2,
+      "table_sizes": [
+        64
+      ],
+      "zero_point": null
+    },
+    "stat_key": "attn2.vq"
+  },
+  {
+    "input_dtype": {
+      "bits": 9,
+      "qmax": 255,
+      "qmin": -256,
+      "signed": true
+    },
+    "kind": "requant_table",
+    "name": "attn_3_aq",
+    "observed_range": {
+      "cursor": {
+        "max": 80.0,
+        "min": -56.0
+      },
+      "input": {
+        "max": 118.0,
+        "min": -154.0
+      },
+      "output": {
+        "max": 3.0,
+        "min": -4.0
+      }
+    },
+    "output_dtype": {
+      "bits": 3,
+      "qmax": 3,
+      "qmin": -4,
+      "signed": true
+    },
+    "params": {
+      "bound": 63,
+      "effective_divisor": 2,
+      "input_dtype": {
+        "bits": 9,
+        "qmax": 255,
+        "qmin": -256,
+        "signed": true
+      },
+      "name": "attn_3_aq",
+      "observed_range": null,
+      "offset": 43,
+      "output_dtype": {
+        "bits": 3,
+        "qmax": 3,
+        "qmin": -4,
+        "signed": true
+      },
+      "scalars": [
+        43,
+        1,
+        63
+      ],
+      "shift_scale": 1,
+      "table_sizes": [
+        64
+      ],
+      "zero_point": null
+    },
+    "stat_key": "attn3.aq"
+  },
+  {
+    "input_dtype": {
+      "bits": 10,
+      "qmax": 511,
+      "qmin": -512,
+      "signed": true
+    },
+    "kind": "requant_table",
+    "name": "attn_3_kq",
+    "observed_range": {
+      "cursor": {
+        "max": 141.0,
+        "min": -107.0
+      },
+      "input": {
+        "max": 235.0,
+        "min": -261.0
+      },
+      "output": {
+        "max": 3.0,
+        "min": -4.0
+      }
+    },
+    "output_dtype": {
+      "bits": 3,
+      "qmax": 3,
+      "qmin": -4,
+      "signed": true
+    },
+    "params": {
+      "bound": 63,
+      "effective_divisor": 2,
+      "input_dtype": {
+        "bits": 10,
+        "qmax": 511,
+        "qmin": -512,
+        "signed": true
+      },
+      "name": "attn_3_kq",
+      "observed_range": null,
+      "offset": 48,
+      "output_dtype": {
+        "bits": 3,
+        "qmax": 3,
+        "qmin": -4,
+        "signed": true
+      },
+      "scalars": [
+        48,
+        1,
+        63
+      ],
+      "shift_scale": 1,
+      "table_sizes": [
+        64
+      ],
+      "zero_point": null
+    },
+    "stat_key": "attn3.kq"
+  },
+  {
+    "input_dtype": {
+      "bits": 10,
+      "qmax": 511,
+      "qmin": -512,
+      "signed": true
+    },
+    "kind": "requant_table",
+    "name": "attn_3_qq",
+    "observed_range": {
+      "cursor": {
+        "max": 95.0,
+        "min": -63.0
+      },
+      "input": {
+        "max": 306.0,
+        "min": -327.0
+      },
+      "output": {
+        "max": 3.0,
+        "min": -4.0
+      }
+    },
+    "output_dtype": {
+      "bits": 3,
+      "qmax": 3,
+      "qmin": -4,
+      "signed": true
+    },
+    "params": {
+      "bound": 63,
+      "effective_divisor": 4,
+      "input_dtype": {
+        "bits": 10,
+        "qmax": 511,
+        "qmin": -512,
+        "signed": true
+      },
+      "name": "attn_3_qq",
+      "observed_range": null,
+      "offset": 77,
+      "output_dtype": {
+        "bits": 3,
+        "qmax": 3,
+        "qmin": -4,
+        "signed": true
+      },
+      "scalars": [
+        77,
+        2,
+        63
+      ],
+      "shift_scale": 2,
+      "table_sizes": [
+        64
+      ],
+      "zero_point": null
+    },
+    "stat_key": "attn3.qq"
+  },
+  {
+    "input_dtype": {
+      "bits": 10,
+      "qmax": 511,
+      "qmin": -512,
+      "signed": true
+    },
+    "kind": "requant_table",
+    "name": "attn_3_vq",
+    "observed_range": {
+      "cursor": {
+        "max": 121.0,
+        "min": -68.0
+      },
+      "input": {
+        "max": 370.0,
+        "min": -386.0
+      },
+      "output": {
+        "max": 3.0,
+        "min": -4.0
+      }
+    },
+    "output_dtype": {
+      "bits": 3,
+      "qmax": 3,
+      "qmin": -4,
+      "signed": true
+    },
+    "params": {
+      "bound": 63,
+      "effective_divisor": 4,
+      "input_dtype": {
+        "bits": 10,
+        "qmax": 511,
+        "qmin": -512,
+        "signed": true
+      },
+      "name": "attn_3_vq",
+      "observed_range": null,
+      "offset": 117,
+      "output_dtype": {
+        "bits": 3,
+        "qmax": 3,
+        "qmin": -4,
+        "signed": true
+      },
+      "scalars": [
+        117,
+        2,
+        63
+      ],
+      "shift_scale": 2,
+      "table_sizes": [
+        64
+      ],
+      "zero_point": null
+    },
+    "stat_key": "attn3.vq"
+  },
+  {
+    "input_dtype": {
+      "bits": 11,
+      "qmax": 1023,
+      "qmin": -1024,
+      "signed": true
+    },
+    "kind": "requant_table",
+    "name": "attn_4_aq",
+    "observed_range": {
+      "cursor": {
+        "max": 159.0,
+        "min": -115.0
+      },
+      "input": {
+        "max": 507.0,
+        "min": -591.0
+      },
+      "output": {
+        "max": 3.0,
+        "min": -4.0
+      }
+    },
+    "output_dtype": {
+      "bits": 3,
+      "qmax": 3,
+      "qmin": -4,
+      "signed": true
+    },
+    "params": {
+      "bound": 63,
+      "effective_divisor": 4,
+      "input_dtype": {
+        "bits": 11,
+        "qmax": 1023,
+        "qmin": -1024,
+        "signed": true
+      },
+      "name": "attn_4_aq",
+      "observed_range": null,
+      "offset": 132,
+      "output_dtype": {
+        "bits": 3,
+        "qmax": 3,
+        "qmin": -4,
+        "signed": true
+      },
+      "scalars": [
+        132,
+        2,
+        63
+      ],
+      "shift_scale": 2,
+      "table_sizes": [
+        64
+      ],
+      "zero_point": null
+    },
+    "stat_key": "attn4.aq"
+  },
+  {
+    "input_dtype": {
+      "bits": 10,
+      "qmax": 511,
+      "qmin": -512,
+      "signed": true
+    },
+    "kind": "requant_table",
+    "name": "attn_4_kq",
+    "observed_range": {
+      "cursor": {
+        "max": 189.0,
+        "min": -118.0
+      },
+      "input": {
+        "max": 305.0,
+        "min": -309.0
+      },
+      "output": {
+        "max": 3.0,
+        "min": -4.0
+      }
+    },
+    "output_dtype": {
+      "bits": 3,
+      "qmax": 3,
+      "qmin": -4,
+      "signed": true
+    },
+    "params": {
+      "bound": 63,
+      "effective_divisor": 2,
+      "input_dtype": {
+        "bits": 10,
+        "qmax": 511,
+        "qmin": -512,
+        "signed": true
+      },
+      "name": "attn_4_kq",
+      "observed_range": null,
+      "offset": 73,
+      "output_dtype": {
+        "bits": 3,
+        "qmax": 3,
+        "qmin": -4,
+        "signed": true
+      },
+      "scalars": [
+        73,
+        1,
+        63
+      ],
+      "shift_scale": 1,
+      "table_sizes": [
+        64
+      ],
+      "zero_point": null
+    },
+    "stat_key": "attn4.kq"
+  },
+  {
+    "input_dtype": {
+      "bits": 11,
+      "qmax": 1023,
+      "qmin": -1024,
+      "signed": true
+    },
+    "kind": "requant_table",
+    "name": "attn_4_qq",
+    "observed_range": {
+      "cursor": {
+        "max": 160.0,
+        "min": -105.0
+      },
+      "input": {
+        "max": 527.0,
+        "min": -534.0
+      },
+      "output": {
+        "max": 3.0,
+        "min": -4.0
+      }
+    },
+    "output_dtype": {
+      "bits": 3,
+      "qmax": 3,
+      "qmin": -4,
+      "signed": true
+    },
+    "params": {
+      "bound": 63,
+      "effective_divisor": 4,
+      "input_dtype": {
+        "bits": 11,
+        "qmax": 1023,
+        "qmin": -1024,
+        "signed": true
+      },
+      "name": "attn_4_qq",
+      "observed_range": null,
+      "offset": 116,
+      "output_dtype": {
+        "bits": 3,
+        "qmax": 3,
+        "qmin": -4,
+        "signed": true
+      },
+      "scalars": [
+        116,
+        2,
+        63
+      ],
+      "shift_scale": 2,
+      "table_sizes": [
+        64
+      ],
+      "zero_point": null
+    },
+    "stat_key": "attn4.qq"
+  },
+  {
+    "input_dtype": {
+      "bits": 10,
+      "qmax": 511,
+      "qmin": -512,
+      "signed": true
+    },
+    "kind": "requant_table",
+    "name": "attn_4_vq",
+    "observed_range": {
+      "cursor": {
+        "max": 133.0,
+        "min": -66.0
+      },
+      "input": {
+        "max": 403.0,
+        "min": -395.0
+      },
+      "output": {
+        "max": 3.0,
+        "min": -4.0
+      }
+    },
+    "output_dtype": {
+      "bits": 3,
+      "qmax": 3,
+      "qmin": -4,
+      "signed": true
+    },
+    "params": {
+      "bound": 63,
+      "effective_divisor": 4,
+      "input_dtype": {
+        "bits": 10,
+        "qmax": 511,
+        "qmin": -512,
+        "signed": true
+      },
+      "name": "attn_4_vq",
+      "observed_range": null,
+      "offset": 132,
+      "output_dtype": {
+        "bits": 3,
+        "qmax": 3,
+        "qmin": -4,
+        "signed": true
+      },
+      "scalars": [
+        132,
+        2,
+        63
+      ],
+      "shift_scale": 2,
+      "table_sizes": [
+        64
+      ],
+      "zero_point": null
+    },
+    "stat_key": "attn4.vq"
+  },
+  {
+    "input_dtype": {
+      "bits": 10,
+      "qmax": 511,
+      "qmin": -512,
+      "signed": true
+    },
+    "kind": "requant_table",
+    "name": "attn_5_aq",
+    "observed_range": {
+      "cursor": {
+        "max": 100.0,
+        "min": -72.0
+      },
+      "input": {
+        "max": 310.0,
+        "min": -381.0
+      },
+      "output": {
+        "max": 3.0,
+        "min": -4.0
+      }
+    },
+    "output_dtype": {
+      "bits": 3,
+      "qmax": 3,
+      "qmin": -4,
+      "signed": true
+    },
+    "params": {
+      "bound": 63,
+      "effective_divisor": 4,
+      "input_dtype": {
+        "bits": 10,
+        "qmax": 511,
+        "qmin": -512,
+        "signed": true
+      },
+      "name": "attn_5_aq",
+      "observed_range": null,
+      "offset": 93,
+      "output_dtype": {
+        "bits": 3,
+        "qmax": 3,
+        "qmin": -4,
+        "signed": true
+      },
+      "scalars": [
+        93,
+        2,
+        63
+      ],
+      "shift_scale": 2,
+      "table_sizes": [
+        64
+      ],
+      "zero_point": null
+    },
+    "stat_key": "attn5.aq"
+  },
+  {
+    "input_dtype": {
+      "bits": 10,
+      "qmax": 511,
+      "qmin": -512,
+      "signed": true
+    },
+    "kind": "requant_table",
+    "name": "attn_5_kq",
+    "observed_range": {
+      "cursor": {
+        "max": 212.0,
+        "min": -144.0
+      },
+      "input": {
+        "max": 361.0,
+        "min": -352.0
+      },
+      "output": {
+        "max": 3.0,
+        "min": -4.0
+      }
+    },
+    "output_dtype": {
+      "bits": 3,
+      "qmax": 3,
+      "qmin": -4,
+      "signed": true
+    },
+    "params": {
+      "bound": 63,
+      "effective_divisor": 2,
+      "input_dtype": {
+        "bits": 10,
+        "qmax": 511,
+        "qmin": -512,
+        "signed": true
+      },
+      "name": "attn_5_kq",
+      "observed_range": null,
+      "offset": 64,
+      "output_dtype": {
+        "bits": 3,
+        "qmax": 3,
+        "qmin": -4,
+        "signed": true
+      },
+      "scalars": [
+        64,
+        1,
+        63
+      ],
+      "shift_scale": 1,
+      "table_sizes": [
+        64
+      ],
+      "zero_point": null
+    },
+    "stat_key": "attn5.kq"
+  },
+  {
+    "input_dtype": {
+      "bits": 11,
+      "qmax": 1023,
+      "qmin": -1024,
+      "signed": true
+    },
+    "kind": "requant_table",
+    "name": "attn_5_qq",
+    "observed_range": {
+      "cursor": {
+        "max": 141.0,
+        "min": -118.0
+      },
+      "input": {
+        "max": 463.0,
+        "min": -570.0
+      },
+      "output": {
+        "max": 3.0,
+        "min": -4.0
+      }
+    },
+    "output_dtype": {
+      "bits": 3,
+      "qmax": 3,
+      "qmin": -4,
+      "signed": true
+    },
+    "params": {
+      "bound": 63,
+      "effective_divisor": 4,
+      "input_dtype": {
+        "bits": 11,
+        "qmax": 1023,
+        "qmin": -1024,
+        "signed": true
+      },
+      "name": "attn_5_qq",
+      "observed_range": null,
+      "offset": 101,
+      "output_dtype": {
+        "bits": 3,
+        "qmax": 3,
+        "qmin": -4,
+        "signed": true
+      },
+      "scalars": [
+        101,
+        2,
+        63
+      ],
+      "shift_scale": 2,
+      "table_sizes": [
+        64
+      ],
+      "zero_point": null
+    },
+    "stat_key": "attn5.qq"
+  },
+  {
+    "input_dtype": {
+      "bits": 10,
+      "qmax": 511,
+      "qmin": -512,
+      "signed": true
+    },
+    "kind": "requant_table",
+    "name": "attn_5_vq",
+    "observed_range": {
+      "cursor": {
+        "max": 116.0,
+        "min": -70.0
+      },
+      "input": {
+        "max": 345.0,
+        "min": -399.0
+      },
+      "output": {
+        "max": 3.0,
+        "min": -4.0
+      }
+    },
+    "output_dtype": {
+      "bits": 3,
+      "qmax": 3,
+      "qmin": -4,
+      "signed": true
+    },
+    "params": {
+      "bound": 63,
+      "effective_divisor": 4,
+      "input_dtype": {
+        "bits": 10,
+        "qmax": 511,
+        "qmin": -512,
+        "signed": true
+      },
+      "name": "attn_5_vq",
+      "observed_range": null,
+      "offset": 121,
+      "output_dtype": {
+        "bits": 3,
+        "qmax": 3,
+        "qmin": -4,
+        "signed": true
+      },
+      "scalars": [
+        121,
+        2,
+        63
+      ],
+      "shift_scale": 2,
+      "table_sizes": [
+        64
+      ],
+      "zero_point": null
+    },
+    "stat_key": "attn5.vq"
+  },
+  {
+    "input_dtype": {
+      "bits": 11,
+      "qmax": 1023,
+      "qmin": -1024,
+      "signed": true
+    },
+    "kind": "requant_table",
+    "name": "attn_6_aq",
+    "observed_range": {
+      "cursor": {
+        "max": 122.0,
+        "min": -108.0
+      },
+      "input": {
+        "max": 391.0,
+        "min": -527.0
+      },
+      "output": {
+        "max": 3.0,
+        "min": -4.0
+      }
+    },
+    "output_dtype": {
+      "bits": 3,
+      "qmax": 3,
+      "qmin": -4,
+      "signed": true
+    },
+    "params": {
+      "bound": 63,
+      "effective_divisor": 4,
+      "input_dtype": {
+        "bits": 11,
+        "qmax": 1023,
+        "qmin": -1024,
+        "signed": true
+      },
+      "name": "attn_6_aq",
+      "observed_range": null,
+      "offset": 98,
+      "output_dtype": {
+        "bits": 3,
+        "qmax": 3,
+        "qmin": -4,
+        "signed": true
+      },
+      "scalars": [
+        98,
+        2,
+        63
+      ],
+      "shift_scale": 2,
+      "table_sizes": [
+        64
+      ],
+      "zero_point": null
+    },
+    "stat_key": "attn6.aq"
+  },
+  {
+    "input_dtype": {
+      "bits": 10,
+      "qmax": 511,
+      "qmin": -512,
+      "signed": true
+    },
+    "kind": "requant_table",
+    "name": "attn_6_kq",
+    "observed_range": {
+      "cursor": {
+        "max": 139.0,
+        "min": -71.0
+      },
+      "input": {
+        "max": 478.0,
+        "min": -364.0
+      },
+      "output": {
+        "max": 3.0,
+        "min": -4.0
+      }
+    },
+    "output_dtype": {
+      "bits": 3,
+      "qmax": 3,
+      "qmin": -4,
+      "signed": true
+    },
+    "params": {
+      "bound": 63,
+      "effective_divisor": 4,
+      "input_dtype": {
+        "bits": 10,
+        "qmax": 511,
+        "qmin": -512,
+        "signed": true
+      },
+      "name": "attn_6_kq",
+      "observed_range": null,
+      "offset": 81,
+      "output_dtype": {
+        "bits": 3,
+        "qmax": 3,
+        "qmin": -4,
+        "signed": true
+      },
+      "scalars": [
+        81,
+        2,
+        63
+      ],
+      "shift_scale": 2,
+      "table_sizes": [
+        64
+      ],
+      "zero_point": null
+    },
+    "stat_key": "attn6.kq"
+  },
+  {
+    "input_dtype": {
+      "bits": 11,
+      "qmax": 1023,
+      "qmin": -1024,
+      "signed": true
+    },
+    "kind": "requant_table",
+    "name": "attn_6_qq",
+    "observed_range": {
+      "cursor": {
+        "max": 127.0,
+        "min": -106.0
+      },
+      "input": {
+        "max": 398.0,
+        "min": -534.0
+      },
+      "output": {
+        "max": 3.0,
+        "min": -4.0
+      }
+    },
+    "output_dtype": {
+      "bits": 3,
+      "qmax": 3,
+      "qmin": -4,
+      "signed": true
+    },
+    "params": {
+      "bound": 63,
+      "effective_divisor": 4,
+      "input_dtype": {
+        "bits": 11,
+        "qmax": 1023,
+        "qmin": -1024,
+        "signed": true
+      },
+      "name": "attn_6_qq",
+      "observed_range": null,
+      "offset": 111,
+      "output_dtype": {
+        "bits": 3,
+        "qmax": 3,
+        "qmin": -4,
+        "signed": true
+      },
+      "scalars": [
+        111,
+        2,
+        63
+      ],
+      "shift_scale": 2,
+      "table_sizes": [
+        64
+      ],
+      "zero_point": null
+    },
+    "stat_key": "attn6.qq"
+  },
+  {
+    "input_dtype": {
+      "bits": 10,
+      "qmax": 511,
+      "qmin": -512,
+      "signed": true
+    },
+    "kind": "requant_table",
+    "name": "attn_6_vq",
+    "observed_range": {
+      "cursor": {
+        "max": 112.0,
+        "min": -63.0
+      },
+      "input": {
+        "max": 329.0,
+        "min": -370.0
+      },
+      "output": {
+        "max": 3.0,
+        "min": -4.0
+      }
+    },
+    "output_dtype": {
+      "bits": 3,
+      "qmax": 3,
+      "qmin": -4,
+      "signed": true
+    },
+    "params": {
+      "bound": 63,
+      "effective_divisor": 4,
+      "input_dtype": {
+        "bits": 10,
+        "qmax": 511,
+        "qmin": -512,
+        "signed": true
+      },
+      "name": "attn_6_vq",
+      "observed_range": null,
+      "offset": 120,
+      "output_dtype": {
+        "bits": 3,
+        "qmax": 3,
+        "qmin": -4,
+        "signed": true
+      },
+      "scalars": [
+        120,
+        2,
+        63
+      ],
+      "shift_scale": 2,
+      "table_sizes": [
+        64
+      ],
+      "zero_point": null
+    },
+    "stat_key": "attn6.vq"
+  },
+  {
+    "input_dtype": {
+      "bits": 11,
+      "qmax": 1023,
+      "qmin": -1024,
+      "signed": true
+    },
+    "kind": "requant_table",
+    "name": "attn_7_aq",
+    "observed_range": {
+      "cursor": {
+        "max": 74.0,
+        "min": -48.0
+      },
+      "input": {
+        "max": 436.0,
+        "min": -541.0
+      },
+      "output": {
+        "max": 3.0,
+        "min": -4.0
+      }
+    },
+    "output_dtype": {
+      "bits": 3,
+      "qmax": 3,
+      "qmin": -4,
+      "signed": true
+    },
+    "params": {
+      "bound": 63,
+      "effective_divisor": 8,
+      "input_dtype": {
+        "bits": 11,
+        "qmax": 1023,
+        "qmin": -1024,
+        "signed": true
+      },
+      "name": "attn_7_aq",
+      "observed_range": null,
+      "offset": 162,
+      "output_dtype": {
+        "bits": 3,
+        "qmax": 3,
+        "qmin": -4,
+        "signed": true
+      },
+      "scalars": [
+        162,
+        3,
+        63
+      ],
+      "shift_scale": 3,
+      "table_sizes": [
+        64
+      ],
+      "zero_point": null
+    },
+    "stat_key": "attn7.aq"
+  },
+  {
+    "input_dtype": {
+      "bits": 10,
+      "qmax": 511,
+      "qmin": -512,
+      "signed": true
+    },
+    "kind": "requant_table",
+    "name": "attn_7_kq",
+    "observed_range": {
+      "cursor": {
+        "max": 110.0,
+        "min": -69.0
+      },
+      "input": {
+        "max": 348.0,
+        "min": -365.0
+      },
+      "output": {
+        "max": 3.0,
+        "min": -4.0
+      }
+    },
+    "output_dtype": {
+      "bits": 3,
+      "qmax": 3,
+      "qmin": -4,
+      "signed": true
+    },
+    "params": {
+      "bound": 63,
+      "effective_divisor": 4,
+      "input_dtype": {
+        "bits": 10,
+        "qmax": 511,
+        "qmin": -512,
+        "signed": true
+      },
+      "name": "attn_7_kq",
+      "observed_range": null,
+      "offset": 92,
+      "output_dtype": {
+        "bits": 3,
+        "qmax": 3,
+        "qmin": -4,
+        "signed": true
+      },
+      "scalars": [
+        92,
+        2,
+        63
+      ],
+      "shift_scale": 2,
+      "table_sizes": [
+        64
+      ],
+      "zero_point": null
+    },
+    "stat_key": "attn7.kq"
+  },
+  {
+    "input_dtype": {
+      "bits": 10,
+      "qmax": 511,
+      "qmin": -512,
+      "signed": true
+    },
+    "kind": "requant_table",
+    "name": "attn_7_qq",
+    "observed_range": {
+      "cursor": {
+        "max": 150.0,
+        "min": -77.0
+      },
+      "input": {
+        "max": 471.0,
+        "min": -436.0
+      },
+      "output": {
+        "max": 3.0,
+        "min": -4.0
+      }
+    },
+    "output_dtype": {
+      "bits": 3,
+      "qmax": 3,
+      "qmin": -4,
+      "signed": true
+    },
+    "params": {
+      "bound": 63,
+      "effective_divisor": 4,
+      "input_dtype": {
+        "bits": 10,
+        "qmax": 511,
+        "qmin": -512,
+        "signed": true
+      },
+      "name": "attn_7_qq",
+      "observed_range": null,
+      "offset": 129,
+      "output_dtype": {
+        "bits": 3,
+        "qmax": 3,
+        "qmin": -4,
+        "signed": true
+      },
+      "scalars": [
+        129,
+        2,
+        63
+      ],
+      "shift_scale": 2,
+      "table_sizes": [
+        64
+      ],
+      "zero_point": null
+    },
+    "stat_key": "attn7.qq"
+  },
+  {
+    "input_dtype": {
+      "bits": 10,
+      "qmax": 511,
+      "qmin": -512,
+      "signed": true
+    },
+    "kind": "requant_table",
+    "name": "attn_7_vq",
+    "observed_range": {
+      "cursor": {
+        "max": 115.0,
+        "min": -65.0
+      },
+      "input": {
+        "max": 349.0,
+        "min": -373.0
+      },
+      "output": {
+        "max": 3.0,
+        "min": -4.0
+      }
+    },
+    "output_dtype": {
+      "bits": 3,
+      "qmax": 3,
+      "qmin": -4,
+      "signed": true
+    },
+    "params": {
+      "bound": 63,
+      "effective_divisor": 4,
+      "input_dtype": {
+        "bits": 10,
+        "qmax": 511,
+        "qmin": -512,
+        "signed": true
+      },
+      "name": "attn_7_vq",
+      "observed_range": null,
+      "offset": 113,
+      "output_dtype": {
+        "bits": 3,
+        "qmax": 3,
+        "qmin": -4,
+        "signed": true
+      },
+      "scalars": [
+        113,
+        2,
+        63
+      ],
+      "shift_scale": 2,
+      "table_sizes": [
+        64
+      ],
+      "zero_point": null
+    },
+    "stat_key": "attn7.vq"
+  },
+  {
+    "input_dtype": {
+      "bits": 10,
+      "qmax": 511,
+      "qmin": -512,
+      "signed": true
+    },
+    "kind": "requant_table",
+    "name": "attn_8_aq",
+    "observed_range": {
+      "cursor": {
+        "max": 103.0,
+        "min": -75.0
+      },
+      "input": {
+        "max": 307.0,
+        "min": -405.0
+      },
+      "output": {
+        "max": 3.0,
+        "min": -4.0
+      }
+    },
+    "output_dtype": {
+      "bits": 3,
+      "qmax": 3,
+      "qmin": -4,
+      "signed": true
+    },
+    "params": {
+      "bound": 63,
+      "effective_divisor": 4,
+      "input_dtype": {
+        "bits": 10,
+        "qmax": 511,
+        "qmin": -512,
+        "signed": true
+      },
+      "name": "attn_8_aq",
+      "observed_range": null,
+      "offset": 107,
+      "output_dtype": {
+        "bits": 3,
+        "qmax": 3,
+        "qmin": -4,
+        "signed": true
+      },
+      "scalars": [
+        107,
+        2,
+        63
+      ],
+      "shift_scale": 2,
+      "table_sizes": [
+        64
+      ],
+      "zero_point": null
+    },
+    "stat_key": "attn8.aq"
+  },
+  {
+    "input_dtype": {
+      "bits": 10,
+      "qmax": 511,
+      "qmin": -512,
+      "signed": true
+    },
+    "kind": "requant_table",
+    "name": "attn_8_kq",
+    "observed_range": {
+      "cursor": {
+        "max": 106.0,
+        "min": -72.0
+      },
+      "input": {
+        "max": 345.0,
+        "min": -367.0
+      },
+      "output": {
+        "max": 3.0,
+        "min": -4.0
+      }
+    },
+    "output_dtype": {
+      "bits": 3,
+      "qmax": 3,
+      "qmin": -4,
+      "signed": true
+    },
+    "params": {
+      "bound": 63,
+      "effective_divisor": 4,
+      "input_dtype": {
+        "bits": 10,
+        "qmax": 511,
+        "qmin": -512,
+        "signed": true
+      },
+      "name": "attn_8_kq",
+      "observed_range": null,
+      "offset": 80,
+      "output_dtype": {
+        "bits": 3,
+        "qmax": 3,
+        "qmin": -4,
+        "signed": true
+      },
+      "scalars": [
+        80,
+        2,
+        63
+      ],
+      "shift_scale": 2,
+      "table_sizes": [
+        64
+      ],
+      "zero_point": null
+    },
+    "stat_key": "attn8.kq"
+  },
+  {
+    "input_dtype": {
+      "bits": 10,
+      "qmax": 511,
+      "qmin": -512,
+      "signed": true
+    },
+    "kind": "requant_table",
+    "name": "attn_8_qq",
+    "observed_range": {
+      "cursor": {
+        "max": 137.0,
+        "min": -85.0
+      },
+      "input": {
+        "max": 442.0,
+        "min": -447.0
+      },
+      "output": {
+        "max": 3.0,
+        "min": -4.0
+      }
+    },
+    "output_dtype": {
+      "bits": 3,
+      "qmax": 3,
+      "qmin": -4,
+      "signed": true
+    },
+    "params": {
+      "bound": 63,
+      "effective_divisor": 4,
+      "input_dtype": {
+        "bits": 10,
+        "qmax": 511,
+        "qmin": -512,
+        "signed": true
+      },
+      "name": "attn_8_qq",
+      "observed_range": null,
+      "offset": 109,
+      "output_dtype": {
+        "bits": 3,
+        "qmax": 3,
+        "qmin": -4,
+        "signed": true
+      },
+      "scalars": [
+        109,
+        2,
+        63
+      ],
+      "shift_scale": 2,
+      "table_sizes": [
+        64
+      ],
+      "zero_point": null
+    },
+    "stat_key": "attn8.qq"
+  },
+  {
+    "input_dtype": {
+      "bits": 10,
+      "qmax": 511,
+      "qmin": -512,
+      "signed": true
+    },
+    "kind": "requant_table",
+    "name": "attn_8_vq",
+    "observed_range": {
+      "cursor": {
+        "max": 108.0,
+        "min": -59.0
+      },
+      "input": {
+        "max": 321.0,
+        "min": -344.0
+      },
+      "output": {
+        "max": 3.0,
+        "min": -4.0
+      }
+    },
+    "output_dtype": {
+      "bits": 3,
+      "qmax": 3,
+      "qmin": -4,
+      "signed": true
+    },
+    "params": {
+      "bound": 63,
+      "effective_divisor": 4,
+      "input_dtype": {
+        "bits": 10,
+        "qmax": 511,
+        "qmin": -512,
+        "signed": true
+      },
+      "name": "attn_8_vq",
+      "observed_range": null,
+      "offset": 111,
+      "output_dtype": {
+        "bits": 3,
+        "qmax": 3,
+        "qmin": -4,
+        "signed": true
+      },
+      "scalars": [
+        111,
+        2,
+        63
+      ],
+      "shift_scale": 2,
+      "table_sizes": [
+        64
+      ],
+      "zero_point": null
+    },
+    "stat_key": "attn8.vq"
+  },
+  {
+    "input_dtype": {
+      "bits": 11,
+      "qmax": 1023,
+      "qmin": -1024,
+      "signed": true
+    },
+    "kind": "requant_table",
+    "name": "attn_9_aq",
+    "observed_range": {
+      "cursor": {
+        "max": 82.0,
+        "min": -56.0
+      },
+      "input": {
+        "max": 486.0,
+        "min": -618.0
+      },
+      "output": {
+        "max": 3.0,
+        "min": -4.0
+      }
+    },
+    "output_dtype": {
+      "bits": 3,
+      "qmax": 3,
+      "qmin": -4,
+      "signed": true
+    },
+    "params": {
+      "bound": 63,
+      "effective_divisor": 8,
+      "input_dtype": {
+        "bits": 11,
+        "qmax": 1023,
+        "qmin": -1024,
+        "signed": true
+      },
+      "name": "attn_9_aq",
+      "observed_range": null,
+      "offset": 174,
+      "output_dtype": {
+        "bits": 3,
+        "qmax": 3,
+        "qmin": -4,
+        "signed": true
+      },
+      "scalars": [
+        174,
+        3,
+        63
+      ],
+      "shift_scale": 3,
+      "table_sizes": [
+        64
+      ],
+      "zero_point": null
+    },
+    "stat_key": "attn9.aq"
+  },
+  {
+    "input_dtype": {
+      "bits": 10,
+      "qmax": 511,
+      "qmin": -512,
+      "signed": true
+    },
+    "kind": "requant_table",
+    "name": "attn_9_kq",
+    "observed_range": {
+      "cursor": {
+        "max": 143.0,
+        "min": -75.0
+      },
+      "input": {
+        "max": 475.0,
+        "min": -394.0
+      },
+      "output": {
+        "max": 3.0,
+        "min": -4.0
+      }
+    },
+    "output_dtype": {
+      "bits": 3,
+      "qmax": 3,
+      "qmin": -4,
+      "signed": true
+    },
+    "params": {
+      "bound": 63,
+      "effective_divisor": 4,
+      "input_dtype": {
+        "bits": 10,
+        "qmax": 511,
+        "qmin": -512,
+        "signed": true
+      },
+      "name": "attn_9_kq",
+      "observed_range": null,
+      "offset": 97,
+      "output_dtype": {
+        "bits": 3,
+        "qmax": 3,
+        "qmin": -4,
+        "signed": true
+      },
+      "scalars": [
+        97,
+        2,
+        63
+      ],
+      "shift_scale": 2,
+      "table_sizes": [
+        64
+      ],
+      "zero_point": null
+    },
+    "stat_key": "attn9.kq"
+  },
+  {
+    "input_dtype": {
+      "bits": 11,
+      "qmax": 1023,
+      "qmin": -1024,
+      "signed": true
+    },
+    "kind": "requant_table",
+    "name": "attn_9_qq",
+    "observed_range": {
+      "cursor": {
+        "max": 109.0,
+        "min": -75.0
+      },
+      "input": {
+        "max": 724.0,
+        "min": -745.0
+      },
+      "output": {
+        "max": 3.0,
+        "min": -4.0
+      }
+    },
+    "output_dtype": {
+      "bits": 3,
+      "qmax": 3,
+      "qmin": -4,
+      "signed": true
+    },
+    "params": {
+      "bound": 63,
+      "effective_divisor": 8,
+      "input_dtype": {
+        "bits": 11,
+        "qmax": 1023,
+        "qmin": -1024,
+        "signed": true
+      },
+      "name": "attn_9_qq",
+      "observed_range": null,
+      "offset": 152,
+      "output_dtype": {
+        "bits": 3,
+        "qmax": 3,
+        "qmin": -4,
+        "signed": true
+      },
+      "scalars": [
+        152,
+        3,
+        63
+      ],
+      "shift_scale": 3,
+      "table_sizes": [
+        64
+      ],
+      "zero_point": null
+    },
+    "stat_key": "attn9.qq"
+  },
+  {
+    "input_dtype": {
+      "bits": 10,
+      "qmax": 511,
+      "qmin": -512,
+      "signed": true
+    },
+    "kind": "requant_table",
+    "name": "attn_9_vq",
+    "observed_range": {
+      "cursor": {
+        "max": 105.0,
+        "min": -58.0
+      },
+      "input": {
+        "max": 313.0,
+        "min": -339.0
+      },
+      "output": {
+        "max": 3.0,
+        "min": -4.0
+      }
+    },
+    "output_dtype": {
+      "bits": 3,
+      "qmax": 3,
+      "qmin": -4,
+      "signed": true
+    },
+    "params": {
+      "bound": 63,
+      "effective_divisor": 4,
+      "input_dtype": {
+        "bits": 10,
+        "qmax": 511,
+        "qmin": -512,
+        "signed": true
+      },
+      "name": "attn_9_vq",
+      "observed_range": null,
+      "offset": 107,
+      "output_dtype": {
+        "bits": 3,
+        "qmax": 3,
+        "qmin": -4,
+        "signed": true
+      },
+      "scalars": [
+        107,
+        2,
+        63
+      ],
+      "shift_scale": 2,
+      "table_sizes": [
+        64
+      ],
+      "zero_point": null
+    },
+    "stat_key": "attn9.vq"
+  },
+  {
+    "input_dtype": {
+      "bits": 11,
+      "qmax": 1023,
+      "qmin": -1024,
+      "signed": true
+    },
+    "kind": "gelu_requant_table",
+    "name": "mlp_0_geluq",
+    "observed_range": {
+      "cursor": {
+        "max": 397.0,
+        "min": -341.0
+      },
+      "input": {
+        "max": 718.0,
+        "min": -758.0
+      },
+      "output": {
+        "max": 7.0,
+        "min": 0.0
+      }
+    },
+    "output_dtype": {
+      "bits": 3,
+      "qmax": 7,
+      "qmin": 0,
+      "signed": false
+    },
+    "params": {
+      "bound": 63,
+      "effective_divisor": 2,
+      "input_dtype": {
+        "bits": 11,
+        "qmax": 1023,
+        "qmin": -1024,
+        "signed": true
+      },
+      "name": "mlp_0_geluq",
+      "observed_range": null,
+      "offset": 76,
+      "output_dtype": {
+        "bits": 3,
+        "qmax": 7,
+        "qmin": 0,
+        "signed": false
+      },
+      "scalars": [
+        76,
+        1,
+        63
+      ],
+      "shift_scale": 1,
+      "table_sizes": [
+        64
+      ],
+      "zero_point": null
+    },
+    "stat_key": "mlp0.geluq"
+  },
+  {
+    "input_dtype": {
+      "bits": 11,
+      "qmax": 1023,
+      "qmin": -1024,
+      "signed": true
+    },
+    "kind": "gelu_requant_table",
+    "name": "mlp_10_geluq",
+    "observed_range": {
+      "cursor": {
+        "max": 184.0,
+        "min": -266.0
+      },
+      "input": {
+        "max": 370.0,
+        "min": -530.0
+      },
+      "output": {
+        "max": 7.0,
+        "min": 0.0
+      }
+    },
+    "output_dtype": {
+      "bits": 3,
+      "qmax": 7,
+      "qmin": 0,
+      "signed": false
+    },
+    "params": {
+      "bound": 63,
+      "effective_divisor": 2,
+      "input_dtype": {
+        "bits": 11,
+        "qmax": 1023,
+        "qmin": -1024,
+        "signed": true
+      },
+      "name": "mlp_10_geluq",
+      "observed_range": null,
+      "offset": -2,
+      "output_dtype": {
+        "bits": 3,
+        "qmax": 7,
+        "qmin": 0,
+        "signed": false
+      },
+      "scalars": [
+        -2,
+        1,
+        63
+      ],
+      "shift_scale": 1,
+      "table_sizes": [
+        64
+      ],
+      "zero_point": null
+    },
+    "stat_key": "mlp10.geluq"
+  },
+  {
+    "input_dtype": {
+      "bits": 11,
+      "qmax": 1023,
+      "qmin": -1024,
+      "signed": true
+    },
+    "kind": "gelu_requant_table",
+    "name": "mlp_11_geluq",
+    "observed_range": {
+      "cursor": {
+        "max": 105.0,
+        "min": -149.0
+      },
+      "input": {
+        "max": 425.0,
+        "min": -590.0
+      },
+      "output": {
+        "max": 7.0,
+        "min": 0.0
+      }
+    },
+    "output_dtype": {
+      "bits": 3,
+      "qmax": 7,
+      "qmin": 0,
+      "signed": false
+    },
+    "params": {
+      "bound": 63,
+      "effective_divisor": 4,
+      "input_dtype": {
+        "bits": 11,
+        "qmax": 1023,
+        "qmin": -1024,
+        "signed": true
+      },
+      "name": "mlp_11_geluq",
+      "observed_range": null,
+      "offset": -5,
+      "output_dtype": {
+        "bits": 3,
+        "qmax": 7,
+        "qmin": 0,
+        "signed": false
+      },
+      "scalars": [
+        -5,
+        2,
+        63
+      ],
+      "shift_scale": 2,
+      "table_sizes": [
+        64
+      ],
+      "zero_point": null
+    },
+    "stat_key": "mlp11.geluq"
+  },
+  {
+    "input_dtype": {
+      "bits": 11,
+      "qmax": 1023,
+      "qmin": -1024,
+      "signed": true
+    },
+    "kind": "gelu_requant_table",
+    "name": "mlp_1_geluq",
+    "observed_range": {
+      "cursor": {
+        "max": 206.0,
+        "min": -185.0
+      },
+      "input": {
+        "max": 733.0,
+        "min": -831.0
+      },
+      "output": {
+        "max": 7.0,
+        "min": 0.0
+      }
+    },
+    "output_dtype": {
+      "bits": 3,
+      "qmax": 7,
+      "qmin": 0,
+      "signed": false
+    },
+    "params": {
+      "bound": 63,
+      "effective_divisor": 4,
+      "input_dtype": {
+        "bits": 11,
+        "qmax": 1023,
+        "qmin": -1024,
+        "signed": true
+      },
+      "name": "mlp_1_geluq",
+      "observed_range": null,
+      "offset": 94,
+      "output_dtype": {
+        "bits": 3,
+        "qmax": 7,
+        "qmin": 0,
+        "signed": false
+      },
+      "scalars": [
+        94,
+        2,
+        63
+      ],
+      "shift_scale": 2,
+      "table_sizes": [
+        64
+      ],
+      "zero_point": null
+    },
+    "stat_key": "mlp1.geluq"
+  },
+  {
+    "input_dtype": {
+      "bits": 11,
+      "qmax": 1023,
+      "qmin": -1024,
+      "signed": true
+    },
+    "kind": "gelu_requant_table",
+    "name": "mlp_2_geluq",
+    "observed_range": {
+      "cursor": {
+        "max": 249.0,
+        "min": -209.0
+      },
+      "input": {
+        "max": 883.0,
+        "min": -948.0
+      },
+      "output": {
+        "max": 7.0,
+        "min": 0.0
+      }
+    },
+    "output_dtype": {
+      "bits": 3,
+      "qmax": 7,
+      "qmin": 0,
+      "signed": false
+    },
+    "params": {
+      "bound": 63,
+      "effective_divisor": 4,
+      "input_dtype": {
+        "bits": 11,
+        "qmax": 1023,
+        "qmin": -1024,
+        "signed": true
+      },
+      "name": "mlp_2_geluq",
+      "observed_range": null,
+      "offset": 114,
+      "output_dtype": {
+        "bits": 3,
+        "qmax": 7,
+        "qmin": 0,
+        "signed": false
+      },
+      "scalars": [
+        114,
+        2,
+        63
+      ],
+      "shift_scale": 2,
+      "table_sizes": [
+        64
+      ],
+      "zero_point": null
+    },
+    "stat_key": "mlp2.geluq"
+  },
+  {
+    "input_dtype": {
+      "bits": 11,
+      "qmax": 1023,
+      "qmin": -1024,
+      "signed": true
+    },
+    "kind": "gelu_requant_table",
+    "name": "mlp_3_geluq",
+    "observed_range": {
+      "cursor": {
+        "max": 139.0,
+        "min": -119.0
+      },
+      "input": {
+        "max": 443.0,
+        "min": -591.0
+      },
+      "output": {
+        "max": 7.0,
+        "min": 0.0
+      }
+    },
+    "output_dtype": {
+      "bits": 3,
+      "qmax": 7,
+      "qmin": 0,
+      "signed": false
+    },
+    "params": {
+      "bound": 63,
+      "effective_divisor": 4,
+      "input_dtype": {
+        "bits": 11,
+        "qmax": 1023,
+        "qmin": -1024,
+        "signed": true
+      },
+      "name": "mlp_3_geluq",
+      "observed_range": null,
+      "offset": 116,
+      "output_dtype": {
+        "bits": 3,
+        "qmax": 7,
+        "qmin": 0,
+        "signed": false
+      },
+      "scalars": [
+        116,
+        2,
+        63
+      ],
+      "shift_scale": 2,
+      "table_sizes": [
+        64
+      ],
+      "zero_point": null
+    },
+    "stat_key": "mlp3.geluq"
+  },
+  {
+    "input_dtype": {
+      "bits": 11,
+      "qmax": 1023,
+      "qmin": -1024,
+      "signed": true
+    },
+    "kind": "gelu_requant_table",
+    "name": "mlp_4_geluq",
+    "observed_range": {
+      "cursor": {
+        "max": 174.0,
+        "min": -97.0
+      },
+      "input": {
+        "max": 587.0,
+        "min": -499.0
+      },
+      "output": {
+        "max": 7.0,
+        "min": 0.0
+      }
+    },
+    "output_dtype": {
+      "bits": 3,
+      "qmax": 7,
+      "qmin": 0,
+      "signed": false
+    },
+    "params": {
+      "bound": 63,
+      "effective_divisor": 4,
+      "input_dtype": {
+        "bits": 11,
+        "qmax": 1023,
+        "qmin": -1024,
+        "signed": true
+      },
+      "name": "mlp_4_geluq",
+      "observed_range": null,
+      "offset": 112,
+      "output_dtype": {
+        "bits": 3,
+        "qmax": 7,
+        "qmin": 0,
+        "signed": false
+      },
+      "scalars": [
+        112,
+        2,
+        63
+      ],
+      "shift_scale": 2,
+      "table_sizes": [
+        64
+      ],
+      "zero_point": null
+    },
+    "stat_key": "mlp4.geluq"
+  },
+  {
+    "input_dtype": {
+      "bits": 11,
+      "qmax": 1023,
+      "qmin": -1024,
+      "signed": true
+    },
+    "kind": "gelu_requant_table",
+    "name": "mlp_5_geluq",
+    "observed_range": {
+      "cursor": {
+        "max": 182.0,
+        "min": -95.0
+      },
+      "input": {
+        "max": 623.0,
+        "min": -488.0
+      },
+      "output": {
+        "max": 7.0,
+        "min": 0.0
+      }
+    },
+    "output_dtype": {
+      "bits": 3,
+      "qmax": 7,
+      "qmin": 0,
+      "signed": false
+    },
+    "params": {
+      "bound": 63,
+      "effective_divisor": 4,
+      "input_dtype": {
+        "bits": 11,
+        "qmax": 1023,
+        "qmin": -1024,
+        "signed": true
+      },
+      "name": "mlp_5_geluq",
+      "observed_range": null,
+      "offset": 108,
+      "output_dtype": {
+        "bits": 3,
+        "qmax": 7,
+        "qmin": 0,
+        "signed": false
+      },
+      "scalars": [
+        108,
+        2,
+        63
+      ],
+      "shift_scale": 2,
+      "table_sizes": [
+        64
+      ],
+      "zero_point": null
+    },
+    "stat_key": "mlp5.geluq"
+  },
+  {
+    "input_dtype": {
+      "bits": 11,
+      "qmax": 1023,
+      "qmin": -1024,
+      "signed": true
+    },
+    "kind": "gelu_requant_table",
+    "name": "mlp_6_geluq",
+    "observed_range": {
+      "cursor": {
+        "max": 159.0,
+        "min": -88.0
+      },
+      "input": {
+        "max": 529.0,
+        "min": -458.0
+      },
+      "output": {
+        "max": 7.0,
+        "min": 0.0
+      }
+    },
+    "output_dtype": {
+      "bits": 3,
+      "qmax": 7,
+      "qmin": 0,
+      "signed": false
+    },
+    "params": {
+      "bound": 63,
+      "effective_divisor": 4,
+      "input_dtype": {
+        "bits": 11,
+        "qmax": 1023,
+        "qmin": -1024,
+        "signed": true
+      },
+      "name": "mlp_6_geluq",
+      "observed_range": null,
+      "offset": 107,
+      "output_dtype": {
+        "bits": 3,
+        "qmax": 7,
+        "qmin": 0,
+        "signed": false
+      },
+      "scalars": [
+        107,
+        2,
+        63
+      ],
+      "shift_scale": 2,
+      "table_sizes": [
+        64
+      ],
+      "zero_point": null
+    },
+    "stat_key": "mlp6.geluq"
+  },
+  {
+    "input_dtype": {
+      "bits": 10,
+      "qmax": 511,
+      "qmin": -512,
+      "signed": true
+    },
+    "kind": "gelu_requant_table",
+    "name": "mlp_7_geluq",
+    "observed_range": {
+      "cursor": {
+        "max": 120.0,
+        "min": -91.0
+      },
+      "input": {
+        "max": 376.0,
+        "min": -468.0
+      },
+      "output": {
+        "max": 7.0,
+        "min": 0.0
+      }
+    },
+    "output_dtype": {
+      "bits": 3,
+      "qmax": 7,
+      "qmin": 0,
+      "signed": false
+    },
+    "params": {
+      "bound": 63,
+      "effective_divisor": 4,
+      "input_dtype": {
+        "bits": 10,
+        "qmax": 511,
+        "qmin": -512,
+        "signed": true
+      },
+      "name": "mlp_7_geluq",
+      "observed_range": null,
+      "offset": 105,
+      "output_dtype": {
+        "bits": 3,
+        "qmax": 7,
+        "qmin": 0,
+        "signed": false
+      },
+      "scalars": [
+        105,
+        2,
+        63
+      ],
+      "shift_scale": 2,
+      "table_sizes": [
+        64
+      ],
+      "zero_point": null
+    },
+    "stat_key": "mlp7.geluq"
+  },
+  {
+    "input_dtype": {
+      "bits": 10,
+      "qmax": 511,
+      "qmin": -512,
+      "signed": true
+    },
+    "kind": "gelu_requant_table",
+    "name": "mlp_8_geluq",
+    "observed_range": {
+      "cursor": {
+        "max": 141.0,
+        "min": -81.0
+      },
+      "input": {
+        "max": 458.0,
+        "min": -430.0
+      },
+      "output": {
+        "max": 7.0,
+        "min": 0.0
+      }
+    },
+    "output_dtype": {
+      "bits": 3,
+      "qmax": 7,
+      "qmin": 0,
+      "signed": false
+    },
+    "params": {
+      "bound": 63,
+      "effective_divisor": 4,
+      "input_dtype": {
+        "bits": 10,
+        "qmax": 511,
+        "qmin": -512,
+        "signed": true
+      },
+      "name": "mlp_8_geluq",
+      "observed_range": null,
+      "offset": 109,
+      "output_dtype": {
+        "bits": 3,
+        "qmax": 7,
+        "qmin": 0,
+        "signed": false
+      },
+      "scalars": [
+        109,
+        2,
+        63
+      ],
+      "shift_scale": 2,
+      "table_sizes": [
+        64
+      ],
+      "zero_point": null
+    },
+    "stat_key": "mlp8.geluq"
+  },
+  {
+    "input_dtype": {
+      "bits": 10,
+      "qmax": 511,
+      "qmin": -512,
+      "signed": true
+    },
+    "kind": "gelu_requant_table",
+    "name": "mlp_9_geluq",
+    "observed_range": {
+      "cursor": {
+        "max": 106.0,
+        "min": -86.0
+      },
+      "input": {
+        "max": 314.0,
+        "min": -452.0
+      },
+      "output": {
+        "max": 7.0,
+        "min": 0.0
+      }
+    },
+    "output_dtype": {
+      "bits": 3,
+      "qmax": 7,
+      "qmin": 0,
+      "signed": false
+    },
+    "params": {
+      "bound": 63,
+      "effective_divisor": 4,
+      "input_dtype": {
+        "bits": 10,
+        "qmax": 511,
+        "qmin": -512,
+        "signed": true
+      },
+      "name": "mlp_9_geluq",
+      "observed_range": null,
+      "offset": 110,
+      "output_dtype": {
+        "bits": 3,
+        "qmax": 7,
+        "qmin": 0,
+        "signed": false
+      },
+      "scalars": [
+        110,
+        2,
+        63
+      ],
+      "shift_scale": 2,
+      "table_sizes": [
+        64
+      ],
+      "zero_point": null
+    },
+    "stat_key": "mlp9.geluq"
+  },
+  {
+    "input_dtype": {
+      "bits": 13,
+      "qmax": 4095,
+      "qmin": -4096,
+      "signed": true
+    },
+    "kind": "layernorm_rsqrt_table",
+    "name": "attn_0_lnq",
+    "observed_range": {
+      "affine": {
+        "max": 83346821618.0,
+        "min": -74383547398.0
+      },
+      "cursor": {
+        "max": 84.0,
+        "min": 0.0
+      },
+      "divc": {
+        "max": 699536569.0,
+        "min": -688657542.0
+      },
+      "input": {
+        "max": 2671.0,
+        "min": -2638.0
+      },
+      "lnb_m": {
+        "max": 12237930496.0,
+        "min": -15527051264.0
+      },
+      "lnw_m": {
+        "max": 38274.0,
+        "min": 8557.0
+      },
+      "mu": {
+        "max": 83.0,
+        "min": -82.0
+      },
+      "output": {
+        "max": 3.0,
+        "min": -4.0
+      },
+      "rsqrt": {
+        "max": 2503.0,
+        "min": 534.0
+      },
+      "shift": {
+        "max": 38.0,
+        "min": -35.0
+      },
+      "sum": {
+        "max": 15915.0,
+        "min": -15762.0
+      },
+      "var": {
+        "max": 46153104.0,
+        "min": 2104977.0
+      }
+    },
+    "output_dtype": {
+      "bits": 3,
+      "qmax": 3,
+      "qmin": -4,
+      "signed": true
+    },
+    "params": {
+      "bound": -1842833,
+      "effective_divisor": 8388608,
+      "input_dtype": {
+        "bits": 13,
+        "qmax": 4095,
+        "qmin": -4096,
+        "signed": true
+      },
+      "name": "attn_0_lnq",
+      "observed_range": null,
+      "offset": 43691,
+      "output_dtype": {
+        "bits": 3,
+        "qmax": 3,
+        "qmin": -4,
+        "signed": true
+      },
+      "scalars": [
+        43691,
+        23,
+        -1842833,
+        19,
+        127,
+        31,
+        3
+      ],
+      "shift_scale": 23,
+      "table_sizes": [
+        192,
+        192,
+        128
+      ],
+      "zero_point": null
+    },
+    "stat_key": "attn0.lnq"
+  },
+  {
+    "input_dtype": {
+      "bits": 13,
+      "qmax": 4095,
+      "qmin": -4096,
+      "signed": true
+    },
+    "kind": "layernorm_rsqrt_table",
+    "name": "attn_10_lnq",
+    "observed_range": {
+      "affine": {
+        "max": 52478508978.0,
+        "min": -48113259280.0
+      },
+      "cursor": {
+        "max": 91.0,
+        "min": 0.0
+      },
+      "divc": {
+        "max": 1652917880.0,
+        "min": -1050637477.0
+      },
+      "input": {
+        "max": 2894.0,
+        "min": -2443.0
+      },
+      "lnb_m": {
+        "max": 17003446272.0,
+        "min": -12584484864.0
+      },
+      "lnw_m": {
+        "max": 38720.0,
+        "min": 11271.0
+      },
+      "mu": {
+        "max": 197.0,
+        "min": -125.0
+      },
+      "output": {
+        "max": 3.0,
+        "min": -4.0
+      },
+      "rsqrt": {
+        "max": 3102.0,
+        "min": 723.0
+      },
+      "shift": {
+        "max": 12.0,
+        "min": -12.0
+      },
+      "sum": {
+        "max": 37736.0,
+        "min": -24047.0
+      },
+      "var": {
+        "max": 25136336.0,
+        "min": 1382398.0
+      }
+    },
+    "output_dtype": {
+      "bits": 3,
+      "qmax": 3,
+      "qmin": -4,
+      "signed": true
+    },
+    "params": {
+      "bound": -1239294,
+      "effective_divisor": 8388608,
+      "input_dtype": {
+        "bits": 13,
+        "qmax": 4095,
+        "qmin": -4096,
+        "signed": true
+      },
+      "name": "attn_10_lnq",
+      "observed_range": null,
+      "offset": 43691,
+      "output_dtype": {
+        "bits": 3,
+        "qmax": 3,
+        "qmin": -4,
+        "signed": true
+      },
+      "scalars": [
+        43691,
+        23,
+        -1239294,
+        18,
+        127,
+        32,
+        3
+      ],
+      "shift_scale": 23,
+      "table_sizes": [
+        192,
+        192,
+        128
+      ],
+      "zero_point": null
+    },
+    "stat_key": "attn10.lnq"
+  },
+  {
+    "input_dtype": {
+      "bits": 13,
+      "qmax": 4095,
+      "qmin": -4096,
+      "signed": true
+    },
+    "kind": "layernorm_rsqrt_table",
+    "name": "attn_11_lnq",
+    "observed_range": {
+      "affine": {
+        "max": 25817717993.0,
+        "min": -22754733760.0
+      },
+      "cursor": {
+        "max": 77.0,
+        "min": 0.0
+      },
+      "divc": {
+        "max": 1226493720.0,
+        "min": -631378641.0
+      },
+      "input": {
+        "max": 2063.0,
+        "min": -1609.0
+      },
+      "lnb_m": {
+        "max": 5420089344.0,
+        "min": -6028525568.0
+      },
+      "lnw_m": {
+        "max": 38042.0,
+        "min": 10130.0
+      },
+      "mu": {
+        "max": 146.0,
+        "min": -75.0
+      },
+      "output": {
+        "max": 3.0,
+        "min": -4.0
+      },
+      "rsqrt": {
+        "max": 2138.0,
+        "min": 552.0
+      },
+      "shift": {
+        "max": 12.0,
+        "min": -11.0
+      },
+      "sum": {
+        "max": 27976.0,
+        "min": -14451.0
+      },
+      "var": {
+        "max": 10754157.0,
+        "min": 701553.0
+      }
+    },
+    "output_dtype": {
+      "bits": 3,
+      "qmax": 3,
+      "qmin": -4,
+      "signed": true
+    },
+    "params": {
+      "bound": -655549,
+      "effective_divisor": 8388608,
+      "input_dtype": {
+        "bits": 13,
+        "qmax": 4095,
+        "qmin": -4096,
+        "signed": true
+      },
+      "name": "attn_11_lnq",
+      "observed_range": null,
+      "offset": 43691,
+      "output_dtype": {
+        "bits": 3,
+        "qmax": 3,
+        "qmin": -4,
+        "signed": true
+      },
+      "scalars": [
+        43691,
+        23,
+        -655549,
+        17,
+        127,
+        31,
+        3
+      ],
+      "shift_scale": 23,
+      "table_sizes": [
+        192,
+        192,
+        128
+      ],
+      "zero_point": null
+    },
+    "stat_key": "attn11.lnq"
+  },
+  {
+    "input_dtype": {
+      "bits": 13,
+      "qmax": 4095,
+      "qmin": -4096,
+      "signed": true
+    },
+    "kind": "layernorm_rsqrt_table",
+    "name": "attn_1_lnq",
+    "observed_range": {
+      "affine": {
+        "max": 130881686646.0,
+        "min": -119498747024.0
+      },
+      "cursor": {
+        "max": 92.0,
+        "min": 0.0
+      },
+      "divc": {
+        "max": 2136708323.0,
+        "min": -1205172544.0
+      },
+      "input": {
+        "max": 3869.0,
+        "min": -3718.0
+      },
+      "lnb_m": {
+        "max": 68035805184.0,
+        "min": -64873299968.0
+      },
+      "lnw_m": {
+        "max": 60351.0,
+        "min": 2010.0
+      },
+      "mu": {
+        "max": 254.0,
+        "min": -144.0
+      },
+      "output": {
+        "max": 3.0,
+        "min": -4.0
+      },
+      "rsqrt": {
+        "max": 2406.0,
+        "min": 707.0
+      },
+      "shift": {
+        "max": 15.0,
+        "min": -14.0
+      },
+      "sum": {
+        "max": 48809.0,
+        "min": -27584.0
+      },
+      "var": {
+        "max": 105266736.0,
+        "min": 9061475.0
+      }
+    },
+    "output_dtype": {
+      "bits": 3,
+      "qmax": 3,
+      "qmin": -4,
+      "signed": true
+    },
+    "params": {
+      "bound": -8585116,
+      "effective_divisor": 8388608,
+      "input_dtype": {
+        "bits": 13,
+        "qmax": 4095,
+        "qmin": -4096,
+        "signed": true
+      },
+      "name": "attn_1_lnq",
+      "observed_range": null,
+      "offset": 43691,
+      "output_dtype": {
+        "bits": 3,
+        "qmax": 3,
+        "qmin": -4,
+        "signed": true
+      },
+      "scalars": [
+        43691,
+        23,
+        -8585116,
+        20,
+        127,
+        33,
+        3
+      ],
+      "shift_scale": 23,
+      "table_sizes": [
+        192,
+        192,
+        128
+      ],
+      "zero_point": null
+    },
+    "stat_key": "attn1.lnq"
+  },
+  {
+    "input_dtype": {
+      "bits": 13,
+      "qmax": 4095,
+      "qmin": -4096,
+      "signed": true
+    },
+    "kind": "layernorm_rsqrt_table",
+    "name": "attn_2_lnq",
+    "observed_range": {
+      "affine": {
+        "max": 110504191208.0,
+        "min": -99852011467.0
+      },
+      "cursor": {
+        "max": 116.0,
+        "min": 0.0
+      },
+      "divc": {
+        "max": 2472167821.0,
+        "min": -1578730594.0
+      },
+      "input": {
+        "max": 3063.0,
+        "min": -3062.0
+      },
+      "lnb_m": {
+        "max": 70931972096.0,
+        "min": -54173106176.0
+      },
+      "lnw_m": {
+        "max": 49960.0,
+        "min": 7059.0
+      },
+      "mu": {
+        "max": 294.0,
+        "min": -188.0
+      },
+      "output": {
+        "max": 3.0,
+        "min": -4.0
+      },
+      "rsqrt": {
+        "max": 2878.0,
+        "min": 886.0
+      },
+      "shift": {
+        "max": 12.0,
+        "min": -12.0
+      },
+      "sum": {
+        "max": 56487.0,
+        "min": -36134.0
+      },
+      "var": {
+        "max": 66995060.0,
+        "min": 6298236.0
+      }
+    },
+    "output_dtype": {
+      "bits": 3,
+      "qmax": 3,
+      "qmin": -4,
+      "signed": true
+    },
+    "params": {
+      "bound": -6105211,
+      "effective_divisor": 8388608,
+      "input_dtype": {
+        "bits": 13,
+        "qmax": 4095,
+        "qmin": -4096,
+        "signed": true
+      },
+      "name": "attn_2_lnq",
+      "observed_range": null,
+      "offset": 43691,
+      "output_dtype": {
+        "bits": 3,
+        "qmax": 3,
+        "qmin": -4,
+        "signed": true
+      },
+      "scalars": [
+        43691,
+        23,
+        -6105211,
+        19,
+        127,
+        33,
+        3
+      ],
+      "shift_scale": 23,
+      "table_sizes": [
+        192,
+        192,
+        128
+      ],
+      "zero_point": null
+    },
+    "stat_key": "attn2.lnq"
+  },
+  {
+    "input_dtype": {
+      "bits": 13,
+      "qmax": 4095,
+      "qmin": -4096,
+      "signed": true
+    },
+    "kind": "layernorm_rsqrt_table",
+    "name": "attn_3_lnq",
+    "observed_range": {
+      "affine": {
+        "max": 160717275444.0,
+        "min": -143188038856.0
+      },
+      "cursor": {
+        "max": 126.0,
+        "min": 0.0
+      },
+      "divc": {
+        "max": 2388980157.0,
+        "min": -1570735141.0
+      },
+      "input": {
+        "max": 2702.0,
+        "min": -2661.0
+      },
+      "lnb_m": {
+        "max": 102356746240.0,
+        "min": -92817326080.0
+      },
+      "lnw_m": {
+        "max": 61399.0,
+        "min": 12850.0
+      },
+      "mu": {
+        "max": 284.0,
+        "min": -187.0
+      },
+      "output": {
+        "max": 3.0,
+        "min": -4.0
+      },
+      "rsqrt": {
+        "max": 3121.0,
+        "min": 1171.0
+      },
+      "shift": {
+        "max": 18.0,
+        "min": -17.0
+      },
+      "sum": {
+        "max": 54583.0,
+        "min": -35951.0
+      },
+      "var": {
+        "max": 38413536.0,
+        "min": 5515807.0
+      }
+    },
+    "output_dtype": {
+      "bits": 3,
+      "qmax": 3,
+      "qmin": -4,
+      "signed": true
+    },
+    "params": {
+      "bound": -5285370,
+      "effective_divisor": 8388608,
+      "input_dtype": {
+        "bits": 13,
+        "qmax": 4095,
+        "qmin": -4096,
+        "signed": true
+      },
+      "name": "attn_3_lnq",
+      "observed_range": null,
+      "offset": 43691,
+      "output_dtype": {
+        "bits": 3,
+        "qmax": 3,
+        "qmin": -4,
+        "signed": true
+      },
+      "scalars": [
+        43691,
+        23,
+        -5285370,
+        18,
+        127,
+        33,
+        3
+      ],
+      "shift_scale": 23,
+      "table_sizes": [
+        192,
+        192,
+        128
+      ],
+      "zero_point": null
+    },
+    "stat_key": "attn3.lnq"
+  },
+  {
+    "input_dtype": {
+      "bits": 13,
+      "qmax": 4095,
+      "qmin": -4096,
+      "signed": true
+    },
+    "kind": "layernorm_rsqrt_table",
+    "name": "attn_4_lnq",
+    "observed_range": {
+      "affine": {
+        "max": 161921026080.0,
+        "min": -132579862088.0
+      },
+      "cursor": {
+        "max": 88.0,
+        "min": 0.0
+      },
+      "divc": {
+        "max": 2361367445.0,
+        "min": -1586463901.0
+      },
+      "input": {
+        "max": 2846.0,
+        "min": -2685.0
+      },
+      "lnb_m": {
+        "max": 79504080896.0,
+        "min": -71221903360.0
+      },
+      "lnw_m": {
+        "max": 62408.0,
+        "min": 12422.0
+      },
+      "mu": {
+        "max": 281.0,
+        "min": -189.0
+      },
+      "output": {
+        "max": 3.0,
+        "min": -4.0
+      },
+      "rsqrt": {
+        "max": 3058.0,
+        "min": 1355.0
+      },
+      "shift": {
+        "max": 18.0,
+        "min": -16.0
+      },
+      "sum": {
+        "max": 53951.0,
+        "min": -36311.0
+      },
+      "var": {
+        "max": 28718764.0,
+        "min": 5559542.0
+      }
+    },
+    "output_dtype": {
+      "bits": 3,
+      "qmax": 3,
+      "qmin": -4,
+      "signed": true
+    },
+    "params": {
+      "bound": -5511642,
+      "effective_divisor": 8388608,
+      "input_dtype": {
+        "bits": 13,
+        "qmax": 4095,
+        "qmin": -4096,
+        "signed": true
+      },
+      "name": "attn_4_lnq",
+      "observed_range": null,
+      "offset": 43691,
+      "output_dtype": {
+        "bits": 3,
+        "qmax": 3,
+        "qmin": -4,
+        "signed": true
+      },
+      "scalars": [
+        43691,
+        23,
+        -5511642,
+        18,
+        127,
+        33,
+        3
+      ],
+      "shift_scale": 23,
+      "table_sizes": [
+        192,
+        192,
+        128
+      ],
+      "zero_point": null
+    },
+    "stat_key": "attn4.lnq"
+  },
+  {
+    "input_dtype": {
+      "bits": 13,
+      "qmax": 4095,
+      "qmin": -4096,
+      "signed": true
+    },
+    "kind": "layernorm_rsqrt_table",
+    "name": "attn_5_lnq",
+    "observed_range": {
+      "affine": {
+        "max": 151895268794.0,
+        "min": -115225347973.0
+      },
+      "cursor": {
+        "max": 85.0,
+        "min": 0.0
+      },
+      "divc": {
+        "max": 2458186701.0,
+        "min": -1662573623.0
+      },
+      "input": {
+        "max": 3224.0,
+        "min": -2654.0
+      },
+      "lnb_m": {
+        "max": 88958566400.0,
+        "min": -70235717632.0
+      },
+      "lnw_m": {
+        "max": 55555.0,
+        "min": 12017.0
+      },
+      "mu": {
+        "max": 293.0,
+        "min": -198.0
+      },
+      "output": {
+        "max": 3.0,
+        "min": -4.0
+      },
+      "rsqrt": {
+        "max": 3017.0,
+        "min": 1370.0
+      },
+      "shift": {
+        "max": 17.0,
+        "min": -14.0
+      },
+      "sum": {
+        "max": 56167.0,
+        "min": -38053.0
+      },
+      "var": {
+        "max": 28041348.0,
+        "min": 5778375.0
+      }
+    },
+    "output_dtype": {
+      "bits": 3,
+      "qmax": 3,
+      "qmin": -4,
+      "signed": true
+    },
+    "params": {
+      "bound": -5666093,
+      "effective_divisor": 8388608,
+      "input_dtype": {
+        "bits": 13,
+        "qmax": 4095,
+        "qmin": -4096,
+        "signed": true
+      },
+      "name": "attn_5_lnq",
+      "observed_range": null,
+      "offset": 43691,
+      "output_dtype": {
+        "bits": 3,
+        "qmax": 3,
+        "qmin": -4,
+        "signed": true
+      },
+      "scalars": [
+        43691,
+        23,
+        -5666093,
+        18,
+        127,
+        33,
+        3
+      ],
+      "shift_scale": 23,
+      "table_sizes": [
+        192,
+        192,
+        128
+      ],
+      "zero_point": null
+    },
+    "stat_key": "attn5.lnq"
+  },
+  {
+    "input_dtype": {
+      "bits": 13,
+      "qmax": 4095,
+      "qmin": -4096,
+      "signed": true
+    },
+    "kind": "layernorm_rsqrt_table",
+    "name": "attn_6_lnq",
+    "observed_range": {
+      "affine": {
+        "max": 135175138422.0,
+        "min": -109414127904.0
+      },
+      "cursor": {
+        "max": 123.0,
+        "min": 0.0
+      },
+      "divc": {
+        "max": 2206657614.0,
+        "min": -1487547477.0
+      },
+      "input": {
+        "max": 3226.0,
+        "min": -2936.0
+      },
+      "lnb_m": {
+        "max": 85217247232.0,
+        "min": -63732449280.0
+      },
+      "lnw_m": {
+        "max": 50832.0,
+        "min": 14713.0
+      },
+      "mu": {
+        "max": 263.0,
+        "min": -177.0
+      },
+      "output": {
+        "max": 3.0,
+        "min": -4.0
+      },
+      "rsqrt": {
+        "max": 3602.0,
+        "min": 1205.0
+      },
+      "shift": {
+        "max": 15.0,
+        "min": -13.0
+      },
+      "sum": {
+        "max": 50410.0,
+        "min": -34047.0
+      },
+      "var": {
+        "max": 36206792.0,
+        "min": 4126170.0
+      }
+    },
+    "output_dtype": {
+      "bits": 3,
+      "qmax": 3,
+      "qmin": -4,
+      "signed": true
+    },
+    "params": {
+      "bound": -3935884,
+      "effective_divisor": 8388608,
+      "input_dtype": {
+        "bits": 13,
+        "qmax": 4095,
+        "qmin": -4096,
+        "signed": true
+      },
+      "name": "attn_6_lnq",
+      "observed_range": null,
+      "offset": 43691,
+      "output_dtype": {
+        "bits": 3,
+        "qmax": 3,
+        "qmin": -4,
+        "signed": true
+      },
+      "scalars": [
+        43691,
+        23,
+        -3935884,
+        18,
+        127,
+        33,
+        3
+      ],
+      "shift_scale": 23,
+      "table_sizes": [
+        192,
+        192,
+        128
+      ],
+      "zero_point": null
+    },
+    "stat_key": "attn6.lnq"
+  },
+  {
+    "input_dtype": {
+      "bits": 13,
+      "qmax": 4095,
+      "qmin": -4096,
+      "signed": true
+    },
+    "kind": "layernorm_rsqrt_table",
+    "name": "attn_7_lnq",
+    "observed_range": {
+      "affine": {
+        "max": 67210218986.0,
+        "min": -55715058112.0
+      },
+      "cursor": {
+        "max": 72.0,
+        "min": 0.0
+      },
+      "divc": {
+        "max": 2022194212.0,
+        "min": -1313657297.0
+      },
+      "input": {
+        "max": 3482.0,
+        "min": -3156.0
+      },
+      "lnb_m": {
+        "max": 27075280896.0,
+        "min": -21693988864.0
+      },
+      "lnw_m": {
+        "max": 45972.0,
+        "min": 10925.0
+      },
+      "mu": {
+        "max": 241.0,
+        "min": -157.0
+      },
+      "output": {
+        "max": 3.0,
+        "min": -4.0
+      },
+      "rsqrt": {
+        "max": 2077.0,
+        "min": 568.0
+      },
+      "shift": {
+        "max": 15.0,
+        "min": -13.0
+      },
+      "sum": {
+        "max": 46188.0,
+        "min": -30067.0
+      },
+      "var": {
+        "max": 40826668.0,
+        "min": 2983279.0
+      }
+    },
+    "output_dtype": {
+      "bits": 3,
+      "qmax": 3,
+      "qmin": -4,
+      "signed": true
+    },
+    "params": {
+      "bound": -2793443,
+      "effective_divisor": 8388608,
+      "input_dtype": {
+        "bits": 13,
+        "qmax": 4095,
+        "qmin": -4096,
+        "signed": true
+      },
+      "name": "attn_7_lnq",
+      "observed_range": null,
+      "offset": 43691,
+      "output_dtype": {
+        "bits": 3,
+        "qmax": 3,
+        "qmin": -4,
+        "signed": true
+      },
+      "scalars": [
+        43691,
+        23,
+        -2793443,
+        19,
+        127,
+        32,
+        3
+      ],
+      "shift_scale": 23,
+      "table_sizes": [
+        192,
+        192,
+        128
+      ],
+      "zero_point": null
+    },
+    "stat_key": "attn7.lnq"
+  },
+  {
+    "input_dtype": {
+      "bits": 13,
+      "qmax": 4095,
+      "qmin": -4096,
+      "signed": true
+    },
+    "kind": "layernorm_rsqrt_table",
+    "name": "attn_8_lnq",
+    "observed_range": {
+      "affine": {
+        "max": 69555655612.0,
+        "min": -50132075528.0
+      },
+      "cursor": {
+        "max": 73.0,
+        "min": 0.0
+      },
+      "divc": {
+        "max": 1913403622.0,
+        "min": -1308283304.0
+      },
+      "input": {
+        "max": 3452.0,
+        "min": -3062.0
+      },
+      "lnb_m": {
+        "max": 27756068864.0,
+        "min": -19730792448.0
+      },
+      "lnw_m": {
+        "max": 43008.0,
+        "min": 11708.0
+      },
+      "mu": {
+        "max": 228.0,
+        "min": -156.0
+      },
+      "output": {
+        "max": 3.0,
+        "min": -4.0
+      },
+      "rsqrt": {
+        "max": 2338.0,
+        "min": 569.0
+      },
+      "shift": {
+        "max": 16.0,
+        "min": -12.0
+      },
+      "sum": {
+        "max": 43698.0,
+        "min": -29944.0
+      },
+      "var": {
+        "max": 40893168.0,
+        "min": 2407461.0
+      }
+    },
+    "output_dtype": {
+      "bits": 3,
+      "qmax": 3,
+      "qmin": -4,
+      "signed": true
+    },
+    "params": {
+      "bound": -2150450,
+      "effective_divisor": 8388608,
+      "input_dtype": {
+        "bits": 13,
+        "qmax": 4095,
+        "qmin": -4096,
+        "signed": true
+      },
+      "name": "attn_8_lnq",
+      "observed_range": null,
+      "offset": 43691,
+      "output_dtype": {
+        "bits": 3,
+        "qmax": 3,
+        "qmin": -4,
+        "signed": true
+      },
+      "scalars": [
+        43691,
+        23,
+        -2150450,
+        19,
+        127,
+        32,
+        3
+      ],
+      "shift_scale": 23,
+      "table_sizes": [
+        192,
+        192,
+        128
+      ],
+      "zero_point": null
+    },
+    "stat_key": "attn8.lnq"
+  },
+  {
+    "input_dtype": {
+      "bits": 13,
+      "qmax": 4095,
+      "qmin": -4096,
+      "signed": true
+    },
+    "kind": "layernorm_rsqrt_table",
+    "name": "attn_9_lnq",
+    "observed_range": {
+      "affine": {
+        "max": 62828650282.0,
+        "min": -50468638716.0
+      },
+      "cursor": {
+        "max": 114.0,
+        "min": 0.0
+      },
+      "divc": {
+        "max": 1753887781.0,
+        "min": -1242440967.0
+      },
+      "input": {
+        "max": 3121.0,
+        "min": -2731.0
+      },
+      "lnb_m": {
+        "max": 19631702016.0,
+        "min": -15323889664.0
+      },
+      "lnw_m": {
+        "max": 40314.0,
+        "min": 9831.0
+      },
+      "mu": {
+        "max": 209.0,
+        "min": -148.0
+      },
+      "output": {
+        "max": 3.0,
+        "min": -4.0
+      },
+      "rsqrt": {
+        "max": 2731.0,
+        "min": 645.0
+      },
+      "shift": {
+        "max": 14.0,
+        "min": -12.0
+      },
+      "sum": {
+        "max": 40047.0,
+        "min": -28437.0
+      },
+      "var": {
+        "max": 31691382.0,
+        "min": 1751263.0
+      }
+    },
+    "output_dtype": {
+      "bits": 3,
+      "qmax": 3,
+      "qmin": -4,
+      "signed": true
+    },
+    "params": {
+      "bound": -1637294,
+      "effective_divisor": 8388608,
+      "input_dtype": {
+        "bits": 13,
+        "qmax": 4095,
+        "qmin": -4096,
+        "signed": true
+      },
+      "name": "attn_9_lnq",
+      "observed_range": null,
+      "offset": 43691,
+      "output_dtype": {
+        "bits": 3,
+        "qmax": 3,
+        "qmin": -4,
+        "signed": true
+      },
+      "scalars": [
+        43691,
+        23,
+        -1637294,
+        18,
+        127,
+        32,
+        3
+      ],
+      "shift_scale": 23,
+      "table_sizes": [
+        192,
+        192,
+        128
+      ],
+      "zero_point": null
+    },
+    "stat_key": "attn9.lnq"
+  },
+  {
+    "input_dtype": {
+      "bits": 13,
+      "qmax": 4095,
+      "qmin": -4096,
+      "signed": true
+    },
+    "kind": "layernorm_rsqrt_table",
+    "name": "head_lnq",
+    "observed_range": {
+      "affine": {
+        "max": 23713503380.0,
+        "min": -27113728688.0
+      },
+      "cursor": {
+        "max": 61.0,
+        "min": 1.0
+      },
+      "divc": {
+        "max": 814706045.0,
+        "min": 297710474.0
+      },
+      "input": {
+        "max": 2144.0,
+        "min": -590.0
+      },
+      "lnb_m": {
+        "max": 5196087296.0,
+        "min": -12142379008.0
+      },
+      "lnw_m": {
+        "max": 44542.0,
+        "min": 15546.0
+      },
+      "mu": {
+        "max": 97.0,
+        "min": 35.0
+      },
+      "output": {
+        "max": 127.0,
+        "min": -128.0
+      },
+      "rsqrt": {
+        "max": 1961.0,
+        "min": 614.0
+      },
+      "shift": {
+        "max": 176.0,
+        "min": -203.0
+      },
+      "sum": {
+        "max": 18551.0,
+        "min": 6814.0
+      },
+      "var": {
+        "max": 8728914.0,
+        "min": 854765.0
+      }
+    },
+    "output_dtype": {
+      "bits": 8,
+      "qmax": 127,
+      "qmin": -128,
+      "signed": true
+    },
+    "params": {
+      "bound": -660994,
+      "effective_divisor": 8388608,
+      "input_dtype": {
+        "bits": 13,
+        "qmax": 4095,
+        "qmin": -4096,
+        "signed": true
+      },
+      "name": "head_lnq",
+      "observed_range": null,
+      "offset": 43691,
+      "output_dtype": {
+        "bits": 8,
+        "qmax": 127,
+        "qmin": -128,
+        "signed": true
+      },
+      "scalars": [
+        43691,
+        23,
+        -660994,
+        17,
+        127,
+        27,
+        8
+      ],
+      "shift_scale": 23,
+      "table_sizes": [
+        192,
+        192,
+        128
+      ],
+      "zero_point": null
+    },
+    "stat_key": "head.lnq"
+  },
+  {
+    "input_dtype": {
+      "bits": 15,
+      "qmax": 16383,
+      "qmin": -16384,
+      "signed": true
+    },
+    "kind": "layernorm_rsqrt_table",
+    "name": "mlp_0_lnq",
+    "observed_range": {
+      "affine": {
+        "max": 223459771264.0,
+        "min": -218642215216.0
+      },
+      "cursor": {
+        "max": 73.0,
+        "min": 0.0
+      },
+      "divc": {
+        "max": 3314923520.0,
+        "min": -2209410179.0
+      },
+      "input": {
+        "max": 9878.0,
+        "min": -9535.0
+      },
+      "lnb_m": {
+        "max": 17289969664.0,
+        "min": -17602445312.0
+      },
+      "lnw_m": {
+        "max": 49720.0,
+        "min": -1640.0
+      },
+      "mu": {
+        "max": 395.0,
+        "min": -263.0
+      },
+      "output": {
+        "max": 3.0,
+        "min": -4.0
+      },
+      "rsqrt": {
+        "max": 2449.0,
+        "min": 291.0
+      },
+      "shift": {
+        "max": 52.0,
+        "min": -51.0
+      },
+      "sum": {
+        "max": 75776.0,
+        "min": -50569.0
+      },
+      "var": {
+        "max": 621556288.0,
+        "min": 8521807.0
+      }
+    },
+    "output_dtype": {
+      "bits": 3,
+      "qmax": 3,
+      "qmin": -4,
+      "signed": true
+    },
+    "params": {
+      "bound": -4602380,
+      "effective_divisor": 8388608,
+      "input_dtype": {
+        "bits": 15,
+        "qmax": 16383,
+        "qmin": -16384,
+        "signed": true
+      },
+      "name": "mlp_0_lnq",
+      "observed_range": null,
+      "offset": 43691,
+      "output_dtype": {
+        "bits": 3,
+        "qmax": 3,
+        "qmin": -4,
+        "signed": true
+      },
+      "scalars": [
+        43691,
+        23,
+        -4602380,
+        23,
+        127,
+        32,
+        3
+      ],
+      "shift_scale": 23,
+      "table_sizes": [
+        192,
+        192,
+        128
+      ],
+      "zero_point": null
+    },
+    "stat_key": "mlp0.lnq"
+  },
+  {
+    "input_dtype": {
+      "bits": 13,
+      "qmax": 4095,
+      "qmin": -4096,
+      "signed": true
+    },
+    "kind": "layernorm_rsqrt_table",
+    "name": "mlp_10_lnq",
+    "observed_range": {
+      "affine": {
+        "max": 64643081354.0,
+        "min": -53882253808.0
+      },
+      "cursor": {
+        "max": 75.0,
+        "min": 0.0
+      },
+      "divc": {
+        "max": 1489120321.0,
+        "min": -901651167.0
+      },
+      "input": {
+        "max": 2892.0,
+        "min": -2270.0
+      },
+      "lnb_m": {
+        "max": 13090160640.0,
+        "min": -27375697920.0
+      },
+      "lnw_m": {
+        "max": 42485.0,
+        "min": -10874.0
+      },
+      "mu": {
+        "max": 177.0,
+        "min": -107.0
+      },
+      "output": {
+        "max": 3.0,
+        "min": -4.0
+      },
+      "rsqrt": {
+        "max": 3558.0,
+        "min": 798.0
+      },
+      "shift": {
+        "max": 15.0,
+        "min": -13.0
+      },
+      "sum": {
+        "max": 33987.0,
+        "min": -20637.0
+      },
+      "var": {
+        "max": 20654180.0,
+        "min": 1003635.0
+      }
+    },
+    "output_dtype": {
+      "bits": 3,
+      "qmax": 3,
+      "qmin": -4,
+      "signed": true
+    },
+    "params": {
+      "bound": -910942,
+      "effective_divisor": 8388608,
+      "input_dtype": {
+        "bits": 13,
+        "qmax": 4095,
+        "qmin": -4096,
+        "signed": true
+      },
+      "name": "mlp_10_lnq",
+      "observed_range": null,
+      "offset": 43691,
+      "output_dtype": {
+        "bits": 3,
+        "qmax": 3,
+        "qmin": -4,
+        "signed": true
+      },
+      "scalars": [
+        43691,
+        23,
+        -910942,
+        18,
+        127,
+        32,
+        3
+      ],
+      "shift_scale": 23,
+      "table_sizes": [
+        192,
+        192,
+        128
+      ],
+      "zero_point": null
+    },
+    "stat_key": "mlp10.lnq"
+  },
+  {
+    "input_dtype": {
+      "bits": 13,
+      "qmax": 4095,
+      "qmin": -4096,
+      "signed": true
+    },
+    "kind": "layernorm_rsqrt_table",
+    "name": "mlp_11_lnq",
+    "observed_range": {
+      "affine": {
+        "max": 63579756932.0,
+        "min": -106458222986.0
+      },
+      "cursor": {
+        "max": 71.0,
+        "min": 0.0
+      },
+      "divc": {
+        "max": 1413185363.0,
+        "min": -690711019.0
+      },
+      "input": {
+        "max": 3130.0,
+        "min": -1909.0
+      },
+      "lnb_m": {
+        "max": 11094720512.0,
+        "min": -37347131392.0
+      },
+      "lnw_m": {
+        "max": 40182.0,
+        "min": 26431.0
+      },
+      "mu": {
+        "max": 168.0,
+        "min": -82.0
+      },
+      "output": {
+        "max": 3.0,
+        "min": -4.0
+      },
+      "rsqrt": {
+        "max": 3843.0,
+        "min": 822.0
+      },
+      "shift": {
+        "max": 14.0,
+        "min": -25.0
+      },
+      "sum": {
+        "max": 32249.0,
+        "min": -15809.0
+      },
+      "var": {
+        "max": 19595412.0,
+        "min": 891146.0
+      }
+    },
+    "output_dtype": {
+      "bits": 3,
+      "qmax": 3,
+      "qmin": -4,
+      "signed": true
+    },
+    "params": {
+      "bound": -762143,
+      "effective_divisor": 8388608,
+      "input_dtype": {
+        "bits": 13,
+        "qmax": 4095,
+        "qmin": -4096,
+        "signed": true
+      },
+      "name": "mlp_11_lnq",
+      "observed_range": null,
+      "offset": 43691,
+      "output_dtype": {
+        "bits": 3,
+        "qmax": 3,
+        "qmin": -4,
+        "signed": true
+      },
+      "scalars": [
+        43691,
+        23,
+        -762143,
+        18,
+        127,
+        32,
+        3
+      ],
+      "shift_scale": 23,
+      "table_sizes": [
+        192,
+        192,
+        128
+      ],
+      "zero_point": null
+    },
+    "stat_key": "mlp11.lnq"
+  },
+  {
+    "input_dtype": {
+      "bits": 14,
+      "qmax": 8191,
+      "qmin": -8192,
+      "signed": true
+    },
+    "kind": "layernorm_rsqrt_table",
+    "name": "mlp_1_lnq",
+    "observed_range": {
+      "affine": {
+        "max": 284100417202.0,
+        "min": -257955337556.0
+      },
+      "cursor": {
+        "max": 75.0,
+        "min": 0.0
+      },
+      "divc": {
+        "max": 2945559806.0,
+        "min": -1475838289.0
+      },
+      "input": {
+        "max": 4456.0,
+        "min": -4148.0
+      },
+      "lnb_m": {
+        "max": 70201638912.0,
+        "min": -51050446848.0
+      },
+      "lnw_m": {
+        "max": 64491.0,
+        "min": 10247.0
+      },
+      "mu": {
+        "max": 351.0,
+        "min": -176.0
+      },
+      "output": {
+        "max": 3.0,
+        "min": -4.0
+      },
+      "rsqrt": {
+        "max": 3109.0,
+        "min": 569.0
+      },
+      "shift": {
+        "max": 33.0,
+        "min": -31.0
+      },
+      "sum": {
+        "max": 67322.0,
+        "min": -33779.0
+      },
+      "var": {
+        "max": 162561328.0,
+        "min": 5724651.0
+      }
+    },
+    "output_dtype": {
+      "bits": 3,
+      "qmax": 3,
+      "qmin": -4,
+      "signed": true
+    },
+    "params": {
+      "bound": -4409734,
+      "effective_divisor": 8388608,
+      "input_dtype": {
+        "bits": 14,
+        "qmax": 8191,
+        "qmin": -8192,
+        "signed": true
+      },
+      "name": "mlp_1_lnq",
+      "observed_range": null,
+      "offset": 43691,
+      "output_dtype": {
+        "bits": 3,
+        "qmax": 3,
+        "qmin": -4,
+        "signed": true
+      },
+      "scalars": [
+        43691,
+        23,
+        -4409734,
+        21,
+        127,
+        33,
+        3
+      ],
+      "shift_scale": 23,
+      "table_sizes": [
+        192,
+        192,
+        128
+      ],
+      "zero_point": null
+    },
+    "stat_key": "mlp1.lnq"
+  },
+  {
+    "input_dtype": {
+      "bits": 14,
+      "qmax": 8191,
+      "qmin": -8192,
+      "signed": true
+    },
+    "kind": "layernorm_rsqrt_table",
+    "name": "mlp_2_lnq",
+    "observed_range": {
+      "affine": {
+        "max": 174424112384.0,
+        "min": -159978813616.0
+      },
+      "cursor": {
+        "max": 102.0,
+        "min": 0.0
+      },
+      "divc": {
+        "max": 3105687321.0,
+        "min": -2046267985.0
+      },
+      "input": {
+        "max": 4031.0,
+        "min": -4123.0
+      },
+      "lnb_m": {
+        "max": 55070687232.0,
+        "min": -44822429696.0
+      },
+      "lnw_m": {
+        "max": 65247.0,
+        "min": 12027.0
+      },
+      "mu": {
+        "max": 370.0,
+        "min": -244.0
+      },
+      "output": {
+        "max": 3.0,
+        "min": -4.0
+      },
+      "rsqrt": {
+        "max": 2365.0,
+        "min": 673.0
+      },
+      "shift": {
+        "max": 20.0,
+        "min": -19.0
+      },
+      "sum": {
+        "max": 70987.0,
+        "min": -46835.0
+      },
+      "var": {
+        "max": 115881296.0,
+        "min": 9525197.0
+      }
+    },
+    "output_dtype": {
+      "bits": 3,
+      "qmax": 3,
+      "qmin": -4,
+      "signed": true
+    },
+    "params": {
+      "bound": -8909606,
+      "effective_divisor": 8388608,
+      "input_dtype": {
+        "bits": 14,
+        "qmax": 8191,
+        "qmin": -8192,
+        "signed": true
+      },
+      "name": "mlp_2_lnq",
+      "observed_range": null,
+      "offset": 43691,
+      "output_dtype": {
+        "bits": 3,
+        "qmax": 3,
+        "qmin": -4,
+        "signed": true
+      },
+      "scalars": [
+        43691,
+        23,
+        -8909606,
+        20,
+        127,
+        33,
+        3
+      ],
+      "shift_scale": 23,
+      "table_sizes": [
+        192,
+        192,
+        128
+      ],
+      "zero_point": null
+    },
+    "stat_key": "mlp2.lnq"
+  },
+  {
+    "input_dtype": {
+      "bits": 13,
+      "qmax": 4095,
+      "qmin": -4096,
+      "signed": true
+    },
+    "kind": "layernorm_rsqrt_table",
+    "name": "mlp_3_lnq",
+    "observed_range": {
+      "affine": {
+        "max": 168739210006.0,
+        "min": -143181299284.0
+      },
+      "cursor": {
+        "max": 70.0,
+        "min": 0.0
+      },
+      "divc": {
+        "max": 2422403772.0,
+        "min": -1617965112.0
+      },
+      "input": {
+        "max": 2807.0,
+        "min": -2915.0
+      },
+      "lnb_m": {
+        "max": 75396808704.0,
+        "min": -55395745792.0
+      },
+      "lnw_m": {
+        "max": 60087.0,
+        "min": 14955.0
+      },
+      "mu": {
+        "max": 288.0,
+        "min": -193.0
+      },
+      "output": {
+        "max": 3.0,
+        "min": -4.0
+      },
+      "rsqrt": {
+        "max": 2963.0,
+        "min": 1111.0
+      },
+      "shift": {
+        "max": 19.0,
+        "min": -17.0
+      },
+      "sum": {
+        "max": 55348.0,
+        "min": -37032.0
+      },
+      "var": {
+        "max": 42520460.0,
+        "min": 6046935.0
+      }
+    },
+    "output_dtype": {
+      "bits": 3,
+      "qmax": 3,
+      "qmin": -4,
+      "signed": true
+    },
+    "params": {
+      "bound": -5747680,
+      "effective_divisor": 8388608,
+      "input_dtype": {
+        "bits": 13,
+        "qmax": 4095,
+        "qmin": -4096,
+        "signed": true
+      },
+      "name": "mlp_3_lnq",
+      "observed_range": null,
+      "offset": 43691,
+      "output_dtype": {
+        "bits": 3,
+        "qmax": 3,
+        "qmin": -4,
+        "signed": true
+      },
+      "scalars": [
+        43691,
+        23,
+        -5747680,
+        19,
+        127,
+        33,
+        3
+      ],
+      "shift_scale": 23,
+      "table_sizes": [
+        192,
+        192,
+        128
+      ],
+      "zero_point": null
+    },
+    "stat_key": "mlp3.lnq"
+  },
+  {
+    "input_dtype": {
+      "bits": 13,
+      "qmax": 4095,
+      "qmin": -4096,
+      "signed": true
+    },
+    "kind": "layernorm_rsqrt_table",
+    "name": "mlp_4_lnq",
+    "observed_range": {
+      "affine": {
+        "max": 162692779608.0,
+        "min": -124437359104.0
+      },
+      "cursor": {
+        "max": 97.0,
+        "min": 0.0
+      },
+      "divc": {
+        "max": 2498731949.0,
+        "min": -1670612767.0
+      },
+      "input": {
+        "max": 3106.0,
+        "min": -2933.0
+      },
+      "lnb_m": {
+        "max": 89655345152.0,
+        "min": -63272124416.0
+      },
+      "lnw_m": {
+        "max": 56540.0,
+        "min": 15688.0
+      },
+      "mu": {
+        "max": 297.0,
+        "min": -199.0
+      },
+      "output": {
+        "max": 3.0,
+        "min": -4.0
+      },
+      "rsqrt": {
+        "max": 2756.0,
+        "min": 1276.0
+      },
+      "shift": {
+        "max": 18.0,
+        "min": -15.0
+      },
+      "sum": {
+        "max": 57095.0,
+        "min": -38237.0
+      },
+      "var": {
+        "max": 32348484.0,
+        "min": 6982120.0
+      }
+    },
+    "output_dtype": {
+      "bits": 3,
+      "qmax": 3,
+      "qmin": -4,
+      "signed": true
+    },
+    "params": {
+      "bound": -6816111,
+      "effective_divisor": 8388608,
+      "input_dtype": {
+        "bits": 13,
+        "qmax": 4095,
+        "qmin": -4096,
+        "signed": true
+      },
+      "name": "mlp_4_lnq",
+      "observed_range": null,
+      "offset": 43691,
+      "output_dtype": {
+        "bits": 3,
+        "qmax": 3,
+        "qmin": -4,
+        "signed": true
+      },
+      "scalars": [
+        43691,
+        23,
+        -6816111,
+        18,
+        127,
+        33,
+        3
+      ],
+      "shift_scale": 23,
+      "table_sizes": [
+        192,
+        192,
+        128
+      ],
+      "zero_point": null
+    },
+    "stat_key": "mlp4.lnq"
+  },
+  {
+    "input_dtype": {
+      "bits": 13,
+      "qmax": 4095,
+      "qmin": -4096,
+      "signed": true
+    },
+    "kind": "layernorm_rsqrt_table",
+    "name": "mlp_5_lnq",
+    "observed_range": {
+      "affine": {
+        "max": 149854634126.0,
+        "min": -111549794240.0
+      },
+      "cursor": {
+        "max": 93.0,
+        "min": 1.0
+      },
+      "divc": {
+        "max": 2652742724.0,
+        "min": -1792816494.0
+      },
+      "input": {
+        "max": 3571.0,
+        "min": -2907.0
+      },
+      "lnb_m": {
+        "max": 79128690688.0,
+        "min": -55286169600.0
+      },
+      "lnw_m": {
+        "max": 52254.0,
+        "min": 9149.0
+      },
+      "mu": {
+        "max": 316.0,
+        "min": -214.0
+      },
+      "output": {
+        "max": 3.0,
+        "min": -4.0
+      },
+      "rsqrt": {
+        "max": 2659.0,
+        "min": 1292.0
+      },
+      "shift": {
+        "max": 17.0,
+        "min": -13.0
+      },
+      "sum": {
+        "max": 60620.0,
+        "min": -41034.0
+      },
+      "var": {
+        "max": 31680856.0,
+        "min": 7352120.0
+      }
+    },
+    "output_dtype": {
+      "bits": 3,
+      "qmax": 3,
+      "qmin": -4,
+      "signed": true
+    },
+    "params": {
+      "bound": -7069397,
+      "effective_divisor": 8388608,
+      "input_dtype": {
+        "bits": 13,
+        "qmax": 4095,
+        "qmin": -4096,
+        "signed": true
+      },
+      "name": "mlp_5_lnq",
+      "observed_range": null,
+      "offset": 43691,
+      "output_dtype": {
+        "bits": 3,
+        "qmax": 3,
+        "qmin": -4,
+        "signed": true
+      },
+      "scalars": [
+        43691,
+        23,
+        -7069397,
+        18,
+        127,
+        33,
+        3
+      ],
+      "shift_scale": 23,
+      "table_sizes": [
+        192,
+        192,
+        128
+      ],
+      "zero_point": null
+    },
+    "stat_key": "mlp5.lnq"
+  },
+  {
+    "input_dtype": {
+      "bits": 13,
+      "qmax": 4095,
+      "qmin": -4096,
+      "signed": true
+    },
+    "kind": "layernorm_rsqrt_table",
+    "name": "mlp_6_lnq",
+    "observed_range": {
+      "affine": {
+        "max": 149343532121.0,
+        "min": -120973978370.0
+      },
+      "cursor": {
+        "max": 86.0,
+        "min": 0.0
+      },
+      "divc": {
+        "max": 2563918921.0,
+        "min": -1716706772.0
+      },
+      "input": {
+        "max": 3993.0,
+        "min": -3508.0
+      },
+      "lnb_m": {
+        "max": 80566812672.0,
+        "min": -59374043136.0
+      },
+      "lnw_m": {
+        "max": 47844.0,
+        "min": 7456.0
+      },
+      "mu": {
+        "max": 305.0,
+        "min": -205.0
+      },
+      "output": {
+        "max": 3.0,
+        "min": -4.0
+      },
+      "rsqrt": {
+        "max": 2894.0,
+        "min": 1013.0
+      },
+      "shift": {
+        "max": 17.0,
+        "min": -15.0
+      },
+      "sum": {
+        "max": 58587.0,
+        "min": -39292.0
+      },
+      "var": {
+        "max": 51177720.0,
+        "min": 6257213.0
+      }
+    },
+    "output_dtype": {
+      "bits": 3,
+      "qmax": 3,
+      "qmin": -4,
+      "signed": true
+    },
+    "params": {
+      "bound": -6037980,
+      "effective_divisor": 8388608,
+      "input_dtype": {
+        "bits": 13,
+        "qmax": 4095,
+        "qmin": -4096,
+        "signed": true
+      },
+      "name": "mlp_6_lnq",
+      "observed_range": null,
+      "offset": 43691,
+      "output_dtype": {
+        "bits": 3,
+        "qmax": 3,
+        "qmin": -4,
+        "signed": true
+      },
+      "scalars": [
+        43691,
+        23,
+        -6037980,
+        19,
+        127,
+        33,
+        3
+      ],
+      "shift_scale": 23,
+      "table_sizes": [
+        192,
+        192,
+        128
+      ],
+      "zero_point": null
+    },
+    "stat_key": "mlp6.lnq"
+  },
+  {
+    "input_dtype": {
+      "bits": 13,
+      "qmax": 4095,
+      "qmin": -4096,
+      "signed": true
+    },
+    "kind": "layernorm_rsqrt_table",
+    "name": "mlp_7_lnq",
+    "observed_range": {
+      "affine": {
+        "max": 130150088552.0,
+        "min": -114955619504.0
+      },
+      "cursor": {
+        "max": 89.0,
+        "min": 0.0
+      },
+      "divc": {
+        "max": 2199579672.0,
+        "min": -1440929180.0
+      },
+      "input": {
+        "max": 3963.0,
+        "min": -3465.0
+      },
+      "lnb_m": {
+        "max": 58083770368.0,
+        "min": -44690833408.0
+      },
+      "lnw_m": {
+        "max": 45504.0,
+        "min": 6068.0
+      },
+      "mu": {
+        "max": 262.0,
+        "min": -172.0
+      },
+      "output": {
+        "max": 3.0,
+        "min": -4.0
+      },
+      "rsqrt": {
+        "max": 3632.0,
+        "min": 1020.0
+      },
+      "shift": {
+        "max": 15.0,
+        "min": -14.0
+      },
+      "sum": {
+        "max": 50248.0,
+        "min": -32980.0
+      },
+      "var": {
+        "max": 50589840.0,
+        "min": 3952340.0
+      }
+    },
+    "output_dtype": {
+      "bits": 3,
+      "qmax": 3,
+      "qmin": -4,
+      "signed": true
+    },
+    "params": {
+      "bound": -3738640,
+      "effective_divisor": 8388608,
+      "input_dtype": {
+        "bits": 13,
+        "qmax": 4095,
+        "qmin": -4096,
+        "signed": true
+      },
+      "name": "mlp_7_lnq",
+      "observed_range": null,
+      "offset": 43691,
+      "output_dtype": {
+        "bits": 3,
+        "qmax": 3,
+        "qmin": -4,
+        "signed": true
+      },
+      "scalars": [
+        43691,
+        23,
+        -3738640,
+        19,
+        127,
+        33,
+        3
+      ],
+      "shift_scale": 23,
+      "table_sizes": [
+        192,
+        192,
+        128
+      ],
+      "zero_point": null
+    },
+    "stat_key": "mlp7.lnq"
+  },
+  {
+    "input_dtype": {
+      "bits": 14,
+      "qmax": 8191,
+      "qmin": -8192,
+      "signed": true
+    },
+    "kind": "layernorm_rsqrt_table",
+    "name": "mlp_8_lnq",
+    "observed_range": {
+      "affine": {
+        "max": 127860621784.0,
+        "min": -101569168494.0
+      },
+      "cursor": {
+        "max": 119.0,
+        "min": 0.0
+      },
+      "divc": {
+        "max": 2414888920.0,
+        "min": -1654840316.0
+      },
+      "input": {
+        "max": 4549.0,
+        "min": -3948.0
+      },
+      "lnb_m": {
+        "max": 55117873152.0,
+        "min": -33058979840.0
+      },
+      "lnw_m": {
+        "max": 41551.0,
+        "min": 5820.0
+      },
+      "mu": {
+        "max": 287.0,
+        "min": -197.0
+      },
+      "output": {
+        "max": 3.0,
+        "min": -4.0
+      },
+      "rsqrt": {
+        "max": 3532.0,
+        "min": 890.0
+      },
+      "shift": {
+        "max": 14.0,
+        "min": -12.0
+      },
+      "sum": {
+        "max": 55176.0,
+        "min": -37876.0
+      },
+      "var": {
+        "max": 66731184.0,
+        "min": 4244330.0
+      }
+    },
+    "output_dtype": {
+      "bits": 3,
+      "qmax": 3,
+      "qmin": -4,
+      "signed": true
+    },
+    "params": {
+      "bound": -3967626,
+      "effective_divisor": 8388608,
+      "input_dtype": {
+        "bits": 14,
+        "qmax": 8191,
+        "qmin": -8192,
+        "signed": true
+      },
+      "name": "mlp_8_lnq",
+      "observed_range": null,
+      "offset": 43691,
+      "output_dtype": {
+        "bits": 3,
+        "qmax": 3,
+        "qmin": -4,
+        "signed": true
+      },
+      "scalars": [
+        43691,
+        23,
+        -3967626,
+        19,
+        127,
+        33,
+        3
+      ],
+      "shift_scale": 23,
+      "table_sizes": [
+        192,
+        192,
+        128
+      ],
+      "zero_point": null
+    },
+    "stat_key": "mlp8.lnq"
+  },
+  {
+    "input_dtype": {
+      "bits": 13,
+      "qmax": 4095,
+      "qmin": -4096,
+      "signed": true
+    },
+    "kind": "layernorm_rsqrt_table",
+    "name": "mlp_9_lnq",
+    "observed_range": {
+      "affine": {
+        "max": 60149543104.0,
+        "min": -54169332296.0
+      },
+      "cursor": {
+        "max": 103.0,
+        "min": 0.0
+      },
+      "divc": {
+        "max": 1647500196.0,
+        "min": -1157243517.0
+      },
+      "input": {
+        "max": 3107.0,
+        "min": -2625.0
+      },
+      "lnb_m": {
+        "max": 21698183168.0,
+        "min": -14646771712.0
+      },
+      "lnw_m": {
+        "max": 42239.0,
+        "min": -10208.0
+      },
+      "mu": {
+        "max": 196.0,
+        "min": -138.0
+      },
+      "output": {
+        "max": 3.0,
+        "min": -4.0
+      },
+      "rsqrt": {
+        "max": 2832.0,
+        "min": 678.0
+      },
+      "shift": {
+        "max": 14.0,
+        "min": -13.0
+      },
+      "sum": {
+        "max": 37612.0,
+        "min": -26487.0
+      },
+      "var": {
+        "max": 28545240.0,
+        "min": 1603351.0
+      }
+    },
+    "output_dtype": {
+      "bits": 3,
+      "qmax": 3,
+      "qmin": -4,
+      "signed": true
+    },
+    "params": {
+      "bound": -1513477,
+      "effective_divisor": 8388608,
+      "input_dtype": {
+        "bits": 13,
+        "qmax": 4095,
+        "qmin": -4096,
+        "signed": true
+      },
+      "name": "mlp_9_lnq",
+      "observed_range": null,
+      "offset": 43691,
+      "output_dtype": {
+        "bits": 3,
+        "qmax": 3,
+        "qmin": -4,
+        "signed": true
+      },
+      "scalars": [
+        43691,
+        23,
+        -1513477,
+        18,
+        127,
+        32,
+        3
+      ],
+      "shift_scale": 23,
+      "table_sizes": [
+        192,
+        192,
+        128
+      ],
+      "zero_point": null
+    },
+    "stat_key": "mlp9.lnq"
+  },
+  {
+    "input_dtype": {
+      "bits": 10,
+      "qmax": 511,
+      "qmin": -512,
+      "signed": true
+    },
+    "kind": "softmax_segmented_table",
+    "name": "attn_0_softmaxq",
+    "observed_range": {
+      "acc": {
+        "max": 4774493.0,
+        "min": 33299.0
+      },
+      "affine": {
+        "max": 8028160.0,
+        "min": 0.0
+      },
+      "cursor1": {
+        "max": 40.0,
+        "min": 0.0
+      },
+      "cursor2_one": {
+        "max": 289.0,
+        "min": 0.0
+      },
+      "cursor2_two": {
+        "max": 31.0,
+        "min": -5.0
+      },
+      "cursor3": {
+        "max": 122.0,
+        "min": 0.0
+      },
+      "exp": {
+        "max": 32768.0,
+        "min": 0.0
+      },
+      "input": {
+        "max": 408.0,
+        "min": -328.0
+      },
+      "minus_max": {
+        "max": 0.0,
+        "min": -642.0
+      },
+      "output": {
+        "max": 7.0,
+        "min": 0.0
+      },
+      "recip": {
+        "max": 244.0,
+        "min": 7.0
+      },
+      "select": {
+        "max": 122.0,
+        "min": 0.0
+      }
+    },
+    "output_dtype": {
+      "bits": 3,
+      "qmax": 7,
+      "qmin": 0,
+      "signed": false
+    },
+    "params": {
+      "bound": 31,
+      "effective_divisor": 16,
+      "input_dtype": {
+        "bits": 10,
+        "qmax": 511,
+        "qmin": -512,
+        "signed": true
+      },
+      "name": "attn_0_softmaxq",
+      "observed_range": null,
+      "offset": 8,
+      "output_dtype": {
+        "bits": 3,
+        "qmax": 7,
+        "qmin": 0,
+        "signed": false
+      },
+      "scalars": [
+        8,
+        4,
+        31,
+        -25242,
+        14,
+        63,
+        32768,
+        16,
+        -596612,
+        17,
+        63,
+        524288,
+        20,
+        3
+      ],
+      "shift_scale": 4,
+      "table_sizes": [
+        32,
+        64,
+        64
+      ],
+      "zero_point": null
+    },
+    "stat_key": "attn0.softmaxq"
+  },
+  {
+    "input_dtype": {
+      "bits": 10,
+      "qmax": 511,
+      "qmin": -512,
+      "signed": true
+    },
+    "kind": "softmax_segmented_table",
+    "name": "attn_10_softmaxq",
+    "observed_range": {
+      "acc": {
+        "max": 2999423.0,
+        "min": 32789.0
+      },
+      "affine": {
+        "max": 6062080.0,
+        "min": 0.0
+      },
+      "cursor1": {
+        "max": 37.0,
+        "min": 0.0
+      },
+      "cursor2_one": {
+        "max": 362.0,
+        "min": 0.0
+      },
+      "cursor2_two": {
+        "max": 40.0,
+        "min": -5.0
+      },
+      "cursor3": {
+        "max": 132.0,
+        "min": 0.0
+      },
+      "exp": {
+        "max": 32768.0,
+        "min": 0.0
+      },
+      "input": {
+        "max": 442.0,
+        "min": -219.0
+      },
+      "minus_max": {
+        "max": 0.0,
+        "min": -594.0
+      },
+      "output": {
+        "max": 7.0,
+        "min": 0.0
+      },
+      "recip": {
+        "max": 177.0,
+        "min": 7.0
+      },
+      "select": {
+        "max": 132.0,
+        "min": 0.0
+      }
+    },
+    "output_dtype": {
+      "bits": 3,
+      "qmax": 7,
+      "qmin": 0,
+      "signed": false
+    },
+    "params": {
+      "bound": 31,
+      "effective_divisor": 16,
+      "input_dtype": {
+        "bits": 10,
+        "qmax": 511,
+        "qmin": -512,
+        "signed": true
+      },
+      "name": "attn_10_softmaxq",
+      "observed_range": null,
+      "offset": 8,
+      "output_dtype": {
+        "bits": 3,
+        "qmax": 7,
+        "qmin": 0,
+        "signed": false
+      },
+      "scalars": [
+        8,
+        4,
+        31,
+        -28706,
+        13,
+        63,
+        16384,
+        15,
+        -359889,
+        16,
+        63,
+        262144,
+        19,
+        3
+      ],
+      "shift_scale": 4,
+      "table_sizes": [
+        32,
+        64,
+        64
+      ],
+      "zero_point": null
+    },
+    "stat_key": "attn10.softmaxq"
+  },
+  {
+    "input_dtype": {
+      "bits": 10,
+      "qmax": 511,
+      "qmin": -512,
+      "signed": true
+    },
+    "kind": "softmax_segmented_table",
+    "name": "attn_11_softmaxq",
+    "observed_range": {
+      "acc": {
+        "max": 3193761.0,
+        "min": 36853.0
+      },
+      "affine": {
+        "max": 6291456.0,
+        "min": 0.0
+      },
+      "cursor1": {
+        "max": 19.0,
+        "min": 0.0
+      },
+      "cursor2_one": {
+        "max": 385.0,
+        "min": 0.0
+      },
+      "cursor2_two": {
+        "max": 42.0,
+        "min": -6.0
+      },
+      "cursor3": {
+        "max": 96.0,
+        "min": 0.0
+      },
+      "exp": {
+        "max": 32768.0,
+        "min": 1.0
+      },
+      "input": {
+        "max": 345.0,
+        "min": -293.0
+      },
+      "minus_max": {
+        "max": 0.0,
+        "min": -607.0
+      },
+      "output": {
+        "max": 7.0,
+        "min": 0.0
+      },
+      "recip": {
+        "max": 191.0,
+        "min": 13.0
+      },
+      "select": {
+        "max": 96.0,
+        "min": 0.0
+      }
+    },
+    "output_dtype": {
+      "bits": 3,
+      "qmax": 7,
+      "qmin": 0,
+      "signed": false
+    },
+    "params": {
+      "bound": 31,
+      "effective_divisor": 32,
+      "input_dtype": {
+        "bits": 10,
+        "qmax": 511,
+        "qmin": -512,
+        "signed": true
+      },
+      "name": "attn_11_softmaxq",
+      "observed_range": null,
+      "offset": 16,
+      "output_dtype": {
+        "bits": 3,
+        "qmax": 7,
+        "qmin": 0,
+        "signed": false
+      },
+      "scalars": [
+        16,
+        5,
+        31,
+        -33678,
+        13,
+        63,
+        32768,
+        16,
+        -414060,
+        16,
+        63,
+        262144,
+        19,
+        3
+      ],
+      "shift_scale": 5,
+      "table_sizes": [
+        32,
+        64,
+        64
+      ],
+      "zero_point": null
+    },
+    "stat_key": "attn11.softmaxq"
+  },
+  {
+    "input_dtype": {
+      "bits": 10,
+      "qmax": 511,
+      "qmin": -512,
+      "signed": true
+    },
+    "kind": "softmax_segmented_table",
+    "name": "attn_1_softmaxq",
+    "observed_range": {
+      "acc": {
+        "max": 4008211.0,
+        "min": 32768.0
+      },
+      "affine": {
+        "max": 4947968.0,
+        "min": 0.0
+      },
+      "cursor1": {
+        "max": 44.0,
+        "min": 0.0
+      },
+      "cursor2_one": {
+        "max": 485.0,
+        "min": 0.0
+      },
+      "cursor2_two": {
+        "max": 53.0,
+        "min": -8.0
+      },
+      "cursor3": {
+        "max": 147.0,
+        "min": 0.0
+      },
+      "exp": {
+        "max": 32768.0,
+        "min": 0.0
+      },
+      "input": {
+        "max": 470.0,
+        "min": -322.0
+      },
+      "minus_max": {
+        "max": 0.0,
+        "min": -709.0
+      },
+      "output": {
+        "max": 7.0,
+        "min": 0.0
+      },
+      "recip": {
+        "max": 147.0,
+        "min": 8.0
+      },
+      "select": {
+        "max": 147.0,
+        "min": 0.0
+      }
+    },
+    "output_dtype": {
+      "bits": 3,
+      "qmax": 7,
+      "qmin": 0,
+      "signed": false
+    },
+    "params": {
+      "bound": 31,
+      "effective_divisor": 16,
+      "input_dtype": {
+        "bits": 10,
+        "qmax": 511,
+        "qmin": -512,
+        "signed": true
+      },
+      "name": "attn_1_softmaxq",
+      "observed_range": null,
+      "offset": 8,
+      "output_dtype": {
+        "bits": 3,
+        "qmax": 7,
+        "qmin": 0,
+        "signed": false
+      },
+      "scalars": [
+        8,
+        4,
+        31,
+        -28690,
+        13,
+        63,
+        16384,
+        15,
+        -507831,
+        16,
+        63,
+        262144,
+        19,
+        3
+      ],
+      "shift_scale": 4,
+      "table_sizes": [
+        32,
+        64,
+        64
+      ],
+      "zero_point": null
+    },
+    "stat_key": "attn1.softmaxq"
+  },
+  {
+    "input_dtype": {
+      "bits": 10,
+      "qmax": 511,
+      "qmin": -512,
+      "signed": true
+    },
+    "kind": "softmax_segmented_table",
+    "name": "attn_2_softmaxq",
+    "observed_range": {
+      "acc": {
+        "max": 5989679.0,
+        "min": 32768.0
+      },
+      "affine": {
+        "max": 7536640.0,
+        "min": 0.0
+      },
+      "cursor1": {
+        "max": 196.0,
+        "min": 0.0
+      },
+      "cursor2_one": {
+        "max": 364.0,
+        "min": 0.0
+      },
+      "cursor2_two": {
+        "max": 40.0,
+        "min": -6.0
+      },
+      "cursor3": {
+        "max": 74.0,
+        "min": 0.0
+      },
+      "exp": {
+        "max": 32768.0,
+        "min": 0.0
+      },
+      "input": {
+        "max": 476.0,
+        "min": -384.0
+      },
+      "minus_max": {
+        "max": 0.0,
+        "min": -783.0
+      },
+      "output": {
+        "max": 7.0,
+        "min": 0.0
+      },
+      "recip": {
+        "max": 198.0,
+        "min": 4.0
+      },
+      "select": {
+        "max": 74.0,
+        "min": 0.0
+      }
+    },
+    "output_dtype": {
+      "bits": 3,
+      "qmax": 7,
+      "qmin": 0,
+      "signed": false
+    },
+    "params": {
+      "bound": 31,
+      "effective_divisor": 4,
+      "input_dtype": {
+        "bits": 10,
+        "qmax": 511,
+        "qmin": -512,
+        "signed": true
+      },
+      "name": "attn_2_softmaxq",
+      "observed_range": null,
+      "offset": 2,
+      "output_dtype": {
+        "bits": 3,
+        "qmax": 7,
+        "qmin": 0,
+        "signed": false
+      },
+      "scalars": [
+        2,
+        2,
+        31,
+        -24576,
+        14,
+        63,
+        32768,
+        16,
+        -720252,
+        17,
+        63,
+        1048576,
+        21,
+        3
+      ],
+      "shift_scale": 2,
+      "table_sizes": [
+        32,
+        64,
+        64
+      ],
+      "zero_point": null
+    },
+    "stat_key": "attn2.softmaxq"
+  },
+  {
+    "input_dtype": {
+      "bits": 10,
+      "qmax": 511,
+      "qmin": -512,
+      "signed": true
+    },
+    "kind": "softmax_segmented_table",
+    "name": "attn_3_softmaxq",
+    "observed_range": {
+      "acc": {
+        "max": 3360402.0,
+        "min": 32768.0
+      },
+      "affine": {
+        "max": 5832704.0,
+        "min": 0.0
+      },
+      "cursor1": {
+        "max": 42.0,
+        "min": 0.0
+      },
+      "cursor2_one": {
+        "max": 406.0,
+        "min": 0.0
+      },
+      "cursor2_two": {
+        "max": 44.0,
+        "min": -7.0
+      },
+      "cursor3": {
+        "max": 33.0,
+        "min": 0.0
+      },
+      "exp": {
+        "max": 32768.0,
+        "min": 0.0
+      },
+      "input": {
+        "max": 449.0,
+        "min": -302.0
+      },
+      "minus_max": {
+        "max": 0.0,
+        "min": -678.0
+      },
+      "output": {
+        "max": 7.0,
+        "min": 0.0
+      },
+      "recip": {
+        "max": 146.0,
+        "min": 7.0
+      },
+      "select": {
+        "max": 33.0,
+        "min": 0.0
+      }
+    },
+    "output_dtype": {
+      "bits": 3,
+      "qmax": 7,
+      "qmin": 0,
+      "signed": false
+    },
+    "params": {
+      "bound": 31,
+      "effective_divisor": 16,
+      "input_dtype": {
+        "bits": 10,
+        "qmax": 511,
+        "qmin": -512,
+        "signed": true
+      },
+      "name": "attn_3_softmaxq",
+      "observed_range": null,
+      "offset": 8,
+      "output_dtype": {
+        "bits": 3,
+        "qmax": 7,
+        "qmin": 0,
+        "signed": false
+      },
+      "scalars": [
+        8,
+        4,
+        31,
+        -28672,
+        13,
+        63,
+        65536,
+        17,
+        -432345,
+        16,
+        63,
+        1048576,
+        21,
+        3
+      ],
+      "shift_scale": 4,
+      "table_sizes": [
+        32,
+        64,
+        64
+      ],
+      "zero_point": null
+    },
+    "stat_key": "attn3.softmaxq"
+  },
+  {
+    "input_dtype": {
+      "bits": 10,
+      "qmax": 511,
+      "qmin": -512,
+      "signed": true
+    },
+    "kind": "softmax_segmented_table",
+    "name": "attn_4_softmaxq",
+    "observed_range": {
+      "acc": {
+        "max": 3078971.0,
+        "min": 32785.0
+      },
+      "affine": {
+        "max": 8323072.0,
+        "min": 0.0
+      },
+      "cursor1": {
+        "max": 38.0,
+        "min": 0.0
+      },
+      "cursor2_one": {
+        "max": 372.0,
+        "min": 0.0
+      },
+      "cursor2_two": {
+        "max": 40.0,
+        "min": -6.0
+      },
+      "cursor3": {
+        "max": 127.0,
+        "min": 0.0
+      },
+      "exp": {
+        "max": 32768.0,
+        "min": 0.0
+      },
+      "input": {
+        "max": 429.0,
+        "min": -259.0
+      },
+      "minus_max": {
+        "max": 0.0,
+        "min": -603.0
+      },
+      "output": {
+        "max": 7.0,
+        "min": 0.0
+      },
+      "recip": {
+        "max": 253.0,
+        "min": 15.0
+      },
+      "select": {
+        "max": 127.0,
+        "min": 0.0
+      }
+    },
+    "output_dtype": {
+      "bits": 3,
+      "qmax": 7,
+      "qmin": 0,
+      "signed": false
+    },
+    "params": {
+      "bound": 31,
+      "effective_divisor": 16,
+      "input_dtype": {
+        "bits": 10,
+        "qmax": 511,
+        "qmin": -512,
+        "signed": true
+      },
+      "name": "attn_4_softmaxq",
+      "observed_range": null,
+      "offset": 8,
+      "output_dtype": {
+        "bits": 3,
+        "qmax": 7,
+        "qmin": 0,
+        "signed": false
+      },
+      "scalars": [
+        8,
+        4,
+        31,
+        -28707,
+        13,
+        63,
+        32768,
+        16,
+        -403413,
+        16,
+        63,
+        262144,
+        19,
+        3
+      ],
+      "shift_scale": 4,
+      "table_sizes": [
+        32,
+        64,
+        64
+      ],
+      "zero_point": null
+    },
+    "stat_key": "attn4.softmaxq"
+  },
+  {
+    "input_dtype": {
+      "bits": 10,
+      "qmax": 511,
+      "qmin": -512,
+      "signed": true
+    },
+    "kind": "softmax_segmented_table",
+    "name": "attn_5_softmaxq",
+    "observed_range": {
+      "acc": {
+        "max": 3882139.0,
+        "min": 32799.0
+      },
+      "affine": {
+        "max": 6619136.0,
+        "min": 0.0
+      },
+      "cursor1": {
+        "max": 40.0,
+        "min": 0.0
+      },
+      "cursor2_one": {
+        "max": 470.0,
+        "min": 0.0
+      },
+      "cursor2_two": {
+        "max": 52.0,
+        "min": -7.0
+      },
+      "cursor3": {
+        "max": 86.0,
+        "min": 0.0
+      },
+      "exp": {
+        "max": 32768.0,
+        "min": 0.0
+      },
+      "input": {
+        "max": 389.0,
+        "min": -315.0
+      },
+      "minus_max": {
+        "max": 0.0,
+        "min": -644.0
+      },
+      "output": {
+        "max": 7.0,
+        "min": 0.0
+      },
+      "recip": {
+        "max": 186.0,
+        "min": 10.0
+      },
+      "select": {
+        "max": 86.0,
+        "min": 0.0
+      }
+    },
+    "output_dtype": {
+      "bits": 3,
+      "qmax": 7,
+      "qmin": 0,
+      "signed": false
+    },
+    "params": {
+      "bound": 31,
+      "effective_divisor": 16,
+      "input_dtype": {
+        "bits": 10,
+        "qmax": 511,
+        "qmin": -512,
+        "signed": true
+      },
+      "name": "attn_5_softmaxq",
+      "observed_range": null,
+      "offset": 8,
+      "output_dtype": {
+        "bits": 3,
+        "qmax": 7,
+        "qmin": 0,
+        "signed": false
+      },
+      "scalars": [
+        8,
+        4,
+        31,
+        -28732,
+        13,
+        63,
+        32768,
+        16,
+        -452800,
+        16,
+        63,
+        524288,
+        20,
+        3
+      ],
+      "shift_scale": 4,
+      "table_sizes": [
+        32,
+        64,
+        64
+      ],
+      "zero_point": null
+    },
+    "stat_key": "attn5.softmaxq"
+  },
+  {
+    "input_dtype": {
+      "bits": 10,
+      "qmax": 511,
+      "qmin": -512,
+      "signed": true
+    },
+    "kind": "softmax_segmented_table",
+    "name": "attn_6_softmaxq",
+    "observed_range": {
+      "acc": {
+        "max": 4007726.0,
+        "min": 33071.0
+      },
+      "affine": {
+        "max": 6193152.0,
+        "min": 0.0
+      },
+      "cursor1": {
+        "max": 31.0,
+        "min": 0.0
+      },
+      "cursor2_one": {
+        "max": 485.0,
+        "min": 0.0
+      },
+      "cursor2_two": {
+        "max": 53.0,
+        "min": -8.0
+      },
+      "cursor3": {
+        "max": 87.0,
+        "min": 0.0
+      },
+      "exp": {
+        "max": 32768.0,
+        "min": 0.0
+      },
+      "input": {
+        "max": 323.0,
+        "min": -264.0
+      },
+      "minus_max": {
+        "max": 0.0,
+        "min": -488.0
+      },
+      "output": {
+        "max": 7.0,
+        "min": 0.0
+      },
+      "recip": {
+        "max": 173.0,
+        "min": 10.0
+      },
+      "select": {
+        "max": 87.0,
+        "min": 0.0
+      }
+    },
+    "output_dtype": {
+      "bits": 3,
+      "qmax": 7,
+      "qmin": 0,
+      "signed": false
+    },
+    "params": {
+      "bound": 31,
+      "effective_divisor": 16,
+      "input_dtype": {
+        "bits": 10,
+        "qmax": 511,
+        "qmin": -512,
+        "signed": true
+      },
+      "name": "attn_6_softmaxq",
+      "observed_range": null,
+      "offset": 8,
+      "output_dtype": {
+        "bits": 3,
+        "qmax": 7,
+        "qmin": 0,
+        "signed": false
+      },
+      "scalars": [
+        8,
+        4,
+        31,
+        -29038,
+        13,
+        63,
+        32768,
+        16,
+        -499119,
+        16,
+        63,
+        524288,
+        20,
+        3
+      ],
+      "shift_scale": 4,
+      "table_sizes": [
+        32,
+        64,
+        64
+      ],
+      "zero_point": null
+    },
+    "stat_key": "attn6.softmaxq"
+  },
+  {
+    "input_dtype": {
+      "bits": 10,
+      "qmax": 511,
+      "qmin": -512,
+      "signed": true
+    },
+    "kind": "softmax_segmented_table",
+    "name": "attn_7_softmaxq",
+    "observed_range": {
+      "acc": {
+        "max": 2297412.0,
+        "min": 32798.0
+      },
+      "affine": {
+        "max": 8355840.0,
+        "min": 0.0
+      },
+      "cursor1": {
+        "max": 51.0,
+        "min": 0.0
+      },
+      "cursor2_one": {
+        "max": 276.0,
+        "min": 0.0
+      },
+      "cursor2_two": {
+        "max": 30.0,
+        "min": -5.0
+      },
+      "cursor3": {
+        "max": 127.0,
+        "min": 0.0
+      },
+      "exp": {
+        "max": 32768.0,
+        "min": 0.0
+      },
+      "input": {
+        "max": 286.0,
+        "min": -223.0
+      },
+      "minus_max": {
+        "max": 0.0,
+        "min": -406.0
+      },
+      "output": {
+        "max": 7.0,
+        "min": 0.0
+      },
+      "recip": {
+        "max": 254.0,
+        "min": 15.0
+      },
+      "select": {
+        "max": 127.0,
+        "min": 0.0
+      }
+    },
+    "output_dtype": {
+      "bits": 3,
+      "qmax": 7,
+      "qmin": 0,
+      "signed": false
+    },
+    "params": {
+      "bound": 31,
+      "effective_divisor": 8,
+      "input_dtype": {
+        "bits": 10,
+        "qmax": 511,
+        "qmin": -512,
+        "signed": true
+      },
+      "name": "attn_7_softmaxq",
+      "observed_range": null,
+      "offset": 4,
+      "output_dtype": {
+        "bits": 3,
+        "qmax": 7,
+        "qmin": 0,
+        "signed": false
+      },
+      "scalars": [
+        4,
+        3,
+        31,
+        -28773,
+        13,
+        63,
+        32768,
+        16,
+        -301274,
+        16,
+        63,
+        262144,
+        19,
+        3
+      ],
+      "shift_scale": 3,
+      "table_sizes": [
+        32,
+        64,
+        64
+      ],
+      "zero_point": null
+    },
+    "stat_key": "attn7.softmaxq"
+  },
+  {
+    "input_dtype": {
+      "bits": 10,
+      "qmax": 511,
+      "qmin": -512,
+      "signed": true
+    },
+    "kind": "softmax_segmented_table",
+    "name": "attn_8_softmaxq",
+    "observed_range": {
+      "acc": {
+        "max": 3658716.0,
+        "min": 32789.0
+      },
+      "affine": {
+        "max": 6455296.0,
+        "min": 0.0
+      },
+      "cursor1": {
+        "max": 35.0,
+        "min": 0.0
+      },
+      "cursor2_one": {
+        "max": 443.0,
+        "min": 0.0
+      },
+      "cursor2_two": {
+        "max": 49.0,
+        "min": -7.0
+      },
+      "cursor3": {
+        "max": 81.0,
+        "min": 0.0
+      },
+      "exp": {
+        "max": 32768.0,
+        "min": 0.0
+      },
+      "input": {
+        "max": 352.0,
+        "min": -270.0
+      },
+      "minus_max": {
+        "max": 0.0,
+        "min": -552.0
+      },
+      "output": {
+        "max": 7.0,
+        "min": 0.0
+      },
+      "recip": {
+        "max": 181.0,
+        "min": 9.0
+      },
+      "select": {
+        "max": 81.0,
+        "min": 0.0
+      }
+    },
+    "output_dtype": {
+      "bits": 3,
+      "qmax": 7,
+      "qmin": 0,
+      "signed": false
+    },
+    "params": {
+      "bound": 31,
+      "effective_divisor": 16,
+      "input_dtype": {
+        "bits": 10,
+        "qmax": 511,
+        "qmin": -512,
+        "signed": true
+      },
+      "name": "attn_8_softmaxq",
+      "observed_range": null,
+      "offset": 8,
+      "output_dtype": {
+        "bits": 3,
+        "qmax": 7,
+        "qmin": 0,
+        "signed": false
+      },
+      "scalars": [
+        8,
+        4,
+        31,
+        -28744,
+        13,
+        63,
+        32768,
+        16,
+        -436489,
+        16,
+        63,
+        524288,
+        20,
+        3
+      ],
+      "shift_scale": 4,
+      "table_sizes": [
+        32,
+        64,
+        64
+      ],
+      "zero_point": null
+    },
+    "stat_key": "attn8.softmaxq"
+  },
+  {
+    "input_dtype": {
+      "bits": 10,
+      "qmax": 511,
+      "qmin": -512,
+      "signed": true
+    },
+    "kind": "softmax_segmented_table",
+    "name": "attn_9_softmaxq",
+    "observed_range": {
+      "acc": {
+        "max": 2564757.0,
+        "min": 32801.0
+      },
+      "affine": {
+        "max": 6389760.0,
+        "min": 0.0
+      },
+      "cursor1": {
+        "max": 28.0,
+        "min": 0.0
+      },
+      "cursor2_one": {
+        "max": 309.0,
+        "min": 0.0
+      },
+      "cursor2_two": {
+        "max": 33.0,
+        "min": -5.0
+      },
+      "cursor3": {
+        "max": 136.0,
+        "min": 0.0
+      },
+      "exp": {
+        "max": 32768.0,
+        "min": 0.0
+      },
+      "input": {
+        "max": 330.0,
+        "min": -233.0
+      },
+      "minus_max": {
+        "max": 0.0,
+        "min": -442.0
+      },
+      "output": {
+        "max": 7.0,
+        "min": 0.0
+      },
+      "recip": {
+        "max": 187.0,
+        "min": 8.0
+      },
+      "select": {
+        "max": 136.0,
+        "min": 0.0
+      }
+    },
+    "output_dtype": {
+      "bits": 3,
+      "qmax": 7,
+      "qmin": 0,
+      "signed": false
+    },
+    "params": {
+      "bound": 31,
+      "effective_divisor": 16,
+      "input_dtype": {
+        "bits": 10,
+        "qmax": 511,
+        "qmin": -512,
+        "signed": true
+      },
+      "name": "attn_9_softmaxq",
+      "observed_range": null,
+      "offset": 8,
+      "output_dtype": {
+        "bits": 3,
+        "qmax": 7,
+        "qmin": 0,
+        "signed": false
+      },
+      "scalars": [
+        8,
+        4,
+        31,
+        -28802,
+        13,
+        63,
+        16384,
+        15,
+        -350846,
+        16,
+        63,
+        262144,
+        19,
+        3
+      ],
+      "shift_scale": 4,
+      "table_sizes": [
+        32,
+        64,
+        64
+      ],
+      "zero_point": null
+    },
+    "stat_key": "attn9.softmaxq"
+  }
+]

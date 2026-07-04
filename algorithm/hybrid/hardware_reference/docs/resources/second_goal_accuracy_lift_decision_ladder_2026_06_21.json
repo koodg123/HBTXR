@@ -1,0 +1,353 @@
+{
+  "contract_version": 1,
+  "date": "2026-06-21",
+  "scope": "HGTXR-SW second-goal accuracy lift decision ladder",
+  "execution_state": "paused_by_user_directive",
+  "execute_supported": false,
+  "allowed_while_paused": true,
+  "do_not_execute_until_user_resumes": true,
+  "active_goal_complete": false,
+  "prompt_pack": {
+    "objective": "Convert current metric-specific leaders and XR-63 oracle headroom into a leakage-safe experiment ladder that can raise center/P10/P5 accuracy toward the submission target.",
+    "source_artifacts": [
+      "docs/resources/second_goal_current_result_synthesis_2026_06_20.json",
+      "docs/resources/second_goal_paper_ref_current_ablation_plan_2026_06_20.md",
+      "docs/resources/xr64_experiment_design_contract_2026_06_21.json",
+      "docs/resources/xr64_resume_execution_dag_2026_06_21.json",
+      "docs/resources/second_goal_post_xr64_followup_experiment_contract_2026_06_21.json",
+      "docs/resources/paper_target_comparison_evidence_manifest_2026_06_21.json"
+    ],
+    "idea_gen_phase": "P1",
+    "domain": "Research Workflow",
+    "parent_skill": "paper-idea-generator",
+    "target_model_algorithm_hardware_or_dataset": "HGTXR raw event-count eye tracking on manifest1 train/val/test splits",
+    "constraints": [
+      "No train/eval/GPU command while execution_state is paused_by_user_directive.",
+      "XR-63 oracle is diagnostic only and cannot be promoted.",
+      "XR-64A/B cannot launch until strict generated artifact coverage passes.",
+      "Paper-level submission comparison is blocked until metric/protocol bridge evidence exists."
+    ],
+    "required_artifact": "A machine-checkable decision ladder with ablation matrix, controls, expected evidence, and blocked follow-up triggers.",
+    "verification_evidence": [
+      "JSON parse",
+      "decision ladder checker",
+      "second-goal status reporter",
+      "focused pytest",
+      "git diff whitespace check"
+    ],
+    "risks_and_missing_inputs": [
+      "XR-64 train/val teacher eval rows are not generated.",
+      "XR-64 override JSON files are not generated.",
+      "XR-64A/B/C training evidence does not exist.",
+      "Paper target metric-frame bridge is not complete."
+    ]
+  },
+  "source_artifacts": {
+    "current_result_synthesis": "docs/resources/second_goal_current_result_synthesis_2026_06_20.json",
+    "paper_ref_current_ablation_plan": "docs/resources/second_goal_paper_ref_current_ablation_plan_2026_06_20.md",
+    "xr64_experiment_design_contract": "docs/resources/xr64_experiment_design_contract_2026_06_21.json",
+    "xr64_resume_execution_dag": "docs/resources/xr64_resume_execution_dag_2026_06_21.json",
+    "post_xr64_followup_contract": "docs/resources/second_goal_post_xr64_followup_experiment_contract_2026_06_21.json",
+    "paper_target_evidence_manifest": "docs/resources/paper_target_comparison_evidence_manifest_2026_06_21.json",
+    "metric_protocol_bridge": "docs/resources/second_goal_metric_protocol_bridge_2026_06_20.json"
+  },
+  "current_gates": {
+    "center_lt": 16.468481131962367,
+    "p10_gt": 35.02295998845781,
+    "p5_gt": 12.133503770828247
+  },
+  "current_best": {
+    "center": {
+      "metric": "metric_track_center_px",
+      "direction": "lower_is_better",
+      "value": 16.468481131962367,
+      "owner": "XR-62A FACET geometry auxiliary refresh"
+    },
+    "p10": {
+      "metric": "metric_track_p10_pct",
+      "direction": "higher_is_better",
+      "value": 35.02295998845781,
+      "owner": "XR-39 mixed-leader soup c25p45f30"
+    },
+    "p5": {
+      "metric": "metric_track_p5_pct",
+      "direction": "higher_is_better",
+      "value": 12.133503770828247,
+      "owner": "XR-56B best-P5"
+    }
+  },
+  "oracle_signal": {
+    "id": "XR-63",
+    "type": "no-train test-aligned teacher-target oracle",
+    "promotable_as_result": false,
+    "metrics": {
+      "metric_track_center_px": 16.04023192701366,
+      "metric_track_p10_pct": 36.48596938775512,
+      "metric_track_p5_pct": 13.41751700680271
+    },
+    "interpretation": "XR-63 shows sample-wise teacher routing can exceed the current center/P10/P5 gates, but only a train/val-only conversion can become valid promotion evidence."
+  },
+  "submission_target_relation": {
+    "submission_initial_root": "/home/kjm26/project/PRJXR/XR-VIT/PAPER_WORKS/10_submission_initial",
+    "hybrid_pixel_error_px": 0.1812,
+    "hybrid_p10_pct": 99.97,
+    "hybrid_p5_pct": 99.72,
+    "hybrid_p1_pct": 99.61,
+    "direct_submission_comparison_allowed": false,
+    "bridge_status": "blocked_until_metric_frame_and_protocol_match"
+  },
+  "decision_ladder": [
+    {
+      "stage": "current_gates",
+      "decision": "Use current center/P10/P5 gates as the only valid software promotion criteria while paper bridge remains blocked.",
+      "promotion_allowed": false,
+      "next": "oracle_signal"
+    },
+    {
+      "stage": "oracle_signal",
+      "decision": "Treat XR-63 as headroom evidence and convert it through leakage-safe XR-64 train/val teacher-target construction.",
+      "promotion_allowed": false,
+      "next": "xr64_transfer"
+    },
+    {
+      "stage": "xr64_transfer",
+      "decision": "Run XR-64-prep first after explicit resume, then launch XR-64A/B only after strict readiness passes.",
+      "promotion_allowed": false,
+      "next": "post_xr64_branching"
+    },
+    {
+      "stage": "post_xr64_branching",
+      "decision": "Select XR-64C/XR-65/XR-66/XR-67/XR-68 only from full-test XR-64A/B evidence and blocked follow-up triggers.",
+      "promotion_allowed": false,
+      "next": "paper_target_bridge"
+    },
+    {
+      "stage": "paper_target_bridge",
+      "decision": "Do not claim submission-level accuracy until coordinate frame, split protocol, hybrid scheduler, P1, and trained-candidate evidence exist.",
+      "promotion_allowed": false,
+      "next": "completion_gate"
+    }
+  ],
+  "ablation_matrix": [
+    {
+      "id": "XR-64-prep",
+      "priority": "P0",
+      "axis": [
+        "teacher_model_training",
+        "self_supervised_distillation"
+      ],
+      "mechanism": "Generate train/val teacher eval rows and override JSON files.",
+      "launch_allowed_now": false,
+      "blocked_until": [
+        "user explicitly resumes experiments"
+      ],
+      "expected_evidence": [
+        "8 train/val eval_rows.json files",
+        "6 train/val override JSON files",
+        "strict XR-64 checker ready_to_train=true"
+      ]
+    },
+    {
+      "id": "XR-64A",
+      "priority": "P0",
+      "axis": [
+        "head",
+        "loss",
+        "lr",
+        "teacher_model_training"
+      ],
+      "mechanism": "Center-safe teacher-target transfer from XR-62A with XR-39 teacher signal.",
+      "launch_allowed_now": false,
+      "blocked_until": [
+        "XR-64-prep complete",
+        "strict XR-64 checker ready_to_train=true"
+      ],
+      "expected_evidence": [
+        "full-test center/P10/P5/P1",
+        "no test target override",
+        "axis-certified eval summary"
+      ]
+    },
+    {
+      "id": "XR-64B",
+      "priority": "P0",
+      "axis": [
+        "head",
+        "loss",
+        "lr",
+        "optimizer",
+        "teacher_model_training"
+      ],
+      "mechanism": "Threshold-priority teacher-target transfer from XR-56B with XR-39 teacher signal.",
+      "launch_allowed_now": false,
+      "blocked_until": [
+        "XR-64-prep complete",
+        "strict XR-64 checker ready_to_train=true"
+      ],
+      "expected_evidence": [
+        "full-test center/P10/P5/P1",
+        "bounded center tradeoff",
+        "axis-certified eval summary"
+      ]
+    },
+    {
+      "id": "XR-64C",
+      "priority": "P1",
+      "axis": [
+        "loss",
+        "teacher_model_training"
+      ],
+      "mechanism": "Min-error high-pressure diagnostic after XR-64A/B.",
+      "launch_allowed_now": false,
+      "blocked_until": [
+        "XR-64A/B post-run evidence exists"
+      ],
+      "expected_evidence": [
+        "full-test gate movement",
+        "validation-transfer check"
+      ]
+    },
+    {
+      "id": "XR-65",
+      "priority": "P1",
+      "axis": [
+        "loss",
+        "self_supervised_distillation"
+      ],
+      "mechanism": "Temporal-lite consistency only after XR-64 non-collapse evidence.",
+      "launch_allowed_now": false,
+      "blocked_until": [
+        "XR-64 non-collapsing checkpoint",
+        "same-scene temporal evidence",
+        "center drift <=0.3 px guard"
+      ],
+      "expected_evidence": [
+        "same-scene temporal comparison",
+        "center drift guard"
+      ]
+    },
+    {
+      "id": "XR-66",
+      "priority": "P1",
+      "axis": [
+        "head",
+        "loss"
+      ],
+      "mechanism": "Confidence-gated local/event update after no-train diagnostic.",
+      "launch_allowed_now": false,
+      "blocked_until": [
+        "no-train confidence bucket diagnostic",
+        "coordinate transform audit"
+      ],
+      "expected_evidence": [
+        "accepted subset center gain",
+        "fallback aggregate preservation"
+      ]
+    },
+    {
+      "id": "XR-67",
+      "priority": "P2",
+      "axis": [
+        "loss",
+        "self_supervised_distillation"
+      ],
+      "mechanism": "Dense trajectory smoothing only if continuous segments exist.",
+      "launch_allowed_now": false,
+      "blocked_until": [
+        "dense or continuous segment evidence"
+      ],
+      "expected_evidence": [
+        "dense trajectory coverage",
+        "sparse-only smoothing rejection"
+      ]
+    },
+    {
+      "id": "XR-68",
+      "priority": "P2",
+      "axis": [
+        "head",
+        "optimizer",
+        "teacher_model_training"
+      ],
+      "mechanism": "Stronger teacher/student branch with hardware-aware claim separation.",
+      "launch_allowed_now": false,
+      "blocked_until": [
+        "stable full-width teacher",
+        "student accuracy tolerance",
+        "hardware claim separation"
+      ],
+      "expected_evidence": [
+        "teacher improves active gate",
+        "student tolerance report",
+        "no weak-teacher hardware claim"
+      ]
+    }
+  ],
+  "control_variables": [
+    "manifest1 split identity remains fixed",
+    "test split receives no target override",
+    "software promotion uses full-test center/P10/P5 gates",
+    "P1 is tracked as future evidence but not current gate owner",
+    "GPU assignment follows XR-64 design contract for A/B lanes",
+    "XR-64A/B compare against current gates, not directly against paper hybrid targets"
+  ],
+  "expected_evidence": [
+    "strict XR-64 generated-artifact checker report",
+    "train/val eval_rows coverage for all required teachers",
+    "train/val override JSON coverage",
+    "XR-64A/B full-test eval_summary.json",
+    "XR-64A/B full-test eval_rows.json",
+    "axis-certified ablation provenance",
+    "post-run promotion decision report",
+    "paper-target metric/protocol bridge payloads"
+  ],
+  "current_state": {
+    "single_model_sota_claim_allowed": false,
+    "software_promotion_allowed": false,
+    "paper_level_completion_allowed": false,
+    "direct_submission_comparison_allowed": false,
+    "xr64_ready_to_train": false,
+    "xr64_can_run_lane": false,
+    "missing_eval_rows": 8,
+    "missing_overrides": 6,
+    "xr64_postrun_candidate_count": 0,
+    "minimal_next_worker_after_resume": "XR-64-prep",
+    "current_next_prep_id": "XR64-EVAL-TRAIN-XR62A",
+    "leakage_risk": "none"
+  },
+  "promotion_policy": {
+    "software_promotion_requires": [
+      "future trained model",
+      "full-test center/P10/P5 result",
+      "beat at least one current active gate",
+      "document bounded tradeoff for non-winning metrics",
+      "no test-derived target override"
+    ],
+    "paper_level_completion_requires": [
+      "metric/protocol bridge complete",
+      "paper-frame center/P10/P5/P1 evidence",
+      "XR-64-or-later trained candidate evidence",
+      "bridge decision payload"
+    ],
+    "reject_if": [
+      "oracle-only result",
+      "validation-only improvement",
+      "direct comparison to paper target without bridge",
+      "XR-64 generated artifacts are incomplete",
+      "test override path is non-null"
+    ]
+  },
+  "validation_commands": [
+    "python3 -m json.tool docs/resources/second_goal_accuracy_lift_decision_ladder_2026_06_21.json",
+    "python3 -m py_compile scripts/external/check_second_goal_accuracy_lift_decision_ladder.py scripts/external/report_second_goal_status.py",
+    ".venv/bin/python scripts/external/check_second_goal_accuracy_lift_decision_ladder.py --format summary",
+    ".venv/bin/python scripts/external/report_second_goal_status.py --format summary",
+    ".venv/bin/python -m pytest -q tests/test_second_goal_accuracy_lift_decision_ladder.py tests/test_second_goal_status.py",
+    "git diff --check -- docs/resources/second_goal_accuracy_lift_decision_ladder_2026_06_21.json docs/resources/second_goal_accuracy_lift_decision_ladder_2026_06_21.md scripts/external/check_second_goal_accuracy_lift_decision_ladder.py tests/test_second_goal_accuracy_lift_decision_ladder.py scripts/external/report_second_goal_status.py tests/test_second_goal_status.py docs/resources/second_goal_artifact_index_2026_06_18.json docs/resources/second_goal_artifact_index_2026_06_18.md docs/Validation.md docs/track/PROGRESS.md docs/track/log.md"
+  ],
+  "remaining_risks": [
+    "XR-64 transfer may not reproduce XR-63 oracle gains under leakage-safe train/val-only supervision.",
+    "P10 and P5 improvements may trade off against center unless guarded by full-test promotion policy.",
+    "Paper target remains incomparable until metric/protocol bridge payloads are generated after resume."
+  ]
+}

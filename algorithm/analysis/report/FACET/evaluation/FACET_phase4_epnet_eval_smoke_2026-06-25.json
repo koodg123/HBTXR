@@ -1,0 +1,34 @@
+{
+  "config": "DavisEyeEllipse_EPNet_local_train_smoke.yaml",
+  "checkpoint": "runs/logs/EPNet_local_train_smoke/version_0/checkpoints/epoch=00-val_mean_distance=38.6962.ckpt",
+  "device": "cpu",
+  "dataset_root": "/home/kjm26/project/dataset/XR/EV_Eye/raw_data/DeanDataset",
+  "max_batches": 2,
+  "evaluated_batches": 2,
+  "metrics": {
+    "val_loss": 743.7369689941406,
+    "val_p10_acc": 0.0,
+    "val_p5_acc": 0.0,
+    "val_p3_acc": 0.0,
+    "val_p1_acc": 0.0,
+    "val_mean_distance": 38.69616508483887,
+    "val_IoU": 0.0,
+    "val_AP": 0.0
+  },
+  "total_params": 3898280,
+  "trainable_params": 3898280,
+  "params_m": 3.89828,
+  "trainable_params_m": 3.89828,
+  "flops": 3422324568.0,
+  "flops_g": 3.422324568,
+  "latency_ms": 20.294669223949313,
+  "latency_warmup": 2,
+  "latency_iterations": 5,
+  "paper_table2_reference": {
+    "paper_p1_acc_percent": 99.59,
+    "paper_mean_pixel_error": 0.203,
+    "paper_params_m": 3.92,
+    "paper_flops_g": 3.44,
+    "paper_latency_ms": 0.5302
+  }
+}

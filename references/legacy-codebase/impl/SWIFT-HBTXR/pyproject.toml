@@ -1,0 +1,17 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "swift-hbtxr"
+version = "0.1.0"
+description = "Flattened Swift-Eye + HBTXR integration without mmrotate"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = []
+
+[tool.setuptools]
+packages = ["swift_hbtxr"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

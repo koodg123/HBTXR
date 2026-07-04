@@ -1,0 +1,10 @@
+{
+  "project_root": "/home/kjm26/project/PRJXR/external hybrid source",
+  "raw_root": "/home/kjm26/project/dataset/EV_Eye/raw_data/Data_davis",
+  "groundedsam_root": "/home/kjm26/project/PRJXR/grounded-segment-anything",
+  "annotation_root": "/home/kjm26/project/PRJXR/external hybrid source/workspace/groundedsam_annotations",
+  "canonical_root": "/home/kjm26/project/PRJXR/external hybrid source/workspace/canonical",
+  "indexes_root": "/home/kjm26/project/PRJXR/external hybrid source/workspace/canonical/indexes",
+  "manifests_root": "/home/kjm26/project/PRJXR/external hybrid source/workspace/manifests",
+  "preview_root": "/home/kjm26/project/PRJXR/external hybrid source/workspace/previews"
+}

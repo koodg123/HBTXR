@@ -1,0 +1,110 @@
+{
+  "date": "2026-06-20",
+  "scope": "HGTXR-SW second-goal current experiment result synthesis",
+  "execution_state": "paused_by_user_directive",
+  "active_goal_complete": false,
+  "source_artifacts": {
+    "current_summary": "docs/resources/current_work_summary_and_next_experiments_2026_06_18.md",
+    "artifact_index": "docs/resources/second_goal_artifact_index_2026_06_18.json",
+    "xr63_oracle_json": "docs/resources/xr63_p10_teacher_target_oracle_2026_06_18.json",
+    "experiment_queue_json": "docs/resources/second_goal_experiment_queue_2026_06_20.json",
+    "submission_target_gap_json": "docs/resources/second_goal_submission_target_gap_audit_2026_06_20.json",
+    "metric_protocol_bridge_json": "docs/resources/second_goal_metric_protocol_bridge_2026_06_20.json"
+  },
+  "current_best": {
+    "center": {
+      "metric": "metric_track_center_px",
+      "direction": "lower_is_better",
+      "value": 16.468481131962367,
+      "gate": "<16.468481131962367",
+      "owner": "XR-62A FACET geometry auxiliary refresh",
+      "interpretation": "best validated center gate; useful as geometry/center guard rather than a complete P10/P5 solution"
+    },
+    "p10": {
+      "metric": "metric_track_p10_pct",
+      "direction": "higher_is_better",
+      "value": 35.02295998845781,
+      "gate": ">35.02295998845781",
+      "owner": "XR-39 mixed-leader soup c25p45f30",
+      "interpretation": "best validated P10 gate; remains the hardest active threshold gate"
+    },
+    "p5": {
+      "metric": "metric_track_p5_pct",
+      "direction": "higher_is_better",
+      "value": 12.133503770828247,
+      "gate": ">12.133503770828247",
+      "owner": "XR-56B best-P5",
+      "interpretation": "best validated P5 gate; strong but fragile under P10-focused branches"
+    }
+  },
+  "result_interpretation": {
+    "single_model_sota_claim_allowed": false,
+    "reason": "The current best center, P10, and P5 gates come from different experiment owners.",
+    "high_value_signal": "XR-63 shows complementary sample-wise predictions across the current leader set.",
+    "closed_or_low_return_axes": [
+      "geometry-only replay after XR-62",
+      "candidate-head-only continuation after XR-60/XR-61",
+      "scalar P10-soft continuation after XR-56/XR-58/XR-59",
+      "low-similarity weighting/subset/sampler after XR-04/XR-09/XR-10",
+      "checkpoint soup/interpolation as primary work",
+      "prev-pupil/local crop without confidence fallback"
+    ]
+  },
+  "oracle_diagnostic": {
+    "id": "XR-63",
+    "type": "no-train test-aligned teacher-target oracle",
+    "promotable_as_result": false,
+    "non_promotion_reason": "The oracle selects among test-aligned predictions and is diagnostic only; it must be converted into train/val-only supervision before training.",
+    "metrics": {
+      "metric_track_center_px": 16.04023192701366,
+      "metric_track_p10_pct": 36.48596938775512,
+      "metric_track_p5_pct": 13.41751700680271
+    },
+    "promotes_active_gate_if_it_were_valid": {
+      "center": true,
+      "p10": true,
+      "p5": true
+    },
+    "operational_implication": "Use XR-64 teacher-target construction as the leakage-safe route to test whether the oracle signal transfers."
+  },
+  "submission_target_relation": {
+    "submission_initial_root": "/home/kjm26/project/PRJXR/XR-VIT/PAPER_WORKS/10_submission_initial",
+    "submission_targets": {
+      "hybrid_pixel_error_px": 0.1812,
+      "hybrid_p10_pct": 99.97,
+      "hybrid_p5_pct": 99.72,
+      "hybrid_p1_pct": 99.61,
+      "hybrid_latency_ms": 0.43
+    },
+    "direct_comparison_valid": false,
+    "bridge_status": "blocked_until_metric_frame_and_protocol_match",
+    "metric_frame": "post-transform input coordinate frame",
+    "directly_sensor_px": false,
+    "hybrid_match_status": "not_proven",
+    "current_p1_metric_available": true,
+    "current_p1_full_test_evidence_available": false,
+    "operational_rule": "Use current center/P10/P5 gates for software promotion until coordinate frame, split protocol, hybrid scheduler mode, and paper-frame/full-test P1 coverage are proven."
+  },
+  "xr64_resume_gate": {
+    "current_status": "generated_incomplete",
+    "ready_to_train": false,
+    "can_run_lane": false,
+    "missing_eval_rows": 8,
+    "missing_overrides": 6,
+    "leakage_risk": "none",
+    "next_priority": [
+      "XR-64-prep",
+      "XR-64A",
+      "XR-64B",
+      "XR-64C"
+    ],
+    "next_action_after_user_resumes": "Generate XR-64 train/val teacher eval rows and override JSONs, then run the strict XR-64 checker before any XR-64A/B training."
+  },
+  "promotion_rules": [
+    "Do not promote XR-63 oracle as a trained result.",
+    "Do not compare current metric_track_center_px directly against the 0.1812 px submission target.",
+    "Do not run or claim XR-64A/B until XR-64-prep generated artifacts pass strict checking.",
+    "Promote future trained results only against current software gates unless the metric/protocol bridge is unblocked."
+  ],
+  "conclusion": "Current work has identified credible accuracy headroom, but the active second goal remains incomplete: no single trained model owns all gates, XR-63 is diagnostic only, XR-64 generated artifacts are missing, and paper-level metric/protocol comparison is blocked."
+}

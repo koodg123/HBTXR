@@ -1,0 +1,71 @@
+# Python/runtime caches
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.ipynb_checkpoints/
+
+# Local virtual environments
+.venv/
+.*-venv/
+.facet-prep-venv/
+.facet-train-venv/
+
+# Training outputs and generated model artifacts
+runs/
+**/runs/
+artifacts/checkpoints/
+artifacts/large-local-only/
+artifacts/row-level-csv/
+algorithm/artifacts/checkpoints/
+algorithm/artifacts/large-local-only/
+algorithm/artifacts/row-level-csv/
+references/codebase/software/ais2025/tdtracker/checkpoint/
+references/codebase/software/ais2025/tdtracker/eyetracking_log/
+references/codebase/software/ais2025/tdtracker/log/
+*.ckpt
+*.pt
+*.pth
+*.onnx
+events.out.tfevents.*
+
+# Local logs
+*.log
+
+# Large generated FACET/HBTXR per-sample evaluation tables
+references/report/FACET/HBTXR_val_motion_eval/hbtxr_val_predictions_with_metadata.csv
+references/report/FACET/HBTXR_val_motion_eval/hbtxr_val_sample_predictions.csv
+references/report/FACET/HBTXR_val_motion_eval/hbtxr_val_sample_metadata.csv
+references/report/FACET/evaluation/HBTXR_val_motion_eval/hbtxr_val_predictions_with_metadata.csv
+references/report/FACET/evaluation/HBTXR_val_motion_eval/hbtxr_val_sample_predictions.csv
+references/report/FACET/evaluation/HBTXR_val_motion_eval/hbtxr_val_sample_metadata.csv
+algorithm/analysis/report/FACET/evaluation/HBTXR_val_motion_eval/hbtxr_val_predictions_with_metadata.csv
+algorithm/analysis/report/FACET/evaluation/HBTXR_val_motion_eval/hbtxr_val_sample_predictions.csv
+algorithm/analysis/report/FACET/evaluation/HBTXR_val_motion_eval/hbtxr_val_sample_metadata.csv
+analysis/RESULTS/**/*_test_sample_metadata.csv
+analysis/RESULTS/**/*_test_sample_predictions.csv
+analysis/RESULTS/**/*_test_joined_motion_error.csv
+analysis/RESULTS/**/*_test_predictions_with_metadata.csv
+analysis/RESULTS/**/*_raw_test_predictions.csv
+algorithm/analysis/RESULTS/**/*_test_sample_metadata.csv
+algorithm/analysis/RESULTS/**/*_test_sample_predictions.csv
+algorithm/analysis/RESULTS/**/*_test_joined_motion_error.csv
+algorithm/analysis/RESULTS/**/*_test_predictions_with_metadata.csv
+algorithm/analysis/RESULTS/**/*_raw_test_predictions.csv
+
+# Large generated BRAT/3ET exports and caches
+references/codebase/software/ais2025/Event-based-Eye-Tracking-Challenge-Solution/event_data_hbtxr_img64_fulltest/**/*.h5
+references/codebase/software/ais2025/Event-based-Eye-Tracking-Challenge-Solution/cache_hbtxr_img64_fulltest/
+references/codebase/software/ais2025/Event-based-Eye-Tracking-Challenge-Solution/metadata_hbtxr_img64_fulltest/
+
+# Nested repository metadata from vendored references
+third/*/.git/
+references/codebase/software/FACET/.git/
+references/legacy-codebase/**/.git/
+
+# Editor/OS files
+.idea/
+.vscode/
+.DS_Store
+
+# Large vendored pretrained weights
+third/DeepVOG/deepvog/model/DeepVOG_weights.h5

@@ -1,0 +1,220 @@
+{
+  "date": "2026-06-20",
+  "scope": "HGTXR-SW second-goal active experiment queue",
+  "execution_state": "paused_by_user_directive",
+  "do_not_execute_until_user_resumes": true,
+  "current_gates": {
+    "center_lt": 16.468481131962367,
+    "p10_gt": 35.02295998845781,
+    "p5_gt": 12.133503770828247
+  },
+  "source_artifacts": {
+    "paper_ref_ablation_plan": "docs/resources/second_goal_paper_ref_current_ablation_plan_2026_06_20.md",
+    "current_summary": "docs/resources/current_work_summary_and_next_experiments_2026_06_18.md",
+    "xr64_runbook": "docs/resources/xr64_resume_runbook_2026_06_18.md",
+    "paper_ref_per_paper_index": "anlaysis/paper-ref/papers/index.md"
+  },
+  "queue": [
+    {
+      "id": "XR-64-prep",
+      "priority": "P0",
+      "status": "blocked_by_pause_and_missing_generated_artifacts",
+      "stage": "artifact_generation",
+      "axes": ["teacher_model_training", "data_protocol", "loss_target_override"],
+      "paper_basis": ["EV-Eye", "FACET", "Local-Global Distillation", "XR-63 oracle diagnostic"],
+      "objective": "Generate leakage-safe train/val teacher eval rows and target override JSON files for XR-64A/B/C.",
+      "mechanism": "Evaluate XR-62A, XR-39, XR-56B, XR-58A on train/val only, then build conservative, threshold-priority, and min-error pseudo-target overrides.",
+      "preconditions": [
+        "experiments explicitly resumed by user",
+        "XR-64 source checkpoints exist",
+        "manifest1 train/val/test manifests exist",
+        "no test-derived override generation"
+      ],
+      "commands": [
+        "XR64_ACTIONS=eval XR64_SPLITS=train XR64_TEACHERS=xr62a bash scripts/external/run_xr64_teacher_eval_rows_and_overrides.sh",
+        "XR64_ACTIONS=eval XR64_SPLITS=train XR64_TEACHERS=xr39 bash scripts/external/run_xr64_teacher_eval_rows_and_overrides.sh",
+        "XR64_ACTIONS=eval XR64_SPLITS=train XR64_TEACHERS=xr56b bash scripts/external/run_xr64_teacher_eval_rows_and_overrides.sh",
+        "XR64_ACTIONS=eval XR64_SPLITS=train XR64_TEACHERS=xr58a bash scripts/external/run_xr64_teacher_eval_rows_and_overrides.sh",
+        "XR64_ACTIONS=eval XR64_SPLITS=val XR64_TEACHERS=xr62a bash scripts/external/run_xr64_teacher_eval_rows_and_overrides.sh",
+        "XR64_ACTIONS=eval XR64_SPLITS=val XR64_TEACHERS=xr39 bash scripts/external/run_xr64_teacher_eval_rows_and_overrides.sh",
+        "XR64_ACTIONS=eval XR64_SPLITS=val XR64_TEACHERS=xr56b bash scripts/external/run_xr64_teacher_eval_rows_and_overrides.sh",
+        "XR64_ACTIONS=eval XR64_SPLITS=val XR64_TEACHERS=xr58a bash scripts/external/run_xr64_teacher_eval_rows_and_overrides.sh",
+        "XR64_ACTIONS=build XR64_SPLITS=train bash scripts/external/run_xr64_teacher_eval_rows_and_overrides.sh",
+        "XR64_ACTIONS=build XR64_SPLITS=val bash scripts/external/run_xr64_teacher_eval_rows_and_overrides.sh"
+      ],
+      "control_variables": [
+        "same manifest1 split",
+        "train/val override files only",
+        "test evaluation remains override-free",
+        "same current gates"
+      ],
+      "expected_evidence": [
+        "8 eval_rows.json files",
+        "6 override JSON files",
+        "scripts/external/check_xr64_resume_artifacts.py returns ready_to_train"
+      ],
+      "promotion_gate": "artifact readiness only; no model promotion in prep",
+      "reject_if": [
+        "any test split target override is generated",
+        "any expected eval rows or override JSON is missing",
+        "strict XR-64 checker reports leakage risk"
+      ],
+      "dependencies": []
+    },
+    {
+      "id": "XR-64A",
+      "priority": "P0",
+      "status": "waiting_for_XR-64-prep",
+      "stage": "training",
+      "axes": ["head", "loss", "lr", "teacher_model_training"],
+      "paper_basis": ["FACET", "EV-Eye", "Local-Global Distillation"],
+      "objective": "Convert XR-63 teacher-routing headroom into a center-safe trained branch.",
+      "mechanism": "Conservative teacher-target override from XR-62A init with XR-39 teacher and geometry/state guards.",
+      "preconditions": [
+        "XR-64-prep complete",
+        "strict XR-64 checker ready_to_train",
+        "experiments explicitly resumed by user"
+      ],
+      "commands": ["bash scripts/external/run_xr64_teacher_target_construction.sh a cuda:0"],
+      "hyperparameters": {
+        "init": "XR-62A center checkpoint",
+        "teacher": "XR-39 P10 soup",
+        "override_rule": "conservative",
+        "lr": "3e-7",
+        "override_center_l2": 0.0006,
+        "center_guard": 0.0025,
+        "p10_soft": 0.004,
+        "p5_soft": 0.002,
+        "state_distill": 0.00035,
+        "trainable_scope": ["heatmap head", "state aux head", "event adapter", "event embed projection"]
+      },
+      "control_variables": ["same manifest1 split", "same evaluator", "no test target override"],
+      "expected_evidence": ["run root", "checkpoint path", "full-test center/P10/P5", "override provenance"],
+      "promotion_gate": "center < 16.468481131962367 or P10 > 35.02295998845781 or P5 > 12.133503770828247",
+      "reject_if": ["all active gates fail", "override provenance invalid", "center/P5 collapse undocumented"],
+      "dependencies": ["XR-64-prep"]
+    },
+    {
+      "id": "XR-64B",
+      "priority": "P0",
+      "status": "waiting_for_XR-64-prep",
+      "stage": "training",
+      "axes": ["head", "loss", "lr", "teacher_model_training"],
+      "paper_basis": ["FACET", "EV-Eye", "Local-Global Distillation"],
+      "objective": "Recover P10/P5 threshold hits while preserving XR-56B P5 behavior.",
+      "mechanism": "Threshold-priority teacher-target override from XR-56B init with XR-39 teacher.",
+      "preconditions": ["XR-64-prep complete", "strict XR-64 checker ready_to_train", "experiments explicitly resumed by user"],
+      "commands": ["bash scripts/external/run_xr64_teacher_target_construction.sh b cuda:1"],
+      "hyperparameters": {
+        "init": "XR-56B P5 checkpoint",
+        "teacher": "XR-39 P10 soup",
+        "override_rule": "threshold_priority",
+        "lr": "5e-7",
+        "override_center_l2": 0.0008,
+        "center_guard": 0.003,
+        "p10_soft": 0.006,
+        "p5_soft": 0.0025,
+        "state_distill": 0.0003
+      },
+      "control_variables": ["same manifest1 split", "same evaluator", "no test target override"],
+      "expected_evidence": ["run root", "checkpoint path", "full-test center/P10/P5", "center/P5 tradeoff report"],
+      "promotion_gate": "P10 > 35.02295998845781 or P5 > 12.133503770828247 with bounded center tradeoff",
+      "reject_if": ["center collapse", "P5 collapse", "tradeoff undocumented"],
+      "dependencies": ["XR-64-prep"]
+    },
+    {
+      "id": "XR-64C",
+      "priority": "P1",
+      "status": "conditional_after_XR-64A_B",
+      "stage": "diagnostic_training",
+      "axes": ["loss", "lr", "teacher_model_training"],
+      "paper_basis": ["XR-63 oracle diagnostic", "Local-Global Distillation"],
+      "objective": "Measure train/val pure min-error pseudo-target pressure transfer.",
+      "mechanism": "Min-error target override diagnostic from XR-62A init.",
+      "preconditions": ["XR-64A/B complete or fail to move validation", "no test-derived target selection"],
+      "commands": ["bash scripts/external/run_xr64_teacher_target_construction.sh c cuda:0"],
+      "hyperparameters": {"init": "XR-62A", "override_rule": "min_error", "lr": "3e-7", "override_center_l2": 0.001},
+      "control_variables": ["same manifest1 split", "diagnostic only unless full-test gate improves"],
+      "expected_evidence": ["validation transfer limit", "full-test center/P10/P5", "overfit report"],
+      "promotion_gate": "diagnostic; promotion only if full-test gate improves without leakage",
+      "reject_if": ["overfits validation", "uses test-derived selection"],
+      "dependencies": ["XR-64A", "XR-64B"]
+    },
+    {
+      "id": "XR-65",
+      "priority": "P1",
+      "status": "conditional_after_XR-64_noncollapse",
+      "stage": "training",
+      "axes": ["head", "loss", "lr", "self_supervised_distillation"],
+      "paper_basis": ["3ET", "MambaPupil", "TDTracker", "AIS2024/2025"],
+      "objective": "Add temporal-lite residual/state regularization after teacher-target utility is proven.",
+      "mechanism": "Low-LR adapter/event-embed/head training with state distillation from best XR-64 checkpoint.",
+      "preconditions": ["XR-64A/B yields non-collapsing checkpoint", "temporal evidence is framed as regularization if dense tracks remain unavailable"],
+      "commands": ["not implemented; design runner after XR-64 evidence"],
+      "hyperparameters": {"lr_range": "2e-7..3e-7", "state_distill_range": "0.00020..0.00035", "stop_rule": "val center worsens by >0.3 px"},
+      "control_variables": ["freeze broad backbone", "same full-test gates"],
+      "expected_evidence": ["temporal gain report", "center drift report", "same-scene comparison"],
+      "promotion_gate": "center/P10/P5 gate improvement without center drift >0.3 px",
+      "reject_if": ["sparse manifest makes temporal signal untestable", "center drifts >0.3 px"],
+      "dependencies": ["XR-64A", "XR-64B"]
+    },
+    {
+      "id": "XR-66",
+      "priority": "P1",
+      "status": "conditional_after_XR-64_diagnostics",
+      "stage": "diagnostic_then_training",
+      "axes": ["head", "loss", "data_protocol"],
+      "paper_basis": ["EX-Gaze", "Swift-Eye", "E-BTS"],
+      "objective": "Revisit local/event patch update only with confidence and fallback gates.",
+      "mechanism": "No-train confidence bucket analysis first; train a gated local updater only if fallback route is valid.",
+      "preconditions": ["XR-64 evidence identifies local-update failure mode", "accepted subset improves center by at least 0.2 px", "fallback preserves aggregate metrics"],
+      "commands": ["not implemented; start with no-train confidence bucket report"],
+      "control_variables": ["no fallback no training", "coordinate transform audit required"],
+      "expected_evidence": ["confidence bucket report", "fallback comparison", "full-test center/P10/P5 if trained"],
+      "promotion_gate": "subset center improves by >=0.2 px and aggregate gates do not collapse",
+      "reject_if": ["confidence remains saturated", "fallback state is worse", "local crop transform risk unresolved"],
+      "dependencies": ["XR-64A", "XR-64B"]
+    },
+    {
+      "id": "XR-67",
+      "priority": "P2",
+      "status": "blocked_by_dense_trajectory_absence",
+      "stage": "postprocess_or_data_prep",
+      "axes": ["data_protocol", "postprocess"],
+      "paper_basis": ["EyeLoRiN", "TimeLens-XL", "Swift-Eye"],
+      "objective": "Reopen dense-trajectory/EyeLoRiN-style refinement only with continuous trajectories.",
+      "mechanism": "Before/after smoothing/refinement on dense prediction trajectories.",
+      "preconditions": ["dense or continuous split exists", "raw tuple interpolation artifacts controlled"],
+      "commands": ["not executable until dense trajectories exist"],
+      "expected_evidence": ["dense segment count", "before/after center/P10/P5/jitter"],
+      "promotion_gate": "same-scene center/P10/P5 improvement on dense trajectories",
+      "reject_if": ["dense segment remains unavailable", "jitter improves while P10/P5 collapse"],
+      "dependencies": []
+    },
+    {
+      "id": "XR-68",
+      "priority": "P2",
+      "status": "blocked_until_stable_full_width_teacher",
+      "stage": "compression_export",
+      "axes": ["optimizer", "self_supervised_distillation", "hardware_export"],
+      "paper_basis": ["Retina", "SEE/ESDA", "JaneEye", "DistillGaze"],
+      "objective": "Start sparse/quant/distilled edge branch after software teacher is strong.",
+      "mechanism": "Distill a smaller event/track path and report accuracy/resource tradeoff.",
+      "preconditions": ["stable full-width teacher improves gates", "software accuracy target no longer moving by P0 teacher work"],
+      "commands": ["not executable before teacher improves"],
+      "expected_evidence": ["student center/P10/P5", "latency/resource report", "teacher-student tolerance"],
+      "promotion_gate": "accuracy within tolerance of improved teacher plus resource benefit",
+      "reject_if": ["teacher is not stronger than current gates", "student loses P10/P5 beyond tolerance"],
+      "dependencies": ["XR-64A", "XR-64B"]
+    }
+  ],
+  "stale_or_closed_families": [
+    "XR-15 as immediate P0",
+    "XR-60/XR-61 candidate-head-only continuation",
+    "geometry-only replay",
+    "scalar P10-soft continuation",
+    "low-similarity weighting/subset/sampler",
+    "checkpoint soup/interpolation as primary work",
+    "prev-pupil/local crop without confidence fallback"
+  ]
+}

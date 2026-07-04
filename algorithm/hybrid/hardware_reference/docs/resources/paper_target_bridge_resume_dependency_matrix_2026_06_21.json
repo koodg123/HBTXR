@@ -1,0 +1,182 @@
+{
+  "artifact": "paper_target_bridge_resume_dependency_matrix",
+  "date": "2026-06-21",
+  "scope": "HGTXR-SW paper-target bridge resume dependency matrix",
+  "execution_state": "paused_by_user_directive",
+  "execute_supported": false,
+  "allowed_while_paused": true,
+  "direct_submission_comparison_allowed": false,
+  "paper_level_completion_allowed": false,
+  "idea_gen_phase": "P1",
+  "idea_gen_domain": "Research Workflow",
+  "parent_skill": "paper-idea-generator",
+  "worker_skill": "ablation-study-designer",
+  "objective": "Bind PTB-0, PTB-1, PTB-2, PTB-3, XR-64 readiness, and the final completion gate into one no-execute dependency matrix before any direct comparison with 10_submission_initial.",
+  "source_artifacts": {
+    "paper_target_bridge_artifact_workplan": "docs/resources/paper_target_bridge_artifact_workplan_2026_06_21.json",
+    "paper_target_bridge_ptb1_resume_runbook": "docs/resources/paper_target_bridge_ptb1_resume_runbook_2026_06_21.json",
+    "paper_target_bridge_trained_candidate_contract": "docs/resources/paper_target_bridge_trained_candidate_contract_2026_06_21.json",
+    "paper_target_bridge_decision_contract": "docs/resources/paper_target_bridge_decision_contract_2026_06_21.json",
+    "paper_target_metric_bridge_preflight": "docs/resources/paper_target_metric_bridge_preflight_2026_06_21.json",
+    "second_goal_completion_readiness_contract": "docs/resources/second_goal_completion_readiness_contract_2026_06_21.json",
+    "second_goal_blocker_artifact_map": "docs/resources/second_goal_blocker_artifact_map_2026_06_21.json",
+    "xr64_prelaunch_packet": "docs/resources/xr64_prelaunch_packet_2026_06_20.json"
+  },
+  "current_state": {
+    "work_package_count": 4,
+    "ptb0_doc_prefill_existing_artifact_count": 3,
+    "ptb1_schema_output_count": 5,
+    "ptb1_payload_existing_count": 0,
+    "ptb1_payload_missing_count": 5,
+    "ptb2_output_count": 2,
+    "ptb2_payload_existing_count": 0,
+    "ptb3_output_count": 1,
+    "ptb3_payload_existing_count": 0,
+    "execution_dependent_payload_missing_count": 8,
+    "xr64_ready_to_train": false,
+    "xr64_can_run_lane": false,
+    "xr64_missing_eval_rows": 8,
+    "xr64_missing_overrides": 6,
+    "xr64_postrun_candidate_count": 0,
+    "completion_allowed": false,
+    "completion_blocker_count": 28,
+    "direct_submission_comparison_allowed": false,
+    "paper_level_completion_allowed": false
+  },
+  "dependency_gates": [
+    {
+      "id": "PBRD-0-DOC-PREFILL",
+      "work_package": "PTB-0-DOC-PREFILL",
+      "allowed_while_paused": true,
+      "complete_now": true,
+      "requires_train_eval": false,
+      "required_artifact_count": 3,
+      "current_existing_artifact_count": 3,
+      "unblocks": [
+        "PBRD-1-SCHEMA-AND-RUNBOOK"
+      ],
+      "acceptance_rule": "Doc-prefill artifacts exist as source notes only; direct paper-target comparison remains false."
+    },
+    {
+      "id": "PBRD-1-SCHEMA-AND-RUNBOOK",
+      "work_package": "PTB-1-EVALUATOR-SCHEMA",
+      "allowed_while_paused": true,
+      "complete_now": true,
+      "requires_train_eval": false,
+      "required_artifact_count": 5,
+      "current_existing_artifact_count": 0,
+      "payload_generation_allowed_now": false,
+      "unblocks": [
+        "PBRD-2-PTB1-PAYLOADS-AFTER-RESUME"
+      ],
+      "acceptance_rule": "PTB-1 schema and runbook are ready, but official PTB-1 payload files must stay absent while paused."
+    },
+    {
+      "id": "PBRD-2-PTB1-PAYLOADS-AFTER-RESUME",
+      "work_package": "PTB-1-EVALUATOR-PAYLOADS",
+      "allowed_while_paused": false,
+      "complete_now": false,
+      "requires_train_eval": true,
+      "required_artifact_count": 5,
+      "current_existing_artifact_count": 0,
+      "missing_artifact_count": 5,
+      "blocked_by": [
+        "paused_by_user_directive",
+        "missing evaluator execution",
+        "missing sensor-space and hybrid rows"
+      ],
+      "unblocks": [
+        "PBRD-4-BRIDGE-DECISION"
+      ],
+      "acceptance_rule": "After explicit resume, all five PTB-1 payloads must pass check_paper_target_bridge_payloads.py with --allow-present --require-all-present."
+    },
+    {
+      "id": "PBRD-3-XR64-TRAINED-CANDIDATE",
+      "work_package": "PTB-2-XR64-TRAINED-CANDIDATE",
+      "allowed_while_paused": false,
+      "complete_now": false,
+      "requires_train_eval": true,
+      "required_artifact_count": 2,
+      "current_existing_artifact_count": 0,
+      "missing_artifact_count": 2,
+      "blocked_by": [
+        "paused_by_user_directive",
+        "XR-64 generated artifacts missing",
+        "XR-64A/B/C not run",
+        "xr64_postrun_candidate_count=0"
+      ],
+      "unblocks": [
+        "PBRD-4-BRIDGE-DECISION"
+      ],
+      "acceptance_rule": "A trained XR-64-or-later candidate must provide override-cleared full-test metrics, P1, and leakage-risk none."
+    },
+    {
+      "id": "PBRD-4-BRIDGE-DECISION",
+      "work_package": "PTB-3-BRIDGE-DECISION",
+      "allowed_while_paused": false,
+      "complete_now": false,
+      "requires_train_eval": false,
+      "required_artifact_count": 1,
+      "current_existing_artifact_count": 0,
+      "missing_artifact_count": 1,
+      "blocked_by": [
+        "PTB-1 payloads absent",
+        "PTB-2 trained candidate absent",
+        "metric/protocol unblock contract blocked",
+        "paper target evidence incomplete"
+      ],
+      "unblocks": [
+        "PBRD-5-COMPLETION-GATE"
+      ],
+      "acceptance_rule": "bridge_decision.json may allow direct comparison only after PTB-1 and PTB-2 payloads both pass and remaining blockers are empty."
+    },
+    {
+      "id": "PBRD-5-COMPLETION-GATE",
+      "work_package": "SECOND-GOAL-COMPLETION",
+      "allowed_while_paused": false,
+      "complete_now": false,
+      "requires_train_eval": false,
+      "required_artifact_count": 1,
+      "current_existing_artifact_count": 0,
+      "missing_artifact_count": 1,
+      "blocked_by": [
+        "completion_allowed=false",
+        "blocker_count=28",
+        "direct_submission_comparison_allowed=false",
+        "paper_level_completion_allowed=false"
+      ],
+      "unblocks": [],
+      "acceptance_rule": "Only the strict completion gate may close the full second goal after XR-64 evidence and paper-target bridge evidence are complete."
+    }
+  ],
+  "counts": {
+    "dependency_gate_count": 6,
+    "allowed_while_paused_gate_count": 2,
+    "complete_now_gate_count": 2,
+    "blocked_gate_count": 4,
+    "execution_dependent_payload_missing_count": 8,
+    "direct_comparison_unblock_required_gate_count": 6
+  },
+  "reject_conditions": [
+    "execute_supported true while experiments are paused",
+    "direct_submission_comparison_allowed true while any dependency gate is incomplete",
+    "paper_level_completion_allowed true while direct_submission_comparison_allowed is false",
+    "PTB-1 payload gate complete while payload files are absent",
+    "PTB-2 trained-candidate gate complete while XR-64 post-run candidate count is 0",
+    "PTB-3 bridge decision exists while previous gates are incomplete",
+    "completion gate complete while blocker_count is nonzero",
+    "validation commands that launch train/eval/GPU jobs"
+  ],
+  "validation_commands": [
+    "python3 -m py_compile scripts/external/check_paper_target_bridge_resume_dependency_matrix.py scripts/external/report_second_goal_status.py",
+    ".venv/bin/python scripts/external/check_paper_target_bridge_resume_dependency_matrix.py --format summary",
+    ".venv/bin/python scripts/external/report_second_goal_status.py --format summary",
+    ".venv/bin/python -m pytest -q tests/test_paper_target_bridge_resume_dependency_matrix.py tests/test_second_goal_status.py"
+  ],
+  "next_safe_actions": [
+    "Keep PTB-1, PTB-2, and PTB-3 payload files absent while experiments are paused.",
+    "After explicit resume, generate PTB-1 payloads before PTB-3 bridge decision.",
+    "Generate PTB-2 trained-candidate payloads only after XR-64-or-later post-run evidence exists.",
+    "Do not mark the second goal complete until this dependency matrix, the bridge decision contract, and the strict completion gate all pass."
+  ]
+}

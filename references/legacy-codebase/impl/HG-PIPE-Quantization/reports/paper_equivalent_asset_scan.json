@@ -1,0 +1,26 @@
+{
+  "status": "insufficient_assets",
+  "repo": {
+    "npy_npz": [
+      "reports/smoke_artifact_images.npy",
+      "reports/smoke_artifact_labels.npy",
+      "reports/smoke_patch_inputs.npy",
+      "reports/smoke_patch_labels.npy",
+      "reports/smoke_scale_images.npy",
+      "reports/smoke_zero_image.npy"
+    ],
+    "checkpoint_files": []
+  },
+  "sibling_iccad24_hg_pipe": {
+    "npy_npz": [
+      "statistics/range.npy",
+      "statistics/type.npy"
+    ],
+    "checkpoint_files": [],
+    "preprocess_or_export_hits": []
+  },
+  "assessment": {
+    "paper_equivalent_matrix_ready": false,
+    "reason": "Only smoke arrays and statistics files are present. No full 3-model x 3-precision patch-input/label matrix, no quantized checkpoints, and no sibling preprocessing/export flow evidence were found."
+  }
+}

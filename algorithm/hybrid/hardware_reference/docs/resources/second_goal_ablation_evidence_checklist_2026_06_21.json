@@ -1,0 +1,326 @@
+{
+  "contract_version": 1,
+  "date": "2026-06-21",
+  "scope": "HGTXR-SW second-goal ablation evidence checklist for paused future experiments",
+  "execution_state": "paused_by_user_directive",
+  "do_not_execute_until_user_resumes": true,
+  "prompt_pack": {
+    "idea_gen_phase": "P1",
+    "domain": "Research Workflow",
+    "parent_skill": "paper-idea-generator",
+    "worker_skill": "ablation-study-designer",
+    "objective": "Convert PAPER_REF-derived experiment plans into verifiable ablation evidence requirements without running train/eval while experiments are paused.",
+    "target": "HGTXR-SW raw event-count track model on manifest1, with XR-64 teacher-target construction as the next valid accuracy-improvement branch.",
+    "constraints": [
+      "do not execute train/eval while execution_state is paused_by_user_directive",
+      "do not use test-derived target overrides",
+      "do not claim paper-level accuracy until the metric/protocol bridge is unblocked",
+      "do not claim single-model SOTA until a leakage-safe trained checkpoint owns the final result"
+    ],
+    "required_artifact": "A machine-checkable ablation evidence checklist that binds experiment axes, controls, required metrics, promotion decisions, and rejection rules.",
+    "verification_evidence": [
+      "scripts/external/check_second_goal_ablation_evidence_checklist.py",
+      "tests/test_second_goal_ablation_evidence_checklist.py",
+      "scripts/external/report_second_goal_status.py --format summary"
+    ]
+  },
+  "source_artifacts": {
+    "paper_ref_ablation_plan": "docs/resources/second_goal_paper_ref_current_ablation_plan_2026_06_20.md",
+    "experiment_queue": "docs/resources/second_goal_experiment_queue_2026_06_20.json",
+    "current_result_synthesis": "docs/resources/second_goal_current_result_synthesis_2026_06_20.json",
+    "xr64_postrun_evidence_contract": "docs/resources/xr64_postrun_evidence_contract_2026_06_21.json",
+    "metric_protocol_unblock_contract": "docs/resources/metric_protocol_unblock_contract_2026_06_21.json",
+    "status_reporter": "scripts/external/report_second_goal_status.py"
+  },
+  "current_gates": {
+    "center_lt": 16.468481131962367,
+    "p10_gt": 35.02295998845781,
+    "p5_gt": 12.133503770828247
+  },
+  "promotion_policy": {
+    "software_promotion_metrics": [
+      "metric_track_center_px",
+      "metric_track_p10_pct",
+      "metric_track_p5_pct"
+    ],
+    "future_evidence_metrics": [
+      "metric_track_p1_pct"
+    ],
+    "paper_level_completion_allowed": false,
+    "direct_submission_comparison_allowed": false,
+    "single_model_sota_claim_allowed": false,
+    "promotion_requires": [
+      "trained leakage-safe checkpoint",
+      "full-test eval_summary.json",
+      "full-test eval_rows.json",
+      "data.track_target_override_path cleared for test evaluation",
+      "all current software gates reported as tradeoffs",
+      "metric_track_p1_pct recorded as future paper-bridge evidence when available"
+    ],
+    "reject_if": [
+      "XR-63 oracle is used as a result",
+      "test-derived target override appears in training",
+      "only prelaunch or command artifacts exist",
+      "paper-level comparison is made while direct_submission_comparison_allowed is false"
+    ]
+  },
+  "axis_coverage": {
+    "head": ["XR-64A", "XR-64B", "XR-65", "XR-66"],
+    "loss": ["XR-64A", "XR-64B", "XR-64C", "XR-65", "XR-66"],
+    "lr": ["XR-64A", "XR-64B", "XR-64C", "XR-65"],
+    "optimizer": ["XR-68"],
+    "self_supervised_distillation": ["XR-65", "XR-68"],
+    "teacher_model_training": ["XR-64-prep", "XR-64A", "XR-64B", "XR-64C"],
+    "data_protocol": ["XR-64-prep", "XR-66", "XR-67"],
+    "hardware_export": ["XR-68"]
+  },
+  "experiments": [
+    {
+      "id": "XR-64-prep",
+      "priority": "P0",
+      "status": "blocked_by_pause_and_missing_generated_artifacts",
+      "isolated_contribution": "teacher-target data protocol and leakage-safe pseudo-target construction",
+      "paper_basis": ["EV-Eye", "FACET", "Local-Global Distillation", "XR-63 oracle diagnostic"],
+      "control_variables": [
+        "manifest1 train/val only",
+        "no test target override generation",
+        "same teacher checkpoint set",
+        "same current software gates"
+      ],
+      "required_evidence": [
+        "8 train/val eval_rows.json files",
+        "6 train/val override JSON files",
+        "strict XR-64 checker reports ready_to_train",
+        "leakage_risk none"
+      ],
+      "pass_decision": "artifact readiness only; no model promotion",
+      "reject_if": [
+        "any test-derived target override is generated",
+        "any expected eval_rows.json or override JSON is missing",
+        "strict checker reports leakage risk"
+      ],
+      "dependencies": []
+    },
+    {
+      "id": "XR-64A",
+      "priority": "P0",
+      "status": "waiting_for_XR-64-prep",
+      "isolated_contribution": "conservative teacher-target head/loss/LR branch for center-safe transfer",
+      "paper_basis": ["FACET", "EV-Eye", "Local-Global Distillation"],
+      "control_variables": [
+        "XR-62A init",
+        "XR-39 teacher",
+        "same manifest1 test evaluator",
+        "test target override path cleared",
+        "AdamW low-LR conservative schedule recorded in train/ablation_lr_manifest.json",
+        "optimizer and scheduler values recorded in train/optimizer_config_snapshot.json",
+        "teacher checkpoint ID/SHA/source manifest recorded in train/teacher_provenance.json"
+      ],
+      "required_evidence": [
+        "run root",
+        "trained checkpoint path",
+        "train/ablation_lr_manifest.json",
+        "train/optimizer_config_snapshot.json",
+        "train/teacher_provenance.json",
+        "train/ablation_attribution_report.json",
+        "full-test eval_summary.json",
+        "full-test eval_rows.json",
+        "metric_track_center_px",
+        "metric_track_p10_pct",
+        "metric_track_p5_pct",
+        "metric_track_p1_pct",
+        "override provenance",
+        "tradeoff against center/P10/P5 gates",
+        "axis contribution justification for head/loss/lr/teacher_model_training"
+      ],
+      "pass_decision": "promote only if center, P10, or P5 beats the active software gate with valid provenance",
+      "reject_if": [
+        "all active software gates fail",
+        "override provenance invalid",
+        "test override path is non-null",
+        "center/P5 collapse is undocumented"
+      ],
+      "dependencies": ["XR-64-prep"]
+    },
+    {
+      "id": "XR-64B",
+      "priority": "P0",
+      "status": "waiting_for_XR-64-prep",
+      "isolated_contribution": "threshold-priority teacher-target loss branch for P10/P5 recovery",
+      "paper_basis": ["FACET", "EV-Eye", "Local-Global Distillation"],
+      "control_variables": [
+        "XR-56B init",
+        "XR-39 teacher",
+        "same manifest1 test evaluator",
+        "test target override path cleared",
+        "AdamW low-LR threshold-priority schedule recorded in train/ablation_lr_manifest.json",
+        "optimizer and scheduler values recorded in train/optimizer_config_snapshot.json",
+        "teacher checkpoint ID/SHA/source manifest recorded in train/teacher_provenance.json"
+      ],
+      "required_evidence": [
+        "run root",
+        "trained checkpoint path",
+        "train/ablation_lr_manifest.json",
+        "train/optimizer_config_snapshot.json",
+        "train/teacher_provenance.json",
+        "train/ablation_attribution_report.json",
+        "full-test eval_summary.json",
+        "full-test eval_rows.json",
+        "metric_track_center_px",
+        "metric_track_p10_pct",
+        "metric_track_p5_pct",
+        "metric_track_p1_pct",
+        "center/P5 tradeoff report",
+        "override provenance",
+        "axis contribution justification for head/loss/lr/teacher_model_training"
+      ],
+      "pass_decision": "promote only if P10 or P5 beats the active software gate with bounded center tradeoff",
+      "reject_if": [
+        "center collapse",
+        "P5 collapse",
+        "test override path is non-null",
+        "tradeoff undocumented"
+      ],
+      "dependencies": ["XR-64-prep"]
+    },
+    {
+      "id": "XR-64C",
+      "priority": "P1",
+      "status": "conditional_after_XR-64A_B",
+      "isolated_contribution": "min-error pseudo-target pressure and overfit boundary",
+      "paper_basis": ["XR-63 oracle diagnostic", "Local-Global Distillation"],
+      "control_variables": [
+        "XR-62A init",
+        "train/val target construction only",
+        "diagnostic status unless full-test gate improves"
+      ],
+      "required_evidence": [
+        "validation transfer report",
+        "full-test center/P10/P5/P1 metrics",
+        "overfit report",
+        "override provenance"
+      ],
+      "pass_decision": "use as diagnostic unless a full-test software gate improves without leakage",
+      "reject_if": [
+        "validation improves but full-test collapses",
+        "test-derived selection is used"
+      ],
+      "dependencies": ["XR-64A", "XR-64B"]
+    },
+    {
+      "id": "XR-65",
+      "priority": "P1",
+      "status": "conditional_after_XR-64_noncollapse",
+      "isolated_contribution": "temporal-lite residual and self-supervised state distillation",
+      "paper_basis": ["3ET", "MambaPupil", "TDTracker", "AIS2024/2025"],
+      "control_variables": [
+        "best non-collapsing XR-64 checkpoint",
+        "freeze broad backbone",
+        "same full-test evaluator"
+      ],
+      "required_evidence": [
+        "temporal gain report",
+        "center drift report",
+        "same-scene comparison",
+        "full-test center/P10/P5/P1 metrics"
+      ],
+      "pass_decision": "continue only if temporal signal improves a software gate without center drift greater than 0.3 px",
+      "reject_if": [
+        "sparse manifest makes temporal signal untestable",
+        "center drifts by more than 0.3 px"
+      ],
+      "dependencies": ["XR-64A", "XR-64B"]
+    },
+    {
+      "id": "XR-66",
+      "priority": "P1",
+      "status": "conditional_after_XR-64_diagnostics",
+      "isolated_contribution": "confidence-gated local event update with fallback",
+      "paper_basis": ["EX-Gaze", "Swift-Eye", "E-BTS"],
+      "control_variables": [
+        "no train before confidence bucket report",
+        "fallback route required",
+        "coordinate transform audit required"
+      ],
+      "required_evidence": [
+        "confidence bucket report",
+        "fallback comparison",
+        "local-update subset center delta",
+        "full-test center/P10/P5/P1 metrics if trained"
+      ],
+      "pass_decision": "train only if a reliable subset improves center by at least 0.2 px and aggregate gates do not collapse",
+      "reject_if": [
+        "confidence remains saturated",
+        "fallback state is worse",
+        "local crop transform risk unresolved"
+      ],
+      "dependencies": ["XR-64A", "XR-64B"]
+    },
+    {
+      "id": "XR-67",
+      "priority": "P2",
+      "status": "blocked_by_dense_trajectory_absence",
+      "isolated_contribution": "dense trajectory refinement and jitter control",
+      "paper_basis": ["EyeLoRiN", "TimeLens-XL", "Swift-Eye"],
+      "control_variables": [
+        "dense or continuous trajectories required",
+        "same-scene before/after comparison",
+        "raw tuple interpolation artifacts controlled"
+      ],
+      "required_evidence": [
+        "dense segment count",
+        "before/after center/P10/P5/P1 metrics",
+        "jitter report"
+      ],
+      "pass_decision": "reopen only when dense trajectories exist and same-scene metrics improve",
+      "reject_if": [
+        "dense segment remains unavailable",
+        "jitter improves while P10/P5 collapse"
+      ],
+      "dependencies": []
+    },
+    {
+      "id": "XR-68",
+      "priority": "P2",
+      "status": "blocked_until_stable_full_width_teacher",
+      "isolated_contribution": "optimizer/distillation/hardware-export tradeoff after stronger teacher",
+      "paper_basis": ["Retina", "SEE/ESDA", "JaneEye", "DistillGaze"],
+      "control_variables": [
+        "stable full-width teacher required",
+        "student compared against improved teacher",
+        "latency/resource reported separately from software promotion"
+      ],
+      "required_evidence": [
+        "student center/P10/P5/P1 metrics",
+        "teacher-student tolerance report",
+        "latency/resource report"
+      ],
+      "pass_decision": "continue only if student stays within tolerance of an improved teacher and provides resource benefit",
+      "reject_if": [
+        "teacher is not stronger than current gates",
+        "student loses P10/P5 beyond tolerance"
+      ],
+      "dependencies": ["XR-64A", "XR-64B"]
+    }
+  ],
+  "current_state": {
+    "artifact_execution_allowed": false,
+    "software_promotion_allowed": false,
+    "paper_level_completion_allowed": false,
+    "xr64_ready_to_train": false,
+    "missing_eval_rows": 8,
+    "missing_overrides": 6
+  },
+  "validation_commands": [
+    ".venv/bin/python scripts/external/check_second_goal_ablation_evidence_checklist.py --format summary",
+    ".venv/bin/python scripts/external/report_second_goal_status.py --format summary",
+    ".venv/bin/python -m pytest -q tests/test_second_goal_ablation_evidence_checklist.py",
+    ".venv/bin/python -m pytest -q tests/test_second_goal_status.py"
+  ],
+  "remaining_risks": [
+    "XR-64 teacher-target transfer may not generalize from train/val to test",
+    "metric/protocol bridge still blocks paper-frame comparison",
+    "P1 metric is future bridge evidence, not a current software promotion gate",
+    "hardware/export branches should remain blocked until a stronger software teacher exists"
+  ]
+}

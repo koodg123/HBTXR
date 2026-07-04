@@ -1,0 +1,190 @@
+{
+  "artifact": "paper_target_bridge_evaluator_schema_contract",
+  "date": "2026-06-21",
+  "scope": "HGTXR-SW paper-target bridge PTB-1 evaluator schema contract",
+  "execution_state": "paused_by_user_directive",
+  "execute_supported": false,
+  "direct_submission_comparison_allowed": false,
+  "paper_level_completion_allowed": false,
+  "idea_gen_phase": "P1",
+  "idea_gen_domain": "Research Workflow",
+  "parent_skill": "paper-idea-generator",
+  "worker_skill": "ablation-study-designer",
+  "objective": "Freeze the PTB-1 evaluator output schemas and rejection rules without creating execution-dependent paper-target bridge artifacts.",
+  "source_artifacts": {
+    "paper_target_comparison_evidence_manifest": "docs/resources/paper_target_comparison_evidence_manifest_2026_06_21.json",
+    "paper_target_bridge_artifact_workplan": "docs/resources/paper_target_bridge_artifact_workplan_2026_06_21.json",
+    "metric_protocol_bridge": "docs/resources/second_goal_metric_protocol_bridge_2026_06_20.json",
+    "metric_protocol_unblock_contract": "docs/resources/metric_protocol_unblock_contract_2026_06_21.json",
+    "submission_target_source_trace": "docs/resources/submission_target_source_trace_2026_06_21.json"
+  },
+  "current_state": {
+    "required_future_artifact_count": 10,
+    "existing_required_future_artifact_count": 3,
+    "ptb1_evaluator_schema_artifact_count": 5,
+    "ptb1_existing_output_count": 0,
+    "direct_submission_comparison_allowed": false,
+    "paper_level_completion_allowed": false
+  },
+  "evaluator_outputs": [
+    {
+      "id": "sensor_space_eval_rows",
+      "work_package": "PTB-1-EVALUATOR-SCHEMA",
+      "path": "docs/resources/future/paper_target_bridge/sensor_space_eval_rows.jsonl",
+      "format": "jsonl",
+      "creates_required_future_artifact": false,
+      "requires_execution": true,
+      "required_fields": [
+        "sample_id",
+        "split",
+        "pred_center_transform_xy",
+        "target_center_transform_xy",
+        "pred_center_sensor_xy",
+        "target_center_sensor_xy",
+        "center_error_sensor_px"
+      ],
+      "additional_required_context": [
+        "manifest_root",
+        "checkpoint",
+        "coordinate_transform_policy",
+        "source_eval_rows"
+      ],
+      "blocked_by": [
+        "paused_by_user_directive",
+        "missing evaluator execution"
+      ]
+    },
+    {
+      "id": "coordinate_transform_audit",
+      "work_package": "PTB-1-EVALUATOR-SCHEMA",
+      "path": "docs/resources/future/paper_target_bridge/coordinate_transform_audit.json",
+      "format": "json",
+      "creates_required_future_artifact": false,
+      "requires_execution": true,
+      "required_fields": [
+        "metric_frame",
+        "transform_policy",
+        "directly_sensor_px",
+        "sample_count",
+        "decision"
+      ],
+      "additional_required_context": [
+        "source_coordinate_frame",
+        "target_coordinate_frame",
+        "inverse_transform_evidence",
+        "audit_sample_ids"
+      ],
+      "blocked_by": [
+        "paused_by_user_directive",
+        "missing sample-level transform evidence"
+      ]
+    },
+    {
+      "id": "hybrid_eval_rows",
+      "work_package": "PTB-1-EVALUATOR-SCHEMA",
+      "path": "docs/resources/future/paper_target_bridge/hybrid_scheduler_eval_rows.jsonl",
+      "format": "jsonl",
+      "creates_required_future_artifact": false,
+      "requires_execution": true,
+      "required_fields": [
+        "sample_id",
+        "split",
+        "chosen_mode",
+        "chosen_state",
+        "center_error",
+        "p10_hit",
+        "p5_hit",
+        "p1_hit",
+        "target_definition"
+      ],
+      "additional_required_context": [
+        "scheduler_policy",
+        "search_state",
+        "track_state",
+        "fallback_reason"
+      ],
+      "blocked_by": [
+        "paused_by_user_directive",
+        "missing hybrid scheduler evaluation"
+      ]
+    },
+    {
+      "id": "hybrid_metric_report",
+      "work_package": "PTB-1-EVALUATOR-SCHEMA",
+      "path": "docs/resources/future/paper_target_bridge/hybrid_scheduler_metric_report.json",
+      "format": "json",
+      "creates_required_future_artifact": false,
+      "requires_execution": true,
+      "required_fields": [
+        "metric_frame",
+        "sample_count",
+        "metric_hybrid_center_px",
+        "metric_hybrid_p10_pct",
+        "metric_hybrid_p5_pct",
+        "metric_hybrid_p1_pct"
+      ],
+      "additional_required_context": [
+        "hybrid_eval_rows_path",
+        "threshold_definitions",
+        "split_protocol_audit_path",
+        "target_mapping_audit_path"
+      ],
+      "blocked_by": [
+        "paused_by_user_directive",
+        "missing hybrid scheduler metric rows"
+      ]
+    },
+    {
+      "id": "paper_frame_full_test_p1",
+      "work_package": "PTB-1-EVALUATOR-SCHEMA",
+      "path": "docs/resources/future/paper_target_bridge/paper_frame_full_test_p1_report.json",
+      "format": "json",
+      "creates_required_future_artifact": false,
+      "requires_execution": true,
+      "required_fields": [
+        "metric_frame",
+        "split",
+        "sample_count",
+        "metric_track_p1_pct",
+        "paper_frame_match"
+      ],
+      "additional_required_context": [
+        "p1_threshold_definition",
+        "full_test_manifest",
+        "coordinate_transform_audit_path",
+        "target_definition"
+      ],
+      "blocked_by": [
+        "paused_by_user_directive",
+        "missing paper-frame full-test P1 evaluation"
+      ]
+    }
+  ],
+  "counts": {
+    "evaluator_output_count": 5,
+    "jsonl_output_schema_count": 2,
+    "json_output_schema_count": 3,
+    "blocked_output_count": 5,
+    "current_existing_output_count": 0
+  },
+  "reject_conditions": [
+    "execute_supported true while experiments are paused",
+    "direct_submission_comparison_allowed true from schema-only evidence",
+    "paper_level_completion_allowed true from schema-only evidence",
+    "creates_required_future_artifact true before evaluator execution",
+    "PTB-1 output path exists while execution_state is paused_by_user_directive",
+    "validation commands that launch train/eval/GPU jobs"
+  ],
+  "validation_commands": [
+    "python3 -m py_compile scripts/external/check_paper_target_bridge_evaluator_schema_contract.py scripts/external/check_paper_target_bridge_payloads.py scripts/external/report_second_goal_status.py",
+    ".venv/bin/python scripts/external/check_paper_target_bridge_evaluator_schema_contract.py --format summary",
+    ".venv/bin/python scripts/external/check_paper_target_bridge_payloads.py --format summary",
+    ".venv/bin/python scripts/external/report_second_goal_status.py --format summary",
+    ".venv/bin/python -m pytest -q tests/test_paper_target_bridge_evaluator_schema_contract.py tests/test_paper_target_bridge_payloads.py tests/test_second_goal_status.py"
+  ],
+  "next_safe_actions": [
+    "Implement future evaluator code against this schema without running it while paused.",
+    "Keep PTB-1 required future artifact files absent until explicit evaluation resume.",
+    "After explicit resume, generate rows/reports and re-run the paper-target comparison evidence manifest checker."
+  ]
+}

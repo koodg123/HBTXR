@@ -1,0 +1,353 @@
+{
+  "date": "2026-06-20",
+  "scope": "HGTXR-SW second-goal objective requirements trace",
+  "execution_state": "paused_by_user_directive",
+  "active_goal_complete": false,
+  "skill_context": {
+    "skill": "ablation-study-designer",
+    "idea_gen_phase": "P1",
+    "domain": "Research Workflow",
+    "parent_skill": "paper-idea-generator",
+    "source_mapping": "PAPER_REF evidence and current HGTXR-SW result state are converted into traceable ablation and execution requirements."
+  },
+  "prompt_pack": {
+    "objective": "Trace the user-provided second goal against current evidence without running experiments.",
+    "source_artifacts": [
+      "anlaysis/paper-ref/papers/index.md",
+      "docs/resources/second_goal_paper_ref_current_ablation_plan_2026_06_20.md",
+      "docs/resources/second_goal_experiment_queue_2026_06_20.json",
+      "docs/resources/second_goal_ablation_evidence_checklist_2026_06_21.json",
+      "docs/resources/second_goal_current_result_synthesis_2026_06_20.json",
+      "docs/resources/second_goal_metric_protocol_bridge_2026_06_20.json",
+      "docs/resources/second_goal_submission_target_gap_audit_2026_06_20.json",
+      "docs/resources/xr64_resume_command_manifest_2026_06_20.json",
+      "docs/resources/second_goal_post_xr64_decision_tree_2026_06_21.json",
+      "scripts/external/check_second_goal_post_xr64_decision_tree.py",
+      "tests/test_second_goal_post_xr64_decision_tree.py",
+      "docs/resources/second_goal_artifact_index_2026_06_18.json"
+    ],
+    "target_model_algorithm_dataset": "HGTXR-SW raw event-count track model on manifest1 train/val/test splits",
+    "constraints": [
+      "Experiments are paused until explicit user resume.",
+      "Do not use test-derived target overrides.",
+      "Do not claim submission-level accuracy until metric/protocol bridge is unblocked.",
+      "Use current software center/P10/P5 gates for promotion until paper-frame evaluator exists."
+    ],
+    "required_artifact": "Machine-readable objective trace plus human-readable summary and validator.",
+    "verification_evidence": "Local checker, status reporter, and pytest coverage must pass."
+  },
+  "facts": [
+    "PAPER_REF per-paper analysis index covers 31 analysis files.",
+    "Current experiment queue contains XR-64-prep, XR-64A, XR-64B, XR-64C, XR-65, XR-66, XR-67, and XR-68.",
+    "Current active gates are center 16.468481131962367, P10 35.02295998845781, and P5 12.133503770828247.",
+    "XR-63 oracle is diagnostic only and not promotable as a trained result.",
+    "XR-64 generated artifacts are missing: 8 eval-row files and 6 override JSON files.",
+    "Metric/protocol bridge status is blocked_until_metric_frame_and_protocol_match."
+  ],
+  "assumptions": [
+    "The current manifest1 split remains the active software evaluation substrate.",
+    "The next valid accuracy-improvement route is teacher-target construction unless new evidence supersedes XR-64.",
+    "Hardware/export branches should remain secondary until software teacher quality improves."
+  ],
+  "requirements": [
+    {
+      "id": "REQ-1",
+      "category": "paper_ref_analysis",
+      "objective_text": "Analyze papers under /home/kjm26/project/PRJXR/XR-VIT/PAPER_WORKS/01_REFERENCES/PAPER_REF in detail.",
+      "status": "complete_as_planning_input",
+      "promotion_allowed": false,
+      "evidence": [
+        "anlaysis/paper-ref/papers/index.md",
+        "anlaysis/paper-ref/papers/*/analysis.md",
+        "anlaysis/paper-ref/PAPER_REF_DETAILED_EXPERIMENT_MAP.md",
+        "scripts/external/check_paper_ref_analysis_coverage.py",
+        "tests/test_paper_ref_analysis_coverage.py"
+      ],
+      "evidence_artifacts": [
+        {
+          "path": "anlaysis/paper-ref/papers/index.md",
+          "claim": "31 PAPER_REF papers are indexed with priorities and analysis links."
+        },
+        {
+          "path": "scripts/external/check_paper_ref_analysis_coverage.py",
+          "claim": "Checker validates PDF-to-analysis coverage and required experiment-planning sections."
+        }
+      ],
+      "proof_requirements": [
+        "31 per-paper analysis files exist.",
+        "Coverage checker reports ok true.",
+        "Each analysis contributes HGTXR mapping, ablation option, and rejection rule."
+      ],
+      "current_evidence_summary": "PAPER_REF analysis is sufficient for planning and experiment prioritization; one i-FlatCam text extraction is missing but the analysis coverage checker reports ok true.",
+      "missing_evidence": [
+        "No missing evidence for current planning input.",
+        "Future added papers would need new extraction, analysis, and coverage check."
+      ],
+      "blocked_by": [],
+      "next_allowed_action": "Use PAPER_REF analysis as planning input; rerun coverage checker after any paper corpus change.",
+      "false_completion_guardrails": [
+        "PAPER_REF planning coverage does not prove accuracy closure.",
+        "PAPER_REF planning coverage does not permit train/eval execution while paused."
+      ],
+      "do_not_claim": [
+        "Do not claim final second-goal completion from paper analysis alone."
+      ],
+      "remaining_gap": "No gap for planning input; future paper additions must be re-indexed and rechecked."
+    },
+    {
+      "id": "REQ-2",
+      "category": "experiment_planning",
+      "objective_text": "Plan accuracy-improvement experiments across Head, Loss, LR, Optimizer, Self-supervised Distillation, and Teacher Model training.",
+      "status": "planned_not_fully_executed",
+      "promotion_allowed": false,
+      "evidence": [
+        "docs/resources/second_goal_paper_ref_current_ablation_plan_2026_06_20.md",
+        "docs/resources/second_goal_experiment_queue_2026_06_20.json",
+        "docs/resources/second_goal_post_xr64_decision_tree_2026_06_21.json",
+        "scripts/external/check_second_goal_experiment_queue.py",
+        "tests/test_second_goal_experiment_queue.py",
+        "scripts/external/check_second_goal_post_xr64_decision_tree.py",
+        "tests/test_second_goal_post_xr64_decision_tree.py"
+      ],
+      "evidence_artifacts": [
+        {
+          "path": "docs/resources/second_goal_experiment_queue_2026_06_20.json",
+          "claim": "Queue encodes XR-64-prep/A/B as P0 and covers requested experiment axes."
+        },
+        {
+          "path": "scripts/external/check_second_goal_experiment_queue.py",
+          "claim": "Checker rejects unpaused execution, stale P0 branches, missing axes, and malformed entries."
+        },
+        {
+          "path": "docs/resources/second_goal_post_xr64_decision_tree_2026_06_21.json",
+          "claim": "Post-XR64 decision tree routes future XR-64A/B result patterns to PAPER_REF-backed next experiments without execution."
+        }
+      ],
+      "axis_coverage": {
+        "head": ["XR-64A", "XR-64B", "XR-65", "XR-66"],
+        "loss": ["XR-64A", "XR-64B", "XR-64C", "XR-65", "XR-66"],
+        "lr": ["XR-64A", "XR-64B", "XR-64C", "XR-65"],
+        "optimizer": ["XR-68"],
+        "self_supervised_distillation": ["XR-65", "XR-68"],
+        "teacher_model_training": ["XR-64-prep", "XR-64A", "XR-64B", "XR-64C"]
+      },
+      "post_xr64_decision_tree_ref": {
+        "path": "docs/resources/second_goal_post_xr64_decision_tree_2026_06_21.json",
+        "checker": "scripts/external/check_second_goal_post_xr64_decision_tree.py",
+        "checker_tests": "tests/test_second_goal_post_xr64_decision_tree.py",
+        "allowed_claim_scope": "experiment_planning_only",
+        "requirement_link": "REQ-2"
+      },
+      "post_xr64_decision_tree_summary": {
+        "execute_supported": false,
+        "claim_level_count": 4,
+        "decision_input_count": 3,
+        "branch_count": 7,
+        "source_artifact_count": 4,
+        "signoff_rule_count": 4,
+        "minimal_next_worker_after_resume": "XR-64-prep",
+        "current_next_prep_id": "XR64-EVAL-TRAIN-XR62A",
+        "xr64_ready_to_train": false,
+        "missing_eval_rows": 8,
+        "missing_overrides": 6,
+        "direct_submission_comparison_allowed": false,
+        "next_experiments": ["XR-64C", "XR-65", "XR-66", "XR-67", "XR-68"]
+      },
+      "proof_requirements": [
+        "Experiment queue checker reports ok true.",
+        "Post-XR64 decision tree checker reports ok true and preserves XR-64-prep as the minimal next worker.",
+        "P0 queue is exactly XR-64-prep, XR-64A, XR-64B.",
+        "Stale head-only, geometry-only, scalar P10-soft, and low-similarity branches are not active P0 items."
+      ],
+      "current_evidence_summary": "The experiment plan covers all requested axes, prioritizes XR-64 teacher-target construction as P0, and uses the post-XR64 decision tree as experiment_planning_only routing evidence.",
+      "missing_evidence": [
+        "XR-64-prep eval rows are not generated.",
+        "XR-64 override JSON files are not generated.",
+        "XR-64A/B/C trained checkpoints and full-test summaries do not exist.",
+        "XR-64 command manifest is future-only and not execution evidence."
+      ],
+      "blocked_by": [
+        "paused_by_user_directive",
+        "missing_XR-64_generated_artifacts"
+      ],
+      "next_allowed_action": "Documentation and read-only validation only until explicit user resume; after resume, run XR-64-prep.",
+      "false_completion_guardrails": [
+        "A complete experiment plan is not executed evidence.",
+        "Post-XR64 decision tree is routing/planning evidence only, not XR-64 execution or promotion evidence.",
+        "Do not treat XR-64A/B commands as runnable until XR-64-prep passes strict checker."
+      ],
+      "do_not_claim": [
+        "Do not claim XR-64A/B results before training/evaluation exists.",
+        "Do not reopen stale head-only or geometry-only branches as P0 without a new mechanism."
+      ],
+      "remaining_gap": "XR-64-prep/A/B/C have not been executed after the pause directive."
+    },
+    {
+      "id": "REQ-3",
+      "category": "accuracy_closure",
+      "objective_text": "Use planned experiments to maximize accuracy toward /home/kjm26/project/PRJXR/XR-VIT/PAPER_WORKS/10_submission_initial.",
+      "status": "incomplete",
+      "promotion_allowed": false,
+      "evidence": [
+        "docs/resources/second_goal_current_result_synthesis_2026_06_20.json",
+        "docs/resources/second_goal_submission_target_gap_audit_2026_06_20.json",
+        "docs/resources/second_goal_metric_protocol_bridge_2026_06_20.json",
+        "scripts/external/check_current_result_synthesis.py",
+        "scripts/external/check_metric_protocol_bridge.py"
+      ],
+      "evidence_artifacts": [
+        {
+          "path": "docs/resources/second_goal_current_result_synthesis_2026_06_20.json",
+          "claim": "Current best gates are split across owners and XR-63 is diagnostic only."
+        },
+        {
+          "path": "docs/resources/second_goal_metric_protocol_bridge_2026_06_20.json",
+          "claim": "Direct submission comparison is blocked by coordinate/protocol/hybrid/P1 gaps."
+        }
+      ],
+      "current_best_gates": {
+        "center_lt": 16.468481131962367,
+        "p10_gt": 35.02295998845781,
+        "p5_gt": 12.133503770828247
+      },
+      "submission_targets": {
+        "hybrid_pixel_error_px": 0.1812,
+        "hybrid_p10_pct": 99.97,
+        "hybrid_p5_pct": 99.72,
+        "hybrid_p1_pct": 99.61,
+        "hybrid_latency_ms": 0.43
+      },
+      "proof_requirements": [
+        "Metric/protocol bridge must allow direct submission comparison.",
+        "A trained, leakage-safe model must improve or satisfy the relevant software gates.",
+        "XR-64 generated artifacts must pass strict readiness before XR-64A/B training.",
+        "Final promoted result must include checkpoint path, run root, config, test summary, and leakage check."
+      ],
+      "current_evidence_summary": "Current work has identified XR-63 oracle headroom, but no trained model reaches submission-level closure and direct paper-target comparison is blocked.",
+      "missing_evidence": [
+        "A trained leakage-safe checkpoint that improves current software gates.",
+        "Strict XR-64 readiness state.",
+        "XR-64 command manifest strict readiness gate satisfied by actual generated files.",
+        "XR-64A/B/C full-test summaries.",
+        "Metric/protocol bridge evidence allowing direct comparison to 0.1812 px.",
+        "Hybrid scheduler P10/P5/P1 evaluation in the paper target frame."
+      ],
+      "blocked_by": [
+        "paused_by_user_directive",
+        "XR-64_generated_incomplete",
+        "metric_protocol_bridge_blocked",
+        "paper_frame_hybrid_P1_not_proven"
+      ],
+      "next_allowed_action": "Read-only documentation/checker work while paused; after resume, generate XR-64 artifacts and execute XR-64A/B.",
+      "false_completion_guardrails": [
+        "Do not promote XR-63 oracle as a trained result.",
+        "Do not compare metric_track_center_px directly with 0.1812 px.",
+        "Do not claim paper-level accuracy closure while direct_submission_comparison_allowed is false."
+      ],
+      "do_not_claim": [
+        "Do not claim single-model best because current best gates are split across owners.",
+        "Do not claim submission-level accuracy closure.",
+        "Do not claim XR-64 success before generated artifacts and trained results exist."
+      ],
+      "remaining_gap": "XR-64 generated artifacts are missing, XR-64A/B/C have not run, and paper-frame hybrid/P1 evaluation is not proven."
+    }
+  ],
+  "ablation_matrix": [
+    {
+      "id": "XR-64-prep",
+      "priority": "P0",
+      "purpose": "Leakage-safe teacher eval rows and override targets",
+      "isolated_contribution": "teacher target construction/data protocol",
+      "control_variables": ["manifest1 split", "train/val only", "no test override"],
+      "expected_evidence": ["8 eval_rows.json", "6 override JSON", "strict checker ready_to_train"],
+      "current_status": "missing_generated_artifacts"
+    },
+    {
+      "id": "XR-64A",
+      "priority": "P0",
+      "purpose": "Center-safe conservative teacher-target training",
+      "isolated_contribution": "head/loss/LR/teacher override",
+      "control_variables": ["XR-62A init", "XR-39 teacher", "same evaluator"],
+      "expected_evidence": ["full-test center/P10/P5", "override provenance", "checkpoint path"],
+      "current_status": "waiting_for_XR-64-prep"
+    },
+    {
+      "id": "XR-64B",
+      "priority": "P0",
+      "purpose": "P10/P5 threshold-priority teacher-target training",
+      "isolated_contribution": "threshold-oriented loss and teacher selection",
+      "control_variables": ["XR-56B init", "XR-39 teacher", "same evaluator"],
+      "expected_evidence": ["full-test center/P10/P5", "center/P5 tradeoff report", "checkpoint path"],
+      "current_status": "waiting_for_XR-64-prep"
+    },
+    {
+      "id": "XR-64C",
+      "priority": "P1",
+      "purpose": "Min-error pseudo-target pressure diagnostic",
+      "isolated_contribution": "teacher-target pressure and overfit boundary",
+      "control_variables": ["XR-62A init", "train/val-only overrides", "diagnostic unless full-test gate improves"],
+      "expected_evidence": ["validation transfer report", "full-test center/P10/P5/P1", "overfit report"],
+      "current_status": "conditional_after_XR-64A_B"
+    },
+    {
+      "id": "XR-65",
+      "priority": "P1",
+      "purpose": "Temporal-lite residual/state regularization",
+      "isolated_contribution": "self-supervised distillation and temporal regularization",
+      "control_variables": ["best XR-64 checkpoint", "frozen broad backbone", "center drift stop rule"],
+      "expected_evidence": ["temporal gain report", "same-scene comparison", "center drift report"],
+      "current_status": "conditional_after_XR-64_noncollapse"
+    },
+    {
+      "id": "XR-66",
+      "priority": "P1",
+      "purpose": "Confidence-gated local event update diagnostic",
+      "isolated_contribution": "fallback-safe local update and failure-bucket routing",
+      "control_variables": ["confidence bucket report first", "fallback route required", "coordinate transform audit"],
+      "expected_evidence": ["confidence bucket report", "fallback comparison", "local-update subset center delta"],
+      "current_status": "conditional_after_XR-64_diagnostics"
+    },
+    {
+      "id": "XR-67",
+      "priority": "P2",
+      "purpose": "Dense-trajectory refinement and jitter control",
+      "isolated_contribution": "postprocess/dense trajectory refinement",
+      "control_variables": ["dense trajectories required", "same-scene before/after comparison", "raw tuple interpolation controlled"],
+      "expected_evidence": ["dense segment count", "before/after center/P10/P5/P1", "jitter report"],
+      "current_status": "blocked_by_dense_trajectory_absence"
+    },
+    {
+      "id": "XR-68",
+      "priority": "P2",
+      "purpose": "Sparse/quant/distilled edge branch",
+      "isolated_contribution": "optimizer/distillation/hardware export tradeoff",
+      "control_variables": ["stable full-width teacher", "teacher-student tolerance"],
+      "expected_evidence": ["student center/P10/P5", "latency/resource report"],
+      "current_status": "blocked_until_stable_full_width_teacher"
+    }
+  ],
+  "guardrails": [
+    "Do not mark the active goal complete while active_goal_complete is false in the status reporter.",
+    "Do not execute train/eval commands while execution_state is paused_by_user_directive.",
+    "Do not promote XR-63 oracle as a trained result.",
+    "Do not compare current metric_track_center_px directly with 0.1812 px until direct_submission_comparison_allowed is true.",
+    "Do not launch XR-64A/B until XR-64-prep generated artifacts pass the strict XR-64 checker."
+  ],
+  "next_required_evidence": [
+    "After explicit user resume, generate the 8 XR-64 train/val teacher eval rows.",
+    "After eval rows exist, generate the 6 XR-64 train/val override JSON files.",
+    "Run strict check_xr64_resume_artifacts.py and require ready_to_train.",
+    "Run XR-64A/B and compare full-test summaries against current software gates.",
+    "Unblock metric/protocol bridge before claiming paper-level accuracy closure."
+  ],
+  "completion_judgment": {
+    "goal_complete": false,
+    "why_not_complete": [
+      "Accuracy closure toward 10_submission_initial is not proven.",
+      "XR-64 generated artifacts are missing.",
+      "XR-64A/B/C have not run.",
+      "Metric/protocol bridge blocks direct paper-target comparison.",
+      "Experiments remain paused by user directive."
+    ]
+  }
+}

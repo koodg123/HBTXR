@@ -1,0 +1,49 @@
+[
+  {
+    "contract": {
+      "channels": 768,
+      "cls_slot": true,
+      "image_size": 224,
+      "observed_max": 127,
+      "observed_min": -102,
+      "patch_size": 16,
+      "signed_max": 127,
+      "signed_min": -128,
+      "tokens": 196
+    },
+    "device": "default",
+    "evaluation_mode": "hgpipe_artifact_graph",
+    "labels_npy": "reports/smoke_patch_labels.npy",
+    "labels_shape": [
+      1
+    ],
+    "model": "deit_tiny_patch16_224",
+    "paper_equivalent": false,
+    "patch_input_shape": [
+      1,
+      150528
+    ],
+    "patch_inputs_npy": "reports/smoke_patch_inputs.npy",
+    "precision": "int8",
+    "provenance_note": "Already-quantized HG-PIPE patch inputs; paper_equivalent reflects the caller assertion from --paper-equivalent-inputs.",
+    "quantization_flow": "torch_int",
+    "runner_comparison_mismatches": 0,
+    "runner_comparison_passed": true,
+    "samples": 1,
+    "samples_detail": [
+      {
+        "comparison_mismatches": 0,
+        "comparison_passed": true,
+        "fakequant_top1": 0,
+        "index": 0,
+        "label": 0,
+        "selected_top1": 0,
+        "top1_hit": true,
+        "top5_hit": true,
+        "torch_int_top1": 0
+      }
+    ],
+    "top1": 100.0,
+    "top5": 100.0
+  }
+]

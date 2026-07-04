@@ -1,0 +1,23 @@
+project_name: hgtxr_hls
+top_function: hgtxr_top
+clock_period_ns: 5.0
+part: xczu7ev-ffvc1156-2-e
+search_input_size: [128, 128]
+track_input_size: [64, 64]
+patch_size: 16
+embed_dim: 192
+num_heads: 3
+search_tokens: 64
+track_tokens: 16
+search_depth: 8
+track_cut_depth: 4
+cyclic_cores:
+  - MHA Core0
+  - MLP Core0
+  - MHA Core1
+  - MLP Core1
+fixed_point:
+  data_width: 16
+  integer_width: 6
+  accum_width: 32
+

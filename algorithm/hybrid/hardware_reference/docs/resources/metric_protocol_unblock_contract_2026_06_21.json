@@ -1,0 +1,190 @@
+{
+  "date": "2026-06-21",
+  "scope": "HGTXR-SW metric/protocol unblock contract for paper-target comparison",
+  "execution_state": "paused_by_user_directive",
+  "idea_gen_phase": "P1",
+  "idea_gen_domain": "Research Workflow",
+  "parent_skill": "paper-idea-generator",
+  "contract_status": "blocked",
+  "direct_submission_comparison_allowed": false,
+  "paper_level_completion_allowed": false,
+  "software_promotion_metric_space": "current center/P10/P5 gates only until this contract is unblocked",
+  "source_artifacts": {
+    "metric_protocol_bridge_json": "docs/resources/second_goal_metric_protocol_bridge_2026_06_20.json",
+    "metric_protocol_bridge_md": "docs/resources/second_goal_metric_protocol_bridge_2026_06_20.md",
+    "submission_target_gap_json": "docs/resources/second_goal_submission_target_gap_audit_2026_06_20.json",
+    "submission_target_gap_md": "docs/resources/second_goal_submission_target_gap_audit_2026_06_20.md",
+    "current_result_synthesis_json": "docs/resources/second_goal_current_result_synthesis_2026_06_20.json",
+    "current_result_synthesis_md": "docs/resources/second_goal_current_result_synthesis_2026_06_20.md",
+    "paper_target_comparison_evidence_manifest_json": "docs/resources/paper_target_comparison_evidence_manifest_2026_06_21.json",
+    "paper_target_comparison_evidence_manifest_md": "docs/resources/paper_target_comparison_evidence_manifest_2026_06_21.md",
+    "metric_bridge_checker": "scripts/external/check_metric_protocol_bridge.py",
+    "paper_target_comparison_evidence_manifest_checker": "scripts/external/check_paper_target_comparison_evidence_manifest.py",
+    "xr64_promotion_helper": "scripts/external/decide_xr64_postrun_promotion.py",
+    "metric_implementation": "src/hbtxr/loss/metrics.py"
+  },
+  "submission_targets": {
+    "hybrid_pixel_error_px": 0.1812,
+    "hybrid_latency_ms": 0.43,
+    "hybrid_p10_pct": 99.97,
+    "hybrid_p5_pct": 99.72,
+    "hybrid_p1_pct": 99.61
+  },
+  "current_software_gates": {
+    "center_lt": 16.468481131962367,
+    "p10_gt": 35.02295998845781,
+    "p5_gt": 12.133503770828247
+  },
+  "known_facts": [
+    "Current metric_track_center_px, metric_track_p10_pct, and metric_track_p5_pct are active software gates.",
+    "Current metric frame is documented as post-transform input coordinate frame.",
+    "Current direct submission comparison is invalid.",
+    "The evaluator now exposes metric_track_p1_pct.",
+    "Paper-frame full-test P1 evidence is still missing.",
+    "Current hybrid scheduler match status is not_proven.",
+    "XR-63 oracle is not promotable because it is no-train and test-aligned.",
+    "XR-64 is generated_incomplete with 8 missing train/val eval-row files and 6 missing override JSON files."
+  ],
+  "assumptions": [
+    "The submission paper target uses a paper-frame or raw sensor-pixel definition that must be matched before numeric closure can be claimed.",
+    "A software candidate may improve current center/P10/P5 gates before paper-target comparison is valid.",
+    "Latency and hardware claims remain separate from software accuracy promotion until hardware evidence is available."
+  ],
+  "required_evidence": [
+    {
+      "id": "coordinate_frame_match",
+      "status": "missing",
+      "description": "Prediction rows must contain both transformed-input centers and raw sensor-space centers for the same samples, or an evaluator must inverse-transform predictions into the paper metric frame.",
+      "required_outputs": [
+        "sensor-space prediction rows",
+        "inverse-transform evaluator or submission evaluator replay",
+        "coordinate-frame decision note"
+      ]
+    },
+    {
+      "id": "hybrid_scheduler_eval",
+      "status": "missing",
+      "description": "Evaluation rows must include search/track mode, chosen hybrid state, center error, P10, P5, and P1 for the same target definition.",
+      "required_outputs": [
+        "hybrid scheduler eval rows",
+        "chosen-mode provenance",
+        "center/P10/P5/P1 metric report"
+      ]
+    },
+    {
+      "id": "p1_metric_coverage",
+      "status": "partial",
+      "description": "A transformed-frame evaluator key exists as metric_track_p1_pct, but paper-frame/full-test P1 evidence still has to be produced.",
+      "required_outputs": [
+        "metric_track_p1_pct or paper-frame P1 metric",
+        "P1 unit or checker coverage",
+        "P1 value in full-test report"
+      ]
+    },
+    {
+      "id": "split_protocol_match",
+      "status": "missing",
+      "description": "EV-Eye split provenance and counts must be matched to the EX-Gaze-following split claim.",
+      "current_manifest_root": "data/_internal/manifests/manifest1",
+      "current_split_counts": {
+        "train": 5929,
+        "val": 844,
+        "test": 2238
+      },
+      "required_outputs": [
+        "split provenance audit",
+        "manifest count report",
+        "paper protocol match decision"
+      ]
+    },
+    {
+      "id": "target_definition_match",
+      "status": "missing",
+      "description": "The pupil-center target definition must match the paper table target before direct numeric comparison.",
+      "required_outputs": [
+        "target definition note",
+        "cur_state-to-paper-target mapping",
+        "sample-level target sanity rows"
+      ]
+    },
+    {
+      "id": "latency_separation",
+      "status": "missing",
+      "description": "The 0.43 ms latency claim must remain outside software accuracy promotion until hardware evidence exists.",
+      "required_outputs": [
+        "software accuracy report separated from latency",
+        "hardware latency evidence link or explicit missing state"
+      ]
+    },
+    {
+      "id": "xr64_result_dependency",
+      "status": "missing",
+      "description": "A paper-comparison candidate must be a trained leakage-safe result such as post-XR-64 evidence, not the XR-63 test-aligned oracle.",
+      "required_outputs": [
+        "trained checkpoint evidence",
+        "target override cleared test eval",
+        "leakage audit"
+      ]
+    }
+  ],
+  "required_output_schema": {
+    "sensor_space_eval_rows": [
+      "sample_id",
+      "split",
+      "pred_center_transform_xy",
+      "target_center_transform_xy",
+      "pred_center_sensor_xy",
+      "target_center_sensor_xy",
+      "chosen_mode",
+      "center_error",
+      "p10_hit",
+      "p5_hit",
+      "p1_hit"
+    ],
+    "metric_report": [
+      "metric_frame",
+      "center_px",
+      "p10_pct",
+      "p5_pct",
+      "p1_pct",
+      "sample_count"
+    ],
+    "protocol_audit": [
+      "manifest_root",
+      "split_counts",
+      "split_provenance",
+      "target_definition",
+      "scheduler_policy"
+    ],
+    "bridge_decision": [
+      "direct_submission_comparison_allowed",
+      "paper_level_completion_allowed",
+      "remaining_blockers"
+    ]
+  },
+  "reject_conditions": [
+    "direct_submission_comparison_allowed true while any required evidence status is not complete",
+    "paper_level_completion_allowed true while direct_submission_comparison_allowed is false",
+    "missing or incomplete P1 metric coverage requirement",
+    "missing hybrid scheduler evaluation requirement",
+    "missing coordinate-frame match requirement",
+    "validation command that launches train/eval experiments",
+    "test-derived target override used as training evidence",
+    "XR-63 oracle used as trained promotion evidence"
+  ],
+  "validation_commands": [
+    "python3 -m py_compile scripts/external/check_metric_protocol_unblock_contract.py",
+    ".venv/bin/python scripts/external/check_metric_protocol_unblock_contract.py --format summary",
+    ".venv/bin/python scripts/external/check_paper_target_comparison_evidence_manifest.py --format summary",
+    ".venv/bin/python scripts/external/report_second_goal_status.py --format summary",
+    ".venv/bin/python -m pytest -q tests/test_hbtxr_metrics_p1.py tests/test_metric_protocol_unblock_contract.py tests/test_metric_protocol_bridge.py tests/test_submission_target_gap.py tests/test_paper_target_comparison_evidence_manifest.py"
+  ],
+  "current_blockers": [
+    "metric frame is post-transform input coordinate frame, not confirmed raw sensor-pixel frame",
+    "raw sensor-space prediction rows are missing",
+    "hybrid scheduler evaluation rows are missing",
+    "P1 evaluator implementation exists, but paper-frame/full-test P1 evidence is missing",
+    "split protocol provenance match is not complete",
+    "XR-64 trained post-run evidence is missing"
+  ]
+}

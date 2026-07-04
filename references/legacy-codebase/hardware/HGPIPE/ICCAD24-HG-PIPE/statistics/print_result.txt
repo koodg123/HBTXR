@@ -1,0 +1,1943 @@
+    patch_embed.input              signed              8
+    patch_embed.matmul             signed             21
+    patch_embed.cat                signed             21
+    patch_embed.add                signed             21
+    patch_embed.output             signed             13
+    attn0.input                    signed             13
+    attn0.q                        signed             11
+    attn0.k                        signed             11
+    attn0.v                        signed             11
+    attn0.r                        signed             10
+    attn0.a                        signed             11
+    attn0.proj                     signed             13
+    attn0.res_scaled               signed             33
+    attn0.res_scaled_add           signed             33
+    attn0.res_scaled_shift         signed             15
+    attn0.output                   signed             15
+    attn0.lnq.lnw_m                unsigned           16
+    attn0.lnq.lnb_m                signed             35
+    attn0.lnq.input                signed             13
+    attn0.lnq.sum                  signed             15
+    attn0.lnq.divc                 signed             31
+    attn0.lnq.mu                   signed              8
+    attn0.lnq.var                  unsigned           26
+    attn0.lnq.cursor               unsigned            7
+    attn0.lnq.rsqrt                unsigned           12
+    attn0.lnq.affine               signed             38
+    attn0.lnq.shift                signed              7
+    attn0.lnq.output               signed              3
+    attn0.qq.input                 signed             11
+    attn0.qq.cursor                signed              8
+    attn0.qq.output                signed              3
+    attn0.kq.input                 signed             11
+    attn0.kq.cursor                signed              9
+    attn0.kq.output                signed              3
+    attn0.vq.input                 signed             11
+    attn0.vq.cursor                signed              8
+    attn0.vq.output                signed              3
+    attn0.aq.input                 signed             11
+    attn0.aq.cursor                signed              9
+    attn0.aq.output                signed              3
+    attn0.softmaxq.input           signed             10
+    attn0.softmaxq.minus_max       signed             11
+    attn0.softmaxq.cursor1         unsigned            6
+    attn0.softmaxq.exp             unsigned           16
+    attn0.softmaxq.acc             unsigned           23
+    attn0.softmaxq.cursor2_one     unsigned            9
+    attn0.softmaxq.recip           unsigned            8
+    attn0.softmaxq.affine          unsigned           23
+    attn0.softmaxq.cursor3         unsigned            7
+    attn0.softmaxq.cursor2_two     signed              6
+    attn0.softmaxq.select          unsigned            7
+    attn0.softmaxq.output          unsigned            3
+    attn1.input                    signed             13
+    attn1.q                        signed             10
+    attn1.k                        signed             10
+    attn1.v                        signed             10
+    attn1.r                        signed             10
+    attn1.a                        signed             11
+    attn1.proj                     signed             12
+    attn1.res_scaled               signed             33
+    attn1.res_scaled_add           signed             33
+    attn1.res_scaled_shift         signed             14
+    attn1.output                   signed             14
+    attn1.lnq.lnw_m                unsigned           16
+    attn1.lnq.lnb_m                signed             37
+    attn1.lnq.input                signed             13
+    attn1.lnq.sum                  signed             17
+    attn1.lnq.divc                 signed             32
+    attn1.lnq.mu                   signed              9
+    attn1.lnq.var                  unsigned           27
+    attn1.lnq.cursor               unsigned            7
+    attn1.lnq.rsqrt                unsigned           12
+    attn1.lnq.affine               signed             38
+    attn1.lnq.shift                signed              5
+    attn1.lnq.output               signed              3
+    attn1.qq.input                 signed             10
+    attn1.qq.cursor                signed              9
+    attn1.qq.output                signed              3
+    attn1.kq.input                 signed             10
+    attn1.kq.cursor                signed              9
+    attn1.kq.output                signed              3
+    attn1.vq.input                 signed             10
+    attn1.vq.cursor                signed              9
+    attn1.vq.output                signed              3
+    attn1.aq.input                 signed             11
+    attn1.aq.cursor                signed              8
+    attn1.aq.output                signed              3
+    attn1.softmaxq.input           signed             10
+    attn1.softmaxq.minus_max       signed             11
+    attn1.softmaxq.cursor1         unsigned            6
+    attn1.softmaxq.exp             unsigned           16
+    attn1.softmaxq.acc             unsigned           22
+    attn1.softmaxq.cursor2_one     unsigned            9
+    attn1.softmaxq.recip           unsigned            8
+    attn1.softmaxq.affine          unsigned           23
+    attn1.softmaxq.cursor3         unsigned            8
+    attn1.softmaxq.cursor2_two     signed              7
+    attn1.softmaxq.select          unsigned            8
+    attn1.softmaxq.output          unsigned            3
+    attn2.input                    signed             13
+    attn2.q                        signed              9
+    attn2.k                        signed              9
+    attn2.v                        signed             10
+    attn2.r                        signed             10
+    attn2.a                        signed             10
+    attn2.proj                     signed             11
+    attn2.res_scaled               signed             32
+    attn2.res_scaled_add           signed             32
+    attn2.res_scaled_shift         signed             13
+    attn2.output                   signed             14
+    attn2.lnq.lnw_m                unsigned           16
+    attn2.lnq.lnb_m                signed             38
+    attn2.lnq.input                signed             13
+    attn2.lnq.sum                  signed             17
+    attn2.lnq.divc                 signed             33
+    attn2.lnq.mu                   signed             10
+    attn2.lnq.var                  unsigned           26
+    attn2.lnq.cursor               unsigned            7
+    attn2.lnq.rsqrt                unsigned           12
+    attn2.lnq.affine               signed             38
+    attn2.lnq.shift                signed              5
+    attn2.lnq.output               signed              3
+    attn2.qq.input                 signed              9
+    attn2.qq.cursor                signed              8
+    attn2.qq.output                signed              3
+    attn2.kq.input                 signed              9
+    attn2.kq.cursor                signed              9
+    attn2.kq.output                signed              3
+    attn2.vq.input                 signed             10
+    attn2.vq.cursor                signed              8
+    attn2.vq.output                signed              3
+    attn2.aq.input                 signed             10
+    attn2.aq.cursor                signed             10
+    attn2.aq.output                signed              3
+    attn2.softmaxq.input           signed             10
+    attn2.softmaxq.minus_max       signed             11
+    attn2.softmaxq.cursor1         unsigned            8
+    attn2.softmaxq.exp             unsigned           16
+    attn2.softmaxq.acc             unsigned           23
+    attn2.softmaxq.cursor2_one     unsigned            9
+    attn2.softmaxq.recip           unsigned            8
+    attn2.softmaxq.affine          unsigned           23
+    attn2.softmaxq.cursor3         unsigned            7
+    attn2.softmaxq.cursor2_two     signed              7
+    attn2.softmaxq.select          unsigned            7
+    attn2.softmaxq.output          unsigned            3
+    attn3.input                    signed             13
+    attn3.q                        signed             10
+    attn3.k                        signed             10
+    attn3.v                        signed             10
+    attn3.r                        signed             10
+    attn3.a                        signed              9
+    attn3.proj                     signed             11
+    attn3.res_scaled               signed             32
+    attn3.res_scaled_add           signed             32
+    attn3.res_scaled_shift         signed             13
+    attn3.output                   signed             13
+    attn3.lnq.lnw_m                unsigned           16
+    attn3.lnq.lnb_m                signed             38
+    attn3.lnq.input                signed             13
+    attn3.lnq.sum                  signed             17
+    attn3.lnq.divc                 signed             33
+    attn3.lnq.mu                   signed             10
+    attn3.lnq.var                  unsigned           26
+    attn3.lnq.cursor               unsigned            7
+    attn3.lnq.rsqrt                unsigned           12
+    attn3.lnq.affine               signed             39
+    attn3.lnq.shift                signed              6
+    attn3.lnq.output               signed              3
+    attn3.qq.input                 signed             10
+    attn3.qq.cursor                signed              8
+    attn3.qq.output                signed              3
+    attn3.kq.input                 signed             10
+    attn3.kq.cursor                signed              9
+    attn3.kq.output                signed              3
+    attn3.vq.input                 signed             10
+    attn3.vq.cursor                signed              8
+    attn3.vq.output                signed              3
+    attn3.aq.input                 signed              9
+    attn3.aq.cursor                signed              8
+    attn3.aq.output                signed              3
+    attn3.softmaxq.input           signed             10
+    attn3.softmaxq.minus_max       signed             11
+    attn3.softmaxq.cursor1         unsigned            6
+    attn3.softmaxq.exp             unsigned           16
+    attn3.softmaxq.acc             unsigned           22
+    attn3.softmaxq.cursor2_one     unsigned            9
+    attn3.softmaxq.recip           unsigned            8
+    attn3.softmaxq.affine          unsigned           23
+    attn3.softmaxq.cursor3         unsigned            6
+    attn3.softmaxq.cursor2_two     signed              7
+    attn3.softmaxq.select          unsigned            6
+    attn3.softmaxq.output          unsigned            3
+    attn4.input                    signed             13
+    attn4.q                        signed             11
+    attn4.k                        signed             10
+    attn4.v                        signed             10
+    attn4.r                        signed             10
+    attn4.a                        signed             11
+    attn4.proj                     signed             10
+    attn4.res_scaled               signed             32
+    attn4.res_scaled_add           signed             32
+    attn4.res_scaled_shift         signed             13
+    attn4.output                   signed             13
+    attn4.lnq.lnw_m                unsigned           16
+    attn4.lnq.lnb_m                signed             38
+    attn4.lnq.input                signed             13
+    attn4.lnq.sum                  signed             17
+    attn4.lnq.divc                 signed             33
+    attn4.lnq.mu                   signed             10
+    attn4.lnq.var                  unsigned           25
+    attn4.lnq.cursor               unsigned            7
+    attn4.lnq.rsqrt                unsigned           12
+    attn4.lnq.affine               signed             39
+    attn4.lnq.shift                signed              6
+    attn4.lnq.output               signed              3
+    attn4.qq.input                 signed             11
+    attn4.qq.cursor                signed              9
+    attn4.qq.output                signed              3
+    attn4.kq.input                 signed             10
+    attn4.kq.cursor                signed              9
+    attn4.kq.output                signed              3
+    attn4.vq.input                 signed             10
+    attn4.vq.cursor                signed              9
+    attn4.vq.output                signed              3
+    attn4.aq.input                 signed             11
+    attn4.aq.cursor                signed              9
+    attn4.aq.output                signed              3
+    attn4.softmaxq.input           signed             10
+    attn4.softmaxq.minus_max       signed             11
+    attn4.softmaxq.cursor1         unsigned            6
+    attn4.softmaxq.exp             unsigned           16
+    attn4.softmaxq.acc             unsigned           22
+    attn4.softmaxq.cursor2_one     unsigned            9
+    attn4.softmaxq.recip           unsigned            8
+    attn4.softmaxq.affine          unsigned           23
+    attn4.softmaxq.cursor3         unsigned            7
+    attn4.softmaxq.cursor2_two     signed              7
+    attn4.softmaxq.select          unsigned            7
+    attn4.softmaxq.output          unsigned            3
+    attn5.input                    signed             13
+    attn5.q                        signed             11
+    attn5.k                        signed             10
+    attn5.v                        signed             10
+    attn5.r                        signed             10
+    attn5.a                        signed             10
+    attn5.proj                     signed             10
+    attn5.res_scaled               signed             32
+    attn5.res_scaled_add           signed             32
+    attn5.res_scaled_shift         signed             13
+    attn5.output                   signed             13
+    attn5.lnq.lnw_m                unsigned           16
+    attn5.lnq.lnb_m                signed             38
+    attn5.lnq.input                signed             13
+    attn5.lnq.sum                  signed             17
+    attn5.lnq.divc                 signed             33
+    attn5.lnq.mu                   signed             10
+    attn5.lnq.var                  unsigned           25
+    attn5.lnq.cursor               unsigned            7
+    attn5.lnq.rsqrt                unsigned           12
+    attn5.lnq.affine               signed             39
+    attn5.lnq.shift                signed              6
+    attn5.lnq.output               signed              3
+    attn5.qq.input                 signed             11
+    attn5.qq.cursor                signed              9
+    attn5.qq.output                signed              3
+    attn5.kq.input                 signed             10
+    attn5.kq.cursor                signed              9
+    attn5.kq.output                signed              3
+    attn5.vq.input                 signed             10
+    attn5.vq.cursor                signed              8
+    attn5.vq.output                signed              3
+    attn5.aq.input                 signed             10
+    attn5.aq.cursor                signed              8
+    attn5.aq.output                signed              3
+    attn5.softmaxq.input           signed             10
+    attn5.softmaxq.minus_max       signed             11
+    attn5.softmaxq.cursor1         unsigned            6
+    attn5.softmaxq.exp             unsigned           16
+    attn5.softmaxq.acc             unsigned           22
+    attn5.softmaxq.cursor2_one     unsigned            9
+    attn5.softmaxq.recip           unsigned            8
+    attn5.softmaxq.affine          unsigned           23
+    attn5.softmaxq.cursor3         unsigned            7
+    attn5.softmaxq.cursor2_two     signed              7
+    attn5.softmaxq.select          unsigned            7
+    attn5.softmaxq.output          unsigned            3
+    attn6.input                    signed             13
+    attn6.q                        signed             11
+    attn6.k                        signed             10
+    attn6.v                        signed             10
+    attn6.r                        signed             10
+    attn6.a                        signed             11
+    attn6.proj                     signed             10
+    attn6.res_scaled               signed             32
+    attn6.res_scaled_add           signed             32
+    attn6.res_scaled_shift         signed             13
+    attn6.output                   signed             13
+    attn6.lnq.lnw_m                unsigned           16
+    attn6.lnq.lnb_m                signed             38
+    attn6.lnq.input                signed             13
+    attn6.lnq.sum                  signed             17
+    attn6.lnq.divc                 signed             33
+    attn6.lnq.mu                   signed             10
+    attn6.lnq.var                  unsigned           26
+    attn6.lnq.cursor               unsigned            7
+    attn6.lnq.rsqrt                unsigned           12
+    attn6.lnq.affine               signed             38
+    attn6.lnq.shift                signed              5
+    attn6.lnq.output               signed              3
+    attn6.qq.input                 signed             11
+    attn6.qq.cursor                signed              8
+    attn6.qq.output                signed              3
+    attn6.kq.input                 signed             10
+    attn6.kq.cursor                signed              9
+    attn6.kq.output                signed              3
+    attn6.vq.input                 signed             10
+    attn6.vq.cursor                signed              8
+    attn6.vq.output                signed              3
+    attn6.aq.input                 signed             11
+    attn6.aq.cursor                signed              8
+    attn6.aq.output                signed              3
+    attn6.softmaxq.input           signed             10
+    attn6.softmaxq.minus_max       signed             10
+    attn6.softmaxq.cursor1         unsigned            5
+    attn6.softmaxq.exp             unsigned           16
+    attn6.softmaxq.acc             unsigned           22
+    attn6.softmaxq.cursor2_one     unsigned            9
+    attn6.softmaxq.recip           unsigned            8
+    attn6.softmaxq.affine          unsigned           23
+    attn6.softmaxq.cursor3         unsigned            7
+    attn6.softmaxq.cursor2_two     signed              7
+    attn6.softmaxq.select          unsigned            7
+    attn6.softmaxq.output          unsigned            3
+    attn7.input                    signed             13
+    attn7.q                        signed             10
+    attn7.k                        signed             10
+    attn7.v                        signed             10
+    attn7.r                        signed             10
+    attn7.a                        signed             11
+    attn7.proj                     signed             10
+    attn7.res_scaled               signed             32
+    attn7.res_scaled_add           signed             32
+    attn7.res_scaled_shift         signed             13
+    attn7.output                   signed             13
+    attn7.lnq.lnw_m                unsigned           16
+    attn7.lnq.lnb_m                signed             36
+    attn7.lnq.input                signed             13
+    attn7.lnq.sum                  signed             17
+    attn7.lnq.divc                 signed             32
+    attn7.lnq.mu                   signed              9
+    attn7.lnq.var                  unsigned           26
+    attn7.lnq.cursor               unsigned            7
+    attn7.lnq.rsqrt                unsigned           12
+    attn7.lnq.affine               signed             37
+    attn7.lnq.shift                signed              5
+    attn7.lnq.output               signed              3
+    attn7.qq.input                 signed             10
+    attn7.qq.cursor                signed              9
+    attn7.qq.output                signed              3
+    attn7.kq.input                 signed             10
+    attn7.kq.cursor                signed              8
+    attn7.kq.output                signed              3
+    attn7.vq.input                 signed             10
+    attn7.vq.cursor                signed              8
+    attn7.vq.output                signed              3
+    attn7.aq.input                 signed             11
+    attn7.aq.cursor                signed              8
+    attn7.aq.output                signed              3
+    attn7.softmaxq.input           signed             10
+    attn7.softmaxq.minus_max       signed             10
+    attn7.softmaxq.cursor1         unsigned            6
+    attn7.softmaxq.exp             unsigned           16
+    attn7.softmaxq.acc             unsigned           22
+    attn7.softmaxq.cursor2_one     unsigned            9
+    attn7.softmaxq.recip           unsigned            8
+    attn7.softmaxq.affine          unsigned           23
+    attn7.softmaxq.cursor3         unsigned            7
+    attn7.softmaxq.cursor2_two     signed              6
+    attn7.softmaxq.select          unsigned            7
+    attn7.softmaxq.output          unsigned            3
+    attn8.input                    signed             13
+    attn8.q                        signed             10
+    attn8.k                        signed             10
+    attn8.v                        signed             10
+    attn8.r                        signed             10
+    attn8.a                        signed             10
+    attn8.proj                     signed             10
+    attn8.res_scaled               signed             33
+    attn8.res_scaled_add           signed             33
+    attn8.res_scaled_shift         signed             14
+    attn8.output                   signed             14
+    attn8.lnq.lnw_m                unsigned           16
+    attn8.lnq.lnb_m                signed             36
+    attn8.lnq.input                signed             13
+    attn8.lnq.sum                  signed             17
+    attn8.lnq.divc                 signed             32
+    attn8.lnq.mu                   signed              9
+    attn8.lnq.var                  unsigned           26
+    attn8.lnq.cursor               unsigned            7
+    attn8.lnq.rsqrt                unsigned           12
+    attn8.lnq.affine               signed             38
+    attn8.lnq.shift                signed              6
+    attn8.lnq.output               signed              3
+    attn8.qq.input                 signed             10
+    attn8.qq.cursor                signed              9
+    attn8.qq.output                signed              3
+    attn8.kq.input                 signed             10
+    attn8.kq.cursor                signed              8
+    attn8.kq.output                signed              3
+    attn8.vq.input                 signed             10
+    attn8.vq.cursor                signed              8
+    attn8.vq.output                signed              3
+    attn8.aq.input                 signed             10
+    attn8.aq.cursor                signed              8
+    attn8.aq.output                signed              3
+    attn8.softmaxq.input           signed             10
+    attn8.softmaxq.minus_max       signed             11
+    attn8.softmaxq.cursor1         unsigned            6
+    attn8.softmaxq.exp             unsigned           16
+    attn8.softmaxq.acc             unsigned           22
+    attn8.softmaxq.cursor2_one     unsigned            9
+    attn8.softmaxq.recip           unsigned            8
+    attn8.softmaxq.affine          unsigned           23
+    attn8.softmaxq.cursor3         unsigned            7
+    attn8.softmaxq.cursor2_two     signed              7
+    attn8.softmaxq.select          unsigned            7
+    attn8.softmaxq.output          unsigned            3
+    attn9.input                    signed             13
+    attn9.q                        signed             11
+    attn9.k                        signed             10
+    attn9.v                        signed             10
+    attn9.r                        signed             10
+    attn9.a                        signed             11
+    attn9.proj                     signed             10
+    attn9.res_scaled               signed             33
+    attn9.res_scaled_add           signed             33
+    attn9.res_scaled_shift         signed             13
+    attn9.output                   signed             13
+    attn9.lnq.lnw_m                unsigned           16
+    attn9.lnq.lnb_m                signed             36
+    attn9.lnq.input                signed             13
+    attn9.lnq.sum                  signed             17
+    attn9.lnq.divc                 signed             32
+    attn9.lnq.mu                   signed              9
+    attn9.lnq.var                  unsigned           25
+    attn9.lnq.cursor               unsigned            7
+    attn9.lnq.rsqrt                unsigned           12
+    attn9.lnq.affine               signed             37
+    attn9.lnq.shift                signed              5
+    attn9.lnq.output               signed              3
+    attn9.qq.input                 signed             11
+    attn9.qq.cursor                signed              8
+    attn9.qq.output                signed              3
+    attn9.kq.input                 signed             10
+    attn9.kq.cursor                signed              9
+    attn9.kq.output                signed              3
+    attn9.vq.input                 signed             10
+    attn9.vq.cursor                signed              8
+    attn9.vq.output                signed              3
+    attn9.aq.input                 signed             11
+    attn9.aq.cursor                signed              8
+    attn9.aq.output                signed              3
+    attn9.softmaxq.input           signed             10
+    attn9.softmaxq.minus_max       signed             10
+    attn9.softmaxq.cursor1         unsigned            5
+    attn9.softmaxq.exp             unsigned           16
+    attn9.softmaxq.acc             unsigned           22
+    attn9.softmaxq.cursor2_one     unsigned            9
+    attn9.softmaxq.recip           unsigned            8
+    attn9.softmaxq.affine          unsigned           23
+    attn9.softmaxq.cursor3         unsigned            8
+    attn9.softmaxq.cursor2_two     signed              7
+    attn9.softmaxq.select          unsigned            8
+    attn9.softmaxq.output          unsigned            3
+    attn10.input                   signed             13
+    attn10.q                       signed             12
+    attn10.k                       signed             10
+    attn10.v                       signed             10
+    attn10.r                       signed             10
+    attn10.a                       signed             11
+    attn10.proj                    signed             11
+    attn10.res_scaled              signed             33
+    attn10.res_scaled_add          signed             33
+    attn10.res_scaled_shift        signed             13
+    attn10.output                  signed             13
+    attn10.lnq.lnw_m               unsigned           16
+    attn10.lnq.lnb_m               signed             35
+    attn10.lnq.input               signed             13
+    attn10.lnq.sum                 signed             17
+    attn10.lnq.divc                signed             32
+    attn10.lnq.mu                  signed              9
+    attn10.lnq.var                 unsigned           25
+    attn10.lnq.cursor              unsigned            7
+    attn10.lnq.rsqrt               unsigned           12
+    attn10.lnq.affine              signed             37
+    attn10.lnq.shift               signed              5
+    attn10.lnq.output              signed              3
+    attn10.qq.input                signed             12
+    attn10.qq.cursor               signed              9
+    attn10.qq.output               signed              3
+    attn10.kq.input                signed             10
+    attn10.kq.cursor               signed              8
+    attn10.kq.output               signed              3
+    attn10.vq.input                signed             10
+    attn10.vq.cursor               signed              8
+    attn10.vq.output               signed              3
+    attn10.aq.input                signed             11
+    attn10.aq.cursor               signed              9
+    attn10.aq.output               signed              3
+    attn10.softmaxq.input          signed             10
+    attn10.softmaxq.minus_max      signed             11
+    attn10.softmaxq.cursor1        unsigned            6
+    attn10.softmaxq.exp            unsigned           16
+    attn10.softmaxq.acc            unsigned           22
+    attn10.softmaxq.cursor2_one    unsigned            9
+    attn10.softmaxq.recip          unsigned            8
+    attn10.softmaxq.affine         unsigned           23
+    attn10.softmaxq.cursor3        unsigned            8
+    attn10.softmaxq.cursor2_two    signed              7
+    attn10.softmaxq.select         unsigned            8
+    attn10.softmaxq.output         unsigned            3
+    attn11.input                   signed             13
+    attn11.q                       signed             12
+    attn11.k                       signed             10
+    attn11.v                       signed             10
+    attn11.r                       signed             10
+    attn11.a                       signed             10
+    attn11.proj                    signed             12
+    attn11.res_scaled              signed             32
+    attn11.res_scaled_add          signed             32
+    attn11.res_scaled_shift        signed             13
+    attn11.output                  signed             13
+    attn11.lnq.lnw_m               unsigned           16
+    attn11.lnq.lnb_m               signed             34
+    attn11.lnq.input               signed             13
+    attn11.lnq.sum                 signed             16
+    attn11.lnq.divc                signed             32
+    attn11.lnq.mu                  signed              9
+    attn11.lnq.var                 unsigned           24
+    attn11.lnq.cursor              unsigned            7
+    attn11.lnq.rsqrt               unsigned           12
+    attn11.lnq.affine              signed             36
+    attn11.lnq.shift               signed              5
+    attn11.lnq.output              signed              3
+    attn11.qq.input                signed             12
+    attn11.qq.cursor               signed              9
+    attn11.qq.output               signed              3
+    attn11.kq.input                signed             10
+    attn11.kq.cursor               signed              8
+    attn11.kq.output               signed              3
+    attn11.vq.input                signed             10
+    attn11.vq.cursor               signed              8
+    attn11.vq.output               signed              3
+    attn11.aq.input                signed             10
+    attn11.aq.cursor               signed              8
+    attn11.aq.output               signed              3
+    attn11.softmaxq.input          signed             10
+    attn11.softmaxq.minus_max      signed             11
+    attn11.softmaxq.cursor1        unsigned            5
+    attn11.softmaxq.exp            unsigned           16
+    attn11.softmaxq.acc            unsigned           22
+    attn11.softmaxq.cursor2_one    unsigned            9
+    attn11.softmaxq.recip          unsigned            8
+    attn11.softmaxq.affine         unsigned           23
+    attn11.softmaxq.cursor3        unsigned            7
+    attn11.softmaxq.cursor2_two    signed              7
+    attn11.softmaxq.select         unsigned            7
+    attn11.softmaxq.output         unsigned            3
+    mlp0.input                     signed             15
+    mlp0.matmul1                   signed             11
+    mlp0.matmul2                   signed             13
+    mlp0.res_scaled                signed             35
+    mlp0.res_scaled_add            signed             35
+    mlp0.res_scaled_shift          signed             14
+    mlp0.output                    signed             13
+    mlp0.lnq.lnw_m                 signed             17
+    mlp0.lnq.lnb_m                 signed             36
+    mlp0.lnq.input                 signed             15
+    mlp0.lnq.sum                   signed             18
+    mlp0.lnq.divc                  signed             33
+    mlp0.lnq.mu                    signed             10
+    mlp0.lnq.var                   unsigned           30
+    mlp0.lnq.cursor                unsigned            7
+    mlp0.lnq.rsqrt                 unsigned           12
+    mlp0.lnq.affine                signed             39
+    mlp0.lnq.shift                 signed              7
+    mlp0.lnq.output                signed              3
+    mlp0.geluq.input               signed             11
+    mlp0.geluq.cursor              signed             10
+    mlp0.geluq.output              unsigned            3
+    mlp1.input                     signed             14
+    mlp1.matmul1                   signed             11
+    mlp1.matmul2                   signed             12
+    mlp1.res_scaled                signed             33
+    mlp1.res_scaled_add            signed             33
+    mlp1.res_scaled_shift          signed             13
+    mlp1.output                    signed             13
+    mlp1.lnq.lnw_m                 unsigned           16
+    mlp1.lnq.lnb_m                 signed             38
+    mlp1.lnq.input                 signed             14
+    mlp1.lnq.sum                   signed             18
+    mlp1.lnq.divc                  signed             33
+    mlp1.lnq.mu                    signed             10
+    mlp1.lnq.var                   unsigned           28
+    mlp1.lnq.cursor                unsigned            7
+    mlp1.lnq.rsqrt                 unsigned           12
+    mlp1.lnq.affine                signed             40
+    mlp1.lnq.shift                 signed              7
+    mlp1.lnq.output                signed              3
+    mlp1.geluq.input               signed             11
+    mlp1.geluq.cursor              signed              9
+    mlp1.geluq.output              unsigned            3
+    mlp2.input                     signed             14
+    mlp2.matmul1                   signed             11
+    mlp2.matmul2                   signed             11
+    mlp2.res_scaled                signed             33
+    mlp2.res_scaled_add            signed             33
+    mlp2.res_scaled_shift          signed             13
+    mlp2.output                    signed             13
+    mlp2.lnq.lnw_m                 unsigned           16
+    mlp2.lnq.lnb_m                 signed             37
+    mlp2.lnq.input                 signed             14
+    mlp2.lnq.sum                   signed             18
+    mlp2.lnq.divc                  signed             33
+    mlp2.lnq.mu                    signed             10
+    mlp2.lnq.var                   unsigned           27
+    mlp2.lnq.cursor                unsigned            7
+    mlp2.lnq.rsqrt                 unsigned           12
+    mlp2.lnq.affine                signed             39
+    mlp2.lnq.shift                 signed              6
+    mlp2.lnq.output                signed              3
+    mlp2.geluq.input               signed             11
+    mlp2.geluq.cursor              signed              9
+    mlp2.geluq.output              unsigned            3
+    mlp3.input                     signed             13
+    mlp3.matmul1                   signed             11
+    mlp3.matmul2                   signed             11
+    mlp3.res_scaled                signed             33
+    mlp3.res_scaled_add            signed             33
+    mlp3.res_scaled_shift          signed             13
+    mlp3.output                    signed             13
+    mlp3.lnq.lnw_m                 unsigned           16
+    mlp3.lnq.lnb_m                 signed             38
+    mlp3.lnq.input                 signed             13
+    mlp3.lnq.sum                   signed             17
+    mlp3.lnq.divc                  signed             33
+    mlp3.lnq.mu                    signed             10
+    mlp3.lnq.var                   unsigned           26
+    mlp3.lnq.cursor                unsigned            7
+    mlp3.lnq.rsqrt                 unsigned           12
+    mlp3.lnq.affine                signed             39
+    mlp3.lnq.shift                 signed              6
+    mlp3.lnq.output                signed              3
+    mlp3.geluq.input               signed             11
+    mlp3.geluq.cursor              signed              9
+    mlp3.geluq.output              unsigned            3
+    mlp4.input                     signed             13
+    mlp4.matmul1                   signed             11
+    mlp4.matmul2                   signed             11
+    mlp4.res_scaled                signed             33
+    mlp4.res_scaled_add            signed             33
+    mlp4.res_scaled_shift          signed             13
+    mlp4.output                    signed             13
+    mlp4.lnq.lnw_m                 unsigned           16
+    mlp4.lnq.lnb_m                 signed             38
+    mlp4.lnq.input                 signed             13
+    mlp4.lnq.sum                   signed             17
+    mlp4.lnq.divc                  signed             33
+    mlp4.lnq.mu                    signed             10
+    mlp4.lnq.var                   unsigned           25
+    mlp4.lnq.cursor                unsigned            7
+    mlp4.lnq.rsqrt                 unsigned           12
+    mlp4.lnq.affine                signed             39
+    mlp4.lnq.shift                 signed              6
+    mlp4.lnq.output                signed              3
+    mlp4.geluq.input               signed             11
+    mlp4.geluq.cursor              signed              9
+    mlp4.geluq.output              unsigned            3
+    mlp5.input                     signed             13
+    mlp5.matmul1                   signed             11
+    mlp5.matmul2                   signed             12
+    mlp5.res_scaled                signed             33
+    mlp5.res_scaled_add            signed             33
+    mlp5.res_scaled_shift          signed             13
+    mlp5.output                    signed             13
+    mlp5.lnq.lnw_m                 unsigned           16
+    mlp5.lnq.lnb_m                 signed             38
+    mlp5.lnq.input                 signed             13
+    mlp5.lnq.sum                   signed             17
+    mlp5.lnq.divc                  signed             33
+    mlp5.lnq.mu                    signed             10
+    mlp5.lnq.var                   unsigned           25
+    mlp5.lnq.cursor                unsigned            7
+    mlp5.lnq.rsqrt                 unsigned           12
+    mlp5.lnq.affine                signed             39
+    mlp5.lnq.shift                 signed              6
+    mlp5.lnq.output                signed              3
+    mlp5.geluq.input               signed             11
+    mlp5.geluq.cursor              signed              9
+    mlp5.geluq.output              unsigned            3
+    mlp6.input                     signed             13
+    mlp6.matmul1                   signed             11
+    mlp6.matmul2                   signed             11
+    mlp6.res_scaled                signed             33
+    mlp6.res_scaled_add            signed             33
+    mlp6.res_scaled_shift          signed             13
+    mlp6.output                    signed             13
+    mlp6.lnq.lnw_m                 unsigned           16
+    mlp6.lnq.lnb_m                 signed             38
+    mlp6.lnq.input                 signed             13
+    mlp6.lnq.sum                   signed             17
+    mlp6.lnq.divc                  signed             33
+    mlp6.lnq.mu                    signed             10
+    mlp6.lnq.var                   unsigned           26
+    mlp6.lnq.cursor                unsigned            7
+    mlp6.lnq.rsqrt                 unsigned           12
+    mlp6.lnq.affine                signed             39
+    mlp6.lnq.shift                 signed              6
+    mlp6.lnq.output                signed              3
+    mlp6.geluq.input               signed             11
+    mlp6.geluq.cursor              signed              9
+    mlp6.geluq.output              unsigned            3
+    mlp7.input                     signed             13
+    mlp7.matmul1                   signed             10
+    mlp7.matmul2                   signed             11
+    mlp7.res_scaled                signed             33
+    mlp7.res_scaled_add            signed             33
+    mlp7.res_scaled_shift          signed             13
+    mlp7.output                    signed             13
+    mlp7.lnq.lnw_m                 unsigned           16
+    mlp7.lnq.lnb_m                 signed             37
+    mlp7.lnq.input                 signed             13
+    mlp7.lnq.sum                   signed             17
+    mlp7.lnq.divc                  signed             33
+    mlp7.lnq.mu                    signed             10
+    mlp7.lnq.var                   unsigned           26
+    mlp7.lnq.cursor                unsigned            7
+    mlp7.lnq.rsqrt                 unsigned           12
+    mlp7.lnq.affine                signed             38
+    mlp7.lnq.shift                 signed              5
+    mlp7.lnq.output                signed              3
+    mlp7.geluq.input               signed             10
+    mlp7.geluq.cursor              signed              8
+    mlp7.geluq.output              unsigned            3
+    mlp8.input                     signed             14
+    mlp8.matmul1                   signed             10
+    mlp8.matmul2                   signed             10
+    mlp8.res_scaled                signed             33
+    mlp8.res_scaled_add            signed             33
+    mlp8.res_scaled_shift          signed             13
+    mlp8.output                    signed             13
+    mlp8.lnq.lnw_m                 unsigned           16
+    mlp8.lnq.lnb_m                 signed             37
+    mlp8.lnq.input                 signed             14
+    mlp8.lnq.sum                   signed             17
+    mlp8.lnq.divc                  signed             33
+    mlp8.lnq.mu                    signed             10
+    mlp8.lnq.var                   unsigned           26
+    mlp8.lnq.cursor                unsigned            7
+    mlp8.lnq.rsqrt                 unsigned           12
+    mlp8.lnq.affine                signed             38
+    mlp8.lnq.shift                 signed              5
+    mlp8.lnq.output                signed              3
+    mlp8.geluq.input               signed             10
+    mlp8.geluq.cursor              signed              9
+    mlp8.geluq.output              unsigned            3
+    mlp9.input                     signed             13
+    mlp9.matmul1                   signed             10
+    mlp9.matmul2                   signed             11
+    mlp9.res_scaled                signed             33
+    mlp9.res_scaled_add            signed             33
+    mlp9.res_scaled_shift          signed             13
+    mlp9.output                    signed             13
+    mlp9.lnq.lnw_m                 signed             17
+    mlp9.lnq.lnb_m                 signed             36
+    mlp9.lnq.input                 signed             13
+    mlp9.lnq.sum                   signed             17
+    mlp9.lnq.divc                  signed             32
+    mlp9.lnq.mu                    signed              9
+    mlp9.lnq.var                   unsigned           25
+    mlp9.lnq.cursor                unsigned            7
+    mlp9.lnq.rsqrt                 unsigned           12
+    mlp9.lnq.affine                signed             37
+    mlp9.lnq.shift                 signed              5
+    mlp9.lnq.output                signed              3
+    mlp9.geluq.input               signed             10
+    mlp9.geluq.cursor              signed              8
+    mlp9.geluq.output              unsigned            3
+    mlp10.input                    signed             13
+    mlp10.matmul1                  signed             11
+    mlp10.matmul2                  signed             10
+    mlp10.res_scaled               signed             33
+    mlp10.res_scaled_add           signed             33
+    mlp10.res_scaled_shift         signed             13
+    mlp10.output                   signed             13
+    mlp10.lnq.lnw_m                signed             17
+    mlp10.lnq.lnb_m                signed             36
+    mlp10.lnq.input                signed             13
+    mlp10.lnq.sum                  signed             17
+    mlp10.lnq.divc                 signed             32
+    mlp10.lnq.mu                   signed              9
+    mlp10.lnq.var                  unsigned           25
+    mlp10.lnq.cursor               unsigned            7
+    mlp10.lnq.rsqrt                unsigned           12
+    mlp10.lnq.affine               signed             37
+    mlp10.lnq.shift                signed              5
+    mlp10.lnq.output               signed              3
+    mlp10.geluq.input              signed             11
+    mlp10.geluq.cursor             signed             10
+    mlp10.geluq.output             unsigned            3
+    mlp11.input                    signed             13
+    mlp11.matmul1                  signed             11
+    mlp11.matmul2                  signed             11
+    mlp11.res_scaled               signed             33
+    mlp11.res_scaled_add           signed             33
+    mlp11.res_scaled_shift         signed             13
+    mlp11.output                   signed             13
+    mlp11.lnq.lnw_m                unsigned           16
+    mlp11.lnq.lnb_m                signed             37
+    mlp11.lnq.input                signed             13
+    mlp11.lnq.sum                  signed             16
+    mlp11.lnq.divc                 signed             32
+    mlp11.lnq.mu                   signed              9
+    mlp11.lnq.var                  unsigned           25
+    mlp11.lnq.cursor               unsigned            7
+    mlp11.lnq.rsqrt                unsigned           12
+    mlp11.lnq.affine               signed             38
+    mlp11.lnq.shift                signed              6
+    mlp11.lnq.output               signed              3
+    mlp11.geluq.input              signed             11
+    mlp11.geluq.cursor             signed              9
+    mlp11.geluq.output             unsigned            3
+    head.input                     signed             13
+    head.slice                     signed             13
+    head.output                    signed             19
+    head.lnq.lnw_m                 unsigned           16
+    head.lnq.lnb_m                 signed             35
+    head.lnq.input                 signed             13
+    head.lnq.sum                   unsigned           15
+    head.lnq.divc                  unsigned           30
+    head.lnq.mu                    unsigned            7
+    head.lnq.var                   unsigned           24
+    head.lnq.cursor                unsigned            6
+    head.lnq.rsqrt                 unsigned           11
+    head.lnq.affine                signed             36
+    head.lnq.shift                 signed              9
+    head.lnq.output                signed              8
+**************************************************
+    patch_embed                   
+        input                              -102.0                127.0
+        matmul                          -675456.0             683740.0
+        cat                             -675456.0             683740.0
+        add                             -675328.0             683868.0
+        output                              -2638                 2671
+
+    attn0                         
+        input                             -2638.0               2671.0
+        q                                  -549.0                397.0
+        k                                  -456.0                524.0
+        v                                  -604.0                548.0
+        r                                  -328.0                408.0
+        a                                  -567.0                489.0
+        proj                              -2080.0               1841.0
+        res_scaled                  -2602843392.0         2635403520.0
+        res_scaled_add              -2602712320.0         2635534592.0
+        res_scaled_shift                    -9929                10053
+        output                            -9535.0               9878.0
+
+    attn0.lnq                     
+        lnw_m                                8557                38274
+        lnb_m                        -15527051264          12237930496
+        input                             -2638.0               2671.0
+        sum                                -15762                15915
+        divc                           -688657542            699536569
+        mu                                    -82                   83
+        var                               2104977             46153104
+        cursor                                  0                   84
+        rsqrt                                 534                 2503
+        affine                       -74383547398          83346821618
+        shift                                 -35                   38
+        output                                 -4                    3
+
+    attn0.qq                      
+        input                              -549.0                397.0
+        cursor                               -116                  121
+        output                                 -4                    3
+
+    attn0.kq                      
+        input                              -456.0                524.0
+        cursor                                -93                  152
+        output                                 -4                    3
+
+    attn0.vq                      
+        input                              -604.0                548.0
+        cursor                                -56                   88
+        output                                 -4                    3
+
+    attn0.aq                      
+        input                              -567.0                489.0
+        cursor                               -117                  147
+        output                                 -4                    3
+
+    attn0.softmaxq                
+        input                              -328.0                408.0
+        minus_max                            -642                    0
+        cursor1                                 0                   40
+        exp                                     0                32768
+        acc                                 33299              4774493
+        cursor2_one                             0                  289
+        recip                                   7                  244
+        affine                                  0              8028160
+        cursor3                                 0                  122
+        cursor2_two                            -5                   31
+        select                                  0                  122
+        output                                  0                    7
+
+    attn1                         
+        input                             -3718.0               3869.0
+        q                                  -408.0                432.0
+        k                                  -434.0                363.0
+        v                                  -492.0                503.0
+        r                                  -322.0                470.0
+        a                                  -702.0                583.0
+        proj                              -1078.0               1211.0
+        res_scaled                  -2477058048.0         2577659392.0
+        res_scaled_add              -2476795904.0         2577921536.0
+        res_scaled_shift                    -4725                 4916
+        output                            -4148.0               4456.0
+
+    attn1.lnq                     
+        lnw_m                                2010                60351
+        lnb_m                        -64873299968          68035805184
+        input                             -3718.0               3869.0
+        sum                                -27584                48809
+        divc                          -1205172544           2136708323
+        mu                                   -144                  254
+        var                               9061475            105266736
+        cursor                                  0                   92
+        rsqrt                                 707                 2406
+        affine                      -119498747024         130881686646
+        shift                                 -14                   15
+        output                                 -4                    3
+
+    attn1.qq                      
+        input                              -408.0                432.0
+        cursor                                -80                  130
+        output                                 -4                    3
+
+    attn1.kq                      
+        input                              -434.0                363.0
+        cursor                               -184                  215
+        output                                 -4                    3
+
+    attn1.vq                      
+        input                              -492.0                503.0
+        cursor                                -91                  158
+        output                                 -4                    3
+
+    attn1.aq                      
+        input                              -702.0                583.0
+        cursor                                -68                   93
+        output                                 -4                    3
+
+    attn1.softmaxq                
+        input                              -322.0                470.0
+        minus_max                            -709                    0
+        cursor1                                 0                   44
+        exp                                     0                32768
+        acc                                 32768              4008211
+        cursor2_one                             0                  485
+        recip                                   8                  147
+        affine                                  0              4947968
+        cursor3                                 0                  147
+        cursor2_two                            -8                   53
+        select                                  0                  147
+        output                                  0                    7
+
+    attn2                         
+        input                             -3062.0               3063.0
+        q                                  -147.0                145.0
+        k                                  -143.0                135.0
+        v                                  -358.0                341.0
+        r                                  -384.0                476.0
+        a                                  -268.0                246.0
+        proj                               -598.0                746.0
+        res_scaled                  -2075258240.0         2075936000.0
+        res_scaled_add              -2074996096.0         2076198144.0
+        res_scaled_shift                    -3958                 3960
+        output                            -4123.0               4031.0
+
+    attn2.lnq                     
+        lnw_m                                7059                49960
+        lnb_m                        -54173106176          70931972096
+        input                             -3062.0               3063.0
+        sum                                -36134                56487
+        divc                          -1578730594           2472167821
+        mu                                   -188                  294
+        var                               6298236             66995060
+        cursor                                  0                  116
+        rsqrt                                 886                 2878
+        affine                       -99852011467         110504191208
+        shift                                 -12                   12
+        output                                 -4                    3
+
+    attn2.qq                      
+        input                              -147.0                145.0
+        cursor                                -50                   96
+        output                                 -4                    3
+
+    attn2.kq                      
+        input                              -143.0                135.0
+        cursor                               -111                  167
+        output                                 -4                    3
+
+    attn2.vq                      
+        input                              -358.0                341.0
+        cursor                                -66                  109
+        output                                 -4                    3
+
+    attn2.aq                      
+        input                              -268.0                246.0
+        cursor                               -243                  271
+        output                                 -4                    3
+
+    attn2.softmaxq                
+        input                              -384.0                476.0
+        minus_max                            -783                    0
+        cursor1                                 0                  196
+        exp                                     0                32768
+        acc                                 32768              5989679
+        cursor2_one                             0                  364
+        recip                                   4                  198
+        affine                                  0              7536640
+        cursor3                                 0                   74
+        cursor2_two                            -6                   40
+        select                                  0                   74
+        output                                  0                    7
+
+    attn3                         
+        input                             -2661.0               2702.0
+        q                                  -327.0                306.0
+        k                                  -261.0                235.0
+        v                                  -386.0                370.0
+        r                                  -302.0                449.0
+        a                                  -154.0                118.0
+        proj                               -627.0                665.0
+        res_scaled                  -1413376896.0         1435153792.0
+        res_scaled_add              -1413114752.0         1435415936.0
+        res_scaled_shift                    -2696                 2737
+        output                            -2915.0               2807.0
+
+    attn3.lnq                     
+        lnw_m                               12850                61399
+        lnb_m                        -92817326080         102356746240
+        input                             -2661.0               2702.0
+        sum                                -35951                54583
+        divc                          -1570735141           2388980157
+        mu                                   -187                  284
+        var                               5515807             38413536
+        cursor                                  0                  126
+        rsqrt                                1171                 3121
+        affine                      -143188038856         160717275444
+        shift                                 -17                   18
+        output                                 -4                    3
+
+    attn3.qq                      
+        input                              -327.0                306.0
+        cursor                                -63                   95
+        output                                 -4                    3
+
+    attn3.kq                      
+        input                              -261.0                235.0
+        cursor                               -107                  141
+        output                                 -4                    3
+
+    attn3.vq                      
+        input                              -386.0                370.0
+        cursor                                -68                  121
+        output                                 -4                    3
+
+    attn3.aq                      
+        input                              -154.0                118.0
+        cursor                                -56                   80
+        output                                 -4                    3
+
+    attn3.softmaxq                
+        input                              -302.0                449.0
+        minus_max                            -678                    0
+        cursor1                                 0                   42
+        exp                                     0                32768
+        acc                                 32768              3360402
+        cursor2_one                             0                  406
+        recip                                   7                  146
+        affine                                  0              5832704
+        cursor3                                 0                   33
+        cursor2_two                            -7                   44
+        select                                  0                   33
+        output                                  0                    7
+
+    attn4                         
+        input                             -2685.0               2846.0
+        q                                  -534.0                527.0
+        k                                  -309.0                305.0
+        v                                  -395.0                403.0
+        r                                  -259.0                429.0
+        a                                  -591.0                507.0
+        proj                               -479.0                511.0
+        res_scaled                  -1458067712.0         1545497472.0
+        res_scaled_add              -1457805568.0         1545759616.0
+        res_scaled_shift                    -2781                 2948
+        output                            -2933.0               3106.0
+
+    attn4.lnq                     
+        lnw_m                               12422                62408
+        lnb_m                        -71221903360          79504080896
+        input                             -2685.0               2846.0
+        sum                                -36311                53951
+        divc                          -1586463901           2361367445
+        mu                                   -189                  281
+        var                               5559542             28718764
+        cursor                                  0                   88
+        rsqrt                                1355                 3058
+        affine                      -132579862088         161921026080
+        shift                                 -16                   18
+        output                                 -4                    3
+
+    attn4.qq                      
+        input                              -534.0                527.0
+        cursor                               -105                  160
+        output                                 -4                    3
+
+    attn4.kq                      
+        input                              -309.0                305.0
+        cursor                               -118                  189
+        output                                 -4                    3
+
+    attn4.vq                      
+        input                              -395.0                403.0
+        cursor                                -66                  133
+        output                                 -4                    3
+
+    attn4.aq                      
+        input                              -591.0                507.0
+        cursor                               -115                  159
+        output                                 -4                    3
+
+    attn4.softmaxq                
+        input                              -259.0                429.0
+        minus_max                            -603                    0
+        cursor1                                 0                   38
+        exp                                     0                32768
+        acc                                 32785              3078971
+        cursor2_one                             0                  372
+        recip                                  15                  253
+        affine                                  0              8323072
+        cursor3                                 0                  127
+        cursor2_two                            -6                   40
+        select                                  0                  127
+        output                                  0                    7
+
+    attn5                         
+        input                             -2654.0               3224.0
+        q                                  -570.0                463.0
+        k                                  -352.0                361.0
+        v                                  -399.0                345.0
+        r                                  -315.0                389.0
+        a                                  -381.0                310.0
+        proj                               -451.0                467.0
+        res_scaled                  -1480199552.0         1798102144.0
+        res_scaled_add              -1479937408.0         1798364288.0
+        res_scaled_shift                    -2823                 3430
+        output                            -2907.0               3571.0
+
+    attn5.lnq                     
+        lnw_m                               12017                55555
+        lnb_m                        -70235717632          88958566400
+        input                             -2654.0               3224.0
+        sum                                -38053                56167
+        divc                          -1662573623           2458186701
+        mu                                   -198                  293
+        var                               5778375             28041348
+        cursor                                  0                   85
+        rsqrt                                1370                 3017
+        affine                      -115225347973         151895268794
+        shift                                 -14                   17
+        output                                 -4                    3
+
+    attn5.qq                      
+        input                              -570.0                463.0
+        cursor                               -118                  141
+        output                                 -4                    3
+
+    attn5.kq                      
+        input                              -352.0                361.0
+        cursor                               -144                  212
+        output                                 -4                    3
+
+    attn5.vq                      
+        input                              -399.0                345.0
+        cursor                                -70                  116
+        output                                 -4                    3
+
+    attn5.aq                      
+        input                              -381.0                310.0
+        cursor                                -72                  100
+        output                                 -4                    3
+
+    attn5.softmaxq                
+        input                              -315.0                389.0
+        minus_max                            -644                    0
+        cursor1                                 0                   40
+        exp                                     0                32768
+        acc                                 32799              3882139
+        cursor2_one                             0                  470
+        recip                                  10                  186
+        affine                                  0              6619136
+        cursor3                                 0                   86
+        cursor2_two                            -7                   52
+        select                                  0                   86
+        output                                  0                    7
+
+    attn6                         
+        input                             -2936.0               3226.0
+        q                                  -534.0                398.0
+        k                                  -364.0                478.0
+        v                                  -370.0                329.0
+        r                                  -264.0                323.0
+        a                                  -527.0                391.0
+        proj                               -480.0                448.0
+        res_scaled                  -1786787968.0         1963275904.0
+        res_scaled_add              -1786525824.0         1963538048.0
+        res_scaled_shift                    -3408                 3745
+        output                            -3508.0               3993.0
+
+    attn6.lnq                     
+        lnw_m                               14713                50832
+        lnb_m                        -63732449280          85217247232
+        input                             -2936.0               3226.0
+        sum                                -34047                50410
+        divc                          -1487547477           2206657614
+        mu                                   -177                  263
+        var                               4126170             36206792
+        cursor                                  0                  123
+        rsqrt                                1205                 3602
+        affine                      -109414127904         135175138422
+        shift                                 -13                   15
+        output                                 -4                    3
+
+    attn6.qq                      
+        input                              -534.0                398.0
+        cursor                               -106                  127
+        output                                 -4                    3
+
+    attn6.kq                      
+        input                              -364.0                478.0
+        cursor                                -71                  139
+        output                                 -4                    3
+
+    attn6.vq                      
+        input                              -370.0                329.0
+        cursor                                -63                  112
+        output                                 -4                    3
+
+    attn6.aq                      
+        input                              -527.0                391.0
+        cursor                               -108                  122
+        output                                 -4                    3
+
+    attn6.softmaxq                
+        input                              -264.0                323.0
+        minus_max                            -488                    0
+        cursor1                                 0                   31
+        exp                                     0                32768
+        acc                                 33071              4007726
+        cursor2_one                             0                  485
+        recip                                  10                  173
+        affine                                  0              6193152
+        cursor3                                 0                   87
+        cursor2_two                            -8                   53
+        select                                  0                   87
+        output                                  0                    7
+
+    attn7                         
+        input                             -3156.0               3482.0
+        q                                  -436.0                471.0
+        k                                  -365.0                348.0
+        v                                  -373.0                349.0
+        r                                  -223.0                286.0
+        a                                  -541.0                436.0
+        proj                               -342.0                355.0
+        res_scaled                  -1811509248.0         1998629760.0
+        res_scaled_add              -1811247104.0         1998891904.0
+        res_scaled_shift                    -3455                 3812
+        output                            -3465.0               3963.0
+
+    attn7.lnq                     
+        lnw_m                               10925                45972
+        lnb_m                        -21693988864          27075280896
+        input                             -3156.0               3482.0
+        sum                                -30067                46188
+        divc                          -1313657297           2022194212
+        mu                                   -157                  241
+        var                               2983279             40826668
+        cursor                                  0                   72
+        rsqrt                                 568                 2077
+        affine                       -55715058112          67210218986
+        shift                                 -13                   15
+        output                                 -4                    3
+
+    attn7.qq                      
+        input                              -436.0                471.0
+        cursor                                -77                  150
+        output                                 -4                    3
+
+    attn7.kq                      
+        input                              -365.0                348.0
+        cursor                                -69                  110
+        output                                 -4                    3
+
+    attn7.vq                      
+        input                              -373.0                349.0
+        cursor                                -65                  115
+        output                                 -4                    3
+
+    attn7.aq                      
+        input                              -541.0                436.0
+        cursor                                -48                   74
+        output                                 -4                    3
+
+    attn7.softmaxq                
+        input                              -223.0                286.0
+        minus_max                            -406                    0
+        cursor1                                 0                   51
+        exp                                     0                32768
+        acc                                 32798              2297412
+        cursor2_one                             0                  276
+        recip                                  15                  254
+        affine                                  0              8355840
+        cursor3                                 0                  127
+        cursor2_two                            -5                   30
+        select                                  0                  127
+        output                                  0                    7
+
+    attn8                         
+        input                             -3062.0               3452.0
+        q                                  -447.0                442.0
+        k                                  -367.0                345.0
+        v                                  -344.0                321.0
+        r                                  -270.0                352.0
+        a                                  -405.0                307.0
+        proj                               -490.0                365.0
+        res_scaled                  -2027142016.0         2285334528.0
+        res_scaled_add              -2026879872.0         2285596672.0
+        res_scaled_shift                    -3866                 4359
+        output                            -3948.0               4549.0
+
+    attn8.lnq                     
+        lnw_m                               11708                43008
+        lnb_m                        -19730792448          27756068864
+        input                             -3062.0               3452.0
+        sum                                -29944                43698
+        divc                          -1308283304           1913403622
+        mu                                   -156                  228
+        var                               2407461             40893168
+        cursor                                  0                   73
+        rsqrt                                 569                 2338
+        affine                       -50132075528          69555655612
+        shift                                 -12                   16
+        output                                 -4                    3
+
+    attn8.qq                      
+        input                              -447.0                442.0
+        cursor                                -85                  137
+        output                                 -4                    3
+
+    attn8.kq                      
+        input                              -367.0                345.0
+        cursor                                -72                  106
+        output                                 -4                    3
+
+    attn8.vq                      
+        input                              -344.0                321.0
+        cursor                                -59                  108
+        output                                 -4                    3
+
+    attn8.aq                      
+        input                              -405.0                307.0
+        cursor                                -75                  103
+        output                                 -4                    3
+
+    attn8.softmaxq                
+        input                              -270.0                352.0
+        minus_max                            -552                    0
+        cursor1                                 0                   35
+        exp                                     0                32768
+        acc                                 32789              3658716
+        cursor2_one                             0                  443
+        recip                                   9                  181
+        affine                                  0              6455296
+        cursor3                                 0                   81
+        cursor2_two                            -7                   49
+        select                                  0                   81
+        output                                  0                    7
+
+    attn9                         
+        input                             -2731.0               3121.0
+        q                                  -745.0                724.0
+        k                                  -394.0                475.0
+        v                                  -339.0                313.0
+        r                                  -233.0                330.0
+        a                                  -618.0                486.0
+        proj                               -483.0                416.0
+        res_scaled                  -2669284864.0         3050471680.0
+        res_scaled_add              -2668760576.0         3050995968.0
+        res_scaled_shift                    -2546                 2909
+        output                            -2625.0               3107.0
+
+    attn9.lnq                     
+        lnw_m                                9831                40314
+        lnb_m                        -15323889664          19631702016
+        input                             -2731.0               3121.0
+        sum                                -28437                40047
+        divc                          -1242440967           1753887781
+        mu                                   -148                  209
+        var                               1751263             31691382
+        cursor                                  0                  114
+        rsqrt                                 645                 2731
+        affine                       -50468638716          62828650282
+        shift                                 -12                   14
+        output                                 -4                    3
+
+    attn9.qq                      
+        input                              -745.0                724.0
+        cursor                                -75                  109
+        output                                 -4                    3
+
+    attn9.kq                      
+        input                              -394.0                475.0
+        cursor                                -75                  143
+        output                                 -4                    3
+
+    attn9.vq                      
+        input                              -339.0                313.0
+        cursor                                -58                  105
+        output                                 -4                    3
+
+    attn9.aq                      
+        input                              -618.0                486.0
+        cursor                                -56                   82
+        output                                 -4                    3
+
+    attn9.softmaxq                
+        input                              -233.0                330.0
+        minus_max                            -442                    0
+        cursor1                                 0                   28
+        exp                                     0                32768
+        acc                                 32801              2564757
+        cursor2_one                             0                  309
+        recip                                   8                  187
+        affine                                  0              6389760
+        cursor3                                 0                  136
+        cursor2_two                            -5                   33
+        select                                  0                  136
+        output                                  0                    7
+
+    attn10                        
+        input                             -2443.0               2894.0
+        q                                 -1360.0               1616.0
+        k                                  -389.0                397.0
+        v                                  -323.0                305.0
+        r                                  -219.0                442.0
+        a                                  -565.0                440.0
+        proj                               -346.0                567.0
+        res_scaled                  -2164883968.0         2564541184.0
+        res_scaled_add              -2164359680.0         2565065472.0
+        res_scaled_shift                    -2065                 2446
+        output                            -2270.0               2892.0
+
+    attn10.lnq                    
+        lnw_m                               11271                38720
+        lnb_m                        -12584484864          17003446272
+        input                             -2443.0               2894.0
+        sum                                -24047                37736
+        divc                          -1050637477           1652917880
+        mu                                   -125                  197
+        var                               1382398             25136336
+        cursor                                  0                   91
+        rsqrt                                 723                 3102
+        affine                       -48113259280          52478508978
+        shift                                 -12                   12
+        output                                 -4                    3
+
+    attn10.qq                     
+        input                             -1360.0               1616.0
+        cursor                               -149                  223
+        output                                 -4                    3
+
+    attn10.kq                     
+        input                              -389.0                397.0
+        cursor                                -70                  127
+        output                                 -4                    3
+
+    attn10.vq                     
+        input                              -323.0                305.0
+        cursor                                -53                  104
+        output                                 -4                    3
+
+    attn10.aq                     
+        input                              -565.0                440.0
+        cursor                               -108                  143
+        output                                 -4                    3
+
+    attn10.softmaxq               
+        input                              -219.0                442.0
+        minus_max                            -594                    0
+        cursor1                                 0                   37
+        exp                                     0                32768
+        acc                                 32789              2999423
+        cursor2_one                             0                  362
+        recip                                   7                  177
+        affine                                  0              6062080
+        cursor3                                 0                  132
+        cursor2_two                            -5                   40
+        select                                  0                  132
+        output                                  0                    7
+
+    attn11                        
+        input                             -1609.0               2063.0
+        q                                 -1526.0               1145.0
+        k                                  -326.0                334.0
+        v                                  -311.0                281.0
+        r                                  -293.0                345.0
+        a                                  -511.0                397.0
+        proj                               -463.0               1415.0
+        res_scaled                   -953100800.0         1222030464.0
+        res_scaled_add               -952838656.0         1222292608.0
+        res_scaled_shift                    -1818                 2331
+        output                            -1909.0               3130.0
+
+    attn11.lnq                    
+        lnw_m                               10130                38042
+        lnb_m                         -6028525568           5420089344
+        input                             -1609.0               2063.0
+        sum                                -14451                27976
+        divc                           -631378641           1226493720
+        mu                                    -75                  146
+        var                                701553             10754157
+        cursor                                  0                   77
+        rsqrt                                 552                 2138
+        affine                       -22754733760          25817717993
+        shift                                 -11                   12
+        output                                 -4                    3
+
+    attn11.qq                     
+        input                             -1526.0               1145.0
+        cursor                               -168                  166
+        output                                 -4                    3
+
+    attn11.kq                     
+        input                              -326.0                334.0
+        cursor                                -63                  102
+        output                                 -4                    3
+
+    attn11.vq                     
+        input                              -311.0                281.0
+        cursor                                -51                   97
+        output                                 -4                    3
+
+    attn11.aq                     
+        input                              -511.0                397.0
+        cursor                               -103                  124
+        output                                 -4                    3
+
+    attn11.softmaxq               
+        input                              -293.0                345.0
+        minus_max                            -607                    0
+        cursor1                                 0                   19
+        exp                                     1                32768
+        acc                                 36853              3193761
+        cursor2_one                             0                  385
+        recip                                  13                  191
+        affine                                  0              6291456
+        cursor3                                 0                   96
+        cursor2_two                            -6                   42
+        select                                  0                   96
+        output                                  0                    7
+
+    mlp0                          
+        input                             -9535.0               9878.0
+        matmul1                            -758.0                718.0
+        matmul2                           -2170.0               2232.0
+        res_scaled                    -8462770180           8767199144
+        res_scaled_add                -8461721604           8768247720
+        res_scaled_shift                    -4035                 4181
+        output                            -3718.0               3869.0
+
+    mlp0.lnq                      
+        lnw_m                               -1640                49720
+        lnb_m                        -17602445312          17289969664
+        input                             -9535.0               9878.0
+        sum                                -50569                75776
+        divc                          -2209410179           3314923520
+        mu                                   -263                  395
+        var                               8521807            621556288
+        cursor                                  0                   73
+        rsqrt                                 291                 2449
+        affine                      -218642215216         223459771264
+        shift                                 -51                   52
+        output                                 -4                    3
+
+    mlp0.geluq                    
+        input                              -758.0                718.0
+        cursor                               -341                  397
+        output                                  0                    7
+
+    mlp1                          
+        input                             -4148.0               4456.0
+        matmul1                            -831.0                733.0
+        matmul2                            -906.0               1275.0
+        res_scaled                    -3059469396           3286643112
+        res_scaled_add                -3058945108           3287167400
+        res_scaled_shift                    -2918                 3134
+        output                            -3062.0               3063.0
+
+    mlp1.lnq                      
+        lnw_m                               10247                64491
+        lnb_m                        -51050446848          70201638912
+        input                             -4148.0               4456.0
+        sum                                -33779                67322
+        divc                          -1475838289           2945559806
+        mu                                   -176                  351
+        var                               5724651            162561328
+        cursor                                  0                   75
+        rsqrt                                 569                 3109
+        affine                      -257955337556         284100417202
+        shift                                 -31                   33
+        output                                 -4                    3
+
+    mlp1.geluq                    
+        input                              -831.0                733.0
+        cursor                               -185                  206
+        output                                  0                    7
+
+    mlp2                          
+        input                             -4123.0               4031.0
+        matmul1                            -948.0                883.0
+        matmul2                            -740.0                811.0
+        res_scaled                    -2724791748           2663991156
+        res_scaled_add                -2724267460           2664515444
+        res_scaled_shift                    -2599                 2541
+        output                            -2661.0               2702.0
+
+    mlp2.lnq                      
+        lnw_m                               12027                65247
+        lnb_m                        -44822429696          55070687232
+        input                             -4123.0               4031.0
+        sum                                -46835                70987
+        divc                          -2046267985           3105687321
+        mu                                   -244                  370
+        var                               9525197            115881296
+        cursor                                  0                  102
+        rsqrt                                 673                 2365
+        affine                      -159978813616         174424112384
+        shift                                 -19                   20
+        output                                 -4                    3
+
+    mlp2.geluq                    
+        input                              -948.0                883.0
+        cursor                               -209                  249
+        output                                  0                    7
+
+    mlp3                          
+        input                             -2915.0               2807.0
+        matmul1                            -591.0                443.0
+        matmul2                            -756.0                658.0
+        res_scaled                    -2761603955           2659287239
+        res_scaled_add                -2761079667           2659811527
+        res_scaled_shift                    -2634                 2536
+        output                            -2685.0               2846.0
+
+    mlp3.lnq                      
+        lnw_m                               14955                60087
+        lnb_m                        -55395745792          75396808704
+        input                             -2915.0               2807.0
+        sum                                -37032                55348
+        divc                          -1617965112           2422403772
+        mu                                   -193                  288
+        var                               6046935             42520460
+        cursor                                  0                   70
+        rsqrt                                1111                 2963
+        affine                      -143181299284         168739210006
+        shift                                 -17                   19
+        output                                 -4                    3
+
+    mlp3.geluq                    
+        input                              -591.0                443.0
+        cursor                               -119                  139
+        output                                  0                    7
+
+    mlp4                          
+        input                             -2933.0               3106.0
+        matmul1                            -499.0                587.0
+        matmul2                            -872.0                784.0
+        res_scaled                    -2889263104           3059683328
+        res_scaled_add                -2888738816           3060207616
+        res_scaled_shift                    -2755                 2918
+        output                            -2654.0               3224.0
+
+    mlp4.lnq                      
+        lnw_m                               15688                56540
+        lnb_m                        -63272124416          89655345152
+        input                             -2933.0               3106.0
+        sum                                -38237                57095
+        divc                          -1670612767           2498731949
+        mu                                   -199                  297
+        var                               6982120             32348484
+        cursor                                  0                   97
+        rsqrt                                1276                 2756
+        affine                      -124437359104         162692779608
+        shift                                 -15                   18
+        output                                 -4                    3
+
+    mlp4.geluq                    
+        input                              -499.0                587.0
+        cursor                                -97                  174
+        output                                  0                    7
+
+    mlp5                          
+        input                             -2907.0               3571.0
+        matmul1                            -488.0                623.0
+        matmul2                            -988.0               1032.0
+        res_scaled                    -2391876693           2938215229
+        res_scaled_add                -2391352405           2938739517
+        res_scaled_shift                    -2281                 2802
+        output                            -2936.0               3226.0
+
+    mlp5.lnq                      
+        lnw_m                                9149                52254
+        lnb_m                        -55286169600          79128690688
+        input                             -2907.0               3571.0
+        sum                                -41034                60620
+        divc                          -1792816494           2652742724
+        mu                                   -214                  316
+        var                               7352120             31680856
+        cursor                                  1                   93
+        rsqrt                                1292                 2659
+        affine                      -111549794240         149854634126
+        shift                                 -13                   17
+        output                                 -4                    3
+
+    mlp5.geluq                    
+        input                              -488.0                623.0
+        cursor                                -95                  182
+        output                                  0                    7
+
+    mlp6                          
+        input                             -3508.0               3993.0
+        matmul1                            -458.0                529.0
+        matmul2                            -743.0                768.0
+        res_scaled                    -2683244644           3054217749
+        res_scaled_add                -2682720356           3054742037
+        res_scaled_shift                    -2559                 2913
+        output                            -3156.0               3482.0
+
+    mlp6.lnq                      
+        lnw_m                                7456                47844
+        lnb_m                        -59374043136          80566812672
+        input                             -3508.0               3993.0
+        sum                                -39292                58587
+        divc                          -1716706772           2563918921
+        mu                                   -205                  305
+        var                               6257213             51177720
+        cursor                                  0                   86
+        rsqrt                                1013                 2894
+        affine                      -120973978370         149343532121
+        shift                                 -15                   17
+        output                                 -4                    3
+
+    mlp6.geluq                    
+        input                              -458.0                529.0
+        cursor                                -88                  159
+        output                                  0                    7
+
+    mlp7                          
+        input                             -3465.0               3963.0
+        matmul1                            -468.0                376.0
+        matmul2                            -471.0                556.0
+        res_scaled                    -2870676270           3283258314
+        res_scaled_add                -2870151982           3283782602
+        res_scaled_shift                    -2738                 3131
+        output                            -3062.0               3452.0
+
+    mlp7.lnq                      
+        lnw_m                                6068                45504
+        lnb_m                        -44690833408          58083770368
+        input                             -3465.0               3963.0
+        sum                                -32980                50248
+        divc                          -1440929180           2199579672
+        mu                                   -172                  262
+        var                               3952340             50589840
+        cursor                                  0                   89
+        rsqrt                                1020                 3632
+        affine                      -114955619504         130150088552
+        shift                                 -14                   15
+        output                                 -4                    3
+
+    mlp7.geluq                    
+        input                              -468.0                376.0
+        cursor                                -91                  120
+        output                                  0                    7
+
+    mlp8                          
+        input                             -3948.0               4549.0
+        matmul1                            -430.0                458.0
+        matmul2                            -470.0                440.0
+        res_scaled                    -2647978872           3051077986
+        res_scaled_add                -2647454584           3051602274
+        res_scaled_shift                    -2525                 2910
+        output                            -2731.0               3121.0
+
+    mlp8.lnq                      
+        lnw_m                                5820                41551
+        lnb_m                        -33058979840          55117873152
+        input                             -3948.0               4549.0
+        sum                                -37876                55176
+        divc                          -1654840316           2414888920
+        mu                                   -197                  287
+        var                               4244330             66731184
+        cursor                                  0                  119
+        rsqrt                                 890                 3532
+        affine                      -101569168494         127860621784
+        shift                                 -12                   14
+        output                                 -4                    3
+
+    mlp8.geluq                    
+        input                              -430.0                458.0
+        cursor                                -81                  141
+        output                                  0                    7
+
+    mlp9                          
+        input                             -2625.0               3107.0
+        matmul1                            -452.0                314.0
+        matmul2                            -429.0                536.0
+        res_scaled                    -2465321250           2918001190
+        res_scaled_add                -2464796962           2918525478
+        res_scaled_shift                    -2351                 2783
+        output                            -2443.0               2894.0
+
+    mlp9.lnq                      
+        lnw_m                              -10208                42239
+        lnb_m                        -14646771712          21698183168
+        input                             -2625.0               3107.0
+        sum                                -26487                37612
+        divc                          -1157243517           1647500196
+        mu                                   -138                  196
+        var                               1603351             28545240
+        cursor                                  0                  103
+        rsqrt                                 678                 2832
+        affine                       -54169332296          60149543104
+        shift                                 -13                   14
+        output                                 -4                    3
+
+    mlp9.geluq                    
+        input                              -452.0                314.0
+        cursor                                -86                  106
+        output                                  0                    7
+
+    mlp10                         
+        input                             -2270.0               2892.0
+        matmul1                            -530.0                370.0
+        matmul2                            -352.0                493.0
+        res_scaled                    -1805147130           2299773348
+        res_scaled_add                -1804622842           2300297636
+        res_scaled_shift                    -1722                 2193
+        output                            -1609.0               2063.0
+
+    mlp10.lnq                     
+        lnw_m                              -10874                42485
+        lnb_m                        -27375697920          13090160640
+        input                             -2270.0               2892.0
+        sum                                -20637                33987
+        divc                           -901651167           1489120321
+        mu                                   -107                  177
+        var                               1003635             20654180
+        cursor                                  0                   75
+        rsqrt                                 798                 3558
+        affine                       -53882253808          64643081354
+        shift                                 -13                   15
+        output                                 -4                    3
+
+    mlp10.geluq                   
+        input                              -530.0                370.0
+        cursor                               -266                  184
+        output                                  0                    7
+
+    mlp11                         
+        input                             -1909.0               3130.0
+        matmul1                            -590.0                425.0
+        matmul2                            -418.0               1004.0
+        res_scaled                    -1466257084           2404077880
+        res_scaled_add                -1465732796           2404602168
+        res_scaled_shift                    -1398                 2293
+        output                            -1435.0               2504.0
+
+    mlp11.lnq                     
+        lnw_m                               26431                40182
+        lnb_m                        -37347131392          11094720512
+        input                             -1909.0               3130.0
+        sum                                -15809                32249
+        divc                           -690711019           1413185363
+        mu                                    -82                  168
+        var                                891146             19595412
+        cursor                                  0                   71
+        rsqrt                                 822                 3843
+        affine                      -106458222986          63579756932
+        shift                                 -25                   14
+        output                                 -4                    3
+
+    mlp11.geluq                   
+        input                              -590.0                425.0
+        cursor                               -149                  105
+        output                                  0                    7
+
+    head                          
+        input                             -1435.0               2504.0
+        slice                              -590.0               2144.0
+        output                          -103042.0             177054.0
+
+    head.lnq                      
+        lnw_m                               15546                44542
+        lnb_m                        -12142379008           5196087296
+        input                              -590.0               2144.0
+        sum                                  6814                18551
+        divc                            297710474            814706045
+        mu                                     35                   97
+        var                                854765              8728914
+        cursor                                  1                   61
+        rsqrt                                 614                 1961
+        affine                       -27113728688          23713503380
+        shift                                -203                  176
+        output                               -128                  127
+

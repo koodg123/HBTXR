@@ -1,0 +1,156 @@
+{
+  "artifact": "paper_target_bridge_trained_candidate_contract",
+  "date": "2026-06-21",
+  "scope": "HGTXR-SW paper-target bridge PTB-2 trained-candidate evidence contract",
+  "execution_state": "paused_by_user_directive",
+  "schema_contract_allowed_while_paused": true,
+  "trained_candidate_payload_allowed_while_paused": false,
+  "execute_supported": false,
+  "direct_submission_comparison_allowed": false,
+  "paper_level_completion_allowed": false,
+  "idea_gen_phase": "P1",
+  "idea_gen_domain": "Research Workflow",
+  "parent_skill": "paper-idea-generator",
+  "worker_skill": "ablation-study-designer",
+  "objective": "Freeze the PTB-2 trained-candidate evidence contract without creating trained-candidate payload artifacts or permitting paper-target comparison.",
+  "source_artifacts": {
+    "paper_target_comparison_evidence_manifest": "docs/resources/paper_target_comparison_evidence_manifest_2026_06_21.json",
+    "paper_target_bridge_artifact_workplan": "docs/resources/paper_target_bridge_artifact_workplan_2026_06_21.json",
+    "xr64_postrun_evidence_contract": "docs/resources/xr64_postrun_evidence_contract_2026_06_21.json",
+    "xr64_postrun_promotion_decision": "docs/resources/xr64_postrun_promotion_decision_2026_06_21.json",
+    "completion_readiness_contract": "docs/resources/second_goal_completion_readiness_contract_2026_06_21.json"
+  },
+  "current_state": {
+    "work_package": "PTB-2-XR64-TRAINED-CANDIDATE",
+    "required_future_artifact_count": 10,
+    "existing_required_future_artifact_count": 3,
+    "ptb2_trained_candidate_artifact_count": 2,
+    "ptb2_existing_payload_count": 0,
+    "xr64_ready_to_train": false,
+    "xr64_postrun_candidate_count": 0,
+    "completion_allowed": false,
+    "direct_submission_comparison_allowed": false,
+    "paper_level_completion_allowed": false
+  },
+  "trained_candidate_outputs": [
+    {
+      "id": "trained_candidate_eval_summary",
+      "work_package": "PTB-2-XR64-TRAINED-CANDIDATE",
+      "path": "docs/resources/future/paper_target_bridge/trained_candidate_test_eval_summary.json",
+      "format": "json",
+      "creates_required_future_artifact": false,
+      "requires_train_eval": true,
+      "required_fields": [
+        "run_id",
+        "split",
+        "checkpoint",
+        "target_override_path",
+        "metric_track_center_px",
+        "metric_track_p10_pct",
+        "metric_track_p5_pct",
+        "metric_track_p1_pct"
+      ],
+      "required_semantics": {
+        "split": "test",
+        "target_override_path": null,
+        "allow_test_target_override": false,
+        "metrics_are_finite": true,
+        "percentage_metrics_range": "0..100",
+        "checkpoint_must_exist": true,
+        "checkpoint_kind_values": [
+          "best_track_p10",
+          "best_track_p5",
+          "best_metric_track_center_px"
+        ],
+        "lane_id_values": [
+          "XR-64A",
+          "XR-64B",
+          "XR-64C"
+        ],
+        "run_id_required": true
+      },
+      "checker_required_context_fields": [
+        "lane_id",
+        "checkpoint_kind",
+        "sample_count",
+        "eval_rows_path",
+        "resolved_config_path",
+        "teacher_provenance_path",
+        "ablation_attribution_report_path",
+        "allow_test_target_override"
+      ],
+      "blocked_by": [
+        "paused_by_user_directive",
+        "XR-64 generated artifacts missing",
+        "XR-64A/B/C not run",
+        "xr64_postrun_candidate_count=0"
+      ]
+    },
+    {
+      "id": "trained_candidate_leakage_audit",
+      "work_package": "PTB-2-XR64-TRAINED-CANDIDATE",
+      "path": "docs/resources/future/paper_target_bridge/trained_candidate_leakage_audit.json",
+      "format": "json",
+      "creates_required_future_artifact": false,
+      "requires_train_eval": true,
+      "required_fields": [
+        "run_id",
+        "test_derived_targets_used",
+        "train_override_paths",
+        "val_override_paths",
+        "test_override_paths",
+        "leakage_risk",
+        "decision"
+      ],
+      "required_semantics": {
+        "test_derived_targets_used": false,
+        "test_override_paths": [],
+        "leakage_risk": "none",
+        "decision": "valid"
+      },
+      "checker_required_context_fields": [
+        "eval_summary_path",
+        "checked_train_inputs",
+        "checked_eval_overrides",
+        "source_manifest",
+        "teacher_checkpoint_id",
+        "teacher_checkpoint_sha"
+      ],
+      "blocked_by": [
+        "paused_by_user_directive",
+        "missing trained-candidate provenance",
+        "missing override-cleared full-test evaluation"
+      ]
+    }
+  ],
+  "counts": {
+    "trained_candidate_output_count": 2,
+    "json_output_schema_count": 2,
+    "blocked_output_count": 2,
+    "current_existing_output_count": 0
+  },
+  "reject_conditions": [
+    "trained_candidate_payload_allowed_while_paused true",
+    "execute_supported true while experiments are paused",
+    "direct_submission_comparison_allowed true from PTB-2 schema-only evidence",
+    "paper_level_completion_allowed true from PTB-2 schema-only evidence",
+    "trained-candidate output path exists while execution_state is paused_by_user_directive",
+    "trained_candidate_eval_summary exists without trained_candidate_leakage_audit",
+    "trained_candidate_leakage_audit exists without trained_candidate_eval_summary",
+    "trained_candidate_eval_summary target_override_path is non-null",
+    "trained_candidate_eval_summary allow_test_target_override is true",
+    "trained_candidate_leakage_audit test_derived_targets_used true",
+    "trained_candidate_leakage_audit leakage_risk not none",
+    "validation commands that launch train/eval/GPU jobs"
+  ],
+  "validation_commands": [
+    "python3 -m py_compile scripts/external/check_paper_target_bridge_trained_candidate_contract.py",
+    ".venv/bin/python scripts/external/check_paper_target_bridge_trained_candidate_contract.py --format summary",
+    ".venv/bin/python -m pytest -q tests/test_paper_target_bridge_trained_candidate_contract.py"
+  ],
+  "next_safe_actions": [
+    "Keep trained-candidate payload artifacts absent while experiments are paused.",
+    "After explicit resume and XR-64 post-run evidence, validate candidate summary and leakage audit against this contract.",
+    "Do not allow direct paper-target comparison until PTB-0, PTB-1, PTB-2, and PTB-3 evidence all pass."
+  ]
+}

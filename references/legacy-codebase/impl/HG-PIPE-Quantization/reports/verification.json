@@ -1,0 +1,6684 @@
+[
+  {
+    "elements": 37632,
+    "kind": "requant_table",
+    "metadata": {
+      "input_summary": {
+        "count": 37632,
+        "max": 213,
+        "mean": 0.6933992346938775,
+        "min": -182
+      },
+      "input_type": [
+        "signed",
+        11
+      ],
+      "output_summary": {
+        "count": 37632,
+        "max": 3,
+        "mean": -0.009460034013605442,
+        "min": -4
+      },
+      "output_type": [
+        "signed",
+        3
+      ],
+      "range": {
+        "cursor": [
+          -117,
+          147
+        ],
+        "input": [
+          -567.0,
+          489.0
+        ],
+        "output": [
+          -4,
+          3
+        ]
+      },
+      "scalars": [
+        101,
+        2,
+        63
+      ],
+      "stat_key": "attn0.aq",
+      "table_sizes": [
+        64
+      ]
+    },
+    "mismatches": 0,
+    "name": "attn_0_aq",
+    "passed": true
+  },
+  {
+    "elements": 37632,
+    "kind": "requant_table",
+    "metadata": {
+      "input_summary": {
+        "count": 37632,
+        "max": 317,
+        "mean": 3.2583971088435373,
+        "min": -337
+      },
+      "input_type": [
+        "signed",
+        11
+      ],
+      "output_summary": {
+        "count": 37632,
+        "max": 3,
+        "mean": -0.011160714285714286,
+        "min": -4
+      },
+      "output_type": [
+        "signed",
+        3
+      ],
+      "range": {
+        "cursor": [
+          -93,
+          152
+        ],
+        "input": [
+          -456.0,
+          524.0
+        ],
+        "output": [
+          -4,
+          3
+        ]
+      },
+      "scalars": [
+        85,
+        2,
+        63
+      ],
+      "stat_key": "attn0.kq",
+      "table_sizes": [
+        64
+      ]
+    },
+    "mismatches": 0,
+    "name": "attn_0_kq",
+    "passed": true
+  },
+  {
+    "elements": 37632,
+    "kind": "requant_table",
+    "metadata": {
+      "input_summary": {
+        "count": 37632,
+        "max": 276,
+        "mean": 2.1431228741496597,
+        "min": -344
+      },
+      "input_type": [
+        "signed",
+        11
+      ],
+      "output_summary": {
+        "count": 37632,
+        "max": 3,
+        "mean": 0.06571534863945579,
+        "min": -4
+      },
+      "output_type": [
+        "signed",
+        3
+      ],
+      "range": {
+        "cursor": [
+          -116,
+          121
+        ],
+        "input": [
+          -549.0,
+          397.0
+        ],
+        "output": [
+          -4,
+          3
+        ]
+      },
+      "scalars": [
+        88,
+        2,
+        63
+      ],
+      "stat_key": "attn0.qq",
+      "table_sizes": [
+        64
+      ]
+    },
+    "mismatches": 0,
+    "name": "attn_0_qq",
+    "passed": true
+  },
+  {
+    "elements": 37632,
+    "kind": "requant_table",
+    "metadata": {
+      "input_summary": {
+        "count": 37632,
+        "max": 314,
+        "mean": -3.461282950680272,
+        "min": -334
+      },
+      "input_type": [
+        "signed",
+        11
+      ],
+      "output_summary": {
+        "count": 37632,
+        "max": 3,
+        "mean": -0.05978954081632653,
+        "min": -4
+      },
+      "output_type": [
+        "signed",
+        3
+      ],
+      "range": {
+        "cursor": [
+          -56,
+          88
+        ],
+        "input": [
+          -604.0,
+          548.0
+        ],
+        "output": [
+          -4,
+          3
+        ]
+      },
+      "scalars": [
+        162,
+        3,
+        63
+      ],
+      "stat_key": "attn0.vq",
+      "table_sizes": [
+        64
+      ]
+    },
+    "mismatches": 0,
+    "name": "attn_0_vq",
+    "passed": true
+  },
+  {
+    "elements": 37632,
+    "kind": "requant_table",
+    "metadata": {
+      "input_summary": {
+        "count": 37632,
+        "max": 234,
+        "mean": -0.48987563775510207,
+        "min": -256
+      },
+      "input_type": [
+        "signed",
+        11
+      ],
+      "output_summary": {
+        "count": 37632,
+        "max": 3,
+        "mean": 0.01684736394557823,
+        "min": -4
+      },
+      "output_type": [
+        "signed",
+        3
+      ],
+      "range": {
+        "cursor": [
+          -108,
+          143
+        ],
+        "input": [
+          -565.0,
+          440.0
+        ],
+        "output": [
+          -4,
+          3
+        ]
+      },
+      "scalars": [
+        135,
+        2,
+        63
+      ],
+      "stat_key": "attn10.aq",
+      "table_sizes": [
+        64
+      ]
+    },
+    "mismatches": 0,
+    "name": "attn_10_aq",
+    "passed": true
+  },
+  {
+    "elements": 37632,
+    "kind": "requant_table",
+    "metadata": {
+      "input_summary": {
+        "count": 37632,
+        "max": 332,
+        "mean": -0.6760204081632653,
+        "min": -318
+      },
+      "input_type": [
+        "signed",
+        10
+      ],
+      "output_summary": {
+        "count": 37632,
+        "max": 3,
+        "mean": -0.023251488095238096,
+        "min": -4
+      },
+      "output_type": [
+        "signed",
+        3
+      ],
+      "range": {
+        "cursor": [
+          -70,
+          127
+        ],
+        "input": [
+          -389.0,
+          397.0
+        ],
+        "output": [
+          -4,
+          3
+        ]
+      },
+      "scalars": [
+        112,
+        2,
+        63
+      ],
+      "stat_key": "attn10.kq",
+      "table_sizes": [
+        64
+      ]
+    },
+    "mismatches": 0,
+    "name": "attn_10_kq",
+    "passed": true
+  },
+  {
+    "elements": 37632,
+    "kind": "requant_table",
+    "metadata": {
+      "input_summary": {
+        "count": 37632,
+        "max": 1446,
+        "mean": -48.44292091836735,
+        "min": -1225
+      },
+      "input_type": [
+        "signed",
+        12
+      ],
+      "output_summary": {
+        "count": 37632,
+        "max": 3,
+        "mean": -0.5330038265306123,
+        "min": -4
+      },
+      "output_type": [
+        "signed",
+        3
+      ],
+      "range": {
+        "cursor": [
+          -149,
+          223
+        ],
+        "input": [
+          -1360.0,
+          1616.0
+        ],
+        "output": [
+          -4,
+          3
+        ]
+      },
+      "scalars": [
+        173,
+        3,
+        63
+      ],
+      "stat_key": "attn10.qq",
+      "table_sizes": [
+        64
+      ]
+    },
+    "mismatches": 0,
+    "name": "attn_10_qq",
+    "passed": true
+  },
+  {
+    "elements": 37632,
+    "kind": "requant_table",
+    "metadata": {
+      "input_summary": {
+        "count": 37632,
+        "max": 205,
+        "mean": 0.6887223639455783,
+        "min": -197
+      },
+      "input_type": [
+        "signed",
+        10
+      ],
+      "output_summary": {
+        "count": 37632,
+        "max": 3,
+        "mean": 0.02532419217687075,
+        "min": -4
+      },
+      "output_type": [
+        "signed",
+        3
+      ],
+      "range": {
+        "cursor": [
+          -53,
+          104
+        ],
+        "input": [
+          -323.0,
+          305.0
+        ],
+        "output": [
+          -4,
+          3
+        ]
+      },
+      "scalars": [
+        114,
+        2,
+        63
+      ],
+      "stat_key": "attn10.vq",
+      "table_sizes": [
+        64
+      ]
+    },
+    "mismatches": 0,
+    "name": "attn_10_vq",
+    "passed": true
+  },
+  {
+    "elements": 37632,
+    "kind": "requant_table",
+    "metadata": {
+      "input_summary": {
+        "count": 37632,
+        "max": 213,
+        "mean": -8.137728528911564,
+        "min": -275
+      },
+      "input_type": [
+        "signed",
+        10
+      ],
+      "output_summary": {
+        "count": 37632,
+        "max": 3,
+        "mean": -0.2771045918367347,
+        "min": -4
+      },
+      "output_type": [
+        "signed",
+        3
+      ],
+      "range": {
+        "cursor": [
+          -103,
+          124
+        ],
+        "input": [
+          -511.0,
+          397.0
+        ],
+        "output": [
+          -4,
+          3
+        ]
+      },
+      "scalars": [
+        102,
+        2,
+        63
+      ],
+      "stat_key": "attn11.aq",
+      "table_sizes": [
+        64
+      ]
+    },
+    "mismatches": 0,
+    "name": "attn_11_aq",
+    "passed": true
+  },
+  {
+    "elements": 37632,
+    "kind": "requant_table",
+    "metadata": {
+      "input_summary": {
+        "count": 37632,
+        "max": 207,
+        "mean": -3.190237032312925,
+        "min": -207
+      },
+      "input_type": [
+        "signed",
+        10
+      ],
+      "output_summary": {
+        "count": 37632,
+        "max": 3,
+        "mean": -0.19252232142857142,
+        "min": -4
+      },
+      "output_type": [
+        "signed",
+        3
+      ],
+      "range": {
+        "cursor": [
+          -63,
+          102
+        ],
+        "input": [
+          -326.0,
+          334.0
+        ],
+        "output": [
+          -4,
+          3
+        ]
+      },
+      "scalars": [
+        77,
+        2,
+        63
+      ],
+      "stat_key": "attn11.kq",
+      "table_sizes": [
+        64
+      ]
+    },
+    "mismatches": 0,
+    "name": "attn_11_kq",
+    "passed": true
+  },
+  {
+    "elements": 37632,
+    "kind": "requant_table",
+    "metadata": {
+      "input_summary": {
+        "count": 37632,
+        "max": 978,
+        "mean": -3.4650563350340136,
+        "min": -1263
+      },
+      "input_type": [
+        "signed",
+        12
+      ],
+      "output_summary": {
+        "count": 37632,
+        "max": 3,
+        "mean": 0.04203869047619048,
+        "min": -4
+      },
+      "output_type": [
+        "signed",
+        3
+      ],
+      "range": {
+        "cursor": [
+          -168,
+          166
+        ],
+        "input": [
+          -1526.0,
+          1145.0
+        ],
+        "output": [
+          -4,
+          3
+        ]
+      },
+      "scalars": [
+        189,
+        3,
+        63
+      ],
+      "stat_key": "attn11.qq",
+      "table_sizes": [
+        64
+      ]
+    },
+    "mismatches": 0,
+    "name": "attn_11_qq",
+    "passed": true
+  },
+  {
+    "elements": 37632,
+    "kind": "requant_table",
+    "metadata": {
+      "input_summary": {
+        "count": 37632,
+        "max": 184,
+        "mean": -0.5974702380952381,
+        "min": -189
+      },
+      "input_type": [
+        "signed",
+        10
+      ],
+      "output_summary": {
+        "count": 37632,
+        "max": 3,
+        "mean": -0.00940688775510204,
+        "min": -4
+      },
+      "output_type": [
+        "signed",
+        3
+      ],
+      "range": {
+        "cursor": [
+          -51,
+          97
+        ],
+        "input": [
+          -311.0,
+          281.0
+        ],
+        "output": [
+          -4,
+          3
+        ]
+      },
+      "scalars": [
+        110,
+        2,
+        63
+      ],
+      "stat_key": "attn11.vq",
+      "table_sizes": [
+        64
+      ]
+    },
+    "mismatches": 0,
+    "name": "attn_11_vq",
+    "passed": true
+  },
+  {
+    "elements": 37632,
+    "kind": "requant_table",
+    "metadata": {
+      "input_summary": {
+        "count": 37632,
+        "max": 283,
+        "mean": 6.1004730017006805,
+        "min": -287
+      },
+      "input_type": [
+        "signed",
+        11
+      ],
+      "output_summary": {
+        "count": 37632,
+        "max": 3,
+        "mean": 0.11814413265306123,
+        "min": -4
+      },
+      "output_type": [
+        "signed",
+        3
+      ],
+      "range": {
+        "cursor": [
+          -68,
+          93
+        ],
+        "input": [
+          -702.0,
+          583.0
+        ],
+        "output": [
+          -4,
+          3
+        ]
+      },
+      "scalars": [
+        162,
+        3,
+        63
+      ],
+      "stat_key": "attn1.aq",
+      "table_sizes": [
+        64
+      ]
+    },
+    "mismatches": 0,
+    "name": "attn_1_aq",
+    "passed": true
+  },
+  {
+    "elements": 37632,
+    "kind": "requant_table",
+    "metadata": {
+      "input_summary": {
+        "count": 37632,
+        "max": 243,
+        "mean": -2.968245110544218,
+        "min": -245
+      },
+      "input_type": [
+        "signed",
+        10
+      ],
+      "output_summary": {
+        "count": 37632,
+        "max": 3,
+        "mean": -0.19084821428571427,
+        "min": -4
+      },
+      "output_type": [
+        "signed",
+        3
+      ],
+      "range": {
+        "cursor": [
+          -184,
+          215
+        ],
+        "input": [
+          -434.0,
+          363.0
+        ],
+        "output": [
+          -4,
+          3
+        ]
+      },
+      "scalars": [
+        67,
+        1,
+        63
+      ],
+      "stat_key": "attn1.kq",
+      "table_sizes": [
+        64
+      ]
+    },
+    "mismatches": 0,
+    "name": "attn_1_kq",
+    "passed": true
+  },
+  {
+    "elements": 37632,
+    "kind": "requant_table",
+    "metadata": {
+      "input_summary": {
+        "count": 37632,
+        "max": 220,
+        "mean": -0.18027210884353742,
+        "min": -271
+      },
+      "input_type": [
+        "signed",
+        10
+      ],
+      "output_summary": {
+        "count": 37632,
+        "max": 3,
+        "mean": -0.04581207482993197,
+        "min": -4
+      },
+      "output_type": [
+        "signed",
+        3
+      ],
+      "range": {
+        "cursor": [
+          -80,
+          130
+        ],
+        "input": [
+          -408.0,
+          432.0
+        ],
+        "output": [
+          -4,
+          3
+        ]
+      },
+      "scalars": [
+        91,
+        2,
+        63
+      ],
+      "stat_key": "attn1.qq",
+      "table_sizes": [
+        64
+      ]
+    },
+    "mismatches": 0,
+    "name": "attn_1_qq",
+    "passed": true
+  },
+  {
+    "elements": 37632,
+    "kind": "requant_table",
+    "metadata": {
+      "input_summary": {
+        "count": 37632,
+        "max": 288,
+        "mean": 0.9520355017006803,
+        "min": -318
+      },
+      "input_type": [
+        "signed",
+        10
+      ],
+      "output_summary": {
+        "count": 37632,
+        "max": 3,
+        "mean": 0.05280080782312925,
+        "min": -4
+      },
+      "output_type": [
+        "signed",
+        3
+      ],
+      "range": {
+        "cursor": [
+          -91,
+          158
+        ],
+        "input": [
+          -492.0,
+          503.0
+        ],
+        "output": [
+          -4,
+          3
+        ]
+      },
+      "scalars": [
+        131,
+        2,
+        63
+      ],
+      "stat_key": "attn1.vq",
+      "table_sizes": [
+        64
+      ]
+    },
+    "mismatches": 0,
+    "name": "attn_1_vq",
+    "passed": true
+  },
+  {
+    "elements": 37632,
+    "kind": "requant_table",
+    "metadata": {
+      "input_summary": {
+        "count": 37632,
+        "max": 88,
+        "mean": 0.6861447704081632,
+        "min": -93
+      },
+      "input_type": [
+        "signed",
+        10
+      ],
+      "output_summary": {
+        "count": 37632,
+        "max": 3,
+        "mean": 0.048708545918367346,
+        "min": -4
+      },
+      "output_type": [
+        "signed",
+        3
+      ],
+      "range": {
+        "cursor": [
+          -243,
+          271
+        ],
+        "input": [
+          -268.0,
+          246.0
+        ],
+        "output": [
+          -4,
+          3
+        ]
+      },
+      "scalars": [
+        25,
+        0,
+        63
+      ],
+      "stat_key": "attn2.aq",
+      "table_sizes": [
+        64
+      ]
+    },
+    "mismatches": 0,
+    "name": "attn_2_aq",
+    "passed": true
+  },
+  {
+    "elements": 37632,
+    "kind": "requant_table",
+    "metadata": {
+      "input_summary": {
+        "count": 37632,
+        "max": 103,
+        "mean": -0.49423363095238093,
+        "min": -102
+      },
+      "input_type": [
+        "signed",
+        9
+      ],
+      "output_summary": {
+        "count": 37632,
+        "max": 3,
+        "mean": -0.20044111394557823,
+        "min": -4
+      },
+      "output_type": [
+        "signed",
+        3
+      ],
+      "range": {
+        "cursor": [
+          -111,
+          167
+        ],
+        "input": [
+          -143.0,
+          135.0
+        ],
+        "output": [
+          -4,
+          3
+        ]
+      },
+      "scalars": [
+        32,
+        0,
+        63
+      ],
+      "stat_key": "attn2.kq",
+      "table_sizes": [
+        64
+      ]
+    },
+    "mismatches": 0,
+    "name": "attn_2_kq",
+    "passed": true
+  },
+  {
+    "elements": 37632,
+    "kind": "requant_table",
+    "metadata": {
+      "input_summary": {
+        "count": 37632,
+        "max": 95,
+        "mean": 0.19055590986394558,
+        "min": -102
+      },
+      "input_type": [
+        "signed",
+        9
+      ],
+      "output_summary": {
+        "count": 37632,
+        "max": 3,
+        "mean": 0.006802721088435374,
+        "min": -4
+      },
+      "output_type": [
+        "signed",
+        3
+      ],
+      "range": {
+        "cursor": [
+          -50,
+          96
+        ],
+        "input": [
+          -147.0,
+          145.0
+        ],
+        "output": [
+          -4,
+          3
+        ]
+      },
+      "scalars": [
+        48,
+        1,
+        63
+      ],
+      "stat_key": "attn2.qq",
+      "table_sizes": [
+        64
+      ]
+    },
+    "mismatches": 0,
+    "name": "attn_2_qq",
+    "passed": true
+  },
+  {
+    "elements": 37632,
+    "kind": "requant_table",
+    "metadata": {
+      "input_summary": {
+        "count": 37632,
+        "max": 256,
+        "mean": 1.8907578656462585,
+        "min": -239
+      },
+      "input_type": [
+        "signed",
+        10
+      ],
+      "output_summary": {
+        "count": 37632,
+        "max": 3,
+        "mean": 0.04028486394557823,
+        "min": -4
+      },
+      "output_type": [
+        "signed",
+        3
+      ],
+      "range": {
+        "cursor": [
+          -66,
+          109
+        ],
+        "input": [
+          -358.0,
+          341.0
+        ],
+        "output": [
+          -4,
+          3
+        ]
+      },
+      "scalars": [
+        95,
+        2,
+        63
+      ],
+      "stat_key": "attn2.vq",
+      "table_sizes": [
+        64
+      ]
+    },
+    "mismatches": 0,
+    "name": "attn_2_vq",
+    "passed": true
+  },
+  {
+    "elements": 37632,
+    "kind": "requant_table",
+    "metadata": {
+      "input_summary": {
+        "count": 37632,
+        "max": 75,
+        "mean": -0.23883928571428573,
+        "min": -103
+      },
+      "input_type": [
+        "signed",
+        9
+      ],
+      "output_summary": {
+        "count": 37632,
+        "max": 3,
+        "mean": 0.016156462585034014,
+        "min": -4
+      },
+      "output_type": [
+        "signed",
+        3
+      ],
+      "range": {
+        "cursor": [
+          -56,
+          80
+        ],
+        "input": [
+          -154.0,
+          118.0
+        ],
+        "output": [
+          -4,
+          3
+        ]
+      },
+      "scalars": [
+        43,
+        1,
+        63
+      ],
+      "stat_key": "attn3.aq",
+      "table_sizes": [
+        64
+      ]
+    },
+    "mismatches": 0,
+    "name": "attn_3_aq",
+    "passed": true
+  },
+  {
+    "elements": 37632,
+    "kind": "requant_table",
+    "metadata": {
+      "input_summary": {
+        "count": 37632,
+        "max": 157,
+        "mean": -4.1248671343537415,
+        "min": -170
+      },
+      "input_type": [
+        "signed",
+        10
+      ],
+      "output_summary": {
+        "count": 37632,
+        "max": 3,
+        "mean": -0.3265837585034014,
+        "min": -4
+      },
+      "output_type": [
+        "signed",
+        3
+      ],
+      "range": {
+        "cursor": [
+          -107,
+          141
+        ],
+        "input": [
+          -261.0,
+          235.0
+        ],
+        "output": [
+          -4,
+          3
+        ]
+      },
+      "scalars": [
+        48,
+        1,
+        63
+      ],
+      "stat_key": "attn3.kq",
+      "table_sizes": [
+        64
+      ]
+    },
+    "mismatches": 0,
+    "name": "attn_3_kq",
+    "passed": true
+  },
+  {
+    "elements": 37632,
+    "kind": "requant_table",
+    "metadata": {
+      "input_summary": {
+        "count": 37632,
+        "max": 191,
+        "mean": 0.9541347789115646,
+        "min": -235
+      },
+      "input_type": [
+        "signed",
+        10
+      ],
+      "output_summary": {
+        "count": 37632,
+        "max": 3,
+        "mean": -0.0052614795918367345,
+        "min": -4
+      },
+      "output_type": [
+        "signed",
+        3
+      ],
+      "range": {
+        "cursor": [
+          -63,
+          95
+        ],
+        "input": [
+          -327.0,
+          306.0
+        ],
+        "output": [
+          -4,
+          3
+        ]
+      },
+      "scalars": [
+        77,
+        2,
+        63
+      ],
+      "stat_key": "attn3.qq",
+      "table_sizes": [
+        64
+      ]
+    },
+    "mismatches": 0,
+    "name": "attn_3_qq",
+    "passed": true
+  },
+  {
+    "elements": 37632,
+    "kind": "requant_table",
+    "metadata": {
+      "input_summary": {
+        "count": 37632,
+        "max": 230,
+        "mean": -0.06805378401360544,
+        "min": -272
+      },
+      "input_type": [
+        "signed",
+        10
+      ],
+      "output_summary": {
+        "count": 37632,
+        "max": 3,
+        "mean": -0.01054953231292517,
+        "min": -4
+      },
+      "output_type": [
+        "signed",
+        3
+      ],
+      "range": {
+        "cursor": [
+          -68,
+          121
+        ],
+        "input": [
+          -386.0,
+          370.0
+        ],
+        "output": [
+          -4,
+          3
+        ]
+      },
+      "scalars": [
+        117,
+        2,
+        63
+      ],
+      "stat_key": "attn3.vq",
+      "table_sizes": [
+        64
+      ]
+    },
+    "mismatches": 0,
+    "name": "attn_3_vq",
+    "passed": true
+  },
+  {
+    "elements": 37632,
+    "kind": "requant_table",
+    "metadata": {
+      "input_summary": {
+        "count": 37632,
+        "max": 244,
+        "mean": -4.890571853741497,
+        "min": -280
+      },
+      "input_type": [
+        "signed",
+        11
+      ],
+      "output_summary": {
+        "count": 37632,
+        "max": 3,
+        "mean": -0.12026998299319729,
+        "min": -4
+      },
+      "output_type": [
+        "signed",
+        3
+      ],
+      "range": {
+        "cursor": [
+          -115,
+          159
+        ],
+        "input": [
+          -591.0,
+          507.0
+        ],
+        "output": [
+          -4,
+          3
+        ]
+      },
+      "scalars": [
+        132,
+        2,
+        63
+      ],
+      "stat_key": "attn4.aq",
+      "table_sizes": [
+        64
+      ]
+    },
+    "mismatches": 0,
+    "name": "attn_4_aq",
+    "passed": true
+  },
+  {
+    "elements": 37632,
+    "kind": "requant_table",
+    "metadata": {
+      "input_summary": {
+        "count": 37632,
+        "max": 228,
+        "mean": -2.884088010204082,
+        "min": -198
+      },
+      "input_type": [
+        "signed",
+        10
+      ],
+      "output_summary": {
+        "count": 37632,
+        "max": 3,
+        "mean": -0.1832482993197279,
+        "min": -4
+      },
+      "output_type": [
+        "signed",
+        3
+      ],
+      "range": {
+        "cursor": [
+          -118,
+          189
+        ],
+        "input": [
+          -309.0,
+          305.0
+        ],
+        "output": [
+          -4,
+          3
+        ]
+      },
+      "scalars": [
+        73,
+        1,
+        63
+      ],
+      "stat_key": "attn4.kq",
+      "table_sizes": [
+        64
+      ]
+    },
+    "mismatches": 0,
+    "name": "attn_4_kq",
+    "passed": true
+  },
+  {
+    "elements": 37632,
+    "kind": "requant_table",
+    "metadata": {
+      "input_summary": {
+        "count": 37632,
+        "max": 411,
+        "mean": 3.353954081632653,
+        "min": -397
+      },
+      "input_type": [
+        "signed",
+        11
+      ],
+      "output_summary": {
+        "count": 37632,
+        "max": 3,
+        "mean": 0.0546343537414966,
+        "min": -4
+      },
+      "output_type": [
+        "signed",
+        3
+      ],
+      "range": {
+        "cursor": [
+          -105,
+          160
+        ],
+        "input": [
+          -534.0,
+          527.0
+        ],
+        "output": [
+          -4,
+          3
+        ]
+      },
+      "scalars": [
+        116,
+        2,
+        63
+      ],
+      "stat_key": "attn4.qq",
+      "table_sizes": [
+        64
+      ]
+    },
+    "mismatches": 0,
+    "name": "attn_4_qq",
+    "passed": true
+  },
+  {
+    "elements": 37632,
+    "kind": "requant_table",
+    "metadata": {
+      "input_summary": {
+        "count": 37632,
+        "max": 245,
+        "mean": -2.36203231292517,
+        "min": -306
+      },
+      "input_type": [
+        "signed",
+        10
+      ],
+      "output_summary": {
+        "count": 37632,
+        "max": 3,
+        "mean": -0.06343005952380952,
+        "min": -4
+      },
+      "output_type": [
+        "signed",
+        3
+      ],
+      "range": {
+        "cursor": [
+          -66,
+          133
+        ],
+        "input": [
+          -395.0,
+          403.0
+        ],
+        "output": [
+          -4,
+          3
+        ]
+      },
+      "scalars": [
+        132,
+        2,
+        63
+      ],
+      "stat_key": "attn4.vq",
+      "table_sizes": [
+        64
+      ]
+    },
+    "mismatches": 0,
+    "name": "attn_4_vq",
+    "passed": true
+  },
+  {
+    "elements": 37632,
+    "kind": "requant_table",
+    "metadata": {
+      "input_summary": {
+        "count": 37632,
+        "max": 184,
+        "mean": -2.7269345238095237,
+        "min": -169
+      },
+      "input_type": [
+        "signed",
+        10
+      ],
+      "output_summary": {
+        "count": 37632,
+        "max": 3,
+        "mean": -0.08490114795918367,
+        "min": -4
+      },
+      "output_type": [
+        "signed",
+        3
+      ],
+      "range": {
+        "cursor": [
+          -72,
+          100
+        ],
+        "input": [
+          -381.0,
+          310.0
+        ],
+        "output": [
+          -4,
+          3
+        ]
+      },
+      "scalars": [
+        93,
+        2,
+        63
+      ],
+      "stat_key": "attn5.aq",
+      "table_sizes": [
+        64
+      ]
+    },
+    "mismatches": 0,
+    "name": "attn_5_aq",
+    "passed": true
+  },
+  {
+    "elements": 37632,
+    "kind": "requant_table",
+    "metadata": {
+      "input_summary": {
+        "count": 37632,
+        "max": 226,
+        "mean": 4.75592580782313,
+        "min": -254
+      },
+      "input_type": [
+        "signed",
+        10
+      ],
+      "output_summary": {
+        "count": 37632,
+        "max": 3,
+        "mean": 0.08899340986394558,
+        "min": -4
+      },
+      "output_type": [
+        "signed",
+        3
+      ],
+      "range": {
+        "cursor": [
+          -144,
+          212
+        ],
+        "input": [
+          -352.0,
+          361.0
+        ],
+        "output": [
+          -4,
+          3
+        ]
+      },
+      "scalars": [
+        64,
+        1,
+        63
+      ],
+      "stat_key": "attn5.kq",
+      "table_sizes": [
+        64
+      ]
+    },
+    "mismatches": 0,
+    "name": "attn_5_kq",
+    "passed": true
+  },
+  {
+    "elements": 37632,
+    "kind": "requant_table",
+    "metadata": {
+      "input_summary": {
+        "count": 37632,
+        "max": 402,
+        "mean": 2.498671343537415,
+        "min": -457
+      },
+      "input_type": [
+        "signed",
+        11
+      ],
+      "output_summary": {
+        "count": 37632,
+        "max": 3,
+        "mean": 0.01363201530612245,
+        "min": -4
+      },
+      "output_type": [
+        "signed",
+        3
+      ],
+      "range": {
+        "cursor": [
+          -118,
+          141
+        ],
+        "input": [
+          -570.0,
+          463.0
+        ],
+        "output": [
+          -4,
+          3
+        ]
+      },
+      "scalars": [
+        101,
+        2,
+        63
+      ],
+      "stat_key": "attn5.qq",
+      "table_sizes": [
+        64
+      ]
+    },
+    "mismatches": 0,
+    "name": "attn_5_qq",
+    "passed": true
+  },
+  {
+    "elements": 37632,
+    "kind": "requant_table",
+    "metadata": {
+      "input_summary": {
+        "count": 37632,
+        "max": 212,
+        "mean": -0.32775297619047616,
+        "min": -225
+      },
+      "input_type": [
+        "signed",
+        10
+      ],
+      "output_summary": {
+        "count": 37632,
+        "max": 3,
+        "mean": -0.008104804421768707,
+        "min": -4
+      },
+      "output_type": [
+        "signed",
+        3
+      ],
+      "range": {
+        "cursor": [
+          -70,
+          116
+        ],
+        "input": [
+          -399.0,
+          345.0
+        ],
+        "output": [
+          -4,
+          3
+        ]
+      },
+      "scalars": [
+        121,
+        2,
+        63
+      ],
+      "stat_key": "attn5.vq",
+      "table_sizes": [
+        64
+      ]
+    },
+    "mismatches": 0,
+    "name": "attn_5_vq",
+    "passed": true
+  },
+  {
+    "elements": 37632,
+    "kind": "requant_table",
+    "metadata": {
+      "input_summary": {
+        "count": 37632,
+        "max": 165,
+        "mean": 0.5314891581632653,
+        "min": -269
+      },
+      "input_type": [
+        "signed",
+        11
+      ],
+      "output_summary": {
+        "count": 37632,
+        "max": 3,
+        "mean": 0.027609481292517005,
+        "min": -4
+      },
+      "output_type": [
+        "signed",
+        3
+      ],
+      "range": {
+        "cursor": [
+          -108,
+          122
+        ],
+        "input": [
+          -527.0,
+          391.0
+        ],
+        "output": [
+          -4,
+          3
+        ]
+      },
+      "scalars": [
+        98,
+        2,
+        63
+      ],
+      "stat_key": "attn6.aq",
+      "table_sizes": [
+        64
+      ]
+    },
+    "mismatches": 0,
+    "name": "attn_6_aq",
+    "passed": true
+  },
+  {
+    "elements": 37632,
+    "kind": "requant_table",
+    "metadata": {
+      "input_summary": {
+        "count": 37632,
+        "max": 307,
+        "mean": -0.12109375,
+        "min": -289
+      },
+      "input_type": [
+        "signed",
+        10
+      ],
+      "output_summary": {
+        "count": 37632,
+        "max": 3,
+        "mean": -0.09688562925170068,
+        "min": -4
+      },
+      "output_type": [
+        "signed",
+        3
+      ],
+      "range": {
+        "cursor": [
+          -71,
+          139
+        ],
+        "input": [
+          -364.0,
+          478.0
+        ],
+        "output": [
+          -4,
+          3
+        ]
+      },
+      "scalars": [
+        81,
+        2,
+        63
+      ],
+      "stat_key": "attn6.kq",
+      "table_sizes": [
+        64
+      ]
+    },
+    "mismatches": 0,
+    "name": "attn_6_kq",
+    "passed": true
+  },
+  {
+    "elements": 37632,
+    "kind": "requant_table",
+    "metadata": {
+      "input_summary": {
+        "count": 37632,
+        "max": 341,
+        "mean": 3.7650403911564627,
+        "min": -457
+      },
+      "input_type": [
+        "signed",
+        11
+      ],
+      "output_summary": {
+        "count": 37632,
+        "max": 3,
+        "mean": 0.03786670918367347,
+        "min": -4
+      },
+      "output_type": [
+        "signed",
+        3
+      ],
+      "range": {
+        "cursor": [
+          -106,
+          127
+        ],
+        "input": [
+          -534.0,
+          398.0
+        ],
+        "output": [
+          -4,
+          3
+        ]
+      },
+      "scalars": [
+        111,
+        2,
+        63
+      ],
+      "stat_key": "attn6.qq",
+      "table_sizes": [
+        64
+      ]
+    },
+    "mismatches": 0,
+    "name": "attn_6_qq",
+    "passed": true
+  },
+  {
+    "elements": 37632,
+    "kind": "requant_table",
+    "metadata": {
+      "input_summary": {
+        "count": 37632,
+        "max": 222,
+        "mean": 0.03191432823129252,
+        "min": -234
+      },
+      "input_type": [
+        "signed",
+        10
+      ],
+      "output_summary": {
+        "count": 37632,
+        "max": 3,
+        "mean": 0.0030293367346938774,
+        "min": -4
+      },
+      "output_type": [
+        "signed",
+        3
+      ],
+      "range": {
+        "cursor": [
+          -63,
+          112
+        ],
+        "input": [
+          -370.0,
+          329.0
+        ],
+        "output": [
+          -4,
+          3
+        ]
+      },
+      "scalars": [
+        120,
+        2,
+        63
+      ],
+      "stat_key": "attn6.vq",
+      "table_sizes": [
+        64
+      ]
+    },
+    "mismatches": 0,
+    "name": "attn_6_vq",
+    "passed": true
+  },
+  {
+    "elements": 37632,
+    "kind": "requant_table",
+    "metadata": {
+      "input_summary": {
+        "count": 37632,
+        "max": 206,
+        "mean": -7.41140518707483,
+        "min": -275
+      },
+      "input_type": [
+        "signed",
+        11
+      ],
+      "output_summary": {
+        "count": 37632,
+        "max": 3,
+        "mean": -0.18027210884353742,
+        "min": -4
+      },
+      "output_type": [
+        "signed",
+        3
+      ],
+      "range": {
+        "cursor": [
+          -48,
+          74
+        ],
+        "input": [
+          -541.0,
+          436.0
+        ],
+        "output": [
+          -4,
+          3
+        ]
+      },
+      "scalars": [
+        162,
+        3,
+        63
+      ],
+      "stat_key": "attn7.aq",
+      "table_sizes": [
+        64
+      ]
+    },
+    "mismatches": 0,
+    "name": "attn_7_aq",
+    "passed": true
+  },
+  {
+    "elements": 37632,
+    "kind": "requant_table",
+    "metadata": {
+      "input_summary": {
+        "count": 37632,
+        "max": 267,
+        "mean": 2.011213860544218,
+        "min": -262
+      },
+      "input_type": [
+        "signed",
+        10
+      ],
+      "output_summary": {
+        "count": 37632,
+        "max": 3,
+        "mean": 0.03396045918367347,
+        "min": -4
+      },
+      "output_type": [
+        "signed",
+        3
+      ],
+      "range": {
+        "cursor": [
+          -69,
+          110
+        ],
+        "input": [
+          -365.0,
+          348.0
+        ],
+        "output": [
+          -4,
+          3
+        ]
+      },
+      "scalars": [
+        92,
+        2,
+        63
+      ],
+      "stat_key": "attn7.kq",
+      "table_sizes": [
+        64
+      ]
+    },
+    "mismatches": 0,
+    "name": "attn_7_kq",
+    "passed": true
+  },
+  {
+    "elements": 37632,
+    "kind": "requant_table",
+    "metadata": {
+      "input_summary": {
+        "count": 37632,
+        "max": 358,
+        "mean": 4.533083545918367,
+        "min": -333
+      },
+      "input_type": [
+        "signed",
+        10
+      ],
+      "output_summary": {
+        "count": 37632,
+        "max": 3,
+        "mean": 0.04174638605442177,
+        "min": -4
+      },
+      "output_type": [
+        "signed",
+        3
+      ],
+      "range": {
+        "cursor": [
+          -77,
+          150
+        ],
+        "input": [
+          -436.0,
+          471.0
+        ],
+        "output": [
+          -4,
+          3
+        ]
+      },
+      "scalars": [
+        129,
+        2,
+        63
+      ],
+      "stat_key": "attn7.qq",
+      "table_sizes": [
+        64
+      ]
+    },
+    "mismatches": 0,
+    "name": "attn_7_qq",
+    "passed": true
+  },
+  {
+    "elements": 37632,
+    "kind": "requant_table",
+    "metadata": {
+      "input_summary": {
+        "count": 37632,
+        "max": 228,
+        "mean": -2.385708971088435,
+        "min": -244
+      },
+      "input_type": [
+        "signed",
+        10
+      ],
+      "output_summary": {
+        "count": 37632,
+        "max": 3,
+        "mean": -0.07451105442176871,
+        "min": -4
+      },
+      "output_type": [
+        "signed",
+        3
+      ],
+      "range": {
+        "cursor": [
+          -65,
+          115
+        ],
+        "input": [
+          -373.0,
+          349.0
+        ],
+        "output": [
+          -4,
+          3
+        ]
+      },
+      "scalars": [
+        113,
+        2,
+        63
+      ],
+      "stat_key": "attn7.vq",
+      "table_sizes": [
+        64
+      ]
+    },
+    "mismatches": 0,
+    "name": "attn_7_vq",
+    "passed": true
+  },
+  {
+    "elements": 37632,
+    "kind": "requant_table",
+    "metadata": {
+      "input_summary": {
+        "count": 37632,
+        "max": 174,
+        "mean": -0.9807079081632653,
+        "min": -202
+      },
+      "input_type": [
+        "signed",
+        10
+      ],
+      "output_summary": {
+        "count": 37632,
+        "max": 3,
+        "mean": -0.0022587159863945577,
+        "min": -4
+      },
+      "output_type": [
+        "signed",
+        3
+      ],
+      "range": {
+        "cursor": [
+          -75,
+          103
+        ],
+        "input": [
+          -405.0,
+          307.0
+        ],
+        "output": [
+          -4,
+          3
+        ]
+      },
+      "scalars": [
+        107,
+        2,
+        63
+      ],
+      "stat_key": "attn8.aq",
+      "table_sizes": [
+        64
+      ]
+    },
+    "mismatches": 0,
+    "name": "attn_8_aq",
+    "passed": true
+  },
+  {
+    "elements": 37632,
+    "kind": "requant_table",
+    "metadata": {
+      "input_summary": {
+        "count": 37632,
+        "max": 252,
+        "mean": 0.17389455782312926,
+        "min": -243
+      },
+      "input_type": [
+        "signed",
+        10
+      ],
+      "output_summary": {
+        "count": 37632,
+        "max": 3,
+        "mean": -0.08822278911564625,
+        "min": -4
+      },
+      "output_type": [
+        "signed",
+        3
+      ],
+      "range": {
+        "cursor": [
+          -72,
+          106
+        ],
+        "input": [
+          -367.0,
+          345.0
+        ],
+        "output": [
+          -4,
+          3
+        ]
+      },
+      "scalars": [
+        80,
+        2,
+        63
+      ],
+      "stat_key": "attn8.kq",
+      "table_sizes": [
+        64
+      ]
+    },
+    "mismatches": 0,
+    "name": "attn_8_kq",
+    "passed": true
+  },
+  {
+    "elements": 37632,
+    "kind": "requant_table",
+    "metadata": {
+      "input_summary": {
+        "count": 37632,
+        "max": 306,
+        "mean": -1.5136851615646258,
+        "min": -288
+      },
+      "input_type": [
+        "signed",
+        10
+      ],
+      "output_summary": {
+        "count": 37632,
+        "max": 3,
+        "mean": -0.06420068027210885,
+        "min": -4
+      },
+      "output_type": [
+        "signed",
+        3
+      ],
+      "range": {
+        "cursor": [
+          -85,
+          137
+        ],
+        "input": [
+          -447.0,
+          442.0
+        ],
+        "output": [
+          -4,
+          3
+        ]
+      },
+      "scalars": [
+        109,
+        2,
+        63
+      ],
+      "stat_key": "attn8.qq",
+      "table_sizes": [
+        64
+      ]
+    },
+    "mismatches": 0,
+    "name": "attn_8_qq",
+    "passed": true
+  },
+  {
+    "elements": 37632,
+    "kind": "requant_table",
+    "metadata": {
+      "input_summary": {
+        "count": 37632,
+        "max": 210,
+        "mean": 0.48636798469387754,
+        "min": -206
+      },
+      "input_type": [
+        "signed",
+        10
+      ],
+      "output_summary": {
+        "count": 37632,
+        "max": 3,
+        "mean": 0.0024713010204081634,
+        "min": -4
+      },
+      "output_type": [
+        "signed",
+        3
+      ],
+      "range": {
+        "cursor": [
+          -59,
+          108
+        ],
+        "input": [
+          -344.0,
+          321.0
+        ],
+        "output": [
+          -4,
+          3
+        ]
+      },
+      "scalars": [
+        111,
+        2,
+        63
+      ],
+      "stat_key": "attn8.vq",
+      "table_sizes": [
+        64
+      ]
+    },
+    "mismatches": 0,
+    "name": "attn_8_vq",
+    "passed": true
+  },
+  {
+    "elements": 37632,
+    "kind": "requant_table",
+    "metadata": {
+      "input_summary": {
+        "count": 37632,
+        "max": 271,
+        "mean": 0.48947704081632654,
+        "min": -314
+      },
+      "input_type": [
+        "signed",
+        11
+      ],
+      "output_summary": {
+        "count": 37632,
+        "max": 3,
+        "mean": -0.009088010204081632,
+        "min": -4
+      },
+      "output_type": [
+        "signed",
+        3
+      ],
+      "range": {
+        "cursor": [
+          -56,
+          82
+        ],
+        "input": [
+          -618.0,
+          486.0
+        ],
+        "output": [
+          -4,
+          3
+        ]
+      },
+      "scalars": [
+        174,
+        3,
+        63
+      ],
+      "stat_key": "attn9.aq",
+      "table_sizes": [
+        64
+      ]
+    },
+    "mismatches": 0,
+    "name": "attn_9_aq",
+    "passed": true
+  },
+  {
+    "elements": 37632,
+    "kind": "requant_table",
+    "metadata": {
+      "input_summary": {
+        "count": 37632,
+        "max": 302,
+        "mean": 2.520514455782313,
+        "min": -262
+      },
+      "input_type": [
+        "signed",
+        10
+      ],
+      "output_summary": {
+        "count": 37632,
+        "max": 3,
+        "mean": 0.023729804421768707,
+        "min": -4
+      },
+      "output_type": [
+        "signed",
+        3
+      ],
+      "range": {
+        "cursor": [
+          -75,
+          143
+        ],
+        "input": [
+          -394.0,
+          475.0
+        ],
+        "output": [
+          -4,
+          3
+        ]
+      },
+      "scalars": [
+        97,
+        2,
+        63
+      ],
+      "stat_key": "attn9.kq",
+      "table_sizes": [
+        64
+      ]
+    },
+    "mismatches": 0,
+    "name": "attn_9_kq",
+    "passed": true
+  },
+  {
+    "elements": 37632,
+    "kind": "requant_table",
+    "metadata": {
+      "input_summary": {
+        "count": 37632,
+        "max": 555,
+        "mean": -2.1096673044217686,
+        "min": -536
+      },
+      "input_type": [
+        "signed",
+        11
+      ],
+      "output_summary": {
+        "count": 37632,
+        "max": 3,
+        "mean": -0.0896577380952381,
+        "min": -4
+      },
+      "output_type": [
+        "signed",
+        3
+      ],
+      "range": {
+        "cursor": [
+          -75,
+          109
+        ],
+        "input": [
+          -745.0,
+          724.0
+        ],
+        "output": [
+          -4,
+          3
+        ]
+      },
+      "scalars": [
+        152,
+        3,
+        63
+      ],
+      "stat_key": "attn9.qq",
+      "table_sizes": [
+        64
+      ]
+    },
+    "mismatches": 0,
+    "name": "attn_9_qq",
+    "passed": true
+  },
+  {
+    "elements": 37632,
+    "kind": "requant_table",
+    "metadata": {
+      "input_summary": {
+        "count": 37632,
+        "max": 224,
+        "mean": -2.487510629251701,
+        "min": -212
+      },
+      "input_type": [
+        "signed",
+        10
+      ],
+      "output_summary": {
+        "count": 37632,
+        "max": 3,
+        "mean": -0.07169430272108844,
+        "min": -4
+      },
+      "output_type": [
+        "signed",
+        3
+      ],
+      "range": {
+        "cursor": [
+          -58,
+          105
+        ],
+        "input": [
+          -339.0,
+          313.0
+        ],
+        "output": [
+          -4,
+          3
+        ]
+      },
+      "scalars": [
+        107,
+        2,
+        63
+      ],
+      "stat_key": "attn9.vq",
+      "table_sizes": [
+        64
+      ]
+    },
+    "mismatches": 0,
+    "name": "attn_9_vq",
+    "passed": true
+  },
+  {
+    "elements": 150528,
+    "kind": "gelu_requant_table",
+    "metadata": {
+      "input_summary": {
+        "count": 150528,
+        "max": 514,
+        "mean": -34.14043234481292,
+        "min": -440
+      },
+      "input_type": [
+        "signed",
+        11
+      ],
+      "output_summary": {
+        "count": 150528,
+        "max": 7,
+        "mean": 1.2026466836734695,
+        "min": 0
+      },
+      "output_type": [
+        "unsigned",
+        3
+      ],
+      "range": {
+        "cursor": [
+          -341,
+          397
+        ],
+        "input": [
+          -758.0,
+          718.0
+        ],
+        "output": [
+          0,
+          7
+        ]
+      },
+      "scalars": [
+        76,
+        1,
+        63
+      ],
+      "stat_key": "mlp0.geluq",
+      "table_sizes": [
+        64
+      ]
+    },
+    "mismatches": 0,
+    "name": "mlp_0_geluq",
+    "passed": true
+  },
+  {
+    "elements": 150528,
+    "kind": "gelu_requant_table",
+    "metadata": {
+      "input_summary": {
+        "count": 150528,
+        "max": 175,
+        "mean": -66.95268654336735,
+        "min": -357
+      },
+      "input_type": [
+        "signed",
+        11
+      ],
+      "output_summary": {
+        "count": 150528,
+        "max": 7,
+        "mean": 0.133078231292517,
+        "min": 0
+      },
+      "output_type": [
+        "unsigned",
+        3
+      ],
+      "range": {
+        "cursor": [
+          -266,
+          184
+        ],
+        "input": [
+          -530.0,
+          370.0
+        ],
+        "output": [
+          0,
+          7
+        ]
+      },
+      "scalars": [
+        -2,
+        1,
+        63
+      ],
+      "stat_key": "mlp10.geluq",
+      "table_sizes": [
+        64
+      ]
+    },
+    "mismatches": 0,
+    "name": "mlp_10_geluq",
+    "passed": true
+  },
+  {
+    "elements": 150528,
+    "kind": "gelu_requant_table",
+    "metadata": {
+      "input_summary": {
+        "count": 150528,
+        "max": 240,
+        "mean": -62.08238334396258,
+        "min": -325
+      },
+      "input_type": [
+        "signed",
+        11
+      ],
+      "output_summary": {
+        "count": 150528,
+        "max": 7,
+        "mean": 0.1861248405612245,
+        "min": 0
+      },
+      "output_type": [
+        "unsigned",
+        3
+      ],
+      "range": {
+        "cursor": [
+          -149,
+          105
+        ],
+        "input": [
+          -590.0,
+          425.0
+        ],
+        "output": [
+          0,
+          7
+        ]
+      },
+      "scalars": [
+        -5,
+        2,
+        63
+      ],
+      "stat_key": "mlp11.geluq",
+      "table_sizes": [
+        64
+      ]
+    },
+    "mismatches": 0,
+    "name": "mlp_11_geluq",
+    "passed": true
+  },
+  {
+    "elements": 150528,
+    "kind": "gelu_requant_table",
+    "metadata": {
+      "input_summary": {
+        "count": 150528,
+        "max": 403,
+        "mean": -41.29413796768708,
+        "min": -433
+      },
+      "input_type": [
+        "signed",
+        11
+      ],
+      "output_summary": {
+        "count": 150528,
+        "max": 7,
+        "mean": 0.7629544005102041,
+        "min": 0
+      },
+      "output_type": [
+        "unsigned",
+        3
+      ],
+      "range": {
+        "cursor": [
+          -185,
+          206
+        ],
+        "input": [
+          -831.0,
+          733.0
+        ],
+        "output": [
+          0,
+          7
+        ]
+      },
+      "scalars": [
+        94,
+        2,
+        63
+      ],
+      "stat_key": "mlp1.geluq",
+      "table_sizes": [
+        64
+      ]
+    },
+    "mismatches": 0,
+    "name": "mlp_1_geluq",
+    "passed": true
+  },
+  {
+    "elements": 150528,
+    "kind": "gelu_requant_table",
+    "metadata": {
+      "input_summary": {
+        "count": 150528,
+        "max": 196,
+        "mean": -45.87293393920068,
+        "min": -370
+      },
+      "input_type": [
+        "signed",
+        11
+      ],
+      "output_summary": {
+        "count": 150528,
+        "max": 7,
+        "mean": 0.7014243197278912,
+        "min": 0
+      },
+      "output_type": [
+        "unsigned",
+        3
+      ],
+      "range": {
+        "cursor": [
+          -209,
+          249
+        ],
+        "input": [
+          -948.0,
+          883.0
+        ],
+        "output": [
+          0,
+          7
+        ]
+      },
+      "scalars": [
+        114,
+        2,
+        63
+      ],
+      "stat_key": "mlp2.geluq",
+      "table_sizes": [
+        64
+      ]
+    },
+    "mismatches": 0,
+    "name": "mlp_2_geluq",
+    "passed": true
+  },
+  {
+    "elements": 150528,
+    "kind": "gelu_requant_table",
+    "metadata": {
+      "input_summary": {
+        "count": 150528,
+        "max": 169,
+        "mean": -58.863699776785715,
+        "min": -317
+      },
+      "input_type": [
+        "signed",
+        11
+      ],
+      "output_summary": {
+        "count": 150528,
+        "max": 7,
+        "mean": 0.6297698767006803,
+        "min": 0
+      },
+      "output_type": [
+        "unsigned",
+        3
+      ],
+      "range": {
+        "cursor": [
+          -119,
+          139
+        ],
+        "input": [
+          -591.0,
+          443.0
+        ],
+        "output": [
+          0,
+          7
+        ]
+      },
+      "scalars": [
+        116,
+        2,
+        63
+      ],
+      "stat_key": "mlp3.geluq",
+      "table_sizes": [
+        64
+      ]
+    },
+    "mismatches": 0,
+    "name": "mlp_3_geluq",
+    "passed": true
+  },
+  {
+    "elements": 150528,
+    "kind": "gelu_requant_table",
+    "metadata": {
+      "input_summary": {
+        "count": 150528,
+        "max": 383,
+        "mean": -66.30768362032313,
+        "min": -344
+      },
+      "input_type": [
+        "signed",
+        11
+      ],
+      "output_summary": {
+        "count": 150528,
+        "max": 7,
+        "mean": 0.6257506909013606,
+        "min": 0
+      },
+      "output_type": [
+        "unsigned",
+        3
+      ],
+      "range": {
+        "cursor": [
+          -97,
+          174
+        ],
+        "input": [
+          -499.0,
+          587.0
+        ],
+        "output": [
+          0,
+          7
+        ]
+      },
+      "scalars": [
+        112,
+        2,
+        63
+      ],
+      "stat_key": "mlp4.geluq",
+      "table_sizes": [
+        64
+      ]
+    },
+    "mismatches": 0,
+    "name": "mlp_4_geluq",
+    "passed": true
+  },
+  {
+    "elements": 150528,
+    "kind": "gelu_requant_table",
+    "metadata": {
+      "input_summary": {
+        "count": 150528,
+        "max": 521,
+        "mean": -66.55644796981292,
+        "min": -292
+      },
+      "input_type": [
+        "signed",
+        11
+      ],
+      "output_summary": {
+        "count": 150528,
+        "max": 7,
+        "mean": 0.6020474596088435,
+        "min": 0
+      },
+      "output_type": [
+        "unsigned",
+        3
+      ],
+      "range": {
+        "cursor": [
+          -95,
+          182
+        ],
+        "input": [
+          -488.0,
+          623.0
+        ],
+        "output": [
+          0,
+          7
+        ]
+      },
+      "scalars": [
+        108,
+        2,
+        63
+      ],
+      "stat_key": "mlp5.geluq",
+      "table_sizes": [
+        64
+      ]
+    },
+    "mismatches": 0,
+    "name": "mlp_5_geluq",
+    "passed": true
+  },
+  {
+    "elements": 150528,
+    "kind": "gelu_requant_table",
+    "metadata": {
+      "input_summary": {
+        "count": 150528,
+        "max": 423,
+        "mean": -64.37323953018708,
+        "min": -356
+      },
+      "input_type": [
+        "signed",
+        11
+      ],
+      "output_summary": {
+        "count": 150528,
+        "max": 7,
+        "mean": 0.5594773065476191,
+        "min": 0
+      },
+      "output_type": [
+        "unsigned",
+        3
+      ],
+      "range": {
+        "cursor": [
+          -88,
+          159
+        ],
+        "input": [
+          -458.0,
+          529.0
+        ],
+        "output": [
+          0,
+          7
+        ]
+      },
+      "scalars": [
+        107,
+        2,
+        63
+      ],
+      "stat_key": "mlp6.geluq",
+      "table_sizes": [
+        64
+      ]
+    },
+    "mismatches": 0,
+    "name": "mlp_6_geluq",
+    "passed": true
+  },
+  {
+    "elements": 150528,
+    "kind": "gelu_requant_table",
+    "metadata": {
+      "input_summary": {
+        "count": 150528,
+        "max": 338,
+        "mean": -58.789726828231295,
+        "min": -386
+      },
+      "input_type": [
+        "signed",
+        10
+      ],
+      "output_summary": {
+        "count": 150528,
+        "max": 7,
+        "mean": 0.49832589285714285,
+        "min": 0
+      },
+      "output_type": [
+        "unsigned",
+        3
+      ],
+      "range": {
+        "cursor": [
+          -91,
+          120
+        ],
+        "input": [
+          -468.0,
+          376.0
+        ],
+        "output": [
+          0,
+          7
+        ]
+      },
+      "scalars": [
+        105,
+        2,
+        63
+      ],
+      "stat_key": "mlp7.geluq",
+      "table_sizes": [
+        64
+      ]
+    },
+    "mismatches": 0,
+    "name": "mlp_7_geluq",
+    "passed": true
+  },
+  {
+    "elements": 150528,
+    "kind": "gelu_requant_table",
+    "metadata": {
+      "input_summary": {
+        "count": 150528,
+        "max": 415,
+        "mean": -71.37482727465986,
+        "min": -298
+      },
+      "input_type": [
+        "signed",
+        10
+      ],
+      "output_summary": {
+        "count": 150528,
+        "max": 7,
+        "mean": 0.47343351403061223,
+        "min": 0
+      },
+      "output_type": [
+        "unsigned",
+        3
+      ],
+      "range": {
+        "cursor": [
+          -81,
+          141
+        ],
+        "input": [
+          -430.0,
+          458.0
+        ],
+        "output": [
+          0,
+          7
+        ]
+      },
+      "scalars": [
+        109,
+        2,
+        63
+      ],
+      "stat_key": "mlp8.geluq",
+      "table_sizes": [
+        64
+      ]
+    },
+    "mismatches": 0,
+    "name": "mlp_8_geluq",
+    "passed": true
+  },
+  {
+    "elements": 150528,
+    "kind": "gelu_requant_table",
+    "metadata": {
+      "input_summary": {
+        "count": 150528,
+        "max": 200,
+        "mean": -65.57228555484694,
+        "min": -288
+      },
+      "input_type": [
+        "signed",
+        10
+      ],
+      "output_summary": {
+        "count": 150528,
+        "max": 7,
+        "mean": 0.3974941539115646,
+        "min": 0
+      },
+      "output_type": [
+        "unsigned",
+        3
+      ],
+      "range": {
+        "cursor": [
+          -86,
+          106
+        ],
+        "input": [
+          -452.0,
+          314.0
+        ],
+        "output": [
+          0,
+          7
+        ]
+      },
+      "scalars": [
+        110,
+        2,
+        63
+      ],
+      "stat_key": "mlp9.geluq",
+      "table_sizes": [
+        64
+      ]
+    },
+    "mismatches": 0,
+    "name": "mlp_9_geluq",
+    "passed": true
+  },
+  {
+    "elements": 37632,
+    "kind": "layernorm_rsqrt_table",
+    "metadata": {
+      "input_summary": {
+        "count": 37632,
+        "max": 1425,
+        "mean": -0.6625478316326531,
+        "min": -1205
+      },
+      "input_type": [
+        "signed",
+        13
+      ],
+      "output_summary": {
+        "count": 37632,
+        "max": 3,
+        "mean": -0.002976190476190476,
+        "min": -4
+      },
+      "output_type": [
+        "signed",
+        3
+      ],
+      "range": {
+        "affine": [
+          -74383547398,
+          83346821618
+        ],
+        "cursor": [
+          0,
+          84
+        ],
+        "divc": [
+          -688657542,
+          699536569
+        ],
+        "input": [
+          -2638.0,
+          2671.0
+        ],
+        "lnb_m": [
+          -15527051264,
+          12237930496
+        ],
+        "lnw_m": [
+          8557,
+          38274
+        ],
+        "mu": [
+          -82,
+          83
+        ],
+        "output": [
+          -4,
+          3
+        ],
+        "rsqrt": [
+          534,
+          2503
+        ],
+        "shift": [
+          -35,
+          38
+        ],
+        "sum": [
+          -15762,
+          15915
+        ],
+        "var": [
+          2104977,
+          46153104
+        ]
+      },
+      "scalars": [
+        43691,
+        23,
+        -1842833,
+        19,
+        127,
+        31,
+        3
+      ],
+      "stat_key": "attn0.lnq",
+      "table_sizes": [
+        192,
+        192,
+        128
+      ]
+    },
+    "mismatches": 0,
+    "name": "attn_0_lnq",
+    "passed": true
+  },
+  {
+    "elements": 37632,
+    "kind": "layernorm_rsqrt_table",
+    "metadata": {
+      "input_summary": {
+        "count": 37632,
+        "max": 2143,
+        "mean": 45.982408588435376,
+        "min": -1783
+      },
+      "input_type": [
+        "signed",
+        13
+      ],
+      "output_summary": {
+        "count": 37632,
+        "max": 3,
+        "mean": -0.007148171768707483,
+        "min": -4
+      },
+      "output_type": [
+        "signed",
+        3
+      ],
+      "range": {
+        "affine": [
+          -48113259280,
+          52478508978
+        ],
+        "cursor": [
+          0,
+          91
+        ],
+        "divc": [
+          -1050637477,
+          1652917880
+        ],
+        "input": [
+          -2443.0,
+          2894.0
+        ],
+        "lnb_m": [
+          -12584484864,
+          17003446272
+        ],
+        "lnw_m": [
+          11271,
+          38720
+        ],
+        "mu": [
+          -125,
+          197
+        ],
+        "output": [
+          -4,
+          3
+        ],
+        "rsqrt": [
+          723,
+          3102
+        ],
+        "shift": [
+          -12,
+          12
+        ],
+        "sum": [
+          -24047,
+          37736
+        ],
+        "var": [
+          1382398,
+          25136336
+        ]
+      },
+      "scalars": [
+        43691,
+        23,
+        -1239294,
+        18,
+        127,
+        32,
+        3
+      ],
+      "stat_key": "attn10.lnq",
+      "table_sizes": [
+        192,
+        192,
+        128
+      ]
+    },
+    "mismatches": 0,
+    "name": "attn_10_lnq",
+    "passed": true
+  },
+  {
+    "elements": 37632,
+    "kind": "layernorm_rsqrt_table",
+    "metadata": {
+      "input_summary": {
+        "count": 37632,
+        "max": 1140,
+        "mean": 38.38270620748299,
+        "min": -1049
+      },
+      "input_type": [
+        "signed",
+        13
+      ],
+      "output_summary": {
+        "count": 37632,
+        "max": 3,
+        "mean": 0.008343962585034014,
+        "min": -4
+      },
+      "output_type": [
+        "signed",
+        3
+      ],
+      "range": {
+        "affine": [
+          -22754733760,
+          25817717993
+        ],
+        "cursor": [
+          0,
+          77
+        ],
+        "divc": [
+          -631378641,
+          1226493720
+        ],
+        "input": [
+          -1609.0,
+          2063.0
+        ],
+        "lnb_m": [
+          -6028525568,
+          5420089344
+        ],
+        "lnw_m": [
+          10130,
+          38042
+        ],
+        "mu": [
+          -75,
+          146
+        ],
+        "output": [
+          -4,
+          3
+        ],
+        "rsqrt": [
+          552,
+          2138
+        ],
+        "shift": [
+          -11,
+          12
+        ],
+        "sum": [
+          -14451,
+          27976
+        ],
+        "var": [
+          701553,
+          10754157
+        ]
+      },
+      "scalars": [
+        43691,
+        23,
+        -655549,
+        17,
+        127,
+        31,
+        3
+      ],
+      "stat_key": "attn11.lnq",
+      "table_sizes": [
+        192,
+        192,
+        128
+      ]
+    },
+    "mismatches": 0,
+    "name": "attn_11_lnq",
+    "passed": true
+  },
+  {
+    "elements": 37632,
+    "kind": "layernorm_rsqrt_table",
+    "metadata": {
+      "input_summary": {
+        "count": 37632,
+        "max": 2631,
+        "mean": 32.61806441326531,
+        "min": -2548
+      },
+      "input_type": [
+        "signed",
+        13
+      ],
+      "output_summary": {
+        "count": 37632,
+        "max": 3,
+        "mean": -0.05325255102040816,
+        "min": -4
+      },
+      "output_type": [
+        "signed",
+        3
+      ],
+      "range": {
+        "affine": [
+          -119498747024,
+          130881686646
+        ],
+        "cursor": [
+          0,
+          92
+        ],
+        "divc": [
+          -1205172544,
+          2136708323
+        ],
+        "input": [
+          -3718.0,
+          3869.0
+        ],
+        "lnb_m": [
+          -64873299968,
+          68035805184
+        ],
+        "lnw_m": [
+          2010,
+          60351
+        ],
+        "mu": [
+          -144,
+          254
+        ],
+        "output": [
+          -4,
+          3
+        ],
+        "rsqrt": [
+          707,
+          2406
+        ],
+        "shift": [
+          -14,
+          15
+        ],
+        "sum": [
+          -27584,
+          48809
+        ],
+        "var": [
+          9061475,
+          105266736
+        ]
+      },
+      "scalars": [
+        43691,
+        23,
+        -8585116,
+        20,
+        127,
+        33,
+        3
+      ],
+      "stat_key": "attn1.lnq",
+      "table_sizes": [
+        192,
+        192,
+        128
+      ]
+    },
+    "mismatches": 0,
+    "name": "attn_1_lnq",
+    "passed": true
+  },
+  {
+    "elements": 37632,
+    "kind": "layernorm_rsqrt_table",
+    "metadata": {
+      "input_summary": {
+        "count": 37632,
+        "max": 2662,
+        "mean": 40.337771045918366,
+        "min": -2673
+      },
+      "input_type": [
+        "signed",
+        13
+      ],
+      "output_summary": {
+        "count": 37632,
+        "max": 3,
+        "mean": -0.09523809523809523,
+        "min": -4
+      },
+      "output_type": [
+        "signed",
+        3
+      ],
+      "range": {
+        "affine": [
+          -99852011467,
+          110504191208
+        ],
+        "cursor": [
+          0,
+          116
+        ],
+        "divc": [
+          -1578730594,
+          2472167821
+        ],
+        "input": [
+          -3062.0,
+          3063.0
+        ],
+        "lnb_m": [
+          -54173106176,
+          70931972096
+        ],
+        "lnw_m": [
+          7059,
+          49960
+        ],
+        "mu": [
+          -188,
+          294
+        ],
+        "output": [
+          -4,
+          3
+        ],
+        "rsqrt": [
+          886,
+          2878
+        ],
+        "shift": [
+          -12,
+          12
+        ],
+        "sum": [
+          -36134,
+          56487
+        ],
+        "var": [
+          6298236,
+          66995060
+        ]
+      },
+      "scalars": [
+        43691,
+        23,
+        -6105211,
+        19,
+        127,
+        33,
+        3
+      ],
+      "stat_key": "attn2.lnq",
+      "table_sizes": [
+        192,
+        192,
+        128
+      ]
+    },
+    "mismatches": 0,
+    "name": "attn_2_lnq",
+    "passed": true
+  },
+  {
+    "elements": 37632,
+    "kind": "layernorm_rsqrt_table",
+    "metadata": {
+      "input_summary": {
+        "count": 37632,
+        "max": 2519,
+        "mean": 37.578151573129254,
+        "min": -2426
+      },
+      "input_type": [
+        "signed",
+        13
+      ],
+      "output_summary": {
+        "count": 37632,
+        "max": 3,
+        "mean": -0.09497236394557823,
+        "min": -4
+      },
+      "output_type": [
+        "signed",
+        3
+      ],
+      "range": {
+        "affine": [
+          -143188038856,
+          160717275444
+        ],
+        "cursor": [
+          0,
+          126
+        ],
+        "divc": [
+          -1570735141,
+          2388980157
+        ],
+        "input": [
+          -2661.0,
+          2702.0
+        ],
+        "lnb_m": [
+          -92817326080,
+          102356746240
+        ],
+        "lnw_m": [
+          12850,
+          61399
+        ],
+        "mu": [
+          -187,
+          284
+        ],
+        "output": [
+          -4,
+          3
+        ],
+        "rsqrt": [
+          1171,
+          3121
+        ],
+        "shift": [
+          -17,
+          18
+        ],
+        "sum": [
+          -35951,
+          54583
+        ],
+        "var": [
+          5515807,
+          38413536
+        ]
+      },
+      "scalars": [
+        43691,
+        23,
+        -5285370,
+        18,
+        127,
+        33,
+        3
+      ],
+      "stat_key": "attn3.lnq",
+      "table_sizes": [
+        192,
+        192,
+        128
+      ]
+    },
+    "mismatches": 0,
+    "name": "attn_3_lnq",
+    "passed": true
+  },
+  {
+    "elements": 37632,
+    "kind": "layernorm_rsqrt_table",
+    "metadata": {
+      "input_summary": {
+        "count": 37632,
+        "max": 2690,
+        "mean": 43.567256590136054,
+        "min": -2209
+      },
+      "input_type": [
+        "signed",
+        13
+      ],
+      "output_summary": {
+        "count": 37632,
+        "max": 3,
+        "mean": -0.07222576530612244,
+        "min": -4
+      },
+      "output_type": [
+        "signed",
+        3
+      ],
+      "range": {
+        "affine": [
+          -132579862088,
+          161921026080
+        ],
+        "cursor": [
+          0,
+          88
+        ],
+        "divc": [
+          -1586463901,
+          2361367445
+        ],
+        "input": [
+          -2685.0,
+          2846.0
+        ],
+        "lnb_m": [
+          -71221903360,
+          79504080896
+        ],
+        "lnw_m": [
+          12422,
+          62408
+        ],
+        "mu": [
+          -189,
+          281
+        ],
+        "output": [
+          -4,
+          3
+        ],
+        "rsqrt": [
+          1355,
+          3058
+        ],
+        "shift": [
+          -16,
+          18
+        ],
+        "sum": [
+          -36311,
+          53951
+        ],
+        "var": [
+          5559542,
+          28718764
+        ]
+      },
+      "scalars": [
+        43691,
+        23,
+        -5511642,
+        18,
+        127,
+        33,
+        3
+      ],
+      "stat_key": "attn4.lnq",
+      "table_sizes": [
+        192,
+        192,
+        128
+      ]
+    },
+    "mismatches": 0,
+    "name": "attn_4_lnq",
+    "passed": true
+  },
+  {
+    "elements": 37632,
+    "kind": "layernorm_rsqrt_table",
+    "metadata": {
+      "input_summary": {
+        "count": 37632,
+        "max": 2976,
+        "mean": 58.958705357142854,
+        "min": -2162
+      },
+      "input_type": [
+        "signed",
+        13
+      ],
+      "output_summary": {
+        "count": 37632,
+        "max": 3,
+        "mean": -0.07684948979591837,
+        "min": -4
+      },
+      "output_type": [
+        "signed",
+        3
+      ],
+      "range": {
+        "affine": [
+          -115225347973,
+          151895268794
+        ],
+        "cursor": [
+          0,
+          85
+        ],
+        "divc": [
+          -1662573623,
+          2458186701
+        ],
+        "input": [
+          -2654.0,
+          3224.0
+        ],
+        "lnb_m": [
+          -70235717632,
+          88958566400
+        ],
+        "lnw_m": [
+          12017,
+          55555
+        ],
+        "mu": [
+          -198,
+          293
+        ],
+        "output": [
+          -4,
+          3
+        ],
+        "rsqrt": [
+          1370,
+          3017
+        ],
+        "shift": [
+          -14,
+          17
+        ],
+        "sum": [
+          -38053,
+          56167
+        ],
+        "var": [
+          5778375,
+          28041348
+        ]
+      },
+      "scalars": [
+        43691,
+        23,
+        -5666093,
+        18,
+        127,
+        33,
+        3
+      ],
+      "stat_key": "attn5.lnq",
+      "table_sizes": [
+        192,
+        192,
+        128
+      ]
+    },
+    "mismatches": 0,
+    "name": "attn_5_lnq",
+    "passed": true
+  },
+  {
+    "elements": 37632,
+    "kind": "layernorm_rsqrt_table",
+    "metadata": {
+      "input_summary": {
+        "count": 37632,
+        "max": 2709,
+        "mean": 59.846752763605444,
+        "min": -1745
+      },
+      "input_type": [
+        "signed",
+        13
+      ],
+      "output_summary": {
+        "count": 37632,
+        "max": 3,
+        "mean": -0.06861181972789115,
+        "min": -4
+      },
+      "output_type": [
+        "signed",
+        3
+      ],
+      "range": {
+        "affine": [
+          -109414127904,
+          135175138422
+        ],
+        "cursor": [
+          0,
+          123
+        ],
+        "divc": [
+          -1487547477,
+          2206657614
+        ],
+        "input": [
+          -2936.0,
+          3226.0
+        ],
+        "lnb_m": [
+          -63732449280,
+          85217247232
+        ],
+        "lnw_m": [
+          14713,
+          50832
+        ],
+        "mu": [
+          -177,
+          263
+        ],
+        "output": [
+          -4,
+          3
+        ],
+        "rsqrt": [
+          1205,
+          3602
+        ],
+        "shift": [
+          -13,
+          15
+        ],
+        "sum": [
+          -34047,
+          50410
+        ],
+        "var": [
+          4126170,
+          36206792
+        ]
+      },
+      "scalars": [
+        43691,
+        23,
+        -3935884,
+        18,
+        127,
+        33,
+        3
+      ],
+      "stat_key": "attn6.lnq",
+      "table_sizes": [
+        192,
+        192,
+        128
+      ]
+    },
+    "mismatches": 0,
+    "name": "attn_6_lnq",
+    "passed": true
+  },
+  {
+    "elements": 37632,
+    "kind": "layernorm_rsqrt_table",
+    "metadata": {
+      "input_summary": {
+        "count": 37632,
+        "max": 2951,
+        "mean": 59.00693558673469,
+        "min": -2115
+      },
+      "input_type": [
+        "signed",
+        13
+      ],
+      "output_summary": {
+        "count": 37632,
+        "max": 3,
+        "mean": -0.04450999149659864,
+        "min": -4
+      },
+      "output_type": [
+        "signed",
+        3
+      ],
+      "range": {
+        "affine": [
+          -55715058112,
+          67210218986
+        ],
+        "cursor": [
+          0,
+          72
+        ],
+        "divc": [
+          -1313657297,
+          2022194212
+        ],
+        "input": [
+          -3156.0,
+          3482.0
+        ],
+        "lnb_m": [
+          -21693988864,
+          27075280896
+        ],
+        "lnw_m": [
+          10925,
+          45972
+        ],
+        "mu": [
+          -157,
+          241
+        ],
+        "output": [
+          -4,
+          3
+        ],
+        "rsqrt": [
+          568,
+          2077
+        ],
+        "shift": [
+          -13,
+          15
+        ],
+        "sum": [
+          -30067,
+          46188
+        ],
+        "var": [
+          2983279,
+          40826668
+        ]
+      },
+      "scalars": [
+        43691,
+        23,
+        -2793443,
+        19,
+        127,
+        32,
+        3
+      ],
+      "stat_key": "attn7.lnq",
+      "table_sizes": [
+        192,
+        192,
+        128
+      ]
+    },
+    "mismatches": 0,
+    "name": "attn_7_lnq",
+    "passed": true
+  },
+  {
+    "elements": 37632,
+    "kind": "layernorm_rsqrt_table",
+    "metadata": {
+      "input_summary": {
+        "count": 37632,
+        "max": 2907,
+        "mean": 59.54326105442177,
+        "min": -2195
+      },
+      "input_type": [
+        "signed",
+        13
+      ],
+      "output_summary": {
+        "count": 37632,
+        "max": 3,
+        "mean": -0.039965986394557826,
+        "min": -4
+      },
+      "output_type": [
+        "signed",
+        3
+      ],
+      "range": {
+        "affine": [
+          -50132075528,
+          69555655612
+        ],
+        "cursor": [
+          0,
+          73
+        ],
+        "divc": [
+          -1308283304,
+          1913403622
+        ],
+        "input": [
+          -3062.0,
+          3452.0
+        ],
+        "lnb_m": [
+          -19730792448,
+          27756068864
+        ],
+        "lnw_m": [
+          11708,
+          43008
+        ],
+        "mu": [
+          -156,
+          228
+        ],
+        "output": [
+          -4,
+          3
+        ],
+        "rsqrt": [
+          569,
+          2338
+        ],
+        "shift": [
+          -12,
+          16
+        ],
+        "sum": [
+          -29944,
+          43698
+        ],
+        "var": [
+          2407461,
+          40893168
+        ]
+      },
+      "scalars": [
+        43691,
+        23,
+        -2150450,
+        19,
+        127,
+        32,
+        3
+      ],
+      "stat_key": "attn8.lnq",
+      "table_sizes": [
+        192,
+        192,
+        128
+      ]
+    },
+    "mismatches": 0,
+    "name": "attn_8_lnq",
+    "passed": true
+  },
+  {
+    "elements": 37632,
+    "kind": "layernorm_rsqrt_table",
+    "metadata": {
+      "input_summary": {
+        "count": 37632,
+        "max": 2528,
+        "mean": 49.18319515306123,
+        "min": -2032
+      },
+      "input_type": [
+        "signed",
+        13
+      ],
+      "output_summary": {
+        "count": 37632,
+        "max": 3,
+        "mean": -0.017485119047619048,
+        "min": -4
+      },
+      "output_type": [
+        "signed",
+        3
+      ],
+      "range": {
+        "affine": [
+          -50468638716,
+          62828650282
+        ],
+        "cursor": [
+          0,
+          114
+        ],
+        "divc": [
+          -1242440967,
+          1753887781
+        ],
+        "input": [
+          -2731.0,
+          3121.0
+        ],
+        "lnb_m": [
+          -15323889664,
+          19631702016
+        ],
+        "lnw_m": [
+          9831,
+          40314
+        ],
+        "mu": [
+          -148,
+          209
+        ],
+        "output": [
+          -4,
+          3
+        ],
+        "rsqrt": [
+          645,
+          2731
+        ],
+        "shift": [
+          -12,
+          14
+        ],
+        "sum": [
+          -28437,
+          40047
+        ],
+        "var": [
+          1751263,
+          31691382
+        ]
+      },
+      "scalars": [
+        43691,
+        23,
+        -1637294,
+        18,
+        127,
+        32,
+        3
+      ],
+      "stat_key": "attn9.lnq",
+      "table_sizes": [
+        192,
+        192,
+        128
+      ]
+    },
+    "mismatches": 0,
+    "name": "attn_9_lnq",
+    "passed": true
+  },
+  {
+    "elements": 192,
+    "kind": "layernorm_rsqrt_table",
+    "metadata": {
+      "input_summary": {
+        "count": 192,
+        "max": 795,
+        "mean": 63.328125,
+        "min": -250
+      },
+      "input_type": [
+        "signed",
+        13
+      ],
+      "output_summary": {
+        "count": 192,
+        "max": 87,
+        "mean": 0.3489583333333333,
+        "min": -68
+      },
+      "output_type": [
+        "signed",
+        8
+      ],
+      "range": {
+        "affine": [
+          -27113728688,
+          23713503380
+        ],
+        "cursor": [
+          1,
+          61
+        ],
+        "divc": [
+          297710474,
+          814706045
+        ],
+        "input": [
+          -590.0,
+          2144.0
+        ],
+        "lnb_m": [
+          -12142379008,
+          5196087296
+        ],
+        "lnw_m": [
+          15546,
+          44542
+        ],
+        "mu": [
+          35,
+          97
+        ],
+        "output": [
+          -128,
+          127
+        ],
+        "rsqrt": [
+          614,
+          1961
+        ],
+        "shift": [
+          -203,
+          176
+        ],
+        "sum": [
+          6814,
+          18551
+        ],
+        "var": [
+          854765,
+          8728914
+        ]
+      },
+      "scalars": [
+        43691,
+        23,
+        -660994,
+        17,
+        127,
+        27,
+        8
+      ],
+      "stat_key": "head.lnq",
+      "table_sizes": [
+        192,
+        192,
+        128
+      ]
+    },
+    "mismatches": 0,
+    "name": "head_lnq",
+    "passed": true
+  },
+  {
+    "elements": 37632,
+    "kind": "layernorm_rsqrt_table",
+    "metadata": {
+      "input_summary": {
+        "count": 37632,
+        "max": 5353,
+        "mean": -0.8529974489795918,
+        "min": -4494
+      },
+      "input_type": [
+        "signed",
+        15
+      ],
+      "output_summary": {
+        "count": 37632,
+        "max": 3,
+        "mean": -0.20400191326530612,
+        "min": -4
+      },
+      "output_type": [
+        "signed",
+        3
+      ],
+      "range": {
+        "affine": [
+          -218642215216,
+          223459771264
+        ],
+        "cursor": [
+          0,
+          73
+        ],
+        "divc": [
+          -2209410179,
+          3314923520
+        ],
+        "input": [
+          -9535.0,
+          9878.0
+        ],
+        "lnb_m": [
+          -17602445312,
+          17289969664
+        ],
+        "lnw_m": [
+          -1640,
+          49720
+        ],
+        "mu": [
+          -263,
+          395
+        ],
+        "output": [
+          -4,
+          3
+        ],
+        "rsqrt": [
+          291,
+          2449
+        ],
+        "shift": [
+          -51,
+          52
+        ],
+        "sum": [
+          -50569,
+          75776
+        ],
+        "var": [
+          8521807,
+          621556288
+        ]
+      },
+      "scalars": [
+        43691,
+        23,
+        -4602380,
+        23,
+        127,
+        32,
+        3
+      ],
+      "stat_key": "mlp0.lnq",
+      "table_sizes": [
+        192,
+        192,
+        128
+      ]
+    },
+    "mismatches": 0,
+    "name": "mlp_0_lnq",
+    "passed": true
+  },
+  {
+    "elements": 37632,
+    "kind": "layernorm_rsqrt_table",
+    "metadata": {
+      "input_summary": {
+        "count": 37632,
+        "max": 1794,
+        "mean": 37.6843112244898,
+        "min": -1554
+      },
+      "input_type": [
+        "signed",
+        13
+      ],
+      "output_summary": {
+        "count": 37632,
+        "max": 3,
+        "mean": 0.006058673469387755,
+        "min": -4
+      },
+      "output_type": [
+        "signed",
+        3
+      ],
+      "range": {
+        "affine": [
+          -53882253808,
+          64643081354
+        ],
+        "cursor": [
+          0,
+          75
+        ],
+        "divc": [
+          -901651167,
+          1489120321
+        ],
+        "input": [
+          -2270.0,
+          2892.0
+        ],
+        "lnb_m": [
+          -27375697920,
+          13090160640
+        ],
+        "lnw_m": [
+          -10874,
+          42485
+        ],
+        "mu": [
+          -107,
+          177
+        ],
+        "output": [
+          -4,
+          3
+        ],
+        "rsqrt": [
+          798,
+          3558
+        ],
+        "shift": [
+          -13,
+          15
+        ],
+        "sum": [
+          -20637,
+          33987
+        ],
+        "var": [
+          1003635,
+          20654180
+        ]
+      },
+      "scalars": [
+        43691,
+        23,
+        -910942,
+        18,
+        127,
+        32,
+        3
+      ],
+      "stat_key": "mlp10.lnq",
+      "table_sizes": [
+        192,
+        192,
+        128
+      ]
+    },
+    "mismatches": 0,
+    "name": "mlp_10_lnq",
+    "passed": true
+  },
+  {
+    "elements": 37632,
+    "kind": "layernorm_rsqrt_table",
+    "metadata": {
+      "input_summary": {
+        "count": 37632,
+        "max": 1585,
+        "mean": 51.340747236394556,
+        "min": -1167
+      },
+      "input_type": [
+        "signed",
+        13
+      ],
+      "output_summary": {
+        "count": 37632,
+        "max": 3,
+        "mean": -0.09026892006802721,
+        "min": -4
+      },
+      "output_type": [
+        "signed",
+        3
+      ],
+      "range": {
+        "affine": [
+          -106458222986,
+          63579756932
+        ],
+        "cursor": [
+          0,
+          71
+        ],
+        "divc": [
+          -690711019,
+          1413185363
+        ],
+        "input": [
+          -1909.0,
+          3130.0
+        ],
+        "lnb_m": [
+          -37347131392,
+          11094720512
+        ],
+        "lnw_m": [
+          26431,
+          40182
+        ],
+        "mu": [
+          -82,
+          168
+        ],
+        "output": [
+          -4,
+          3
+        ],
+        "rsqrt": [
+          822,
+          3843
+        ],
+        "shift": [
+          -25,
+          14
+        ],
+        "sum": [
+          -15809,
+          32249
+        ],
+        "var": [
+          891146,
+          19595412
+        ]
+      },
+      "scalars": [
+        43691,
+        23,
+        -762143,
+        18,
+        127,
+        32,
+        3
+      ],
+      "stat_key": "mlp11.lnq",
+      "table_sizes": [
+        192,
+        192,
+        128
+      ]
+    },
+    "mismatches": 0,
+    "name": "mlp_11_lnq",
+    "passed": true
+  },
+  {
+    "elements": 37632,
+    "kind": "layernorm_rsqrt_table",
+    "metadata": {
+      "input_summary": {
+        "count": 37632,
+        "max": 3465,
+        "mean": 30.50061118197279,
+        "min": -3409
+      },
+      "input_type": [
+        "signed",
+        14
+      ],
+      "output_summary": {
+        "count": 37632,
+        "max": 3,
+        "mean": -0.14918154761904762,
+        "min": -4
+      },
+      "output_type": [
+        "signed",
+        3
+      ],
+      "range": {
+        "affine": [
+          -257955337556,
+          284100417202
+        ],
+        "cursor": [
+          0,
+          75
+        ],
+        "divc": [
+          -1475838289,
+          2945559806
+        ],
+        "input": [
+          -4148.0,
+          4456.0
+        ],
+        "lnb_m": [
+          -51050446848,
+          70201638912
+        ],
+        "lnw_m": [
+          10247,
+          64491
+        ],
+        "mu": [
+          -176,
+          351
+        ],
+        "output": [
+          -4,
+          3
+        ],
+        "rsqrt": [
+          569,
+          3109
+        ],
+        "shift": [
+          -31,
+          33
+        ],
+        "sum": [
+          -33779,
+          67322
+        ],
+        "var": [
+          5724651,
+          162561328
+        ]
+      },
+      "scalars": [
+        43691,
+        23,
+        -4409734,
+        21,
+        127,
+        33,
+        3
+      ],
+      "stat_key": "mlp1.lnq",
+      "table_sizes": [
+        192,
+        192,
+        128
+      ]
+    },
+    "mismatches": 0,
+    "name": "mlp_1_lnq",
+    "passed": true
+  },
+  {
+    "elements": 37632,
+    "kind": "layernorm_rsqrt_table",
+    "metadata": {
+      "input_summary": {
+        "count": 37632,
+        "max": 3549,
+        "mean": 48.55141900510204,
+        "min": -3721
+      },
+      "input_type": [
+        "signed",
+        14
+      ],
+      "output_summary": {
+        "count": 37632,
+        "max": 3,
+        "mean": -0.10666454081632654,
+        "min": -4
+      },
+      "output_type": [
+        "signed",
+        3
+      ],
+      "range": {
+        "affine": [
+          -159978813616,
+          174424112384
+        ],
+        "cursor": [
+          0,
+          102
+        ],
+        "divc": [
+          -2046267985,
+          3105687321
+        ],
+        "input": [
+          -4123.0,
+          4031.0
+        ],
+        "lnb_m": [
+          -44822429696,
+          55070687232
+        ],
+        "lnw_m": [
+          12027,
+          65247
+        ],
+        "mu": [
+          -244,
+          370
+        ],
+        "output": [
+          -4,
+          3
+        ],
+        "rsqrt": [
+          673,
+          2365
+        ],
+        "shift": [
+          -19,
+          20
+        ],
+        "sum": [
+          -46835,
+          70987
+        ],
+        "var": [
+          9525197,
+          115881296
+        ]
+      },
+      "scalars": [
+        43691,
+        23,
+        -8909606,
+        20,
+        127,
+        33,
+        3
+      ],
+      "stat_key": "mlp2.lnq",
+      "table_sizes": [
+        192,
+        192,
+        128
+      ]
+    },
+    "mismatches": 0,
+    "name": "mlp_2_lnq",
+    "passed": true
+  },
+  {
+    "elements": 37632,
+    "kind": "layernorm_rsqrt_table",
+    "metadata": {
+      "input_summary": {
+        "count": 37632,
+        "max": 2595,
+        "mean": 37.81077274659864,
+        "min": -2561
+      },
+      "input_type": [
+        "signed",
+        13
+      ],
+      "output_summary": {
+        "count": 37632,
+        "max": 3,
+        "mean": -0.0897640306122449,
+        "min": -4
+      },
+      "output_type": [
+        "signed",
+        3
+      ],
+      "range": {
+        "affine": [
+          -143181299284,
+          168739210006
+        ],
+        "cursor": [
+          0,
+          70
+        ],
+        "divc": [
+          -1617965112,
+          2422403772
+        ],
+        "input": [
+          -2915.0,
+          2807.0
+        ],
+        "lnb_m": [
+          -55395745792,
+          75396808704
+        ],
+        "lnw_m": [
+          14955,
+          60087
+        ],
+        "mu": [
+          -193,
+          288
+        ],
+        "output": [
+          -4,
+          3
+        ],
+        "rsqrt": [
+          1111,
+          2963
+        ],
+        "shift": [
+          -17,
+          19
+        ],
+        "sum": [
+          -37032,
+          55348
+        ],
+        "var": [
+          6046935,
+          42520460
+        ]
+      },
+      "scalars": [
+        43691,
+        23,
+        -5747680,
+        19,
+        127,
+        33,
+        3
+      ],
+      "stat_key": "mlp3.lnq",
+      "table_sizes": [
+        192,
+        192,
+        128
+      ]
+    },
+    "mismatches": 0,
+    "name": "mlp_3_lnq",
+    "passed": true
+  },
+  {
+    "elements": 37632,
+    "kind": "layernorm_rsqrt_table",
+    "metadata": {
+      "input_summary": {
+        "count": 37632,
+        "max": 2894,
+        "mean": 49.00124893707483,
+        "min": -2345
+      },
+      "input_type": [
+        "signed",
+        13
+      ],
+      "output_summary": {
+        "count": 37632,
+        "max": 3,
+        "mean": -0.07948022959183673,
+        "min": -4
+      },
+      "output_type": [
+        "signed",
+        3
+      ],
+      "range": {
+        "affine": [
+          -124437359104,
+          162692779608
+        ],
+        "cursor": [
+          0,
+          97
+        ],
+        "divc": [
+          -1670612767,
+          2498731949
+        ],
+        "input": [
+          -2933.0,
+          3106.0
+        ],
+        "lnb_m": [
+          -63272124416,
+          89655345152
+        ],
+        "lnw_m": [
+          15688,
+          56540
+        ],
+        "mu": [
+          -199,
+          297
+        ],
+        "output": [
+          -4,
+          3
+        ],
+        "rsqrt": [
+          1276,
+          2756
+        ],
+        "shift": [
+          -15,
+          18
+        ],
+        "sum": [
+          -38237,
+          57095
+        ],
+        "var": [
+          6982120,
+          32348484
+        ]
+      },
+      "scalars": [
+        43691,
+        23,
+        -6816111,
+        18,
+        127,
+        33,
+        3
+      ],
+      "stat_key": "mlp4.lnq",
+      "table_sizes": [
+        192,
+        192,
+        128
+      ]
+    },
+    "mismatches": 0,
+    "name": "mlp_4_lnq",
+    "passed": true
+  },
+  {
+    "elements": 37632,
+    "kind": "layernorm_rsqrt_table",
+    "metadata": {
+      "input_summary": {
+        "count": 37632,
+        "max": 3249,
+        "mean": 65.45036139455782,
+        "min": -2373
+      },
+      "input_type": [
+        "signed",
+        13
+      ],
+      "output_summary": {
+        "count": 37632,
+        "max": 3,
+        "mean": -0.039275085034013606,
+        "min": -4
+      },
+      "output_type": [
+        "signed",
+        3
+      ],
+      "range": {
+        "affine": [
+          -111549794240,
+          149854634126
+        ],
+        "cursor": [
+          1,
+          93
+        ],
+        "divc": [
+          -1792816494,
+          2652742724
+        ],
+        "input": [
+          -2907.0,
+          3571.0
+        ],
+        "lnb_m": [
+          -55286169600,
+          79128690688
+        ],
+        "lnw_m": [
+          9149,
+          52254
+        ],
+        "mu": [
+          -214,
+          316
+        ],
+        "output": [
+          -4,
+          3
+        ],
+        "rsqrt": [
+          1292,
+          2659
+        ],
+        "shift": [
+          -13,
+          17
+        ],
+        "sum": [
+          -41034,
+          60620
+        ],
+        "var": [
+          7352120,
+          31680856
+        ]
+      },
+      "scalars": [
+        43691,
+        23,
+        -7069397,
+        18,
+        127,
+        33,
+        3
+      ],
+      "stat_key": "mlp5.lnq",
+      "table_sizes": [
+        192,
+        192,
+        128
+      ]
+    },
+    "mismatches": 0,
+    "name": "mlp_5_lnq",
+    "passed": true
+  },
+  {
+    "elements": 37632,
+    "kind": "layernorm_rsqrt_table",
+    "metadata": {
+      "input_summary": {
+        "count": 37632,
+        "max": 3298,
+        "mean": 68.65885416666667,
+        "min": -2100
+      },
+      "input_type": [
+        "signed",
+        13
+      ],
+      "output_summary": {
+        "count": 37632,
+        "max": 3,
+        "mean": 0.014535501700680272,
+        "min": -4
+      },
+      "output_type": [
+        "signed",
+        3
+      ],
+      "range": {
+        "affine": [
+          -120973978370,
+          149343532121
+        ],
+        "cursor": [
+          0,
+          86
+        ],
+        "divc": [
+          -1716706772,
+          2563918921
+        ],
+        "input": [
+          -3508.0,
+          3993.0
+        ],
+        "lnb_m": [
+          -59374043136,
+          80566812672
+        ],
+        "lnw_m": [
+          7456,
+          47844
+        ],
+        "mu": [
+          -205,
+          305
+        ],
+        "output": [
+          -4,
+          3
+        ],
+        "rsqrt": [
+          1013,
+          2894
+        ],
+        "shift": [
+          -15,
+          17
+        ],
+        "sum": [
+          -39292,
+          58587
+        ],
+        "var": [
+          6257213,
+          51177720
+        ]
+      },
+      "scalars": [
+        43691,
+        23,
+        -6037980,
+        19,
+        127,
+        33,
+        3
+      ],
+      "stat_key": "mlp6.lnq",
+      "table_sizes": [
+        192,
+        192,
+        128
+      ]
+    },
+    "mismatches": 0,
+    "name": "mlp_6_lnq",
+    "passed": true
+  },
+  {
+    "elements": 37632,
+    "kind": "layernorm_rsqrt_table",
+    "metadata": {
+      "input_summary": {
+        "count": 37632,
+        "max": 3240,
+        "mean": 69.04878826530613,
+        "min": -2334
+      },
+      "input_type": [
+        "signed",
+        13
+      ],
+      "output_summary": {
+        "count": 37632,
+        "max": 3,
+        "mean": 0.031728316326530615,
+        "min": -4
+      },
+      "output_type": [
+        "signed",
+        3
+      ],
+      "range": {
+        "affine": [
+          -114955619504,
+          130150088552
+        ],
+        "cursor": [
+          0,
+          89
+        ],
+        "divc": [
+          -1440929180,
+          2199579672
+        ],
+        "input": [
+          -3465.0,
+          3963.0
+        ],
+        "lnb_m": [
+          -44690833408,
+          58083770368
+        ],
+        "lnw_m": [
+          6068,
+          45504
+        ],
+        "mu": [
+          -172,
+          262
+        ],
+        "output": [
+          -4,
+          3
+        ],
+        "rsqrt": [
+          1020,
+          3632
+        ],
+        "shift": [
+          -14,
+          15
+        ],
+        "sum": [
+          -32980,
+          50248
+        ],
+        "var": [
+          3952340,
+          50589840
+        ]
+      },
+      "scalars": [
+        43691,
+        23,
+        -3738640,
+        19,
+        127,
+        33,
+        3
+      ],
+      "stat_key": "mlp7.lnq",
+      "table_sizes": [
+        192,
+        192,
+        128
+      ]
+    },
+    "mismatches": 0,
+    "name": "mlp_7_lnq",
+    "passed": true
+  },
+  {
+    "elements": 37632,
+    "kind": "layernorm_rsqrt_table",
+    "metadata": {
+      "input_summary": {
+        "count": 37632,
+        "max": 3618,
+        "mean": 74.65808354591837,
+        "min": -2817
+      },
+      "input_type": [
+        "signed",
+        14
+      ],
+      "output_summary": {
+        "count": 37632,
+        "max": 3,
+        "mean": 0.13212159863945577,
+        "min": -4
+      },
+      "output_type": [
+        "signed",
+        3
+      ],
+      "range": {
+        "affine": [
+          -101569168494,
+          127860621784
+        ],
+        "cursor": [
+          0,
+          119
+        ],
+        "divc": [
+          -1654840316,
+          2414888920
+        ],
+        "input": [
+          -3948.0,
+          4549.0
+        ],
+        "lnb_m": [
+          -33058979840,
+          55117873152
+        ],
+        "lnw_m": [
+          5820,
+          41551
+        ],
+        "mu": [
+          -197,
+          287
+        ],
+        "output": [
+          -4,
+          3
+        ],
+        "rsqrt": [
+          890,
+          3532
+        ],
+        "shift": [
+          -12,
+          14
+        ],
+        "sum": [
+          -37876,
+          55176
+        ],
+        "var": [
+          4244330,
+          66731184
+        ]
+      },
+      "scalars": [
+        43691,
+        23,
+        -3967626,
+        19,
+        127,
+        33,
+        3
+      ],
+      "stat_key": "mlp8.lnq",
+      "table_sizes": [
+        192,
+        192,
+        128
+      ]
+    },
+    "mismatches": 0,
+    "name": "mlp_8_lnq",
+    "passed": true
+  },
+  {
+    "elements": 37632,
+    "kind": "layernorm_rsqrt_table",
+    "metadata": {
+      "input_summary": {
+        "count": 37632,
+        "max": 2283,
+        "mean": 45.50372023809524,
+        "min": -1862
+      },
+      "input_type": [
+        "signed",
+        13
+      ],
+      "output_summary": {
+        "count": 37632,
+        "max": 3,
+        "mean": 0.024394132653061226,
+        "min": -4
+      },
+      "output_type": [
+        "signed",
+        3
+      ],
+      "range": {
+        "affine": [
+          -54169332296,
+          60149543104
+        ],
+        "cursor": [
+          0,
+          103
+        ],
+        "divc": [
+          -1157243517,
+          1647500196
+        ],
+        "input": [
+          -2625.0,
+          3107.0
+        ],
+        "lnb_m": [
+          -14646771712,
+          21698183168
+        ],
+        "lnw_m": [
+          -10208,
+          42239
+        ],
+        "mu": [
+          -138,
+          196
+        ],
+        "output": [
+          -4,
+          3
+        ],
+        "rsqrt": [
+          678,
+          2832
+        ],
+        "shift": [
+          -13,
+          14
+        ],
+        "sum": [
+          -26487,
+          37612
+        ],
+        "var": [
+          1603351,
+          28545240
+        ]
+      },
+      "scalars": [
+        43691,
+        23,
+        -1513477,
+        18,
+        127,
+        32,
+        3
+      ],
+      "stat_key": "mlp9.lnq",
+      "table_sizes": [
+        192,
+        192,
+        128
+      ]
+    },
+    "mismatches": 0,
+    "name": "mlp_9_lnq",
+    "passed": true
+  },
+  {
+    "elements": 115248,
+    "kind": "softmax_segmented_table",
+    "metadata": {
+      "input_summary": {
+        "count": 115248,
+        "max": 307,
+        "mean": 26.114743856726363,
+        "min": -206
+      },
+      "input_type": [
+        "signed",
+        10
+      ],
+      "output_summary": {
+        "count": 115248,
+        "max": 7,
+        "mean": 0.4353654727197001,
+        "min": 0
+      },
+      "output_type": [
+        "unsigned",
+        3
+      ],
+      "range": {
+        "acc": [
+          33299,
+          4774493
+        ],
+        "affine": [
+          0,
+          8028160
+        ],
+        "cursor1": [
+          0,
+          40
+        ],
+        "cursor2_one": [
+          0,
+          289
+        ],
+        "cursor2_two": [
+          -5,
+          31
+        ],
+        "cursor3": [
+          0,
+          122
+        ],
+        "exp": [
+          0,
+          32768
+        ],
+        "input": [
+          -328.0,
+          408.0
+        ],
+        "minus_max": [
+          -642,
+          0
+        ],
+        "output": [
+          0,
+          7
+        ],
+        "recip": [
+          7,
+          244
+        ],
+        "select": [
+          0,
+          122
+        ]
+      },
+      "scalars": [
+        8,
+        4,
+        31,
+        -25242,
+        14,
+        63,
+        32768,
+        16,
+        -596612,
+        17,
+        63,
+        524288,
+        20,
+        3
+      ],
+      "stat_key": "attn0.softmaxq",
+      "table_sizes": [
+        32,
+        64,
+        64
+      ]
+    },
+    "mismatches": 0,
+    "name": "attn_0_softmaxq",
+    "passed": true
+  },
+  {
+    "elements": 115248,
+    "kind": "softmax_segmented_table",
+    "metadata": {
+      "input_summary": {
+        "count": 115248,
+        "max": 396,
+        "mean": 16.577979661252257,
+        "min": -167
+      },
+      "input_type": [
+        "signed",
+        10
+      ],
+      "output_summary": {
+        "count": 115248,
+        "max": 7,
+        "mean": 0.13680063862279607,
+        "min": 0
+      },
+      "output_type": [
+        "unsigned",
+        3
+      ],
+      "range": {
+        "acc": [
+          32789,
+          2999423
+        ],
+        "affine": [
+          0,
+          6062080
+        ],
+        "cursor1": [
+          0,
+          37
+        ],
+        "cursor2_one": [
+          0,
+          362
+        ],
+        "cursor2_two": [
+          -5,
+          40
+        ],
+        "cursor3": [
+          0,
+          132
+        ],
+        "exp": [
+          0,
+          32768
+        ],
+        "input": [
+          -219.0,
+          442.0
+        ],
+        "minus_max": [
+          -594,
+          0
+        ],
+        "output": [
+          0,
+          7
+        ],
+        "recip": [
+          7,
+          177
+        ],
+        "select": [
+          0,
+          132
+        ]
+      },
+      "scalars": [
+        8,
+        4,
+        31,
+        -28706,
+        13,
+        63,
+        16384,
+        15,
+        -359889,
+        16,
+        63,
+        262144,
+        19,
+        3
+      ],
+      "stat_key": "attn10.softmaxq",
+      "table_sizes": [
+        32,
+        64,
+        64
+      ]
+    },
+    "mismatches": 0,
+    "name": "attn_10_softmaxq",
+    "passed": true
+  },
+  {
+    "elements": 115248,
+    "kind": "softmax_segmented_table",
+    "metadata": {
+      "input_summary": {
+        "count": 115248,
+        "max": 217,
+        "mean": -68.11609745939192,
+        "min": -228
+      },
+      "input_type": [
+        "signed",
+        10
+      ],
+      "output_summary": {
+        "count": 115248,
+        "max": 7,
+        "mean": 0.4018290989865334,
+        "min": 0
+      },
+      "output_type": [
+        "unsigned",
+        3
+      ],
+      "range": {
+        "acc": [
+          36853,
+          3193761
+        ],
+        "affine": [
+          0,
+          6291456
+        ],
+        "cursor1": [
+          0,
+          19
+        ],
+        "cursor2_one": [
+          0,
+          385
+        ],
+        "cursor2_two": [
+          -6,
+          42
+        ],
+        "cursor3": [
+          0,
+          96
+        ],
+        "exp": [
+          1,
+          32768
+        ],
+        "input": [
+          -293.0,
+          345.0
+        ],
+        "minus_max": [
+          -607,
+          0
+        ],
+        "output": [
+          0,
+          7
+        ],
+        "recip": [
+          13,
+          191
+        ],
+        "select": [
+          0,
+          96
+        ]
+      },
+      "scalars": [
+        16,
+        5,
+        31,
+        -33678,
+        13,
+        63,
+        32768,
+        16,
+        -414060,
+        16,
+        63,
+        262144,
+        19,
+        3
+      ],
+      "stat_key": "attn11.softmaxq",
+      "table_sizes": [
+        32,
+        64,
+        64
+      ]
+    },
+    "mismatches": 0,
+    "name": "attn_11_softmaxq",
+    "passed": true
+  },
+  {
+    "elements": 115248,
+    "kind": "softmax_segmented_table",
+    "metadata": {
+      "input_summary": {
+        "count": 115248,
+        "max": 349,
+        "mean": 48.43756941552131,
+        "min": -234
+      },
+      "input_type": [
+        "signed",
+        10
+      ],
+      "output_summary": {
+        "count": 115248,
+        "max": 7,
+        "mean": 0.5922705817020686,
+        "min": 0
+      },
+      "output_type": [
+        "unsigned",
+        3
+      ],
+      "range": {
+        "acc": [
+          32768,
+          4008211
+        ],
+        "affine": [
+          0,
+          4947968
+        ],
+        "cursor1": [
+          0,
+          44
+        ],
+        "cursor2_one": [
+          0,
+          485
+        ],
+        "cursor2_two": [
+          -8,
+          53
+        ],
+        "cursor3": [
+          0,
+          147
+        ],
+        "exp": [
+          0,
+          32768
+        ],
+        "input": [
+          -322.0,
+          470.0
+        ],
+        "minus_max": [
+          -709,
+          0
+        ],
+        "output": [
+          0,
+          7
+        ],
+        "recip": [
+          8,
+          147
+        ],
+        "select": [
+          0,
+          147
+        ]
+      },
+      "scalars": [
+        8,
+        4,
+        31,
+        -28690,
+        13,
+        63,
+        16384,
+        15,
+        -507831,
+        16,
+        63,
+        262144,
+        19,
+        3
+      ],
+      "stat_key": "attn1.softmaxq",
+      "table_sizes": [
+        32,
+        64,
+        64
+      ]
+    },
+    "mismatches": 0,
+    "name": "attn_1_softmaxq",
+    "passed": true
+  },
+  {
+    "elements": 115248,
+    "kind": "softmax_segmented_table",
+    "metadata": {
+      "input_summary": {
+        "count": 115248,
+        "max": 363,
+        "mean": 24.538820630292932,
+        "min": -303
+      },
+      "input_type": [
+        "signed",
+        10
+      ],
+      "output_summary": {
+        "count": 115248,
+        "max": 7,
+        "mean": 0.09606240455365819,
+        "min": 0
+      },
+      "output_type": [
+        "unsigned",
+        3
+      ],
+      "range": {
+        "acc": [
+          32768,
+          5989679
+        ],
+        "affine": [
+          0,
+          7536640
+        ],
+        "cursor1": [
+          0,
+          196
+        ],
+        "cursor2_one": [
+          0,
+          364
+        ],
+        "cursor2_two": [
+          -6,
+          40
+        ],
+        "cursor3": [
+          0,
+          74
+        ],
+        "exp": [
+          0,
+          32768
+        ],
+        "input": [
+          -384.0,
+          476.0
+        ],
+        "minus_max": [
+          -783,
+          0
+        ],
+        "output": [
+          0,
+          7
+        ],
+        "recip": [
+          4,
+          198
+        ],
+        "select": [
+          0,
+          74
+        ]
+      },
+      "scalars": [
+        2,
+        2,
+        31,
+        -24576,
+        14,
+        63,
+        32768,
+        16,
+        -720252,
+        17,
+        63,
+        1048576,
+        21,
+        3
+      ],
+      "stat_key": "attn2.softmaxq",
+      "table_sizes": [
+        32,
+        64,
+        64
+      ]
+    },
+    "mismatches": 0,
+    "name": "attn_2_softmaxq",
+    "passed": true
+  },
+  {
+    "elements": 115248,
+    "kind": "softmax_segmented_table",
+    "metadata": {
+      "input_summary": {
+        "count": 115248,
+        "max": 396,
+        "mean": 26.34336387616271,
+        "min": -211
+      },
+      "input_type": [
+        "signed",
+        10
+      ],
+      "output_summary": {
+        "count": 115248,
+        "max": 7,
+        "mean": 0.11147265028460364,
+        "min": 0
+      },
+      "output_type": [
+        "unsigned",
+        3
+      ],
+      "range": {
+        "acc": [
+          32768,
+          3360402
+        ],
+        "affine": [
+          0,
+          5832704
+        ],
+        "cursor1": [
+          0,
+          42
+        ],
+        "cursor2_one": [
+          0,
+          406
+        ],
+        "cursor2_two": [
+          -7,
+          44
+        ],
+        "cursor3": [
+          0,
+          33
+        ],
+        "exp": [
+          0,
+          32768
+        ],
+        "input": [
+          -302.0,
+          449.0
+        ],
+        "minus_max": [
+          -678,
+          0
+        ],
+        "output": [
+          0,
+          7
+        ],
+        "recip": [
+          7,
+          146
+        ],
+        "select": [
+          0,
+          33
+        ]
+      },
+      "scalars": [
+        8,
+        4,
+        31,
+        -28672,
+        13,
+        63,
+        65536,
+        17,
+        -432345,
+        16,
+        63,
+        1048576,
+        21,
+        3
+      ],
+      "stat_key": "attn3.softmaxq",
+      "table_sizes": [
+        32,
+        64,
+        64
+      ]
+    },
+    "mismatches": 0,
+    "name": "attn_3_softmaxq",
+    "passed": true
+  },
+  {
+    "elements": 115248,
+    "kind": "softmax_segmented_table",
+    "metadata": {
+      "input_summary": {
+        "count": 115248,
+        "max": 298,
+        "mean": 24.88015410245731,
+        "min": -170
+      },
+      "input_type": [
+        "signed",
+        10
+      ],
+      "output_summary": {
+        "count": 115248,
+        "max": 7,
+        "mean": 0.46103186172428157,
+        "min": 0
+      },
+      "output_type": [
+        "unsigned",
+        3
+      ],
+      "range": {
+        "acc": [
+          32785,
+          3078971
+        ],
+        "affine": [
+          0,
+          8323072
+        ],
+        "cursor1": [
+          0,
+          38
+        ],
+        "cursor2_one": [
+          0,
+          372
+        ],
+        "cursor2_two": [
+          -6,
+          40
+        ],
+        "cursor3": [
+          0,
+          127
+        ],
+        "exp": [
+          0,
+          32768
+        ],
+        "input": [
+          -259.0,
+          429.0
+        ],
+        "minus_max": [
+          -603,
+          0
+        ],
+        "output": [
+          0,
+          7
+        ],
+        "recip": [
+          15,
+          253
+        ],
+        "select": [
+          0,
+          127
+        ]
+      },
+      "scalars": [
+        8,
+        4,
+        31,
+        -28707,
+        13,
+        63,
+        32768,
+        16,
+        -403413,
+        16,
+        63,
+        262144,
+        19,
+        3
+      ],
+      "stat_key": "attn4.softmaxq",
+      "table_sizes": [
+        32,
+        64,
+        64
+      ]
+    },
+    "mismatches": 0,
+    "name": "attn_4_softmaxq",
+    "passed": true
+  },
+  {
+    "elements": 115248,
+    "kind": "softmax_segmented_table",
+    "metadata": {
+      "input_summary": {
+        "count": 115248,
+        "max": 277,
+        "mean": 13.577728029987504,
+        "min": -196
+      },
+      "input_type": [
+        "signed",
+        10
+      ],
+      "output_summary": {
+        "count": 115248,
+        "max": 7,
+        "mean": 0.3269384284325975,
+        "min": 0
+      },
+      "output_type": [
+        "unsigned",
+        3
+      ],
+      "range": {
+        "acc": [
+          32799,
+          3882139
+        ],
+        "affine": [
+          0,
+          6619136
+        ],
+        "cursor1": [
+          0,
+          40
+        ],
+        "cursor2_one": [
+          0,
+          470
+        ],
+        "cursor2_two": [
+          -7,
+          52
+        ],
+        "cursor3": [
+          0,
+          86
+        ],
+        "exp": [
+          0,
+          32768
+        ],
+        "input": [
+          -315.0,
+          389.0
+        ],
+        "minus_max": [
+          -644,
+          0
+        ],
+        "output": [
+          0,
+          7
+        ],
+        "recip": [
+          10,
+          186
+        ],
+        "select": [
+          0,
+          86
+        ]
+      },
+      "scalars": [
+        8,
+        4,
+        31,
+        -28732,
+        13,
+        63,
+        32768,
+        16,
+        -452800,
+        16,
+        63,
+        524288,
+        20,
+        3
+      ],
+      "stat_key": "attn5.softmaxq",
+      "table_sizes": [
+        32,
+        64,
+        64
+      ]
+    },
+    "mismatches": 0,
+    "name": "attn_5_softmaxq",
+    "passed": true
+  },
+  {
+    "elements": 115248,
+    "kind": "softmax_segmented_table",
+    "metadata": {
+      "input_summary": {
+        "count": 115248,
+        "max": 209,
+        "mean": -0.9555827433014022,
+        "min": -170
+      },
+      "input_type": [
+        "signed",
+        10
+      ],
+      "output_summary": {
+        "count": 115248,
+        "max": 7,
+        "mean": 0.33250034707760656,
+        "min": 0
+      },
+      "output_type": [
+        "unsigned",
+        3
+      ],
+      "range": {
+        "acc": [
+          33071,
+          4007726
+        ],
+        "affine": [
+          0,
+          6193152
+        ],
+        "cursor1": [
+          0,
+          31
+        ],
+        "cursor2_one": [
+          0,
+          485
+        ],
+        "cursor2_two": [
+          -8,
+          53
+        ],
+        "cursor3": [
+          0,
+          87
+        ],
+        "exp": [
+          0,
+          32768
+        ],
+        "input": [
+          -264.0,
+          323.0
+        ],
+        "minus_max": [
+          -488,
+          0
+        ],
+        "output": [
+          0,
+          7
+        ],
+        "recip": [
+          10,
+          173
+        ],
+        "select": [
+          0,
+          87
+        ]
+      },
+      "scalars": [
+        8,
+        4,
+        31,
+        -29038,
+        13,
+        63,
+        32768,
+        16,
+        -499119,
+        16,
+        63,
+        524288,
+        20,
+        3
+      ],
+      "stat_key": "attn6.softmaxq",
+      "table_sizes": [
+        32,
+        64,
+        64
+      ]
+    },
+    "mismatches": 0,
+    "name": "attn_6_softmaxq",
+    "passed": true
+  },
+  {
+    "elements": 115248,
+    "kind": "softmax_segmented_table",
+    "metadata": {
+      "input_summary": {
+        "count": 115248,
+        "max": 191,
+        "mean": -18.624982646119673,
+        "min": -173
+      },
+      "input_type": [
+        "signed",
+        10
+      ],
+      "output_summary": {
+        "count": 115248,
+        "max": 7,
+        "mean": 0.37034916007219215,
+        "min": 0
+      },
+      "output_type": [
+        "unsigned",
+        3
+      ],
+      "range": {
+        "acc": [
+          32798,
+          2297412
+        ],
+        "affine": [
+          0,
+          8355840
+        ],
+        "cursor1": [
+          0,
+          51
+        ],
+        "cursor2_one": [
+          0,
+          276
+        ],
+        "cursor2_two": [
+          -5,
+          30
+        ],
+        "cursor3": [
+          0,
+          127
+        ],
+        "exp": [
+          0,
+          32768
+        ],
+        "input": [
+          -223.0,
+          286.0
+        ],
+        "minus_max": [
+          -406,
+          0
+        ],
+        "output": [
+          0,
+          7
+        ],
+        "recip": [
+          15,
+          254
+        ],
+        "select": [
+          0,
+          127
+        ]
+      },
+      "scalars": [
+        4,
+        3,
+        31,
+        -28773,
+        13,
+        63,
+        32768,
+        16,
+        -301274,
+        16,
+        63,
+        262144,
+        19,
+        3
+      ],
+      "stat_key": "attn7.softmaxq",
+      "table_sizes": [
+        32,
+        64,
+        64
+      ]
+    },
+    "mismatches": 0,
+    "name": "attn_7_softmaxq",
+    "passed": true
+  },
+  {
+    "elements": 115248,
+    "kind": "softmax_segmented_table",
+    "metadata": {
+      "input_summary": {
+        "count": 115248,
+        "max": 237,
+        "mean": -6.439460988477023,
+        "min": -159
+      },
+      "input_type": [
+        "signed",
+        10
+      ],
+      "output_summary": {
+        "count": 115248,
+        "max": 7,
+        "mean": 0.2854279466888796,
+        "min": 0
+      },
+      "output_type": [
+        "unsigned",
+        3
+      ],
+      "range": {
+        "acc": [
+          32789,
+          3658716
+        ],
+        "affine": [
+          0,
+          6455296
+        ],
+        "cursor1": [
+          0,
+          35
+        ],
+        "cursor2_one": [
+          0,
+          443
+        ],
+        "cursor2_two": [
+          -7,
+          49
+        ],
+        "cursor3": [
+          0,
+          81
+        ],
+        "exp": [
+          0,
+          32768
+        ],
+        "input": [
+          -270.0,
+          352.0
+        ],
+        "minus_max": [
+          -552,
+          0
+        ],
+        "output": [
+          0,
+          7
+        ],
+        "recip": [
+          9,
+          181
+        ],
+        "select": [
+          0,
+          81
+        ]
+      },
+      "scalars": [
+        8,
+        4,
+        31,
+        -28744,
+        13,
+        63,
+        32768,
+        16,
+        -436489,
+        16,
+        63,
+        524288,
+        20,
+        3
+      ],
+      "stat_key": "attn8.softmaxq",
+      "table_sizes": [
+        32,
+        64,
+        64
+      ]
+    },
+    "mismatches": 0,
+    "name": "attn_8_softmaxq",
+    "passed": true
+  },
+  {
+    "elements": 115248,
+    "kind": "softmax_segmented_table",
+    "metadata": {
+      "input_summary": {
+        "count": 115248,
+        "max": 264,
+        "mean": -10.92496182146328,
+        "min": -164
+      },
+      "input_type": [
+        "signed",
+        10
+      ],
+      "output_summary": {
+        "count": 115248,
+        "max": 7,
+        "mean": 0.21834652228238233,
+        "min": 0
+      },
+      "output_type": [
+        "unsigned",
+        3
+      ],
+      "range": {
+        "acc": [
+          32801,
+          2564757
+        ],
+        "affine": [
+          0,
+          6389760
+        ],
+        "cursor1": [
+          0,
+          28
+        ],
+        "cursor2_one": [
+          0,
+          309
+        ],
+        "cursor2_two": [
+          -5,
+          33
+        ],
+        "cursor3": [
+          0,
+          136
+        ],
+        "exp": [
+          0,
+          32768
+        ],
+        "input": [
+          -233.0,
+          330.0
+        ],
+        "minus_max": [
+          -442,
+          0
+        ],
+        "output": [
+          0,
+          7
+        ],
+        "recip": [
+          8,
+          187
+        ],
+        "select": [
+          0,
+          136
+        ]
+      },
+      "scalars": [
+        8,
+        4,
+        31,
+        -28802,
+        13,
+        63,
+        16384,
+        15,
+        -350846,
+        16,
+        63,
+        262144,
+        19,
+        3
+      ],
+      "stat_key": "attn9.softmaxq",
+      "table_sizes": [
+        32,
+        64,
+        64
+      ]
+    },
+    "mismatches": 0,
+    "name": "attn_9_softmaxq",
+    "passed": true
+  }
+]

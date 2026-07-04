@@ -1,0 +1,119 @@
+{
+  "date": "2026-06-12",
+  "current_workspace": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware",
+  "source_roots": [
+    {
+      "path": "/home/kjm26/project/PRJXR/XR-VIT/ViT_Accel",
+      "role": "original multi-board DeiT/HG-PIPE flow and docs",
+      "observed_file_count_max_depth": 109
+    },
+    {
+      "path": "/home/kjm26/project/PRJXR/XR-VIT/XR_Accel",
+      "role": "ZCU104 cyclic/HBTXR extension and max-performance handoff",
+      "observed_file_count_max_depth": 307
+    },
+    {
+      "path": "/home/kjm26/project/PRJXR/Hardware/HG_PIPE_MERGE/ViT_Accel/docs",
+      "role": "curated historical documentation set",
+      "observed_file_count_max_depth": 33
+    }
+  ],
+  "key_artifacts": [
+    {
+      "path": "/home/kjm26/project/PRJXR/Hardware/HG_PIPE_MERGE/ViT_Accel/docs/experiments/deit_tiny_baseline/full_deit_tiny_fit/step2_hls_resource_summary.md",
+      "category": "hls_resource_summary",
+      "status": "complete_cosim_summary",
+      "key_result": "26/26 COSIM_PASS; ATTN0 max LUT 78460; PATCH_EMBED max DSP 428 and URAM 18"
+    },
+    {
+      "path": "/home/kjm26/project/PRJXR/Hardware/HG_PIPE_MERGE/ViT_Accel/workspace/artifacts/reports/vck190/attn_mlp_dsp_probe/step2_hls_resource_summary_attn_mlp_dsp_probe.md",
+      "category": "dsp_probe",
+      "status": "resource_probe_cosim_unknown",
+      "key_result": "ATTN0 DSP 748, MLP0 DSP 682; useful for resource direction, not functional signoff"
+    },
+    {
+      "path": "/home/kjm26/project/PRJXR/Hardware/HG_PIPE_MERGE/ViT_Accel/docs/experiments/pnr/vck190_deit_tiny_full_status_20260410.md",
+      "category": "vivado_pnr_status",
+      "status": "routed_ooc_timing_not_clean",
+      "key_result": "VCK190 routed OOC; LUT 644533, DSP 743, URAM 287, WNS -0.973 ns at 2.5 ns"
+    },
+    {
+      "path": "/home/kjm26/project/PRJXR/Hardware/HG_PIPE_MERGE/ViT_Accel/docs/experiments/pnr/zu15eg_deit_tiny_full_status_20260410.md",
+      "category": "vivado_pnr_status",
+      "status": "synth_opt_done_place_blocked",
+      "key_result": "ZU15EG logic LUT 173.0%; URAM 0; capacity blocker before placement"
+    },
+    {
+      "path": "/home/kjm26/project/PRJXR/Hardware/HG_PIPE_MERGE/ViT_Accel/docs/experiments/pnr/zcu102_deit_tiny_full_status_20260410.md",
+      "category": "vivado_pnr_status",
+      "status": "synth_opt_done_place_blocked",
+      "key_result": "ZCU102 logic LUT 206.9%; URAM 0; capacity blocker before placement"
+    },
+    {
+      "path": "/home/kjm26/project/PRJXR/Hardware/HG_PIPE_MERGE/ViT_Accel/docs/status/HANDOFF_2026_04_20.md",
+      "category": "handoff",
+      "status": "reuse_ooc_and_capacity_handoff",
+      "key_result": "VCK190 board export advanced to placement capacity blocker; DSP and URAM still had headroom relative to LUT pressure"
+    },
+    {
+      "path": "/home/kjm26/project/PRJXR/Hardware/HG_PIPE_MERGE/ViT_Accel/docs/architecture/SRC_CASE_PARALLELISM_TUNING.md",
+      "category": "tuning_policy",
+      "status": "design_guidance",
+      "key_result": "MAC lane proxy TP*COP*CIP; storage binding should move large buffers away from LUTRAM/BRAM when appropriate"
+    },
+    {
+      "path": "/home/kjm26/project/PRJXR/XR-VIT/ViT_Accel/docs/SRC_CASE_PARALLELISM_TUNING.md",
+      "category": "attention_serialization_experiment",
+      "status": "mixed_csynth_cosim_evidence",
+      "key_result": "HEAD_SERIAL_C3_MIX_FIFOLOW_QKVPACK_AQPACK: 30761 LUT / 92 BRAM / 10 URAM / COSIM_PASS; O4X4 speed option: 911205 cycles; AQTILE_O4X4 stalled in cosim"
+    },
+    {
+      "path": "/home/kjm26/project/PRJXR/XR-VIT/XR_Accel/docs/architecture/HBTXR_ARCH_FREEZE.md",
+      "category": "architecture",
+      "status": "architecture_freeze_plan",
+      "key_result": "Paper-style cyclic architecture: DMA, Global Buffer, NoC, MHA/MLP cyclic cores, controller, search/track mode split"
+    },
+    {
+      "path": "/home/kjm26/project/PRJXR/XR-VIT/XR_Accel/docs/validation/DEIT_CYCLIC_VERIFICATION.md",
+      "category": "validation",
+      "status": "csim_anchor",
+      "key_result": "DeiT cyclic exact-match gate for patch, ATTN0..11, MLP0..11, and head"
+    },
+    {
+      "path": "/home/kjm26/project/PRJXR/XR-VIT/XR_Accel/docs/status/ZCU104_CYCLIC_MAXPERF_HANDOVER.md",
+      "category": "handoff",
+      "status": "partial_hls_no_final_csynth",
+      "key_result": "Maxperf C-sim passed; CYCLIC_VIT_TOP final csynth did not complete; only partial design-size files existed"
+    },
+    {
+      "path": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/signoff/e2e_resource_matrix_2026_06_10.md",
+      "category": "current_hgtxr_resource_matrix",
+      "status": "current_reference",
+      "key_result": "C3b selected: PAR16, DSP 604, LUT 126506, BRAM18K 332, URAM 64, WNS 4.415 ns"
+    }
+  ],
+  "current_hgtxr_policy_links": [
+    {
+      "path": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/hls/include/hgtxr_e2e_vit.hpp",
+      "macros": [
+        "HGTXR_E2E_FORCE_DSP_MUL",
+        "HGTXR_E2E_FORCE_URAM_BUFFERS",
+        "HGTXR_E2E_SMALL_MEM_LUTRAM"
+      ]
+    },
+    {
+      "path": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/hls/include/hgtxr_cyclic_transformer_params.hpp",
+      "macros": [
+        "HGTXR_PAR_QK",
+        "HGTXR_PAR_ATTN",
+        "HGTXR_PAR_FFN"
+      ]
+    }
+  ],
+  "evidence_boundaries": [
+    "C-sim pass is not a resource or board-performance claim.",
+    "Partial csynth_design_size.* files are not completed HLS csynth evidence.",
+    "DSP probe reports with COSIM UNKNOWN are resource-direction evidence only.",
+    "Board claims require routed timing/power/utilization or explicit board-smoke artifacts."
+  ]
+}

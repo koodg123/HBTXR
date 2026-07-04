@@ -1,0 +1,14 @@
+# Core runtime
+torch>=2.2
+numpy>=1.24
+pillow>=10.0
+pyyaml>=6.0
+opencv-python>=4.8
+
+# Verification
+pytest>=8.0
+
+# TimeLens note:
+# The interpolation wrapper calls the upstream repository passed by
+# --timelens-root. Install that repository's own dependencies in the Python
+# environment referenced by --timelens-python when running interpolation.

@@ -1,0 +1,48 @@
+{
+  "date": "2026-06-20",
+  "scope": "HGTXR-SW second-goal submission target gap audit",
+  "submission_initial_root": "/home/kjm26/project/PRJXR/XR-VIT/PAPER_WORKS/10_submission_initial",
+  "source_file": "/home/kjm26/project/PRJXR/XR-VIT/PAPER_WORKS/10_submission_initial/main.tex",
+  "execution_state": "paused_by_user_directive",
+  "submission_claims": {
+    "hybrid_pixel_error_px": 0.1812,
+    "hybrid_latency_ms": 0.43,
+    "hybrid_p10_pct": 99.97,
+    "hybrid_p5_pct": 99.72,
+    "hybrid_p1_pct": 99.61,
+    "stage1_epochs": 100,
+    "stage1_optimizer": "AdamW",
+    "stage1_lr": 0.001,
+    "stage2_epochs": 200,
+    "stage2_optimizer": "AdamW",
+    "stage2_lr": 0.0001,
+    "stage3": "model slimming via self-supervised distillation"
+  },
+  "current_software_gates": {
+    "center_lt": 16.468481131962367,
+    "p10_gt": 35.02295998845781,
+    "p5_gt": 12.133503770828247
+  },
+  "direct_numeric_gap_if_same_metric_frame": {
+    "center_error_ratio_current_over_submission": 90.88565746116096,
+    "center_error_absolute_gap_px": 16.287281131962366,
+    "p10_gap_pct_points": 64.94704001154219,
+    "p5_gap_pct_points": 87.58649622917176
+  },
+  "direct_comparison_valid": false,
+  "direct_comparison_blocker": "Current metric_track_center_px is documented as post-transform input-coordinate error, not confirmed sensor-pixel error; direct comparison with the 0.1812 px submission target is invalid until protocol and coordinate frame are matched.",
+  "required_alignment_checks": [
+    "Verify coordinate frame and scale of metric_track_center_px against the paper's pixel error definition.",
+    "Verify EV-Eye split protocol and train/val/test sample counts against the paper's EX-Gaze-following split claim.",
+    "Verify whether current track-only event-count experiments cover the paper's hybrid scheduler mode, not only event-side tracking.",
+    "Verify whether P10/P5/P1 are computed on the same target points and coordinate frame as Table I in the submission draft.",
+    "Keep latency and hardware claims out of the software accuracy promotion path until a stronger full-width teacher exists."
+  ],
+  "experiment_implications": [
+    "XR-64 remains the immediate P0 path because it is the only current leakage-safe mechanism for converting XR-63 oracle headroom into trainable supervision.",
+    "XR-65 temporal-lite residual is relevant only after XR-64 yields a non-collapsing checkpoint.",
+    "XR-66 confidence-gated local update is relevant only after no-train confidence/fallback diagnostics identify a usable subset.",
+    "XR-68 hardware/distillation compression is blocked until software accuracy improves with a stable full-width teacher."
+  ],
+  "completion_status": "incomplete"
+}

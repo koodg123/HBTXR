@@ -1,0 +1,92 @@
+# Preset: mode2 + stage2
+# Purpose:
+# - interpolated frame path with materialized synthetic samples
+# - pair-local source_pair_average event construction for tracking
+# Main options you will usually edit here:
+# - data.mode2.execution
+# - data.mode2.interpolation.*
+# - data.mode2.synthetic_event_builder.*
+# - training.scheduler.* and experiment.name
+
+extends: base.yaml                                                              # inherit shared defaults from base
+
+model:
+  heads:
+    # stage2 enables event head and turns off mask loss
+    event: true                                                                 # enable event head in stage2
+    mask: false                                                                 # disable mask supervision in stage2
+
+data:
+  mode: mode2                                                                   # interpolated / target-fps frame path
+  canonical_name: canonical2                                                    # mode2 canonical bundle
+  manifest_name: manifest2                                                      # mode2 manifest bundle
+  mode2:
+    # materialized = synthetic frames are already written into canonical2
+    execution: materialized                                                     # materialized | lazy_target_fps
+    interpolation:
+      enabled: true                                                             # bool; enable interpolation path
+      backend: linear_blend                                                     # linear_blend | timelens
+      target_fps: 2000                                                          # target fps for synthetic grid
+      fixed_insert: null                                                        # explicit insert-count override
+      count_policy: round                                                       # round | floor | ceil
+      max_insert: 255                                                           # max inserted frames per gap
+    synthetic_event_builder:
+      # source_pair_average mixes left/right pair-local event windows using alpha weighting
+      policy: fixed_count                                                       # fixed_count | time_bin | interval_all
+      event_count_target: 2500                                                  # used when policy=fixed_count
+      time_bin_us: 2500                                                         # used when policy=time_bin
+      accumulation: fast_causal_linear                                          # plain | causal_linear | fast_causal_linear
+      causal_weight_power: 1.0                                                  # causal weighting exponent
+      fast_causal_limit: 25.0                                                   # saturation limit for fast_causal_linear
+      polarity_split: true                                                      # bool; split positive/negative channels
+      generation_strategy: source_pair_average                                  # raw_window | source_pair_average | target_fps_session_store
+      source_pair_scope: pair_local                                             # anchor_window | pair_local
+      average_weighting: alpha                                                  # mean | alpha
+
+training:
+  # stage2 = frame-event hybrid tracking
+  stage: stage2                                                                 # frame-event hybrid tracking stage
+  epochs: 30                                                                    # stage2 epochs
+  batch_size: 8                                                                 # stage2 batch size
+  best_metric_name: metric_track_p10_pct                                        # stage2 main ranking metric
+  scheduler:
+    type: plateau                                                               # none | cosine | plateau | step
+    metric_name: metric_track_p10_pct                                           # plateau monitor metric
+    factor: 0.5                                                                 # plateau decay factor
+    patience: 4                                                                 # plateau patience
+  early_stopping:
+    enabled: true                                                               # enable early stopping
+    patience: 10                                                                # no-improvement epochs before stop
+    start_epoch: 6                                                              # first epoch to activate patience count
+
+distillation:
+  enabled: true                                                                 # enable distillation
+  feature_similarity: true
+  feature_weight: 0.1
+  state_similarity: true
+  state_weight: 0.15
+  prediction_similarity: true
+  prediction_weight: 0.1
+  mask_similarity: false
+  kd:
+    enabled: true                                                               # enable KD
+    temperature: 1.0
+    weight: 0.05
+  rkd:
+    enabled: true                                                               # enable RKD
+    distance_weight: 0.02
+
+regularization_ssl:
+  enabled: false                                                                # keep regularization SSL off
+  force_with_teacher: false                                                     # keep off even with teacher
+
+pruning:
+  enabled: true                                                                 # enable structural student path
+  scheme: structural_width                                                      # structural_width pruning/export path
+  student:
+    width_ratio: 0.6666667                                                      # student width ratio
+  export:
+    enabled: true                                                               # export structural student
+
+experiment:
+  name: hbtxr_mode2_stage2                                                      # run name prefix

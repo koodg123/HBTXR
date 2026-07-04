@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eye Detection Algorithm Demo</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="flex flex-col items-center space-y-4">
+        <div class="flex flex-col items-center space-y-2">
+            <h1 class="text-3xl font-bold tracking-tight">Eye Detection Algorithm</h1>
+            <p class="text-center text-gray-500">This is a demo of our Eye Detection Algorithm on a sample of train and test data. The green dot represents the correct label and the red one is our prediction.</p>
+        </div>
+        <div class="flex flex-col items-center space-y-4 w-full md:w-3/4 p-4">
+          <h2 class="text-2xl font-semibold col-span-full">Train Data</h2>
+          <div class="flex flex-wrap w-full gap-4 md:grid-cols-2 items-center justify-center">
+              <div class="flex flex-col items-center justify-center border-4 border-green-500 rounded-lg bg-green-200 text-green-500 p-4">
+                  <h3 class="text-2xl font-semibold col-span-full text-black">Standard</h3>
+                  <iframe src="train/0.html" class="h-96 w-96" frameborder="0"></iframe>
+              </div>
+              <div class="flex flex-col items-center justify-center border-4 border-green-500 rounded-lg bg-green-200 text-green-500 p-4">
+                  <h3 class="text-2xl font-semibold col-span-full text-black">Blinking</h3>
+                  <iframe src="train/1.html" class="h-96 w-96" frameborder="0"></iframe>
+              </div>     
+              <div class="flex flex-col items-center justify-center border-4 border-green-500 rounded-lg bg-green-200 text-green-500 p-4">
+                <h3 class="text-2xl font-semibold col-span-full text-black">Fast movement</h3>
+                <iframe src="val/2.html" class="h-96 w-96" frameborder="0"></iframe>
+            </div>   
+            <div class="flex flex-col items-center justify-center border-4 border-green-500 rounded-lg bg-green-200 text-green-500 p-4">
+              <h3 class="text-2xl font-semibold col-span-full text-black">Glasses example</h3>
+              <iframe src="val/20.html" class="h-96 w-96" frameborder="0"></iframe>
+          </div>   
+          </div>
+          <h2 class="text-2xl font-semibold col-span-full">Test Data</h2>
+          <div class="flex flex-wrap w-full gap-4 md:grid-cols-2 items-center justify-center">
+              <div class="flex flex-col items-center justify-center border-4 border-red-500 rounded-lg bg-red-200 text-red-500 p-4">
+                  <iframe src="test/0.html" class="h-96 w-96" frameborder="0"></iframe>
+              </div>
+              <div class="flex flex-col items-center justify-center border-4 border-red-500 rounded-lg bg-red-200 text-red-500 p-4">
+                <iframe src="test/1.html" class="h-96 w-96" frameborder="0"></iframe>
+              </div>
+              <div class="flex flex-col items-center justify-center border-4 border-red-500 rounded-lg bg-red-200 text-red-500 p-4">
+                <iframe src="test/2.html" class="h-96 w-96" frameborder="0"></iframe>
+              </div>
+              <div class="flex flex-col items-center justify-center border-4 border-red-500 rounded-lg bg-red-200 text-red-500 p-4">
+                <iframe src="test/3.html" class="h-96 w-96" frameborder="0"></iframe>
+              </div>
+              <div class="flex flex-col items-center justify-center border-4 border-red-500 rounded-lg bg-red-200 text-red-500 p-4">
+                <iframe src="test/4.html" class="h-96 w-96" frameborder="0"></iframe>
+              </div>
+              <div class="flex flex-col items-center justify-center border-4 border-red-500 rounded-lg bg-red-200 text-red-500 p-4">
+                <iframe src="test/5.html" class="h-96 w-96" frameborder="0"></iframe>
+              </div>
+              <div class="flex flex-col items-center justify-center border-4 border-red-500 rounded-lg bg-red-200 text-red-500 p-4">
+                <iframe src="test/6.html" class="h-96 w-96" frameborder="0"></iframe>
+              </div>
+              <div class="flex flex-col items-center justify-center border-4 border-red-500 rounded-lg bg-red-200 text-red-500 p-4">
+                <iframe src="test/7.html" class="h-96 w-96" frameborder="0"></iframe>
+              </div>
+              <div class="flex flex-col items-center justify-center border-4 border-red-500 rounded-lg bg-red-200 text-red-500 p-4">
+                <iframe src="test/8.html" class="h-96 w-96" frameborder="0"></iframe>
+              </div>
+              <div class="flex flex-col items-center justify-center border-4 border-red-500 rounded-lg bg-red-200 text-red-500 p-4">
+                  <h3 class="text-2xl font-semibold col-span-full text-black">Bad initial state</h3>
+                  <iframe src="test/52.html" class="h-96 w-96" frameborder="0"></iframe>
+              </div>
+          </div>
+        </div>
+      </div>
+    </div>
+</body>
+</html>

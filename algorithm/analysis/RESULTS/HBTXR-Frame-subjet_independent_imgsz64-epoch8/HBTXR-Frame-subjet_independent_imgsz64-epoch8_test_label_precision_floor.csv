@@ -1,0 +1,2 @@
+source,n_annotations_reference,integer_quantized_pct,per_axis_label_std_px,floor_mean_px,floor_median_px,floor_p95_px
+manual_gt_integer_quantization_floor,9011,100.0,0.289,0.383,0.399,0.599

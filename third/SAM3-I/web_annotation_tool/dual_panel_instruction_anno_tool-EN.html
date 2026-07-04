@@ -1,0 +1,1053 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Dual-Panel Instruction Annotation Tool (Left: Annotate / Right: Reference, Auto-Save + JSON)</title>
+  <style>
+    body { font-family: sans-serif; margin: 0; padding: 16px; box-sizing: border-box; }
+    h1 { font-size: 20px; margin-bottom: 12px; }
+
+    #top-bar {
+      display: flex; align-items: center; gap: 12px; margin-bottom: 12px; flex-wrap: wrap;
+      position: sticky; top: 0; z-index: 10; background: white; padding-bottom: 8px;
+    }
+
+    #info-bar { margin-bottom: 8px; display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+
+    button { padding: 4px 10px; cursor: pointer; }
+
+    /* Jump control */
+    .jump-wrap{
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 2px 6px;
+      border: 1px solid #eee;
+      border-radius: 6px;
+      background: #fafafa;
+    }
+    .jump-wrap input{
+      width: 210px;
+      padding: 4px 6px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      outline: none;
+      font-size: 12px;
+    }
+    .jump-hint{
+      font-size: 12px;
+      color: #666;
+      max-width: 520px;
+    }
+    .jump-hint.warn{ color: #b45309; }
+    .jump-hint.ok{ color: #0f766e; }
+
+    /* Dual-panel layout */
+    .panel-wrap{
+      width: 100%;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      align-items: start;
+      margin-bottom: 8px;
+    }
+    .panel{
+      border: 1px solid #ccc;
+      background: #f8f8f8;
+      padding: 8px;
+      border-radius: 6px;
+      box-sizing: border-box;
+    }
+    .panel-title{
+      font-size: 12px;
+      color: #333;
+      display:flex;
+      justify-content: space-between;
+      align-items:center;
+      margin: 0 0 6px 0;
+      gap: 8px;
+    }
+    .panel-title code{
+      font-size: 11px;
+      color: #666;
+      background: #fff;
+      padding: 2px 6px;
+      border-radius: 4px;
+      border: 1px solid #eee;
+    }
+
+    /* Left annotation container: relative positioning for markers */
+    .image-container {
+      position: relative;
+      display: inline-block;
+      background: #f8f8f8;
+    }
+
+    /* Default image display */
+    .img {
+      display: block;
+      max-width: 100%;
+      max-height: 50vh;
+      height: auto;
+      user-select: none;
+      -webkit-user-drag: none;
+    }
+
+    .point-marker {
+      position: absolute; width: 12px; height: 12px; border-radius: 50%;
+      border: 2px solid red; background: rgba(255, 0, 0, 0.3);
+      transform: translate(-50%, -50%); cursor: pointer; box-shadow: 0 0 4px rgba(0,0,0,0.5);
+    }
+
+    .comment-wrap { width: 100%; display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .comment-box label { font-size: 12px; color: #333; display: block; margin-bottom: 6px; }
+    textarea {
+      width: 100%;
+      height: 70px;
+      padding: 8px;
+      box-sizing: border-box;
+      resize: vertical;
+    }
+
+    #log {
+      font-size: 12px; color: #555; white-space: pre-wrap; max-height: 100px; overflow: auto;
+      border-top: 1px solid #eee; margin-top: 10px; padding-top: 6px;
+    }
+
+    #autosave-status { font-size: 12px; color: #888; }
+    #pairWarn { font-size: 12px; color: #b45309; }
+
+    @media (max-width: 1000px) {
+      .panel-wrap { grid-template-columns: 1fr; }
+      .comment-wrap { grid-template-columns: 1fr; }
+      .img { max-height: 40vh; }
+      .jump-wrap input{ width: 180px; }
+    }
+
+    /* =========================================================
+       ✅ Full-screen annotation mode (Left panel only)
+       + 2x/3x zoom + Shift-drag panning
+       ========================================================= */
+    #fsOverlay{
+      position: fixed;
+      inset: 0;
+      z-index: 99999;
+      background: #111;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 8px;
+      box-sizing: border-box;
+    }
+    #fsOverlay.show{ display: flex; }
+
+    #fsContainer{
+      position: relative;
+      width: 100vw;
+      height: 100vh;
+      overflow: hidden;
+      box-sizing: border-box;
+    }
+
+    /* This layer is transformed (scale/pan). It contains image + points, so points stay aligned. */
+    #fsStage{
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%) scale(1);
+      transform-origin: center center;
+      will-change: transform;
+      cursor: default;
+    }
+
+    #fsImageA{
+      display: block;
+      max-width: 100vw;
+      max-height: 100vh;
+      width: auto;
+      height: auto;
+      object-fit: contain;
+      user-select: none;
+      -webkit-user-drag: none;
+    }
+
+    .fs-point{
+      position: absolute;
+      width: 12px; height: 12px; border-radius: 50%;
+      border: 2px solid #ff3b30;
+      background: rgba(255, 59, 48, 0.35);
+      transform: translate(-50%, -50%);
+      cursor: pointer;
+      box-shadow: 0 0 4px rgba(0,0,0,0.6);
+    }
+
+    /* Top toolbar (clickable) */
+    #fsToolbar{
+      position: absolute;
+      top: 10px;
+      left: 12px;
+      display: flex;
+      gap: 8px;
+      align-items: center;
+      background: rgba(0,0,0,0.45);
+      padding: 8px 10px;
+      border-radius: 10px;
+      color: #fff;
+      font-size: 12px;
+      user-select: none;
+    }
+    #fsToolbar button{
+      padding: 4px 8px;
+      border: 1px solid rgba(255,255,255,0.25);
+      background: rgba(255,255,255,0.08);
+      color: #fff;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+    #fsToolbar button:hover{
+      background: rgba(255,255,255,0.16);
+    }
+    #fsToolbar .muted{
+      opacity: 0.85;
+      margin-left: 6px;
+      white-space: nowrap;
+    }
+
+    /* Shift-pan cursor */
+    #fsContainer.shift-pan #fsStage{
+      cursor: grab;
+    }
+    #fsContainer.shift-pan.dragging #fsStage{
+      cursor: grabbing;
+    }
+  </style>
+</head>
+<body>
+  <h1>Dual-Panel Instruction Annotation Tool (Left: Annotate / Right: Reference)</h1>
+
+  <div id="top-bar">
+    <label>
+      Select the left annotation folder (A_to_be_annotated):
+      <input type="file" id="fileInputA" webkitdirectory multiple accept="image/*">
+    </label>
+    <label>
+      Select the right reference folder (B_for_reference):
+      <input type="file" id="fileInputB" webkitdirectory multiple accept="image/*">
+    </label>
+
+    <button id="prevBtn" disabled>Previous</button>
+    <button id="nextBtn" disabled>Next</button>
+
+    <span class="jump-wrap" title="Enter a file name to jump to that image (press Enter to confirm)">
+      <input id="jumpInput" type="text" placeholder="Enter image name, e.g., object-image.png">
+      <button id="jumpBtn" disabled>Go</button>
+    </span>
+    <span id="jumpHint" class="jump-hint"></span>
+
+    <button id="fsBtn" disabled title="Show the left (annotated) image in full screen (press ESC to exit)">Full Screen (Left)</button>
+
+    <button id="exportCurrentBtn" disabled>Export Current JSON</button>
+    <button id="exportAllBtn" disabled>Save annotation.json</button>
+    <button id="loadJsonBtn" disabled>Load Existing JSON</button>
+    <input type="file" id="jsonInput" accept=".json,application/json" style="display:none">
+    <span id="autosave-status"></span>
+  </div>
+
+  <div id="info-bar">
+    <span id="imageName">Current image: None</span>
+    <span id="imageIndex"></span>
+    <span id="pairWarn"></span>
+  </div>
+
+  <div class="panel-wrap">
+    <div class="panel">
+      <div class="panel-title">
+        <span>Left: Annotation Panel (click to add points)</span>
+        <code id="aStatus">Not loaded</code>
+      </div>
+      <div class="image-container" id="leftContainer">
+        <img id="imageA" class="img" alt="Left image (annotation)">
+      </div>
+      <div style="font-size:12px;color:#666;margin-top:6px;">
+        Instructions: Click to add a point. Click an existing point to delete it. Exported coordinates are based on the original (full-resolution) left image.
+      </div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-title">
+        <span>Right: Reference Panel (no annotation)</span>
+        <code id="bStatus">Not loaded</code>
+      </div>
+      <div class="image-container" id="rightContainer">
+        <img id="imageB" class="img" alt="Right image (reference)">
+      </div>
+      <div style="font-size:12px;color:#666;margin-top:6px;">
+        Notes: For reference only. This panel does not accept clicks and will not show markers.
+      </div>
+    </div>
+  </div>
+
+  <div class="comment-wrap">
+    <div class="comment-box">
+      <label for="simpleText">Referring Description (with target term)</label>
+      <textarea id="simpleText" placeholder="e.g., Identify the red wooden bench in the scene..."></textarea>
+    </div>
+    <div class="comment-box">
+      <label for="complexText">Reasoning Description (without target term)</label>
+      <textarea id="complexText" placeholder="e.g., Find the object in the image that can be used for a short rest..."></textarea>
+    </div>
+  </div>
+
+  <div style="margin-top:10px;">
+    <button id="clearPointsBtn" disabled>Clear All Points</button>
+  </div>
+
+  <div id="log"></div>
+
+  <!-- ✅ Full-screen overlay: left image + points + 2x/3x zoom + Shift-drag panning -->
+  <div id="fsOverlay" aria-hidden="true">
+    <div id="fsContainer">
+      <div id="fsToolbar">
+        <button id="fsZoom1">1x</button>
+        <button id="fsZoom2">2x</button>
+        <button id="fsZoom3">3x</button>
+        <button id="fsReset">Reset</button>
+        <span class="muted">Shift+Drag: Pan | Click: Add point | Click point: Delete | ESC: Exit</span>
+      </div>
+
+      <div id="fsStage">
+        <img id="fsImageA" alt="Full-screen left image">
+        <!-- Points will be dynamically inserted into fsStage -->
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // names: intersection list of shared file names in A/B
+    let names = [];
+    let currentIndex = -1;
+
+    const mapA = new Map(); // name -> File (left annotation)
+    const mapB = new Map(); // name -> File (right reference)
+
+    // annotations[name] = { points: [{x,y},...], simple: "...", complex: "..." }
+    const annotations = {};
+    const AUTOSAVE_KEY = 'image_annotator_autosave_v4_dual_left_annotate';
+
+    const fileInputA = document.getElementById('fileInputA');
+    const fileInputB = document.getElementById('fileInputB');
+
+    const imageA = document.getElementById('imageA');
+    const imageB = document.getElementById('imageB');
+
+    const leftContainer = document.getElementById('leftContainer');
+    const rightContainer = document.getElementById('rightContainer');
+
+    const aStatus = document.getElementById('aStatus');
+    const bStatus = document.getElementById('bStatus');
+
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+    const exportCurrentBtn = document.getElementById('exportCurrentBtn');
+    const exportAllBtn = document.getElementById('exportAllBtn');
+    const clearPointsBtn = document.getElementById('clearPointsBtn');
+    const loadJsonBtn = document.getElementById('loadJsonBtn');
+    const jsonInput = document.getElementById('jsonInput');
+
+    const imageNameEl = document.getElementById('imageName');
+    const imageIndexEl = document.getElementById('imageIndex');
+    const pairWarnEl = document.getElementById('pairWarn');
+
+    const simpleEl = document.getElementById('simpleText');
+    const complexEl = document.getElementById('complexText');
+    const logEl = document.getElementById('log');
+    const autosaveStatusEl = document.getElementById('autosave-status');
+
+    // Jump control
+    const jumpInput = document.getElementById('jumpInput');
+    const jumpBtn = document.getElementById('jumpBtn');
+    const jumpHint = document.getElementById('jumpHint');
+
+    // Full-screen controls
+    const fsBtn = document.getElementById('fsBtn');
+    const fsOverlay = document.getElementById('fsOverlay');
+    const fsContainer = document.getElementById('fsContainer');
+    const fsStage = document.getElementById('fsStage');
+    const fsImageA = document.getElementById('fsImageA');
+
+    const fsZoom1 = document.getElementById('fsZoom1');
+    const fsZoom2 = document.getElementById('fsZoom2');
+    const fsZoom3 = document.getElementById('fsZoom3');
+    const fsReset = document.getElementById('fsReset');
+
+    let fsObjectUrl = null;
+
+    // Full-screen zoom/pan state (display-only; does not affect stored coordinates)
+    let fsZoom = 1;
+    let fsPanX = 0;
+    let fsPanY = 0;
+
+    // Shift-drag state
+    let isShiftDown = false;
+    let isDragging = false;
+    let dragStartX = 0;
+    let dragStartY = 0;
+    let panStartX = 0;
+    let panStartY = 0;
+
+    function setJumpHint(text, cls) {
+      jumpHint.textContent = text || '';
+      jumpHint.className = 'jump-hint' + (cls ? (' ' + cls) : '');
+    }
+
+    function showAutosaveStatus() {
+      autosaveStatusEl.textContent = 'Auto-saved';
+      setTimeout(() => { autosaveStatusEl.textContent = ''; }, 1800);
+    }
+
+    function ensureAnn(name) {
+      if (!annotations[name]) annotations[name] = { points: [], simple: '', complex: '' };
+      if (!Array.isArray(annotations[name].points)) annotations[name].points = [];
+      if (typeof annotations[name].simple !== 'string') annotations[name].simple = '';
+      if (typeof annotations[name].complex !== 'string') annotations[name].complex = '';
+    }
+
+    function saveAnnotations() {
+      if (names.length === 0) {
+        localStorage.removeItem(AUTOSAVE_KEY);
+        return;
+      }
+      const data = {
+        timestamp: Date.now(),
+        imageNames: names.slice(),
+        annotations,
+        currentImageName: (currentIndex >= 0 ? names[currentIndex] : null),
+      };
+      try {
+        localStorage.setItem(AUTOSAVE_KEY, JSON.stringify(data));
+        showAutosaveStatus();
+      } catch (e) {
+        console.warn('autosave failed:', e);
+      }
+    }
+
+    function tryRestoreFromAutosave() {
+      const raw = localStorage.getItem(AUTOSAVE_KEY);
+      if (!raw) return;
+      let data;
+      try { data = JSON.parse(raw); } catch { return; }
+      if (!data || !data.annotations) return;
+
+      const savedAnn = data.annotations || {};
+      names.forEach(n => {
+        const item = savedAnn[n];
+        if (item) {
+          annotations[n] = {
+            points: Array.isArray(item.points) ? item.points.map(p => ({ x: Number(p.x), y: Number(p.y) })) : [],
+            simple: item.simple ?? (item.comment ?? ''),
+            complex: item.complex ?? '',
+          };
+        } else {
+          annotations[n] = { points: [], simple: '', complex: '' };
+        }
+      });
+
+      if (data.currentImageName) {
+        const idx = names.findIndex(x => x === data.currentImageName);
+        if (idx >= 0) currentIndex = idx;
+      }
+    }
+
+    function updateButtons() {
+      const ready = names.length > 0;
+      prevBtn.disabled = !ready || currentIndex <= 0;
+      nextBtn.disabled = !ready || currentIndex >= names.length - 1;
+      exportCurrentBtn.disabled = !ready;
+      exportAllBtn.disabled = !ready;
+      clearPointsBtn.disabled = !ready;
+      loadJsonBtn.disabled = !ready;
+      jumpBtn.disabled = !ready;
+      fsBtn.disabled = !ready;
+    }
+
+    function setWarn(msg) { pairWarnEl.textContent = msg || ''; }
+
+    function buildNameList() {
+      const aNames = new Set(mapA.keys());
+      const bNames = new Set(mapB.keys());
+
+      const inter = [];
+      for (const n of aNames) if (bNames.has(n)) inter.push(n);
+      inter.sort((x, y) => x.localeCompare(y, 'en'));
+
+      const onlyA = [];
+      const onlyB = [];
+      for (const n of aNames) if (!bNames.has(n)) onlyA.push(n);
+      for (const n of bNames) if (!aNames.has(n)) onlyB.push(n);
+
+      names = inter;
+
+      if (names.length === 0) {
+        setWarn('No matching file names were found between A and B. Please verify that the two folders contain identical image file names.');
+        currentIndex = -1;
+      } else {
+        let msg = '';
+        if (onlyA.length) msg += `${onlyA.length} image(s) exist in A but are missing in B; `;
+        if (onlyB.length) msg += `${onlyB.length} image(s) exist in B but are missing in A; `;
+        setWarn(msg);
+        currentIndex = 0;
+      }
+
+      for (const k in annotations) delete annotations[k];
+      tryRestoreFromAutosave();
+
+      updateButtons();
+      if (names.length > 0) loadCurrentPair();
+      saveAnnotations();
+
+      if (names.length > 0) {
+        setJumpHint(`Loaded ${names.length} image(s). You may jump directly by file name for quick review.`, '');
+      } else {
+        setJumpHint('', '');
+      }
+    }
+
+    function loadImageInto(imgEl, file, onOk, onErr) {
+      const url = URL.createObjectURL(file);
+      imgEl.onload = () => { URL.revokeObjectURL(url); onOk && onOk(); };
+      imgEl.onerror = () => { URL.revokeObjectURL(url); onErr && onErr(); };
+      imgEl.src = url;
+    }
+
+    function loadCurrentPair() {
+      if (currentIndex < 0 || currentIndex >= names.length) return;
+      const name = names[currentIndex];
+
+      const fileA = mapA.get(name);
+      const fileB = mapB.get(name);
+
+      if (!fileA || !fileB) {
+        setWarn(`The current file "${name}" is missing in A or B and has been skipped.`);
+        return;
+      }
+
+      aStatus.textContent = `A: ${name}`;
+      bStatus.textContent = `B: ${name}`;
+
+      ensureAnn(name);
+      simpleEl.value = annotations[name].simple || '';
+      complexEl.value = annotations[name].complex || '';
+
+      loadImageInto(imageA, fileA, () => {
+        renderPoints();
+        imageNameEl.textContent = `Current image: ${name}`;
+        imageIndexEl.textContent = `(${currentIndex + 1} / ${names.length})`;
+        saveAnnotations();
+
+        if (isFullscreenOpen()) openFullscreen(true); // sync full-screen
+      }, () => alert('Failed to load the left (A) image: ' + name));
+
+      loadImageInto(imageB, fileB, () => {}, () => alert('Failed to load the right (B) image: ' + name));
+
+      setJumpHint(`Current: ${name}`, 'ok');
+    }
+
+    // --- Main view: point rendering (left only) ---
+    function clearMarkers() {
+      leftContainer.querySelectorAll('.point-marker').forEach(m => m.remove());
+    }
+
+    function renderPoints() {
+      clearMarkers();
+      if (!imageA.clientWidth || !imageA.clientHeight) return;
+
+      const name = names[currentIndex];
+      const ann = annotations[name];
+      if (!ann || !Array.isArray(ann.points)) return;
+
+      const scaleX = imageA.clientWidth / imageA.naturalWidth;
+      const scaleY = imageA.clientHeight / imageA.naturalHeight;
+
+      ann.points.forEach((p, idx) => {
+        const m = document.createElement('div');
+        m.className = 'point-marker';
+        m.style.left = (p.x * scaleX) + 'px';
+        m.style.top  = (p.y * scaleY) + 'px';
+        m.title = `Point ${idx + 1}: (${p.x}, ${p.y}) - Click to delete`;
+
+        m.addEventListener('click', ev => {
+          ev.stopPropagation();
+          ann.points.splice(idx, 1);
+          renderPoints();
+          renderPointsFullscreen();
+          saveAnnotations();
+        });
+
+        leftContainer.appendChild(m);
+      });
+
+      refreshPointList();
+      renderPointsFullscreen();
+    }
+
+    function refreshPointList() {
+      const name = names[currentIndex];
+      const ann = annotations[name];
+      if (!ann || !ann.points || ann.points.length === 0) {
+        logEl.textContent = 'No points annotated for the current image.';
+        return;
+      }
+      logEl.textContent = ann.points.map((p, i) => `${i + 1}: (${p.x}, ${p.y})`).join('\n');
+    }
+
+    // --- Jump ---
+    function normalizeName(s) { return (s || '').trim(); }
+    function stripExt(s) { return s.replace(/\.[^.]+$/, ''); }
+
+    function jumpToName(queryRaw) {
+      if (!names.length) return;
+
+      const q = normalizeName(queryRaw);
+      if (!q) { setJumpHint('Please enter an image file name (e.g., object-image.png).', 'warn'); return; }
+
+      let idx = names.indexOf(q);
+
+      if (idx < 0) {
+        const qLower = q.toLowerCase();
+        idx = names.findIndex(n => n.toLowerCase() === qLower);
+      }
+      if (idx < 0 && !/\.[^.]+$/.test(q)) {
+        const qNoExt = q.toLowerCase();
+        idx = names.findIndex(n => stripExt(n).toLowerCase() === qNoExt);
+      }
+      if (idx < 0) {
+        const qLower = q.toLowerCase();
+        idx = names.findIndex(n => n.toLowerCase().includes(qLower));
+      }
+
+      if (idx >= 0) {
+        currentIndex = idx;
+        updateButtons();
+        loadCurrentPair();
+        setJumpHint(`Jumped to: ${names[idx]} (Image ${idx + 1} of ${names.length})`, 'ok');
+        return;
+      }
+
+      const qLower = q.toLowerCase();
+      const suggestions = names
+        .filter(n => n.toLowerCase().includes(qLower) || stripExt(n).toLowerCase().includes(qLower))
+        .slice(0, 10);
+
+      if (suggestions.length) {
+        setJumpHint(`No match for "${q}". Did you mean: ${suggestions.join(', ')}?`, 'warn');
+      } else {
+        setJumpHint(`No match for "${q}". Please verify the exact file name (including extension).`, 'warn');
+      }
+    }
+
+    jumpBtn.addEventListener('click', () => jumpToName(jumpInput.value));
+    jumpInput.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') {
+        e.preventDefault();
+        if (!jumpBtn.disabled) jumpToName(jumpInput.value);
+      }
+    });
+
+    // --- Select A/B folders ---
+    fileInputA.addEventListener('change', (e) => {
+      mapA.clear();
+      const files = Array.from(e.target.files || []).filter(f => f.type.startsWith('image/'));
+      for (const f of files) mapA.set(f.name, f);
+      aStatus.textContent = files.length ? `Loaded ${files.length} image(s)` : 'Not loaded';
+      if (mapB.size) buildNameList();
+    });
+
+    fileInputB.addEventListener('change', (e) => {
+      mapB.clear();
+      const files = Array.from(e.target.files || []).filter(f => f.type.startsWith('image/'));
+      for (const f of files) mapB.set(f.name, f);
+      bStatus.textContent = files.length ? `Loaded ${files.length} image(s)` : 'Not loaded';
+      if (mapA.size) buildNameList();
+    });
+
+    // --- Left click to add a point (coordinates are in the original left image space) ---
+    leftContainer.addEventListener('click', (e) => {
+      if (!imageA.src || currentIndex < 0) return;
+
+      const rect = imageA.getBoundingClientRect();
+      const xCss = e.clientX - rect.left;
+      const yCss = e.clientY - rect.top;
+
+      if (xCss < 0 || yCss < 0 || xCss > rect.width || yCss > rect.height) return;
+
+      const x = Math.round(xCss * imageA.naturalWidth / imageA.clientWidth);
+      const y = Math.round(yCss * imageA.naturalHeight / imageA.clientHeight);
+
+      const name = names[currentIndex];
+      ensureAnn(name);
+      annotations[name].points.push({ x, y });
+
+      renderPoints();
+      saveAnnotations();
+    });
+
+    // --- Clear points ---
+    clearPointsBtn.addEventListener('click', () => {
+      if (currentIndex < 0) return;
+      const name = names[currentIndex];
+      ensureAnn(name);
+      annotations[name].points = [];
+      renderPoints();
+      saveAnnotations();
+    });
+
+    // --- Text inputs ---
+    simpleEl.addEventListener('input', () => {
+      if (currentIndex < 0) return;
+      const name = names[currentIndex];
+      ensureAnn(name);
+      annotations[name].simple = simpleEl.value;
+      saveAnnotations();
+    });
+
+    complexEl.addEventListener('input', () => {
+      if (currentIndex < 0) return;
+      const name = names[currentIndex];
+      ensureAnn(name);
+      annotations[name].complex = complexEl.value;
+      saveAnnotations();
+    });
+
+    // --- Navigation ---
+    prevBtn.addEventListener('click', () => {
+      if (currentIndex <= 0) return;
+      currentIndex--;
+      updateButtons();
+      loadCurrentPair();
+    });
+
+    nextBtn.addEventListener('click', () => {
+      if (currentIndex >= names.length - 1) return;
+      currentIndex++;
+      updateButtons();
+      loadCurrentPair();
+    });
+
+    // --- Export current (format unchanged) ---
+    exportCurrentBtn.addEventListener('click', () => {
+      if (currentIndex < 0) return;
+      const name = names[currentIndex];
+      ensureAnn(name);
+      const ann = annotations[name];
+
+      const json = JSON.stringify({
+        image_name: name,
+        points: ann.points,
+        simple: ann.simple,
+        complex: ann.complex
+      }, null, 2);
+
+      download(json, name.replace(/\.[^.]+$/, '') + '_annotation.json');
+    });
+
+    // --- Export all annotation.json (format unchanged) ---
+    exportAllBtn.addEventListener('click', () => {
+      if (names.length === 0) return;
+      const arr = names.map(name => {
+        ensureAnn(name);
+        return {
+          image_name: name,
+          points: annotations[name].points,
+          simple: annotations[name].simple,
+          complex: annotations[name].complex
+        };
+      });
+      download(JSON.stringify(arr, null, 2), 'annotation.json');
+    });
+
+    function download(content, filename) {
+      const blob = new Blob([content], { type: 'application/json' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = filename;
+      a.click();
+      URL.revokeObjectURL(url);
+    }
+
+    // --- Import JSON ---
+    loadJsonBtn.addEventListener('click', () => {
+      if (names.length === 0) {
+        alert('Please select both the left and right image folders first.');
+        return;
+      }
+      jsonInput.value = '';
+      jsonInput.click();
+    });
+
+    jsonInput.addEventListener('change', e => {
+      const file = e.target.files[0];
+      if (!file) return;
+
+      const reader = new FileReader();
+      reader.onload = () => {
+        let data;
+        try { data = JSON.parse(reader.result); }
+        catch (err) { alert('Failed to parse JSON: ' + err.message); return; }
+
+        if (Array.isArray(data)) {
+          data.forEach(item => {
+            if (!item || !item.image_name) return;
+            const n = item.image_name;
+            annotations[n] = {
+              points: Array.isArray(item.points) ? item.points.map(p => ({ x: Number(p.x), y: Number(p.y) })) : [],
+              simple: item.simple ?? (item.comment ?? ''),
+              complex: item.complex ?? '',
+            };
+          });
+        } else if (data && typeof data === 'object') {
+          Object.entries(data).forEach(([n, item]) => {
+            if (!item) return;
+            annotations[n] = {
+              points: Array.isArray(item.points) ? item.points.map(p => ({ x: Number(p.x), y: Number(p.y) })) : [],
+              simple: item.simple ?? (item.comment ?? ''),
+              complex: item.complex ?? '',
+            };
+          });
+        } else {
+          alert('Unsupported JSON format.');
+          return;
+        }
+
+        const cur = names[currentIndex];
+        ensureAnn(cur);
+        simpleEl.value = annotations[cur].simple || '';
+        complexEl.value = annotations[cur].complex || '';
+        renderPoints();
+        saveAnnotations();
+        alert('JSON loaded successfully.');
+        setJumpHint('JSON loaded. You can jump by file name for quick review.', '');
+      };
+      reader.readAsText(file, 'utf-8');
+    });
+
+    window.addEventListener('resize', () => {
+      if (names.length > 0) {
+        renderPoints();
+        renderPointsFullscreen();
+      }
+    });
+
+    /* =========================================================
+       ✅ Full-screen: point rendering + 2x/3x zoom + Shift-drag pan (pixel-perfect alignment)
+       Key points:
+       - Click coordinates use getBoundingClientRect() (post-transform size/position)
+       - Coordinate mapping: x = xCss * naturalW / rect.width
+       - Marker positions use the untransformed layout size (clientWidth) and follow fsStage transform.
+       ========================================================= */
+
+    function isFullscreenOpen() {
+      return fsOverlay.classList.contains('show');
+    }
+
+    function applyFsTransform() {
+      fsStage.style.transform =
+        `translate(-50%, -50%) translate(${fsPanX}px, ${fsPanY}px) scale(${fsZoom})`;
+    }
+
+    function resetFsView() {
+      fsZoom = 1;
+      fsPanX = 0;
+      fsPanY = 0;
+      applyFsTransform();
+    }
+
+    function clearFsPoints() {
+      fsStage.querySelectorAll('.fs-point').forEach(n => n.remove());
+    }
+
+    function renderPointsFullscreen() {
+      if (!isFullscreenOpen()) return;
+      if (!fsImageA.clientWidth || !fsImageA.clientHeight) return;
+      if (currentIndex < 0) return;
+
+      const name = names[currentIndex];
+      const ann = annotations[name];
+      if (!ann || !Array.isArray(ann.points)) return;
+
+      clearFsPoints();
+
+      const scaleX = fsImageA.clientWidth / fsImageA.naturalWidth;
+      const scaleY = fsImageA.clientHeight / fsImageA.naturalHeight;
+
+      ann.points.forEach((p, idx) => {
+        const m = document.createElement('div');
+        m.className = 'fs-point';
+        m.style.left = (p.x * scaleX) + 'px';
+        m.style.top  = (p.y * scaleY) + 'px';
+        m.title = `Point ${idx + 1}: (${p.x}, ${p.y}) - Click to delete`;
+
+        m.addEventListener('click', (ev) => {
+          ev.stopPropagation();
+          ann.points.splice(idx, 1);
+          renderPoints();
+          renderPointsFullscreen();
+          saveAnnotations();
+        });
+
+        fsStage.appendChild(m);
+      });
+    }
+
+    function openFullscreen(syncOnly=false) {
+      if (currentIndex < 0) return;
+      const name = names[currentIndex];
+      const fileA = mapA.get(name);
+      if (!fileA) return;
+
+      if (!syncOnly) {
+        fsOverlay.classList.add('show');
+        fsOverlay.setAttribute('aria-hidden', 'false');
+        resetFsView();
+      }
+
+      try { if (fsObjectUrl) URL.revokeObjectURL(fsObjectUrl); } catch {}
+      fsObjectUrl = URL.createObjectURL(fileA);
+
+      fsImageA.onload = () => {
+        renderPointsFullscreen();
+      };
+      fsImageA.onerror = () => {
+        alert('Failed to load the full-screen image: ' + name);
+      };
+      fsImageA.src = fsObjectUrl;
+
+      fsContainer.classList.toggle('shift-pan', isShiftDown);
+    }
+
+    function closeFullscreen() {
+      fsOverlay.classList.remove('show');
+      fsOverlay.setAttribute('aria-hidden', 'true');
+      clearFsPoints();
+
+      resetFsView();
+
+      if (fsObjectUrl) {
+        try { URL.revokeObjectURL(fsObjectUrl); } catch {}
+        fsObjectUrl = null;
+      }
+      isDragging = false;
+      fsContainer.classList.remove('dragging');
+    }
+
+    fsBtn.addEventListener('click', () => {
+      if (!names.length) return;
+      openFullscreen(false);
+    });
+
+    // ESC exits
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && isFullscreenOpen()) {
+        e.preventDefault();
+        closeFullscreen();
+      }
+      if (e.key === 'Shift') {
+        isShiftDown = true;
+        if (isFullscreenOpen()) fsContainer.classList.add('shift-pan');
+      }
+    });
+
+    window.addEventListener('keyup', (e) => {
+      if (e.key === 'Shift') {
+        isShiftDown = false;
+        if (isFullscreenOpen()) {
+          fsContainer.classList.remove('shift-pan');
+          if (isDragging) {
+            isDragging = false;
+            fsContainer.classList.remove('dragging');
+          }
+        }
+      }
+    });
+
+    // Click on the dark background to exit (optional)
+    fsOverlay.addEventListener('click', (e) => {
+      if (e.target === fsOverlay) closeFullscreen();
+    });
+
+    // 2x/3x/1x/Reset
+    function setFsZoom(z) {
+      fsZoom = z;
+      applyFsTransform();
+    }
+    fsZoom1.addEventListener('click', (e) => { e.stopPropagation(); setFsZoom(1); });
+    fsZoom2.addEventListener('click', (e) => { e.stopPropagation(); setFsZoom(2); });
+    fsZoom3.addEventListener('click', (e) => { e.stopPropagation(); setFsZoom(3); });
+    fsReset.addEventListener('click', (e) => { e.stopPropagation(); resetFsView(); });
+
+    // Shift + drag panning (display-only)
+    fsContainer.addEventListener('mousedown', (e) => {
+      if (!isFullscreenOpen()) return;
+      if (!isShiftDown) return;
+
+      if (e.target.classList && e.target.classList.contains('fs-point')) return;
+      if (e.target.tagName === 'BUTTON') return;
+
+      isDragging = true;
+      fsContainer.classList.add('dragging');
+
+      dragStartX = e.clientX;
+      dragStartY = e.clientY;
+      panStartX = fsPanX;
+      panStartY = fsPanY;
+
+      e.preventDefault();
+    });
+
+    window.addEventListener('mousemove', (e) => {
+      if (!isFullscreenOpen()) return;
+      if (!isDragging) return;
+
+      const dx = e.clientX - dragStartX;
+      const dy = e.clientY - dragStartY;
+
+      fsPanX = panStartX + dx;
+      fsPanY = panStartY + dy;
+      applyFsTransform();
+    });
+
+    window.addEventListener('mouseup', () => {
+      if (!isFullscreenOpen()) return;
+      if (!isDragging) return;
+      isDragging = false;
+      fsContainer.classList.remove('dragging');
+    });
+
+    // Full-screen click to add point (rect-based mapping for pixel-perfect alignment)
+    fsContainer.addEventListener('click', (e) => {
+      if (!isFullscreenOpen()) return;
+      if (!fsImageA.src || currentIndex < 0) return;
+
+      if (isShiftDown) return;
+      if (e.target.tagName === 'BUTTON') return;
+
+      const rect = fsImageA.getBoundingClientRect();
+      const xCss = e.clientX - rect.left;
+      const yCss = e.clientY - rect.top;
+
+      if (xCss < 0 || yCss < 0 || xCss > rect.width || yCss > rect.height) return;
+
+      const x = Math.round(xCss * fsImageA.naturalWidth / rect.width);
+      const y = Math.round(yCss * fsImageA.naturalHeight / rect.height);
+
+      const name = names[currentIndex];
+      ensureAnn(name);
+      annotations[name].points.push({ x, y });
+
+      renderPoints();
+      renderPointsFullscreen();
+      saveAnnotations();
+    });
+  </script>
+</body>
+</html>

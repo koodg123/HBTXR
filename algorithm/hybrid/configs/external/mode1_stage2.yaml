@@ -1,0 +1,78 @@
+# Preset: mode1 + stage2
+# Purpose:
+# - original frame + event voxel tracking path
+# - use interval_all event aggregation between prev/current frames
+# Main options you will usually edit here:
+# - data.mode1.event_builder.*
+# - training.epochs, training.scheduler.*
+# - distillation.* and pruning.student.width_ratio
+# - experiment.name
+
+extends: base.yaml                                                              # inherit shared defaults from base
+
+model:
+  heads:
+    # stage2 enables event head and turns off mask loss
+    event: true                                                                 # enable event head in stage2
+    mask: false                                                                 # disable mask supervision in stage2
+
+data:
+  mode: mode1                                                                   # original frame + event baseline
+  canonical_name: canonical1                                                    # mode1 canonical bundle
+  manifest_name: manifest1                                                      # mode1 manifest bundle
+  mode1:
+    event_builder:
+      # interval_all = prev/current frame pair window for stage2 tracking
+      policy: interval_all                                                      # fixed_count | time_bin | interval_all
+      accumulation: fast_causal_linear                                          # plain | causal_linear | fast_causal_linear
+      causal_weight_power: 1.0                                                  # causal weighting exponent
+      fast_causal_limit: 25.0                                                   # saturation limit for fast_causal_linear
+      polarity_split: true                                                      # bool; split positive/negative channels
+
+training:
+  # stage2 = frame-event hybrid tracking
+  stage: stage2                                                                 # frame-event hybrid tracking stage
+  epochs: 30                                                                    # stage2 epochs
+  batch_size: 8                                                                 # stage2 batch size
+  best_metric_name: metric_track_p10_pct                                        # stage2 main ranking metric
+  scheduler:
+    type: plateau                                                               # none | cosine | plateau | step
+    metric_name: metric_track_p10_pct                                           # plateau monitor metric
+    factor: 0.5                                                                 # plateau decay factor
+    patience: 4                                                                 # plateau patience
+  early_stopping:
+    enabled: true                                                               # enable early stopping
+    patience: 10                                                                # no-improvement epochs before stop
+    start_epoch: 6                                                              # first epoch to activate patience count
+
+distillation:
+  enabled: true                                                                 # enable distillation
+  feature_similarity: true
+  feature_weight: 0.1
+  state_similarity: true
+  state_weight: 0.15
+  prediction_similarity: true
+  prediction_weight: 0.1
+  mask_similarity: false
+  kd:
+    enabled: true                                                               # enable KD
+    temperature: 1.0
+    weight: 0.05
+  rkd:
+    enabled: true                                                               # enable RKD
+    distance_weight: 0.02
+
+regularization_ssl:
+  enabled: false                                                                # keep regularization SSL off
+  force_with_teacher: false                                                     # keep off even with teacher
+
+pruning:
+  enabled: true                                                                 # enable structural student path
+  scheme: structural_width                                                      # structural_width pruning/export path
+  student:
+    width_ratio: 0.6666667                                                      # student width ratio
+  export:
+    enabled: true                                                               # export structural student
+
+experiment:
+  name: hbtxr_mode1_stage2                                                      # run name prefix

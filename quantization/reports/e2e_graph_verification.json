@@ -1,0 +1,2346 @@
+[
+  {
+    "elements": 37632,
+    "kind": "graph_patch_embed",
+    "max_abs_error": 0,
+    "mismatches": 0,
+    "name": "patch_embed",
+    "passed": true
+  },
+  {
+    "elements": 37632,
+    "kind": "graph_chain_boundary",
+    "max_abs_error": 0,
+    "mismatches": 0,
+    "name": "patch_embed_to_attn_0",
+    "passed": true
+  },
+  {
+    "elements": 37632,
+    "kind": "graph_layernorm",
+    "max_abs_error": 0,
+    "mismatches": 0,
+    "name": "attn_0_lnq",
+    "passed": true
+  },
+  {
+    "elements": 37632,
+    "kind": "graph_matmul",
+    "max_abs_error": 0,
+    "mismatches": 0,
+    "name": "attn_0_gen_q_matmul",
+    "passed": true
+  },
+  {
+    "elements": 37632,
+    "kind": "graph_matmul",
+    "max_abs_error": 0,
+    "mismatches": 0,
+    "name": "attn_0_gen_k_matmul",
+    "passed": true
+  },
+  {
+    "elements": 37632,
+    "kind": "graph_matmul",
+    "max_abs_error": 0,
+    "mismatches": 0,
+    "name": "attn_0_gen_v_matmul",
+    "passed": true
+  },
+  {
+    "elements": 37632,
+    "kind": "graph_requant_table",
+    "max_abs_error": 0,
+    "mismatches": 0,
+    "name": "attn_0_qq",
+    "passed": true
+  },
+  {
+    "elements": 37632,
+    "kind": "graph_requant_table",
+    "max_abs_error": 0,
+    "mismatches": 0,
+    "name": "attn_0_kq",
+    "passed": true
+  },
+  {
+    "elements": 37632,
+    "kind": "graph_requant_table",
+    "max_abs_error": 0,
+    "mismatches": 0,
+    "name": "attn_0_vq",
+    "passed": true
+  },
+  {
+    "elements": 37632,
+    "kind": "graph_head_split",
+    "max_abs_error": 0,
+    "mismatches": 0,
+    "name": "attn_0_gen_r_matmul_input",
+    "passed": true
+  },
+  {
+    "elements": 37632,
+    "kind": "graph_head_split",
+    "max_abs_error": 0,
+    "mismatches": 0,
+    "name": "attn_0_gen_r_matmul_weight",
+    "passed": true
+  },
+  {
+    "elements": 37632,
+    "kind": "graph_head_transpose",
+    "max_abs_error": 0,
+    "mismatches": 0,
+    "name": "attn_0_gen_a_matmul_weight",
+    "passed": true
+  },
+  {
+    "elements": 115248,
+    "kind": "graph_dynamic_matmul",
+    "max_abs_error": 0,
+    "mismatches": 0,
+    "name": "attn_0_gen_r_matmul",
+    "passed": true
+  },
+  {
+    "elements": 115248,
+    "kind": "graph_softmax_table",
+    "max_abs_error": 0,
+    "mismatches": 0,
+    "name": "attn_0_softmaxq",
+    "passed": true
+  },
+  {
+    "elements": 37632,
+    "kind": "graph_dynamic_matmul",
+    "max_abs_error": 0,
+    "mismatches": 0,
+    "name": "attn_0_gen_a_matmul",
+    "passed": true
+  },
+  {
+    "elements": 37632,
+    "kind": "graph_requant_table",
+    "max_abs_error": 0,
+    "mismatches": 0,
+    "name": "attn_0_aq",
+    "passed": true
+  },
+  {
+    "elements": 37632,
+    "kind": "graph_head_merge",
+    "max_abs_error": 0,
+    "mismatches": 0,
+    "name": "attn_0_gen_o_matmul_input",
+    "passed": true
+  },
+  {
+    "elements": 37632,
+    "kind": "graph_matmul",
+    "max_abs_error": 0,
+    "mismatches": 0,
+    "name": "attn_0_gen_o_matmul",
+    "passed": true
+  },
+  {
+    "elements": 37632,
+    "kind": "graph_attention_block",
+    "max_abs_error": 0,
+    "mismatches": 0,
+    "name": "attn_0",
+    "passed": true
+  },
+  {
+    "elements": 37632,
+    "kind": "graph_chain_boundary",
+    "max_abs_error": 0,
+    "mismatches": 0,
+    "name": "attn_0_to_mlp_0",
+    "passed": true
+  },
+  {
+    "elements": 37632,
+    "kind": "graph_layernorm",
+    "max_abs_error": 0,
+    "mismatches": 0,
+    "name": "mlp_0_lnq",
+    "passed": true
+  },
+  {
+    "elements": 150528,
+    "kind": "graph_matmul",
+    "max_abs_error": 0,
+    "mismatches": 0,
+    "name": "mlp_0_matmul1",
+    "passed": true
+  },
+  {
+    "elements": 150528,
+    "kind": "graph_gelu_table",
+    "max_abs_error": 0,
+    "mismatches": 0,
+    "name": "mlp_0_geluq",
+    "passed": true
+  },
+  {
+    "elements": 37632,
+    "kind": "graph_matmul",
+    "max_abs_error": 0,
+    "mismatches": 0,
+    "name": "mlp_0_matmul2",
+    "passed": true
+  },
+  {
+    "elements": 37632,
+    "kind": "graph_mlp_block",
+    "max_abs_error": 0,
+    "mismatches": 0,
+    "name": "mlp_0",
+    "passed": true
+  },
+  {
+    "elements": 37632,
+    "kind": "graph_chain_boundary",
+    "max_abs_error": 0,
+    "mismatches": 0,
+    "name": "mlp_0_to_attn_1",
+    "passed": true
+  },
+  {
+    "elements": 37632,
+    "kind": "graph_layernorm",
+    "max_abs_error": 0,
+    "mismatches": 0,
+    "name": "attn_1_lnq",
+    "passed": true
+  },
+  {
+    "elements": 37632,
+    "kind": "graph_matmul",
+    "max_abs_error": 0,
+    "mismatches": 0,
+    "name": "attn_1_gen_q_matmul",
+    "passed": true
+  },
+  {
+    "elements": 37632,
+    "kind": "graph_matmul",
+    "max_abs_error": 0,
+    "mismatches": 0,
+    "name": "attn_1_gen_k_matmul",
+    "passed": true
+  },
+  {
+    "elements": 37632,
+    "kind": "graph_matmul",
+    "max_abs_error": 0,
+    "mismatches": 0,
+    "name": "attn_1_gen_v_matmul",
+    "passed": true
+  },
+  {
+    "elements": 37632,
+    "kind": "graph_requant_table",
+    "max_abs_error": 0,
+    "mismatches": 0,
+    "name": "attn_1_qq",
+    "passed": true
+  },
+  {
+    "elements": 37632,
+    "kind": "graph_requant_table",
+    "max_abs_error": 0,
+    "mismatches": 0,
+    "name": "attn_1_kq",
+    "passed": true
+  },
+  {
+    "elements": 37632,
+    "kind": "graph_requant_table",
+    "max_abs_error": 0,
+    "mismatches": 0,
+    "name": "attn_1_vq",
+    "passed": true
+  },
+  {
+    "elements": 37632,
+    "kind": "graph_head_split",
+    "max_abs_error": 0,
+    "mismatches": 0,
+    "name": "attn_1_gen_r_matmul_input",
+    "passed": true
+  },
+  {
+    "elements": 37632,
+    "kind": "graph_head_split",
+    "max_abs_error": 0,
+    "mismatches": 0,
+    "name": "attn_1_gen_r_matmul_weight",
+    "passed": true
+  },
+  {
+    "elements": 37632,
+    "kind": "graph_head_transpose",
+    "max_abs_error": 0,
+    "mismatches": 0,
+    "name": "attn_1_gen_a_matmul_weight",
+    "passed": true
+  },
+  {
+    "elements": 115248,
+    "kind": "graph_dynamic_matmul",
+    "max_abs_error": 0,
+    "mismatches": 0,
+    "name": "attn_1_gen_r_matmul",
+    "passed": true
+  },
+  {
+    "elements": 115248,
+    "kind": "graph_softmax_table",
+    "max_abs_error": 0,
+    "mismatches": 0,
+    "name": "attn_1_softmaxq",
+    "passed": true
+  },
+  {
+    "elements": 37632,
+    "kind": "graph_dynamic_matmul",
+    "max_abs_error": 0,
+    "mismatches": 0,
+    "name": "attn_1_gen_a_matmul",
+    "passed": true
+  },
+  {
+    "elements": 37632,
+    "kind": "graph_requant_table",
+    "max_abs_error": 0,
+    "mismatches": 0,
+    "name": "attn_1_aq",
+    "passed": true
+  },
+  {
+    "elements": 37632,
+    "kind": "graph_head_merge",
+    "max_abs_error": 0,
+    "mismatches": 0,
+    "name": "attn_1_gen_o_matmul_input",
+    "passed": true
+  },
+  {
+    "elements": 37632,
+    "kind": "graph_matmul",
+    "max_abs_error": 0,
+    "mismatches": 0,
+    "name": "attn_1_gen_o_matmul",
+    "passed": true
+  },
+  {
+    "elements": 37632,
+    "kind": "graph_attention_block",
+    "max_abs_error": 0,
+    "mismatches": 0,
+    "name": "attn_1",
+    "passed": true
+  },
+  {
+    "elements": 37632,
+    "kind": "graph_chain_boundary",
+    "max_abs_error": 0,
+    "mismatches": 0,
+    "name": "attn_1_to_mlp_1",
+    "passed": true
+  },
+  {
+    "elements": 37632,
+    "kind": "graph_layernorm",
+    "max_abs_error": 0,
+    "mismatches": 0,
+    "name": "mlp_1_lnq",
+    "passed": true
+  },
+  {
+    "elements": 150528,
+    "kind": "graph_matmul",
+    "max_abs_error": 0,
+    "mismatches": 0,
+    "name": "mlp_1_matmul1",
+    "passed": true
+  },
+  {
+    "elements": 150528,
+    "kind": "graph_gelu_table",
+    "max_abs_error": 0,
+    "mismatches": 0,
+    "name": "mlp_1_geluq",
+    "passed": true
+  },
+  {
+    "elements": 37632,
+    "kind": "graph_matmul",
+    "max_abs_error": 0,
+    "mismatches": 0,
+    "name": "mlp_1_matmul2",
+    "passed": true
+  },
+  {
+    "elements": 37632,
+    "kind": "graph_mlp_block",
+    "max_abs_error": 0,
+    "mismatches": 0,
+    "name": "mlp_1",
+    "passed": true
+  },
+  {
+    "elements": 37632,
+    "kind": "graph_chain_boundary",
+    "max_abs_error": 0,
+    "mismatches": 0,
+    "name": "mlp_1_to_attn_2",
+    "passed": true
+  },
+  {
+    "elements": 37632,
+    "kind": "graph_layernorm",
+    "max_abs_error": 0,
+    "mismatches": 0,
+    "name": "attn_2_lnq",
+    "passed": true
+  },
+  {
+    "elements": 37632,
+    "kind": "graph_matmul",
+    "max_abs_error": 0,
+    "mismatches": 0,
+    "name": "attn_2_gen_q_matmul",
+    "passed": true
+  },
+  {
+    "elements": 37632,
+    "kind": "graph_matmul",
+    "max_abs_error": 0,
+    "mismatches": 0,
+    "name": "attn_2_gen_k_matmul",
+    "passed": true
+  },
+  {
+    "elements": 37632,
+    "kind": "graph_matmul",
+    "max_abs_error": 0,
+    "mismatches": 0,
+    "name": "attn_2_gen_v_matmul",
+    "passed": true
+  },
+  {
+    "elements": 37632,
+    "kind": "graph_requant_table",
+    "max_abs_error": 0,
+    "mismatches": 0,
+    "name": "attn_2_qq",
+    "passed": true
+  },
+  {
+    "elements": 37632,
+    "kind": "graph_requant_table",
+    "max_abs_error": 0,
+    "mismatches": 0,
+    "name": "attn_2_kq",
+    "passed": true
+  },
+  {
+    "elements": 37632,
+    "kind": "graph_requant_table",
+    "max_abs_error": 0,
+    "mismatches": 0,
+    "name": "attn_2_vq",
+    "passed": true
+  },
+  {
+    "elements": 37632,
+    "kind": "graph_head_split",
+    "max_abs_error": 0,
+    "mismatches": 0,
+    "name": "attn_2_gen_r_matmul_input",
+    "passed": true
+  },
+  {
+    "elements": 37632,
+    "kind": "graph_head_split",
+    "max_abs_error": 0,
+    "mismatches": 0,
+    "name": "attn_2_gen_r_matmul_weight",
+    "passed": true
+  },
+  {
+    "elements": 37632,
+    "kind": "graph_head_transpose",
+    "max_abs_error": 0,
+    "mismatches": 0,
+    "name": "attn_2_gen_a_matmul_weight",
+    "passed": true
+  },
+  {
+    "elements": 115248,
+    "kind": "graph_dynamic_matmul",
+    "max_abs_error": 0,
+    "mismatches": 0,
+    "name": "attn_2_gen_r_matmul",
+    "passed": true
+  },
+  {
+    "elements": 115248,
+    "kind": "graph_softmax_table",
+    "max_abs_error": 0,
+    "mismatches": 0,
+    "name": "attn_2_softmaxq",
+    "passed": true
+  },
+  {
+    "elements": 37632,
+    "kind": "graph_dynamic_matmul",
+    "max_abs_error": 0,
+    "mismatches": 0,
+    "name": "attn_2_gen_a_matmul",
+    "passed": true
+  },
+  {
+    "elements": 37632,
+    "kind": "graph_requant_table",
+    "max_abs_error": 0,
+    "mismatches": 0,
+    "name": "attn_2_aq",
+    "passed": true
+  },
+  {
+    "elements": 37632,
+    "kind": "graph_head_merge",
+    "max_abs_error": 0,
+    "mismatches": 0,
+    "name": "attn_2_gen_o_matmul_input",
+    "passed": true
+  },
+  {
+    "elements": 37632,
+    "kind": "graph_matmul",
+    "max_abs_error": 0,
+    "mismatches": 0,
+    "name": "attn_2_gen_o_matmul",
+    "passed": true
+  },
+  {
+    "elements": 37632,
+    "kind": "graph_attention_block",
+    "max_abs_error": 0,
+    "mismatches": 0,
+    "name": "attn_2",
+    "passed": true
+  },
+  {
+    "elements": 37632,
+    "kind": "graph_chain_boundary",
+    "max_abs_error": 0,
+    "mismatches": 0,
+    "name": "attn_2_to_mlp_2",
+    "passed": true
+  },
+  {
+    "elements": 37632,
+    "kind": "graph_layernorm",
+    "max_abs_error": 0,
+    "mismatches": 0,
+    "name": "mlp_2_lnq",
+    "passed": true
+  },
+  {
+    "elements": 150528,
+    "kind": "graph_matmul",
+    "max_abs_error": 0,
+    "mismatches": 0,
+    "name": "mlp_2_matmul1",
+    "passed": true
+  },
+  {
+    "elements": 150528,
+    "kind": "graph_gelu_table",
+    "max_abs_error": 0,
+    "mismatches": 0,
+    "name": "mlp_2_geluq",
+    "passed": true
+  },
+  {
+    "elements": 37632,
+    "kind": "graph_matmul",
+    "max_abs_error": 0,
+    "mismatches": 0,
+    "name": "mlp_2_matmul2",
+    "passed": true
+  },
+  {
+    "elements": 37632,
+    "kind": "graph_mlp_block",
+    "max_abs_error": 0,
+    "mismatches": 0,
+    "name": "mlp_2",
+    "passed": true
+  },
+  {
+    "elements": 37632,
+    "kind": "graph_chain_boundary",
+    "max_abs_error": 0,
+    "mismatches": 0,
+    "name": "mlp_2_to_attn_3",
+    "passed": true
+  },
+  {
+    "elements": 37632,
+    "kind": "graph_layernorm",
+    "max_abs_error": 0,
+    "mismatches": 0,
+    "name": "attn_3_lnq",
+    "passed": true
+  },
+  {
+    "elements": 37632,
+    "kind": "graph_matmul",
+    "max_abs_error": 0,
+    "mismatches": 0,
+    "name": "attn_3_gen_q_matmul",
+    "passed": true
+  },
+  {
+    "elements": 37632,
+    "kind": "graph_matmul",
+    "max_abs_error": 0,
+    "mismatches": 0,
+    "name": "attn_3_gen_k_matmul",
+    "passed": true
+  },
+  {
+    "elements": 37632,
+    "kind": "graph_matmul",
+    "max_abs_error": 0,
+    "mismatches": 0,
+    "name": "attn_3_gen_v_matmul",
+    "passed": true
+  },
+  {
+    "elements": 37632,
+    "kind": "graph_requant_table",
+    "max_abs_error": 0,
+    "mismatches": 0,
+    "name": "attn_3_qq",
+    "passed": true
+  },
+  {
+    "elements": 37632,
+    "kind": "graph_requant_table",
+    "max_abs_error": 0,
+    "mismatches": 0,
+    "name": "attn_3_kq",
+    "passed": true
+  },
+  {
+    "elements": 37632,
+    "kind": "graph_requant_table",
+    "max_abs_error": 0,
+    "mismatches": 0,
+    "name": "attn_3_vq",
+    "passed": true
+  },
+  {
+    "elements": 37632,
+    "kind": "graph_head_split",
+    "max_abs_error": 0,
+    "mismatches": 0,
+    "name": "attn_3_gen_r_matmul_input",
+    "passed": true
+  },
+  {
+    "elements": 37632,
+    "kind": "graph_head_split",
+    "max_abs_error": 0,
+    "mismatches": 0,
+    "name": "attn_3_gen_r_matmul_weight",
+    "passed": true
+  },
+  {
+    "elements": 37632,
+    "kind": "graph_head_transpose",
+    "max_abs_error": 0,
+    "mismatches": 0,
+    "name": "attn_3_gen_a_matmul_weight",
+    "passed": true
+  },
+  {
+    "elements": 115248,
+    "kind": "graph_dynamic_matmul",
+    "max_abs_error": 0,
+    "mismatches": 0,
+    "name": "attn_3_gen_r_matmul",
+    "passed": true
+  },
+  {
+    "elements": 115248,
+    "kind": "graph_softmax_table",
+    "max_abs_error": 0,
+    "mismatches": 0,
+    "name": "attn_3_softmaxq",
+    "passed": true
+  },
+  {
+    "elements": 37632,
+    "kind": "graph_dynamic_matmul",
+    "max_abs_error": 0,
+    "mismatches": 0,
+    "name": "attn_3_gen_a_matmul",
+    "passed": true
+  },
+  {
+    "elements": 37632,
+    "kind": "graph_requant_table",
+    "max_abs_error": 0,
+    "mismatches": 0,
+    "name": "attn_3_aq",
+    "passed": true
+  },
+  {
+    "elements": 37632,
+    "kind": "graph_head_merge",
+    "max_abs_error": 0,
+    "mismatches": 0,
+    "name": "attn_3_gen_o_matmul_input",
+    "passed": true
+  },
+  {
+    "elements": 37632,
+    "kind": "graph_matmul",
+    "max_abs_error": 0,
+    "mismatches": 0,
+    "name": "attn_3_gen_o_matmul",
+    "passed": true
+  },
+  {
+    "elements": 37632,
+    "kind": "graph_attention_block",
+    "max_abs_error": 0,
+    "mismatches": 0,
+    "name": "attn_3",
+    "passed": true
+  },
+  {
+    "elements": 37632,
+    "kind": "graph_chain_boundary",
+    "max_abs_error": 0,
+    "mismatches": 0,
+    "name": "attn_3_to_mlp_3",
+    "passed": true
+  },
+  {
+    "elements": 37632,
+    "kind": "graph_layernorm",
+    "max_abs_error": 0,
+    "mismatches": 0,
+    "name": "mlp_3_lnq",
+    "passed": true
+  },
+  {
+    "elements": 150528,
+    "kind": "graph_matmul",
+    "max_abs_error": 0,
+    "mismatches": 0,
+    "name": "mlp_3_matmul1",
+    "passed": true
+  },
+  {
+    "elements": 150528,
+    "kind": "graph_gelu_table",
+    "max_abs_error": 0,
+    "mismatches": 0,
+    "name": "mlp_3_geluq",
+    "passed": true
+  },
+  {
+    "elements": 37632,
+    "kind": "graph_matmul",
+    "max_abs_error": 0,
+    "mismatches": 0,
+    "name": "mlp_3_matmul2",
+    "passed": true
+  },
+  {
+    "elements": 37632,
+    "kind": "graph_mlp_block",
+    "max_abs_error": 0,
+    "mismatches": 0,
+    "name": "mlp_3",
+    "passed": true
+  },
+  {
+    "elements": 37632,
+    "kind": "graph_chain_boundary",
+    "max_abs_error": 0,
+    "mismatches": 0,
+    "name": "mlp_3_to_attn_4",
+    "passed": true
+  },
+  {
+    "elements": 37632,
+    "kind": "graph_layernorm",
+    "max_abs_error": 0,
+    "mismatches": 0,
+    "name": "attn_4_lnq",
+    "passed": true
+  },
+  {
+    "elements": 37632,
+    "kind": "graph_matmul",
+    "max_abs_error": 0,
+    "mismatches": 0,
+    "name": "attn_4_gen_q_matmul",
+    "passed": true
+  },
+  {
+    "elements": 37632,
+    "kind": "graph_matmul",
+    "max_abs_error": 0,
+    "mismatches": 0,
+    "name": "attn_4_gen_k_matmul",
+    "passed": true
+  },
+  {
+    "elements": 37632,
+    "kind": "graph_matmul",
+    "max_abs_error": 0,
+    "mismatches": 0,
+    "name": "attn_4_gen_v_matmul",
+    "passed": true
+  },
+  {
+    "elements": 37632,
+    "kind": "graph_requant_table",
+    "max_abs_error": 0,
+    "mismatches": 0,
+    "name": "attn_4_qq",
+    "passed": true
+  },
+  {
+    "elements": 37632,
+    "kind": "graph_requant_table",
+    "max_abs_error": 0,
+    "mismatches": 0,
+    "name": "attn_4_kq",
+    "passed": true
+  },
+  {
+    "elements": 37632,
+    "kind": "graph_requant_table",
+    "max_abs_error": 0,
+    "mismatches": 0,
+    "name": "attn_4_vq",
+    "passed": true
+  },
+  {
+    "elements": 37632,
+    "kind": "graph_head_split",
+    "max_abs_error": 0,
+    "mismatches": 0,
+    "name": "attn_4_gen_r_matmul_input",
+    "passed": true
+  },
+  {
+    "elements": 37632,
+    "kind": "graph_head_split",
+    "max_abs_error": 0,
+    "mismatches": 0,
+    "name": "attn_4_gen_r_matmul_weight",
+    "passed": true
+  },
+  {
+    "elements": 37632,
+    "kind": "graph_head_transpose",
+    "max_abs_error": 0,
+    "mismatches": 0,
+    "name": "attn_4_gen_a_matmul_weight",
+    "passed": true
+  },
+  {
+    "elements": 115248,
+    "kind": "graph_dynamic_matmul",
+    "max_abs_error": 0,
+    "mismatches": 0,
+    "name": "attn_4_gen_r_matmul",
+    "passed": true
+  },
+  {
+    "elements": 115248,
+    "kind": "graph_softmax_table",
+    "max_abs_error": 0,
+    "mismatches": 0,
+    "name": "attn_4_softmaxq",
+    "passed": true
+  },
+  {
+    "elements": 37632,
+    "kind": "graph_dynamic_matmul",
+    "max_abs_error": 0,
+    "mismatches": 0,
+    "name": "attn_4_gen_a_matmul",
+    "passed": true
+  },
+  {
+    "elements": 37632,
+    "kind": "graph_requant_table",
+    "max_abs_error": 0,
+    "mismatches": 0,
+    "name": "attn_4_aq",
+    "passed": true
+  },
+  {
+    "elements": 37632,
+    "kind": "graph_head_merge",
+    "max_abs_error": 0,
+    "mismatches": 0,
+    "name": "attn_4_gen_o_matmul_input",
+    "passed": true
+  },
+  {
+    "elements": 37632,
+    "kind": "graph_matmul",
+    "max_abs_error": 0,
+    "mismatches": 0,
+    "name": "attn_4_gen_o_matmul",
+    "passed": true
+  },
+  {
+    "elements": 37632,
+    "kind": "graph_attention_block",
+    "max_abs_error": 0,
+    "mismatches": 0,
+    "name": "attn_4",
+    "passed": true
+  },
+  {
+    "elements": 37632,
+    "kind": "graph_chain_boundary",
+    "max_abs_error": 0,
+    "mismatches": 0,
+    "name": "attn_4_to_mlp_4",
+    "passed": true
+  },
+  {
+    "elements": 37632,
+    "kind": "graph_layernorm",
+    "max_abs_error": 0,
+    "mismatches": 0,
+    "name": "mlp_4_lnq",
+    "passed": true
+  },
+  {
+    "elements": 150528,
+    "kind": "graph_matmul",
+    "max_abs_error": 0,
+    "mismatches": 0,
+    "name": "mlp_4_matmul1",
+    "passed": true
+  },
+  {
+    "elements": 150528,
+    "kind": "graph_gelu_table",
+    "max_abs_error": 0,
+    "mismatches": 0,
+    "name": "mlp_4_geluq",
+    "passed": true
+  },
+  {
+    "elements": 37632,
+    "kind": "graph_matmul",
+    "max_abs_error": 0,
+    "mismatches": 0,
+    "name": "mlp_4_matmul2",
+    "passed": true
+  },
+  {
+    "elements": 37632,
+    "kind": "graph_mlp_block",
+    "max_abs_error": 0,
+    "mismatches": 0,
+    "name": "mlp_4",
+    "passed": true
+  },
+  {
+    "elements": 37632,
+    "kind": "graph_chain_boundary",
+    "max_abs_error": 0,
+    "mismatches": 0,
+    "name": "mlp_4_to_attn_5",
+    "passed": true
+  },
+  {
+    "elements": 37632,
+    "kind": "graph_layernorm",
+    "max_abs_error": 0,
+    "mismatches": 0,
+    "name": "attn_5_lnq",
+    "passed": true
+  },
+  {
+    "elements": 37632,
+    "kind": "graph_matmul",
+    "max_abs_error": 0,
+    "mismatches": 0,
+    "name": "attn_5_gen_q_matmul",
+    "passed": true
+  },
+  {
+    "elements": 37632,
+    "kind": "graph_matmul",
+    "max_abs_error": 0,
+    "mismatches": 0,
+    "name": "attn_5_gen_k_matmul",
+    "passed": true
+  },
+  {
+    "elements": 37632,
+    "kind": "graph_matmul",
+    "max_abs_error": 0,
+    "mismatches": 0,
+    "name": "attn_5_gen_v_matmul",
+    "passed": true
+  },
+  {
+    "elements": 37632,
+    "kind": "graph_requant_table",
+    "max_abs_error": 0,
+    "mismatches": 0,
+    "name": "attn_5_qq",
+    "passed": true
+  },
+  {
+    "elements": 37632,
+    "kind": "graph_requant_table",
+    "max_abs_error": 0,
+    "mismatches": 0,
+    "name": "attn_5_kq",
+    "passed": true
+  },
+  {
+    "elements": 37632,
+    "kind": "graph_requant_table",
+    "max_abs_error": 0,
+    "mismatches": 0,
+    "name": "attn_5_vq",
+    "passed": true
+  },
+  {
+    "elements": 37632,
+    "kind": "graph_head_split",
+    "max_abs_error": 0,
+    "mismatches": 0,
+    "name": "attn_5_gen_r_matmul_input",
+    "passed": true
+  },
+  {
+    "elements": 37632,
+    "kind": "graph_head_split",
+    "max_abs_error": 0,
+    "mismatches": 0,
+    "name": "attn_5_gen_r_matmul_weight",
+    "passed": true
+  },
+  {
+    "elements": 37632,
+    "kind": "graph_head_transpose",
+    "max_abs_error": 0,
+    "mismatches": 0,
+    "name": "attn_5_gen_a_matmul_weight",
+    "passed": true
+  },
+  {
+    "elements": 115248,
+    "kind": "graph_dynamic_matmul",
+    "max_abs_error": 0,
+    "mismatches": 0,
+    "name": "attn_5_gen_r_matmul",
+    "passed": true
+  },
+  {
+    "elements": 115248,
+    "kind": "graph_softmax_table",
+    "max_abs_error": 0,
+    "mismatches": 0,
+    "name": "attn_5_softmaxq",
+    "passed": true
+  },
+  {
+    "elements": 37632,
+    "kind": "graph_dynamic_matmul",
+    "max_abs_error": 0,
+    "mismatches": 0,
+    "name": "attn_5_gen_a_matmul",
+    "passed": true
+  },
+  {
+    "elements": 37632,
+    "kind": "graph_requant_table",
+    "max_abs_error": 0,
+    "mismatches": 0,
+    "name": "attn_5_aq",
+    "passed": true
+  },
+  {
+    "elements": 37632,
+    "kind": "graph_head_merge",
+    "max_abs_error": 0,
+    "mismatches": 0,
+    "name": "attn_5_gen_o_matmul_input",
+    "passed": true
+  },
+  {
+    "elements": 37632,
+    "kind": "graph_matmul",
+    "max_abs_error": 0,
+    "mismatches": 0,
+    "name": "attn_5_gen_o_matmul",
+    "passed": true
+  },
+  {
+    "elements": 37632,
+    "kind": "graph_attention_block",
+    "max_abs_error": 0,
+    "mismatches": 0,
+    "name": "attn_5",
+    "passed": true
+  },
+  {
+    "elements": 37632,
+    "kind": "graph_chain_boundary",
+    "max_abs_error": 0,
+    "mismatches": 0,
+    "name": "attn_5_to_mlp_5",
+    "passed": true
+  },
+  {
+    "elements": 37632,
+    "kind": "graph_layernorm",
+    "max_abs_error": 0,
+    "mismatches": 0,
+    "name": "mlp_5_lnq",
+    "passed": true
+  },
+  {
+    "elements": 150528,
+    "kind": "graph_matmul",
+    "max_abs_error": 0,
+    "mismatches": 0,
+    "name": "mlp_5_matmul1",
+    "passed": true
+  },
+  {
+    "elements": 150528,
+    "kind": "graph_gelu_table",
+    "max_abs_error": 0,
+    "mismatches": 0,
+    "name": "mlp_5_geluq",
+    "passed": true
+  },
+  {
+    "elements": 37632,
+    "kind": "graph_matmul",
+    "max_abs_error": 0,
+    "mismatches": 0,
+    "name": "mlp_5_matmul2",
+    "passed": true
+  },
+  {
+    "elements": 37632,
+    "kind": "graph_mlp_block",
+    "max_abs_error": 0,
+    "mismatches": 0,
+    "name": "mlp_5",
+    "passed": true
+  },
+  {
+    "elements": 37632,
+    "kind": "graph_chain_boundary",
+    "max_abs_error": 0,
+    "mismatches": 0,
+    "name": "mlp_5_to_attn_6",
+    "passed": true
+  },
+  {
+    "elements": 37632,
+    "kind": "graph_layernorm",
+    "max_abs_error": 0,
+    "mismatches": 0,
+    "name": "attn_6_lnq",
+    "passed": true
+  },
+  {
+    "elements": 37632,
+    "kind": "graph_matmul",
+    "max_abs_error": 0,
+    "mismatches": 0,
+    "name": "attn_6_gen_q_matmul",
+    "passed": true
+  },
+  {
+    "elements": 37632,
+    "kind": "graph_matmul",
+    "max_abs_error": 0,
+    "mismatches": 0,
+    "name": "attn_6_gen_k_matmul",
+    "passed": true
+  },
+  {
+    "elements": 37632,
+    "kind": "graph_matmul",
+    "max_abs_error": 0,
+    "mismatches": 0,
+    "name": "attn_6_gen_v_matmul",
+    "passed": true
+  },
+  {
+    "elements": 37632,
+    "kind": "graph_requant_table",
+    "max_abs_error": 0,
+    "mismatches": 0,
+    "name": "attn_6_qq",
+    "passed": true
+  },
+  {
+    "elements": 37632,
+    "kind": "graph_requant_table",
+    "max_abs_error": 0,
+    "mismatches": 0,
+    "name": "attn_6_kq",
+    "passed": true
+  },
+  {
+    "elements": 37632,
+    "kind": "graph_requant_table",
+    "max_abs_error": 0,
+    "mismatches": 0,
+    "name": "attn_6_vq",
+    "passed": true
+  },
+  {
+    "elements": 37632,
+    "kind": "graph_head_split",
+    "max_abs_error": 0,
+    "mismatches": 0,
+    "name": "attn_6_gen_r_matmul_input",
+    "passed": true
+  },
+  {
+    "elements": 37632,
+    "kind": "graph_head_split",
+    "max_abs_error": 0,
+    "mismatches": 0,
+    "name": "attn_6_gen_r_matmul_weight",
+    "passed": true
+  },
+  {
+    "elements": 37632,
+    "kind": "graph_head_transpose",
+    "max_abs_error": 0,
+    "mismatches": 0,
+    "name": "attn_6_gen_a_matmul_weight",
+    "passed": true
+  },
+  {
+    "elements": 115248,
+    "kind": "graph_dynamic_matmul",
+    "max_abs_error": 0,
+    "mismatches": 0,
+    "name": "attn_6_gen_r_matmul",
+    "passed": true
+  },
+  {
+    "elements": 115248,
+    "kind": "graph_softmax_table",
+    "max_abs_error": 0,
+    "mismatches": 0,
+    "name": "attn_6_softmaxq",
+    "passed": true
+  },
+  {
+    "elements": 37632,
+    "kind": "graph_dynamic_matmul",
+    "max_abs_error": 0,
+    "mismatches": 0,
+    "name": "attn_6_gen_a_matmul",
+    "passed": true
+  },
+  {
+    "elements": 37632,
+    "kind": "graph_requant_table",
+    "max_abs_error": 0,
+    "mismatches": 0,
+    "name": "attn_6_aq",
+    "passed": true
+  },
+  {
+    "elements": 37632,
+    "kind": "graph_head_merge",
+    "max_abs_error": 0,
+    "mismatches": 0,
+    "name": "attn_6_gen_o_matmul_input",
+    "passed": true
+  },
+  {
+    "elements": 37632,
+    "kind": "graph_matmul",
+    "max_abs_error": 0,
+    "mismatches": 0,
+    "name": "attn_6_gen_o_matmul",
+    "passed": true
+  },
+  {
+    "elements": 37632,
+    "kind": "graph_attention_block",
+    "max_abs_error": 0,
+    "mismatches": 0,
+    "name": "attn_6",
+    "passed": true
+  },
+  {
+    "elements": 37632,
+    "kind": "graph_chain_boundary",
+    "max_abs_error": 0,
+    "mismatches": 0,
+    "name": "attn_6_to_mlp_6",
+    "passed": true
+  },
+  {
+    "elements": 37632,
+    "kind": "graph_layernorm",
+    "max_abs_error": 0,
+    "mismatches": 0,
+    "name": "mlp_6_lnq",
+    "passed": true
+  },
+  {
+    "elements": 150528,
+    "kind": "graph_matmul",
+    "max_abs_error": 0,
+    "mismatches": 0,
+    "name": "mlp_6_matmul1",
+    "passed": true
+  },
+  {
+    "elements": 150528,
+    "kind": "graph_gelu_table",
+    "max_abs_error": 0,
+    "mismatches": 0,
+    "name": "mlp_6_geluq",
+    "passed": true
+  },
+  {
+    "elements": 37632,
+    "kind": "graph_matmul",
+    "max_abs_error": 0,
+    "mismatches": 0,
+    "name": "mlp_6_matmul2",
+    "passed": true
+  },
+  {
+    "elements": 37632,
+    "kind": "graph_mlp_block",
+    "max_abs_error": 0,
+    "mismatches": 0,
+    "name": "mlp_6",
+    "passed": true
+  },
+  {
+    "elements": 37632,
+    "kind": "graph_chain_boundary",
+    "max_abs_error": 0,
+    "mismatches": 0,
+    "name": "mlp_6_to_attn_7",
+    "passed": true
+  },
+  {
+    "elements": 37632,
+    "kind": "graph_layernorm",
+    "max_abs_error": 0,
+    "mismatches": 0,
+    "name": "attn_7_lnq",
+    "passed": true
+  },
+  {
+    "elements": 37632,
+    "kind": "graph_matmul",
+    "max_abs_error": 0,
+    "mismatches": 0,
+    "name": "attn_7_gen_q_matmul",
+    "passed": true
+  },
+  {
+    "elements": 37632,
+    "kind": "graph_matmul",
+    "max_abs_error": 0,
+    "mismatches": 0,
+    "name": "attn_7_gen_k_matmul",
+    "passed": true
+  },
+  {
+    "elements": 37632,
+    "kind": "graph_matmul",
+    "max_abs_error": 0,
+    "mismatches": 0,
+    "name": "attn_7_gen_v_matmul",
+    "passed": true
+  },
+  {
+    "elements": 37632,
+    "kind": "graph_requant_table",
+    "max_abs_error": 0,
+    "mismatches": 0,
+    "name": "attn_7_qq",
+    "passed": true
+  },
+  {
+    "elements": 37632,
+    "kind": "graph_requant_table",
+    "max_abs_error": 0,
+    "mismatches": 0,
+    "name": "attn_7_kq",
+    "passed": true
+  },
+  {
+    "elements": 37632,
+    "kind": "graph_requant_table",
+    "max_abs_error": 0,
+    "mismatches": 0,
+    "name": "attn_7_vq",
+    "passed": true
+  },
+  {
+    "elements": 37632,
+    "kind": "graph_head_split",
+    "max_abs_error": 0,
+    "mismatches": 0,
+    "name": "attn_7_gen_r_matmul_input",
+    "passed": true
+  },
+  {
+    "elements": 37632,
+    "kind": "graph_head_split",
+    "max_abs_error": 0,
+    "mismatches": 0,
+    "name": "attn_7_gen_r_matmul_weight",
+    "passed": true
+  },
+  {
+    "elements": 37632,
+    "kind": "graph_head_transpose",
+    "max_abs_error": 0,
+    "mismatches": 0,
+    "name": "attn_7_gen_a_matmul_weight",
+    "passed": true
+  },
+  {
+    "elements": 115248,
+    "kind": "graph_dynamic_matmul",
+    "max_abs_error": 0,
+    "mismatches": 0,
+    "name": "attn_7_gen_r_matmul",
+    "passed": true
+  },
+  {
+    "elements": 115248,
+    "kind": "graph_softmax_table",
+    "max_abs_error": 0,
+    "mismatches": 0,
+    "name": "attn_7_softmaxq",
+    "passed": true
+  },
+  {
+    "elements": 37632,
+    "kind": "graph_dynamic_matmul",
+    "max_abs_error": 0,
+    "mismatches": 0,
+    "name": "attn_7_gen_a_matmul",
+    "passed": true
+  },
+  {
+    "elements": 37632,
+    "kind": "graph_requant_table",
+    "max_abs_error": 0,
+    "mismatches": 0,
+    "name": "attn_7_aq",
+    "passed": true
+  },
+  {
+    "elements": 37632,
+    "kind": "graph_head_merge",
+    "max_abs_error": 0,
+    "mismatches": 0,
+    "name": "attn_7_gen_o_matmul_input",
+    "passed": true
+  },
+  {
+    "elements": 37632,
+    "kind": "graph_matmul",
+    "max_abs_error": 0,
+    "mismatches": 0,
+    "name": "attn_7_gen_o_matmul",
+    "passed": true
+  },
+  {
+    "elements": 37632,
+    "kind": "graph_attention_block",
+    "max_abs_error": 0,
+    "mismatches": 0,
+    "name": "attn_7",
+    "passed": true
+  },
+  {
+    "elements": 37632,
+    "kind": "graph_chain_boundary",
+    "max_abs_error": 0,
+    "mismatches": 0,
+    "name": "attn_7_to_mlp_7",
+    "passed": true
+  },
+  {
+    "elements": 37632,
+    "kind": "graph_layernorm",
+    "max_abs_error": 0,
+    "mismatches": 0,
+    "name": "mlp_7_lnq",
+    "passed": true
+  },
+  {
+    "elements": 150528,
+    "kind": "graph_matmul",
+    "max_abs_error": 0,
+    "mismatches": 0,
+    "name": "mlp_7_matmul1",
+    "passed": true
+  },
+  {
+    "elements": 150528,
+    "kind": "graph_gelu_table",
+    "max_abs_error": 0,
+    "mismatches": 0,
+    "name": "mlp_7_geluq",
+    "passed": true
+  },
+  {
+    "elements": 37632,
+    "kind": "graph_matmul",
+    "max_abs_error": 0,
+    "mismatches": 0,
+    "name": "mlp_7_matmul2",
+    "passed": true
+  },
+  {
+    "elements": 37632,
+    "kind": "graph_mlp_block",
+    "max_abs_error": 0,
+    "mismatches": 0,
+    "name": "mlp_7",
+    "passed": true
+  },
+  {
+    "elements": 37632,
+    "kind": "graph_chain_boundary",
+    "max_abs_error": 0,
+    "mismatches": 0,
+    "name": "mlp_7_to_attn_8",
+    "passed": true
+  },
+  {
+    "elements": 37632,
+    "kind": "graph_layernorm",
+    "max_abs_error": 0,
+    "mismatches": 0,
+    "name": "attn_8_lnq",
+    "passed": true
+  },
+  {
+    "elements": 37632,
+    "kind": "graph_matmul",
+    "max_abs_error": 0,
+    "mismatches": 0,
+    "name": "attn_8_gen_q_matmul",
+    "passed": true
+  },
+  {
+    "elements": 37632,
+    "kind": "graph_matmul",
+    "max_abs_error": 0,
+    "mismatches": 0,
+    "name": "attn_8_gen_k_matmul",
+    "passed": true
+  },
+  {
+    "elements": 37632,
+    "kind": "graph_matmul",
+    "max_abs_error": 0,
+    "mismatches": 0,
+    "name": "attn_8_gen_v_matmul",
+    "passed": true
+  },
+  {
+    "elements": 37632,
+    "kind": "graph_requant_table",
+    "max_abs_error": 0,
+    "mismatches": 0,
+    "name": "attn_8_qq",
+    "passed": true
+  },
+  {
+    "elements": 37632,
+    "kind": "graph_requant_table",
+    "max_abs_error": 0,
+    "mismatches": 0,
+    "name": "attn_8_kq",
+    "passed": true
+  },
+  {
+    "elements": 37632,
+    "kind": "graph_requant_table",
+    "max_abs_error": 0,
+    "mismatches": 0,
+    "name": "attn_8_vq",
+    "passed": true
+  },
+  {
+    "elements": 37632,
+    "kind": "graph_head_split",
+    "max_abs_error": 0,
+    "mismatches": 0,
+    "name": "attn_8_gen_r_matmul_input",
+    "passed": true
+  },
+  {
+    "elements": 37632,
+    "kind": "graph_head_split",
+    "max_abs_error": 0,
+    "mismatches": 0,
+    "name": "attn_8_gen_r_matmul_weight",
+    "passed": true
+  },
+  {
+    "elements": 37632,
+    "kind": "graph_head_transpose",
+    "max_abs_error": 0,
+    "mismatches": 0,
+    "name": "attn_8_gen_a_matmul_weight",
+    "passed": true
+  },
+  {
+    "elements": 115248,
+    "kind": "graph_dynamic_matmul",
+    "max_abs_error": 0,
+    "mismatches": 0,
+    "name": "attn_8_gen_r_matmul",
+    "passed": true
+  },
+  {
+    "elements": 115248,
+    "kind": "graph_softmax_table",
+    "max_abs_error": 0,
+    "mismatches": 0,
+    "name": "attn_8_softmaxq",
+    "passed": true
+  },
+  {
+    "elements": 37632,
+    "kind": "graph_dynamic_matmul",
+    "max_abs_error": 0,
+    "mismatches": 0,
+    "name": "attn_8_gen_a_matmul",
+    "passed": true
+  },
+  {
+    "elements": 37632,
+    "kind": "graph_requant_table",
+    "max_abs_error": 0,
+    "mismatches": 0,
+    "name": "attn_8_aq",
+    "passed": true
+  },
+  {
+    "elements": 37632,
+    "kind": "graph_head_merge",
+    "max_abs_error": 0,
+    "mismatches": 0,
+    "name": "attn_8_gen_o_matmul_input",
+    "passed": true
+  },
+  {
+    "elements": 37632,
+    "kind": "graph_matmul",
+    "max_abs_error": 0,
+    "mismatches": 0,
+    "name": "attn_8_gen_o_matmul",
+    "passed": true
+  },
+  {
+    "elements": 37632,
+    "kind": "graph_attention_block",
+    "max_abs_error": 0,
+    "mismatches": 0,
+    "name": "attn_8",
+    "passed": true
+  },
+  {
+    "elements": 37632,
+    "kind": "graph_chain_boundary",
+    "max_abs_error": 0,
+    "mismatches": 0,
+    "name": "attn_8_to_mlp_8",
+    "passed": true
+  },
+  {
+    "elements": 37632,
+    "kind": "graph_layernorm",
+    "max_abs_error": 0,
+    "mismatches": 0,
+    "name": "mlp_8_lnq",
+    "passed": true
+  },
+  {
+    "elements": 150528,
+    "kind": "graph_matmul",
+    "max_abs_error": 0,
+    "mismatches": 0,
+    "name": "mlp_8_matmul1",
+    "passed": true
+  },
+  {
+    "elements": 150528,
+    "kind": "graph_gelu_table",
+    "max_abs_error": 0,
+    "mismatches": 0,
+    "name": "mlp_8_geluq",
+    "passed": true
+  },
+  {
+    "elements": 37632,
+    "kind": "graph_matmul",
+    "max_abs_error": 0,
+    "mismatches": 0,
+    "name": "mlp_8_matmul2",
+    "passed": true
+  },
+  {
+    "elements": 37632,
+    "kind": "graph_mlp_block",
+    "max_abs_error": 0,
+    "mismatches": 0,
+    "name": "mlp_8",
+    "passed": true
+  },
+  {
+    "elements": 37632,
+    "kind": "graph_chain_boundary",
+    "max_abs_error": 0,
+    "mismatches": 0,
+    "name": "mlp_8_to_attn_9",
+    "passed": true
+  },
+  {
+    "elements": 37632,
+    "kind": "graph_layernorm",
+    "max_abs_error": 0,
+    "mismatches": 0,
+    "name": "attn_9_lnq",
+    "passed": true
+  },
+  {
+    "elements": 37632,
+    "kind": "graph_matmul",
+    "max_abs_error": 0,
+    "mismatches": 0,
+    "name": "attn_9_gen_q_matmul",
+    "passed": true
+  },
+  {
+    "elements": 37632,
+    "kind": "graph_matmul",
+    "max_abs_error": 0,
+    "mismatches": 0,
+    "name": "attn_9_gen_k_matmul",
+    "passed": true
+  },
+  {
+    "elements": 37632,
+    "kind": "graph_matmul",
+    "max_abs_error": 0,
+    "mismatches": 0,
+    "name": "attn_9_gen_v_matmul",
+    "passed": true
+  },
+  {
+    "elements": 37632,
+    "kind": "graph_requant_table",
+    "max_abs_error": 0,
+    "mismatches": 0,
+    "name": "attn_9_qq",
+    "passed": true
+  },
+  {
+    "elements": 37632,
+    "kind": "graph_requant_table",
+    "max_abs_error": 0,
+    "mismatches": 0,
+    "name": "attn_9_kq",
+    "passed": true
+  },
+  {
+    "elements": 37632,
+    "kind": "graph_requant_table",
+    "max_abs_error": 0,
+    "mismatches": 0,
+    "name": "attn_9_vq",
+    "passed": true
+  },
+  {
+    "elements": 37632,
+    "kind": "graph_head_split",
+    "max_abs_error": 0,
+    "mismatches": 0,
+    "name": "attn_9_gen_r_matmul_input",
+    "passed": true
+  },
+  {
+    "elements": 37632,
+    "kind": "graph_head_split",
+    "max_abs_error": 0,
+    "mismatches": 0,
+    "name": "attn_9_gen_r_matmul_weight",
+    "passed": true
+  },
+  {
+    "elements": 37632,
+    "kind": "graph_head_transpose",
+    "max_abs_error": 0,
+    "mismatches": 0,
+    "name": "attn_9_gen_a_matmul_weight",
+    "passed": true
+  },
+  {
+    "elements": 115248,
+    "kind": "graph_dynamic_matmul",
+    "max_abs_error": 0,
+    "mismatches": 0,
+    "name": "attn_9_gen_r_matmul",
+    "passed": true
+  },
+  {
+    "elements": 115248,
+    "kind": "graph_softmax_table",
+    "max_abs_error": 0,
+    "mismatches": 0,
+    "name": "attn_9_softmaxq",
+    "passed": true
+  },
+  {
+    "elements": 37632,
+    "kind": "graph_dynamic_matmul",
+    "max_abs_error": 0,
+    "mismatches": 0,
+    "name": "attn_9_gen_a_matmul",
+    "passed": true
+  },
+  {
+    "elements": 37632,
+    "kind": "graph_requant_table",
+    "max_abs_error": 0,
+    "mismatches": 0,
+    "name": "attn_9_aq",
+    "passed": true
+  },
+  {
+    "elements": 37632,
+    "kind": "graph_head_merge",
+    "max_abs_error": 0,
+    "mismatches": 0,
+    "name": "attn_9_gen_o_matmul_input",
+    "passed": true
+  },
+  {
+    "elements": 37632,
+    "kind": "graph_matmul",
+    "max_abs_error": 0,
+    "mismatches": 0,
+    "name": "attn_9_gen_o_matmul",
+    "passed": true
+  },
+  {
+    "elements": 37632,
+    "kind": "graph_attention_block",
+    "max_abs_error": 0,
+    "mismatches": 0,
+    "name": "attn_9",
+    "passed": true
+  },
+  {
+    "elements": 37632,
+    "kind": "graph_chain_boundary",
+    "max_abs_error": 0,
+    "mismatches": 0,
+    "name": "attn_9_to_mlp_9",
+    "passed": true
+  },
+  {
+    "elements": 37632,
+    "kind": "graph_layernorm",
+    "max_abs_error": 0,
+    "mismatches": 0,
+    "name": "mlp_9_lnq",
+    "passed": true
+  },
+  {
+    "elements": 150528,
+    "kind": "graph_matmul",
+    "max_abs_error": 0,
+    "mismatches": 0,
+    "name": "mlp_9_matmul1",
+    "passed": true
+  },
+  {
+    "elements": 150528,
+    "kind": "graph_gelu_table",
+    "max_abs_error": 0,
+    "mismatches": 0,
+    "name": "mlp_9_geluq",
+    "passed": true
+  },
+  {
+    "elements": 37632,
+    "kind": "graph_matmul",
+    "max_abs_error": 0,
+    "mismatches": 0,
+    "name": "mlp_9_matmul2",
+    "passed": true
+  },
+  {
+    "elements": 37632,
+    "kind": "graph_mlp_block",
+    "max_abs_error": 0,
+    "mismatches": 0,
+    "name": "mlp_9",
+    "passed": true
+  },
+  {
+    "elements": 37632,
+    "kind": "graph_chain_boundary",
+    "max_abs_error": 0,
+    "mismatches": 0,
+    "name": "mlp_9_to_attn_10",
+    "passed": true
+  },
+  {
+    "elements": 37632,
+    "kind": "graph_layernorm",
+    "max_abs_error": 0,
+    "mismatches": 0,
+    "name": "attn_10_lnq",
+    "passed": true
+  },
+  {
+    "elements": 37632,
+    "kind": "graph_matmul",
+    "max_abs_error": 0,
+    "mismatches": 0,
+    "name": "attn_10_gen_q_matmul",
+    "passed": true
+  },
+  {
+    "elements": 37632,
+    "kind": "graph_matmul",
+    "max_abs_error": 0,
+    "mismatches": 0,
+    "name": "attn_10_gen_k_matmul",
+    "passed": true
+  },
+  {
+    "elements": 37632,
+    "kind": "graph_matmul",
+    "max_abs_error": 0,
+    "mismatches": 0,
+    "name": "attn_10_gen_v_matmul",
+    "passed": true
+  },
+  {
+    "elements": 37632,
+    "kind": "graph_requant_table",
+    "max_abs_error": 0,
+    "mismatches": 0,
+    "name": "attn_10_qq",
+    "passed": true
+  },
+  {
+    "elements": 37632,
+    "kind": "graph_requant_table",
+    "max_abs_error": 0,
+    "mismatches": 0,
+    "name": "attn_10_kq",
+    "passed": true
+  },
+  {
+    "elements": 37632,
+    "kind": "graph_requant_table",
+    "max_abs_error": 0,
+    "mismatches": 0,
+    "name": "attn_10_vq",
+    "passed": true
+  },
+  {
+    "elements": 37632,
+    "kind": "graph_head_split",
+    "max_abs_error": 0,
+    "mismatches": 0,
+    "name": "attn_10_gen_r_matmul_input",
+    "passed": true
+  },
+  {
+    "elements": 37632,
+    "kind": "graph_head_split",
+    "max_abs_error": 0,
+    "mismatches": 0,
+    "name": "attn_10_gen_r_matmul_weight",
+    "passed": true
+  },
+  {
+    "elements": 37632,
+    "kind": "graph_head_transpose",
+    "max_abs_error": 0,
+    "mismatches": 0,
+    "name": "attn_10_gen_a_matmul_weight",
+    "passed": true
+  },
+  {
+    "elements": 115248,
+    "kind": "graph_dynamic_matmul",
+    "max_abs_error": 0,
+    "mismatches": 0,
+    "name": "attn_10_gen_r_matmul",
+    "passed": true
+  },
+  {
+    "elements": 115248,
+    "kind": "graph_softmax_table",
+    "max_abs_error": 0,
+    "mismatches": 0,
+    "name": "attn_10_softmaxq",
+    "passed": true
+  },
+  {
+    "elements": 37632,
+    "kind": "graph_dynamic_matmul",
+    "max_abs_error": 0,
+    "mismatches": 0,
+    "name": "attn_10_gen_a_matmul",
+    "passed": true
+  },
+  {
+    "elements": 37632,
+    "kind": "graph_requant_table",
+    "max_abs_error": 0,
+    "mismatches": 0,
+    "name": "attn_10_aq",
+    "passed": true
+  },
+  {
+    "elements": 37632,
+    "kind": "graph_head_merge",
+    "max_abs_error": 0,
+    "mismatches": 0,
+    "name": "attn_10_gen_o_matmul_input",
+    "passed": true
+  },
+  {
+    "elements": 37632,
+    "kind": "graph_matmul",
+    "max_abs_error": 0,
+    "mismatches": 0,
+    "name": "attn_10_gen_o_matmul",
+    "passed": true
+  },
+  {
+    "elements": 37632,
+    "kind": "graph_attention_block",
+    "max_abs_error": 0,
+    "mismatches": 0,
+    "name": "attn_10",
+    "passed": true
+  },
+  {
+    "elements": 37632,
+    "kind": "graph_chain_boundary",
+    "max_abs_error": 0,
+    "mismatches": 0,
+    "name": "attn_10_to_mlp_10",
+    "passed": true
+  },
+  {
+    "elements": 37632,
+    "kind": "graph_layernorm",
+    "max_abs_error": 0,
+    "mismatches": 0,
+    "name": "mlp_10_lnq",
+    "passed": true
+  },
+  {
+    "elements": 150528,
+    "kind": "graph_matmul",
+    "max_abs_error": 0,
+    "mismatches": 0,
+    "name": "mlp_10_matmul1",
+    "passed": true
+  },
+  {
+    "elements": 150528,
+    "kind": "graph_gelu_table",
+    "max_abs_error": 0,
+    "mismatches": 0,
+    "name": "mlp_10_geluq",
+    "passed": true
+  },
+  {
+    "elements": 37632,
+    "kind": "graph_matmul",
+    "max_abs_error": 0,
+    "mismatches": 0,
+    "name": "mlp_10_matmul2",
+    "passed": true
+  },
+  {
+    "elements": 37632,
+    "kind": "graph_mlp_block",
+    "max_abs_error": 0,
+    "mismatches": 0,
+    "name": "mlp_10",
+    "passed": true
+  },
+  {
+    "elements": 37632,
+    "kind": "graph_chain_boundary",
+    "max_abs_error": 0,
+    "mismatches": 0,
+    "name": "mlp_10_to_attn_11",
+    "passed": true
+  },
+  {
+    "elements": 37632,
+    "kind": "graph_layernorm",
+    "max_abs_error": 0,
+    "mismatches": 0,
+    "name": "attn_11_lnq",
+    "passed": true
+  },
+  {
+    "elements": 37632,
+    "kind": "graph_matmul",
+    "max_abs_error": 0,
+    "mismatches": 0,
+    "name": "attn_11_gen_q_matmul",
+    "passed": true
+  },
+  {
+    "elements": 37632,
+    "kind": "graph_matmul",
+    "max_abs_error": 0,
+    "mismatches": 0,
+    "name": "attn_11_gen_k_matmul",
+    "passed": true
+  },
+  {
+    "elements": 37632,
+    "kind": "graph_matmul",
+    "max_abs_error": 0,
+    "mismatches": 0,
+    "name": "attn_11_gen_v_matmul",
+    "passed": true
+  },
+  {
+    "elements": 37632,
+    "kind": "graph_requant_table",
+    "max_abs_error": 0,
+    "mismatches": 0,
+    "name": "attn_11_qq",
+    "passed": true
+  },
+  {
+    "elements": 37632,
+    "kind": "graph_requant_table",
+    "max_abs_error": 0,
+    "mismatches": 0,
+    "name": "attn_11_kq",
+    "passed": true
+  },
+  {
+    "elements": 37632,
+    "kind": "graph_requant_table",
+    "max_abs_error": 0,
+    "mismatches": 0,
+    "name": "attn_11_vq",
+    "passed": true
+  },
+  {
+    "elements": 37632,
+    "kind": "graph_head_split",
+    "max_abs_error": 0,
+    "mismatches": 0,
+    "name": "attn_11_gen_r_matmul_input",
+    "passed": true
+  },
+  {
+    "elements": 37632,
+    "kind": "graph_head_split",
+    "max_abs_error": 0,
+    "mismatches": 0,
+    "name": "attn_11_gen_r_matmul_weight",
+    "passed": true
+  },
+  {
+    "elements": 37632,
+    "kind": "graph_head_transpose",
+    "max_abs_error": 0,
+    "mismatches": 0,
+    "name": "attn_11_gen_a_matmul_weight",
+    "passed": true
+  },
+  {
+    "elements": 115248,
+    "kind": "graph_dynamic_matmul",
+    "max_abs_error": 0,
+    "mismatches": 0,
+    "name": "attn_11_gen_r_matmul",
+    "passed": true
+  },
+  {
+    "elements": 115248,
+    "kind": "graph_softmax_table",
+    "max_abs_error": 0,
+    "mismatches": 0,
+    "name": "attn_11_softmaxq",
+    "passed": true
+  },
+  {
+    "elements": 37632,
+    "kind": "graph_dynamic_matmul",
+    "max_abs_error": 0,
+    "mismatches": 0,
+    "name": "attn_11_gen_a_matmul",
+    "passed": true
+  },
+  {
+    "elements": 37632,
+    "kind": "graph_requant_table",
+    "max_abs_error": 0,
+    "mismatches": 0,
+    "name": "attn_11_aq",
+    "passed": true
+  },
+  {
+    "elements": 37632,
+    "kind": "graph_head_merge",
+    "max_abs_error": 0,
+    "mismatches": 0,
+    "name": "attn_11_gen_o_matmul_input",
+    "passed": true
+  },
+  {
+    "elements": 37632,
+    "kind": "graph_matmul",
+    "max_abs_error": 0,
+    "mismatches": 0,
+    "name": "attn_11_gen_o_matmul",
+    "passed": true
+  },
+  {
+    "elements": 37632,
+    "kind": "graph_attention_block",
+    "max_abs_error": 0,
+    "mismatches": 0,
+    "name": "attn_11",
+    "passed": true
+  },
+  {
+    "elements": 37632,
+    "kind": "graph_chain_boundary",
+    "max_abs_error": 0,
+    "mismatches": 0,
+    "name": "attn_11_to_mlp_11",
+    "passed": true
+  },
+  {
+    "elements": 37632,
+    "kind": "graph_layernorm",
+    "max_abs_error": 0,
+    "mismatches": 0,
+    "name": "mlp_11_lnq",
+    "passed": true
+  },
+  {
+    "elements": 150528,
+    "kind": "graph_matmul",
+    "max_abs_error": 0,
+    "mismatches": 0,
+    "name": "mlp_11_matmul1",
+    "passed": true
+  },
+  {
+    "elements": 150528,
+    "kind": "graph_gelu_table",
+    "max_abs_error": 0,
+    "mismatches": 0,
+    "name": "mlp_11_geluq",
+    "passed": true
+  },
+  {
+    "elements": 37632,
+    "kind": "graph_matmul",
+    "max_abs_error": 0,
+    "mismatches": 0,
+    "name": "mlp_11_matmul2",
+    "passed": true
+  },
+  {
+    "elements": 37632,
+    "kind": "graph_mlp_block",
+    "max_abs_error": 0,
+    "mismatches": 0,
+    "name": "mlp_11",
+    "passed": true
+  },
+  {
+    "elements": 37632,
+    "kind": "graph_chain_boundary",
+    "max_abs_error": 0,
+    "mismatches": 0,
+    "name": "mlp_11_to_head",
+    "passed": true
+  },
+  {
+    "elements": 192,
+    "kind": "graph_layernorm",
+    "max_abs_error": 0,
+    "mismatches": 0,
+    "name": "head_lnq",
+    "passed": true
+  },
+  {
+    "elements": 1000,
+    "kind": "graph_matmul",
+    "max_abs_error": 0,
+    "mismatches": 0,
+    "name": "head_matmul",
+    "passed": true
+  },
+  {
+    "elements": 1000,
+    "kind": "graph_head",
+    "max_abs_error": 0,
+    "mismatches": 0,
+    "name": "head",
+    "passed": true
+  }
+]

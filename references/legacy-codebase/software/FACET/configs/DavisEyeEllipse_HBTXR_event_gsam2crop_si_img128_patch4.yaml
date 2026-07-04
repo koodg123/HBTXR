@@ -1,0 +1,112 @@
+---
+# HBTXR frame training on Dataset_sample_gsam2_subject_independent
+# (improved-GSAM2 labels, Eye-ROI crop 240x160, marker-excluded; subject-independent 70/10/20).
+# Loader: DavisEyeEllipseFrameDataset with use_cached_aps=true -> reads cached_data events -> 2ch polarity frame (crop 240x160) +
+# crop-coord ellipse_records.npy, aligned via labels_original/frame_index.npy. A.Resize 240x160 -> 128x128
+# (anisotropic) with automatic label remap in transform_ellipse. img64 / patch4 -> 16x16 grid (G=16).
+dataloader:
+  train:
+    dataset:
+      type: DavisEyeEllipseFrameDataset
+      root_path: /mnt/e/DATASET/eveye/target_data/Dataset_sample_gsam2_subject_independent
+      split: train
+      pupil_area: 200
+      num_classes: 1
+      default_resolution: [128, 128]
+      channels: 2
+      use_cached_events: true
+      sensor_wh: [240, 160]
+    batch_size: 16
+    shuffle: true
+    drop_last: false
+    num_workers: 4
+    prefetch_factor: 4
+    persistent_workers: true
+    pin_memory: true
+
+  val:
+    dataset:
+      type: DavisEyeEllipseFrameDataset
+      root_path: /mnt/e/DATASET/eveye/target_data/Dataset_sample_gsam2_subject_independent
+      split: val
+      pupil_area: 200
+      num_classes: 1
+      default_resolution: [128, 128]
+      channels: 2
+      use_cached_events: true
+      sensor_wh: [240, 160]
+    batch_size: 16
+    shuffle: false
+    drop_last: false
+    num_workers: 4
+    prefetch_factor: 4
+    persistent_workers: true
+    pin_memory: true
+
+model:
+  type: HBTXR
+  input_channels: 2
+  img_size: 128
+  patch_size: 4
+  embed_dim: 192
+  depth: 8
+  num_heads: 3
+  projection_channels: 64
+  projection_kernel_size: 1
+  head_conv: 256
+  pretrained: false
+  head_dict: { "hm": 1, "ab": 2, "trig": 2, "reg": 2, "mask": 1 }
+  loss_weight: {
+      "hm_weight": 1,
+      "ab_weight": 0.1,
+      "ang_weight": 0,
+      "trig_weight": 1,
+      "reg_weight": 0.1,
+      "iou_weight": 15,
+      "mask_weight": 1,
+    }
+
+train:
+  max_epochs: 100
+  check_val_every_n_epoch: 5
+  optimizer:
+    learning_rate: 1.0e-3
+    weight_decay: 1.0e-5
+
+val:
+  ckpt_path:
+
+trainer:
+  accelerator: auto
+  devices: auto
+  default_root_dir: /home/user/project/PRJXR-HBTXR/HBTXR/references/codebase/software/FACET/runs/event_gsam2crop_si_hbtxr_img128_patch4
+  precision: 32-true
+
+runtime:
+  cudnn_enabled: true
+  cudnn_benchmark: true
+  cudnn_deterministic: false
+
+logger:
+  type: tensorboard
+  save_dir: /home/user/project/PRJXR-HBTXR/HBTXR/references/codebase/software/FACET/runs/logs
+  name: HBTXR_event_gsam2crop_si_img128_patch4
+
+callback:
+  - type: ModelCheckpoint
+    monitor: val_mean_distance
+    auto_insert_metric_name: true
+    save_top_k: 3
+    mode: min
+    every_n_epochs: 5
+    save_last: true
+    verbose: true
+    filename: "{epoch:02d}-{val_mean_distance:.4f}"
+
+  - type: TQDMProgressBar
+    refresh_rate: 1
+
+  - type: Timer
+
+  - type: LearningRateMonitor
+    logging_interval: epoch

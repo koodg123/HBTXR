@@ -1,0 +1,15 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "hbtxr-algorithm"
+version = "0.1.0"
+description = "Reorganized HBTXR algorithm, training, evaluation, and packaging code."
+requires-python = ">=3.10"
+
+[tool.setuptools]
+package-dir = {"" = "common/src"}
+
+[tool.setuptools.packages.find]
+where = ["common/src"]

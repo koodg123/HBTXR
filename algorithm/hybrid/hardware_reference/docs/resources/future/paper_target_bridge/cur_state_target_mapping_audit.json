@@ -1,0 +1,22 @@
+{
+  "artifact": "cur_state_target_mapping_audit",
+  "date": "2026-06-21",
+  "execution_state": "paused_by_user_directive",
+  "idea_gen_phase": "P1",
+  "idea_gen_domain": "Research Workflow",
+  "parent_skill": "paper-idea-generator",
+  "worker_skill": "ablation-study-designer",
+  "target_tensor": {
+    "current_metric_center_source": "batch['cur_state'][:, :2] for current center/P10/P5/P1 track metrics",
+    "current_state_scope": "current software target state is used by track loss/evaluator in the post-transform input coordinate frame",
+    "known_gap": "sample-level equivalence between current cur_state and paper q_k is not yet audited in the paper/sensor frame"
+  },
+  "paper_state_definition": {
+    "state": "q_k = (x_k, y_k, a_k, b_k, theta_k)",
+    "convention": "a_k >= b_k and theta_k in [0, pi)",
+    "residual": "Delta s_k* = q_k - g(alpha_k*)"
+  },
+  "sample_count": 0,
+  "mapping_valid": false,
+  "decision": "schema/source note only; direct target-definition match remains blocked until sample-level cur_state-to-paper-q_k rows are audited"
+}

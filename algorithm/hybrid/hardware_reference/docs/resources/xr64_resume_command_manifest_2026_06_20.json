@@ -1,0 +1,486 @@
+{
+  "manifest_version": 1,
+  "date": "2026-06-20",
+  "created_at": "2026-06-20",
+  "scope": "XR-64 resume command manifest",
+  "execution_state": "paused_by_user_directive",
+  "do_not_execute_until_user_resumes": true,
+  "default_allowed_to_run": false,
+  "project_root": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/software",
+  "manifest_root": "data/_internal/manifests/manifest1",
+  "target_dir": "data/_internal/manifests/manifest1/xr64_teacher_targets",
+  "purpose": "Encode the exact future XR-64-prep command sequence, launch gates, and post-run decision review without running train/eval.",
+  "current_gates": {
+    "center_lt": 16.468481131962367,
+    "p10_gt": 35.02295998845781,
+    "p5_gt": 12.133503770828247
+  },
+  "source_artifacts": {
+    "runbook": "docs/resources/xr64_resume_runbook_2026_06_18.md",
+    "experiment_queue": "docs/resources/second_goal_experiment_queue_2026_06_20.json",
+    "objective_trace": "docs/resources/second_goal_objective_trace_2026_06_20.json",
+    "prep_runner": "scripts/external/run_xr64_teacher_eval_rows_and_overrides.sh",
+    "train_runner": "scripts/external/run_xr64_teacher_target_construction.sh",
+    "resume_checker": "scripts/external/check_xr64_resume_artifacts.py",
+    "candidate_collector": "scripts/external/collect_xr64_postrun_candidates.py",
+    "promotion_decider": "scripts/external/decide_xr64_postrun_promotion.py"
+  },
+  "prompt_pack": {
+    "objective": "Make XR-64-prep resumable, auditable, and leakage-safe after explicit user resume.",
+    "idea_gen_phase": "P1",
+    "domain": "Research Workflow",
+    "parent_skill": "paper-idea-generator",
+    "worker_skill": "ablation-study-designer",
+    "target": "HGTXR-SW manifest1 train/val teacher-target construction",
+    "constraints": [
+      "Do not run while experiments are paused.",
+      "Use train/val splits only for teacher eval rows and override targets.",
+      "Do not generate test target overrides.",
+      "Run strict XR-64 resume checker before XR-64A/B training.",
+      "Evaluate promoted checkpoints only with test override path cleared."
+    ],
+        "required_artifact": "10 XR-64-prep commands, prep runner safety contract, expected generated files, strict readiness gate, A/B launch gate, and post-run candidate/decision review commands.",
+        "verification_evidence": "scripts/external/check_xr64_resume_command_manifest.py --format summary"
+    },
+    "strict_generated_artifact_contract": {
+        "eval_rows_full_manifest_coverage_required": true,
+        "override_full_manifest_coverage_required": true,
+        "duplicate_sample_ids_allowed": false,
+        "opposite_split_sample_ids_allowed": false,
+        "subset_artifacts_satisfy_ready_to_train": false,
+        "checker": "scripts/external/check_xr64_resume_artifacts.py"
+    },
+    "expected_generated_counts": {
+        "split_manifest_rows": {
+            "train": 5929,
+            "val": 844
+        },
+        "teacher_count": 4,
+        "override_rule_count": 3,
+        "eval_rows_per_split_teacher": {
+            "train": 5929,
+            "val": 844
+        },
+        "override_rows_per_split_rule": {
+            "train": 5929,
+            "val": 844
+        },
+        "total_eval_row_records": 27092,
+        "total_override_records": 20319
+    },
+    "prep_runner_contract": {
+    "script": "scripts/external/run_xr64_teacher_eval_rows_and_overrides.sh",
+    "check_count": 17,
+    "required_properties": [
+      "strict bash mode",
+      "test split refusal",
+      "train/val default splits",
+      "teacher default set",
+      "eval/build default actions",
+      "test override path cleared during teacher eval",
+      "test target override disabled",
+      "eval start/done log markers",
+      "override start/done log markers",
+      "json row validation",
+      "foreground tee logging",
+      "existing eval row validation on skip",
+      "existing override validation on skip",
+      "build input eval row validation"
+    ],
+    "forbidden_markers": [
+      "XR64_SPLITS:-train,val,test",
+      "XR64_SPLITS:-test",
+      "allow_test_target_override=true",
+      "data.track_target_override_path=test"
+    ]
+  },
+  "current_state": {
+    "xr64_resume_status": "generated_incomplete",
+    "ready_to_train": false,
+    "can_run_lane": false,
+    "missing_eval_rows": 8,
+    "missing_overrides": 6,
+    "leakage_risk": "none"
+  },
+  "allowed_splits": [
+    "train",
+    "val"
+  ],
+  "forbidden_splits": [
+    "test"
+  ],
+  "teachers": [
+    "xr62a",
+    "xr39",
+    "xr56b",
+    "xr58a"
+  ],
+  "override_rules": [
+    {
+      "key": "xr64a_conservative",
+      "rule": "conservative",
+      "lane": "XR-64A"
+    },
+    {
+      "key": "xr64b_threshold",
+      "rule": "threshold_priority",
+      "lane": "XR-64B"
+    },
+    {
+      "key": "xr64c_minerror",
+      "rule": "min_error",
+      "lane": "XR-64C"
+    }
+  ],
+  "precheck_commands": [
+    {
+      "id": "XR64-PRECHECK-001",
+      "kind": "static_check",
+      "stage": "precheck",
+      "allowed_to_run": false,
+      "safe_while_paused": true,
+      "command": "bash -n scripts/external/run_xr64_teacher_eval_rows_and_overrides.sh scripts/external/run_xr64_teacher_target_construction.sh"
+    },
+    {
+      "id": "XR64-PRECHECK-002",
+      "kind": "read_only_status",
+      "stage": "precheck",
+      "allowed_to_run": false,
+      "safe_while_paused": true,
+      "command": ".venv/bin/python scripts/external/check_xr64_resume_artifacts.py --allow-missing-generated --format summary"
+    }
+  ],
+  "prep_commands": [
+    {
+      "id": "XR64-EVAL-TRAIN-XR62A",
+      "stage": "prep",
+      "action": "eval",
+      "split": "train",
+      "teacher": "xr62a",
+      "device": "cuda:0",
+      "allowed_to_run": false,
+      "env": {
+        "XR64_ACTIONS": "eval",
+        "XR64_SPLITS": "train",
+        "XR64_TEACHERS": "xr62a",
+        "XR64_EVAL_DEVICE": "cuda:0"
+      },
+      "required_inputs": [
+        "data/_internal/manifests/manifest1/train_manifest.jsonl",
+        "runs/XR-62/xr62_xr56b_facetaux_p10_preserve_c255000_lr3e_7_g32_hm0_004_off0_0015_c0_0025_p10soft0_004_p5soft0_0020_auxc0_0006_auxa0_0125_auxt0_005_s0_00035_m160k_M384k_r4000kus_p0p5_20260618_003308/train/best_track_p10.pt"
+      ],
+      "depends_on": [],
+      "command": "XR64_ACTIONS=eval XR64_SPLITS=train XR64_TEACHERS=xr62a XR64_EVAL_DEVICE=cuda:0 bash scripts/external/run_xr64_teacher_eval_rows_and_overrides.sh",
+      "expected_artifact": "data/_internal/manifests/manifest1/xr64_teacher_targets/eval_rows/train/xr62a/eval_rows.json"
+    },
+    {
+      "id": "XR64-EVAL-TRAIN-XR39",
+      "stage": "prep",
+      "action": "eval",
+      "split": "train",
+      "teacher": "xr39",
+      "device": "cuda:0",
+      "allowed_to_run": false,
+      "env": {
+        "XR64_ACTIONS": "eval",
+        "XR64_SPLITS": "train",
+        "XR64_TEACHERS": "xr39",
+        "XR64_EVAL_DEVICE": "cuda:0"
+      },
+      "required_inputs": [
+        "data/_internal/manifests/manifest1/train_manifest.jsonl",
+        "runs/interpolated_checkpoints/xr39_mixedleader_soup_c25p45f30.pt"
+      ],
+      "depends_on": [],
+      "command": "XR64_ACTIONS=eval XR64_SPLITS=train XR64_TEACHERS=xr39 XR64_EVAL_DEVICE=cuda:0 bash scripts/external/run_xr64_teacher_eval_rows_and_overrides.sh",
+      "expected_artifact": "data/_internal/manifests/manifest1/xr64_teacher_targets/eval_rows/train/xr39/eval_rows.json"
+    },
+    {
+      "id": "XR64-EVAL-TRAIN-XR56B",
+      "stage": "prep",
+      "action": "eval",
+      "split": "train",
+      "teacher": "xr56b",
+      "device": "cuda:0",
+      "allowed_to_run": false,
+      "env": {
+        "XR64_ACTIONS": "eval",
+        "XR64_SPLITS": "train",
+        "XR64_TEACHERS": "xr56b",
+        "XR64_EVAL_DEVICE": "cuda:0"
+      },
+      "required_inputs": [
+        "data/_internal/manifests/manifest1/train_manifest.jsonl",
+        "runs/XR-56/xr56_xr52seed_xr39teacher_directp10p5soft_c255000_lr5e_7_g32_hm0_004_off0_0015_c0_0030_p10soft0_008_p5soft0_0020_s0_00035_m160k_M384k_r4000kus_p0p5_20260617_072340/train/best_track_p5.pt"
+      ],
+      "depends_on": [],
+      "command": "XR64_ACTIONS=eval XR64_SPLITS=train XR64_TEACHERS=xr56b XR64_EVAL_DEVICE=cuda:0 bash scripts/external/run_xr64_teacher_eval_rows_and_overrides.sh",
+      "expected_artifact": "data/_internal/manifests/manifest1/xr64_teacher_targets/eval_rows/train/xr56b/eval_rows.json"
+    },
+    {
+      "id": "XR64-EVAL-TRAIN-XR58A",
+      "stage": "prep",
+      "action": "eval",
+      "split": "train",
+      "teacher": "xr58a",
+      "device": "cuda:0",
+      "allowed_to_run": false,
+      "env": {
+        "XR64_ACTIONS": "eval",
+        "XR64_SPLITS": "train",
+        "XR64_TEACHERS": "xr58a",
+        "XR64_EVAL_DEVICE": "cuda:0"
+      },
+      "required_inputs": [
+        "data/_internal/manifests/manifest1/train_manifest.jsonl",
+        "runs/XR-58/xr58_xr39self_p10teacher_anchored_c255000_lr1e_6_g32_hm0_004_off0_0015_c0_0005_p10soft0_014_p5soft0_0_disttrue_s0_00010_m160k_M384k_r4000kus_p0p5_20260617_082242/train/best_track_p10.pt"
+      ],
+      "depends_on": [],
+      "command": "XR64_ACTIONS=eval XR64_SPLITS=train XR64_TEACHERS=xr58a XR64_EVAL_DEVICE=cuda:0 bash scripts/external/run_xr64_teacher_eval_rows_and_overrides.sh",
+      "expected_artifact": "data/_internal/manifests/manifest1/xr64_teacher_targets/eval_rows/train/xr58a/eval_rows.json"
+    },
+    {
+      "id": "XR64-EVAL-VAL-XR62A",
+      "stage": "prep",
+      "action": "eval",
+      "split": "val",
+      "teacher": "xr62a",
+      "device": "cuda:0",
+      "allowed_to_run": false,
+      "env": {
+        "XR64_ACTIONS": "eval",
+        "XR64_SPLITS": "val",
+        "XR64_TEACHERS": "xr62a",
+        "XR64_EVAL_DEVICE": "cuda:0"
+      },
+      "required_inputs": [
+        "data/_internal/manifests/manifest1/val_manifest.jsonl",
+        "runs/XR-62/xr62_xr56b_facetaux_p10_preserve_c255000_lr3e_7_g32_hm0_004_off0_0015_c0_0025_p10soft0_004_p5soft0_0020_auxc0_0006_auxa0_0125_auxt0_005_s0_00035_m160k_M384k_r4000kus_p0p5_20260618_003308/train/best_track_p10.pt"
+      ],
+      "depends_on": [],
+      "command": "XR64_ACTIONS=eval XR64_SPLITS=val XR64_TEACHERS=xr62a XR64_EVAL_DEVICE=cuda:0 bash scripts/external/run_xr64_teacher_eval_rows_and_overrides.sh",
+      "expected_artifact": "data/_internal/manifests/manifest1/xr64_teacher_targets/eval_rows/val/xr62a/eval_rows.json"
+    },
+    {
+      "id": "XR64-EVAL-VAL-XR39",
+      "stage": "prep",
+      "action": "eval",
+      "split": "val",
+      "teacher": "xr39",
+      "device": "cuda:0",
+      "allowed_to_run": false,
+      "env": {
+        "XR64_ACTIONS": "eval",
+        "XR64_SPLITS": "val",
+        "XR64_TEACHERS": "xr39",
+        "XR64_EVAL_DEVICE": "cuda:0"
+      },
+      "required_inputs": [
+        "data/_internal/manifests/manifest1/val_manifest.jsonl",
+        "runs/interpolated_checkpoints/xr39_mixedleader_soup_c25p45f30.pt"
+      ],
+      "depends_on": [],
+      "command": "XR64_ACTIONS=eval XR64_SPLITS=val XR64_TEACHERS=xr39 XR64_EVAL_DEVICE=cuda:0 bash scripts/external/run_xr64_teacher_eval_rows_and_overrides.sh",
+      "expected_artifact": "data/_internal/manifests/manifest1/xr64_teacher_targets/eval_rows/val/xr39/eval_rows.json"
+    },
+    {
+      "id": "XR64-EVAL-VAL-XR56B",
+      "stage": "prep",
+      "action": "eval",
+      "split": "val",
+      "teacher": "xr56b",
+      "device": "cuda:0",
+      "allowed_to_run": false,
+      "env": {
+        "XR64_ACTIONS": "eval",
+        "XR64_SPLITS": "val",
+        "XR64_TEACHERS": "xr56b",
+        "XR64_EVAL_DEVICE": "cuda:0"
+      },
+      "required_inputs": [
+        "data/_internal/manifests/manifest1/val_manifest.jsonl",
+        "runs/XR-56/xr56_xr52seed_xr39teacher_directp10p5soft_c255000_lr5e_7_g32_hm0_004_off0_0015_c0_0030_p10soft0_008_p5soft0_0020_s0_00035_m160k_M384k_r4000kus_p0p5_20260617_072340/train/best_track_p5.pt"
+      ],
+      "depends_on": [],
+      "command": "XR64_ACTIONS=eval XR64_SPLITS=val XR64_TEACHERS=xr56b XR64_EVAL_DEVICE=cuda:0 bash scripts/external/run_xr64_teacher_eval_rows_and_overrides.sh",
+      "expected_artifact": "data/_internal/manifests/manifest1/xr64_teacher_targets/eval_rows/val/xr56b/eval_rows.json"
+    },
+    {
+      "id": "XR64-EVAL-VAL-XR58A",
+      "stage": "prep",
+      "action": "eval",
+      "split": "val",
+      "teacher": "xr58a",
+      "device": "cuda:0",
+      "allowed_to_run": false,
+      "env": {
+        "XR64_ACTIONS": "eval",
+        "XR64_SPLITS": "val",
+        "XR64_TEACHERS": "xr58a",
+        "XR64_EVAL_DEVICE": "cuda:0"
+      },
+      "required_inputs": [
+        "data/_internal/manifests/manifest1/val_manifest.jsonl",
+        "runs/XR-58/xr58_xr39self_p10teacher_anchored_c255000_lr1e_6_g32_hm0_004_off0_0015_c0_0005_p10soft0_014_p5soft0_0_disttrue_s0_00010_m160k_M384k_r4000kus_p0p5_20260617_082242/train/best_track_p10.pt"
+      ],
+      "depends_on": [],
+      "command": "XR64_ACTIONS=eval XR64_SPLITS=val XR64_TEACHERS=xr58a XR64_EVAL_DEVICE=cuda:0 bash scripts/external/run_xr64_teacher_eval_rows_and_overrides.sh",
+      "expected_artifact": "data/_internal/manifests/manifest1/xr64_teacher_targets/eval_rows/val/xr58a/eval_rows.json"
+    },
+    {
+      "id": "XR64-BUILD-TRAIN",
+      "stage": "prep",
+      "action": "build",
+      "split": "train",
+      "teacher": null,
+      "device": null,
+      "allowed_to_run": false,
+      "env": {
+        "XR64_ACTIONS": "build",
+        "XR64_SPLITS": "train"
+      },
+      "required_inputs": [
+        "data/_internal/manifests/manifest1/xr64_teacher_targets/eval_rows/train/xr62a/eval_rows.json",
+        "data/_internal/manifests/manifest1/xr64_teacher_targets/eval_rows/train/xr39/eval_rows.json",
+        "data/_internal/manifests/manifest1/xr64_teacher_targets/eval_rows/train/xr56b/eval_rows.json",
+        "data/_internal/manifests/manifest1/xr64_teacher_targets/eval_rows/train/xr58a/eval_rows.json"
+      ],
+      "depends_on": [
+        "XR64-EVAL-TRAIN-XR62A",
+        "XR64-EVAL-TRAIN-XR39",
+        "XR64-EVAL-TRAIN-XR56B",
+        "XR64-EVAL-TRAIN-XR58A"
+      ],
+      "command": "XR64_ACTIONS=build XR64_SPLITS=train bash scripts/external/run_xr64_teacher_eval_rows_and_overrides.sh",
+      "expected_artifacts": [
+        "data/_internal/manifests/manifest1/xr64_teacher_targets/xr64a_conservative_train_overrides.json",
+        "data/_internal/manifests/manifest1/xr64_teacher_targets/xr64b_threshold_train_overrides.json",
+        "data/_internal/manifests/manifest1/xr64_teacher_targets/xr64c_minerror_train_overrides.json"
+      ]
+    },
+    {
+      "id": "XR64-BUILD-VAL",
+      "stage": "prep",
+      "action": "build",
+      "split": "val",
+      "teacher": null,
+      "device": null,
+      "allowed_to_run": false,
+      "env": {
+        "XR64_ACTIONS": "build",
+        "XR64_SPLITS": "val"
+      },
+      "required_inputs": [
+        "data/_internal/manifests/manifest1/xr64_teacher_targets/eval_rows/val/xr62a/eval_rows.json",
+        "data/_internal/manifests/manifest1/xr64_teacher_targets/eval_rows/val/xr39/eval_rows.json",
+        "data/_internal/manifests/manifest1/xr64_teacher_targets/eval_rows/val/xr56b/eval_rows.json",
+        "data/_internal/manifests/manifest1/xr64_teacher_targets/eval_rows/val/xr58a/eval_rows.json"
+      ],
+      "depends_on": [
+        "XR64-EVAL-VAL-XR62A",
+        "XR64-EVAL-VAL-XR39",
+        "XR64-EVAL-VAL-XR56B",
+        "XR64-EVAL-VAL-XR58A"
+      ],
+      "command": "XR64_ACTIONS=build XR64_SPLITS=val bash scripts/external/run_xr64_teacher_eval_rows_and_overrides.sh",
+      "expected_artifacts": [
+        "data/_internal/manifests/manifest1/xr64_teacher_targets/xr64a_conservative_val_overrides.json",
+        "data/_internal/manifests/manifest1/xr64_teacher_targets/xr64b_threshold_val_overrides.json",
+        "data/_internal/manifests/manifest1/xr64_teacher_targets/xr64c_minerror_val_overrides.json"
+      ]
+    }
+  ],
+  "strict_readiness_gate": {
+    "id": "XR64-STRICT-READY",
+    "command": ".venv/bin/python scripts/external/check_xr64_resume_artifacts.py --format summary",
+    "required": {
+      "resume_status": "ready_to_train",
+      "ready_to_train": true,
+      "can_run_lane": true,
+      "missing_eval_rows": 0,
+      "missing_overrides": 0,
+      "leakage_risk": "none"
+    }
+  },
+  "launch_commands_after_strict_ready": [
+    {
+      "id": "XR64A-LAUNCH",
+      "stage": "train",
+      "lane": "XR-64A",
+      "device": "cuda:0",
+      "allowed_to_run": false,
+      "allowed_only_after": "XR64-STRICT-READY",
+      "depends_on": [
+        "XR64-STRICT-READY"
+      ],
+      "command": "bash scripts/external/run_xr64_teacher_target_construction.sh a cuda:0",
+      "promotion_gate": "center < 16.468481131962367 or P10 > 35.02295998845781 or P5 > 12.133503770828247"
+    },
+    {
+      "id": "XR64B-LAUNCH",
+      "stage": "train",
+      "lane": "XR-64B",
+      "device": "cuda:1",
+      "allowed_to_run": false,
+      "allowed_only_after": "XR64-STRICT-READY",
+      "depends_on": [
+        "XR64-STRICT-READY"
+      ],
+      "command": "bash scripts/external/run_xr64_teacher_target_construction.sh b cuda:1",
+      "promotion_gate": "P10 > 35.02295998845781 or P5 > 12.133503770828247 with bounded center tradeoff"
+    }
+  ],
+  "postrun_commands_after_launch": [
+    {
+      "id": "XR64-POSTRUN-COLLECT-CANDIDATES",
+      "stage": "postrun",
+      "kind": "collect_candidates",
+      "allowed_to_run": false,
+      "allowed_only_after": "XR64A-LAUNCH and XR64B-LAUNCH complete with override-cleared test eval summaries",
+      "depends_on": [
+        "XR64A-LAUNCH",
+        "XR64B-LAUNCH"
+      ],
+      "command": ".venv/bin/python scripts/external/collect_xr64_postrun_candidates.py --format summary"
+    },
+    {
+      "id": "XR64-POSTRUN-PRINT-DECISION-COMMAND",
+      "stage": "postrun",
+      "kind": "print_decision_command",
+      "allowed_to_run": false,
+      "allowed_only_after": "XR64-POSTRUN-COLLECT-CANDIDATES reports certified XR-64A/B candidates",
+      "depends_on": [
+        "XR64-POSTRUN-COLLECT-CANDIDATES"
+      ],
+      "command": ".venv/bin/python scripts/external/collect_xr64_postrun_candidates.py --format commands"
+    }
+  ],
+  "expected_generated_files": {
+    "eval_rows": [
+      "data/_internal/manifests/manifest1/xr64_teacher_targets/eval_rows/train/xr62a/eval_rows.json",
+      "data/_internal/manifests/manifest1/xr64_teacher_targets/eval_rows/train/xr39/eval_rows.json",
+      "data/_internal/manifests/manifest1/xr64_teacher_targets/eval_rows/train/xr56b/eval_rows.json",
+      "data/_internal/manifests/manifest1/xr64_teacher_targets/eval_rows/train/xr58a/eval_rows.json",
+      "data/_internal/manifests/manifest1/xr64_teacher_targets/eval_rows/val/xr62a/eval_rows.json",
+      "data/_internal/manifests/manifest1/xr64_teacher_targets/eval_rows/val/xr39/eval_rows.json",
+      "data/_internal/manifests/manifest1/xr64_teacher_targets/eval_rows/val/xr56b/eval_rows.json",
+      "data/_internal/manifests/manifest1/xr64_teacher_targets/eval_rows/val/xr58a/eval_rows.json"
+    ],
+    "overrides": [
+      "data/_internal/manifests/manifest1/xr64_teacher_targets/xr64a_conservative_train_overrides.json",
+      "data/_internal/manifests/manifest1/xr64_teacher_targets/xr64a_conservative_val_overrides.json",
+      "data/_internal/manifests/manifest1/xr64_teacher_targets/xr64b_threshold_train_overrides.json",
+      "data/_internal/manifests/manifest1/xr64_teacher_targets/xr64b_threshold_val_overrides.json",
+      "data/_internal/manifests/manifest1/xr64_teacher_targets/xr64c_minerror_train_overrides.json",
+      "data/_internal/manifests/manifest1/xr64_teacher_targets/xr64c_minerror_val_overrides.json"
+    ]
+  },
+  "false_completion_guardrails": [
+    "This manifest is not execution evidence.",
+    "Do not run prep_commands while execution_state is paused_by_user_directive.",
+    "Do not include test in XR64_SPLITS.",
+    "Do not launch XR-64A/B before strict readiness reports ready_to_train.",
+    "Do not promote any result without full-test center/P10/P5 and leakage check.",
+    "Do not run postrun decision review before XR-64A/B test eval summaries have ablation axis certification."
+  ]
+}

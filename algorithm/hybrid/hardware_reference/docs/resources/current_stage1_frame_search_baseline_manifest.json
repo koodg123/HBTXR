@@ -1,0 +1,590 @@
+{
+  "manifest_version": 1,
+  "generated_at_utc": "2026-06-21T18:47:19.413098+00:00",
+  "purpose": "Current Stage1 frame-based Search baseline selection for downstream HGTXR experiments.",
+  "state": "promoted_followup",
+  "min_epochs": 50,
+  "target_epochs": 80,
+  "active_baseline": {
+    "run": "runs/NON_XR/raw/stage1_frame_search_centerpolish_selfdistill_lr7p5e6_xy2_ema999_stage1_centerpolish_after_s1ef_20260622_0128_20260622_021949",
+    "checkpoint": "runs/NON_XR/raw/stage1_frame_search_centerpolish_selfdistill_lr7p5e6_xy2_ema999_stage1_centerpolish_after_s1ef_20260622_0128_20260622_021949/train/best_search_p10.pt",
+    "source": "followup"
+  },
+  "previous_baseline": {
+    "run": "runs/NON_XR/raw/stage1_frame_search_sonly_adamw_lr5e4_xy1p5_fullwidth_20260621_204500",
+    "checkpoint": "runs/NON_XR/raw/stage1_frame_search_sonly_adamw_lr5e4_xy1p5_fullwidth_20260621_204500/train/best_search_p10.pt"
+  },
+  "promotion": {
+    "ready": true,
+    "checkpoint": "runs/NON_XR/raw/stage1_frame_search_centerpolish_selfdistill_lr7p5e6_xy2_ema999_stage1_centerpolish_after_s1ef_20260622_0128_20260622_021949/train/best_search_p10.pt",
+    "status": "promote_followup"
+  },
+  "leading_ranked_candidate": {
+    "run": "runs/NON_XR/raw/stage1_frame_search_centerpolish_nodistill_lr1e5_xy2_stage1_centerpolish_after_s1ef_20260622_0128_20260622_021949",
+    "epochs": 80,
+    "complete_target_epochs": true,
+    "min_epoch_ready": true,
+    "best_search_p10": 28.303010526693093,
+    "best_search_p5": 9.884321932522756,
+    "best_search_p1": 0.6626235674012382,
+    "best_search_center_px": 17.3741187104639,
+    "delta_search_p10_pp": 0.0786163761930645,
+    "delta_search_p5_pp": 0.05053910669290751,
+    "delta_search_p1_pp": -0.40206648268789613,
+    "delta_search_center_px_improvement": -0.08526944214442977,
+    "checkpoint_exists": true,
+    "checkpoint_path": "runs/NON_XR/raw/stage1_frame_search_centerpolish_nodistill_lr1e5_xy2_stage1_centerpolish_after_s1ef_20260622_0128_20260622_021949/train/best_search_p10.pt",
+    "beats_baseline_primary": true,
+    "keeps_or_improves_center": false,
+    "promotable_after_min_epoch": false
+  },
+  "leading_baseline_candidate": {
+    "run": "runs/NON_XR/raw/stage1_frame_search_centerpolish_selfdistill_lr7p5e6_xy2_ema999_stage1_centerpolish_after_s1ef_20260622_0128_20260622_021949",
+    "epochs": 80,
+    "complete_target_epochs": true,
+    "min_epoch_ready": true,
+    "best_search_p10": 28.27717937613433,
+    "best_search_p5": 10.153863744915656,
+    "best_search_p1": 0.5615454079969874,
+    "best_search_center_px": 17.257583906065744,
+    "delta_search_p10_pp": 0.052785225634302435,
+    "delta_search_p5_pp": 0.3200809190858074,
+    "delta_search_p1_pp": -0.5031446420921469,
+    "delta_search_center_px_improvement": 0.03126536225372689,
+    "checkpoint_exists": true,
+    "checkpoint_path": "runs/NON_XR/raw/stage1_frame_search_centerpolish_selfdistill_lr7p5e6_xy2_ema999_stage1_centerpolish_after_s1ef_20260622_0128_20260622_021949/train/best_search_p10.pt",
+    "beats_baseline_primary": true,
+    "keeps_or_improves_center": true,
+    "promotable_after_min_epoch": true
+  },
+  "ranked_followups": [
+    {
+      "run": "runs/NON_XR/raw/stage1_frame_search_centerpolish_nodistill_lr1e5_xy2_stage1_centerpolish_after_s1ef_20260622_0128_20260622_021949",
+      "epochs": 80,
+      "complete_target_epochs": true,
+      "min_epoch_ready": true,
+      "best_search_p10": 28.303010526693093,
+      "best_search_p5": 9.884321932522756,
+      "best_search_p1": 0.6626235674012382,
+      "best_search_center_px": 17.3741187104639,
+      "delta_search_p10_pp": 0.0786163761930645,
+      "delta_search_p5_pp": 0.05053910669290751,
+      "delta_search_p1_pp": -0.40206648268789613,
+      "delta_search_center_px_improvement": -0.08526944214442977,
+      "checkpoint_exists": true,
+      "checkpoint_path": "runs/NON_XR/raw/stage1_frame_search_centerpolish_nodistill_lr1e5_xy2_stage1_centerpolish_after_s1ef_20260622_0128_20260622_021949/train/best_search_p10.pt",
+      "beats_baseline_primary": true,
+      "keeps_or_improves_center": false,
+      "promotable_after_min_epoch": false
+    },
+    {
+      "run": "runs/NON_XR/raw/stage1_frame_search_centerpolish_selfdistill_lr7p5e6_xy2_ema999_stage1_centerpolish_after_s1ef_20260622_0128_20260622_021949",
+      "epochs": 80,
+      "complete_target_epochs": true,
+      "min_epoch_ready": true,
+      "best_search_p10": 28.27717937613433,
+      "best_search_p5": 10.153863744915656,
+      "best_search_p1": 0.5615454079969874,
+      "best_search_center_px": 17.257583906065744,
+      "delta_search_p10_pp": 0.052785225634302435,
+      "delta_search_p5_pp": 0.3200809190858074,
+      "delta_search_p1_pp": -0.5031446420921469,
+      "delta_search_center_px_improvement": 0.03126536225372689,
+      "checkpoint_exists": true,
+      "checkpoint_path": "runs/NON_XR/raw/stage1_frame_search_centerpolish_selfdistill_lr7p5e6_xy2_ema999_stage1_centerpolish_after_s1ef_20260622_0128_20260622_021949/train/best_search_p10.pt",
+      "beats_baseline_primary": true,
+      "keeps_or_improves_center": true,
+      "promotable_after_min_epoch": true
+    }
+  ],
+  "report": {
+    "ok": true,
+    "baseline": {
+      "run": "runs/NON_XR/raw/stage1_frame_search_sonly_adamw_lr5e4_xy1p5_fullwidth_20260621_204500",
+      "exists": true,
+      "history_path": "runs/NON_XR/raw/stage1_frame_search_sonly_adamw_lr5e4_xy1p5_fullwidth_20260621_204500/train/history.json",
+      "epochs": 300,
+      "target_epochs": 300,
+      "complete_target_epochs": true,
+      "metrics": {
+        "metric_search_p10_pct": {
+          "mode": "max",
+          "best_val": [
+            175,
+            28.22439415050003
+          ],
+          "last_val": [
+            300,
+            24.285714887223154
+          ],
+          "best_train": [
+            298,
+            93.15283659654807
+          ],
+          "last_train": [
+            300,
+            92.91971513074685
+          ]
+        },
+        "metric_search_p5_pct": {
+          "mode": "max",
+          "best_val": [
+            172,
+            9.833782825829848
+          ],
+          "last_val": [
+            300,
+            8.046945427948573
+          ],
+          "best_train": [
+            298,
+            72.65739370998989
+          ],
+          "last_train": [
+            300,
+            72.2139334048865
+          ]
+        },
+        "metric_search_p1_pct": {
+          "mode": "max",
+          "best_val": [
+            189,
+            1.0646900500891343
+          ],
+          "last_val": [
+            300,
+            0.2358490566037736
+          ],
+          "best_train": [
+            298,
+            19.278815727028242
+          ],
+          "last_train": [
+            300,
+            19.13586231704671
+          ]
+        },
+        "metric_search_center_px": {
+          "mode": "min",
+          "best_val": [
+            176,
+            17.28884926831947
+          ],
+          "last_val": [
+            300,
+            17.820249755427522
+          ],
+          "best_train": [
+            298,
+            3.8470652455268204
+          ],
+          "last_train": [
+            300,
+            3.8521034554490505
+          ]
+        },
+        "loss_total": {
+          "mode": "min",
+          "best_val": [
+            209,
+            26.903135992446035
+          ],
+          "last_val": [
+            300,
+            27.675921889970887
+          ],
+          "best_train": [
+            298,
+            6.490768778034941
+          ],
+          "last_train": [
+            300,
+            6.49742423010001
+          ]
+        },
+        "loss_search_xy": {
+          "mode": "min",
+          "best_val": [
+            209,
+            15.802935168428242
+          ],
+          "last_val": [
+            300,
+            16.22436411875599
+          ],
+          "best_train": [
+            298,
+            2.877679188858788
+          ],
+          "last_train": [
+            300,
+            2.883101640364552
+          ]
+        }
+      },
+      "checkpoints": {
+        "best_search_p10.pt": {
+          "exists": true,
+          "path": "runs/NON_XR/raw/stage1_frame_search_sonly_adamw_lr5e4_xy1p5_fullwidth_20260621_204500/train/best_search_p10.pt"
+        },
+        "best_search_p5.pt": {
+          "exists": true,
+          "path": "runs/NON_XR/raw/stage1_frame_search_sonly_adamw_lr5e4_xy1p5_fullwidth_20260621_204500/train/best_search_p5.pt"
+        },
+        "last.pt": {
+          "exists": true,
+          "path": "runs/NON_XR/raw/stage1_frame_search_sonly_adamw_lr5e4_xy1p5_fullwidth_20260621_204500/train/last.pt"
+        }
+      }
+    },
+    "followups": [
+      {
+        "run": "runs/NON_XR/raw/stage1_frame_search_centerpolish_nodistill_lr1e5_xy2_stage1_centerpolish_after_s1ef_20260622_0128_20260622_021949",
+        "exists": true,
+        "history_path": "runs/NON_XR/raw/stage1_frame_search_centerpolish_nodistill_lr1e5_xy2_stage1_centerpolish_after_s1ef_20260622_0128_20260622_021949/train/history.json",
+        "epochs": 80,
+        "target_epochs": 80,
+        "complete_target_epochs": true,
+        "metrics": {
+          "metric_search_p10_pct": {
+            "mode": "max",
+            "best_val": [
+              2,
+              28.303010526693093
+            ],
+            "last_val": [
+              80,
+              26.274708513943654
+            ],
+            "best_train": [
+              78,
+              77.70087323869977
+            ],
+            "last_train": [
+              80,
+              77.53000304126996
+            ]
+          },
+          "metric_search_p5_pct": {
+            "mode": "max",
+            "best_val": [
+              2,
+              9.884321932522756
+            ],
+            "last_val": [
+              80,
+              7.9795599343641745
+            ],
+            "best_train": [
+              74,
+              41.94920485617337
+            ],
+            "last_train": [
+              80,
+              41.93316073044934
+            ]
+          },
+          "metric_search_p1_pct": {
+            "mode": "max",
+            "best_val": [
+              56,
+              0.6626235674012382
+            ],
+            "last_val": [
+              80,
+              0.3706199538032964
+            ],
+            "best_train": [
+              77,
+              5.048132605951109
+            ],
+            "last_train": [
+              80,
+              5.004813381925104
+            ]
+          },
+          "metric_search_center_px": {
+            "mode": "min",
+            "best_val": [
+              2,
+              17.3741187104639
+            ],
+            "last_val": [
+              80,
+              17.776763470667714
+            ],
+            "best_train": [
+              78,
+              6.910644212501711
+            ],
+            "last_train": [
+              80,
+              6.9272749372569695
+            ]
+          },
+          "loss_total": {
+            "mode": "min",
+            "best_val": [
+              2,
+              32.464798945300984
+            ],
+            "last_val": [
+              80,
+              33.217314261310506
+            ],
+            "best_train": [
+              78,
+              12.813159876435272
+            ],
+            "last_train": [
+              80,
+              12.847858730352149
+            ]
+          },
+          "loss_search_xy": {
+            "mode": "min",
+            "best_val": [
+              2,
+              21.14960693863203
+            ],
+            "last_val": [
+              80,
+              21.691195042628163
+            ],
+            "best_train": [
+              78,
+              7.630161188040782
+            ],
+            "last_train": [
+              80,
+              7.650217490697486
+            ]
+          }
+        },
+        "checkpoints": {
+          "best_search_p10.pt": {
+            "exists": true,
+            "path": "runs/NON_XR/raw/stage1_frame_search_centerpolish_nodistill_lr1e5_xy2_stage1_centerpolish_after_s1ef_20260622_0128_20260622_021949/train/best_search_p10.pt"
+          },
+          "best_search_p5.pt": {
+            "exists": true,
+            "path": "runs/NON_XR/raw/stage1_frame_search_centerpolish_nodistill_lr1e5_xy2_stage1_centerpolish_after_s1ef_20260622_0128_20260622_021949/train/best_search_p5.pt"
+          },
+          "last.pt": {
+            "exists": true,
+            "path": "runs/NON_XR/raw/stage1_frame_search_centerpolish_nodistill_lr1e5_xy2_stage1_centerpolish_after_s1ef_20260622_0128_20260622_021949/train/last.pt"
+          }
+        }
+      },
+      {
+        "run": "runs/NON_XR/raw/stage1_frame_search_centerpolish_selfdistill_lr7p5e6_xy2_ema999_stage1_centerpolish_after_s1ef_20260622_0128_20260622_021949",
+        "exists": true,
+        "history_path": "runs/NON_XR/raw/stage1_frame_search_centerpolish_selfdistill_lr7p5e6_xy2_ema999_stage1_centerpolish_after_s1ef_20260622_0128_20260622_021949/train/history.json",
+        "epochs": 80,
+        "target_epochs": 80,
+        "complete_target_epochs": true,
+        "metrics": {
+          "metric_search_p10_pct": {
+            "mode": "max",
+            "best_val": [
+              2,
+              28.27717937613433
+            ],
+            "last_val": [
+              80,
+              25.87151899877584
+            ],
+            "best_train": [
+              80,
+              76.52660182222844
+            ],
+            "last_train": [
+              80,
+              76.52660182222844
+            ]
+          },
+          "metric_search_p5_pct": {
+            "mode": "max",
+            "best_val": [
+              3,
+              10.153863744915656
+            ],
+            "last_val": [
+              80,
+              8.019991244909898
+            ],
+            "best_train": [
+              80,
+              40.382172448294504
+            ],
+            "last_train": [
+              80,
+              40.382172448294504
+            ]
+          },
+          "metric_search_p1_pct": {
+            "mode": "max",
+            "best_val": [
+              7,
+              0.5615454079969874
+            ],
+            "last_val": [
+              80,
+              0.2358490566037736
+            ],
+            "best_train": [
+              79,
+              4.247529317747872
+            ],
+            "last_train": [
+              80,
+              4.241913870017163
+            ]
+          },
+          "metric_search_center_px": {
+            "mode": "min",
+            "best_val": [
+              1,
+              17.257583906065744
+            ],
+            "last_val": [
+              80,
+              17.7814475095497
+            ],
+            "best_train": [
+              78,
+              7.076319327894247
+            ],
+            "last_train": [
+              80,
+              7.081039607042894
+            ]
+          },
+          "loss_total": {
+            "mode": "min",
+            "best_val": [
+              1,
+              32.24795374780331
+            ],
+            "last_val": [
+              80,
+              33.2092836487968
+            ],
+            "best_train": [
+              78,
+              13.111673168094974
+            ],
+            "last_train": [
+              80,
+              13.118657165781828
+            ]
+          },
+          "loss_search_xy": {
+            "mode": "min",
+            "best_val": [
+              1,
+              21.02012821413436
+            ],
+            "last_val": [
+              80,
+              21.688594912582975
+            ],
+            "best_train": [
+              78,
+              7.853541106708609
+            ],
+            "last_train": [
+              80,
+              7.858339225185528
+            ]
+          }
+        },
+        "checkpoints": {
+          "best_search_p10.pt": {
+            "exists": true,
+            "path": "runs/NON_XR/raw/stage1_frame_search_centerpolish_selfdistill_lr7p5e6_xy2_ema999_stage1_centerpolish_after_s1ef_20260622_0128_20260622_021949/train/best_search_p10.pt"
+          },
+          "best_search_p5.pt": {
+            "exists": true,
+            "path": "runs/NON_XR/raw/stage1_frame_search_centerpolish_selfdistill_lr7p5e6_xy2_ema999_stage1_centerpolish_after_s1ef_20260622_0128_20260622_021949/train/best_search_p5.pt"
+          },
+          "last.pt": {
+            "exists": true,
+            "path": "runs/NON_XR/raw/stage1_frame_search_centerpolish_selfdistill_lr7p5e6_xy2_ema999_stage1_centerpolish_after_s1ef_20260622_0128_20260622_021949/train/last.pt"
+          }
+        }
+      }
+    ],
+    "ranked_followups": [
+      {
+        "run": "runs/NON_XR/raw/stage1_frame_search_centerpolish_nodistill_lr1e5_xy2_stage1_centerpolish_after_s1ef_20260622_0128_20260622_021949",
+        "epochs": 80,
+        "complete_target_epochs": true,
+        "min_epoch_ready": true,
+        "best_search_p10": 28.303010526693093,
+        "best_search_p5": 9.884321932522756,
+        "best_search_p1": 0.6626235674012382,
+        "best_search_center_px": 17.3741187104639,
+        "delta_search_p10_pp": 0.0786163761930645,
+        "delta_search_p5_pp": 0.05053910669290751,
+        "delta_search_p1_pp": -0.40206648268789613,
+        "delta_search_center_px_improvement": -0.08526944214442977,
+        "checkpoint_exists": true,
+        "checkpoint_path": "runs/NON_XR/raw/stage1_frame_search_centerpolish_nodistill_lr1e5_xy2_stage1_centerpolish_after_s1ef_20260622_0128_20260622_021949/train/best_search_p10.pt",
+        "beats_baseline_primary": true,
+        "keeps_or_improves_center": false,
+        "promotable_after_min_epoch": false
+      },
+      {
+        "run": "runs/NON_XR/raw/stage1_frame_search_centerpolish_selfdistill_lr7p5e6_xy2_ema999_stage1_centerpolish_after_s1ef_20260622_0128_20260622_021949",
+        "epochs": 80,
+        "complete_target_epochs": true,
+        "min_epoch_ready": true,
+        "best_search_p10": 28.27717937613433,
+        "best_search_p5": 10.153863744915656,
+        "best_search_p1": 0.5615454079969874,
+        "best_search_center_px": 17.257583906065744,
+        "delta_search_p10_pp": 0.052785225634302435,
+        "delta_search_p5_pp": 0.3200809190858074,
+        "delta_search_p1_pp": -0.5031446420921469,
+        "delta_search_center_px_improvement": 0.03126536225372689,
+        "checkpoint_exists": true,
+        "checkpoint_path": "runs/NON_XR/raw/stage1_frame_search_centerpolish_selfdistill_lr7p5e6_xy2_ema999_stage1_centerpolish_after_s1ef_20260622_0128_20260622_021949/train/best_search_p10.pt",
+        "beats_baseline_primary": true,
+        "keeps_or_improves_center": true,
+        "promotable_after_min_epoch": true
+      }
+    ],
+    "current_winner": {
+      "run": "runs/NON_XR/raw/stage1_frame_search_centerpolish_nodistill_lr1e5_xy2_stage1_centerpolish_after_s1ef_20260622_0128_20260622_021949",
+      "epochs": 80,
+      "complete_target_epochs": true,
+      "min_epoch_ready": true,
+      "best_search_p10": 28.303010526693093,
+      "best_search_p5": 9.884321932522756,
+      "best_search_p1": 0.6626235674012382,
+      "best_search_center_px": 17.3741187104639,
+      "delta_search_p10_pp": 0.0786163761930645,
+      "delta_search_p5_pp": 0.05053910669290751,
+      "delta_search_p1_pp": -0.40206648268789613,
+      "delta_search_center_px_improvement": -0.08526944214442977,
+      "checkpoint_exists": true,
+      "checkpoint_path": "runs/NON_XR/raw/stage1_frame_search_centerpolish_nodistill_lr1e5_xy2_stage1_centerpolish_after_s1ef_20260622_0128_20260622_021949/train/best_search_p10.pt",
+      "beats_baseline_primary": true,
+      "keeps_or_improves_center": false,
+      "promotable_after_min_epoch": false
+    },
+    "decision_gate": {
+      "min_epochs": 50,
+      "target_epochs": 80,
+      "all_followups_min_epoch_ready": true,
+      "any_followup_complete": true
+    },
+    "recommendation": {
+      "status": "promote_followup",
+      "promote_checkpoint": "runs/NON_XR/raw/stage1_frame_search_centerpolish_selfdistill_lr7p5e6_xy2_ema999_stage1_centerpolish_after_s1ef_20260622_0128_20260622_021949/train/best_search_p10.pt",
+      "baseline_checkpoint": "runs/NON_XR/raw/stage1_frame_search_sonly_adamw_lr5e4_xy1p5_fullwidth_20260621_204500/train/best_search_p10.pt",
+      "continue_training": false
+    }
+  }
+}

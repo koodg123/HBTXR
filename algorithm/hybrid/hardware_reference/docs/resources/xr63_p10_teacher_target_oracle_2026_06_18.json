@@ -1,0 +1,306 @@
+{
+  "diagnostic": "XR-63 P10 teacher-target oracle",
+  "phase": "P1",
+  "domain": "Research Workflow",
+  "parent_skill": "paper-idea-generator",
+  "reference_config": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/software/runs/eval_fixed255k_xr62_a_xr56b_facetaux_p10_preserve_adamw_lr3e_7_g32_hm0_004_off0_0015_c0_0025_p10soft0_004_p5soft0_0020_auxc0_0006_auxa0_0125_auxt0_005_best_track_p10_test_gpu0_w0_20260618_004307/hypers/resolved_config.json",
+  "manifest": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/software/data/_internal/manifests/manifest1/test_manifest.jsonl",
+  "evals": {
+    "xr62a_center": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/software/runs/eval_fixed255k_xr62_a_xr56b_facetaux_p10_preserve_adamw_lr3e_7_g32_hm0_004_off0_0015_c0_0025_p10soft0_004_p5soft0_0020_auxc0_0006_auxa0_0125_auxt0_005_best_track_p10_test_gpu0_w0_20260618_004307/eval/test/eval_rows.json",
+    "xr39_p10": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/software/runs/eval_fixed255k_xr39_mixedleader_soup_c25p45f30_gpu1_w0_20260617_010154/eval/test/eval_rows.json",
+    "xr56b_p5": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/software/runs/eval_fixed255k_xr56_b_xr52seed_xr39teacher_directp10p5soft_adamw_lr5e_7_g32_hm0_004_off0_0015_c0_0030_p10soft0_008_p5soft0_0020_state0_00035_best_track_p5_test_gpu1_w0_20260617_073652/eval/test/eval_rows.json",
+    "xr58a_p10teacher": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/software/runs/eval_fixed255k_xr58_a_xr39self_p10teacher_anchored_adamw_lr1e_6_g32_hm0_004_off0_0015_c0_0005_p10soft0_014_p5soft0_0_disttrue_state0_00010_best_track_p10_test_gpu0_w0_20260617_083420/eval/test/eval_rows.json"
+  },
+  "active_gates": {
+    "metric_track_center_px": 16.468481131962367,
+    "metric_track_p10_pct": 35.02295998845781,
+    "metric_track_p5_pct": 12.133503770828247
+  },
+  "aligned_sample_count": 2238,
+  "baseline_model": "xr62a_center",
+  "model_metrics": {
+    "xr62a_center": {
+      "sample_count": 2238,
+      "batch_count": 280,
+      "effective_weight": 1957.0,
+      "metric_track_center_px": 16.46848118897564,
+      "metric_track_p10_pct": 34.30782312925173,
+      "metric_track_p5_pct": 12.052721088435367
+    },
+    "xr39_p10": {
+      "sample_count": 2238,
+      "batch_count": 280,
+      "effective_weight": 1957.0,
+      "metric_track_center_px": 16.503940921902878,
+      "metric_track_p10_pct": 35.02295918367349,
+      "metric_track_p5_pct": 11.46045918367346
+    },
+    "xr56b_p5": {
+      "sample_count": 2238,
+      "batch_count": 280,
+      "effective_weight": 1957.0,
+      "metric_track_center_px": 16.470187651155225,
+      "metric_track_p10_pct": 34.29294217687078,
+      "metric_track_p5_pct": 12.133503401360533
+    },
+    "xr58a_p10teacher": {
+      "sample_count": 2238,
+      "batch_count": 280,
+      "effective_weight": 1957.0,
+      "metric_track_center_px": 16.503614397796106,
+      "metric_track_p10_pct": 34.903061224489825,
+      "metric_track_p5_pct": 11.512755102040812
+    }
+  },
+  "global_weighted_model_metrics": {
+    "xr62a_center": {
+      "sample_count": 2238,
+      "effective_weight": 1957.0,
+      "metric_track_center_px": 16.405413526868696,
+      "metric_track_p10_pct": 34.38937148696985,
+      "metric_track_p5_pct": 12.161471640265713
+    },
+    "xr39_p10": {
+      "sample_count": 2238,
+      "effective_weight": 1957.0,
+      "metric_track_center_px": 16.440059153430113,
+      "metric_track_p10_pct": 35.206949412365866,
+      "metric_track_p5_pct": 11.599386816555953
+    },
+    "xr56b_p5": {
+      "sample_count": 2238,
+      "effective_weight": 1957.0,
+      "metric_track_center_px": 16.40662800194717,
+      "metric_track_p10_pct": 34.38937148696985,
+      "metric_track_p5_pct": 12.263668880940216
+    },
+    "xr58a_p10teacher": {
+      "sample_count": 2238,
+      "effective_weight": 1957.0,
+      "metric_track_center_px": 16.443677778837905,
+      "metric_track_p10_pct": 35.104752171691366,
+      "metric_track_p5_pct": 11.650485436893204
+    }
+  },
+  "oracle_metrics": {
+    "sample_count": 2238,
+    "batch_count": 280,
+    "effective_weight": 1957.0,
+    "metric_track_center_px": 16.04023192701366,
+    "metric_track_p10_pct": 36.48596938775512,
+    "metric_track_p5_pct": 13.41751700680271
+  },
+  "global_weighted_oracle_metrics": {
+    "sample_count": 2238,
+    "effective_weight": 1957.0,
+    "metric_track_center_px": 15.97843771593733,
+    "metric_track_p10_pct": 36.63771078180889,
+    "metric_track_p5_pct": 13.541134389371488
+  },
+  "oracle_promotes_active_gate": {
+    "center": true,
+    "p10": true,
+    "p5": true
+  },
+  "oracle_selection": [
+    {
+      "model": "xr39_p10",
+      "sample_count": 856,
+      "effective_weight": 762.0
+    },
+    {
+      "model": "xr56b_p5",
+      "sample_count": 408,
+      "effective_weight": 347.0
+    },
+    {
+      "model": "xr58a_p10teacher",
+      "sample_count": 595,
+      "effective_weight": 509.0
+    },
+    {
+      "model": "xr62a_center",
+      "sample_count": 379,
+      "effective_weight": 339.0
+    }
+  ],
+  "baseline_miss_recovery": {
+    "p10_miss_count": 1486,
+    "p10_miss_recoverable_by_any_weight_pct": 3.4267912772585665,
+    "p5_miss_count": 1981,
+    "p5_miss_recoverable_by_any_weight_pct": 1.5706806282722512
+  },
+  "top_oracle_gain_buckets": [
+    {
+      "bucket": "session:user42/right/session_202",
+      "sample_count": 25,
+      "effective_weight": 22.0,
+      "baseline_center_px": 21.585378240751357,
+      "oracle_center_px": 20.72077829325545,
+      "oracle_gain_px": 0.8645999474959076
+    },
+    {
+      "bucket": "session:user46/right/session_201",
+      "sample_count": 33,
+      "effective_weight": 27.0,
+      "baseline_center_px": 17.064132811570428,
+      "oracle_center_px": 16.256188519366557,
+      "oracle_gain_px": 0.8079442922038709
+    },
+    {
+      "bucket": "session:user47/left/session_202",
+      "sample_count": 28,
+      "effective_weight": 25.0,
+      "baseline_center_px": 15.828502391586591,
+      "oracle_center_px": 15.166941120424331,
+      "oracle_gain_px": 0.6615612711622596
+    },
+    {
+      "bucket": "session:user42/right/session_102",
+      "sample_count": 27,
+      "effective_weight": 25.0,
+      "baseline_center_px": 16.207378268246263,
+      "oracle_center_px": 15.574133808394024,
+      "oracle_gain_px": 0.6332444598522393
+    },
+    {
+      "bucket": "session:user44/right/session_201",
+      "sample_count": 50,
+      "effective_weight": 44.0,
+      "baseline_center_px": 15.286208680244473,
+      "oracle_center_px": 14.67843554752717,
+      "oracle_gain_px": 0.6077731327173019
+    },
+    {
+      "bucket": "session:user44/right/session_102",
+      "sample_count": 27,
+      "effective_weight": 25.0,
+      "baseline_center_px": 11.590990853001657,
+      "oracle_center_px": 11.016397911416949,
+      "oracle_gain_px": 0.574592941584708
+    },
+    {
+      "bucket": "session:user45/right/session_201",
+      "sample_count": 31,
+      "effective_weight": 29.0,
+      "baseline_center_px": 24.602612769649003,
+      "oracle_center_px": 24.035174962954276,
+      "oracle_gain_px": 0.567437806694727
+    },
+    {
+      "bucket": "session:user40/left/session_201",
+      "sample_count": 47,
+      "effective_weight": 41.0,
+      "baseline_center_px": 16.89962374077753,
+      "oracle_center_px": 16.338045991177648,
+      "oracle_gain_px": 0.5615777495998806
+    },
+    {
+      "bucket": "session:user39/left/session_102",
+      "sample_count": 14,
+      "effective_weight": 10.0,
+      "baseline_center_px": 21.093261683412216,
+      "oracle_center_px": 20.53954040366945,
+      "oracle_gain_px": 0.5537212797427671
+    },
+    {
+      "bucket": "session:user42/right/session_201",
+      "sample_count": 46,
+      "effective_weight": 39.0,
+      "baseline_center_px": 23.54356842201613,
+      "oracle_center_px": 22.994631981139293,
+      "oracle_gain_px": 0.5489364408768367
+    },
+    {
+      "bucket": "session:user45/left/session_102",
+      "sample_count": 28,
+      "effective_weight": 21.0,
+      "baseline_center_px": 16.897318741516838,
+      "oracle_center_px": 16.349184550091167,
+      "oracle_gain_px": 0.548134191425671
+    },
+    {
+      "bucket": "session:user41/left/session_201",
+      "sample_count": 46,
+      "effective_weight": 37.0,
+      "baseline_center_px": 19.35664056308289,
+      "oracle_center_px": 18.811875672442916,
+      "oracle_gain_px": 0.5447648906399749
+    },
+    {
+      "bucket": "session:user40/right/session_102",
+      "sample_count": 28,
+      "effective_weight": 26.0,
+      "baseline_center_px": 10.579867349923981,
+      "oracle_center_px": 10.036384027689326,
+      "oracle_gain_px": 0.5434833222346551
+    },
+    {
+      "bucket": "subject:user42",
+      "sample_count": 195,
+      "effective_weight": 171.0,
+      "baseline_center_px": 21.56891552950408,
+      "oracle_center_px": 21.038738651798575,
+      "oracle_gain_px": 0.5301768777055038
+    },
+    {
+      "bucket": "session:user41/left/session_202",
+      "sample_count": 25,
+      "effective_weight": 20.0,
+      "baseline_center_px": 19.00789065968923,
+      "oracle_center_px": 18.48195788654811,
+      "oracle_gain_px": 0.5259327731411219
+    },
+    {
+      "bucket": "session:user40/right/session_202",
+      "sample_count": 26,
+      "effective_weight": 25.0,
+      "baseline_center_px": 11.458232424783889,
+      "oracle_center_px": 10.951354358918948,
+      "oracle_gain_px": 0.5068780658649406
+    },
+    {
+      "bucket": "session:user44/left/session_201",
+      "sample_count": 50,
+      "effective_weight": 46.0,
+      "baseline_center_px": 13.86931416623088,
+      "oracle_center_px": 13.36432410098322,
+      "oracle_gain_px": 0.5049900652476609
+    },
+    {
+      "bucket": "session:user39/left/session_202",
+      "sample_count": 20,
+      "effective_weight": 17.0,
+      "baseline_center_px": 19.6288932642888,
+      "oracle_center_px": 19.125503353237214,
+      "oracle_gain_px": 0.5033899110515847
+    },
+    {
+      "bucket": "subject:user40",
+      "sample_count": 204,
+      "effective_weight": 185.0,
+      "baseline_center_px": 14.418080771537774,
+      "oracle_center_px": 13.91834736263521,
+      "oracle_gain_px": 0.49973340890256424
+    },
+    {
+      "bucket": "session:user40/right/session_201",
+      "sample_count": 47,
+      "effective_weight": 44.0,
+      "baseline_center_px": 14.774841923351152,
+      "oracle_center_px": 14.276567880656152,
+      "oracle_gain_px": 0.49827404269499986
+    }
+  ],
+  "decision": "GO_teacher_target_construction",
+  "assumptions": [
+    "eval_rows track_state and loader cur_state share the resolved_config transform frame",
+    "oracle_best_center is an upper bound for teacher/selector construction, not deployable accuracy",
+    "test split is diagnostic only; training pseudo-label construction must rebuild split-isolated manifests"
+  ],
+  "control_variables": [
+    "same manifest1 test split",
+    "same resolved XR-62A config for target transform and metric weights",
+    "same weighted center/P10/P5 definitions as hbtxr.loss.metrics"
+  ]
+}

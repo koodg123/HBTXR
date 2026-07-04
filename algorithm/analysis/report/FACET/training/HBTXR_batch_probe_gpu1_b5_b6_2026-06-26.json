@@ -1,0 +1,30 @@
+{
+  "config": "DavisEyeEllipse_HBTXR_full_unet.yaml",
+  "device": "cuda:1",
+  "steps": 3,
+  "num_workers": 0,
+  "batch_sizes": [
+    5,
+    6
+  ],
+  "results": [
+    {
+      "batch_size": 5,
+      "ok": true,
+      "completed_steps": 3,
+      "avg_step_seconds": 0.41104776264789206,
+      "samples_per_second": 12.16403652896915,
+      "peak_allocated_mib": 12472.87841796875,
+      "peak_reserved_mib": 13718.0
+    },
+    {
+      "batch_size": 6,
+      "ok": false,
+      "error": "CUDA out of memory",
+      "detail": "CUDA out of memory. Tried to allocate 1.13 GiB. GPU 1 has a total capacity of 15.47 GiB of which 614.75 MiB is free. Including non-PyTorch memory, this process has 14.85 GiB memory in use. Of the allocated memory 13.42 GiB is allocated by PyTorch, and 1.10 GiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://docs.pytorch.org/docs/stable/notes/cuda.html#optimizing-memory-usage-with-pytorch-cuda-alloc-conf)",
+      "completed_steps": 0,
+      "peak_allocated_mib": 13744.587890625,
+      "peak_reserved_mib": 14868.0
+    }
+  ]
+}

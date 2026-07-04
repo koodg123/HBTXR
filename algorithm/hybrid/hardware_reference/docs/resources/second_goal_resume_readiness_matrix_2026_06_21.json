@@ -1,0 +1,235 @@
+{
+  "artifact": "second_goal_resume_readiness_matrix",
+  "manifest_version": 1,
+  "date": "2026-06-21",
+  "execution_state": "paused_by_user_directive",
+  "execute_supported": false,
+  "allowed_while_paused": true,
+  "direct_submission_comparison_allowed": false,
+  "software_promotion_allowed": false,
+  "paper_level_completion_allowed": false,
+  "idea_gen_phase": "P1",
+  "idea_gen_domain": "Research Workflow",
+  "parent_skill": "paper-idea-generator",
+  "worker_skill": "ablation-study-designer",
+  "prompt_pack": {
+    "objective": "Bind the second-goal objective, PAPER_REF experiment axes, XR-64 resume gate, and paper-target bridge blockers into one no-execute readiness matrix.",
+    "source_artifacts": [
+      "docs/resources/second_goal_objective_trace_2026_06_20.json",
+      "docs/resources/second_goal_experiment_queue_2026_06_20.json",
+      "docs/resources/second_goal_completion_readiness_contract_2026_06_21.json",
+      "docs/resources/xr64_prep_progress_ledger_2026_06_21.json",
+      "docs/resources/paper_target_metric_bridge_preflight_2026_06_21.json"
+    ],
+    "target_model_algorithm_dataset": "HGTXR-SW raw event-count track model on manifest1",
+    "constraints": [
+      "Do not run train/eval/GPU jobs while execution is paused.",
+      "Do not treat PAPER_REF analysis or XR-63 oracle evidence as trained promotion evidence.",
+      "Do not launch XR-64A/B until strict XR-64 readiness passes.",
+      "Do not compare directly with 10_submission_initial until paper-target bridge evidence is complete."
+    ],
+    "required_artifact": "Machine-checkable resume readiness matrix plus checker.",
+    "verification_evidence": ".venv/bin/python scripts/external/check_second_goal_resume_readiness_matrix.py --format summary"
+  },
+  "current_state": {
+    "goal_complete": false,
+    "req1_status": "complete_as_planning_input",
+    "req2_status": "planned_not_fully_executed",
+    "req3_status": "incomplete",
+    "experiment_queue_count": 8,
+    "current_p0_ids": [
+      "XR-64-prep",
+      "XR-64A",
+      "XR-64B"
+    ],
+    "completion_allowed": false,
+    "blocker_count": 28,
+    "xr64_ready_to_train": false,
+    "xr64_can_run_lane": false,
+    "xr64_missing_eval_rows": 8,
+    "xr64_missing_overrides": 6,
+    "xr64_next_prep_id": "XR64-EVAL-TRAIN-XR62A",
+    "xr64_prep_unit_count": 10,
+    "xr64_prep_ready_after_resume_count": 8,
+    "xr64_prep_blocked_count": 2,
+    "xr64_postrun_candidate_count": 0,
+    "paper_target_required_evidence_count": 7,
+    "paper_target_required_output_schema_count": 10,
+    "paper_target_ptb1_existing_payload_count": 0,
+    "direct_submission_comparison_allowed": false,
+    "software_promotion_allowed": false,
+    "paper_level_completion_allowed": false
+  },
+  "axis_resume_matrix": [
+    {
+      "axis": "head",
+      "experiments": [
+        "XR-64A",
+        "XR-64B",
+        "XR-65",
+        "XR-66"
+      ],
+      "current_gate": "blocked_until_XR-64-prep_ready_to_train",
+      "minimum_unblock_evidence": [
+        "XR-64 strict checker ready_to_train",
+        "XR-64A/B run root and checkpoint",
+        "override-cleared full-test eval summary"
+      ]
+    },
+    {
+      "axis": "loss",
+      "experiments": [
+        "XR-64A",
+        "XR-64B",
+        "XR-64C",
+        "XR-65",
+        "XR-66"
+      ],
+      "current_gate": "blocked_until_XR-64_train_val_override_JSONs_exist",
+      "minimum_unblock_evidence": [
+        "6 train/val override JSON files",
+        "override provenance",
+        "no test-derived target override"
+      ]
+    },
+    {
+      "axis": "lr",
+      "experiments": [
+        "XR-64A",
+        "XR-64B",
+        "XR-64C",
+        "XR-65"
+      ],
+      "current_gate": "blocked_until_training_lanes_exist",
+      "minimum_unblock_evidence": [
+        "XR-64A/B configs",
+        "validation curves",
+        "full-test center/P10/P5/P1 summaries"
+      ]
+    },
+    {
+      "axis": "optimizer",
+      "experiments": [
+        "XR-68"
+      ],
+      "current_gate": "deferred_until_stable_full_width_teacher",
+      "minimum_unblock_evidence": [
+        "XR-64-or-later stable trained teacher",
+        "software gate improvement",
+        "compression/export safety note"
+      ]
+    },
+    {
+      "axis": "self_supervised_distillation",
+      "experiments": [
+        "XR-65",
+        "XR-68"
+      ],
+      "current_gate": "deferred_until_XR-64_noncollapse",
+      "minimum_unblock_evidence": [
+        "non-collapsing XR-64 checkpoint",
+        "state distillation ablation provenance",
+        "center drift report"
+      ]
+    },
+    {
+      "axis": "teacher_model_training",
+      "experiments": [
+        "XR-64-prep",
+        "XR-64A",
+        "XR-64B",
+        "XR-64C"
+      ],
+      "current_gate": "highest_priority_after_explicit_resume",
+      "minimum_unblock_evidence": [
+        "8 train/val teacher eval-row files",
+        "6 train/val override JSON files",
+        "strict XR-64 checker ready_to_train"
+      ]
+    }
+  ],
+  "resume_gates": [
+    {
+      "id": "RG-1",
+      "name": "planning_coverage",
+      "status": "satisfied_for_planning_only",
+      "required_before": "any future experiment selection",
+      "evidence": [
+        "REQ-1 complete_as_planning_input",
+        "REQ-2 planned_not_fully_executed",
+        "experiment queue count 8"
+      ],
+      "does_not_allow": [
+        "software promotion",
+        "paper-level completion",
+        "direct submission comparison"
+      ]
+    },
+    {
+      "id": "RG-2",
+      "name": "xr64_prep_generation",
+      "status": "blocked_by_pause_and_missing_outputs",
+      "required_before": "XR-64A/B training",
+      "evidence_needed": [
+        "8 eval_rows.json files",
+        "6 override JSON files",
+        "missing_eval_rows=0",
+        "missing_overrides=0"
+      ],
+      "next_after_resume": "XR64-EVAL-TRAIN-XR62A"
+    },
+    {
+      "id": "RG-3",
+      "name": "xr64_strict_readiness",
+      "status": "blocked",
+      "required_before": "XR-64A/B launch",
+      "evidence_needed": [
+        "ready_to_train=true",
+        "can_run_lane=true",
+        "leakage_risk=none",
+        "subset_artifacts_satisfy_ready_to_train=false"
+      ]
+    },
+    {
+      "id": "RG-4",
+      "name": "postrun_promotion",
+      "status": "blocked_missing_postrun_candidates",
+      "required_before": "software promotion claim",
+      "evidence_needed": [
+        "XR-64A/B candidate matrix",
+        "override-cleared full-test eval summaries",
+        "axis-certified ablation provenance",
+        "single-model claim guard"
+      ]
+    },
+    {
+      "id": "RG-5",
+      "name": "paper_target_bridge",
+      "status": "blocked_missing_required_evidence",
+      "required_before": "direct 10_submission_initial comparison",
+      "evidence_needed": [
+        "sensor_space_eval_rows",
+        "coordinate_transform_audit",
+        "hybrid_eval_rows",
+        "hybrid_metric_report",
+        "paper_frame_full_test_p1",
+        "trained_candidate_eval_summary",
+        "trained_candidate_leakage_audit"
+      ]
+    }
+  ],
+  "validation_commands": [
+    "python3 -m json.tool docs/resources/second_goal_resume_readiness_matrix_2026_06_21.json",
+    "python3 -m py_compile scripts/external/check_second_goal_resume_readiness_matrix.py",
+    ".venv/bin/python scripts/external/check_second_goal_resume_readiness_matrix.py --format summary",
+    ".venv/bin/python -m pytest -q tests/test_second_goal_resume_readiness_matrix.py"
+  ],
+  "rejection_rules": [
+    "Reject if execution_state is not paused_by_user_directive.",
+    "Reject if execute_supported is true.",
+    "Reject if software_promotion_allowed or paper_level_completion_allowed is true.",
+    "Reject if direct_submission_comparison_allowed is true.",
+    "Reject if XR-64A/B launch is allowed before missing_eval_rows and missing_overrides are zero.",
+    "Reject if validation_commands contain train/eval/GPU launchers."
+  ]
+}

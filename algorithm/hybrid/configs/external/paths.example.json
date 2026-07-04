@@ -1,0 +1,15 @@
+{
+  "project_root": "..",
+  "raw_root": "E:/WSL/Shared/dataset/Eye/EV_Eye/raw_data/Data_davis",
+  "groundedsam_root": "./packages/Grounded-Segment-Anything",
+  "ultralytics_root": "./packages/ultralytics",
+  "groundedsam2_root": "./packages/Grounded-SAM-2",
+  "timelens_root": "./packages/timelens",
+  "timelens_xl_root": "./Third/FI",
+  "v2e_root": "./Third/EI",
+  "annotation_root": "./workspace/groundedsam_annotations",
+  "canonical_root": "./workspace",
+  "indexes_root": null,
+  "manifests_root": "./manifests",
+  "preview_root": "./workspace/previews"
+}

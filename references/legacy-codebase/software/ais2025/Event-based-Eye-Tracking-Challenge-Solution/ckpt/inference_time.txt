@@ -1,0 +1,1 @@
+Average inference time: 4.2751710813288275 ms

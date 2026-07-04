@@ -1,0 +1,12 @@
+# EV-Eye annotation/label analysis toolkit
+numpy>=1.21
+h5py>=3.2
+scipy>=1.7
+pandas>=1.3
+opencv-python>=4.5
+matplotlib>=3.4
+tqdm>=4.61
+# Note: scripts 01/03 (events.txt, gazedata, csv) run on the stdlib alone.
+# h5py is needed for 02 (mask .h5) and v7.3 .mat in 04; scipy for <=v7 .mat in 04;
+# opencv-python only for 06 (v2e synthesis check) and optional ellipse fitting in 02;
+# matplotlib only for plots in 05.

@@ -1,0 +1,463 @@
+# Base schema for all HBTXR presets.
+# Override strategy:
+# - mode/stage-specific yaml files should keep only the deltas from this file.
+# - values under data.mode0/mode1/mode2 are per-mode defaults selected by data.mode.
+# - CLI dotted overrides still win over yaml values, e.g. --override training.epochs=50.
+
+seed: 42                                                                       # global random seed
+
+# Backbone / student / head topology.
+# Commonly edited options:
+# - model.patch_size: patch embedding size
+# - model.heads.*: enable or disable search/event/track/mask branches
+# - model.pretrained.*: stage1 preload checkpoint settings
+model:
+  embed_dim: 192                                                                # backbone token width
+  depth: 6                                                                      # transformer block count
+  num_heads: 3                                                                  # attention heads
+  mlp_ratio: 4.0                                                                # FFN expansion ratio
+  patch_size: 16                                                                # patch size in pixels
+  input_size: [256, 256]                                                        # model input [H, W]
+  dropout: 0.0                                                                  # backbone/head dropout
+  aux_classes: 5                                                                # aux-head class count
+  heads:
+    active: all                                                                 # all | eye | search | event | track | mask | aux; non-selected head losses auto-zero
+    eye: true                                                                   # bool; eye ROI bbox head
+    eye_variant: yolo26_bbox                                                    # legacy | yolo26_bbox | yolo26_point | yolo_detect | sot_center | sot_corner
+    eye_reg_max: 1                                                              # 1 | 2+; DFL bins for yolo26_point eye head
+    search: true                                                                # bool; frame search head
+    event: true                                                                 # bool; event search head
+    track: true                                                                 # bool; track residual head
+    mask: true                                                                  # bool; dense mask head
+    aux: true                                                                   # bool; auxiliary logits head
+    search_bbox_aux: false                                                      # bool; pooled search pupil bbox auxiliary head
+    event_bbox_aux: false                                                       # bool; pooled event pupil bbox auxiliary head
+    search_obb_aux: false                                                       # bool; pooled search pupil rotated-bbox auxiliary head
+    event_obb_aux: false                                                        # bool; pooled event pupil rotated-bbox auxiliary head
+  search:
+    xy_from_mask_centroid: false                                                # bool; replace search x/y with soft mask centroid
+  mask:
+    variant: legacy                                                             # legacy | proto26
+    num_prototypes: 8                                                           # prototype count when variant=proto26
+  student:
+    width_ratio: 0.6666667
+    embed_dim: 128
+    depth: 6
+    num_heads: 4
+    mlp_ratio: 3.0
+    patch_size: 16
+    adapter_hidden_dim: 128
+    prev_state_hidden_dim: 128
+    head_hidden_dim: 128
+    track_head_hidden_dim: 256
+    mask_hidden_dim: 64
+  patch_embed:
+    variant: legacy                                                             # legacy | split1 | split2
+    use_mode_affine: true                                                       # bool; mode-conditioned affine in patch frontend
+    flatten_tokens: true                                                        # bool; flatten patch grid into token sequence
+    cache_policy: search_success                                                # runtime patch-cache policy
+    search_use_pseudo_edges: false                                              # bool; split1 pseudo-edge warmup path
+    warmup_epochs: 0                                                            # pseudo-edge warmup epochs
+    alpha: 0.5                                                                  # split frontend mix coefficient
+    beta: 0.5                                                                   # split frontend mix coefficient
+  pretrained:
+    enabled: false                                                              # bool; preload external checkpoint
+    path: null                                                                  # checkpoint path or null
+    source: auto                                                                # auto | deit | hbtxr_like
+    strict_shape: false                                                         # bool; require exact tensor shapes
+    load_stage: stage1                                                          # stage1 | stage2 | all | any
+  # model.components is intentionally omitted from the main surface.
+  # The runtime defaults already resolve all tracker components to split_v1.
+  # Add model.components only in experimental presets when you need to pin alternates.
+
+# Data contract shared by all loaders.
+# Commonly edited options:
+# - data.mode: mode0 | mode1 | mode2
+# - data.canonical_name / manifest_name: physical dataset bundle names
+# - data.resize_policy: facet_square_direct | letterbox_square | sensor_full_square
+# - data.event_builder.*: global fallback event builder when mode block does not override it
+data:
+  mode: mode1                                                                   # mode0 | mode1 | mode2
+  canonical_name: canonical1                                                    # canonical0 | canonical1 | canonical2
+  manifest_name: manifest1                                                      # manifest0 | manifest1 | manifest2
+  canonical_root: null                                                          # workspace root containing canonical bundles
+  input_size: [256, 256]                                                        # loader output [H, W]
+  resize_policy: facet_square_direct                                            # facet_square_direct | letterbox_square | sensor_full_square | sensor_full_letterbox
+  cache_root: null                                                              # optional dataset cache root
+  use_cache: true                                                               # bool; enable sample cache
+  per_channel_normalize: true                                                   # bool; normalize per channel
+  event_builder:
+    # policy:
+    # - fixed_count: use the most recent N events
+    # - time_bin: use a fixed [t_end - time_bin_us, t_end] window
+    # - interval_all: use the interval between previous/current sample timestamps
+    policy: fixed_count                                                         # fixed_count | time_bin | interval_all
+    time_bin_us: 5000                                                           # used when policy=time_bin
+    event_count_target: 5000                                                    # used when policy=fixed_count
+    # accumulation:
+    # - plain
+    # - causal_linear
+    # - fast_causal_linear
+    accumulation: fast_causal_linear                                            # plain | causal_linear | fast_causal_linear
+    causal_weight_power: 1.0                                                    # causal weighting exponent
+    fast_causal_limit: 25.0                                                     # saturation limit for fast_causal_linear
+    polarity_split: true                                                        # bool; split positive/negative event channels
+  # data.components is intentionally omitted from the main surface.
+  # The loader already resolves dataset components to split_v1 by default.
+  # Add data.components only in experimental presets when you need to pin alternates.
+
+  # mode0:
+  # - raw CSV supervision
+  # - pupil state and mask come from raw ellipse annotations
+  # - eye ROI bbox comes from the built-in heuristic
+  mode0:
+    canonical_name: canonical0                                                  # mode0 canonical bundle
+    manifest_name: manifest0                                                    # mode0 manifest bundle
+    frame_source: original                                                      # original sensor frame path
+    resize_policy: facet_square_direct                                          # facet_square_direct | letterbox_square | sensor_full_square | sensor_full_letterbox
+    loader:
+      use_cache: true                                                           # bool; override shared cache behavior
+      per_channel_normalize: true                                               # bool; override shared normalization
+    event_builder:
+      policy: fixed_count                                                       # fixed_count | time_bin | interval_all
+      time_bin_us: 5000                                                         # used when policy=time_bin
+      event_count_target: 5000                                                  # used when policy=fixed_count
+      accumulation: fast_causal_linear                                          # plain | causal_linear | fast_causal_linear
+      causal_weight_power: 1.0                                                  # causal weighting exponent
+      fast_causal_limit: 25.0                                                   # saturation limit for fast_causal_linear
+      polarity_split: true                                                      # bool; split positive/negative event channels
+
+  # mode1:
+  # - original frame + event voxel baseline
+  # - recommended for the standard causal frame/event path
+  mode1:
+    canonical_name: canonical1                                                  # mode1 canonical bundle
+    manifest_name: manifest1                                                    # mode1 manifest bundle
+    frame_source: original                                                      # original sensor frame path
+    resize_policy: facet_square_direct                                          # facet_square_direct | letterbox_square | sensor_full_square | sensor_full_letterbox
+    loader:
+      use_cache: true                                                           # bool; override shared cache behavior
+      per_channel_normalize: true                                               # bool; override shared normalization
+    event_builder:
+      policy: fixed_count                                                       # fixed_count | time_bin | interval_all
+      time_bin_us: 5000                                                         # used when policy=time_bin
+      event_count_target: 5000                                                  # used when policy=fixed_count
+      accumulation: fast_causal_linear                                          # plain | causal_linear | fast_causal_linear
+      causal_weight_power: 1.0                                                  # causal weighting exponent
+      fast_causal_limit: 25.0                                                   # saturation limit for fast_causal_linear
+      polarity_split: true                                                      # bool; split positive/negative event channels
+
+  # mode2:
+  # - interpolated or target-fps frame path
+  # - synthetic event builder is used instead of mode1/mode0 event_builder
+  mode2:
+    canonical_name: canonical2                                                  # mode2 canonical bundle
+    manifest_name: manifest2                                                    # mode2 manifest bundle
+    frame_source: interpolated                                                  # interpolated | target_fps_grid
+    # execution:
+    # - materialized: synthetic frames are written into canonical2
+    # - lazy_target_fps: synthetic frames/events are resolved from target-fps stores at runtime
+    execution: materialized                                                     # materialized | lazy_target_fps
+    resize_policy: facet_square_direct                                          # facet_square_direct | letterbox_square | sensor_full_square | sensor_full_letterbox
+    interpolation:
+      enabled: false                                                            # bool; enable interpolation path
+      # backend/model:
+      # - linear_blend
+      # - timelens
+      backend: linear_blend                                                     # linear_blend | timelens
+      model: linear_blend                                                       # linear_blend | timelens
+      # target_fps and fixed_insert are alternative ways to decide synthetic frame density.
+      target_fps: null                                                          # target fps for auto synthetic frame count
+      fixed_insert: null                                                        # explicit insert-count override
+      # count_policy: round | floor | ceil
+      count_policy: round                                                       # round | floor | ceil
+      max_insert: 255                                                           # max inserted frames per gap
+      alpha_legacy: 0.5                                                         # legacy midpoint alpha
+      timelens_root: null                                                       # TimeLens repo root
+      timelens_checkpoint: null                                                 # TimeLens checkpoint path
+      timelens_device: cpu                                                      # cpu | cuda:0 | ...
+      cache_root: null                                                          # interpolation cache root
+      quality_default: 1.0                                                      # default synthetic frame quality
+      overlap_policy: reuse_event_window                                        # synthetic overlap handling policy
+    loader:
+      use_cache: true                                                           # bool; override shared cache behavior
+      per_channel_normalize: true                                               # bool; override shared normalization
+    synthetic_event_builder:
+      policy: fixed_count                                                       # fixed_count | time_bin | interval_all
+      time_bin_us: 5000                                                         # used when policy=time_bin
+      event_count_target: 5000                                                  # used when policy=fixed_count
+      accumulation: fast_causal_linear                                          # plain | causal_linear | fast_causal_linear
+      causal_weight_power: 1.0                                                  # causal weighting exponent
+      fast_causal_limit: 25.0                                                   # saturation limit for fast_causal_linear
+      polarity_split: true                                                      # bool; split positive/negative event channels
+      # generation_strategy:
+      # - raw_window
+      # - source_pair_average
+      # - target_fps_session_store
+      generation_strategy: raw_window                                           # raw_window | source_pair_average | target_fps_session_store
+      # source_pair_scope:
+      # - anchor_window
+      # - pair_local
+      source_pair_scope: anchor_window                                          # anchor_window | pair_local
+      # average_weighting:
+      # - mean
+      # - alpha
+      average_weighting: mean                                                   # mean | alpha
+
+# Training loop defaults.
+# Commonly edited options:
+# - training.stage: stage1 | stage2
+# - training.batch_size / epochs / lr
+# - training.device: cpu | cuda:0 | multi-gpu
+# - training.scheduler.type: none | cosine | plateau | step
+training:
+  stage: stage1                                                                 # stage1 | stage2
+  batch_size: 8                                                                 # dataloader batch size
+  num_workers: 8                                                                # dataloader workers
+  pin_memory: auto                                                              # auto | true | false
+  grad_accum_steps: 1                                                           # optimizer step every N batches
+  epochs: 5                                                                     # training epochs
+  lr: 0.001                                                                     # legacy fallback lr
+  weight_decay: 0.00005                                                         # legacy fallback weight decay
+  amp: false                                                                    # bool; enable mixed precision on CUDA
+  device: cpu                                                                   # cpu | cuda:0 | cuda:0,cuda:1 | multi-gpu
+  log_every: 10                                                                 # step logging interval
+  log_epoch_every: 1                                                            # epoch summary interval
+  # training.console_log is intentionally omitted from the main surface.
+  # Trainer defaults already enable tqdm-style console logging with lr/best/width shown.
+  # Add training.console_log only when a preset needs to mute or restyle the console output.
+  checkpoint_every: 1                                                           # save interval in epochs
+  save_last_every_epoch: true                                                   # bool; refresh last.pt every epoch
+  best_metric_name: null                                                        # null -> stage default metric
+  grad_clip_norm: 1.0                                                           # 0 disables clip, >0 clips global grad norm
+  optimizer:
+    name: adamw                                                                 # adamw | lion | prodigy | adopt | musgd | adam_mini | adema_mix | ivon | sophia_g | mars | soap
+    lr: 0.001                                                                   # optimizer learning rate
+    weight_decay: 0.00005                                                       # optimizer weight decay
+    betas: [0.9, 0.999]                                                         # Adam-family momentum coefficients
+    eps: 1.0e-8                                                                 # optimizer epsilon
+    kwargs: {}                                                                  # optimizer-specific extra kwargs
+  optimizer_modifiers:
+    cautious: false                                                             # bool; cautious update modifier
+    schedule_free: false                                                        # bool; schedule-free AdamW modifier path
+  # training.optimizer_pool is intentionally omitted from the main surface.
+  # Use exps/configs/mode2_stage{1,2}_optimizer_pool.yaml when benchmarking optimizer candidates.
+  scheduler:
+    type: none                                                                  # none | cosine | plateau | step
+    warmup_epochs: 0                                                            # linear warmup epochs
+    min_lr: 0.0                                                                 # cosine minimum lr
+    metric_name: null                                                           # plateau metric override; null -> best_metric_name
+    factor: 0.5                                                                 # plateau reduction factor
+    patience: 5                                                                 # plateau patience
+    threshold: 0.0                                                              # plateau threshold
+    step_size: 10                                                               # step scheduler period
+    gamma: 0.5                                                                  # step scheduler decay factor
+  early_stopping:
+    enabled: false                                                              # bool; stop when monitored metric stalls
+    patience: 10                                                                # no-improvement epochs before stop
+    min_delta: 0.0                                                              # required improvement margin
+    start_epoch: 1                                                              # earliest epoch to start counting patience
+    metric_name: null                                                           # null -> use training.best_metric_name
+
+# Run naming and explicit manifest/checkpoint overrides.
+experiment:
+  name: hbtxr_v3_default                                                        # experiment/run name prefix
+  train_manifest: null                                                          # explicit train manifest path override
+  val_manifest: null                                                            # explicit val manifest path override
+  test_manifest: null                                                           # explicit test manifest path override
+  output_dir: null                                                              # explicit run output dir override
+  init_checkpoint: null                                                         # initial checkpoint override
+
+run:
+  root: null                                                                    # explicit runs root override
+  materialized_experiment_name: null                                            # exact timestamped run dir name override
+
+# Teacher-student distillation path.
+# Typically enabled in curated presets.
+distillation:
+  enabled: false                                                                # bool; enable teacher-student distillation
+  teacher_student: true                                                         # bool; create teacher model path
+  ema_decay: 0.996                                                              # teacher EMA decay
+  feature_similarity: true                                                      # bool; feature matching loss
+  feature_weight: 0.1                                                           # feature matching loss weight
+  state_similarity: true                                                        # bool; state matching loss
+  state_weight: 0.1                                                             # state matching loss weight
+  prediction_similarity: true                                                   # bool; prediction matching loss
+  prediction_weight: 0.05                                                       # prediction matching loss weight
+  mask_similarity: true                                                         # bool; mask matching loss
+  mask_weight: 0.05                                                             # mask matching loss weight
+  teacher_init_checkpoint: null                                                 # optional teacher init checkpoint
+  force_teacher_from_student: true                                              # bool; copy student weights into teacher when no checkpoint exists
+  targets:
+    stage1:
+      feature_keys: ["search/pooled"]
+      state_keys: ["search/state"]
+      prediction_keys: ["search/eye", "search/pupil"]
+      mask_keys: ["search/mask_logits"]
+      logits_keys: ["search/eye", "search/pupil", "search/aux"]
+      rkd_keys: ["search/pooled"]
+    stage2:
+      feature_keys: ["search/pooled", "event/pooled", "track/fused"]
+      state_keys: ["search/state", "event/state", "track/state"]
+      prediction_keys: ["search/eye", "search/pupil", "event/pupil", "track/pupil"]
+      mask_keys: []
+      logits_keys: ["search/eye", "search/pupil", "event/pupil", "track/pupil", "search/aux", "event/aux"]
+      rkd_keys: ["search/pooled", "event/pooled", "track/fused"]
+  kd:
+    enabled: false                                                              # bool; classic KD logits loss
+    temperature: 1.0                                                            # KD temperature
+    weight: 0.05                                                                # KD loss weight
+  rkd:
+    enabled: false                                                              # bool; relational KD
+    distance_weight: 0.05                                                       # RKD distance loss weight
+
+# Auxiliary self-supervised regularization.
+# Separate from the main distillation block.
+regularization_ssl:
+  enabled: false                                                                # bool; teacher-free auxiliary regularization path
+  force_with_teacher: false                                                     # bool; keep regularization active even with teacher
+  feature_similarity: false                                                     # bool; feature self-regularization
+  feature_weight: 0.1                                                           # feature regularization weight
+  state_similarity: true                                                        # bool; state regularization
+  state_weight: 0.1                                                             # state regularization weight
+  prediction_similarity: false                                                  # bool; prediction regularization
+  prediction_weight: 0.05                                                       # prediction regularization weight
+  cross_modal_contrastive: true                                                 # bool; search/event contrastive term
+  contrastive_weight: 0.05                                                      # contrastive loss weight
+  self_consistency: false                                                       # bool; consistency term inside one sample
+  self_consistency_weight: 0.0                                                  # self-consistency weight
+  targets:
+    stage1:
+      feature_keys: []
+      state_keys: []
+      prediction_keys: []
+      contrastive_keys: []
+      self_keys: []
+    stage2:
+      feature_keys: ["search/pooled", "event/pooled"]
+      state_keys: ["search/state", "event/state", "track/state"]
+      prediction_keys: ["search/pupil", "event/pupil"]
+      contrastive_keys: ["search/pooled", "event/pooled"]
+      self_keys: ["search/state", "track/state"]
+
+# Reference SSL block kept for direct trainer wiring / hypers reports.
+ssl:
+  enabled: false                                                                # legacy/reference block; kept for compatibility reports
+  mode: teacher_student                                                         # teacher_student | self_regularization
+  teacher_student: true                                                         # bool; legacy teacher-student switch
+  ema_decay: 0.996                                                              # legacy EMA decay
+  feature_similarity: true                                                      # bool; legacy feature similarity flag
+  feature_weight: 0.1                                                           # legacy feature loss weight
+  state_similarity: true                                                        # bool; legacy state similarity flag
+  state_weight: 0.1                                                             # legacy state loss weight
+  prediction_similarity: true                                                   # bool; legacy prediction similarity flag
+  prediction_weight: 0.05                                                       # legacy prediction loss weight
+  cross_modal_contrastive: true                                                 # bool; legacy contrastive flag
+  contrastive_weight: 0.05                                                      # legacy contrastive weight
+  kd:
+    enabled: false                                                              # bool; legacy KD
+    temperature: 1.0                                                            # legacy KD temperature
+    weight: 0.05                                                                # legacy KD loss weight
+  rkd:
+    enabled: false                                                              # bool; legacy RKD
+    distance_weight: 0.05                                                       # legacy RKD distance weight
+  note: implemented_but_disabled_by_default                                     # reference-only status marker
+
+# Structural width pruning / export configuration.
+# Commonly edited options:
+# - pruning.enabled
+# - pruning.student.width_ratio
+# - pruning.width_candidates
+pruning:
+  enabled: false                                                                # bool; enable pruning/slimmable path
+  scheme: structural_width                                                      # structural_width | implicit_masking_legacy
+  mode: implicit_width_slicing                                                  # legacy compatibility field
+  method: implicit_width_slicing                                                # legacy compatibility field
+  slimmable_backbone: true                                                      # bool; legacy slimmable toggle
+  width_candidates: [1.0, 0.75, 0.5]                                            # legacy masking candidate widths
+  sample_strategy: random                                                       # random | min | max
+  student_width: 1.0                                                            # legacy eval-time width ratio
+  student:
+    width_ratio: 0.6666667                                                      # structural student width ratio
+  width_loss_weight: 0.0                                                        # legacy width regularizer weight
+  patch_size_mutable: false                                                     # bool; reserved patch-size mutability flag
+  export:
+    enabled: true                                                               # bool; export student after train
+    filename: student_export.pt                                                 # exported checkpoint filename
+    report_filename: student_export_report.json                                 # export report filename
+  note: implemented_but_disabled_by_default                                     # status marker
+
+# Active supervised loss weights.
+# Keep these aligned with the heads that are enabled in the preset.
+loss:
+  eye_weight: 1.0                                                               # eye ROI bbox regression weight
+  eye_box_mode: yolo26_ciou                                                     # legacy_l1 | yolo26_ciou | yolo26_mpdiou | yolo26_point | sot_center | sot_corner
+  eye_assigner: stal_tal                                                        # tal | stal_tal
+  eye_assigner_topk: 10                                                         # top-k aligned points per target box
+  eye_assigner_alpha: 1.0                                                       # TAL cls-score exponent
+  eye_assigner_beta: 6.0                                                        # TAL IoU exponent
+  eye_assigner_min_positive: 1                                                  # minimum positive points when assignment is sparse
+  eye_assigner_min_score: 0.0                                                   # floor for positive target score
+  eye_box_iou_weight: 1.0                                                       # YOLO26-style eye bbox CIoU term weight
+  eye_box_l1_weight: 0.25                                                       # YOLO26-style eye bbox xyxy regression term weight
+  eye_conf_mode: bce                                                            # bce | focal | varifocal
+  eye_conf_weight: 0.1                                                          # eye ROI confidence weight
+  eye_point_cls_loss: bce                                                       # bce | focal | varifocal
+  eye_point_cls_weight: 1.0                                                     # yolo26_point classification loss weight
+  eye_point_box_weight: 1.0                                                     # yolo26_point bbox loss weight
+  eye_point_dfl_weight: 0.25                                                    # yolo26_point DFL loss weight
+  eye_quality_weight: 0.25                                                      # dense detector quality/objectness weight
+  eye_stal_enabled: false                                                       # bool; STAL-like positive expansion for yolo26_point eye head
+  eye_stal_small_box_px: 16.0                                                   # px threshold below which STAL positive expansion is applied
+  eye_stal_min_points: 4                                                        # minimum positive points for small-box STAL path
+  eye_center_focal_weight: 1.0                                                  # SOT center heatmap focal loss weight
+  eye_center_box_weight: 1.0                                                    # SOT center decoded/regressed box loss weight
+  eye_corner_focal_weight: 1.0                                                  # SOT corner heatmap focal loss weight
+  eye_corner_box_weight: 1.0                                                    # SOT corner decoded box loss weight
+  mgiou_fast_mode: false                                                        # bool; use fast MGIoU projection path for rotated OBB auxiliary losses
+  mask_mode: bce_dice                                                           # bce_dice | bce | dice
+  mask_weight: 1.0                                                              # dense mask supervision weight
+  mask_coarse_weight: 0.25                                                      # auxiliary coarse-mask supervision weight for proto-style decoders
+  search_xy_weight: 1.0                                                         # frame search center weight
+  search_ab_weight: 0.5                                                         # frame search axis length weight
+  search_trig_weight: 1.0                                                       # frame search orientation weight
+  search_geo_weight: 0.5                                                        # frame search geometry loss weight
+  search_conf_weight: 0.1                                                       # frame search confidence weight
+  search_bbox_aux_mode: ciou                                                    # ciou | mpdiou
+  search_bbox_aux_weight: 0.0                                                   # search pupil bbox auxiliary overlap loss weight
+  search_bbox_aux_conf_weight: 0.1                                              # search pupil bbox auxiliary confidence weight
+  search_obb_aux_mode: rotated_bbox                                             # rotated_bbox | mgiou2d
+  search_obb_aux_weight: 0.0                                                    # search pupil rotated-bbox auxiliary loss weight
+  search_obb_aux_angle_weight: 0.5                                              # search pupil rotated-bbox auxiliary angle weight
+  search_obb_aux_conf_weight: 0.1                                               # search pupil rotated-bbox auxiliary confidence weight
+  event_xy_weight: 1.0                                                          # event search center weight
+  event_ab_weight: 0.5                                                          # event search axis length weight
+  event_trig_weight: 1.0                                                        # event search orientation weight
+  event_geo_weight: 0.5                                                         # event search geometry loss weight
+  event_conf_weight: 0.1                                                        # event search confidence weight
+  event_bbox_aux_mode: ciou                                                     # ciou | mpdiou
+  event_bbox_aux_weight: 0.0                                                    # event pupil bbox auxiliary overlap loss weight
+  event_bbox_aux_conf_weight: 0.1                                               # event pupil bbox auxiliary confidence weight
+  event_obb_aux_mode: rotated_bbox                                              # rotated_bbox | mgiou2d
+  event_obb_aux_weight: 0.0                                                     # event pupil rotated-bbox auxiliary loss weight
+  event_obb_aux_angle_weight: 0.5                                               # event pupil rotated-bbox auxiliary angle weight
+  event_obb_aux_conf_weight: 0.1                                                # event pupil rotated-bbox auxiliary confidence weight
+  track_xy_weight: 1.0                                                          # track residual center weight
+  track_ab_weight: 0.5                                                          # track residual axis weight
+  track_trig_weight: 1.0                                                        # track residual orientation weight
+  track_geo_weight: 0.5                                                         # decoded track geometry loss weight
+  track_conf_weight: 0.1                                                        # track confidence weight
+  track_quality_weight: 0.1                                                     # track quality weight
+  consistency_weight: 0.2                                                       # search-vs-track consistency weight
+  constraint_center_weight: 0.1                                                 # ROI center prior weight
+  constraint_center_radius: 24.0                                                # ROI center prior radius in px
+  aux_weight: 0.1                                                               # auxiliary classification weight
+
+# Runtime thresholds for eval / infer / vis paths.
+runtime:
+  search_conf_threshold: 0.35                                                   # runtime search confidence threshold
+  track_conf_threshold: 0.45                                                    # runtime track confidence threshold
+  track_quality_threshold: 0.45                                                 # runtime track quality threshold
+  similarity_threshold: 0.5                                                     # runtime search/track similarity threshold
+  density_threshold: 0.002                                                      # runtime event density threshold
+  relocalize_cooldown: 2                                                        # runtime relocalization cooldown in steps

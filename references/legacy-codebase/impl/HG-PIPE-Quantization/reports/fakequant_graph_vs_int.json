@@ -1,0 +1,602 @@
+[
+  {
+    "elements": 37632,
+    "left_runner": "fakequant_graph",
+    "max_abs_error": 0.0,
+    "mean_abs_error": 0.0,
+    "mismatches": 0,
+    "name": "attn_0_aq",
+    "passed": true,
+    "right_runner": "torch_int"
+  },
+  {
+    "elements": 37632,
+    "left_runner": "fakequant_graph",
+    "max_abs_error": 0.0,
+    "mean_abs_error": 0.0,
+    "mismatches": 0,
+    "name": "attn_0_kq",
+    "passed": true,
+    "right_runner": "torch_int"
+  },
+  {
+    "elements": 37632,
+    "left_runner": "fakequant_graph",
+    "max_abs_error": 0.0,
+    "mean_abs_error": 0.0,
+    "mismatches": 0,
+    "name": "attn_0_qq",
+    "passed": true,
+    "right_runner": "torch_int"
+  },
+  {
+    "elements": 37632,
+    "left_runner": "fakequant_graph",
+    "max_abs_error": 0.0,
+    "mean_abs_error": 0.0,
+    "mismatches": 0,
+    "name": "attn_0_vq",
+    "passed": true,
+    "right_runner": "torch_int"
+  },
+  {
+    "elements": 37632,
+    "left_runner": "fakequant_graph",
+    "max_abs_error": 0.0,
+    "mean_abs_error": 0.0,
+    "mismatches": 0,
+    "name": "attn_10_aq",
+    "passed": true,
+    "right_runner": "torch_int"
+  },
+  {
+    "elements": 37632,
+    "left_runner": "fakequant_graph",
+    "max_abs_error": 0.0,
+    "mean_abs_error": 0.0,
+    "mismatches": 0,
+    "name": "attn_10_kq",
+    "passed": true,
+    "right_runner": "torch_int"
+  },
+  {
+    "elements": 37632,
+    "left_runner": "fakequant_graph",
+    "max_abs_error": 0.0,
+    "mean_abs_error": 0.0,
+    "mismatches": 0,
+    "name": "attn_10_qq",
+    "passed": true,
+    "right_runner": "torch_int"
+  },
+  {
+    "elements": 37632,
+    "left_runner": "fakequant_graph",
+    "max_abs_error": 0.0,
+    "mean_abs_error": 0.0,
+    "mismatches": 0,
+    "name": "attn_10_vq",
+    "passed": true,
+    "right_runner": "torch_int"
+  },
+  {
+    "elements": 37632,
+    "left_runner": "fakequant_graph",
+    "max_abs_error": 0.0,
+    "mean_abs_error": 0.0,
+    "mismatches": 0,
+    "name": "attn_11_aq",
+    "passed": true,
+    "right_runner": "torch_int"
+  },
+  {
+    "elements": 37632,
+    "left_runner": "fakequant_graph",
+    "max_abs_error": 0.0,
+    "mean_abs_error": 0.0,
+    "mismatches": 0,
+    "name": "attn_11_kq",
+    "passed": true,
+    "right_runner": "torch_int"
+  },
+  {
+    "elements": 37632,
+    "left_runner": "fakequant_graph",
+    "max_abs_error": 0.0,
+    "mean_abs_error": 0.0,
+    "mismatches": 0,
+    "name": "attn_11_qq",
+    "passed": true,
+    "right_runner": "torch_int"
+  },
+  {
+    "elements": 37632,
+    "left_runner": "fakequant_graph",
+    "max_abs_error": 0.0,
+    "mean_abs_error": 0.0,
+    "mismatches": 0,
+    "name": "attn_11_vq",
+    "passed": true,
+    "right_runner": "torch_int"
+  },
+  {
+    "elements": 37632,
+    "left_runner": "fakequant_graph",
+    "max_abs_error": 0.0,
+    "mean_abs_error": 0.0,
+    "mismatches": 0,
+    "name": "attn_1_aq",
+    "passed": true,
+    "right_runner": "torch_int"
+  },
+  {
+    "elements": 37632,
+    "left_runner": "fakequant_graph",
+    "max_abs_error": 0.0,
+    "mean_abs_error": 0.0,
+    "mismatches": 0,
+    "name": "attn_1_kq",
+    "passed": true,
+    "right_runner": "torch_int"
+  },
+  {
+    "elements": 37632,
+    "left_runner": "fakequant_graph",
+    "max_abs_error": 0.0,
+    "mean_abs_error": 0.0,
+    "mismatches": 0,
+    "name": "attn_1_qq",
+    "passed": true,
+    "right_runner": "torch_int"
+  },
+  {
+    "elements": 37632,
+    "left_runner": "fakequant_graph",
+    "max_abs_error": 0.0,
+    "mean_abs_error": 0.0,
+    "mismatches": 0,
+    "name": "attn_1_vq",
+    "passed": true,
+    "right_runner": "torch_int"
+  },
+  {
+    "elements": 37632,
+    "left_runner": "fakequant_graph",
+    "max_abs_error": 0.0,
+    "mean_abs_error": 0.0,
+    "mismatches": 0,
+    "name": "attn_2_aq",
+    "passed": true,
+    "right_runner": "torch_int"
+  },
+  {
+    "elements": 37632,
+    "left_runner": "fakequant_graph",
+    "max_abs_error": 0.0,
+    "mean_abs_error": 0.0,
+    "mismatches": 0,
+    "name": "attn_2_kq",
+    "passed": true,
+    "right_runner": "torch_int"
+  },
+  {
+    "elements": 37632,
+    "left_runner": "fakequant_graph",
+    "max_abs_error": 0.0,
+    "mean_abs_error": 0.0,
+    "mismatches": 0,
+    "name": "attn_2_qq",
+    "passed": true,
+    "right_runner": "torch_int"
+  },
+  {
+    "elements": 37632,
+    "left_runner": "fakequant_graph",
+    "max_abs_error": 0.0,
+    "mean_abs_error": 0.0,
+    "mismatches": 0,
+    "name": "attn_2_vq",
+    "passed": true,
+    "right_runner": "torch_int"
+  },
+  {
+    "elements": 37632,
+    "left_runner": "fakequant_graph",
+    "max_abs_error": 0.0,
+    "mean_abs_error": 0.0,
+    "mismatches": 0,
+    "name": "attn_3_aq",
+    "passed": true,
+    "right_runner": "torch_int"
+  },
+  {
+    "elements": 37632,
+    "left_runner": "fakequant_graph",
+    "max_abs_error": 0.0,
+    "mean_abs_error": 0.0,
+    "mismatches": 0,
+    "name": "attn_3_kq",
+    "passed": true,
+    "right_runner": "torch_int"
+  },
+  {
+    "elements": 37632,
+    "left_runner": "fakequant_graph",
+    "max_abs_error": 0.0,
+    "mean_abs_error": 0.0,
+    "mismatches": 0,
+    "name": "attn_3_qq",
+    "passed": true,
+    "right_runner": "torch_int"
+  },
+  {
+    "elements": 37632,
+    "left_runner": "fakequant_graph",
+    "max_abs_error": 0.0,
+    "mean_abs_error": 0.0,
+    "mismatches": 0,
+    "name": "attn_3_vq",
+    "passed": true,
+    "right_runner": "torch_int"
+  },
+  {
+    "elements": 37632,
+    "left_runner": "fakequant_graph",
+    "max_abs_error": 0.0,
+    "mean_abs_error": 0.0,
+    "mismatches": 0,
+    "name": "attn_4_aq",
+    "passed": true,
+    "right_runner": "torch_int"
+  },
+  {
+    "elements": 37632,
+    "left_runner": "fakequant_graph",
+    "max_abs_error": 0.0,
+    "mean_abs_error": 0.0,
+    "mismatches": 0,
+    "name": "attn_4_kq",
+    "passed": true,
+    "right_runner": "torch_int"
+  },
+  {
+    "elements": 37632,
+    "left_runner": "fakequant_graph",
+    "max_abs_error": 0.0,
+    "mean_abs_error": 0.0,
+    "mismatches": 0,
+    "name": "attn_4_qq",
+    "passed": true,
+    "right_runner": "torch_int"
+  },
+  {
+    "elements": 37632,
+    "left_runner": "fakequant_graph",
+    "max_abs_error": 0.0,
+    "mean_abs_error": 0.0,
+    "mismatches": 0,
+    "name": "attn_4_vq",
+    "passed": true,
+    "right_runner": "torch_int"
+  },
+  {
+    "elements": 37632,
+    "left_runner": "fakequant_graph",
+    "max_abs_error": 0.0,
+    "mean_abs_error": 0.0,
+    "mismatches": 0,
+    "name": "attn_5_aq",
+    "passed": true,
+    "right_runner": "torch_int"
+  },
+  {
+    "elements": 37632,
+    "left_runner": "fakequant_graph",
+    "max_abs_error": 0.0,
+    "mean_abs_error": 0.0,
+    "mismatches": 0,
+    "name": "attn_5_kq",
+    "passed": true,
+    "right_runner": "torch_int"
+  },
+  {
+    "elements": 37632,
+    "left_runner": "fakequant_graph",
+    "max_abs_error": 0.0,
+    "mean_abs_error": 0.0,
+    "mismatches": 0,
+    "name": "attn_5_qq",
+    "passed": true,
+    "right_runner": "torch_int"
+  },
+  {
+    "elements": 37632,
+    "left_runner": "fakequant_graph",
+    "max_abs_error": 0.0,
+    "mean_abs_error": 0.0,
+    "mismatches": 0,
+    "name": "attn_5_vq",
+    "passed": true,
+    "right_runner": "torch_int"
+  },
+  {
+    "elements": 37632,
+    "left_runner": "fakequant_graph",
+    "max_abs_error": 0.0,
+    "mean_abs_error": 0.0,
+    "mismatches": 0,
+    "name": "attn_6_aq",
+    "passed": true,
+    "right_runner": "torch_int"
+  },
+  {
+    "elements": 37632,
+    "left_runner": "fakequant_graph",
+    "max_abs_error": 0.0,
+    "mean_abs_error": 0.0,
+    "mismatches": 0,
+    "name": "attn_6_kq",
+    "passed": true,
+    "right_runner": "torch_int"
+  },
+  {
+    "elements": 37632,
+    "left_runner": "fakequant_graph",
+    "max_abs_error": 0.0,
+    "mean_abs_error": 0.0,
+    "mismatches": 0,
+    "name": "attn_6_qq",
+    "passed": true,
+    "right_runner": "torch_int"
+  },
+  {
+    "elements": 37632,
+    "left_runner": "fakequant_graph",
+    "max_abs_error": 0.0,
+    "mean_abs_error": 0.0,
+    "mismatches": 0,
+    "name": "attn_6_vq",
+    "passed": true,
+    "right_runner": "torch_int"
+  },
+  {
+    "elements": 37632,
+    "left_runner": "fakequant_graph",
+    "max_abs_error": 0.0,
+    "mean_abs_error": 0.0,
+    "mismatches": 0,
+    "name": "attn_7_aq",
+    "passed": true,
+    "right_runner": "torch_int"
+  },
+  {
+    "elements": 37632,
+    "left_runner": "fakequant_graph",
+    "max_abs_error": 0.0,
+    "mean_abs_error": 0.0,
+    "mismatches": 0,
+    "name": "attn_7_kq",
+    "passed": true,
+    "right_runner": "torch_int"
+  },
+  {
+    "elements": 37632,
+    "left_runner": "fakequant_graph",
+    "max_abs_error": 0.0,
+    "mean_abs_error": 0.0,
+    "mismatches": 0,
+    "name": "attn_7_qq",
+    "passed": true,
+    "right_runner": "torch_int"
+  },
+  {
+    "elements": 37632,
+    "left_runner": "fakequant_graph",
+    "max_abs_error": 0.0,
+    "mean_abs_error": 0.0,
+    "mismatches": 0,
+    "name": "attn_7_vq",
+    "passed": true,
+    "right_runner": "torch_int"
+  },
+  {
+    "elements": 37632,
+    "left_runner": "fakequant_graph",
+    "max_abs_error": 0.0,
+    "mean_abs_error": 0.0,
+    "mismatches": 0,
+    "name": "attn_8_aq",
+    "passed": true,
+    "right_runner": "torch_int"
+  },
+  {
+    "elements": 37632,
+    "left_runner": "fakequant_graph",
+    "max_abs_error": 0.0,
+    "mean_abs_error": 0.0,
+    "mismatches": 0,
+    "name": "attn_8_kq",
+    "passed": true,
+    "right_runner": "torch_int"
+  },
+  {
+    "elements": 37632,
+    "left_runner": "fakequant_graph",
+    "max_abs_error": 0.0,
+    "mean_abs_error": 0.0,
+    "mismatches": 0,
+    "name": "attn_8_qq",
+    "passed": true,
+    "right_runner": "torch_int"
+  },
+  {
+    "elements": 37632,
+    "left_runner": "fakequant_graph",
+    "max_abs_error": 0.0,
+    "mean_abs_error": 0.0,
+    "mismatches": 0,
+    "name": "attn_8_vq",
+    "passed": true,
+    "right_runner": "torch_int"
+  },
+  {
+    "elements": 37632,
+    "left_runner": "fakequant_graph",
+    "max_abs_error": 0.0,
+    "mean_abs_error": 0.0,
+    "mismatches": 0,
+    "name": "attn_9_aq",
+    "passed": true,
+    "right_runner": "torch_int"
+  },
+  {
+    "elements": 37632,
+    "left_runner": "fakequant_graph",
+    "max_abs_error": 0.0,
+    "mean_abs_error": 0.0,
+    "mismatches": 0,
+    "name": "attn_9_kq",
+    "passed": true,
+    "right_runner": "torch_int"
+  },
+  {
+    "elements": 37632,
+    "left_runner": "fakequant_graph",
+    "max_abs_error": 0.0,
+    "mean_abs_error": 0.0,
+    "mismatches": 0,
+    "name": "attn_9_qq",
+    "passed": true,
+    "right_runner": "torch_int"
+  },
+  {
+    "elements": 37632,
+    "left_runner": "fakequant_graph",
+    "max_abs_error": 0.0,
+    "mean_abs_error": 0.0,
+    "mismatches": 0,
+    "name": "attn_9_vq",
+    "passed": true,
+    "right_runner": "torch_int"
+  },
+  {
+    "elements": 150528,
+    "left_runner": "fakequant_graph",
+    "max_abs_error": 0.0,
+    "mean_abs_error": 0.0,
+    "mismatches": 0,
+    "name": "mlp_0_geluq",
+    "passed": true,
+    "right_runner": "torch_int"
+  },
+  {
+    "elements": 150528,
+    "left_runner": "fakequant_graph",
+    "max_abs_error": 0.0,
+    "mean_abs_error": 0.0,
+    "mismatches": 0,
+    "name": "mlp_10_geluq",
+    "passed": true,
+    "right_runner": "torch_int"
+  },
+  {
+    "elements": 150528,
+    "left_runner": "fakequant_graph",
+    "max_abs_error": 0.0,
+    "mean_abs_error": 0.0,
+    "mismatches": 0,
+    "name": "mlp_11_geluq",
+    "passed": true,
+    "right_runner": "torch_int"
+  },
+  {
+    "elements": 150528,
+    "left_runner": "fakequant_graph",
+    "max_abs_error": 0.0,
+    "mean_abs_error": 0.0,
+    "mismatches": 0,
+    "name": "mlp_1_geluq",
+    "passed": true,
+    "right_runner": "torch_int"
+  },
+  {
+    "elements": 150528,
+    "left_runner": "fakequant_graph",
+    "max_abs_error": 0.0,
+    "mean_abs_error": 0.0,
+    "mismatches": 0,
+    "name": "mlp_2_geluq",
+    "passed": true,
+    "right_runner": "torch_int"
+  },
+  {
+    "elements": 150528,
+    "left_runner": "fakequant_graph",
+    "max_abs_error": 0.0,
+    "mean_abs_error": 0.0,
+    "mismatches": 0,
+    "name": "mlp_3_geluq",
+    "passed": true,
+    "right_runner": "torch_int"
+  },
+  {
+    "elements": 150528,
+    "left_runner": "fakequant_graph",
+    "max_abs_error": 0.0,
+    "mean_abs_error": 0.0,
+    "mismatches": 0,
+    "name": "mlp_4_geluq",
+    "passed": true,
+    "right_runner": "torch_int"
+  },
+  {
+    "elements": 150528,
+    "left_runner": "fakequant_graph",
+    "max_abs_error": 0.0,
+    "mean_abs_error": 0.0,
+    "mismatches": 0,
+    "name": "mlp_5_geluq",
+    "passed": true,
+    "right_runner": "torch_int"
+  },
+  {
+    "elements": 150528,
+    "left_runner": "fakequant_graph",
+    "max_abs_error": 0.0,
+    "mean_abs_error": 0.0,
+    "mismatches": 0,
+    "name": "mlp_6_geluq",
+    "passed": true,
+    "right_runner": "torch_int"
+  },
+  {
+    "elements": 150528,
+    "left_runner": "fakequant_graph",
+    "max_abs_error": 0.0,
+    "mean_abs_error": 0.0,
+    "mismatches": 0,
+    "name": "mlp_7_geluq",
+    "passed": true,
+    "right_runner": "torch_int"
+  },
+  {
+    "elements": 150528,
+    "left_runner": "fakequant_graph",
+    "max_abs_error": 0.0,
+    "mean_abs_error": 0.0,
+    "mismatches": 0,
+    "name": "mlp_8_geluq",
+    "passed": true,
+    "right_runner": "torch_int"
+  },
+  {
+    "elements": 150528,
+    "left_runner": "fakequant_graph",
+    "max_abs_error": 0.0,
+    "mean_abs_error": 0.0,
+    "mismatches": 0,
+    "name": "mlp_9_geluq",
+    "passed": true,
+    "right_runner": "torch_int"
+  }
+]

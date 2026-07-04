@@ -1,0 +1,106 @@
+dataloader:
+  train:
+    dataset:
+      type: DavisEyeEllipseFrameDataset
+      root_path: /mnt/e/DATASET/eveye/DeanDataset_full_unet_subject_independent
+      split: train
+      pupil_area: 200
+      num_classes: 1
+      default_resolution: [128, 128]
+      channels: 1
+      use_cached_frame: true
+    batch_size: 16
+    shuffle: true
+    drop_last: false
+    num_workers: 8
+    prefetch_factor: 2
+    persistent_workers: true
+    pin_memory: true
+
+  val:
+    dataset:
+      type: DavisEyeEllipseFrameDataset
+      root_path: /mnt/e/DATASET/eveye/DeanDataset_full_unet_subject_independent
+      split: val
+      pupil_area: 200
+      num_classes: 1
+      default_resolution: [128, 128]
+      channels: 1
+      use_cached_frame: true
+    batch_size: 16
+    shuffle: false
+    drop_last: false
+    num_workers: 4
+    prefetch_factor: 2
+    persistent_workers: true
+    pin_memory: true
+
+model:
+  type: HBTXR
+  input_channels: 1
+  img_size: 128
+  patch_size: 4
+  embed_dim: 192
+  depth: 8
+  num_heads: 3
+  projection_channels: 64
+  projection_kernel_size: 1
+  head_conv: 256
+  pretrained: false
+  head_dict: { "hm": 1, "ab": 2, "trig": 2, "reg": 2, "mask": 1 }
+  loss_weight: {
+      "hm_weight": 1,
+      "ab_weight": 0.1,
+      "ang_weight": 0,
+      "trig_weight": 1,
+      "reg_weight": 0.1,
+      "iou_weight": 15,
+      "mask_weight": 1,
+    }
+
+train:
+  max_epochs: 9
+  check_val_every_n_epoch: 5
+  optimizer:
+    learning_rate: 1.0e-3
+    weight_decay: 1.0e-5
+
+val:
+  ckpt_path:
+
+trainer:
+  accelerator: auto
+  devices: auto
+  default_root_dir: /home/user/project/PRJXR-HBTXR/HBTXR/references/codebase/software/FACET/runs/frame_cached_si_hbtxr_img128_patch4_epoch8_stop
+  precision: 32-true
+  num_sanity_val_steps: 0
+
+runtime:
+  cudnn_enabled: true
+  cudnn_benchmark: true
+  cudnn_deterministic: false
+
+logger:
+  type: tensorboard
+  save_dir: /home/user/project/PRJXR-HBTXR/HBTXR/references/codebase/software/FACET/runs/logs
+  name: HBTXR_frame_cached_si_img128_patch4_epoch8_stop
+
+callback:
+  - type: ModelCheckpoint
+    dirpath: /home/user/project/PRJXR-HBTXR/HBTXR/references/codebase/software/FACET/runs/logs/HBTXR_frame_cached_si_img128_patch4_epoch8_stop/checkpoints
+    filename: "epoch8-final-{epoch:02d}-{step:08d}"
+    monitor:
+    auto_insert_metric_name: false
+    save_top_k: -1
+    every_n_epochs: 1
+    save_last: true
+    save_on_train_epoch_end: true
+    verbose: true
+
+  - type: TQDMProgressBar
+    refresh_rate: 1
+
+  - type: Timer
+
+  - type: LearningRateMonitor
+    logging_interval: epoch

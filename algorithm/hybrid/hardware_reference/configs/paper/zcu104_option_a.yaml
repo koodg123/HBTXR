@@ -1,0 +1,165 @@
+# Submitted-paper reproduction preset for HBTXR Option A on ZCU104.
+# Source: PAPER_PRJXR/20_submission_correction/submitted_version.
+extends: ../v3/base.yaml
+
+paper:
+  submitted_version: ../../PAPER_PRJXR/20_submission_correction/submitted_version/jetcas_draft_final/main.tex
+  platform: ZCU104
+  clock_mhz: 300
+  precision:
+    patch_and_heads: W8A8
+    mha_mlp: W4A4
+    nonlinear: 16bit
+  targets:
+    frame_only:
+      p10_pct: 99.83
+      p5_pct: 99.51
+      p1_pct: 99.43
+      pixel_error_px: 0.2149
+      latency_ms: 0.67
+    event_only:
+      p10_pct: 99.43
+      p5_pct: 99.31
+      p1_pct: 99.28
+      pixel_error_px: 0.3173
+      latency_ms: 0.38
+    hybrid:
+      p10_pct: 99.97
+      p5_pct: 99.72
+      p1_pct: 99.61
+      pixel_error_px: 0.1812
+      latency_ms: 0.43
+      power_w: 1.34
+    resources:
+      lut_k: 145
+      ff_k: 22.7
+      dsp: 814
+      bram36k: 184
+      uram: 12
+
+model:
+  embed_dim: 192
+  depth: 8
+  track_depth: 4
+  event_cut_depth: 4
+  num_heads: 3
+  mlp_ratio: 4.0
+  patch_size: 16
+  input_size: [128, 128]
+  frame_input_size: [128, 128]
+  event_input_size: [64, 64]
+  heads:
+    eye: true
+    search: true
+    event: true
+    track: true
+    mask: true
+    aux: true
+
+data:
+  mode: mode2
+  input_size: [128, 128]
+  frame_input_size: [128, 128]
+  event_input_size: [64, 64]
+  canonical_name: canonical2
+  manifest_name: manifest2
+  mode2:
+    canonical_name: canonical2
+    manifest_name: manifest2
+    frame_source: interpolated
+    execution: materialized
+    input_size: [128, 128]
+    frame_input_size: [128, 128]
+    event_input_size: [64, 64]
+    interpolation:
+      enabled: true
+      backend: timelens
+      target_fps: 2000
+      count_policy: round
+      max_insert: 255
+    synthetic_event_builder:
+      policy: fixed_count
+      event_count_target: 2500
+      time_bin_us: 2500
+      accumulation: fast_causal_linear
+      causal_weight_power: 1.0
+      fast_causal_limit: 25.0
+      polarity_split: true
+      generation_strategy: source_pair_average
+      source_pair_scope: pair_local
+      average_weighting: alpha
+
+training:
+  stage: stage2
+  batch_size: 32
+  epochs: 200
+  device: cpu
+  best_metric_name: metric_track_p10_pct
+  optimizer:
+    name: adamw
+    lr: 0.0001
+    weight_decay: 0.00001
+  scheduler:
+    type: plateau
+    metric_name: metric_track_p10_pct
+    factor: 0.5
+    patience: 4
+  early_stopping:
+    enabled: false
+
+paper_stages:
+  stage1:
+    epochs: 100
+    optimizer: adamw
+    lr: 0.001
+    weight_decay: 0.00001
+    active_path: frame_search
+  stage2:
+    epochs: 200
+    optimizer: adamw
+    lr: 0.0001
+    active_path: hybrid_search_track
+  stage3:
+    enabled: true
+    method: self_supervised_distillation
+    teacher: stage2_full_capacity
+    selected_option: A
+
+runtime:
+  search_conf_threshold: 0.35
+  track_conf_threshold: 0.45
+  track_quality_threshold: 0.45
+  similarity_threshold: 0.5
+  density_threshold: 0.002
+  relocalize_cooldown: 2
+  max_track_updates: 4
+
+distillation:
+  enabled: true
+  teacher_student: true
+  feature_similarity: true
+  feature_weight: 0.1
+  state_similarity: true
+  state_weight: 0.15
+  prediction_similarity: true
+  prediction_weight: 0.1
+  mask_similarity: false
+  kd:
+    enabled: true
+    temperature: 1.0
+    weight: 0.05
+  rkd:
+    enabled: true
+    distance_weight: 0.02
+
+pruning:
+  enabled: true
+  scheme: structural_width
+  student:
+    width_ratio: 1.0
+  export:
+    enabled: true
+
+experiment:
+  name: paper_reproduce_zcu104_option_a
+  output_dir: runs/paper_reproduce_zcu104_option_a

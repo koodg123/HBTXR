@@ -1,0 +1,225 @@
+sweep_matrix:
+  schema_version: "1.0"
+  project: "HGTXR"
+  target: "ZCU104"
+  toolchain: "Vitis/Vivado 2023.2"
+  deployment: "PYNQ overlay"
+  objective: "Machine-readable sweep matrix for HGTXR cyclic Transformer exploration"
+
+  parameters:
+    tiling_factor:
+      type: integer
+      unit: "tiles"
+      values: [1, 2, 4, 8]
+    parallelism_factor:
+      type: integer
+      unit: "parallel lanes"
+      values: [1, 2, 4, 8, 16, 32]
+    bus_width:
+      type: integer
+      unit: "bits"
+      values: [64, 128, 256, 512]
+    bit_width:
+      type: integer
+      unit: "bits"
+      values: [8, 16]
+    buffer_size:
+      type: integer
+      unit: "KiB"
+      values: [64, 128, 256, 512]
+    fifo_depth:
+      type: integer
+      unit: "entries"
+      values: [16, 32, 64, 128]
+
+  naming:
+    run_id_pattern: "hgtxr_zcu104_t{tiling_factor}_p{parallelism_factor}_bw{bus_width}_bit{bit_width}_buf{buffer_size}_fifo{fifo_depth}"
+    output_root: "outputs/sweeps/{run_id}/"
+    stage_prefix: "S{stage}"
+
+  stages:
+    S0:
+      name: "Feasibility and interface"
+      description: "AXI interface, control register, and minimal top-level feasibility build"
+      resource_gates:
+        max_lut_pct: 20
+        max_ff_pct: 20
+        max_bram_pct: 20
+        max_dsp_pct: 10
+      timing_gates:
+        target_clock_mhz: 200
+        min_acceptable_fmax_mhz: 180
+        min_wns_ns: 0.0
+      pynq_gates:
+        require_component_xml: true
+        require_bit_hwh: false
+      expected_artifacts:
+        manifest: "{output_root}{stage_prefix}_manifest.json"
+        report: "{output_root}{stage_prefix}_sweep_report.yaml"
+        hls_log: "{output_root}{stage_prefix}_csynth.log"
+
+    S1:
+      name: "One-dimensional screening"
+      description: "One-at-a-time screening around the conservative baseline"
+      resource_gates:
+        max_lut_pct: 80
+        max_ff_pct: 80
+        max_bram_pct: 75
+        max_dsp_pct: 70
+      timing_gates:
+        target_clock_mhz: 200
+        min_acceptable_fmax_mhz: 180
+        min_wns_ns: 0.0
+      pynq_gates:
+        require_component_xml: true
+        require_bit_hwh: false
+      expected_artifacts:
+        manifest: "{output_root}{stage_prefix}_manifest.json"
+        report: "{output_root}{stage_prefix}_sweep_report.yaml"
+        csv: "{output_root}{stage_prefix}_screening.csv"
+
+    S2:
+      name: "Coarse DOE"
+      description: "Fit-focused grid over promising S1 corners"
+      fixed_grid:
+        tiling_factor: [2, 4]
+        parallelism_factor: [4, 8, 16]
+        bus_width: [128, 256]
+        bit_width: [8, 16]
+        buffer_size: [256, 512]
+        fifo_depth: [32, 64]
+      resource_gates:
+        max_lut_pct: 80
+        max_ff_pct: 80
+        max_bram_pct: 75
+        max_dsp_pct: 70
+      timing_gates:
+        target_clock_mhz: 200
+        min_acceptable_fmax_mhz: 180
+        min_wns_ns: 0.0
+      loop_gates:
+        target_compute_ii: 1
+        allow_documented_ii_exception: true
+      expected_artifacts:
+        manifest: "{output_root}{stage_prefix}_manifest.json"
+        pareto_csv: "{output_root}{stage_prefix}_pareto_candidates.csv"
+        timing_csv: "{output_root}{stage_prefix}_resource_timing.csv"
+
+    S3:
+      name: "PYNQ-compatible finalization"
+      description: "Local refinement of top Pareto candidates and overlay packaging"
+      max_runs_per_anchor: 12
+      resource_gates:
+        max_lut_pct: 85
+        max_ff_pct: 85
+        max_bram_pct: 80
+        max_dsp_pct: 75
+      timing_gates:
+        target_clock_mhz: 200
+        min_acceptable_fmax_mhz: 180
+        min_wns_ns: 0.0
+      pynq_gates:
+        require_bit_hwh: true
+        require_overlay_load: true
+        require_one_batch_smoke: true
+        require_repeatability_checksum: true
+      expected_artifacts:
+        overlay_bit: "{output_root}hardware/pynq/hgtxr/hgtxr.bit"
+        overlay_hwh: "{output_root}hardware/pynq/hgtxr/hgtxr.hwh"
+        pynq_log: "{output_root}pynq_smoke.log"
+        final_ranking: "{output_root}final_ranking.json"
+
+  global_resource_gates:
+    max_total_lut_pct: 85
+    max_total_ff_pct: 85
+    max_total_bram_pct: 80
+    max_total_dsp_pct: 75
+
+  global_timing_gates:
+    target_clock_mhz: 200
+    min_acceptable_fmax_mhz: 180
+    max_total_timing_error_count: 0
+    min_worst_negative_slack_ns: 0.0
+
+  global_pynq_gates:
+    required_overlay_success: true
+    max_stage_failures: 0
+
+  reference_derived_experiments:
+    VREF_P0_01:
+      priority: "P0"
+      status: "planned_sw_first"
+      source: "P2-ViT"
+      objective: "Power-of-two Q4/Q8 scale calibration for HGTXR accuracy with shift-friendly rescale."
+      preserves_c3b_signoff_path: true
+      promote_to_resource_matrix_when: "SW/HW exact-match plus HLS csynth.xml and routed reports exist."
+    VREF_P0_02:
+      priority: "P0"
+      status: "planned_audit_first"
+      source: "ME-ViT"
+      objective: "Single-load and on-chip buffer reuse audit for C3b URAM/global-buffer policy."
+      preserves_c3b_signoff_path: true
+      promote_to_resource_matrix_when: "C3b-compatible HLS/Vivado reports show no board-smoke regression."
+    VREF_P1_01:
+      priority: "P1"
+      status: "planned_sw_ablation"
+      source: "Edge-MoE,UbiMoE,M3ViT"
+      objective: "Search/track task-gated expert or head ablation for accuracy improvement."
+      preserves_c3b_signoff_path: true
+      promote_to_resource_matrix_when: "Static bounded routing and Q4/Q8 parameter manifests are proven."
+    VREF_P1_02:
+      priority: "P1"
+      status: "planned_sw_ablation"
+      source: "ViTALiTy,ViTCoD"
+      objective: "Taylor or fixed sparse attention ablation for eye-region token efficiency."
+      preserves_c3b_signoff_path: true
+      promote_to_resource_matrix_when: "Accuracy is non-regressing and exact-attention fallback remains available."
+    VREF_P1_03:
+      priority: "P1"
+      status: "planned_precision_ablation"
+      source: "TATAA"
+      objective: "Mixed-precision non-linear LayerNorm/Softmax/GELU path only when Q4/Q8 accuracy is bottlenecked."
+      preserves_c3b_signoff_path: true
+      promote_to_resource_matrix_when: "Resource cost is justified by accuracy improvement."
+    VREF_P2_01:
+      priority: "P2"
+      status: "paper_scope_review_required"
+      source: "Trio-ViT,EfficientViT-FPGA"
+      objective: "Softmax-free or hybrid-stem exploration for accuracy, outside default HGTXR paper path."
+      preserves_c3b_signoff_path: true
+      promote_to_resource_matrix_when: "Explicit paper-scope decision approves the model change."
+    VREF_P2_02:
+      priority: "P2"
+      status: "tooling_only"
+      source: "FlexLLM"
+      objective: "Composable manifest generation for future HLS sweeps."
+      preserves_c3b_signoff_path: true
+      promote_to_resource_matrix_when: "Tooling produces reproducible run manifests without behavior changes."
+    VREF_P3_01:
+      priority: "P3"
+      status: "negative_control"
+      source: "LUT-LLM,LUT-GEMM,TerEffic"
+      objective: "Archive LUT-heavy or ternary alternatives as non-default controls under current DSP/URAM policy."
+      preserves_c3b_signoff_path: true
+      promote_to_resource_matrix_when: "Only if accuracy/resource evidence beats C3b without LUT overuse."
+
+  parallelism_extensions:
+    C3b_PAR16:
+      status: "validated_resource_matrix"
+      objective: "Default board-smoke candidate uses PAR16/MEM_BANK_PAR16 for higher DSP utilization and lower latency."
+      evidence: "docs/resources/e2e_resource_matrix_2026_06_10.json:C3b"
+      expected_result: "DSP 604, LUT 126506, URAM 64, latency 37508072 cycles, routed WNS positive."
+      promotion_rule: "Keep as selected candidate until physical C3b board smoke is captured."
+    PAR32:
+      status: "exploratory_not_default"
+      objective: "Evaluate next parallelism step only after C3b board-smoke or explicit user selection."
+      expected_result: "Potential latency reduction with higher DSP/partition pressure and timing risk."
+      promotion_rule: "Requires fresh csynth, routed timing, resource-fit audit, and no C3b artifact overwrite."
+
+  expected_artifact_names:
+    - "{output_root}manifest.yaml"
+    - "{output_root}sweep_index.json"
+    - "{output_root}summary.csv"
+    - "{output_root}hardware/pynq/hgtxr/hgtxr.bit"
+    - "{output_root}hardware/pynq/hgtxr/hgtxr.hwh"
+    - "{output_root}hardware/pynq/load_report.yaml"

@@ -1,0 +1,85 @@
+{
+  "missing": 4,
+  "paper_equivalent_ready": false,
+  "present": 1,
+  "project_root": "/home/user/project/PRJXR/impl_repos/HGPIPE/HG-PIPE-Quantization",
+  "requirements": [
+    {
+      "description": "Original preprocessing or image-to-int8 patch input quantization policy.",
+      "match_count": 0,
+      "matches": [],
+      "name": "original_image_to_patch_quantization_policy",
+      "patterns": [
+        "preprocess",
+        "image_to_patch",
+        "patch_input",
+        "calibration",
+        "calib"
+      ],
+      "required_for": "Converting ImageNet images into paper-equivalent HG-PIPE patch input tensors.",
+      "status": "missing"
+    },
+    {
+      "description": "Original QAT or calibration scripts and configs.",
+      "match_count": 0,
+      "matches": [],
+      "name": "qat_or_calibration_flow",
+      "patterns": [
+        "qat",
+        "calibration",
+        "calib",
+        "train",
+        "finetune"
+      ],
+      "required_for": "Reproducing paper-equivalent activation scales and tables beyond saved reference inputs.",
+      "status": "missing"
+    },
+    {
+      "description": "Quantized model checkpoints or exported model state for all paper models and precisions.",
+      "match_count": 0,
+      "matches": [],
+      "name": "quantized_model_checkpoints",
+      "patterns": [
+        ".pt",
+        ".pth",
+        ".ckpt",
+        ".onnx",
+        "checkpoint",
+        "weights"
+      ],
+      "required_for": "Evaluating DeiT-tiny, DeiT-small, and ViT-tiny under int8, int4, and W4A8 without synthetic weights.",
+      "status": "missing"
+    },
+    {
+      "description": "Scripted flow that exports weights, scales, tables, and ImageNet-ready refs.",
+      "match_count": 1,
+      "matches": [
+        "SPINAL/src/test/scala/network/generate_whole_network_verilog.scala"
+      ],
+      "name": "model_export_or_ref_generation_flow",
+      "patterns": [
+        "export",
+        "generate",
+        "gen_ref",
+        "ref_gen",
+        "convert"
+      ],
+      "required_for": "Regenerating HG-PIPE artifacts from model checkpoints instead of only replaying checked-in refs.",
+      "status": "present"
+    },
+    {
+      "description": "Artifact-backed ImageNet report covering three models by int8, int4, and W4A8 with paper_equivalent true.",
+      "match_count": 0,
+      "matches": [],
+      "name": "full_artifact_imagenet_accuracy_matrix",
+      "patterns": [
+        "artifact_imagenet_accuracy"
+      ],
+      "required_for": "Closing the remaining completion-audit partial item.",
+      "status": "missing"
+    }
+  ],
+  "source_root": "/home/user/project/PRJXR/impl_repos/HGPIPE/ICCAD24-HG-PIPE",
+  "status": "incomplete",
+  "total": 5
+}
