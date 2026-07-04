@@ -50,3 +50,20 @@ Date: 2026-07-03
 
 - The new venvs are intentionally not tracked by git.
 - The model-complexity report includes caveats for DCNv2, TensorFlow custom blocks, EX-Gaze's missing develop checkout, and Swift-Eye dummy ROI proposals.
+
+## 2026-07-04 Swift-Eye Preparation
+
+- Prepared direct HBTXR cache training path for Swift-Eye without PNG/DOTA export.
+- Added `analysis/scripts/swifteye_hbtxr_direct_train.py`.
+- Changed Swift-Eye Swin backbone first projection to `2` input channels instead of using a `2ch -> 3ch` adapter.
+- Made `64x64` the default direct HBTXR input resolution.
+- Reduced detector RPN anchors and temporal tracking anchors for 64px pupil boxes.
+- Reduced temporal fusion crops from original `33/13` to `15/7` so the search crop fits the `16x16` P2 feature map.
+- Parameterized the custom Swift-Eye tracking anchor generator so its original hard-coded crop geometry can be overridden.
+- Validated detector and temporal forward/backward smoke checks with the CPU MMRotate venv.
+- Wrote preparation metadata under `analysis/results/Swift-Eye/direct_hbtxr_img64`.
+
+## 2026-07-04 Swift-Eye Remaining Notes
+
+- Full training is blocked by environment, not data/code wiring: `tmp/venvs/mmrotate_py38` has CPU-only PyTorch.
+- GPU launch needs a GPU-enabled MMRotate 0.3.4/MMCV 1.x stack or an equivalent port into the main CUDA venv.

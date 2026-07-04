@@ -85,6 +85,15 @@ class RotatedAnchorGenerator_tracking(AnchorGenerator):
     (mmtracking/mmtrack/model/track_head)
     """
 
+    def __init__(self,
+                 *args,
+                 search_shape=33,
+                 template_shape=13,
+                 **kwargs):
+        super(RotatedAnchorGenerator_tracking, self).__init__(*args, **kwargs)
+        self.search_shape = search_shape
+        self.template_shape = template_shape
+
     def single_level_grid_priors(self,
                                  featmap_size,
                                  level_idx,
@@ -115,11 +124,14 @@ class RotatedAnchorGenerator_tracking(AnchorGenerator):
         wh = anchors[:, 2:] - anchors[:, :2]
         theta = xy.new_zeros((num_anchors, 1))
         anchors = torch.cat([xy, wh, theta], axis=1)
-        anchors[:,:2]=anchors[:,:2]-10*4
+        stride = self.strides[level_idx][0]
+        response_shape = self.search_shape - self.template_shape + 1
+        response_center = response_shape * stride / 2
+        search_center = self.search_shape * stride / 2
+        center_shift = search_center - response_center + stride / 2
+        anchors[:,:2]=anchors[:,:2] + center_shift
         # Transform the coordinate origin from the top left corner to the
         # center in the scaled score map.
-
-        anchors[:,:2]=anchors[:,:2]+33*4/2
         # The scaled feature map and the searched image have the same center.
         # Transform coordinate origin from the center to the top left corner in
         # the searched image.

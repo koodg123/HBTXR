@@ -1,0 +1,35 @@
+{
+  "data_root": "/mnt/d/dataset/EV_Eye/target_data/DeanDataset_full_unet_subject_independent",
+  "output_root": "/home/user/project/PRJXR/HBTXR/analysis/results/Swift-Eye/direct_hbtxr_img64",
+  "detector_config": "/home/user/project/PRJXR/HBTXR/references/codebase/software/Swift-Eye/mmrotate/train_swift_eye/train_backbone_and_neck/swift_eye_config.py",
+  "temporal_config": "/home/user/project/PRJXR/HBTXR/references/codebase/software/Swift-Eye/mmrotate/train_swift_eye/train_with_temporal_fusion_component/model_config.py",
+  "input_height": 64,
+  "input_width": 64,
+  "pad_divisor": 32,
+  "event_mode": "causal_linear",
+  "event_weight": 1,
+  "input_channels": 2,
+  "backbone_patch_embed": "SwinTransformer.patch_embed.projection Conv2d(2, 96, kernel_size=4, stride=4)",
+  "detector_anchor_scales": [
+    2,
+    4
+  ],
+  "temporal_anchor_scales": [
+    2,
+    3,
+    4
+  ],
+  "temporal_search_shape": 15,
+  "temporal_template_shape": 7,
+  "split_train": "subject 1-32",
+  "split_val": "subject 33-36",
+  "split_test": "subject 37-48",
+  "optimizer_detector": "AdamW, matching original Swift-Eye detector config family",
+  "optimizer_temporal": "Adam, matching original Swift-Eye temporal trainer family",
+  "lr_detector": 0.0001,
+  "lr_temporal": 0.0001,
+  "weight_decay_detector": 0.05,
+  "weight_decay_temporal": 0.0,
+  "temporal_pair_offset": 1,
+  "temporal_max_delta_us": 50000
+}

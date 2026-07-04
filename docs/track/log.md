@@ -19,3 +19,7 @@
 - Installed and used PyTorch 1.13.1, MMCV 2.0.1, MMEngine 0.8.5, MMDetection 3.1.0, and MMRotate 1.0.0rc1 to profile `EX-Gaze`.
 - Added `tmp/venvs/` to `.gitignore`.
 - Restored profiling-generated tracked `__pycache__` updates.
+- Stopped the earlier Swift-Eye PNG/DOTA export direction after the user clarified that the original Swift-Eye model, head, and temporal fusion should remain unchanged.
+- Added a direct HBTXR cache path for Swift-Eye, then revised it to remove the `2ch -> 3ch` adapter and change the Swin patch embedding to 2-channel input.
+- Updated the direct Swift-Eye path to default to 64x64 input, reduced detector/temporal anchors, and reduced temporal crop geometry.
+- Validated detector and temporal fusion forward/backward smoke checks and one-step train-mode checkpoint creation in the CPU MMRotate environment.

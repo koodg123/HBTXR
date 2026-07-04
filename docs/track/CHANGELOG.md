@@ -15,3 +15,5 @@
 - Added measured or profiled rows for `EIDet / ElNet`, `E-Track`, `EV-Eye`, `EX-Gaze`, and `Swift-Eye`.
 - Added local venv ignore rule for `tmp/venvs/`.
 - Documented profiling caveats for missing `DCNv2`, TensorFlow custom blocks, EX-Gaze MMRotate sourcing, and Swift-Eye dummy ROI proposals.
+- Added Swift-Eye direct HBTXR cache training preparation script and launch wrappers.
+- Changed Swift-Eye direct preparation to 64x64 2-channel backbone input, with reduced detector/temporal anchors and temporal crop geometry.
