@@ -1,6 +1,6 @@
 # FACET Report Catalog
 
-Generated: 2026-06-29
+Generated: 2026-07-04
 
 This catalog records the category split for `/home/kjm26/project/PRJXR/HBTXR/references/report/FACET`.
 
@@ -39,6 +39,7 @@ Reproduction plans, runbooks, experiment plans, and plan-progress audits.
 - [planning/FACET_reproduction_execution_runbook_2026-06-25.md](planning/FACET_reproduction_execution_runbook_2026-06-25.md)
 - [planning/FACET_reproduction_plan_2026-06-25.md](planning/FACET_reproduction_plan_2026-06-25.md)
 - [planning/FACET_reproduction_plan_progress_audit_2026-06-26.md](planning/FACET_reproduction_plan_progress_audit_2026-06-26.md)
+- [planning/EV_Eye_EX_Gaze_Swift_Eye_HBTXR_porting_analysis_2026-07-04.md](planning/EV_Eye_EX_Gaze_Swift_Eye_HBTXR_porting_analysis_2026-07-04.md)
 - [planning/HBTXR_subject_independent_img64_patch4_plan_2026-06-28.md](planning/HBTXR_subject_independent_img64_patch4_plan_2026-06-28.md)
 
 ### datasets
