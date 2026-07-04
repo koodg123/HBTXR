@@ -1,0 +1,140 @@
+{
+  "tag": "smoke_32",
+  "expected_count_per_split": 32,
+  "ev_eye_root": "/home/kjm26/project/dataset/XR/EV_Eye/target_data/EV_Eye_Hybrid_frame128_event64_subject_independent/smoke_32",
+  "ex_gaze_root": "/home/kjm26/project/dataset/XR/EV_Eye/target_data/EX_Gaze_Hybrid_frame128_event64_subject_independent/smoke_32",
+  "splits": {
+    "train": {
+      "ev_eye": {
+        "rows": 32,
+        "frame_shape": [
+          128,
+          128
+        ],
+        "frame_dtype": "uint8",
+        "mask_shape": [
+          128,
+          128
+        ],
+        "mask_dtype": "uint8",
+        "event_shape": [
+          2,
+          64,
+          64
+        ],
+        "event_dtype": "uint16",
+        "first_event_sum": 468
+      },
+      "ex_gaze": {
+        "annotation_rows": 32,
+        "event_shape": [
+          2,
+          64,
+          64
+        ],
+        "event_dtype": "uint16",
+        "patch_shape": [
+          8,
+          2,
+          16,
+          16
+        ],
+        "patch_dtype": "uint16",
+        "sample_regions_shape": [
+          8,
+          4
+        ],
+        "sample_regions_min": 19,
+        "sample_regions_max": 46
+      }
+    },
+    "val": {
+      "ev_eye": {
+        "rows": 32,
+        "frame_shape": [
+          128,
+          128
+        ],
+        "frame_dtype": "uint8",
+        "mask_shape": [
+          128,
+          128
+        ],
+        "mask_dtype": "uint8",
+        "event_shape": [
+          2,
+          64,
+          64
+        ],
+        "event_dtype": "uint16",
+        "first_event_sum": 851
+      },
+      "ex_gaze": {
+        "annotation_rows": 32,
+        "event_shape": [
+          2,
+          64,
+          64
+        ],
+        "event_dtype": "uint16",
+        "patch_shape": [
+          8,
+          2,
+          16,
+          16
+        ],
+        "patch_dtype": "uint16",
+        "sample_regions_shape": [
+          8,
+          4
+        ],
+        "sample_regions_min": 12,
+        "sample_regions_max": 46
+      }
+    },
+    "test": {
+      "ev_eye": {
+        "rows": 32,
+        "frame_shape": [
+          128,
+          128
+        ],
+        "frame_dtype": "uint8",
+        "mask_shape": [
+          128,
+          128
+        ],
+        "mask_dtype": "uint8",
+        "event_shape": [
+          2,
+          64,
+          64
+        ],
+        "event_dtype": "uint16",
+        "first_event_sum": 676
+      },
+      "ex_gaze": {
+        "annotation_rows": 32,
+        "event_shape": [
+          2,
+          64,
+          64
+        ],
+        "event_dtype": "uint16",
+        "patch_shape": [
+          8,
+          2,
+          16,
+          16
+        ],
+        "patch_dtype": "uint16",
+        "sample_regions_shape": [
+          8,
+          4
+        ],
+        "sample_regions_min": 19,
+        "sample_regions_max": 42
+      }
+    }
+  }
+}
