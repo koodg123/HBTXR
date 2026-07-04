@@ -1,6 +1,11 @@
 # EV-Eye Porting Review
 
-Date: 2026-06-29
+Date: 2026-07-04
+
+## Current Planning Documents
+
+- `EV_Eye_EX_Gaze_hybrid_frame128_event64_plan_2026-07-04.md`
+- `EV_Eye_EX_Gaze_hybrid_conversation_progress_2026-07-04.md`
 
 ## Local Mapping
 
@@ -72,4 +77,3 @@ Derived output:
 ## Readiness
 
 Status: special-purpose; not an immediate competitor to HBTXR unless the benchmark accepts mask segmentation models with post-processing.
-
