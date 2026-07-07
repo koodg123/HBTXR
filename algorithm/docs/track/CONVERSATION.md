@@ -1,10 +1,10 @@
 # Conversation Summary
 
-Last updated: 2026-07-03
+Last updated: 2026-07-07
 
 ## Current Working Branch
 
-- `etri-server`
+- `refactor/hbtxr-structure`
 
 ## Major User Decisions
 
@@ -20,6 +20,11 @@ Last updated: 2026-07-03
 - Remove `FECET` from the target list because it was a typo.
 - Treat EIDet as the local FACET `ElNet.py` model.
 - Evaluate BRAT on the same Subject 37-48 full test set as EIDet.
+- Preserve the dirty tree before proceeding with the HBTXR structure refactor.
+- Use generalized active package names; keep source-specific historical names
+  only where needed for archive provenance.
+- Move imported and legacy materials out of active package surfaces instead of
+  deleting them.
 
 ## Work Completed
 
@@ -35,6 +40,11 @@ Last updated: 2026-07-03
 - BRAT full-test export was corrected to preserve left/right eye sessions and
   prevent overwrite.
 - BRAT was re-run on GPU1 using the corrected full test set.
+- HGTXR hybrid integration and imported HBTXR/HGTXR materials were checkpointed.
+- Imported conversations, HGTXR project docs, and legacy hybrid material were
+  archived under `algorithm/archive/imports`.
+- Active `algorithm/hybrid` scripts/configs/tests/docs were reduced to
+  maintained package surfaces plus README boundary notes.
 
 ## Current Output Locations
 
@@ -54,4 +64,5 @@ Last updated: 2026-07-03
 - Center-only models should be compared primarily by center pixel error. IoU for
   those models is a proxy unless otherwise stated.
 - Some result artifacts are large generated files.
-
+- Archive-internal documents intentionally preserve original source names and
+  historical paths for provenance.

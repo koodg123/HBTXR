@@ -1,6 +1,6 @@
 # Progress
 
-Last updated: 2026-07-03
+Last updated: 2026-07-07
 
 ## Completed
 
@@ -20,6 +20,13 @@ Last updated: 2026-07-03
 - [x] Update model inference package summary.
 - [x] Exclude large row-level CSV/H5/weight/log artifacts from git tracking so
       the branch can be pushed to GitHub.
+- [x] Preserve the current dirty HBTXR import state in commit `51b18b6`.
+- [x] Move imported conversations, HGTXR project docs, and legacy hybrid
+      docs/scripts/configs/tests into `algorithm/archive/imports`.
+- [x] Keep active `algorithm/hybrid` scripts/configs/tests/docs focused on
+      maintained package surfaces.
+- [x] Move the refactor summary under `algorithm/docs/track/refactor` so root
+      package structure remains clean.
 
 ## In Progress Or Next
 
@@ -29,6 +36,10 @@ Last updated: 2026-07-03
       Git LFS or external artifact storage.
 - [ ] Continue standardizing remaining target models when executable training
       code and dataset adapters are available.
+- [ ] Continue Phase 2 active-code refactor for `frame`, `event`, `hybrid`,
+      `hardware`, and `quantization`.
+- [ ] Promote archived legacy scripts/tests only after API adaptation and
+      validation.
 
 ## Current Key Metrics
 
