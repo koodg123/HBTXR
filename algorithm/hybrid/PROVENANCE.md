@@ -11,7 +11,7 @@ This directory combines three source groups:
 ## Imported Files
 
 ```text
-former algorithm/configs/*hybrid* -> hybrid/configs/legacy/
+former algorithm/configs/*hybrid* -> algorithm/archive/imports/legacy_hybrid/configs/package_legacy/
 external_hybrid_package/configs/ -> hybrid/configs/external/
 external_hybrid_package/scripts/ -> hybrid/scripts/external_pipeline/
 external_hybrid_package/src/hbtxr/ -> hybrid/src/
