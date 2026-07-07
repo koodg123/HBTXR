@@ -1,0 +1,38 @@
+# Stage2 fine-tune: track-head-only supervised refinement from the current
+# centerloss best-center checkpoint. Removes teacher pull and non-track losses.
+
+extends: mode1_stage2_raw_event_count_lr1e-5_weakdistill_centerloss_finetune_fullwidth.yaml
+
+model:
+  heads:
+    active: track
+
+training:
+  lr: 1.0e-5
+  optimizer:
+    name: adamw
+    lr: 1.0e-5
+    weight_decay: 5.0e-5
+    betas: [0.9, 0.999]
+    eps: 1.0e-8
+    kwargs: {}
+  scheduler:
+    type: plateau
+    metric_name: metric_track_center_px
+    factor: 0.5
+    patience: 2
+  early_stopping:
+    enabled: true
+    patience: 5
+    start_epoch: 4
+    min_delta: 0.005
+
+distillation:
+  enabled: false
+  teacher_student: false
+
+regularization_ssl:
+  enabled: false
+
+experiment:
+  name: raw_mode1_stage2_lr1e-5_nodistill_trackonly_centerloss_finetune_fullwidth

@@ -1,0 +1,55 @@
+{
+  "name": "groundedsam_roi_crop_prompted_pupil_v1",
+  "date": "2026-03-28",
+  "status": "focused_validation_passed",
+  "intent": "Run Grounded-SAM pupil inference only inside the cropped eye ROI using a more specific text prompt.",
+  "eye_stage": {
+    "path": "bbox_only_eye_region_runtime",
+    "classes": [
+      "eye"
+    ],
+    "box_threshold": 0.25,
+    "text_threshold": 0.25,
+    "nms_threshold": 0.8,
+    "max_box_area_ratio": 0.85,
+    "border_margin_px": 3,
+    "max_border_touches": 3
+  },
+  "pupil_stage": {
+    "path": "groundedsam_on_cropped_eye_roi",
+    "classes": [
+      "small dark circular pupil",
+      "black pupil",
+      "pupil"
+    ],
+    "box_threshold": 0.3,
+    "text_threshold": 0.3,
+    "nms_threshold": 0.8,
+    "min_mask_area": 16
+  },
+  "optional_post_filters": {
+    "crop_mask_area_ratio_max": 0.3,
+    "crop_bbox_fill_max": 0.85
+  },
+  "focused_validation": {
+    "dataset_scope": "user05/left/session_101",
+    "sample_count": 16,
+    "sample_seed": "user05-left-session101-no-csv-groundedsam-16",
+    "baseline_experiment": "roi_crop_pupil_reinfer_user05_left_session101",
+    "prompted_experiment": "roi_crop_pupil_reinfer_user05_left_session101_prompted",
+    "baseline_fail_like_panels": [
+      1,
+      2,
+      6,
+      8,
+      14
+    ],
+    "prompted_fail_like_panels": [],
+    "expected_prompted_class_name": "small dark circular pupil"
+  },
+  "artifacts": {
+    "prompted_summary": "/home/user/project/PRJXR/HBTXR_v3_0/workspace/roi_crop_pupil_reinfer_user05_left_session101_prompted/summary.json",
+    "prompted_contact_sheet": "/home/user/project/PRJXR/HBTXR_v3_0/workspace/roi_crop_pupil_reinfer_user05_left_session101_prompted/contact_sheet_pairs.png",
+    "comparison_log": "/home/user/project/PRJXR/HBTXR_v3_0/dataset/logs/2026-03-28_roi_crop_pupil_prompted_comparison.json"
+  }
+}

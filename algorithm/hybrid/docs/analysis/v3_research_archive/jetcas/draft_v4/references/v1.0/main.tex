@@ -1,0 +1,396 @@
+\documentclass[journal]{IEEEtran}
+\IEEEoverridecommandlockouts
+% The preceding line is only needed to identify funding in the first footnote. If that is unneeded, please comment it out.
+\usepackage{cite}
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{hyperref}
+\usepackage{algorithmic}
+\usepackage{graphicx}
+\usepackage{textcomp}
+\usepackage{xcolor}
+\usepackage{adjustbox}
+\usepackage{verbatim}
+\usepackage{multirow}
+\usepackage{booktabs}
+\usepackage{algorithm2e}
+\usepackage{orcidlink}
+\usepackage{threeparttable}
+
+\usepackage{xcolor}
+\hypersetup{
+    colorlinks,
+    linkcolor={black},
+    citecolor={black},
+    urlcolor={blue!80!black}
+}
+
+\def\BibTeX{{\rm B\kern-.05em{\sc i\kern-.025em b}\kern-.08em
+    T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
+
+\begin{document}
+\bstctlcite{IEEEexample:BSTcontrol}
+
+\title{HET-XR: A Hybrid Frame-Event Eye Tracking Accelerator for Sub-millisecond XR Interaction}
+\author{Jaemyung Kim, Jung Sung Hoon, and Lee Young Jae%
+\thanks{This work was supported by Institute of Information \& communications Technology Planning \& Evaluation (IITP) grant funded by the Korea government (MSIT) (No. RS-2025-02215472). \textit{(Corresponding author: Jaemyung Kim.)}}
+\thanks{Jaemyung Kim, Jung Sung Hoon and Lee Young Jae are with the AI SoC Infrastructure Research Section, Electronics and Telecommunications Research Institute, Seongnam 13488, Republic of Korea (e-mail: jm1322@etri.re.kr; tamtam211@etri.re.kr; lyj4295@etri.re.kr).}%
+}
+\markboth{IEEE Journal of Emerging and Selected Topics in Circuits and Systems,~Vol.~X, No.~X}%
+{Kim \MakeLowercase{\textit{et al.}}: HET-XR}
+\maketitle
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Abstract %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{abstract}
+Extended reality (XR) applications such as foveated rendering, gaze-based interaction, and attentive user interfaces require eye tracking systems that jointly provide high temporal responsiveness, low latency, and low average compute cost under embedded constraints. Conventional frame-based pipelines offer rich semantic cues for localization and relocalization, but remain limited by frame rate and repeated dense processing. Event-based methods provide sparse asynchronous measurements with high temporal resolution, yet often suffer from drift and weak absolute recovery under blink, occlusion, or tracking failure. In this work, we present HET-XR, a hybrid event-frame eye tracking system that combines a sparse voxel Event Branch, a depth-gated frame-event DeiT Branch, and a state-aware runtime scheduler. The Event Branch operates as the high-rate fast path and uses sparse voxel representations with a lightweight sparse CNN to estimate incremental pupil-state updates. The Hybrid Branch uses frame tokens and event summary tokens to perform initialization, correction, and relocalization with stronger semantic context. To reduce average compute cost, the 8-block DeiT backbone is conditionally executed: only the first four blocks are activated during regular tracking, while all eight blocks are used during initialization and recovery. A four-state finite-state machine over INIT, TRACK, SUSPECT, and RECOVER modes controls branch activation, escalation, and fusion. By explicitly separating fast local tracking from semantic correction and by coupling modality usage with conditional transformer depth, the proposed architecture bridges the gap between event-based efficiency and frame-based robustness. HET-XR provides a deployment-oriented design framework for low-latency, hardware-friendly XR eye tracking.
+\end{abstract}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Abstract %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{IEEEkeywords}
+XR, eye tracking, hybrid sensing, hardware accelerator, fpga, vision transformer
+\end{IEEEkeywords}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Introduction %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Introduction}
+Extended reality (XR) systems increasingly rely on eye and gaze tracking as a core interaction primitive for foveated rendering, gaze-based user interfaces, attention-aware adaptation, and immersive human-computer interaction~\cite{plopski2022eye,kwon2023xrbench}. In head-worn XR devices, however, eye tracking is not merely an estimation problem; it is a latency-critical systems problem that must simultaneously satisfy high temporal responsiveness, low end-to-end latency, low average compute cost, and tight power and form-factor constraints~\cite{plopski2022eye,kwon2023xrbench}. These constraints become especially stringent in wearable and on-device settings, where the tracking pipeline must remain stable under rapid saccadic motion, blinks, partial occlusion, and temporary tracking failure.
+%
+Conventional frame-based eye tracking methods benefit from dense appearance cues and mature estimation pipelines. Prior work has demonstrated effective mobile gaze tracking, real-time head-mounted display (HMD) gaze estimation, and eye-region analysis based on dense image observations~\cite{li2018etracker,feng2022real,chen2022real}. More recently, optics-aware approaches such as lensless eye tracking have explored compact sensing form factors for wearable systems~\cite{jain2025flattrack}. Despite these strengths, frame-based pipelines remain fundamentally limited by image sampling rate and by the repeated cost of dense visual processing. As a result, they are well suited for initialization, absolute localization, and semantically rich correction, but they are less attractive as the only always-on path for ultra-low-latency XR eye tracking.
+%
+Event cameras offer a compelling alternative because they generate asynchronous and sparse brightness-change measurements with very high temporal resolution~\cite{lenero20113}. This sensing paradigm is naturally well aligned with rapid eye dynamics and has motivated a growing body of event-based eye tracking research \cite{wang2024event,chen2025event}. Recent methods have shown that event sensing can support high-frequency eye tracking, low-latency gaze estimation, adaptive event slicing, anti-blink tracking, and efficient ellipse-aware regression~\cite{chen20233et,li2023track,li2024gaze,sen2024eyetraes,zhang2024swift,ding2025facet}. Event-based and neuromorphic approaches have also demonstrated strong potential for low-power deployment~\cite{lai2026efficient,sui2026event,bonazzi2024retina}. Nevertheless, event-only pipelines still face practical limitations. While they are effective for high-rate local motion propagation, they often struggle with robust re-acquisition after blinks, abrupt state changes, long-term drift, or weak event activity. In other words, event sensing is strong for fast incremental updates, but it is not always sufficient for reliable semantic correction on its own.
+%
+These complementary strengths motivate hybrid event--frame eye tracking. Existing hybrid studies have shown that event data is effective for high-frequency local tracking, whereas frame data is useful for initialization, relocalization, and stronger correction~\cite{zhao2023ev,chen2025ex}. This division of labor is particularly relevant to XR because the sensing modalities are complementary not only in information content but also in computational role. However, existing hybrid approaches still leave two major issues unresolved. First, straightforward dual-branch execution can substantially increase average compute cost if both sensing paths are invoked too often. Second, prior methods mainly focus on multimodal fusion or hybrid estimation quality rather than explicit runtime orchestration of \emph{when} each branch should be activated and \emph{how much} computation should be assigned to the stronger branch.
+%
+A related line of work examines eye tracking from a deployment-oriented circuits-and-systems perspective. Prior studies have demonstrated accelerator co-design for compact optics-based eye tracking, resource-constrained microcontroller deployment, spiking/event-driven low-power tracking, and dedicated event-based eye tracking accelerators~\cite{you2022eyecod,bonazzi2024retina,giordano2025sub,han2026janeeye}. These studies clearly establish that practical eye tracking is shaped not only by estimation quality but also by sensing modality, runtime policy, and hardware efficiency. However, most existing deployment-oriented solutions are specialized either for a single sensing modality or for a fixed compact backbone, leaving limited support for heterogeneous branch coordination under state-dependent runtime control.
+%
+In this paper, we present \textbf{HET-XR}, a hybrid event--frame eye tracking system for XR that explicitly separates a high-rate fast path from a stronger but more expensive correction path. The proposed architecture consists of three tightly coupled components. First, a sparse voxel Event Branch performs high-frequency local pupil-state updates from recent event input. Second, a depth-gated Hybrid Branch combines frame tokens and event summary tokens using a lightweight transformer-style backbone to perform initialization, correction, and relocalization. Third, a state-aware runtime scheduler governs branch activation, escalation, and fusion over four operating modes: \textit{INIT}, \textit{TRACK}, \textit{SUSPECT}, and \textit{RECOVER}. During regular tracking, the system prioritizes the sparse event path and invokes only shallow hybrid refinement when needed; during uncertain or failed conditions, it escalates to stronger hybrid inference with deeper execution.
+%
+The key idea of HET-XR is that most runtime steps in practical eye tracking do not require full multimodal computation. Therefore, always-on hybrid execution wastes compute and energy, while event-only execution sacrifices robustness. By treating event processing as the default fast path and reserving frame-aware hybrid reasoning for correction and recovery, HET-XR aims to bridge the gap between event-based efficiency and frame-based robustness. Our main contributions are as follows:
+\begin{itemize}
+    \item We propose a hybrid XR eye tracking architecture that separates sparse event-driven fast tracking from stronger frame-guided correction and relocalization.
+    \item We introduce a state-aware runtime scheduler that jointly controls branch activation, escalation, and conditional depth selection across \textit{INIT}, \textit{TRACK}, \textit{SUSPECT}, and \textit{RECOVER} modes.
+    \item We present a deployment-oriented system formulation that connects multimodal eye tracking with sparse event processing and selective computation for low-latency XR operation.
+\end{itemize}
+%
+The remainder of this paper is organized as follows. Section~II reviews prior work on frame-based, event-based, and hybrid eye tracking. Section~III presents the overall HET-XR system architecture. Section~IV describes the proposed frame branch, event branch, and state-aware runtime scheduler. Section~V summarizes the experimental setup, and Section~VI reports the main results and ablation studies. Finally, Section~VII discusses limitations and future directions, and Section~VIII concludes the paper.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Introduction %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Related Works %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Related Work}
+\label{sec:related}
+%%%% Frame-Based Eye Tracking %%%%
+\subsection{Frame-Based Eye Tracking}
+Frame-based eye tracking has long been the dominant paradigm in gaze estimation and pupil localization. These methods typically operate on dense eye images and exploit appearance modeling, segmentation, geometric fitting, or regression to infer pupil position and gaze direction. Representative works include mobile near-eye tracking systems based on combined gaze-tracking algorithms, real-time gaze estimation for head-mounted displays, and dense image-driven eye segmentation approaches~\cite{li2018etracker,feng2022real,chen2022real}. More recently, compact optics-aware systems such as FlatTrack have further explored wearable form-factor reduction through lensless sensing and computational reconstruction~\cite{jain2025flattrack}.
+%
+However, frame-based pipelines are fundamentally constrained by the sensor frame rate and by the cost of repeatedly processing dense image inputs. These limitations become increasingly problematic in XR scenarios that require rapid gaze updates for latency-sensitive tasks such as foveated rendering and gaze-driven interaction. As a result, while frame-based methods are robust for semantic localization, they are less suitable as the sole mechanism for ultra-high-frequency tracking.
+%
+%%%% Event-Based Eye Tracking %%%%
+\subsection{Event-Based Eye Tracking}
+Event-based eye tracking addresses the temporal and efficiency limitations of frame-based systems by leveraging asynchronous brightness-change sensing~\cite{lenero20113}. Recent surveys and challenge reports have highlighted the rapid progress of this area and its growing relevance to high-frequency eye tracking~\cite{wang2024event,chen2025event}. Existing event-based approaches can be broadly categorized into several groups. One class constructs event frames, temporal slices, or compact tensors and then applies CNNs or recurrent models for pupil or gaze estimation, as demonstrated by 3ET, E-Track, and E-Gaze~\cite{chen20233et,li2023track,li2024gaze}. Another class focuses on robust event representation and event-triggered adaptation, including adaptive event slicing, anti-blink tracking, and ellipse-aware pupil estimation, as in EyeTrAES, Swift-Eye, and FACET~\cite{sen2024eyetraes,zhang2024swift,ding2025facet}. A third class targets low-power or neuromorphic deployment through sparse filtering, spiking inference, or hardware-friendly event processing~\cite{lai2026efficient,sui2026event,bonazzi2024retina}.
+%
+These studies collectively demonstrate that event sensing is highly attractive for eye tracking because it naturally supports sparse, high-rate motion updates without redundant frame acquisition. However, event-only methods still exhibit recurring limitations. First, many approaches eventually densify the event stream into frame-like or tensor-like inputs, thereby weakening the computational advantage of sparse sensing. Second, event-only tracking often becomes fragile when strong semantic recovery is required, such as after blinks, abrupt state changes, heavy occlusion, or long-term drift. Even highly efficient event-only systems may therefore struggle to provide reliable absolute correction in practical XR settings. This motivates the use of complementary sensing or runtime correction mechanisms beyond event-only inference.
+%
+%%%% Hybrid Event-Frame Eye Tracking %%%%
+\subsection{Hybrid Event-Frame Eye Tracking}
+Hybrid event--frame eye tracking combines the high temporal responsiveness of event sensing with the stronger structural cues available from frames. EV-Eye established a large-scale multimodal dataset and benchmark that explicitly supports high-frequency hybrid eye tracking research, showing that joint use of near-eye grayscale images and event data can improve robustness and accuracy~\cite{zhao2023ev}. EX-Gaze further demonstrated that hybrid sensing is particularly effective for on-device XR by assigning events and frames different functional roles: event data is used for rapid local tracking updates, whereas frame data supports stronger localization and correction~\cite{chen2025ex}.
+%
+The key insight behind hybrid eye tracking is that the two modalities are complementary not only in information content but also in computational role. However, existing hybrid methods still tend to emphasize multimodal representation learning and estimation quality rather than explicit runtime orchestration. In particular, prior work has not fully addressed how to decide \emph{when} the stronger branch should be activated, \emph{how} uncertainty should trigger escalation, and \emph{whether} the correction branch itself can be conditionally executed at different computational depths. As a result, hybrid systems can still incur high average cost if multimodal fusion is performed too frequently or too statically. This leaves a gap between hybrid sensing as an algorithmic concept and hybrid scheduling as a system-level efficiency mechanism.
+%
+%%%% Eye Tracking Accelerator and Deployment-oriented Methods %%%%
+\subsection{Eye Tracking Accelerator and Deployment-oriented Methods}
+A separate but highly relevant line of work considers eye tracking from a hardware and deployment perspective. Prior studies have explored optics--accelerator co-design, neuromorphic low-power tracking, highly specialized event-based accelerators, and resource-constrained embedded implementations~\cite{you2022eyecod,bonazzi2024retina,han2026janeeye,giordano2025sub}. EyeCoD demonstrated that eye tracking performance and efficiency can be shaped by joint optimization of front-end sensing and accelerator design~\cite{you2022eyecod}. Retina showed that event camera input and spiking hardware provide a promising path for low-power eye tracking~\cite{bonazzi2024retina}. JaneEye pushed dedicated event-based acceleration toward extremely high tracking speed and energy efficiency~\cite{han2026janeeye}, while recent microcontroller-based implementations showed that meaningful event-driven eye tracking can be achieved even under severe resource constraints~\cite{giordano2025sub}.
+%
+These works clearly show that practical eye tracking is a circuits-and-systems problem as much as it is a vision problem. At the same time, most prior accelerator-oriented designs are specialized either for a single sensing modality or for a fixed compact model. They therefore do not directly address the problem of coordinating a sparse event fast path with a stronger frame-aware correction path under state-dependent runtime control. This limitation is especially important in XR, where average-case efficiency, recovery robustness, and low-latency deployment must be optimized jointly.
+%
+%%%% Summary %%%%
+\subsection{Summary}
+In summary, frame-based methods provide semantically rich localization but suffer from rate-bounded and dense processing~\cite{li2018etracker,feng2022real,chen2022real,jain2025flattrack}. Event-based methods provide sparse, high-frequency updates but often struggle with robust correction and recovery under difficult conditions~\cite{chen20233et,li2023track,li2024gaze,sen2024eyetraes,zhang2024swift,ding2025facet}. Hybrid methods validate the complementarity of events and frames, yet most existing studies do not explicitly formulate branch activation and compute allocation as runtime control problems~\cite{zhao2023ev,chen2025ex}. Accelerator-oriented studies emphasize efficiency and deployment, but they are typically specialized to one sensing path or one fixed backbone~\cite{you2022eyecod,bonazzi2024retina,han2026janeeye,giordano2025sub}.
+%
+Our work addresses this gap by introducing a state-aware hybrid eye tracking architecture in which a sparse event branch serves as the default high-rate fast path, while a stronger hybrid correction branch is selectively activated for initialization, relocalization, and recovery. Unlike static dual-branch designs, the proposed framework explicitly couples modality selection, escalation, and conditional computation under runtime state transitions, thereby aiming to combine event-based efficiency, frame-based robustness, and deployment-oriented XR operation in a single system.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Related Works %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% HET-XR Algorith %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Proposed HET-XR Algorithm}
+\label{sec:algorithm}
+%%%% Problem Formulation and System Overview %%%%
+\subsection{Problem Formulation and System Overview}
+he proposed HET-XR algorithm is designed for XR eye tracking under strict latency and efficiency constraints. The key idea is to separate the workload into two asymmetric paths: a lightweight \emph{event branch} for high-rate local state update and a stronger \emph{frame branch} for initialization, correction, and relocalization. This design is motivated by prior hybrid eye tracking studies showing that event sensing and frame sensing provide complementary advantages \cite{zhao2023ev,chen2025ex}. In contrast to static dual-branch execution, HET-XR explicitly incorporates state-dependent computation so that stronger inference is invoked only when required.
+%
+Let the pupil state at time step $t$ be defined as
+\begin{equation}
+s_t = (x_t, y_t, a_t, b_t, \theta_t),
+\end{equation}
+where $(x_t,y_t)$ denotes the pupil center, $(a_t,b_t)$ denote the ellipse axes, and $\theta_t$ denotes the ellipse angle. The event branch predicts an incremental update $\Delta s_t$, while the frame branch predicts a stronger absolute correction $\hat{s}_t^{full}$ when semantic recovery or relocalization is needed.
+%
+%%%% Frame branch %%%%
+\subsection{Frame branch}
+The frame branch is responsible for semantically strong estimation, including initialization, relocalization, and full correction after tracking uncertainty. This role is consistent with prior frame-based and hybrid eye tracking systems, where dense image cues are particularly useful for absolute localization and stable anchor estimation \cite{li2018etracker,feng2022real,chen2022real,chen2025ex}. In HET-XR, the frame branch receives a grayscale eye region-of-interest (ROI) image of size $1 \times 64 \times 64$ and processes it through a lightweight transformer-style backbone.
+%
+Specifically, the frame branch first applies patch embedding to the input eye ROI and generates a sequence of frame tokens. These frame tokens are then fused with event summary tokens produced from the event branch. The fused tokens are processed by a depth-gated transformer trunk with eight blocks. The transformer is intentionally designed to support conditional execution. During regular tracking, only the first four blocks are activated to reduce average cost. During initialization and recovery, all eight blocks are enabled to maximize correction capability. 
+%
+The frame branch outputs an eye box, a pupil ellipse estimate, and a confidence score:
+\begin{equation}
+\hat{s}_t^{full} = f_{frame}(F_t, z_t^{evt}),
+\end{equation}
+where $F_t$ denotes the current frame ROI and $z_t^{evt}$ denotes the event summary feature.
+This branch is not intended to serve as the default always-on tracker. Instead, it acts as a correction engine that complements the event branch. This asymmetric role assignment is critical for reducing average computation while preserving recovery performance.
+%
+%%%% Event branch %%%%
+\subsection{Event branch}
+The event branch is the primary fast path of HET-XR. Its role is to perform high-frequency local pupil-state tracking from recent event input. Event-based methods are well suited for this task because asynchronous event streams provide high temporal responsiveness and sparse motion information \cite{chen20233et,li2023track,li2024gaze,sen2024eyetraes,zhang2024swift,ding2025facet}. However, instead of using an event-only pipeline for all operating conditions, HET-XR uses the event branch specifically for efficient incremental update.
+%
+Let the recent event window be
+\begin{equation}
+\mathcal{E}_{t-\Delta:t}=\{(x_i,y_i,t_i,p_i)\}_{i=1}^{N},
+\end{equation}
+where $(x_i,y_i)$, $t_i$, and $p_i$ denote the event coordinate, timestamp, and polarity, respectively. The event branch converts this event window into a sparse voxel representation and processes it through a lightweight sparse-compatible network. The network produces a compact latent representation $z_t^{evt}$, an incremental pupil-state update $\Delta s_t$, and an event confidence score $c_t^{evt}$:
+\begin{equation}
+(\Delta s_t, c_t^{evt}, z_t^{evt}) = f_{evt}(\mathcal{E}_{t-\Delta:t}).
+\end{equation}
+%
+The fast estimate is then defined as
+\begin{equation}
+\hat{s}_t^{evt} = s_{t-1} + \Delta s_t.
+\end{equation}
+This formulation allows the event branch to focus on local propagation rather than full semantic recovery. As a result, the branch can remain lightweight and can be executed at high frequency under limited compute budget.
+%
+%%%% Sparse Voxel Event Representation %%%%
+\subsection{Sparse Voxel Event Representation}
+A key component of HET-XR is the sparse voxel event representation, which preserves the sparsity of event input while maintaining temporal structure. Prior event-based methods often accumulate events into dense images or dense temporal tensors \cite{chen20233et,li2023track,li2024gaze}, but this densification partially weakens the computational advantage of event sensing. To avoid this issue, HET-XR retains only active spatiotemporal locations.
+%
+The eye ROI event window is discretized into $T$ temporal bins, and active event locations are stored as sparse coordinate-feature pairs:
+\begin{equation}
+\texttt{coords} \in \mathbb{Z}^{N_{nz}\times 4}, \qquad
+\texttt{feats} \in \mathbb{R}^{N_{nz}\times C_e},
+\end{equation}
+where each coordinate corresponds to $(b,t,y,x)$, $N_{nz}$ is the number of active spatiotemporal sites, and $C_e$ is the feature dimension. In the current design, we use
+\begin{equation}
+T = 8,\quad H = 80,\quad W = 128,\quad C_e = 4,
+\end{equation}
+%
+and the feature channels correspond to positive count, negative count, normalized timestamp mean, and recentness.
+%
+This sparse representation offers two benefits. First, it preserves event sparsity until the event-processing stage, which is important for low-latency execution. Second, it provides a natural bridge between algorithm design and deployment-oriented sparse computation. In this sense, the sparse voxelizer serves as both a representation module and a systems interface between event sensing and accelerator execution.
+%%%% Sequence-aware Training Pipeline %%%%
+\subsection{Sequence-aware Training Pipeline}
+The proposed system is trained in a sequence-aware manner to reflect the actual runtime behavior of hybrid tracking. Instead of training the fast path and correction path independently and combining them only at inference time, HET-XR adopts a multi-stage training strategy that gradually aligns the branches and the scheduler.
+%
+In the first stage, the event branch is pretrained on tracking-dominant samples to regress the incremental state update $\Delta s_t$ and event confidence $c_t^{evt}$. The objective is
+\begin{equation}
+\mathcal{L}_{evt} =
+\lambda_{d}\|\Delta s_t - \Delta s_t^{gt}\|_1
++
+\lambda_{c}\mathcal{L}_{conf}(c_t^{evt}, y_t^{conf}),
+\end{equation}
+where $\Delta s_t^{gt}$ is the ground-truth incremental update and $y_t^{conf}$ is the supervision for fast-path confidence.
+%
+In the second stage, the frame branch is trained on initialization and recovery samples to predict the full pupil state and correction confidence:
+\begin{equation}
+\mathcal{L}_{frame} =
+\lambda_{f}\|\hat{s}_t^{full} - s_t^{gt}\|_1
++
+\lambda_{fc}\mathcal{L}_{conf}(c_t^{full}, y_t^{full}).
+\end{equation}
+%
+In the third stage, a cross-path consistency loss aligns the fast estimate and the full estimate:
+\begin{equation}
+\mathcal{L}_{cons} = \|\hat{s}_t^{evt} - \hat{s}_t^{full}\|_1.
+\end{equation}
+%
+Finally, the full system is trained on sequences with state labels over \textit{INIT}, \textit{TRACK}, \textit{SUSPECT}, and \textit{RECOVER}. This stage includes runtime transition simulation and state-aware loss weighting:
+\begin{equation}
+\mathcal{L}_{total} =
+\mathcal{L}_{evt} + \mathcal{L}_{frame}
++ \lambda_{cons}\mathcal{L}_{cons}
++ \lambda_{state}\mathcal{L}_{state}.
+\end{equation}
+%
+This sequence-aware training pipeline is important because the usefulness of the two branches depends on temporal context and tracking state. By explicitly exposing the model to state transitions during training, the proposed framework better matches runtime behavior than static per-frame supervision.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% HET-XR Algorith %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% HET-XR Accelerator %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Proposed HET-XR Accelerator}
+\label{sec:hardware}
+%%%% Hardware Architecture Overview %%%%
+\subsection{Hardware Architecture Overview}
+The proposed HET-XR accelerator is designed around asymmetric workload execution. Instead of accelerating a monolithic network, we partition the system into a sparse event-driven fast path and a stronger correction path with conditional execution. This design philosophy is motivated by the fact that most runtime steps correspond to regular tracking, while only a minority require strong relocalization or recovery. The overall accelerator architecture therefore consists of four major components: 1) a Sparse Event Processing Engine, 2) a Depth-Gated Transformer Engine, 3) a State-aware Runtime Scheduler, and 4) a Heterogeneous Workload Partitioning framework.
+%
+%%%% Sparse Event Processing Engine %%%%
+\subsection{Sparse Event Processing Engine}
+The Sparse Event Processing Engine implements the event branch and acts as the dominant high-rate compute path. It receives sparse coordinate-feature pairs from the voxelizer and processes only active spatiotemporal locations. This engine is designed to minimize average latency and memory traffic by avoiding dense event-map construction whenever possible.
+%
+At a high level, the engine consists of a sparse front-end, lightweight sparse feature extraction blocks, a global pooling unit, and dual heads for incremental state prediction and confidence estimation. Because the input workload depends on active event occupancy rather than the full ROI volume, the effective computation adapts naturally to eye motion activity. This property is especially beneficial in XR settings, where pupil motion can vary significantly across fixation, saccade, and blink periods.
+The output of this engine includes $\Delta s_t$, $c_t^{evt}$, and the latent event feature $z_t^{evt}$, which is reused by the correction path. Such reuse reduces duplicated computation and enables a tighter integration between sparse event processing and hybrid correction.
+%
+%%%% Depth-Gated Transformer Engine %%%%
+\subsection{Depth-Gated Transformer Engine}
+The Depth-Gated Transformer Engine implements the stronger frame-guided correction path. It receives frame tokens extracted from the eye ROI and event summary tokens projected from the sparse event feature. The fused tokens are then processed by an eight-block transformer-style backbone.
+%
+The central architectural feature of this engine is conditional depth execution. Let the transformer blocks be denoted by $\{B_1,\ldots,B_8\}$. In \textit{TRACK} mode, only $\{B_1,\ldots,B_4\}$ are activated:
+\begin{equation}
+\hat{s}_t^{track} = f_{hyb}^{(1:4)}(F_t, z_t^{evt}),
+\end{equation}
+whereas in \textit{INIT} and \textit{RECOVER} modes the full backbone is used:
+\begin{equation}
+\hat{s}_t^{full} = f_{hyb}^{(1:8)}(F_t, z_t^{evt}).
+\end{equation}
+%
+This design reduces the average cost of hybrid inference while preserving a stronger correction path for difficult cases. In hardware terms, the engine can be organized as a block-wise pipeline with early termination support controlled by the runtime scheduler. Such block-level gating avoids paying the cost of full transformer execution at every step.
+%
+%%%% State-aware Runtime Scheduler %%%%
+\subsection{State-aware Runtime Scheduler}
+The runtime scheduler is the control plane of HET-XR. Rather than treating scheduling as a minor post-processing heuristic, we explicitly formulate it as a key component that determines modality usage, branch escalation, and effective compute depth.
+%
+The scheduler maintains one of four states:
+\begin{equation}
+q_t \in \{\textit{INIT},\textit{TRACK},\textit{SUSPECT},\textit{RECOVER}\}.
+\end{equation}
+Its transition logic depends on lightweight runtime signals such as event confidence, correction confidence, event density, blink indicators, drift proxy, and the elapsed time since the last full correction. A simplified transition rule can be written as
+\begin{equation}
+q_t = \pi(q_{t-1}, c_t^{evt}, c_t^{full}, d_t, b_t, a_t),
+\end{equation}
+where $d_t$ is a drift indicator, $b_t$ is a blink flag, and $a_t$ is the age since last correction.
+%
+The final prediction is then obtained by confidence-aware fusion:
+\begin{equation}
+\hat{s}_t = g_t \hat{s}_t^{full} + (1-g_t)\hat{s}_t^{evt},
+\end{equation}
+where $g_t \in [0,1]$ is selected according to the current state and branch confidence. In regular tracking, $g_t$ is small and the event estimate dominates. In recovery, $g_t$ approaches one and the full correction path dominates.
+%
+This scheduler is critical because, without it, the system degenerates into an always-on hybrid design with unnecessarily high average cost.
+%
+%%%% Heterogeneous Workload Partitioning %%%%
+\subsection{Heterogeneous Workload Partitioning}
+The final accelerator-level contribution of HET-XR is heterogeneous workload partitioning. We partition the overall workload according to both modality and runtime role. The event-driven fast path is assigned to sparse processing resources optimized for active occupancy, while the frame-guided correction path is assigned to a transformer-style engine with conditional depth. The runtime scheduler and fusion unit form a lightweight control layer that coordinates the two.
+%
+This partitioning yields three practical benefits. First, it aligns event sparsity with sparse execution, which is favorable for low-latency tracking. Second, it prevents the stronger correction engine from becoming the dominant average-cost path. Third, it enables an implementation-oriented decomposition into modules such as sparse voxelizer, sparse event engine, transformer engine, controller, and fusion logic. This modularity is useful not only for deployment but also for experimental ablation and future HLS/RTL refinement.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% HET-XR Accelerator %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Experimental Results %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Experimental Results}
+\label{sec:experiental_results}
+In this section, we evaluate the proposed HET-XR framework in terms of tracking quality, robustness, and deployment-oriented efficiency. Following the motivation of prior XR and event-based eye tracking studies \cite{plopski2022eye,kwon2023xrbench,zhao2023ev,chen2025ex}, we emphasize both estimation accuracy and systems behavior. The primary benchmark is EV-Eye \cite{zhao2023ev}, which provides synchronized event and frame streams suitable for hybrid eye tracking evaluation.
+%
+%%%% Experimental Setup %%%%
+\subsection{Experimental Setup}
+Our experiments focus on SoftEx with $N=16$ lanes, resulting in a 256-bit memory interface.
+The algorithms have been validated by implementing them in Python using the PyTorch library. The SoftEx-augmented cluster has been implemented in GlobalFoundries 12LP+ technology, targeting 700MHz frequency in worst-case conditions (SS process, $0.72$V and $125^{\circ}$C) using Synopsys Design Compiler for synthesis and Cadence Innovus for placement, clock tree synthesis, and routing. The system's power consumption has been extracted under typical conditions (TT process and $25^{\circ}$C) using Synopsys Primetime with annotated switching activity from a post-layout simulation in two operating points: at $0.80$V and 1.12 GHz to maximize throughput, and at $0.55$V and 460 MHz to maximize energy efficiency. 
+Where not otherwise specified, we consider 1 MAC = 2 OPs.
+%
+%%%% Tracking Accuracy and Robustness %%%%
+\subsection{Tracking Accuracy and Robustness}
+We first evaluate the tracking accuracy and robustness of HET-XR. The main metrics include pupil center error, ellipse parameter error, and relocalization success rate after difficult conditions such as blink, occlusion, and temporary tracking loss. These metrics are chosen because event-only methods are typically strong at local motion propagation but weaker at semantic recovery, whereas frame-guided correction is expected to improve recovery behavior \cite{zhang2024swift,ding2025facet,chen2025ex}.
+%
+Table~\ref{tab:accuracy} summarizes the main accuracy results. The frame-only baseline is expected to provide relatively strong anchor estimation but limited responsiveness. The event-only baseline should provide efficient local tracking but weaker relocalization. The proposed HET-XR system improves robustness by selectively invoking the frame-guided correction path while preserving the event-driven fast path.
+%
+\begin{table}[t]
+\small
+\centering
+\caption{Tracking accuracy and robustness comparison.}
+\scriptsize
+\label{tab:accuracy}
+\centering
+\begin{tabular}{lccc}
+\hline
+Method & Center Err. $\downarrow$ & Ellipse Err. $\downarrow$ & Reloc. Succ. $\uparrow$ \\
+\hline
+Frame-only & [ ] & [ ] & [ ] \\
+Event-only & [ ] & [ ] & [ ] \\
+Hybrid w/o scheduler & [ ] & [ ] & [ ] \\
+Proposed HET-XR & [ ] & [ ] & [ ] \\
+\hline
+\end{tabular}
+\end{table}
+%
+The expected trend is that HET-XR should outperform event-only tracking under challenging sequences while maintaining lower average cost than static hybrid execution.
+%%%% Computational Efficiency and Latency %%%%
+\subsection{Computational Efficiency and Latency}
+Next, we analyze computational efficiency and latency. Since HET-XR is explicitly designed for average-case efficiency, we report not only worst-case latency but also average latency, active compute ratio, and frame-branch trigger rate. This evaluation is especially important for XR systems, where a method with strong peak performance may still be impractical if its average compute cost is too high \cite{chen2025ex,giordano2025sub,han2026janeeye}.
+%
+Table~\ref{tab:latency} reports the runtime-oriented results. The key question is whether state-aware execution can significantly reduce average cost relative to static hybrid inference. Because the dominant runtime state is expected to be \textit{TRACK}, the proposed system should spend most of its time on the sparse event path and activate the full correction path only when needed.
+%
+\begin{table}[t]
+\small
+\centering
+\caption{Computational efficiency and latency comparison.}
+\scriptsize
+\label{tab:latency}
+\centering
+\begin{tabular}{lccc}
+\hline
+Method & Avg. Latency $\downarrow$ & Worst-case Latency $\downarrow$ & Trigger Rate $\downarrow$ \\
+\hline
+Frame-only & [ ] & [ ] & N/A \\
+Event-only & [ ] & [ ] & 0 \\
+Hybrid w/o scheduler & [ ] & [ ] & [ ] \\
+Proposed HET-XR & [ ] & [ ] & [ ] \\
+\hline
+\end{tabular}
+\end{table}
+%
+A favorable result would show that HET-XR approaches the latency behavior of the event-only tracker during regular operation while retaining the recovery strength of hybrid correction.
+%%%% Comparison with Other Methods %%%%
+\subsection{Comparison with Other Methods}
+We further compare HET-XR with representative prior methods from frame-based, event-based, hybrid, and deployment-oriented categories. Candidate references include E-Track, E-Gaze, EyeTrAES, Swift-Eye, FACET, EX-Gaze, and low-power deployment-oriented systems such as Retina and JaneEye \cite{li2023track,li2024gaze,sen2024eyetraes,zhang2024swift,ding2025facet,chen2025ex,bonazzi2024retina,han2026janeeye}. Because different prior works optimize for different operating points, we emphasize the accuracy--latency trade-off rather than a single metric.
+%
+Figure~\ref{fig:tradeoff} illustrates the expected trade-off. Event-only methods generally achieve lower latency but may suffer under difficult recovery conditions. Strong correction-oriented methods can achieve lower error but at significantly higher compute cost. The proposed HET-XR is intended to occupy a more favorable middle ground by combining sparse event tracking with selective hybrid correction.
+%
+\begin{figure}[t]
+\centering
+\fbox{\parbox{0.9\linewidth}{Placeholder for accuracy--latency trade-off plot.}}
+\caption{Accuracy--latency trade-off comparison with representative prior methods.}
+\label{fig:tradeoff}
+\end{figure}
+%%%% Ablation Studies %%%%
+\subsection{Ablation Studies}
+Finally, we present ablation studies to analyze the contribution of individual components.
+%
+\textbf{1) Event representation ablation:}
+We compare different event input formats, including dense accumulation and sparse voxel representation. This experiment is intended to verify whether preserving event sparsity is beneficial for both latency and accuracy.
+%
+\textbf{2) Frame branch ablation:}
+We compare different correction-path depths, especially the effect of shallow execution versus full-depth execution in the transformer branch. This analysis clarifies whether conditional depth provides a useful efficiency--accuracy trade-off.
+%
+\textbf{3) Scheduler ablation:}
+We compare no scheduler, static periodic hybrid invocation, and the proposed rule-based state-aware scheduler. This is one of the most important experiments because it directly validates that runtime orchestration is a main contribution rather than a minor add-on.
+%
+\textbf{4) Fast-head output ablation:}
+We compare center-only update and full ellipse-delta update for the event branch. This experiment examines the trade-off between fast-path simplicity and representation richness.
+%
+Table~\ref{tab:ablation} shows the overall ablation template.
+%
+\begin{table}[t]
+\small
+\centering
+\caption{Ablation studies of HET-XR.}
+\scriptsize
+\label{tab:ablation}
+\centering
+\begin{tabular}{lccc}
+\hline
+Setting & Center Err. $\downarrow$ & Avg. Latency $\downarrow$ & Reloc. Succ. $\uparrow$ \\
+\hline
+Dense event input & [ ] & [ ] & [ ] \\
+Sparse voxel input & [ ] & [ ] & [ ] \\
+Static hybrid & [ ] & [ ] & [ ] \\
+State-aware hybrid & [ ] & [ ] & [ ] \\
+TRACK 4-block & [ ] & [ ] & [ ] \\
+TRACK 8-block & [ ] & [ ] & [ ] \\
+\hline
+\end{tabular}
+\end{table}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Experimental Results %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Conclusion %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Conclusion}
+\label{sec:conclusion}
+This paper presented HET-XR, a hybrid event--frame eye tracking framework for XR that explicitly separates fast event-driven tracking from stronger frame-guided correction. The proposed method combines four key elements: a sparse voxel event representation, a lightweight event branch for incremental state update, a depth-gated frame branch for initialization and relocalization, and a state-aware runtime scheduler that coordinates the two under changing tracking conditions.
+%
+The main contribution of HET-XR lies in its asymmetric design philosophy. Rather than processing both sensing modalities uniformly at every time step, the proposed framework treats event sensing as the default high-rate fast path and reserves stronger frame-aware inference for difficult conditions such as uncertainty and recovery. This strategy improves the balance between tracking robustness and computational efficiency, which is particularly important for practical XR deployment.
+%
+Experimental evaluation is designed to show that HET-XR provides a more favorable accuracy--latency trade-off than frame-only, event-only, and static hybrid baselines. The proposed accelerator-oriented decomposition further suggests a practical path toward low-latency and hardware-friendly XR eye tracking.
+%
+Future work includes integration of a true sparse backend, learned scheduling policies, and deeper hardware implementation down to HLS or RTL-level refinement. We also plan to extend the current 2D pupil-state tracking framework toward calibration-aware 3D gaze estimation for complete XR headset deployment.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Conclusion %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% \section*{Acknowledgements}
+% This work has been financially supported by the CHIPS-IT foundation.
+
+\bibliographystyle{IEEEtran}
+\bibliography{ieee.bib, main.bib}
+
+\end{document}

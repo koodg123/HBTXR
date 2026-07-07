@@ -1,0 +1,22 @@
+# Preset: mode0 + stage1 + Exp-E with EXP-A dense eye detector
+# Purpose:
+# - use the EXP-A dense eye detector as the eye ROI provider
+# - feed the predicted eye ROI into a self-attention pupil bbox head
+# - avoid ROI Align to isolate the effect of dense eye supervision
+
+extends: mode0_stage1_roi_bbox_without_roi_attention.yaml
+
+model:
+  heads:
+    eye: true
+  search:
+    eye_detector:
+      mode: dense
+    roi_bbox_head:
+      use_external_eye: true
+
+training:
+  epochs: 50
+
+experiment:
+  name: hbtxr_mode0_stage1_dense_eye_roi_bbox_without_roi_attention50

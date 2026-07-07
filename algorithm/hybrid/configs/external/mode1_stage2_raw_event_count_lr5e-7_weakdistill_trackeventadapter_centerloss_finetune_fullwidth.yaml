@@ -1,0 +1,59 @@
+# XR-16A: conservative event-path adapter follow-up.
+#
+# XR-15D/E allowed both frame and event adapters to move and showed validation
+# drift. This variant isolates the event path only while anchoring the student
+# to the init checkpoint with weak teacher-student distillation.
+
+extends: mode1_stage2_raw_event_count_lr5e-6_nodistill_trackeventadapter_centerloss_finetune_fullwidth.yaml
+
+training:
+  epochs: 12
+  lr: 5.0e-7
+  optimizer:
+    name: adamw
+    lr: 5.0e-7
+    weight_decay: 5.0e-5
+    betas: [0.9, 0.999]
+    eps: 1.0e-8
+    kwargs: {}
+  scheduler:
+    type: plateau
+    metric_name: metric_track_center_px
+    factor: 0.5
+    patience: 2
+  trainable:
+    include:
+      - "track_head.*"
+      - "event_adapter.*"
+      - "patch_frontend.event_embed.proj.*"
+  early_stopping:
+    enabled: true
+    patience: 5
+    start_epoch: 4
+    min_delta: 0.005
+
+distillation:
+  enabled: true
+  teacher_student: true
+  ema_decay: 0.9995
+  feature_similarity: true
+  feature_weight: 0.0025
+  state_similarity: true
+  state_weight: 0.0025
+  prediction_similarity: true
+  prediction_weight: 0.0025
+  mask_similarity: false
+  teacher_init_checkpoint: null
+  force_teacher_from_student: false
+  kd:
+    enabled: false
+    weight: 0.0
+  rkd:
+    enabled: false
+    distance_weight: 0.0
+
+regularization_ssl:
+  enabled: false
+
+experiment:
+  name: raw_mode1_stage2_lr5e-7_weakdistill_trackeventadapter_centerloss_finetune_fullwidth

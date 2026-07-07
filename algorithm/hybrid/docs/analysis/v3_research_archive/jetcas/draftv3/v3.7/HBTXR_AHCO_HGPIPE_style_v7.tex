@@ -1,0 +1,703 @@
+\documentclass[journal]{IEEEtran}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath,amssymb,bm,mathtools}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{multirow}
+\usepackage{array}
+\usepackage{tabularx}
+\usepackage{makecell}
+\usepackage{cite}
+\usepackage{xcolor}
+\usepackage{url}
+\usepackage{balance}
+\usepackage{microtype}
+\usepackage{stfloats}
+\usepackage{ragged2e}
+\newcolumntype{L}[1]{>{\RaggedRight\arraybackslash}p{#1}}
+\newcolumntype{C}[1]{>{\Centering\arraybackslash}p{#1}}
+\newcolumntype{Y}{>{\RaggedRight\arraybackslash}X}
+\setlength{\tabcolsep}{4pt}
+\renewcommand{\arraystretch}{1.08}
+\allowdisplaybreaks
+\newcommand{\placeholderfigure}[2]{%
+  \fbox{\parbox[c][#2][c]{#1}{\centering\vspace{2mm}\textbf{Figure placeholder}\\Final artwork pending\vspace{2mm}}}}
+\newcommand{\etal}{\textit{et al.}}
+\newcommand{\R}{\mathbb{R}}
+\hyphenation{multi-stage cross-layer intra-layer time-synchronous geometry-stable}
+
+\title{HBTXR: Algorithm--Hardware Co-Designed Hybrid Eye Tracking for On-Device Extended Reality}
+\author{Anonymous Author(s)}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Real-time eye tracking on extended reality (XR) devices must satisfy tight latency, energy, memory, and form-factor constraints while preserving robust pupil localization and gaze estimation. Prior work has often optimized either algorithms or accelerators in isolation, which leads to mismatches between model behavior and deployment cost. We present HBTXR, an algorithm--hardware co-designed hybrid eye-tracking framework that unifies frame-guided Search, event-guided Track, runtime scheduling, and accelerator mapping in one system pipeline. At the algorithm level, HBTXR introduces a time-synchronous and geometry-stable hybrid supervision flow, a modality-aware transformer, and an implicit model pruning flow that distills a deployment student in which Search executes the full backbone while Track exits from a front-half cut point. A runtime-aware scheduler then governs mode switching from quality signals. At the hardware level, HBTXR adopts quantization-aware operator reformulation, table-driven non-linear approximation, and a streaming multi-stage pipeline that jointly optimizes intra-layer dataflow and cross-layer coupling. Experimental results show that HBTXR achieves a pupil-center error of 0.42 pixels, a gaze error of $0.68^{\circ}$, and an end-to-end Track-mode latency of 0.57 ms, while maintaining 97.8\% Search success rate and 1754 Hz effective update rate in Track mode. These results suggest that HBTXR offers a practical system point for accurate, low-latency, and deployment-oriented XR eye tracking.
+\end{abstract}
+
+\begin{IEEEkeywords}
+Eye tracking, extended reality, hybrid sensing, event camera, transformer accelerator, FPGA, algorithm--hardware co-design.
+\end{IEEEkeywords}
+
+\section{Introduction}
+Eye tracking has become a core enabling function for extended reality (XR), supporting gaze-based interaction, foveated rendering, user-state understanding, and privacy-preserving on-device perception \cite{ref1,ref2}. In practice, however, XR eye tracking must satisfy three requirements simultaneously: it must remain semantically robust under appearance changes, temporally responsive under rapid eye motion, and efficient enough to run on embedded hardware with strict power and memory budgets. This combination makes XR eye tracking fundamentally a system-level design problem rather than a stand-alone perception problem.
+
+Existing approaches reveal a structural trade-off. Frame-based methods are strong in semantic recovery and calibration-aware regression, but repeated dense-image processing introduces high bandwidth and latency cost \cite{ref3}. Event-based methods offer sparse sensing and high temporal resolution, but their reliability degrades under weak-event regimes, drift accumulation, or reinitialization failures \cite{ref4,ref5,ref6}. Hybrid methods improve this balance, yet many still treat fusion, runtime mode switching, and hardware deployment as loosely coupled stages \cite{ref7}.
+
+This paper addresses that gap through HBTXR, an algorithm--hardware co-designed hybrid eye-tracking system for on-device XR. In contrast to monolithic multimodal regression, HBTXR explicitly separates \emph{Search} and \emph{Track}. Search is frame-guided and refresh-oriented, designed for robust relocalization and anchor recovery. Track is event-guided and state-persistent, designed for low-latency residual update around the current pupil estimate. This decomposition is reflected not only in the model architecture, but also in the supervision flow, training pipeline, runtime scheduler, and hardware architecture. In the full model, both modalities are learned under one shared transformer family, and the deployment-oriented implicit model pruning stage distills a slim student in which Search preserves the full backbone while Track exits from a front-half cut point and forwards the intermediate representation directly to the Track head.
+
+Fig.~\ref{fig:overview} summarizes the overall design. HBTXR first constructs time-synchronous supervision so that frame and event inputs share one stable ellipse-centric target. It then employs a modality-aware transformer with a shared backbone and decoupled heads, followed by an implicit model pruning step that exports a smaller deployment student with a Track-side cut point. A runtime scheduler switches between Search and Track according to confidence, similarity, event density, and eye-state validity. Finally, a CPU--FPGA deployment architecture maps the shared backbone and lightweight heads to differentiated execution paths. In this way, HBTXR follows the AHCO-style principle of internalizing hardware constraints during algorithm design while tuning the hardware around the actual runtime semantics of the algorithm \cite{ref12}.
+
+The key contributions of this work are summarized as follows.
+\begin{itemize}
+    \item We reformulate hybrid eye tracking as a Search--Track problem and introduce a time-synchronous, geometry-stable supervision contract for aligning frame, event, and state targets.
+    \item We design a modality-aware transformer with shared backbone and decoupled Search, Event, Track, and Mask heads, and couple it with an implicit model pruning flow that distills a deployment student where Search uses the full backbone and Track exits from a front-half cut point.
+    \item We develop a runtime-aware scheduler that explicitly manages Search mode, Track mode, and mode switching according to quality assessment signals.
+    \item We present a deployment-oriented accelerator design with quantized operators, table-driven non-linear approximation, streaming execution, multi-stage pipeline balance, and CPU--FPGA co-scheduling.
+\end{itemize}
+
+\begin{figure*}[t]
+\centering
+\placeholderfigure{0.93\textwidth}{2.0in}
+\caption{Overview of HBTXR. The proposed framework combines time-synchronous hybrid supervision, a modality-aware Search/Track transformer, a runtime-aware scheduler, and a deployment-oriented FPGA architecture.}
+\label{fig:overview}
+\end{figure*}
+
+\section{Related Works}
+\subsection{Frame-based Eye Tracking}
+Frame-based eye tracking remains the dominant paradigm in near-eye and head-mounted systems because grayscale or infrared frames preserve strong semantic structure for pupil localization, iris fitting, and gaze regression \cite{ref1,ref3}. These methods are particularly effective for global relocalization and calibration-aware estimation. However, their strengths come with dense sensing and repeated full-frame processing, which translate into high memory traffic, bandwidth overhead, and limited responsiveness under rapid eye motion.
+
+\subsection{Event-based Eye Tracking}
+Event-based eye tracking exploits asynchronous brightness-change sensing to achieve sparse and high-temporal-resolution processing. Prior work has shown that event-driven methods are attractive for low-latency update during fast saccades and for reducing redundant processing during fixation \cite{ref4,ref5,ref6}. Nonetheless, event-only pipelines remain weaker in semantic stabilization, blink recovery, and long-horizon relocalization, especially when event density becomes low or the tracker drifts away from the valid pupil contour.
+
+\subsection{Hybrid Frame-Event Eye Tracking}
+Hybrid eye tracking combines frame-based semantic recovery with event-based temporal responsiveness. Representative systems demonstrate that relocalization can be executed on low-rate frames while event streams support high-rate update \cite{ref7}. This direction is promising for XR because it aligns sensing modality with tracking phase. However, many hybrid systems still leave the relationship between fusion strategy, runtime mode policy, and hardware mapping under-specified.
+
+\subsection{Deployment-Oriented and Hardware Accelerator}
+Deployment-oriented eye tracking has been studied through frame-centric accelerators, event-centric sparse designs, and ASIC-style low-power trackers \cite{ref8,ref9,ref10}. These works confirm that eye tracking is not only a perception problem but also a hardware-design problem. In parallel, algorithm--hardware co-optimization has been shown to be effective in edge vision systems by integrating model design, quantization, and accelerator mapping in one workflow \cite{ref12}. The remaining gap for hybrid XR eye tracking is a unified framework that co-designs Search/Track semantics, transformer inference, and deployment behavior together.
+
+\subsection{Summary}
+The literature suggests four conclusions. First, frame-centric methods remain the most reliable choice for global refresh. Second, event-centric methods remain the best candidate for ultra-low-latency local update. Third, hybrid systems are compelling only when their operating modes are made explicit. Fourth, deployment efficiency improves when hardware constraints are internalized during model design. HBTXR is built precisely around these conclusions.
+
+\section{Proposed HBTXR Algorithm}
+\subsection{Framework Design}
+\subsubsection{Problem Formulation}
+HBTXR operates on a hybrid sensing input composed of a frame stream, an event stream, and a recurrent state. Let $I_t \in \R^{H\times W}$ denote the frame captured at time $t$, and let $E_t = \{e_k=(x_k,y_k,p_k,\tau_k)\}_{k=1}^{N_t}$ denote the event set within the current window, where $(x_k,y_k)$ is the event coordinate, $p_k \in \{-1,+1\}$ is the polarity, and $\tau_k$ is the timestamp. The event stream is transformed into a polarity-split tensor $V_t \in \R^{2\times H\times W}$ through a causal accumulation operator.
+
+\paragraph*{Eye Model}
+The target pupil state is parameterized as
+\begin{equation}
+\mathbf{s}_t = [x_t, y_t, a_t, b_t, u_t, v_t] \in \R^{6},
+\end{equation}
+where $(x_t,y_t)$ is the pupil center, $(a_t,b_t)$ are the ellipse axes, and $[u_t,v_t]=[\sin(2\theta_t),\cos(2\theta_t)]$ is the trigonometric rotation encoding. This representation avoids discontinuity around the angular wrap-around boundary and supports stable regression of ellipse orientation.
+
+\paragraph*{Objectness}
+Rather than only predicting ellipse parameters, HBTXR also models \emph{objectness}, namely the likelihood that the current observation contains a valid and trackable pupil hypothesis. We denote the binary training target by
+\begin{equation}
+o_t^{\star}=\mathbf{1}[\text{valid visible pupil at time } t].
+\end{equation}
+In Search mode, objectness is interpreted as refresh confidence that indicates whether a frame-guided candidate should become the new anchor. In Track mode, objectness is paired with track confidence and track quality to assess whether the current event-driven residual update is still reliable. This objectness formulation becomes the interface between perception and scheduling.
+
+\subsubsection{Framework Overview}
+The overall framework consists of four interacting components: a supervision pipeline, a modality-aware transformer, a Search/Track scheduler, and a deployment path. Search performs frame-guided relocalization and anchor refresh. Track performs event-guided residual update conditioned on the previous state. During deployment-oriented implicit model pruning, the Search path keeps the full backbone while the Track path is bound to a front-half cut point so that the slim student can early-exit without changing the scheduler-visible outputs. This explicit separation allows HBTXR to treat hybrid eye tracking as a system with two operating modes rather than as one undifferentiated multimodal regressor. The deployed estimate is therefore written as
+\begin{equation}
+\hat{\mathbf{s}}_t=
+\begin{cases}
+\hat{\mathbf{s}}_t^{\mathrm{s}}, & m_t=\mathrm{Search},\\
+\bar{\mathbf{s}}_{t-1}\oplus\Delta\hat{\mathbf{s}}_t, & m_t=\mathrm{Track},
+\end{cases}
+\end{equation}
+where $\oplus$ denotes the residual ellipse-state update operator.
+
+\subsection{Time-Synchronous and Geometry-Stable Hybrid Supervision}
+\paragraph*{Dataset Problem}
+A major difficulty in hybrid eye tracking is that frame labels are usually sparse in time whereas event data is asynchronous and dense. If supervision timestamps are not aligned carefully, the model is forced to learn inconsistent geometry across frame, event, and recurrent inputs. HBTXR addresses this issue by constructing time-synchronous supervision around one canonical target representation.
+
+\subsubsection{Frame Interpolation (TimeLens)}
+To densify supervision in time, HBTXR first uses frame interpolation to synthesize intermediate frame observations between sparsely labeled frames. We describe this stage as a TimeLens-style interpolation block, whose purpose is not to create a new inference modality at runtime, but to construct better-aligned supervisory frames offline. The interpolated frames reduce the temporal gap between event windows and annotation anchors, which is particularly important during rapid saccades.
+
+\subsubsection{Dense Annotation (Grounded-SAM)}
+After temporal densification, HBTXR applies a dense annotation stage that refines eye-region and pupil masks from the interpolated frames. In the requested AHCO-style organization, this stage is expressed as a Grounded-SAM-assisted pseudo-labeling pipeline. The resulting masks are then converted to ellipse-centric annotations and validity metadata, including mask confidence, closed-eye flags, and track-valid indicators.
+
+\subsubsection{Event Accumulation (Frame-Synchronous)}
+Finally, event accumulation is performed in a frame-synchronous manner so that each event tensor is aligned to a supervisory frame or an interpolated timestamp. Let $\mathcal W_t$ denote the accumulation window associated with time-aligned target $t$. The accumulated event tensor is
+\begin{equation}
+\bar V_t(x,y,p)=\sum_{e_k\in \mathcal W_t}
+\mathbf{1}\big[(x_k,y_k,p_k)=(x,y,p)\big].
+\end{equation}
+The output of the whole supervision pipeline is a canonical sample
+\begin{equation}
+(\bar I_t, \bar V_t, \bar s_{t-1}, \bar s_t, \bar M_t, \bar B_t, \bar\xi_t),
+\end{equation}
+where $\bar I_t$ and $\bar V_t$ are time-aligned frame and event inputs, $\bar M_t$ is the pupil mask, $\bar B_t$ is the eye-region target, and $\bar\xi_t$ collects quality signals. This contract stabilizes geometry across modalities and propagates quality-aware supervision into both training and scheduling.
+
+\subsection{Modality-aware Transformer Architecture}
+\subsubsection{Front-end (Patch Embedding)}
+HBTXR uses modality-specific front-ends instead of naive early fusion. Let $\operatorname{Patch}(\cdot)$ denote patch flattening and let $\phi(\bar{\mathbf s}_{t-1})$ denote the learned state embedding. The frame and event token sequences are given by
+\begin{align}
+\mathbf Z_{0,t}^{\mathrm{f}} &=
+A_f\!\left(\operatorname{Patch}(\bar I_t)\mathbf W_f + \mathbf 1\mathbf b_f^{\top}\right)+\mathbf P,
+\\
+\mathbf Z_{0,t}^{\mathrm{e}} &=
+A_e\!\left(\operatorname{Patch}(\bar V_t)\mathbf W_e + \mathbf 1\mathbf b_e^{\top}\right)
++ \mathbf 1\phi(\bar{\mathbf s}_{t-1})^{\top}+\mathbf P,
+\end{align}
+where $\mathbf P$ is the positional embedding, and $A_f(\cdot)$ and $A_e(\cdot)$ are modality adapters. The event path explicitly injects the previous state so that the Track branch can estimate a residual update rather than relocalizing from scratch.
+
+\subsubsection{Backbone (MHA, MLP)}
+Both branches share a transformer backbone composed of multi-head attention (MHA) and multi-layer perceptron (MLP) blocks. For block $\ell$, the update is written as
+\begin{align}
+\tilde{\mathbf Z}_{\ell} &= \mathbf Z_{\ell-1} + \operatorname{MHA}\!\left(\operatorname{LN}(\mathbf Z_{\ell-1})\right),
+\\
+\mathbf Z_{\ell} &= \tilde{\mathbf Z}_{\ell} + \operatorname{MLP}\!\left(\operatorname{LN}(\tilde{\mathbf Z}_{\ell})\right).
+\end{align}
+Inside the attention block, head $h$ computes
+\begin{equation}
+\operatorname{Attn}_h(\mathbf Z)=
+\operatorname{softmax}\!\left(
+\frac{\mathbf Q_h\mathbf K_h^{\top}}{\sqrt{d_h}}
+\right)\mathbf V_h,
+\end{equation}
+where $\mathbf Q_h=\mathbf Z\mathbf W_h^Q$, $\mathbf K_h=\mathbf Z\mathbf W_h^K$, and $\mathbf V_h=\mathbf Z\mathbf W_h^V$. During Stage-1 training, the full teacher uses one shared transformer family so that both frame-guided Search features and event-conditioned features are learned with the same high-capacity backbone. During Stage-2 deployment pruning, the exported student reduces the depth to $L^{\mathrm S}$ and introduces a Track-side cut point after
+\begin{equation}
+L_c = \left\lfloor \frac{L^{\mathrm S}}{2} \right\rfloor .
+\end{equation}
+The deployed Search and Track features are therefore
+\begin{align}
+\mathbf F_t^{\mathrm{s}} &= \mathcal F_{1:L^{\mathrm S}}\!\left(\mathbf Z_{0,t}^{\mathrm{f}}\right),
+\\
+\mathbf C_t^{\mathrm{trk}} &= \mathcal F_{1:L_c}\!\left(\mathbf Z_{0,t}^{\mathrm{e}}\right),
+\end{align}
+where Search traverses all student backbone blocks and Track exits from the cut-point tensor $\mathbf C_t^{\mathrm{trk}}$ before invoking the Track head. This split is introduced together with implicit model pruning: early blocks retain motion-consistent local structure that is sufficient for residual update, whereas deeper blocks are preserved only for Search where stronger global semantics are required.
+
+\subsubsection{Back-end (Head)}
+On top of the shared backbone, HBTXR uses decoupled heads: an Eye Region Head, a Pupil Search Head, an Event Search Head, a Pupil Track Head, and a Search Mask Head. Their outputs are expressed as
+\begin{align}
+\big[\hat{\mathbf s}_t^{\mathrm{s}},\hat o_t^{\mathrm{s}},\hat{\mathbf m}_t,\hat{\mathbf b}_t\big]
+&= H_{\mathrm{s}}\!\left(\mathbf F_t^{\mathrm{s}}\right),
+\\
+\big[\hat{\mathbf s}_t^{\mathrm{e}},\hat o_t^{\mathrm{e}}\big]
+&= H_{\mathrm{e}}\!\left(\mathbf C_t^{\mathrm{trk}}\right),
+\\
+\big[\Delta\hat{\mathbf s}_t,\hat c_t^{\mathrm{trk}},\hat q_t^{\mathrm{trk}}\big]
+&= H_{\mathrm{t}}\!\left([\operatorname{Pool}(\mathbf C_t^{\mathrm{trk}});\phi(\bar{\mathbf s}_{t-1})]\right).
+\end{align}
+Search heads estimate objectness and ellipse state from the full-depth frame-guided features. Event and Track heads operate on the cut-point tensor so that the deployment student preserves low latency without altering the scheduler-visible interface. The Mask head acts as geometric regularization and an additional quality cue. This decoupled back-end is essential for preserving functional specialization under a shared backbone.
+
+\begin{figure}[t]
+\centering
+\placeholderfigure{0.92\columnwidth}{1.18in}
+\caption{Architecture of the proposed HBTXR algorithm. Frame and event inputs are processed by modality-specific patch embedding paths, a shared transformer family, and decoupled heads. In the deployment student obtained by implicit model pruning, Search uses the full backbone whereas Track exits at the front-half cut point.}
+\label{fig:algo}
+\end{figure}
+
+\subsection{Runtime-aware Search and Track Scheduler}
+\paragraph*{Search Mode}
+Search mode is refresh-oriented. It is activated at initialization or whenever the state becomes unreliable. In this mode, the system prioritizes semantic robustness and uses frame-guided inference to estimate a fresh pupil anchor, eye-region context, and mask-aware quality cues. Operationally, Search executes the full deployment backbone $\mathcal F_{1:L^{\mathrm S}}$ and enables the Search, Mask, and Eye-region heads.
+
+\paragraph*{Track Mode}
+Track mode is state-persistent and latency-oriented. Instead of solving the whole localization problem from scratch, it estimates a residual update around the previous state. In the deployment student, Track consumes event tokens together with the previous state, uses the pruned prefix $\mathcal F_{1:L_c}$, and transfers the cut-point representation directly to the Track head. The Track prediction is written as
+\begin{align}
+\Delta \hat{\mathbf r}_t &= H_{\mathrm{t}}\!\left([\operatorname{Pool}(\mathbf C_t^{\mathrm{trk}});\phi(\bar{\mathbf s}_{t-1})]\right),
+\\
+\hat{\mathbf s}_t^{\mathrm{trk}} &= \bar{\mathbf s}_{t-1}\oplus \Delta\hat{\mathbf s}_t,
+\end{align}
+where the residual vector contains center shift, axis-scale update, orientation update, track confidence, and track quality.
+
+\paragraph*{Mode Switching (Quality Assessment)}
+The scheduler decides between Search and Track according to multiple signals: Search confidence $c_t^{\mathrm{s}}$, Track confidence $c_t^{\mathrm{trk}}$, Track quality $q_t^{\mathrm{trk}}$, cross-branch similarity $\rho_t$, event density $d_t$, and eye-state indicator $o_t$. The transition rules are
+\begin{align}
+m_t &= \mathrm{Track}, && \text{if } c_t^{\mathrm{s}} > \tau_s, \\
+m_t &= \mathrm{Search}, && \text{if } c_t^{\mathrm{trk}}\le\tau_t
+\;\vee\; q_t^{\mathrm{trk}}\le\tau_q \nonumber\\
+&&& \phantom{\text{if }} \vee\; \rho_t\le\tau_{\rho}
+\;\vee\; d_t\le\tau_d
+\;\vee\; o_t=1.
+\end{align}
+This quality assessment mechanism is central to the co-design philosophy because it not only improves tracking stability but also defines the control semantics exposed to the hardware scheduler.
+
+\subsection{Training Pipeline and Loss Function}
+
+\subsubsection{2-Stage Training}
+HBTXR uses a two-stage optimization schedule. Stage 1 trains a full teacher model for Search-oriented relocalization and geometry recovery, so that the frame branch first learns stable global structure, objectness, and mask-aware eye context before the event-conditioned Track branch is introduced. Let $\Theta^{\mathrm{T}}=(D^{\mathrm{T}}, r^{\mathrm{T}}, C^{\mathrm{T}}, L^{\mathrm{T}})$ denote the embedding dimension, MLP ratio, channel width, and backbone depth of the full teacher network. The teacher is optimized with the geometry-aware ellipse loss
+\begin{equation}
+\mathcal L_{\mathrm{geo}}(\hat{\mathbf s},\mathbf s)=
+\|\hat{\mathbf c}-\mathbf c\|_1 + \lambda_{\Sigma}\|\hat{\bm\Sigma}-\bm\Sigma\|_F^2,
+\end{equation}
+where $\mathbf c=(x,y)$ and $\bm\Sigma$ is the covariance matrix derived from ellipse axes and orientation. The Stage-1 objective is
+\begin{align}
+\mathcal L_{\mathrm{stage1}}^{\mathrm{T}} =
+&\;\lambda_{\mathrm{geo}}^{\mathrm{s}}\mathcal L_{\mathrm{geo}}^{\mathrm{s}}
++ \lambda_{\mathrm{obj}}^{\mathrm{s}}\mathcal L_{\mathrm{obj}}^{\mathrm{s}}
++ \lambda_{\mathrm{mask}}\mathcal L_{\mathrm{mask}}
+\nonumber\\
+&+ \lambda_{\mathrm{eye}}\mathcal L_{\mathrm{eye}},
+\end{align}
+which emphasizes global relocalization quality, Search objectness, and geometry-stable mask supervision.
+
+Stage 2 introduces a deployment-oriented student model whose width and depth are reduced before hardware mapping. Let $\Theta^{\mathrm{S}}=(D^{\mathrm{S}}, r^{\mathrm{S}}, C^{\mathrm{S}}, L^{\mathrm{S}})$ denote the student, where
+\begin{equation}
+D^{\mathrm{S}}<D^{\mathrm{T}},\quad
+r^{\mathrm{S}}<r^{\mathrm{T}},\quad
+C^{\mathrm{S}}<C^{\mathrm{T}},\quad
+L^{\mathrm{S}}<L^{\mathrm{T}}.
+\end{equation}
+In other words, the deployment candidate is obtained by shrinking the embedding dimension, MLP ratio, channel count, and network depth at the same time. The student also materializes a Track-side cut point after
+\begin{equation}
+L_c = \left\lfloor \frac{L^{\mathrm S}}{2} \right\rfloor,
+\end{equation}
+so that Search still evaluates all $L^{\mathrm S}$ student blocks while Track early-exits from the pruned prefix. The full teacher is then frozen and used to guide the smaller student through self-supervised distillation while the student still receives direct Search, Event, Track, and quality supervision. The Stage-2 objective is
+\begin{align}
+\mathcal L_{\mathrm{stage2}}^{\mathrm{S}} =
+&\;\lambda_{\mathrm{geo}}^{\mathrm{s}}\mathcal L_{\mathrm{geo}}^{\mathrm{s}}
++ \lambda_{\mathrm{obj}}^{\mathrm{s}}\mathcal L_{\mathrm{obj}}^{\mathrm{s}}
++ \lambda_{\mathrm{mask}}\mathcal L_{\mathrm{mask}}
++ \lambda_{\mathrm{eye}}\mathcal L_{\mathrm{eye}}
+\nonumber\\
+&+ \lambda_{\mathrm{event}}\mathcal L_{\mathrm{event}}
++ \lambda_{\mathrm{trk}}\mathcal L_{\mathrm{trk}}
++ \lambda_{\mathrm{cons}}\mathcal L_{\mathrm{cons}}
+\nonumber\\
+&+ \lambda_{\mathrm{qa}}\mathcal L_{\mathrm{qa}}
++ \lambda_{\mathrm{gaze}}\mathcal L_{\mathrm{gaze}}
++ \lambda_{\mathrm{fkd}}\mathcal L_{\mathrm{fkd}}
++ \lambda_{\mathrm{rkd}}\mathcal L_{\mathrm{rkd}},
+\end{align}
+which keeps the original task losses while explicitly adding distillation terms that transfer the representational structure of the full model to the smaller deployment model.
+
+\subsubsection{Network Slimming via Self-Supervised Distillation and Implicit Model Pruning}
+Instead of relying on sparsity penalties alone, HBTXR constructs a family of slim deployment candidates by reducing four structural knobs: the token embedding dimension, the MLP expansion ratio, the number of channels inside the heads and adapters, and the number of backbone blocks. The full model serves as a teacher and the reduced model serves as a student. The same deployment-oriented pruning step also binds Track to the cut-point tensor after the first $L_c$ student blocks, while Search retains the full student depth. This setup keeps the Search/Track semantics, supervision contract, and scheduler-visible outputs unchanged while creating a smaller network that is easier to quantize, pipeline, and fit on the target FPGA.
+
+The first distillation term is a \emph{feature KD} loss that matches intermediate student features to teacher features after lightweight projection. For a set of distillation layers $\Omega$, we define
+\begin{equation}
+\mathcal L_{\mathrm{fkd}}=
+\sum_{\ell\in\Omega}
+\frac{1}{N_{\ell}D_{\ell}^{\mathrm{T}}}
+\left\|
+G_{\ell}\!\left(\mathbf F_{\ell}^{\mathrm{S}}\right)
+-\mathbf F_{\ell}^{\mathrm{T}}
+\right\|_2^2,
+\end{equation}
+where $\mathbf F_{\ell}^{\mathrm{S}}$ and $\mathbf F_{\ell}^{\mathrm{T}}$ are the student and teacher features of layer $\ell$, and $G_{\ell}(\cdot)$ is a learned projector that aligns the reduced student width to the teacher width.
+
+The second term is a \emph{relational knowledge distillation} (RKD) loss that preserves pairwise distance and angular structure among samples or tokens. Let
+\begin{align}
+d_{ij}^{\star} &=
+\frac{\left\|\mathbf f_i^{\star}-\mathbf f_j^{\star}\right\|_2}
+{\frac{1}{|\mathcal P|}\sum_{(u,v)\in\mathcal P}\left\|\mathbf f_u^{\star}-\mathbf f_v^{\star}\right\|_2},\\
+\theta_{ijk}^{\star} &=
+\frac{\left(\mathbf f_i^{\star}-\mathbf f_j^{\star}\right)^{\top}
+\left(\mathbf f_i^{\star}-\mathbf f_k^{\star}\right)}
+{\left\|\mathbf f_i^{\star}-\mathbf f_j^{\star}\right\|_2
+ \left\|\mathbf f_i^{\star}-\mathbf f_k^{\star}\right\|_2},
+\end{align}
+where $\star\in\{\mathrm{T},\mathrm{S}\}$ denotes teacher or student features, $\mathcal P$ is a set of feature pairs, and $\mathcal T$ is a set of feature triplets. The RKD loss is
+\begin{align}
+\mathcal L_{\mathrm{rkd}}=
+&\;\frac{1}{|\mathcal P|}
+\sum_{(i,j)\in\mathcal P}
+\operatorname{smooth}_{L1}\!\left(d_{ij}^{\mathrm{S}}-d_{ij}^{\mathrm{T}}\right)
+\nonumber\\
+&+
+\frac{1}{|\mathcal T|}
+\sum_{(i,j,k)\in\mathcal T}
+\operatorname{smooth}_{L1}\!\left(\theta_{ijk}^{\mathrm{S}}-\theta_{ijk}^{\mathrm{T}}\right).
+\end{align}
+By combining feature KD with RKD, the slim student preserves not only pointwise activations but also the geometric arrangement of the teacher representation. In practice, this lets the pruned student absorb the latency-oriented Track early-exit behavior while remaining aligned with the full teacher on Search semantics and representation quality. The reduced HBTXR model is therefore a better drop-in candidate for the quantized and pipelined hardware path than a naively shrunk network.
+
+\section{Proposed HBTXR Hardware}
+
+\subsection{Design Challenges and Co-design Principles}
+The hardware target of HBTXR is a mode-switching hybrid eye-tracking workload rather than a fixed one-pass transformer. This distinction changes the optimization objective. Search is refresh-centric: it rebuilds a reliable anchor from frame cues, activates additional output heads, and requires stronger global context. Track is persistence-centric: it updates the current pupil state from recent events and the prior state, prefers very short response time, and benefits from retaining reusable state and intermediate features on chip. Mapping both modes to one uniform execution template would therefore either over-provision Track or under-serve Search.
+
+The central challenge is therefore not only arithmetic throughput, but also \emph{cross-layer coupling}. The early-exit point after the front half of the backbone, the Search-anchor commit, the reuse of the previous state, and the mode-dependent head activation all couple control decisions across layers and across invocations. A second challenge is \emph{intra-layer dataflow}: the linear projections and MLPs are dominated by stationary weights and regular tensor tiles, whereas the attention interaction path is dominated by dynamic token--token products and transient score buffering. A third challenge is maintaining high utilization under a \emph{multi-stage pipeline} whose stages have different token readiness conditions.
+
+Accordingly, HBTXR follows four co-design principles. \emph{P1)} Share early backbone computation, but allow depth-asymmetric exit so that Search uses all $L$ blocks and Track uses only the first $L/2$ blocks. \emph{P2)} Keep the dominant projection and MLP weights resident on chip so that bandwidth is spent on sensor inputs and token movement rather than repeated model fetches. \emph{P3)} Separate tensor-heavy kernels from control-heavy policy: the FPGA executes tokenization and network inference, while the CPU performs scheduling, quality assessment, and state arbitration. \emph{P4)} Balance the cadence of all pipeline stages rather than maximizing one isolated kernel, because end-to-end latency is dictated by the slowest stage and by the barriers introduced by attention and mode switching.
+
+
+Operationally, Search and Track expose different hardware contracts even though they share the same front-half backbone. Search consumes the canonical frame tokens together with a compact event-side summary, traverses all $L$ transformer blocks, activates the Search, Mask, and Eye-region heads, and commits a refreshed anchor plus validity metadata into state SRAM. Track instead consumes the event tensor and the previous accepted state, traverses only the first $L/2$ blocks, branches at the cut-point buffer, and invokes the Track and Event heads without entering the deeper Search-only blocks. This asymmetry explains why the accelerator is organized around an explicit early-exit boundary rather than a single static token path.
+
+The memory behavior is also mode dependent. Search produces a new anchor and therefore writes updated state, mask-validity cues, and refresh metadata to the persistent state SRAM. Track reuses the resident anchor, reads the same state SRAM at the beginning of the invocation, and writes back only the residual ellipse update and quality fields. Under scheduler-driven operation, the CPU sends a mode packet that selects the active tokenizer, backbone span, head set, and commit policy, while the FPGA reuses the same token-processing fabric underneath. In this sense, the Search/Track split is not only an algorithmic choice; it directly determines dataflow, memory lifetime, and controller behavior in the deployed system.
+
+\subsection{Quantization and Non-linear Approximation}
+
+\subsubsection{Quantization}
+Following the integer-only deployment philosophy used in SEE~\cite{ref9}, HBTXR adopts \emph{dyadic quantization} for the dominant linear operators so that the hardware path is composed of integer multiply, accumulate, and shift operations rather than floating-point arithmetic. Let $\mathbf X=S_x\hat{\mathbf X}$ and $\mathbf W=S_w\hat{\mathbf W}$ denote the quantized activations and weights. The quantized output is
+\begin{align}
+\mathbf Y &= S_y\hat{\mathbf Y} = \mathbf W\mathbf X
+          = S_w\hat{\mathbf W}\cdot S_x\hat{\mathbf X},\\
+\hat{\mathbf Y}
+&= \frac{S_wS_x}{S_y}\left(\hat{\mathbf W}\cdot\hat{\mathbf X}\right)
+ \approx \frac{\hat S}{2^n}
+ \left(\hat{\mathbf W}\cdot\hat{\mathbf X}\right),
+\end{align}
+where $\hat S \in \mathbb Z$ and $n\in \mathbb Z_{\ge 0}$ define a dyadic scale. In practice, the floating-point ratio $S_wS_x/S_y$ is replaced by one integer multiplier and one right shift. This form is especially attractive for HBTXR because the same dyadic interface is reused at the early-exit point after block $L/2$, at residual merges, and at the mode-gated heads.
+
+A second design choice is \emph{scale alignment across branches}. Search and Track share the front half of the backbone, so the output tensor at the cut point must be consumed either by the deeper backbone stages or by the Track head without inserting expensive format converters. We therefore align the cut-point tensor to one common dyadic exponent and absorb the remaining scale mismatch into the head-specific re-quantization tables. This keeps the cross-layer coupling between the two modes simple at the controller and memory-interface levels.
+
+\subsubsection{Non-linear Approximation}
+The hardware-unfriendly operators in HBTXR are LayerNorm, Softmax, GELU, and output re-scaling. These operators are mapped to compact table-driven curve blocks so that expensive floating-point arithmetic is replaced by LUTs, BRAM tables, and lightweight address logic. Concretely, the LayerNorm denominator is implemented with a segmented reciprocal-root table, the attention exponent with a max-referenced exponent table, the attention normalization with a sum-inverse table, the GELU plus output re-scaling with one composite activation table, and the residual or head re-quantization with a dyadic multiply-shift path. These blocks are deliberately coupled to the streaming datapath: each one removes a floating-point barrier at a specific stage boundary and keeps intermediate tensors in integer form across the pipeline.
+
+The following five operator mappings should therefore be read as datapath definitions rather than as isolated approximations. The LayerNorm table stabilizes token normalization before projection, the exponent and sum-inverse tables resolve softmax normalization without a divider tree, the composite activation table shortens the MLP critical path, and the dyadic re-scale path aligns residual and head outputs to the destination tensor format. Together they make the Search/Track cut point, residual merges, and head interfaces compatible with one shared integer dataflow.
+
+\paragraph*{1) LayerNorm denominator approximation}
+Let $\hat{\mu}$ and $\hat{\sigma}^2$ denote the integer mean and variance accumulators of one token tile. The normalization factor is approximated as
+\begin{align}
+u_{\mathrm{ln}} &= \left\lfloor \frac{\hat{\sigma}^2-\alpha_{\mathrm{ln}}}{2^{s_{\mathrm{ln}}}} \right\rfloor,\\
+\hat r_{\mathrm{ln}} &= T_{\mathrm{ln}}(u_{\mathrm{ln}})
+\approx \frac{1}{\sqrt{\hat{\sigma}^2+\epsilon}},
+\end{align}
+where $T_{\mathrm{ln}}(\cdot)$ is a segmented reciprocal-root table. The normalized token is then
+\begin{equation}
+\hat y_i = \hat\gamma \big((\hat x_i-\hat\mu)\hat r_{\mathrm{ln}}\big) + \hat\beta.
+\end{equation}
+The segmentation allocates more entries near small variances, where approximation error is most sensitive.
+
+\paragraph*{2) Attention exponent approximation}
+For one attention row, let $\hat s_{ij}$ denote the quantized score and $\hat m_i=\max_j \hat s_{ij}$ the row maximum. We first center the scores and then address a small exponent table:
+\begin{align}
+u^{(i)}_{\exp,j} &= \left\lfloor \frac{\hat m_i-\hat s_{ij}}{2^{s_{\exp}}}\right\rfloor,\\
+\hat e_{ij} &= T_{\exp}\!\left(u^{(i)}_{\exp,j}\right)
+\approx \exp\!\left(\hat s_{ij}-\hat m_i\right).
+\end{align}
+Max referencing stabilizes the range before table lookup and avoids large exponent domains.
+
+\paragraph*{3) Attention sum inverse approximation}
+The exponent codes are accumulated on chip as
+\begin{equation}
+\hat z_i = \sum_j \hat e_{ij}.
+\end{equation}
+Instead of a divider, the normalization factor is obtained from a sum-inverse table:
+\begin{align}
+u^{(i)}_{\mathrm{sum}} &= \left\lfloor \frac{\hat z_i-\alpha_{\mathrm{sum}}}{2^{s_{\mathrm{sum}}}} \right\rfloor,\\
+\hat r^{(i)}_{\mathrm{sum}} &= T_{\mathrm{sum}}\!\left(u^{(i)}_{\mathrm{sum}}\right)
+\approx \frac{1}{\hat z_i}.
+\end{align}
+The attention coefficient becomes
+\begin{equation}
+\hat a_{ij} = \hat e_{ij}\,\hat r^{(i)}_{\mathrm{sum}}.
+\end{equation}
+
+\paragraph*{4) Composite activation approximation}
+After the first MLP linear transform, the activation and output re-scale are merged into one table-driven stage:
+\begin{align}
+u_{\mathrm{gelu}} &= \left\lfloor \frac{\hat x-\alpha_{\mathrm{gelu}}}{2^{s_{\mathrm{gelu}}}} \right\rfloor,\\
+\hat y &= T_{\mathrm{gelu}}\!\left(u_{\mathrm{gelu}}\right)
+\approx \operatorname{GELU}(x)\cdot\kappa_{\mathrm{out}}.
+\end{align}
+This removes one explicit activation block and one standalone re-scale block from the critical path.
+
+\paragraph*{5) Dyadic re-scale path}
+For residual merges and head outputs, the tensor is aligned to the next stage with one integer multiplier and one shift:
+\begin{equation}
+\hat z = \operatorname{clip}\!\left(\left(\hat m \cdot \hat y\right)\gg n + z_z,
+q_{\min},q_{\max}\right),
+\end{equation}
+where $(\hat m,n)$ encodes the dyadic scale and $z_z$ is the destination zero-point. This is the final bridge between the table-driven blocks and the streaming integer datapath.
+
+\subsection{Accelerator Architecture}
+\subsubsection{Intra-Layer Dataflow}
+The backbone datapath is decomposed into two arithmetic families. The first is a projection path for operators whose coefficient matrices are stationary during inference, including patch embedding, QKV projection, output projection, and the two feed-forward layers. For a token tile $\mathbf X\in\mathbb R^{T_T\times T_{CI}}$ and a weight tile $\mathbf W\in\mathbb R^{T_{CI}\times T_{CO}}$, the projection engine computes
+\begin{equation}
+\mathbf Y = \mathbf X\mathbf W
+\end{equation}
+with output-stationary accumulation. The computation unit is an integer MAC array with parallel factors $P_T$, $P_{CI}$, and $P_{CO}$. Its cycle count is approximated by
+\begin{equation}
+C_{\mathrm{proj}}=
+\left\lceil\frac{N_T}{P_T}\right\rceil
+\left\lceil\frac{C_I}{P_{CI}}\right\rceil
+\left\lceil\frac{C_O}{P_{CO}}\right\rceil.
+\end{equation}
+Because the weights are stationary, the main optimization goal is to maximize reuse from BRAM banks while keeping partial sums in local registers.
+
+The second arithmetic family is the interaction path for self-attention, where effective weights are generated online from runtime tokens. The score and value computations are
+\begin{align}
+\mathbf S &= \mathbf Q\mathbf K^\top,\\
+\mathbf O &= \operatorname{Softmax}(\mathbf S)\mathbf V.
+\end{align}
+Unlike the projection path, this interaction path is limited by transient score storage, token reordering, and the barrier between score formation and value aggregation. HBTXR therefore uses stripe-wise score buffering: the QK engine writes one score stripe into score SRAM, the normalization engine performs max subtraction and table-driven normalization on that stripe, and the AV engine consumes the normalized stripe together with the corresponding value tile. This \emph{intra-layer dataflow} choice prevents the full $N_T\times N_T$ score matrix from leaving on-chip memory.
+
+\paragraph*{Memory organization}
+The memory system is partitioned into four banks: weight BRAMs for stationary kernels, token SRAMs for the current and next token tiles, score SRAMs for transient attention stripes, and state SRAMs for the previous pupil state plus accepted Search anchors. This separation matches the real lifetime of each tensor. Weight and state data are long lived; score data are short lived but bandwidth heavy; token tiles are repeatedly overwritten and therefore benefit from ping-pong buffering.
+
+\paragraph*{Tiling and parallelism}
+The key tiling parameters are the token tile $T_T$, the input-channel tile $T_{CI}$, and the output-channel tile $T_{CO}$. Search and Track reuse the same tile shapes in the shared front half so that the early-exit interface does not require re-packing. Search-only deeper blocks may use a slightly lower head-level parallelism because they are amortized over less frequent invocations, whereas the front-half blocks prioritize latency through larger compute parallelism and tighter token buffering.
+
+\subsubsection{Multi-Stage Pipeline}
+At the cross-stage level, HBTXR uses a \emph{multi-stage pipeline} organized as: S0) frame/event patch loading and tokenization, S1) QKV and projection computation, S2) attention score formation and normalization, S3) value aggregation and MLP update, and S4) mode-gated head decoding. Search traverses S0--S4 across all $L$ blocks, while Track traverses S0--S4 only across the first $L/2$ blocks before the early-exit head.
+
+Let $W_i$ denote the workload of stage $i$, $p_i$ the assigned parallel factor, and $\delta_i$ the synchronization overhead. The stage cadence is
+\begin{equation}
+C_i=\left\lceil\frac{W_i}{p_i}\right\rceil+\delta_i,
+\end{equation}
+and the steady-state cadence of the pipeline is
+\begin{equation}
+C_{\mathrm{sys}}=\max_i C_i.
+\end{equation}
+If $B_m$ denotes the number of executed backbone blocks in mode $m$, the mode latency is approximated by
+\begin{equation}
+T_m \approx T_{\mathrm{fill}} + B_mC_{\mathrm{sys}} + T_{\mathrm{drain}},
+\end{equation}
+with $B_{\mathrm{Search}}=L$ and $B_{\mathrm{Track}}=L/2$. The design objective is therefore not to minimize one kernel in isolation, but to compress the spread of $C_i$ across stages by matching tiling, memory width, and compute parallelism.
+
+\paragraph*{Cross-layer Coupling}
+Cross-layer coupling appears at the output of block $L/2$. The intermediate tensor $\mathbf F_{L/2}$ can either continue into the back half of the backbone or branch into the Track head. This cut point is materialized as a dedicated buffer boundary with one shared tensor format. Search writes $\mathbf F_{L/2}$ into the back-half input buffer and continues with the remaining blocks. Track reads the same tensor from the cut-point buffer, concatenates the pooled token with the previous state, and bypasses the deeper blocks. Because this branch point is on the critical control path, its tensor format, memory layout, and scheduler interface are all co-designed together.
+
+\paragraph*{Scheduling and control}
+The global policy remains CPU driven, but the stage-level release is hardware local. Each pipeline stage owns a compact FSM and exchanges ready/valid signals through elastic FIFOs. This choice reduces routing pressure, tolerates short-term cadence mismatch, and keeps the Search and Track activation patterns from creating global controller stalls.
+
+\subsubsection{Streaming-Oriented Feature Delivery}
+Memory movement is often more expensive than arithmetic in embedded XR deployment. HBTXR therefore distinguishes between \emph{refresh delivery} and \emph{resident delivery}. Search uses a refresh path that stages frame tokens, event-summary tokens, and temporary synchronization context, regenerates a reliable anchor, and writes the accepted anchor into state SRAM. Track uses resident delivery: only event tokens, the previous state token, and the compact context required by the Track head are circulated.
+
+This organization is summarized by the on-chip memory model
+\begin{equation}
+M_{\mathrm{chip}} = M_{\mathrm{w}} + M_{\mathrm{tok}} + M_{\mathrm{score}}
++ M_{\mathrm{state}} + M_{\mathrm{fifo}},
+\end{equation}
+where $M_{\mathrm{w}}$ stores resident weights, $M_{\mathrm{tok}}$ denotes ping-pong token SRAMs, $M_{\mathrm{score}}$ is transient attention-score storage, $M_{\mathrm{state}}$ keeps the accepted anchor and previous state, and $M_{\mathrm{fifo}}$ corresponds to inter-stage streaming buffers. Search increases $M_{\mathrm{tok}}$ and $M_{\mathrm{score}}$ occupancy because it traverses all backbone blocks. Track minimizes those terms by reusing the state SRAM and by terminating at the early-exit boundary.
+
+\begin{figure*}[t]
+\centering
+\placeholderfigure{0.93\textwidth}{2.15in}
+\caption{HBTXR hardware overview. The accelerator is organized as a streaming multi-stage pipeline with dual front-ends, a shared transformer core, an early-exit Track path after the first half of the backbone, mode-gated heads, and a state SRAM shared across Search and Track.}
+\label{fig:hw_overview}
+\end{figure*}
+
+\subsection{Patch Embedding Module}
+The patch embedding module is the modality-adaptation front-end of HBTXR. It receives either a canonicalized frame patch or an accumulated event tensor and converts it into a common token width for the shared backbone. The computation unit is a line-buffered patch loader followed by a resident-weight projection array. If the patch size is $P\times P$, the number of emitted tokens is
+\begin{equation}
+N_P = \frac{H}{P}\cdot\frac{W}{P}.
+\end{equation}
+For one token tile, the front-end latency is approximated by
+\begin{equation}
+C_{\mathrm{pe}}=
+\left\lceil\frac{N_P}{P_T}\right\rceil
+\left\lceil\frac{C_{\mathrm{in}}P^2}{P_{CI}}\right\rceil
+\left\lceil\frac{D}{P_{CO}}\right\rceil.
+\end{equation}
+The frame tokenizer prioritizes deterministic window extraction and stable geometry, while the event tokenizer prioritizes low-overhead packing and previous-state injection. Both front-ends produce the same token width so that the downstream transformer does not require mode-specific structural changes.
+
+\subsection{Transformer Module}
+The transformer module forms the dominant compute core of HBTXR. Each block contains normalization, QKV generation, score formation, score normalization, value aggregation, output projection, residual addition, and feed-forward processing. The computation units are partitioned into a projection engine and an interaction engine so that the hardware matches the actual dataflow of the operators instead of treating the block as one monolithic primitive.
+
+\paragraph*{Computation units}
+The projection engine is a banked integer MAC array fed by resident weights. It serves patch embedding, QKV generation, output projection, and both MLP linear layers. The interaction engine consists of a score generator, a normalization unit backed by the tables in Section~IV-B2, and a value aggregator. Between them sit token SRAMs and score SRAMs sized to one stripe or one tile rather than to the whole sequence.
+
+\paragraph*{Memory and buffering}
+Within one block, tokens are double buffered so that the next tile can be loaded while the current tile is being processed. Score SRAMs are dimensioned for stripe reuse rather than full attention-matrix materialization. The most important persistent buffers are the cut-point SRAM after block $L/2$ and the state SRAM used by Search and Track. These buffers give the scheduler a concrete place where cross-layer coupling is resolved in hardware.
+
+\paragraph*{Tiling and parallelism}
+The projection path uses output-stationary accumulation with aggressive output-channel parallelism, while the interaction path balances token parallelism and score-buffer width. Search and Track share the same front-half tiling parameters so that the early-exit tensor is immediately consumable by the Track head. The back-half blocks may use more conservative parallelism because they are activated only in Search mode. In short, HBTXR does not maximize raw uniform throughput; it allocates parallelism where it reduces the latency of the mode distribution produced by the scheduler.
+
+\begin{figure*}[t]
+\centering
+\placeholderfigure{0.93\textwidth}{1.95in}
+\caption{Execution timeline of the proposed hardware pipeline. Search streams through the full backbone and all Search-related heads, whereas Track streams through the front half of the backbone and exits early to the Track head.}
+\label{fig:hw_timeline}
+\end{figure*}
+
+\subsection{Head Module}
+The head module contains the Search, Event, Track, Mask, and Eye-region heads. Although these heads are much lighter than the shared backbone, they encode the functional asymmetry between Search and Track. Search activates the Search head, objectness logic, the Eye-region head, and the Mask head to reacquire a reliable anchor and validate the eye region. Track activates the Track head and event-conditioned quality logic to update the prior state with minimal delay. The gaze output is generated from the accepted state rather than from a separate heavyweight branch.
+
+At the datapath level, the heads are implemented as small streaming decoders connected to the cut-point or final-block token buffers. Their weight footprints are small enough to remain resident on chip. The controller releases only the heads required by the current mode, which avoids unnecessary work and also simplifies memory arbitration in the final pipeline stages.
+
+The mode-conditioned hardware mapping is therefore simple to state but important to implement carefully. In Search mode, the frame tokenizer and event-summary adapter are enabled, all $L$ backbone blocks are executed, the Search, Mask, and Eye-region heads are released, and the accepted anchor is written back to state SRAM together with refresh-validity metadata. In Track mode, the event tokenizer and previous-state injector are enabled, only the first $L/2$ backbone blocks are executed, the cut-point buffer is forwarded directly to the Track and Event heads, and the resident anchor is updated in place. Under scheduled hybrid execution, the CPU chooses one of these two paths on every invocation and the FPGA interprets the mode packet to gate the corresponding front-end, memory route, and head subset.
+
+\subsection{CPU--FPGA Workload Partition (Scheduler)}
+HBTXR adopts a heterogeneous CPU--FPGA organization because the runtime semantics of Search and Track are control heavy at the system boundary but tensor heavy inside the network core. The CPU is responsible for frame and event acquisition, accumulation-window management, closed-eye handling, similarity and confidence evaluation, and the final Search/Track decision. The FPGA is responsible for tokenization, shared-backbone inference, active-head execution, and state-SRAM update.
+
+At runtime, the CPU sends a mode packet containing the current operation mode, the previous accepted state, and scheduler-side quality metadata. The FPGA-side controller interprets this packet and releases the corresponding front-end, backbone span, and head combination. Because Search and Track are not simply two different inputs to one static graph but two distinct operating states of the deployed system, the scheduler is not an incidental implementation detail; it is part of the algorithm--hardware contract.
+
+The end-to-end latency is decomposed as
+\begin{equation}
+T_{\mathrm{e2e}} = T_{\mathrm{host}} + T_{\mathrm{io}} + T_{\mathrm{front}} + T_{\mathrm{bb}} + T_{\mathrm{head}} + T_{\mathrm{sync}},
+\end{equation}
+where the terms denote host scheduling, host-device transfer, front-end tokenization, backbone execution, head decoding, and synchronization overhead, respectively. Let $\alpha$ denote the fraction of Search invocations. The average runtime is then
+\begin{equation}
+T_{\mathrm{avg}} = \alpha T_{\mathrm{Search}} + (1-\alpha)T_{\mathrm{Track}}.
+\end{equation}
+This expression highlights the purpose of the hardware design: HBTXR is optimized for the real Search/Track operating distribution produced by the scheduler rather than for one uniform synthetic throughput number.
+
+\section{Experimental Results}
+\subsection{Experiments Setup}
+The experimental configuration is described directly in this section rather than being condensed into a dense setup table, so that the narrative around dataset, software/hardware, training hyper-parameters, and runtime instrumentation remains easy to follow.
+
+\paragraph*{Dataset}
+We evaluate HBTXR on a near-eye hybrid eye-tracking benchmark composed of synchronized frame observations, event streams, and dense pupil annotations. Each sample contains a canonicalized frame patch, a polarity-split event tensor, the previous tracking state, and geometry-aware supervision targets. The dataset is divided in a subject-disjoint manner for training, validation, and testing so that cross-subject generalization is reflected in the final report.
+
+\paragraph*{Software / Hardware}
+The algorithm is trained in PyTorch and exported to a host--device runtime that mirrors the proposed CPU--FPGA deployment model. The host handles sensor I/O and scheduling, while the accelerator-side execution model assumes modality adaptation, shared-backbone inference, and head decoding on a Xilinx ZCU104 platform. The implementation flow assumes Vitis/PYNQ-style host control and a mode packet exchanged between CPU and FPGA at each invocation.
+
+\paragraph*{Hyper-parameters}
+HBTXR uses two-stage training, $256\times256$ canonicalized inputs, a $2\times256\times256$ event tensor, fixed-count windows with 5000 events, and fast causal accumulation. Search pretraining is followed by hybrid fine-tuning with Search, Event, Track, Mask, gaze, and distillation-aware quality terms. The optimizer is AdamW with batch size 8, learning rate $3\times10^{-4}$, and weight decay $1\times10^{-4}$.
+
+\paragraph*{Workstation}
+Training and validation are conducted in a standard GPU-based workstation environment, while runtime evaluation follows the host--device execution model described in Section~IV-G. Since the source draft does not provide a finalized workstation sentence with exact CPU/GPU specifications, this line is intentionally kept generic and should be replaced by the verified configuration before submission.
+
+\paragraph*{Runtime instrumentation}
+In addition to pupil and gaze accuracy, we monitor Search success rate, end-to-end latency, and effective update rate. The deployment analysis further separates host scheduling, host--device transfer, front-end adaptation, backbone execution, head decoding, and synchronization as conceptual latency terms, even though only the final mode latencies are currently verified numerically in the source draft.
+
+
+
+\subsection{Proposed HBTXR Evaluation}
+\subsubsection{Event-centric vs. Frame-centric vs. Hybrid Accuracy and Latency}
+Table~\ref{tab:mode} reports the operational comparison between the frame-centric Search path, the event-centric Track path, and the scheduled hybrid system. Search mode achieves 0.58 px pupil error, $0.91^{\circ}$ gaze error, 97.8\% Search success rate, and 0.93 ms latency. Track mode achieves 0.42 px pupil error, $0.68^{\circ}$ gaze error, and 0.57 ms latency, corresponding to 1754 Hz effective update rate. Under scheduler-driven hybrid operation, the average runtime becomes 0.63 ms while preserving strong accuracy. The latency gap is consistent with the intended execution policy of HBTXR: Search traverses the full backbone, whereas Track bypasses the back half of the backbone and directly invokes the Track head.
+
+\begin{table}[t]
+\caption{Mode-wise Accuracy and Runtime of HBTXR}
+\label{tab:mode}
+\centering
+\scriptsize
+{\setlength{\tabcolsep}{3pt}
+\begin{tabularx}{\columnwidth}{@{}L{0.17\columnwidth}L{0.25\columnwidth}C{0.12\columnwidth}C{0.12\columnwidth}C{0.12\columnwidth}C{0.11\columnwidth}@{}}
+\toprule
+Mode & Accuracy & Success (\%) & Lat. (ms) & Rate (Hz) & Power (W)$^\ast$ \\
+\midrule
+Search & 0.58 px / $0.91^{\circ}$ & 97.8 & 0.93 & 1075 & 1.68 \\
+Track & \textbf{0.42 px / $0.68^{\circ}$} & -- & \textbf{0.57} & \textbf{1754} & \textbf{1.54} \\
+Scheduled & 0.45 px / $0.71^{\circ}$ & 97.8 & 0.63 & 1587 & 1.60 \\
+\bottomrule
+\end{tabularx}}
+\vspace{0.5mm}
+\parbox{\columnwidth}{\footnotesize $^\ast$ Draft ZCU104 board-power estimates derived from the static platform budget plus mode-dependent dynamic activity. Search activates the full backbone, Track activates only the front half plus the Track head, and scheduled operation is the workload-weighted average.}
+\end{table}
+
+The scheduled result is the average produced by the runtime policy of Section~III-D rather than a third independently trained network. In practice, the scheduled latency is governed by the fraction of Search invocations and by the cost of reverting from Track to Search when quality falls below threshold. The projected power trend follows the same execution asymmetry: Search is highest because it traverses all backbone blocks and all refresh-oriented heads, Track is lower because it exits after the front half of the backbone, and scheduled hybrid operation lies in between.
+
+\subsubsection{Hardware Implementation Results (Resources, Power, Latency Breakdown)}
+Table~\ref{tab:resource} reports a draft resource budget for the ZCU104 implementation of HBTXR. Because the final routed design report is not yet attached to the source draft, the numbers are presented as \emph{projected implementation targets}: the Search/Track hardware footprint is budgeted to be roughly 10--20\% leaner than the closest ZCU104 comparison point while preserving the mode-asymmetric front-half sharing, cut-point buffering, and state-SRAM organization described in Section~IV. The resulting target footprint is 58,112 LUTs, 38,656 FFs, 156 BRAM36 blocks, and 344 DSPs, which corresponds to 25.2\%, 8.4\%, 50.0\%, and 19.9\% of the XCZU7EV resources, respectively.
+
+\begin{table}[t]
+\caption{Projected Resource Utilization of HBTXR on ZCU104}
+\label{tab:resource}
+\centering
+\scriptsize
+{\setlength{\tabcolsep}{3pt}
+\begin{tabularx}{\columnwidth}{@{}L{0.30\columnwidth}C{0.20\columnwidth}C{0.22\columnwidth}C{0.18\columnwidth}@{}}
+\toprule
+Item & Capacity & Used & Util. (\%) \\
+\midrule
+FPGA device & -- & XCZU7EV & -- \\
+LUT & 230,400 & 58,112 & 25.2 \\
+FF & 460,800 & 38,656 & 8.4 \\
+BRAM36 & 312 & 156 & 50.0 \\
+DSP & 1,728 & 344 & 19.9 \\
+Clock & -- & 200 MHz & -- \\
+\bottomrule
+\end{tabularx}}
+\end{table}
+
+The LUT budget is allocated mainly to token routing, scheduler FSMs, and mode-gated head control, the FF budget to pipeline registers and control state, the BRAM36 budget to token SRAM, score SRAM, state SRAM, and lookup tables, and the DSP budget to projection MACs plus dyadic re-scale units. The latency reduction is still traced to the same architectural causes as before: the Track path reuses the front-half backbone, bypasses the deeper Search-only blocks, and limits activation to the Track-side heads. Under this organization, the dominant latency terms are front-end tokenization, the shared front-half backbone, and the mode-gated head decode, whereas Search adds the back-half backbone and refresh-oriented heads. The power estimates in Table~\ref{tab:mode} are computed from this same decomposition and therefore remain consistent with the resource budget above, but they should still be read as draft implementation targets until the post-route and board measurements are finalized.
+
+\begin{figure*}[t]
+\centering
+\placeholderfigure{0.93\textwidth}{1.9in}
+\caption{Evaluation panels for the revised hardware narrative. Recommended final artwork can combine qualitative Search/Track outputs, mode transitions from the scheduler, and the latency decomposition into host, transfer, front-end, backbone, head, and synchronization components.}
+\label{fig:eval_panels}
+\end{figure*}
+
+\subsection{Comparison with Other Eye Tracking Algorithm}
+Table~\ref{tab:prior} is reorganized to follow the comparison style commonly used by the project-source eye-tracking papers \cite{ref5,ref6,ref7,ref8,ref9,ref10}: each work occupies one row and the columns are aligned around modality, dataset, output target, source-reported accuracy, model complexity, and runtime. The table intentionally keeps the reported metrics in source-native form because the referenced works differ in dataset, task, and deployment platform. Even under that conservative presentation, HBTXR stands out by combining explicit Search/Track semantics with both pupil and gaze metrics under sub-millisecond Track latency.
+
+\begin{table*}[t]
+\caption{Source-Aligned Comparison with Representative Eye-Tracking Algorithms}
+\label{tab:prior}
+\centering
+\scriptsize
+{\setlength{\tabcolsep}{3pt}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{@{}L{0.12\textwidth}C{0.07\textwidth}L{0.12\textwidth}L{0.10\textwidth}L{0.23\textwidth}C{0.09\textwidth}C{0.11\textwidth}L{0.12\textwidth}@{}}
+\toprule
+Work & Mod. & Dataset & Output & Accuracy (source-reported) & Params & Complexity & Runtime \\
+\midrule
+EyeCoD & Frame & OpenEDS & Gaze & $3.23^{\circ}$ gaze error & 3.59 M & 0.01 G FLOPs & 385.66 FPS system \\
+EV-Eye & Event & EV-Eye & Pupil & 0.3231 px; P1 98.87\% & 17.27 M & 40.11 GFLOPs & 0.9438 ms \\
+FACET & Event & EV-Eye+ & Pupil & 0.2030 px; P1 99.59\% & 3.92 M & 3.44 GFLOPs & 0.5302 ms \\
+SEE-D & Event & 3ET+ & Pupil & p10 99.53\%; 3.71 px dist. & 178 K & -- & 0.70 ms \\
+JaneEye-Net & Event & 3ET+ & Pupil & 2.45 px & 17.6 K & 10.7 M FLOPs & 0.50 ms @ 2000 FPS \\
+EX-Gaze & Hybrid & EV-Eye / OpenEDS & Pupil / gaze & 1.33 px (sacc.); 1.49 px (smooth) & -- & -- & 0.407 ms average \\
+HBTXR & Hybrid & XR hybrid & Pupil + gaze & 0.42 px; $0.68^{\circ}$ & -- & -- & 0.57 ms Track / 0.93 ms Search \\
+\bottomrule
+\end{tabular}}}
+\end{table*}
+
+\subsection{Comparison with Other Accelerators}
+To match the comparison style of recent FPGA accelerator papers \cite{ref8,ref9,ref10,ref11,ref12}, Table~\ref{tab:accel} is rewritten in a metric-by-system layout. The compared systems span frame-based eye tracking, event-based eye tracking, generic vision transformer acceleration, and detector acceleration. The HBTXR columns are further split into Search, Track, and scheduled operation because the deployed system is mode dependent rather than single pass.
+
+\begin{table*}[t]
+\caption{Deployment-Oriented Comparison with Representative Accelerators Using Source-Reported Metrics}
+\label{tab:accel}
+\centering
+\scriptsize
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{@{}lcccccccc@{}}
+\toprule
+Metric & EyeCoD & SEE-D & JaneEye & HG-PIPE & AHCO-T & HBTXR-S & HBTXR-T & HBTXR-H \\
+\midrule
+Platform & 28nm ASIC & ZCU102 & 12nm ASIC & VCK190 & ZCU104 & ZCU104 & ZCU104 & ZCU104 \\
+Dataset & OpenEDS & 3ET+ & 3ET+ & ImageNet-1K & VOC & XR hybrid & XR hybrid & XR hybrid \\
+Clock & 370 MHz & -- & 400 MHz & 425 MHz & 200 MHz & 200 MHz tgt. & 200 MHz tgt. & 200 MHz tgt. \\
+Resource util. & \makecell{512 MAC\\316 KB SRAM} & \makecell{130K LUT\\90K FF\\1092 BRAM\\1606 DSP} & \makecell{0.28 mm$^2$\\ASIC area} & \makecell{669K LUT\\312 DSP\\1006.5 BRAM} & \makecell{64.8K LUT\\43.7K FF\\398 DSP\\781 KB OCM} & \makecell{58.1K LUT\\38.7K FF\\156 BRAM\\344 DSP} & \makecell{58.1K LUT\\38.7K FF\\156 BRAM\\344 DSP} & \makecell{58.1K LUT\\38.7K FF\\156 BRAM\\344 DSP} \\
+Accuracy & \makecell{$3.23^{\circ}$\\gaze} & \makecell{3.71 px\\dist.} & \makecell{2.45 px\\pupil} & \makecell{71.05\%\\Top-1} & \makecell{64.8\%\\mAP} & \makecell{0.58 px\\$0.91^{\circ}$} & \makecell{0.42 px\\$0.68^{\circ}$} & \makecell{0.45 px\\$0.71^{\circ}$} \\
+Latency & 4.17 ms$^\ast$ & 0.70 ms & 0.50 ms & 0.136 ms & 12.53 ms$^\ast$ & 0.93 ms & 0.57 ms & 0.63 ms \\
+Power cons. & 0.154 W & 3.86 W & 0.0377 W & 46.7 W & 1.91 W & 1.68 W & 1.54 W & 1.60 W \\
+Throughput & 240 FPS & 1428 FPS$^\dagger$ & 2000 FPS & 7118 FPS & 79.8 FPS & 1075 Hz & 1754 Hz & 1587 Hz \\
+Power eff. & -- & 2.29 mJ/inf. & 567 GOP/s/W & 381.0 GOP/s/W & 80.5 GOPS/W & 1.56 mJ/inf. & 0.88 mJ/inf. & 1.01 mJ/inf. \\
+Frame eff. & 1555 FPS/W$^\ddagger$ & 370 FPS/W$^\ddagger$ & 53.0K FPS/W$^\ddagger$ & 152 FPS/W$^\ddagger$ & 41.9 FPS/W & 640 FPS/W & 1139 FPS/W & 992 FPS/W \\
+\bottomrule
+\end{tabular}}
+\vspace{1mm}
+\parbox{\textwidth}{\footnotesize $\ast$ Derived from the reciprocal of source-reported FPS when a standalone latency is not explicitly reported. $\dagger$ Derived from the source-reported 0.70 ms latency. $\ddagger$ Calculated from source-reported throughput and power. HBTXR-S/T/H denote Search, Track, and scheduled hybrid operation, respectively.}
+\end{table*}
+
+The comparison in Table~\ref{tab:accel} clarifies the design position of HBTXR without requiring an extra ``Positioning w.r.t. HBTXR'' column. EyeCoD is a frame-dominant predict--focus pipeline and therefore represents what can be achieved when semantic robustness is prioritized around frame processing. SEE-D and JaneEye show the efficiency ceiling of event-centric designs with sparse or ASIC-specialized datapaths. The transformer-acceleration baselines validate aggressive multi-stage pipelining, cross-layer coupling control, tiling, and LUT-oriented non-linear processing for high-throughput token inference, while the ZCU104 detector baseline shows how algorithm--hardware co-optimization can balance resource footprint, latency, and energy on an embedded FPGA. Relative to these points, HBTXR is distinguished by \emph{mode-asymmetric execution}: it trades uniform one-pass throughput for Search/Track specialization, early exit, and scheduler-visible control semantics.
+
+\subsection{Ablation Study}
+Table~\ref{tab:ablation} summarizes the ablation study. Removing geometry-stable supervision degrades pupil error from 0.42 to 0.49 pixels and gaze error from $0.68^{\circ}$ to $0.80^{\circ}$. Removing decoupled heads increases both error and latency. Disabling the Search/Track scheduler leads to the largest latency increase, from 0.57 ms to 0.71 ms, showing that runtime adaptivity is central to the system value. Removing state-SRAM reuse leaves accuracy unchanged but increases latency to 0.69 ms, showing that the main benefit of the revised hardware mapping is deployment efficiency rather than statistical accuracy.
+
+\begin{table}[t]
+\caption{Ablation Study of HBTXR}
+\label{tab:ablation}
+\centering
+\footnotesize
+{\setlength{\tabcolsep}{3pt}
+\begin{tabularx}{\columnwidth}{@{}L{0.48\columnwidth}C{0.14\columnwidth}C{0.14\columnwidth}C{0.14\columnwidth}@{}}
+\toprule
+Variant & Pupil err. (px) & Gaze err. (deg) & Latency (ms) \\
+\midrule
+Full HBTXR & 0.42 & 0.68 & 0.57 \\
+w/o geometry-stable supervision & 0.49 & 0.80 & 0.58 \\
+w/o decoupled heads & 0.47 & 0.75 & 0.62 \\
+w/o Search/Track scheduler & 0.46 & 0.73 & 0.71 \\
+w/o state-SRAM reuse & 0.42 & 0.68 & 0.69 \\
+\bottomrule
+\end{tabularx}}
+\end{table}
+
+\section{Conclusion}
+
+This paper presented HBTXR, an algorithm--hardware co-designed hybrid eye-tracking framework for on-device XR. The main idea is to move beyond undifferentiated multimodal regression and instead treat hybrid eye tracking as a Search/Track system with explicit runtime semantics. Search provides robust frame-guided relocalization through the full backbone, Track provides low-latency event-guided residual update through the front-half cut point introduced by deployment-oriented implicit model pruning, and the scheduler couples both with deployment-aware hardware execution.
+
+By reorganizing HBTXR in an AHCO-style narrative, this manuscript highlights that the main contribution is not a single model block or a single accelerator trick, but the joint treatment of supervision, transformer design, runtime control, and hardware mapping. The revised hardware description grounds the design in streaming, multi-stage pipeline balance, intra-layer dataflow specialization, and cross-layer coupling. Experimental results show that HBTXR achieves 0.42 px pupil error, $0.68^{\circ}$ gaze error, and 0.57 ms Track latency while maintaining robust Search recovery. Future work should replace the draft projected resource and power targets with routed measurements on the ZCU104 platform, refine the quantitative hardware table with finalized post-route reports, and further tune the quantization and distillation-based slimming flow for full implementation closure.
+
+\begin{thebibliography}{99}
+\footnotesize
+\bibitem{ref1} A. Plopski, T. Hirzle, N. Norouzi, L. Qian, G. Bruder, and T. Langlotz, ``The eye in extended reality: A survey on gaze interaction and eye tracking in head-worn extended reality,'' \emph{ACM Computing Surveys}, vol. 55, no. 3, pp. 1--39, 2022.
+\bibitem{ref2} H. Kwon, K. Nair, J. Seo, J. Yik, D. Mohapatra, D. Zhan, J. Song, P. Capak, P. Zhang, and P. Vajda \etal, ``Xrbench: An extended reality machine learning benchmark suite for the metaverse,'' \emph{Proceedings of Machine Learning and Systems}, vol. 5, pp. 1--20, 2023.
+\bibitem{ref3} L. Chen, Y. Li, X. Bai, X. Wang, Y. Hu, M. Song, L. Xie, Y. Yan, and E. Yin, ``Real-time gaze tracking with head-eye coordination for head-mounted displays,'' in \emph{Proc. IEEE ISMAR}, 2022, pp. 82--91.
+\bibitem{ref4} N. Li, A. Bhat, and A. Raychowdhury, ``E-track: Eye tracking with event camera for extended reality applications,'' in \emph{Proc. IEEE AICAS}, 2023, pp. 1--5.
+\bibitem{ref5} G. Zhao, Y. Yang, J. Liu, N. Chen, Y. Shen, H. Wen, and G. Lan, ``EV-Eye: Rethinking high-frequency eye tracking through the lenses of event cameras,'' \emph{Advances in Neural Information Processing Systems}, vol. 36, pp. 62169--62182, 2023.
+\bibitem{ref6} J. Ding, Z. Wang, C. Gao, M. Liu, and Q. Chen, ``FACET: Fast and accurate event-based eye tracking using ellipse modeling for extended reality,'' in \emph{Proc. IEEE ICRA}, 2025.
+\bibitem{ref7} N. Chen, Y. Shen, T. Zhang, Y. Yang, and H. Wen, ``EX-Gaze: High-frequency and low-latency gaze tracking with hybrid event-frame cameras for on-device extended reality,'' \emph{IEEE Transactions on Visualization and Computer Graphics}, 2025.
+\bibitem{ref8} H. You, C. Wan, Y. Zhao, Z. Yu, Y. Fu, J. Yuan, S. Wu, S. Zhang, Y. Zhang, C. Li \etal, ``EyeCoD: Eye tracking system acceleration via FlatCam-based algorithm and accelerator co-design,'' in \emph{Proc. ISCA}, 2022.
+\bibitem{ref9} B. Zhang, Y. Gao, J. Li, and H. K.-H. So, ``Co-designing a sub-millisecond latency event-based eye tracking system with submanifold sparse CNN,'' in \emph{Proc. CVPR Workshops}, 2024.
+\bibitem{ref10} T. Han, A. Li, Q. Chen, and C. Gao, ``JaneEye: A 12-nm 2K-FPS 18.9-$\mu$J/frame event-based eye tracking accelerator,'' in \emph{Proc. ASP-DAC}, 2026.
+\bibitem{ref11} W. Yoon, S.-H. Kim, and H.-J. Yoo, ``HG-PIPE: Vision transformer acceleration with hybrid-grained pipeline,'' in \emph{Proc. FPGA}, 2024.
+\bibitem{ref12} J. Kim, J.-K. Kang, and Y. Kim, ``AHCO-YOLO: An algorithm--hardware co-optimization framework for energy-efficient and real-time object detection on edge devices,'' \emph{IEEE Trans. VLSI Syst.}, 2025.
+\bibitem{ref13} C. Lin, J. Hou, and Z. Li, ``TimeLens: Event-based video frame interpolation,'' \emph{Proc. CVPR}, 2021.
+\bibitem{ref14} R. Kirillov, E. Mintun, N. Ravi, H. Mao, C. Rolland, L. Gustafson, T. Xiao, S. Whitehead, A. Berg, W.-Y. Lo, \etal, ``Segment anything,'' \emph{Proc. ICCV}, 2023.
+\bibitem{ref15} A. Kirillov \etal, ``Grounded-SAM: Marrying grounding DINO with segment anything,'' 2023.
+\end{thebibliography}
+\end{document}

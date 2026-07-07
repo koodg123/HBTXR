@@ -20,6 +20,8 @@ class TrackerTokenEncoder:
         frame_adapter: nn.Module,
         event_adapter: nn.Module,
         backbone: nn.Module,
+        event_depth_limit: int | None = None,
+        track_depth_limit: int | None = None,
     ) -> None:
         self.embed_dim = int(embed_dim)
         self.structural_width_ratio = float(structural_width_ratio)
@@ -29,6 +31,8 @@ class TrackerTokenEncoder:
         self.frame_adapter = frame_adapter
         self.event_adapter = event_adapter
         self.backbone = backbone
+        self.event_depth_limit = None if event_depth_limit is None else int(event_depth_limit)
+        self.track_depth_limit = None if track_depth_limit is None else int(track_depth_limit)
 
         pruning_mode = str(
             self.pruning_cfg.get("scheme")
@@ -133,12 +137,13 @@ class TrackerTokenEncoder:
         adapter: nn.Module,
         training: bool,
         width_ratio: float | None = None,
+        depth_limit: int | None = None,
     ) -> tuple[torch.Tensor, torch.Tensor, int]:
         resolved_width = self.resolve_width_ratio(training=training, requested=width_ratio)
         active_dim = self.active_dim(resolved_width)
         tokens = adapter(tokens)
         tokens = self.apply_width_mask(tokens, active_dim)
-        tokens, pooled = self.backbone(tokens)
+        tokens, pooled = self.backbone(tokens, depth_limit=self.track_depth_limit)
         tokens = self.apply_width_mask(tokens, active_dim)
         pooled = self.apply_width_mask(pooled, active_dim)
         return tokens, pooled, active_dim
@@ -159,6 +164,7 @@ class TrackerTokenEncoder:
             adapter=self.frame_adapter,
             training=training,
             width_ratio=width_ratio,
+            depth_limit=None,
         )
         return tokens, pooled, grid_size, active_dim
 
@@ -175,6 +181,7 @@ class TrackerTokenEncoder:
             adapter=self.event_adapter,
             training=training,
             width_ratio=width_ratio,
+            depth_limit=self.event_depth_limit,
         )
         return tokens, pooled, grid_size, active_dim
 
@@ -200,12 +207,49 @@ class TrackerTokenEncoder:
         )
         tokens = self.event_adapter(tokens)
         tokens = self.apply_width_mask(tokens, active_dim)
-        tokens, pooled = self.backbone(tokens)
+        tokens, pooled = self.backbone(tokens, depth_limit=self.track_depth_limit)
         pooled = self.apply_width_mask(pooled, active_dim)
         return pooled, active_dim
 
     def map_pretrained_state_dict(self, source_state: dict[str, torch.Tensor]) -> dict[str, torch.Tensor]:
         mapped = dict(source_state)
+        for idx in range(len(getattr(self.backbone, "attn_stages", []))):
+            prefix = f"blocks.{idx}"
+            attn_prefix = f"backbone.attn_stages.{idx}"
+            mlp_prefix = f"backbone.mlp_stages.{idx}"
+            if f"{prefix}.norm1.weight" in source_state:
+                mapped.setdefault(f"{attn_prefix}.norm.weight", source_state[f"{prefix}.norm1.weight"])
+            if f"{prefix}.norm1.bias" in source_state:
+                mapped.setdefault(f"{attn_prefix}.norm.bias", source_state[f"{prefix}.norm1.bias"])
+            qkv_weight = source_state.get(f"{prefix}.attn.qkv.weight")
+            if qkv_weight is not None and qkv_weight.ndim == 2 and qkv_weight.shape[0] % 3 == 0:
+                q_weight, k_weight, v_weight = qkv_weight.chunk(3, dim=0)
+                mapped.setdefault(f"{attn_prefix}.q_proj.weight", q_weight)
+                mapped.setdefault(f"{attn_prefix}.k_proj.weight", k_weight)
+                mapped.setdefault(f"{attn_prefix}.v_proj.weight", v_weight)
+            qkv_bias = source_state.get(f"{prefix}.attn.qkv.bias")
+            if qkv_bias is not None and qkv_bias.ndim == 1 and qkv_bias.shape[0] % 3 == 0:
+                q_bias, k_bias, v_bias = qkv_bias.chunk(3, dim=0)
+                mapped.setdefault(f"{attn_prefix}.q_proj.bias", q_bias)
+                mapped.setdefault(f"{attn_prefix}.k_proj.bias", k_bias)
+                mapped.setdefault(f"{attn_prefix}.v_proj.bias", v_bias)
+            if f"{prefix}.attn.proj.weight" in source_state:
+                mapped.setdefault(f"{attn_prefix}.out_proj.weight", source_state[f"{prefix}.attn.proj.weight"])
+            if f"{prefix}.attn.proj.bias" in source_state:
+                mapped.setdefault(f"{attn_prefix}.out_proj.bias", source_state[f"{prefix}.attn.proj.bias"])
+            if f"{prefix}.norm2.weight" in source_state:
+                mapped.setdefault(f"{mlp_prefix}.norm.weight", source_state[f"{prefix}.norm2.weight"])
+            if f"{prefix}.norm2.bias" in source_state:
+                mapped.setdefault(f"{mlp_prefix}.norm.bias", source_state[f"{prefix}.norm2.bias"])
+            if f"{prefix}.mlp.fc1.weight" in source_state:
+                mapped.setdefault(f"{mlp_prefix}.fc1.weight", source_state[f"{prefix}.mlp.fc1.weight"])
+            if f"{prefix}.mlp.fc1.bias" in source_state:
+                mapped.setdefault(f"{mlp_prefix}.fc1.bias", source_state[f"{prefix}.mlp.fc1.bias"])
+            if f"{prefix}.mlp.fc2.weight" in source_state:
+                mapped.setdefault(f"{mlp_prefix}.fc2.weight", source_state[f"{prefix}.mlp.fc2.weight"])
+            if f"{prefix}.mlp.fc2.bias" in source_state:
+                mapped.setdefault(f"{mlp_prefix}.fc2.bias", source_state[f"{prefix}.mlp.fc2.bias"])
+
         patch_weight = None
         patch_bias = None
         for key in ("patch_embed.proj.weight", "patch_embed.weight", "frame_embed.proj.weight"):

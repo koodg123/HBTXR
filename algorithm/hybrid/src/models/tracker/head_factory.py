@@ -16,9 +16,15 @@ from ..heads import (
     PupilSearchHead,
     PupilTrackHead,
     RoiCascadeBBoxHead,
+    SearchCenterCandidateHead,
     SOTCenterPredictor,
     SOTCornerPredictor,
     SearchMaskHead,
+    TrackCenterCandidateHead,
+    TrackCenterRefineHead,
+    TrackStateAuxHead,
+    TrackCenterHeatmapHead,
+    TrackStateSimDRHead,
     YOLO26EyeRegionHead,
     YOLODetectEyeRegionHead,
     YOLOPointEyeRegionHead,
@@ -34,8 +40,14 @@ class TrackerHeadModules:
     event_bbox_aux_head: nn.Module | None
     search_obb_aux_head: nn.Module | None
     event_obb_aux_head: nn.Module | None
+    search_center_candidate_head: nn.Module | None
     roi_bbox_head: nn.Module | None
     track_head: nn.Module | None
+    track_state_aux_head: nn.Module | None
+    track_state_simdr_head: nn.Module | None
+    track_center_heatmap_head: nn.Module | None
+    track_center_refine_head: nn.Module | None
+    track_center_candidate_head: nn.Module | None
     mask_head: nn.Module | None
     aux_head: nn.Module | None
 
@@ -58,11 +70,24 @@ class TrackerHeadFactory:
         search_use_roi_bbox_head: bool,
         roi_bbox_use_external_eye: bool,
         mask_cfg: dict[str, object],
+        search_head_variant: str = "legacy",
+        search_head_residual_hidden_dim: int | None = None,
+        search_center_candidate_count: int = 4,
+        search_center_candidate_max_delta_px: float = 8.0,
+        track_state_simdr_bins: int = 64,
+        track_center_heatmap_grid: int = 32,
+        track_center_refine_max_delta_px: float = 4.0,
+        track_center_candidate_count: int = 4,
+        track_center_candidate_max_delta_px: float = 8.0,
     ) -> None:
         self.embed_dim = int(embed_dim)
         self.input_size = tuple(int(v) for v in input_size)
         self.aux_classes = int(aux_classes)
         self.head_hidden_dim = head_hidden_dim
+        self.search_head_variant = str(search_head_variant or "legacy").strip().lower()
+        self.search_head_residual_hidden_dim = search_head_residual_hidden_dim
+        self.search_center_candidate_count = max(1, int(search_center_candidate_count))
+        self.search_center_candidate_max_delta_px = max(float(search_center_candidate_max_delta_px), 1.0e-6)
         self.track_head_hidden_dim = track_head_hidden_dim
         self.mask_hidden_dim = mask_hidden_dim
         self.eye_detector_mode = str(eye_detector_mode).strip().lower()
@@ -73,6 +98,11 @@ class TrackerHeadFactory:
         self.search_use_roi_bbox_head = bool(search_use_roi_bbox_head)
         self.roi_bbox_use_external_eye = bool(roi_bbox_use_external_eye)
         self.mask_cfg = dict(mask_cfg or {})
+        self.track_state_simdr_bins = max(2, int(track_state_simdr_bins))
+        self.track_center_heatmap_grid = max(2, int(track_center_heatmap_grid))
+        self.track_center_refine_max_delta_px = max(float(track_center_refine_max_delta_px), 1.0e-6)
+        self.track_center_candidate_count = max(1, int(track_center_candidate_count))
+        self.track_center_candidate_max_delta_px = max(float(track_center_candidate_max_delta_px), 1.0e-6)
 
     def build(
         self,
@@ -87,17 +117,64 @@ class TrackerHeadFactory:
         enable_event_bbox_aux_head: bool,
         enable_search_obb_aux_head: bool,
         enable_event_obb_aux_head: bool,
+        enable_track_state_aux_head: bool,
+        enable_search_center_candidate_head: bool = False,
+        enable_track_state_simdr_head: bool = False,
+        enable_track_center_heatmap_head: bool = False,
+        enable_track_center_refine_head: bool = False,
+        enable_track_center_candidate_head: bool = False,
     ) -> TrackerHeadModules:
         return TrackerHeadModules(
             eye_head=self.build_eye_head(enable_eye_head),
-            search_head=PupilSearchHead(embed_dim=self.embed_dim, hidden_dim=self.head_hidden_dim) if enable_search_head else None,
+            search_head=PupilSearchHead(
+                embed_dim=self.embed_dim,
+                hidden_dim=self.head_hidden_dim,
+                variant=self.search_head_variant,
+                residual_hidden_dim=self.search_head_residual_hidden_dim,
+            )
+            if enable_search_head
+            else None,
             event_head=EventSearchHead(embed_dim=self.embed_dim, hidden_dim=self.head_hidden_dim) if enable_event_head else None,
             search_bbox_aux_head=PupilBBoxAuxHead(embed_dim=self.embed_dim, hidden_dim=self.head_hidden_dim) if enable_search_bbox_aux_head else None,
             event_bbox_aux_head=PupilBBoxAuxHead(embed_dim=self.embed_dim, hidden_dim=self.head_hidden_dim) if enable_event_bbox_aux_head else None,
             search_obb_aux_head=PupilOBBAuxHead(embed_dim=self.embed_dim, hidden_dim=self.head_hidden_dim) if enable_search_obb_aux_head else None,
             event_obb_aux_head=PupilOBBAuxHead(embed_dim=self.embed_dim, hidden_dim=self.head_hidden_dim) if enable_event_obb_aux_head else None,
+            search_center_candidate_head=SearchCenterCandidateHead(
+                in_dim=self.embed_dim,
+                hidden_dim=self.head_hidden_dim,
+                num_candidates=self.search_center_candidate_count,
+                max_delta_px=self.search_center_candidate_max_delta_px,
+            )
+            if enable_search_center_candidate_head
+            else None,
             roi_bbox_head=self.build_roi_bbox_head(),
             track_head=PupilTrackHead(in_dim=self.embed_dim * 2, hidden_dim=self.track_head_hidden_dim) if enable_track_head else None,
+            track_state_aux_head=TrackStateAuxHead(in_dim=self.embed_dim * 2, hidden_dim=self.track_head_hidden_dim) if enable_track_state_aux_head else None,
+            track_state_simdr_head=TrackStateSimDRHead(in_dim=self.embed_dim * 2, hidden_dim=self.track_head_hidden_dim, bins=self.track_state_simdr_bins)
+            if enable_track_state_simdr_head
+            else None,
+            track_center_heatmap_head=TrackCenterHeatmapHead(
+                in_dim=self.embed_dim * 2,
+                hidden_dim=self.track_head_hidden_dim,
+                grid_size=self.track_center_heatmap_grid,
+            )
+            if enable_track_center_heatmap_head
+            else None,
+            track_center_refine_head=TrackCenterRefineHead(
+                in_dim=self.embed_dim * 2,
+                hidden_dim=self.track_head_hidden_dim,
+                max_delta_px=self.track_center_refine_max_delta_px,
+            )
+            if enable_track_center_refine_head
+            else None,
+            track_center_candidate_head=TrackCenterCandidateHead(
+                in_dim=self.embed_dim * 2,
+                hidden_dim=self.track_head_hidden_dim,
+                num_candidates=self.track_center_candidate_count,
+                max_delta_px=self.track_center_candidate_max_delta_px,
+            )
+            if enable_track_center_candidate_head
+            else None,
             mask_head=self.build_mask_head(enable_mask_head),
             aux_head=AuxStateHead(embed_dim=self.embed_dim, num_classes=self.aux_classes, hidden_dim=self.head_hidden_dim) if enable_aux_head else None,
         )

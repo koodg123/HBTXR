@@ -1,0 +1,11 @@
+# Stage2 track-only fine-tune with decoded-center hinge supervision.
+# Targets the P10 gate directly while retaining the current fixed-count surface.
+
+extends: mode1_stage2_raw_event_count_lr5e-6_nodistill_trackonly_centerloss_adaptivecount_finetune_fullwidth.yaml
+
+loss:
+  track_center_hinge_weight: 0.05
+  track_center_hinge_margin_px: 10.0
+
+experiment:
+  name: raw_mode1_stage2_lr5e-6_nodistill_trackonly_centerhinge10_finetune_fullwidth

@@ -1,0 +1,34 @@
+# XR-17B: center-preserving P5-anchor polish.
+#
+# Purpose:
+# - keep the XR-15C center leader as student init.
+# - use XR-17A alpha 0.75 only as a weak P5-direction teacher.
+# - reduce LR/epochs versus XR-15A/B/C to limit center drift.
+# - keep the same support-adaptive fixed255k event contract for comparability.
+
+extends: mode1_stage2_raw_event_count_lr5e-7_weakdistill_trackonly_trackstateaux_supportadaptive_fullwidth.yaml
+
+training:
+  epochs: 8
+  lr: 2.5e-7
+  best_metric_name: metric_track_center_px
+  optimizer:
+    name: adamw
+    lr: 2.5e-7
+    weight_decay: 5.0e-5
+    betas: [0.9, 0.999]
+    eps: 1.0e-8
+    kwargs: {}
+  scheduler:
+    type: plateau
+    metric_name: metric_track_center_px
+    factor: 0.5
+    patience: 2
+  early_stopping:
+    enabled: true
+    patience: 3
+    start_epoch: 4
+    min_delta: 0.003
+
+experiment:
+  name: raw_mode1_stage2_lr2p5e-7_weakdistill_trackonly_trackstateaux_supportadaptive_p5anchor_fullwidth

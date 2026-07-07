@@ -588,12 +588,47 @@ class SOTCornerPredictor(nn.Module):
 
 
 class PupilSearchHead(nn.Module):
-    def __init__(self, embed_dim: int = 192, hidden_dim: int | None = None) -> None:
+    def __init__(
+        self,
+        embed_dim: int = 192,
+        hidden_dim: int | None = None,
+        *,
+        variant: str = "legacy",
+        residual_hidden_dim: int | None = None,
+    ) -> None:
         super().__init__()
+        self.variant = str(variant or "legacy").strip().lower()
         self.net = _mlp_head(embed_dim, 7, hidden_dim=hidden_dim)
+        if self.variant in {"", "legacy", "mlp"}:
+            self.residual = None
+        elif self.variant in {"residual_mlp", "deep_residual_mlp"}:
+            hidden = int(residual_hidden_dim) if residual_hidden_dim is not None else int(hidden_dim) if hidden_dim is not None else max(embed_dim, 128)
+            layers: list[nn.Module] = [
+                nn.LayerNorm(embed_dim),
+                nn.Linear(embed_dim, hidden),
+                nn.GELU(),
+            ]
+            if self.variant == "deep_residual_mlp":
+                layers.extend(
+                    [
+                        nn.Linear(hidden, hidden),
+                        nn.GELU(),
+                    ]
+                )
+            layers.append(nn.Linear(hidden, 7))
+            self.residual = nn.Sequential(*layers)
+            final = self.residual[-1]
+            if isinstance(final, nn.Linear):
+                nn.init.zeros_(final.weight)
+                nn.init.zeros_(final.bias)
+        else:
+            raise ValueError("Unsupported search head variant: " f"{self.variant!r}. Expected legacy, residual_mlp, or deep_residual_mlp.")
 
     def forward(self, pooled: torch.Tensor) -> torch.Tensor:
-        return self.net(pooled)
+        logits = self.net(pooled)
+        if self.residual is not None:
+            logits = logits + self.residual(pooled)
+        return logits
 
 
 class PupilBBoxAuxHead(nn.Module):
@@ -655,6 +690,132 @@ class PupilTrackHead(nn.Module):
 
     def forward(self, fused: torch.Tensor) -> torch.Tensor:
         return self.net(fused)
+
+
+class TrackStateAuxHead(nn.Module):
+    def __init__(self, in_dim: int = 384, hidden_dim: int | None = None) -> None:
+        super().__init__()
+        self.net = _mlp_head(in_dim, 6, hidden_dim=hidden_dim)
+
+    def forward(self, fused: torch.Tensor) -> torch.Tensor:
+        raw = self.net(fused)
+        xy = raw[:, :2]
+        axes = F.softplus(raw[:, 2:4]) + 1.0e-3
+        uv = F.normalize(raw[:, 4:6], dim=-1, eps=1.0e-6)
+        return torch.cat([xy, axes, uv], dim=-1)
+
+
+class TrackStateSimDRHead(nn.Module):
+    def __init__(self, in_dim: int = 384, hidden_dim: int | None = None, *, bins: int = 64) -> None:
+        super().__init__()
+        self.bins = max(2, int(bins))
+        self.net = _mlp_head(in_dim, self.bins * 2, hidden_dim=hidden_dim)
+
+    def forward(self, fused: torch.Tensor) -> torch.Tensor:
+        return self.net(fused).view(fused.shape[0], 2, self.bins)
+
+
+class TrackCenterHeatmapHead(nn.Module):
+    def __init__(self, in_dim: int = 384, hidden_dim: int | None = None, *, grid_size: int = 32) -> None:
+        super().__init__()
+        self.grid_size = max(2, int(grid_size))
+        hidden = int(hidden_dim) if hidden_dim is not None else max(in_dim, 256)
+        cells = self.grid_size * self.grid_size
+        self.net = nn.Sequential(
+            nn.LayerNorm(in_dim),
+            nn.Linear(in_dim, hidden),
+            nn.GELU(),
+            nn.Linear(hidden, cells * 3),
+        )
+
+    def forward(self, fused: torch.Tensor) -> dict[str, torch.Tensor]:
+        raw = self.net(fused)
+        batch = fused.shape[0]
+        grid = self.grid_size
+        raw = raw.view(batch, 3, grid, grid)
+        return {
+            "logits": raw[:, 0],
+            "offset": torch.tanh(raw[:, 1:3]) * 0.5,
+        }
+
+
+class TrackCenterRefineHead(nn.Module):
+    def __init__(self, in_dim: int = 384, hidden_dim: int | None = None, *, max_delta_px: float = 4.0) -> None:
+        super().__init__()
+        self.max_delta_px = max(float(max_delta_px), 1.0e-6)
+        hidden = int(hidden_dim) if hidden_dim is not None else max(in_dim, 256)
+        self.net = nn.Sequential(
+            nn.LayerNorm(in_dim),
+            nn.Linear(in_dim, hidden),
+            nn.GELU(),
+            nn.Linear(hidden, 3),
+        )
+        final = self.net[-1]
+        if isinstance(final, nn.Linear):
+            nn.init.zeros_(final.weight)
+            nn.init.zeros_(final.bias)
+
+    def forward(self, fused: torch.Tensor) -> dict[str, torch.Tensor]:
+        raw = self.net(fused)
+        gate_logit = raw[:, 2:3]
+        gate = torch.sigmoid(gate_logit)
+        delta = torch.tanh(raw[:, :2]) * self.max_delta_px * gate
+        return {
+            "delta": delta,
+            "gate_logit": gate_logit,
+            "gate": gate,
+        }
+
+
+class TrackCenterCandidateHead(nn.Module):
+    def __init__(
+        self,
+        in_dim: int = 384,
+        hidden_dim: int | None = None,
+        *,
+        num_candidates: int = 4,
+        max_delta_px: float = 8.0,
+    ) -> None:
+        super().__init__()
+        self.num_candidates = max(1, int(num_candidates))
+        self.max_delta_px = max(float(max_delta_px), 1.0e-6)
+        hidden = int(hidden_dim) if hidden_dim is not None else max(in_dim, 256)
+        self.net = nn.Sequential(
+            nn.LayerNorm(in_dim),
+            nn.Linear(in_dim, hidden),
+            nn.GELU(),
+            nn.Linear(hidden, self.num_candidates * 3),
+        )
+        final = self.net[-1]
+        if isinstance(final, nn.Linear):
+            nn.init.zeros_(final.weight)
+            nn.init.zeros_(final.bias)
+
+    def forward(self, fused: torch.Tensor) -> dict[str, torch.Tensor]:
+        raw = self.net(fused).view(fused.shape[0], self.num_candidates, 3)
+        delta = torch.tanh(raw[..., :2]) * self.max_delta_px
+        logits = raw[..., 2]
+        return {
+            "delta": delta,
+            "logits": logits,
+        }
+
+
+class SearchCenterCandidateHead(TrackCenterCandidateHead):
+    def __init__(
+        self,
+        in_dim: int = 192,
+        hidden_dim: int | None = None,
+        *,
+        num_candidates: int = 4,
+        max_delta_px: float = 8.0,
+    ) -> None:
+        super().__init__(
+            in_dim=in_dim,
+            hidden_dim=hidden_dim,
+            num_candidates=num_candidates,
+            max_delta_px=max_delta_px,
+        )
 
 
 class AuxStateHead(nn.Module):

@@ -108,6 +108,7 @@ class SearchBranch:
         search_head: nn.Module | None,
         search_bbox_aux_head: nn.Module | None,
         search_obb_aux_head: nn.Module | None,
+        search_center_candidate_head: nn.Module | None,
         roi_bbox_head: nn.Module | None,
         mask_head: nn.Module | None,
         aux_head: nn.Module | None,
@@ -115,12 +116,15 @@ class SearchBranch:
         eye_head_variant: str,
         roi_bbox_use_external_eye: bool,
         refiner: SearchMaskGuidanceRefiner,
+        candidate_as_search_state: bool = False,
+        candidate_blend: float = 1.0,
     ) -> None:
         self.input_size = tuple(int(v) for v in input_size)
         self.eye_head = eye_head
         self.search_head = search_head
         self.search_bbox_aux_head = search_bbox_aux_head
         self.search_obb_aux_head = search_obb_aux_head
+        self.search_center_candidate_head = search_center_candidate_head
         self.roi_bbox_head = roi_bbox_head
         self.mask_head = mask_head
         self.aux_head = aux_head
@@ -128,6 +132,8 @@ class SearchBranch:
         self.eye_head_variant = str(eye_head_variant).strip().lower()
         self.roi_bbox_use_external_eye = bool(roi_bbox_use_external_eye)
         self.refiner = refiner
+        self.candidate_as_search_state = bool(candidate_as_search_state)
+        self.candidate_blend = min(1.0, max(0.0, float(candidate_blend)))
 
     @staticmethod
     def state_from_branch(branch_logits: torch.Tensor) -> torch.Tensor:
@@ -214,6 +220,28 @@ class SearchBranch:
                 mask_logits=outputs.get("search/mask_logits"),
             )
             outputs.update(extra_outputs)
+
+        if self.search_center_candidate_head is not None and search_logits is not None:
+            candidate = self.search_center_candidate_head(pooled)
+            outputs["search/center_candidate_delta"] = candidate["delta"]
+            outputs["search/center_candidate_logits"] = candidate["logits"]
+            current_state = self.state_from_branch(search_logits)
+            candidate_xy = current_state[:, None, :2] + candidate["delta"]
+            outputs["search/center_candidate_xy"] = candidate_xy
+            candidate_weights = torch.softmax(candidate["logits"], dim=-1)
+            soft_xy = (candidate_xy * candidate_weights.unsqueeze(-1)).sum(dim=1)
+            outputs["search/center_candidate_weights"] = candidate_weights
+            outputs["search/center_candidate_soft_xy"] = soft_xy
+            top_idx = candidate["logits"].argmax(dim=-1)
+            gather_idx = top_idx.view(-1, 1, 1).expand(-1, 1, 2)
+            hard_xy = candidate_xy.gather(1, gather_idx).squeeze(1)
+            outputs["search/center_candidate_selected_xy"] = hard_xy
+            if self.candidate_as_search_state:
+                refined_logits = search_logits.clone()
+                refined_logits[:, :2] = (1.0 - self.candidate_blend) * current_state[:, :2] + self.candidate_blend * soft_xy
+                outputs["search/state_base"] = current_state
+                outputs["search/state_pre_candidate"] = current_state
+                search_logits = refined_logits
 
         if search_logits is not None:
             outputs["search/pupil"] = search_logits

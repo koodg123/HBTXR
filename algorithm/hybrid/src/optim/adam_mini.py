@@ -1,6 +1,6 @@
 # Source: https://raw.githubusercontent.com/zyushun/Adam-mini/main/adam_mini/adam_mini.py
 # Upstream: zyushun/Adam-mini adam_mini/adam_mini.py
-# Diff: see docs/src/optimizers/adam_mini_diff.md
+# Diff: see docs/hbtxr/optimizers/adam_mini_diff.md
 
 from __future__ import annotations
 

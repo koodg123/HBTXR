@@ -1,0 +1,11 @@
+# Stage2 track-only fine-tune with stricter decoded-center hinge supervision.
+# Targets P5/P10 balance after the fixed-count optimum is known.
+
+extends: mode1_stage2_raw_event_count_lr5e-6_nodistill_trackonly_centerloss_adaptivecount_finetune_fullwidth.yaml
+
+loss:
+  track_center_hinge_weight: 0.025
+  track_center_hinge_margin_px: 5.0
+
+experiment:
+  name: raw_mode1_stage2_lr5e-6_nodistill_trackonly_centerhinge5_finetune_fullwidth

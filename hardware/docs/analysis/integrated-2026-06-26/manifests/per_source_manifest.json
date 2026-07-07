@@ -1,0 +1,527 @@
+[
+  {
+    "group": "vit-accel-codebase",
+    "item": "AHCPTQ",
+    "analysis": "vit-accel/codebases/AHCPTQ/analysis.md"
+  },
+  {
+    "group": "vit-accel-codebase",
+    "item": "AURA-FlashAttention-AISC-Accelerator",
+    "analysis": "vit-accel/codebases/AURA-FlashAttention-AISC-Accelerator/analysis.md"
+  },
+  {
+    "group": "vit-accel-codebase",
+    "item": "CoQMoE",
+    "analysis": "vit-accel/codebases/CoQMoE/analysis.md"
+  },
+  {
+    "group": "vit-accel-codebase",
+    "item": "Edge-MoE",
+    "analysis": "vit-accel/codebases/Edge-MoE/analysis.md"
+  },
+  {
+    "group": "vit-accel-codebase",
+    "item": "FlexLLM",
+    "analysis": "vit-accel/codebases/FlexLLM/analysis.md"
+  },
+  {
+    "group": "vit-accel-codebase",
+    "item": "HG-PIPE",
+    "analysis": "vit-accel/codebases/HG-PIPE/analysis.md"
+  },
+  {
+    "group": "vit-accel-codebase",
+    "item": "HLS-Acceleration-of-LLaMA2",
+    "analysis": "vit-accel/codebases/HLS-Acceleration-of-LLaMA2/analysis.md"
+  },
+  {
+    "group": "vit-accel-codebase",
+    "item": "HLSTransformation",
+    "analysis": "vit-accel/codebases/HLSTransformation/analysis.md"
+  },
+  {
+    "group": "vit-accel-codebase",
+    "item": "LLM_FPGA",
+    "analysis": "vit-accel/codebases/LLM_FPGA/analysis.md"
+  },
+  {
+    "group": "vit-accel-codebase",
+    "item": "LUT-LLM",
+    "analysis": "vit-accel/codebases/LUT-LLM/analysis.md"
+  },
+  {
+    "group": "vit-accel-codebase",
+    "item": "M3ViT",
+    "analysis": "vit-accel/codebases/M3ViT/analysis.md"
+  },
+  {
+    "group": "vit-accel-codebase",
+    "item": "P2-ViT",
+    "analysis": "vit-accel/codebases/P2-ViT/analysis.md"
+  },
+  {
+    "group": "vit-accel-codebase",
+    "item": "TATAA",
+    "analysis": "vit-accel/codebases/TATAA/analysis.md"
+  },
+  {
+    "group": "vit-accel-codebase",
+    "item": "TeraFly",
+    "analysis": "vit-accel/codebases/TeraFly/analysis.md"
+  },
+  {
+    "group": "vit-accel-codebase",
+    "item": "Tiny-GPT-on-Vortex-GPGPU-for-AMD-Alveo-U280",
+    "analysis": "vit-accel/codebases/Tiny-GPT-on-Vortex-GPGPU-for-AMD-Alveo-U280/analysis.md"
+  },
+  {
+    "group": "vit-accel-codebase",
+    "item": "TinyTransformer",
+    "analysis": "vit-accel/codebases/TinyTransformer/analysis.md"
+  },
+  {
+    "group": "vit-accel-codebase",
+    "item": "Transformer-Accelerator-Based-on-FPGA",
+    "analysis": "vit-accel/codebases/Transformer-Accelerator-Based-on-FPGA/analysis.md"
+  },
+  {
+    "group": "vit-accel-codebase",
+    "item": "Trio-ViT",
+    "analysis": "vit-accel/codebases/Trio-ViT/analysis.md"
+  },
+  {
+    "group": "vit-accel-codebase",
+    "item": "UbiMoE",
+    "analysis": "vit-accel/codebases/UbiMoE/analysis.md"
+  },
+  {
+    "group": "vit-accel-codebase",
+    "item": "ViT-FPGA-TPU",
+    "analysis": "vit-accel/codebases/ViT-FPGA-TPU/analysis.md"
+  },
+  {
+    "group": "vit-accel-codebase",
+    "item": "ViTALiTy",
+    "analysis": "vit-accel/codebases/ViTALiTy/analysis.md"
+  },
+  {
+    "group": "vit-accel-codebase",
+    "item": "ViTCoD",
+    "analysis": "vit-accel/codebases/ViTCoD/analysis.md"
+  },
+  {
+    "group": "vit-accel-codebase",
+    "item": "efficient-transformer-accelerator",
+    "analysis": "vit-accel/codebases/efficient-transformer-accelerator/analysis.md"
+  },
+  {
+    "group": "vit-accel-codebase",
+    "item": "flightllm_test_demo",
+    "analysis": "vit-accel/codebases/flightllm_test_demo/analysis.md"
+  },
+  {
+    "group": "vit-accel-codebase",
+    "item": "hls-fpga-accelerators",
+    "analysis": "vit-accel/codebases/hls-fpga-accelerators/analysis.md"
+  },
+  {
+    "group": "vit-accel-codebase",
+    "item": "llama-fpga",
+    "analysis": "vit-accel/codebases/llama-fpga/analysis.md"
+  },
+  {
+    "group": "vit-accel-codebase",
+    "item": "lut-gemm",
+    "analysis": "vit-accel/codebases/lut-gemm/analysis.md"
+  },
+  {
+    "group": "vit-accel-codebase",
+    "item": "ternaryLLM",
+    "analysis": "vit-accel/codebases/ternaryLLM/analysis.md"
+  },
+  {
+    "group": "vit-accel-codebase",
+    "item": "transformer-hls-thesis",
+    "analysis": "vit-accel/codebases/transformer-hls-thesis/analysis.md"
+  },
+  {
+    "group": "vit-accel-paper",
+    "item": "AHCPTQ",
+    "analysis": "vit-accel/papers/AHCPTQ/analysis.md"
+  },
+  {
+    "group": "vit-accel-paper",
+    "item": "CoQMoE",
+    "analysis": "vit-accel/papers/CoQMoE/analysis.md"
+  },
+  {
+    "group": "vit-accel-paper",
+    "item": "Edge-MoE",
+    "analysis": "vit-accel/papers/Edge-MoE/analysis.md"
+  },
+  {
+    "group": "vit-accel-paper",
+    "item": "EfficientViT-FPGA",
+    "analysis": "vit-accel/papers/EfficientViT-FPGA/analysis.md"
+  },
+  {
+    "group": "vit-accel-paper",
+    "item": "FlexLLM",
+    "analysis": "vit-accel/papers/FlexLLM/analysis.md"
+  },
+  {
+    "group": "vit-accel-paper",
+    "item": "FlightLLM",
+    "analysis": "vit-accel/papers/FlightLLM/analysis.md"
+  },
+  {
+    "group": "vit-accel-paper",
+    "item": "HG-PIPE",
+    "analysis": "vit-accel/papers/HG-PIPE/analysis.md"
+  },
+  {
+    "group": "vit-accel-paper",
+    "item": "LUT-GEMM",
+    "analysis": "vit-accel/papers/LUT-GEMM/analysis.md"
+  },
+  {
+    "group": "vit-accel-paper",
+    "item": "LUT-LLM",
+    "analysis": "vit-accel/papers/LUT-LLM/analysis.md"
+  },
+  {
+    "group": "vit-accel-paper",
+    "item": "M3ViT",
+    "analysis": "vit-accel/papers/M3ViT/analysis.md"
+  },
+  {
+    "group": "vit-accel-paper",
+    "item": "ME-ViT",
+    "analysis": "vit-accel/papers/ME-ViT/analysis.md"
+  },
+  {
+    "group": "vit-accel-paper",
+    "item": "P2-ViT",
+    "analysis": "vit-accel/papers/P2-ViT/analysis.md"
+  },
+  {
+    "group": "vit-accel-paper",
+    "item": "TATAA",
+    "analysis": "vit-accel/papers/TATAA/analysis.md"
+  },
+  {
+    "group": "vit-accel-paper",
+    "item": "TerEffic",
+    "analysis": "vit-accel/papers/TerEffic/analysis.md"
+  },
+  {
+    "group": "vit-accel-paper",
+    "item": "Trio-ViT",
+    "analysis": "vit-accel/papers/Trio-ViT/analysis.md"
+  },
+  {
+    "group": "vit-accel-paper",
+    "item": "UbiMoE",
+    "analysis": "vit-accel/papers/UbiMoE/analysis.md"
+  },
+  {
+    "group": "vit-accel-paper",
+    "item": "ViTALiTy",
+    "analysis": "vit-accel/papers/ViTALiTy/analysis.md"
+  },
+  {
+    "group": "vit-accel-paper",
+    "item": "ViTCoD",
+    "analysis": "vit-accel/papers/ViTCoD/analysis.md"
+  },
+  {
+    "group": "references-vit-codebase",
+    "item": "AMD_QTViT",
+    "analysis": "vit/codebases/AMD_QTViT/analysis.md"
+  },
+  {
+    "group": "references-vit-codebase",
+    "item": "Castling-ViT",
+    "analysis": "vit/codebases/Castling-ViT/analysis.md"
+  },
+  {
+    "group": "references-vit-codebase",
+    "item": "FQ-ViT",
+    "analysis": "vit/codebases/FQ-ViT/analysis.md"
+  },
+  {
+    "group": "references-vit-codebase",
+    "item": "M3ViT",
+    "analysis": "vit/codebases/M3ViT/analysis.md"
+  },
+  {
+    "group": "references-vit-codebase",
+    "item": "Next-ViT",
+    "analysis": "vit/codebases/Next-ViT/analysis.md"
+  },
+  {
+    "group": "references-vit-codebase",
+    "item": "P2-ViT",
+    "analysis": "vit/codebases/P2-ViT/analysis.md"
+  },
+  {
+    "group": "references-vit-codebase",
+    "item": "PTQ4ViT",
+    "analysis": "vit/codebases/PTQ4ViT/analysis.md"
+  },
+  {
+    "group": "references-vit-codebase",
+    "item": "RepViT",
+    "analysis": "vit/codebases/RepViT/analysis.md"
+  },
+  {
+    "group": "references-vit-codebase",
+    "item": "ShiftAddViT",
+    "analysis": "vit/codebases/ShiftAddViT/analysis.md"
+  },
+  {
+    "group": "references-vit-codebase",
+    "item": "ViTALiTy",
+    "analysis": "vit/codebases/ViTALiTy/analysis.md"
+  },
+  {
+    "group": "references-hardware-codebase",
+    "item": "A.U.R.A.---FlashAttention-ASIC-Accelerator",
+    "analysis": "hardware/codebases/A.U.R.A.---FlashAttention-ASIC-Accelerator/analysis.md"
+  },
+  {
+    "group": "references-hardware-codebase",
+    "item": "AGNA-FCCM2023",
+    "analysis": "hardware/codebases/AGNA-FCCM2023/analysis.md"
+  },
+  {
+    "group": "references-hardware-codebase",
+    "item": "DPACS",
+    "analysis": "hardware/codebases/DPACS/analysis.md"
+  },
+  {
+    "group": "references-hardware-codebase",
+    "item": "Diff-DiT",
+    "analysis": "hardware/codebases/Diff-DiT/analysis.md"
+  },
+  {
+    "group": "references-hardware-codebase",
+    "item": "ESDA",
+    "analysis": "hardware/codebases/ESDA/analysis.md"
+  },
+  {
+    "group": "references-hardware-codebase",
+    "item": "Edge-MoE",
+    "analysis": "hardware/codebases/Edge-MoE/analysis.md"
+  },
+  {
+    "group": "references-hardware-codebase",
+    "item": "FPGA_Friendly_SpinQuant",
+    "analysis": "hardware/codebases/FPGA_Friendly_SpinQuant/analysis.md"
+  },
+  {
+    "group": "references-hardware-codebase",
+    "item": "FlexCNN",
+    "analysis": "hardware/codebases/FlexCNN/analysis.md"
+  },
+  {
+    "group": "references-hardware-codebase",
+    "item": "FlexLLM",
+    "analysis": "hardware/codebases/FlexLLM/analysis.md"
+  },
+  {
+    "group": "references-hardware-codebase",
+    "item": "HG-PIPE",
+    "analysis": "hardware/codebases/HG-PIPE/analysis.md"
+  },
+  {
+    "group": "references-hardware-codebase",
+    "item": "HLS-Acceleration-of-LLaMA2",
+    "analysis": "hardware/codebases/HLS-Acceleration-of-LLaMA2/analysis.md"
+  },
+  {
+    "group": "references-hardware-codebase",
+    "item": "HiSpMM",
+    "analysis": "hardware/codebases/HiSpMM/analysis.md"
+  },
+  {
+    "group": "references-hardware-codebase",
+    "item": "HiSpMV",
+    "analysis": "hardware/codebases/HiSpMV/analysis.md"
+  },
+  {
+    "group": "references-hardware-codebase",
+    "item": "HiSparse",
+    "analysis": "hardware/codebases/HiSparse/analysis.md"
+  },
+  {
+    "group": "references-hardware-codebase",
+    "item": "Kria-YOLOv4-Tiny-FPGA-Accelerator",
+    "analysis": "hardware/codebases/Kria-YOLOv4-Tiny-FPGA-Accelerator/analysis.md"
+  },
+  {
+    "group": "references-hardware-codebase",
+    "item": "LLM_FPGA",
+    "analysis": "hardware/codebases/LLM_FPGA/analysis.md"
+  },
+  {
+    "group": "references-hardware-codebase",
+    "item": "Lightening-Transformer-AE",
+    "analysis": "hardware/codebases/Lightening-Transformer-AE/analysis.md"
+  },
+  {
+    "group": "references-hardware-codebase",
+    "item": "MSD-FCCM23",
+    "analysis": "hardware/codebases/MSD-FCCM23/analysis.md"
+  },
+  {
+    "group": "references-hardware-codebase",
+    "item": "MobileVit-AI-Hardware-Accelerator",
+    "analysis": "hardware/codebases/MobileVit-AI-Hardware-Accelerator/analysis.md"
+  },
+  {
+    "group": "references-hardware-codebase",
+    "item": "REMOT-FPGA-22",
+    "analysis": "hardware/codebases/REMOT-FPGA-22/analysis.md"
+  },
+  {
+    "group": "references-hardware-codebase",
+    "item": "TATAA",
+    "analysis": "hardware/codebases/TATAA/analysis.md"
+  },
+  {
+    "group": "references-hardware-codebase",
+    "item": "TMMA",
+    "analysis": "hardware/codebases/TMMA/analysis.md"
+  },
+  {
+    "group": "references-hardware-codebase",
+    "item": "Transformer-Accelerator-Based-on-FPGA",
+    "analysis": "hardware/codebases/Transformer-Accelerator-Based-on-FPGA/analysis.md"
+  },
+  {
+    "group": "references-hardware-codebase",
+    "item": "Transformer_dataflow",
+    "analysis": "hardware/codebases/Transformer_dataflow/analysis.md"
+  },
+  {
+    "group": "references-hardware-codebase",
+    "item": "ViM-Q-FCCM-2026",
+    "analysis": "hardware/codebases/ViM-Q-FCCM-2026/analysis.md"
+  },
+  {
+    "group": "references-hardware-codebase",
+    "item": "ViT-Accelerator",
+    "analysis": "hardware/codebases/ViT-Accelerator/analysis.md"
+  },
+  {
+    "group": "references-hardware-codebase",
+    "item": "ViT-Accelerator-on-FPGA-with-INT8-quantization",
+    "analysis": "hardware/codebases/ViT-Accelerator-on-FPGA-with-INT8-quantization/analysis.md"
+  },
+  {
+    "group": "references-hardware-codebase",
+    "item": "ViT-FPGA-TPU",
+    "analysis": "hardware/codebases/ViT-FPGA-TPU/analysis.md"
+  },
+  {
+    "group": "references-hardware-codebase",
+    "item": "ViTALiTy",
+    "analysis": "hardware/codebases/ViTALiTy/analysis.md"
+  },
+  {
+    "group": "references-hardware-codebase",
+    "item": "ViTCoD",
+    "analysis": "hardware/codebases/ViTCoD/analysis.md"
+  },
+  {
+    "group": "references-hardware-codebase",
+    "item": "acap-gemm-sa",
+    "analysis": "hardware/codebases/acap-gemm-sa/analysis.md"
+  },
+  {
+    "group": "references-hardware-codebase",
+    "item": "efficient-transformer-accelerator",
+    "analysis": "hardware/codebases/efficient-transformer-accelerator/analysis.md"
+  },
+  {
+    "group": "references-hardware-codebase",
+    "item": "hls-spmv",
+    "analysis": "hardware/codebases/hls-spmv/analysis.md"
+  },
+  {
+    "group": "references-hardware-codebase",
+    "item": "submission",
+    "analysis": "hardware/codebases/submission/analysis.md"
+  },
+  {
+    "group": "references-hardware-codebase",
+    "item": "trans-fat",
+    "analysis": "hardware/codebases/trans-fat/analysis.md"
+  },
+  {
+    "group": "references-hardware-codebase",
+    "item": "transformer-hls-thesis",
+    "analysis": "hardware/codebases/transformer-hls-thesis/analysis.md"
+  },
+  {
+    "group": "references-hardware-codebase",
+    "item": "vit-tiny-accelerator",
+    "analysis": "hardware/codebases/vit-tiny-accelerator/analysis.md"
+  },
+  {
+    "group": "references-hw-framework",
+    "item": "FlexCNN",
+    "analysis": "hw-framework/frameworks/FlexCNN/analysis.md"
+  },
+  {
+    "group": "references-hw-framework",
+    "item": "HLS4ML",
+    "analysis": "hw-framework/frameworks/HLS4ML/analysis.md"
+  },
+  {
+    "group": "references-hw-framework",
+    "item": "NVDLA",
+    "analysis": "hw-framework/frameworks/NVDLA/analysis.md"
+  },
+  {
+    "group": "references-hw-framework",
+    "item": "Prometheus",
+    "analysis": "hw-framework/frameworks/Prometheus/analysis.md"
+  },
+  {
+    "group": "references-hw-framework",
+    "item": "Sextans",
+    "analysis": "hw-framework/frameworks/Sextans/analysis.md"
+  },
+  {
+    "group": "references-hw-framework",
+    "item": "Stream-HLS",
+    "analysis": "hw-framework/frameworks/Stream-HLS/analysis.md"
+  },
+  {
+    "group": "references-hw-framework",
+    "item": "allo",
+    "analysis": "hw-framework/frameworks/allo/analysis.md"
+  },
+  {
+    "group": "references-hw-framework",
+    "item": "cgra4ml",
+    "analysis": "hw-framework/frameworks/cgra4ml/analysis.md"
+  },
+  {
+    "group": "references-hw-framework",
+    "item": "mase",
+    "analysis": "hw-framework/frameworks/mase/analysis.md"
+  },
+  {
+    "group": "references-hw-framework",
+    "item": "scalehls",
+    "analysis": "hw-framework/frameworks/scalehls/analysis.md"
+  },
+  {
+    "group": "references-hw-framework",
+    "item": "soda",
+    "analysis": "hw-framework/frameworks/soda/analysis.md"
+  }
+]

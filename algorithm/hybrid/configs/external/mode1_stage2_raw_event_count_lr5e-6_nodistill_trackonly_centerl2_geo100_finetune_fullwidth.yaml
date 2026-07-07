@@ -1,0 +1,12 @@
+# Stage2 track-only fine-tune with decoded-center L2 plus full-strength ellipse geometry.
+# Stronger geometry loss is higher-risk than geo075, so run after the current
+# center-L2/count queues unless a GPU becomes idle.
+
+extends: mode1_stage2_raw_event_count_lr5e-6_nodistill_trackonly_centerl2_finetune_fullwidth.yaml
+
+loss:
+  track_center_l2_weight: 0.0025
+  track_geo_weight: 1.0
+
+experiment:
+  name: raw_mode1_stage2_lr5e-6_nodistill_trackonly_centerl2_geo100_finetune_fullwidth

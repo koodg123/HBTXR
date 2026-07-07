@@ -1,6 +1,6 @@
 # Source: https://raw.githubusercontent.com/apple/ml-ademamix/main/pytorch/ademamix.py
 # Upstream: apple/ml-ademamix pytorch/ademamix.py
-# Diff: see docs/src/optimizers/adema_mix_diff.md
+# Diff: see docs/hbtxr/optimizers/adema_mix_diff.md
 
 from __future__ import annotations
 

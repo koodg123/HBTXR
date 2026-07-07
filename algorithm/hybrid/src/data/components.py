@@ -30,11 +30,71 @@ class AdaptiveRoiResolver:
 
     def resolve_event_crop_policy(self) -> str:
         policy = safe_text(self.event_builder.event_builder.get("crop_policy"), "manifest_roi").lower()
-        return policy if policy in {"manifest_roi", "density_adaptive"} else "manifest_roi"
+        return policy if policy in {"manifest_roi", "density_adaptive", "prev_pupil_anchor"} else "manifest_roi"
 
     def resolve_event_crop_scope(self) -> str:
         scope = safe_text(self.event_builder.event_builder.get("crop_scope"), "within_roi").lower()
         return scope if scope in {"within_roi", "full_sensor"} else "within_roi"
+
+    @staticmethod
+    def _pupil_bbox_from_annotation(annotation: dict[str, Any]) -> tuple[float, float, float, float] | None:
+        bbox = annotation.get("pupil_region_bbox_xywh_sensor")
+        if bbox is not None:
+            return tuple(float(v) for v in bbox)
+        ellipse = (
+            annotation.get("pupil_ellipse_xywht_sensor")
+            or annotation.get("ellipse_sensor_xywht")
+            or annotation.get("ellipse_xywht")
+            or annotation.get("ellipse_frame_xywht")
+        )
+        if ellipse is None:
+            return None
+        return tuple(float(v) for v in ellipse_to_bbox([float(v) for v in ellipse]))
+
+    def resolve_prev_pupil_anchor_roi(
+        self,
+        row: dict[str, Any],
+        *,
+        base_roi: tuple[float, float, float, float],
+        crop_scope: str,
+        sensor_size_wh: tuple[int, int],
+    ) -> tuple[tuple[float, float, float, float], dict[str, Any]]:
+        meta: dict[str, Any] = {
+            "anchor_roi_source": "prev_pupil_anchor",
+            "anchor_roi_applied": False,
+            "anchor_roi_xywh": [float(v) for v in base_roi],
+        }
+        ref = row.get("prev_annotation_ref") or row.get("annotation_ref")
+        if not ref:
+            meta["anchor_roi_reason"] = "missing_annotation_ref"
+            return base_roi, meta
+        try:
+            annotation = self.event_builder.reader.load_annotation(ref)
+        except (KeyError, TypeError, FileNotFoundError):
+            meta["anchor_roi_reason"] = "annotation_load_failed"
+            return base_roi, meta
+
+        bbox = self._pupil_bbox_from_annotation(annotation)
+        if bbox is None:
+            meta["anchor_roi_reason"] = "missing_pupil_bbox"
+            return base_roi, meta
+
+        margin_px = max(0.0, safe_float(self.event_builder.event_builder.get("crop_margin_px"), 24.0))
+        min_side_px = max(1.0, safe_float(self.event_builder.event_builder.get("crop_min_side_px"), 96.0))
+        x, y, w, h = [float(v) for v in bbox]
+        cx = x + 0.5 * w
+        cy = y + 0.5 * h
+        w = max(w + 2.0 * margin_px, min_side_px)
+        h = max(h + 2.0 * margin_px, min_side_px)
+        anchor_roi = (cx - 0.5 * w, cy - 0.5 * h, w, h)
+        anchor_roi = clip_xywh_to_sensor(anchor_roi, sensor_size_wh=sensor_size_wh)
+        if crop_scope == "within_roi":
+            anchor_roi = constrain_xywh_to_parent(anchor_roi, parent_xywh=base_roi)
+            anchor_roi = clip_xywh_to_sensor(anchor_roi, sensor_size_wh=sensor_size_wh)
+
+        meta["anchor_roi_applied"] = True
+        meta["anchor_roi_xywh"] = [float(v) for v in anchor_roi]
+        return anchor_roi, meta
 
     def collect_event_points_for_adaptive_crop(
         self,
@@ -130,6 +190,18 @@ class AdaptiveRoiResolver:
             "adaptive_roi_xywh": [float(v) for v in base_roi],
             "adaptive_roi_event_count": 0,
         }
+        if crop_policy == "prev_pupil_anchor":
+            anchor_roi, anchor_meta = self.resolve_prev_pupil_anchor_roi(
+                row,
+                base_roi=base_roi,
+                crop_scope=crop_scope,
+                sensor_size_wh=sensor_size_wh,
+            )
+            meta.update(anchor_meta)
+            meta["adaptive_roi_applied"] = bool(anchor_meta.get("anchor_roi_applied", False))
+            meta["adaptive_roi_xywh"] = [float(v) for v in anchor_roi]
+            return ResolvedRoi(roi_xywh=anchor_roi, meta=meta)
+
         if crop_policy != "density_adaptive":
             return ResolvedRoi(roi_xywh=base_roi, meta=meta)
 
@@ -291,6 +363,7 @@ class SampleAssembler:
             "canonical_name": canonical_name,
             "manifest_name": manifest_name,
             "frame_source": frame_source,
+            "session_key": row.get("session_key"),
             "sample_timestamp_us": targets.sample_timestamp_us,
             "frame_path": None if assets.resolved_frame_path is None else str(assets.resolved_frame_path),
             "session_store_path": None if assets.resolved_store_path is None else str(assets.resolved_store_path),

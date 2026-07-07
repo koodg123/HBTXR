@@ -1,6 +1,6 @@
 # Source: https://raw.githubusercontent.com/Liuhong99/Sophia/main/sophia.py
 # Upstream: Liuhong99/Sophia sophia.py
-# Diff: see docs/src/optimizers/sophia_g_diff.md
+# Diff: see docs/hbtxr/optimizers/sophia_g_diff.md
 
 from __future__ import annotations
 

@@ -9,6 +9,8 @@ from typing import Any
 
 import yaml
 
+from src.reproduction import write_reproduction_manifest
+
 from .runtime_config import resolve_mode_contract
 
 
@@ -36,7 +38,7 @@ def resolve_experiment_name(cfg: dict, *, config_path: str | Path) -> str:
 
 
 def materialize_experiment_name(experiment_name: str, *, timestamp: str | None = None, resume: bool = False) -> str:
-    base = str(experiment_name).strip() or "src"
+    base = str(experiment_name).strip() or "hbtxr"
     if resume or _TIMESTAMP_SUFFIX.match(base):
         return base
     stamp = timestamp or datetime.now().strftime("%Y%m%d_%H%M%S")
@@ -49,9 +51,17 @@ def latest_run_root(project_root: str | Path, experiment_name: str) -> Path | No
     if not raw:
         return None
     if _TIMESTAMP_SUFFIX.match(raw):
-        candidate = runs_root / raw
-        return candidate if candidate.exists() else None
-    roots = sorted(path for path in runs_root.glob(f"{raw}_*") if path.is_dir())
+        for pattern in (raw, f"XR-*/{raw}", f"NON_XR/*/{raw}"):
+            roots = sorted(path for path in runs_root.glob(pattern) if path.is_dir())
+            if roots:
+                return roots[-1]
+        return None
+    roots = sorted(
+        path
+        for pattern in (f"{raw}_*", f"XR-*/*{raw}_*", f"NON_XR/*/{raw}_*")
+        for path in runs_root.glob(pattern)
+        if path.is_dir()
+    )
     return roots[-1] if roots else None
 
 
@@ -185,6 +195,13 @@ class RunContractResolver:
             (hypers_dir / f"{feature_name}_reference.json").write_text(
                 json.dumps(payload, indent=2, ensure_ascii=False),
                 encoding="utf-8",
+            )
+        if self.cfg.get("paper"):
+            write_reproduction_manifest(
+                self.cfg,
+                project_root=self.project_root,
+                output_dir=run_contract["root"],
+                artifacts={"run_contract": run_contract_payload},
             )
         if pretrained_report_name:
             target = hypers_dir / pretrained_report_name

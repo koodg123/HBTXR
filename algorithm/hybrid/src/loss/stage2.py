@@ -9,9 +9,16 @@ from src.loss.bundles import resolve_search_state as _resolve_search_state
 from src.loss.bundles import resolve_track_state as _resolve_track_state
 from src.loss.bundles import sum_loss_logs as _sum_loss_logs
 from src.loss.bundles import track_branch_losses as _track_branch_losses
+from src.loss.bundles import track_center_candidate_losses as _track_center_candidate_losses
+from src.loss.bundles import track_state_aux_losses as _track_state_aux_losses
+from src.loss.bundles import track_center_heatmap_losses as _track_center_heatmap_losses
+from src.loss.bundles import track_center_refine_losses as _track_center_refine_losses
+from src.loss.bundles import track_state_simdr_losses as _track_state_simdr_losses
+from src.loss.bundles import track_target_override_losses as _track_target_override_losses
 from src.loss.bundles import zero_loss as _zero_loss
 from src.loss.common import ellipse_gwd_loss
 from src.loss.stage_common import (
+    build_loss_sample_weights,
     compute_aux_loss,
     compute_constraint_center_log,
     compute_eye_logs,
@@ -30,7 +37,9 @@ def compute_stage2_losses(
 ) -> Dict[str, torch.Tensor]:
     quality, geom, track_geom = resolve_sample_masks(batch)
     geom_weights = quality * geom
-    track_weights = quality * track_geom
+    track_sample_weights = build_loss_sample_weights(batch, loss_cfg)
+    track_quality = quality if track_sample_weights is None else quality * track_sample_weights
+    track_weights = track_quality * track_geom
     search_state = _resolve_search_state(outputs) if ("search/state" in outputs or "search/pupil" in outputs) else None
     event_state = _resolve_event_state(outputs) if ("event/state" in outputs or "event/pupil" in outputs) else None
     track_state = _resolve_track_state(batch, outputs) if ("track/state" in outputs or "track/pupil" in outputs) else None
@@ -55,11 +64,79 @@ def compute_stage2_losses(
         target=batch["pupil_track_target"],
         state=track_state,
         target_state=batch["cur_state"],
-        quality=quality,
+        quality=track_quality,
         track_geom=track_geom,
         valid_track=batch["valid_track"],
+        similarity_target=batch.get("similarity_target"),
         loss_cfg=loss_cfg,
     ) if ("track/pupil" in outputs and track_state is not None) else {}
+    track_aux_losses = _track_state_aux_losses(
+        state_aux=outputs["track/state_aux"],
+        target_state=batch["cur_state"],
+        quality=track_quality,
+        track_geom=track_geom,
+        loss_cfg=loss_cfg,
+    ) if "track/state_aux" in outputs else {}
+    track_simdr_losses = _track_state_simdr_losses(
+        logits=outputs["track/state_simdr"],
+        target_state=batch["cur_state"],
+        quality=track_quality,
+        track_geom=track_geom,
+        loss_cfg=loss_cfg,
+    ) if "track/state_simdr" in outputs else {}
+    track_heatmap_losses = _track_center_heatmap_losses(
+        logits=outputs["track/center_heatmap_logits"],
+        offset=outputs["track/center_heatmap_offset"],
+        target_state=batch["cur_state"],
+        quality=track_quality,
+        track_geom=track_geom,
+        loss_cfg=loss_cfg,
+    ) if "track/center_heatmap_logits" in outputs and "track/center_heatmap_offset" in outputs else {}
+    track_refine_losses = _track_center_refine_losses(
+        delta=outputs["track/center_refine_delta"],
+        quality=track_quality,
+        track_geom=track_geom,
+        loss_cfg=loss_cfg,
+    ) if "track/center_refine_delta" in outputs else {}
+    track_candidate_losses = _track_center_candidate_losses(
+        candidate_xy=outputs["track/center_candidate_xy"],
+        candidate_logits=outputs["track/center_candidate_logits"],
+        candidate_delta=outputs["track/center_candidate_delta"],
+        target_state=batch["cur_state"],
+        quality=track_quality,
+        track_geom=track_geom,
+        loss_cfg=loss_cfg,
+    ) if (
+        "track/center_candidate_xy" in outputs
+        and "track/center_candidate_logits" in outputs
+        and "track/center_candidate_delta" in outputs
+    ) else {}
+    track_override_losses = _track_target_override_losses(
+        state=track_state,
+        override_state=batch["track_target_override_state"],
+        override_weight=batch["track_target_override_weight"],
+        quality=track_quality,
+        track_geom=track_geom,
+        loss_cfg=loss_cfg,
+        prefix="track_target_override",
+    ) if (
+        track_state is not None
+        and "track_target_override_state" in batch
+        and "track_target_override_weight" in batch
+    ) else {}
+    track_aux_override_losses = _track_target_override_losses(
+        state=outputs["track/state_aux"],
+        override_state=batch["track_target_override_state"],
+        override_weight=batch["track_target_override_weight"],
+        quality=track_quality,
+        track_geom=track_geom,
+        loss_cfg=loss_cfg,
+        prefix="track_state_aux_target_override",
+    ) if (
+        "track/state_aux" in outputs
+        and "track_target_override_state" in batch
+        and "track_target_override_weight" in batch
+    ) else {}
     eye_logs = compute_eye_logs(batch, outputs, loss_cfg, quality=quality, active_head=active_head)
     mask_loss, mask_coarse_loss = compute_mask_losses(batch, outputs, loss_cfg, weights=geom_weights, active_head=active_head)
     consistency = (
@@ -88,6 +165,13 @@ def compute_stage2_losses(
         **search_logs,
         **event_logs,
         **{f"loss_{name}": value for name, value in track_losses.items()},
+        **{f"loss_{name}": value for name, value in track_aux_losses.items()},
+        **{f"loss_{name}": value for name, value in track_simdr_losses.items()},
+        **{f"loss_{name}": value for name, value in track_heatmap_losses.items()},
+        **{f"loss_{name}": value for name, value in track_refine_losses.items()},
+        **{f"loss_{name}": value for name, value in track_candidate_losses.items()},
+        **{f"loss_{name}": value for name, value in track_override_losses.items()},
+        **{f"loss_{name}": value for name, value in track_aux_override_losses.items()},
     }
     logs["loss_total"] = _sum_loss_logs(logs, batch, outputs)
     return logs

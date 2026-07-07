@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import Dict
+from typing import Any, Dict
 
 import torch
 
@@ -34,6 +34,92 @@ def resolve_sample_masks(batch: Dict[str, torch.Tensor]) -> tuple[torch.Tensor, 
     geom = _geom_mask(batch)
     track_geom = _track_mask(batch)
     return quality, geom, track_geom
+
+
+def _as_bool(value: Any, default: bool = False) -> bool:
+    if value is None:
+        return default
+    if isinstance(value, bool):
+        return value
+    return str(value).strip().lower() in {"1", "true", "yes", "on"}
+
+
+def _as_float(value: Any, default: float) -> float:
+    if value is None or value == "":
+        return default
+    try:
+        return float(value)
+    except (TypeError, ValueError):
+        return default
+
+
+def _batch_meta_text(batch: Dict[str, Any], index: int, field: str) -> str:
+    meta = batch.get("meta")
+    if isinstance(meta, list) and index < len(meta) and isinstance(meta[index], dict):
+        value = meta[index].get(field)
+        if value is not None:
+            return str(value)
+    values = batch.get(field)
+    if isinstance(values, list) and index < len(values):
+        return str(values[index])
+    return ""
+
+
+def _multiply_if_text_contains(weight: float, batch: Dict[str, Any], index: int, cfg: Dict[str, Any]) -> float:
+    needle = str(cfg.get("contains", "")).strip()
+    if not needle:
+        return weight
+    field = str(cfg.get("field", "session_key"))
+    if needle in _batch_meta_text(batch, index, field):
+        return weight * max(0.0, _as_float(cfg.get("multiplier"), 1.0))
+    return weight
+
+
+def build_loss_sample_weights(batch: Dict[str, Any], loss_cfg: Dict[str, Any], key: str = "track_sample_weight") -> torch.Tensor | None:
+    cfg = loss_cfg.get(key) or (loss_cfg.get("sample_weight") if key == "track_sample_weight" else None) or {}
+    if not isinstance(cfg, dict) or not _as_bool(cfg.get("enabled"), default=False):
+        return None
+
+    ref = batch.get("annotation_quality")
+    if not torch.is_tensor(ref):
+        raise ValueError(f"loss.{key} requires tensor batch['annotation_quality']")
+    device = ref.device
+    dtype = ref.dtype
+    count = int(ref.view(-1).shape[0])
+    min_weight = max(0.0, _as_float(cfg.get("min_weight"), 1.0e-6))
+    weights = [max(min_weight, _as_float(cfg.get("base_weight"), 1.0)) for _ in range(count)]
+
+    low_sim_cfg = cfg.get("low_similarity") or {}
+    if isinstance(low_sim_cfg, dict) and _as_bool(low_sim_cfg.get("enabled"), default=False):
+        field = str(low_sim_cfg.get("field", "similarity_target"))
+        values = batch.get(field)
+        if torch.is_tensor(values):
+            sims = values.detach().view(-1).float().cpu().tolist()
+            threshold = _as_float(low_sim_cfg.get("threshold"), 0.1)
+            multiplier = max(0.0, _as_float(low_sim_cfg.get("multiplier"), 1.0))
+            for idx, similarity in enumerate(sims[:count]):
+                if similarity <= threshold:
+                    weights[idx] *= multiplier
+
+    session_cfg = cfg.get("session_contains")
+    if isinstance(session_cfg, str):
+        session_cfg = {"contains": session_cfg}
+    if isinstance(session_cfg, dict):
+        for idx in range(count):
+            weights[idx] = _multiply_if_text_contains(weights[idx], batch, idx, session_cfg)
+
+    for text_cfg in cfg.get("text_contains") or []:
+        if isinstance(text_cfg, dict):
+            for idx in range(count):
+                weights[idx] = _multiply_if_text_contains(weights[idx], batch, idx, text_cfg)
+
+    max_multiplier = cfg.get("max_multiplier")
+    if max_multiplier is not None:
+        cap = max(0.0, _as_float(max_multiplier, 0.0))
+        weights = [min(weight, cap) for weight in weights]
+    if not any(weight > 0.0 for weight in weights):
+        raise ValueError(f"loss.{key} produced all-zero sample weights")
+    return torch.as_tensor(weights, device=device, dtype=dtype)
 
 
 def compute_eye_logs(
@@ -201,6 +287,7 @@ __all__ = [
     "compute_eye_logs",
     "compute_mask_losses",
     "compute_pupil_branch_log_group",
+    "build_loss_sample_weights",
     "constraint_center_loss",
     "resolve_sample_masks",
 ]

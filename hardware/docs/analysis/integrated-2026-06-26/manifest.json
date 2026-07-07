@@ -1,0 +1,40 @@
+{
+  "generated_at": "2026-06-26",
+  "package": "analysis/integrated-2026-06-26",
+  "preserves_existing_curated_package": "analysis/curated-2026-06-26",
+  "sources": {
+    "existing_vit_accel_analysis": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/analysis/vit-accel",
+    "references_vit": "/home/kjm26/project/PRJXR/References/ViT",
+    "references_hardware": "/home/kjm26/project/PRJXR/References/Hardware",
+    "references_hw_framework": "/home/kjm26/project/PRJXR/References/HW_Framework",
+    "style_reference": "/home/kjm26/project/PRJXR/References/reports"
+  },
+  "outputs": [
+    "README.md",
+    "HGTXR_DESIGN_EXPERIMENT_INTEGRATION.md",
+    "vit-accel/README.md",
+    "vit-accel/codebases/INTEGRATED_CODEBASE_ANALYSIS.md",
+    "vit-accel/papers/INTEGRATED_PAPER_ANALYSIS.md",
+    "vit/codebases/INTEGRATED_ANALYSIS.md",
+    "hardware/codebases/INTEGRATED_ANALYSIS.md",
+    "hw-framework/frameworks/INTEGRATED_ANALYSIS.md",
+    "manifests/coverage.tsv",
+    "manifests/provenance.md",
+    "manifests/per_source_manifest.json",
+    "manifests/per_source_index.tsv",
+    "vit-accel/codebases/INDEX.md",
+    "vit-accel/papers/INDEX.md",
+    "vit/codebases/INDEX.md",
+    "hardware/codebases/INDEX.md",
+    "hw-framework/frameworks/INDEX.md"
+  ],
+  "evidence_boundary": {
+    "static_analysis_only": true,
+    "external_reference_repositories_modified": false,
+    "hls_synthesis_executed": false,
+    "vivado_implementation_executed": false,
+    "board_run_executed": false,
+    "model_training_executed": false
+  },
+  "per_source_analysis_count": 105
+}

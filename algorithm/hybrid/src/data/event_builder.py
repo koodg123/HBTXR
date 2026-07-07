@@ -12,6 +12,21 @@ from .transform import SpatialTransform, apply_transform_to_event
 from .utils import extract_valid_event_points, safe_float, safe_text
 
 
+def _safe_bool(value: Any, default: bool = False) -> bool:
+    if value is None:
+        return bool(default)
+    if isinstance(value, bool):
+        return value
+    if isinstance(value, (int, float)):
+        return bool(value)
+    text = str(value).strip().lower()
+    if text in {"1", "true", "yes", "y", "on"}:
+        return True
+    if text in {"0", "false", "no", "n", "off"}:
+        return False
+    return bool(default)
+
+
 class EventInputBuilder:
     def __init__(
         self,
@@ -90,7 +105,7 @@ class EventInputBuilder:
             duration = float(end_timestamp_us) - float(start_timestamp_us)
             if duration <= 1e-6:
                 return np.ones((count,), dtype=np.float32)
-            positions = (timestamps_us.astype(np.float32) - float(start_timestamp_us)) / duration
+            positions = (timestamps_us.astype(np.float64) - float(start_timestamp_us)) / duration
             positions = np.clip(positions, 0.0, 1.0)
             return np.power(positions, float(causal_weight_power)).astype(np.float32)
         raise ValueError(f"Unsupported accumulation mode: {mode}")
@@ -370,6 +385,30 @@ class EventInputBuilder:
                     manifest_event_window.get("start_timestamp_us", effective_end),
                 )
             )
+        elif policy == "fixed_count":
+            adaptive_count = effective.get("adaptive_count")
+            if isinstance(adaptive_count, dict) and _safe_bool(adaptive_count.get("enabled"), False):
+                base_count = int(effective.get("event_count_target", self.default_event_builder["event_count_target"]))
+                reference_us = max(1.0, safe_float(adaptive_count.get("reference_us"), 10_000.0))
+                min_count = max(1, int(safe_float(adaptive_count.get("min_event_count"), base_count)))
+                max_count = max(min_count, int(safe_float(adaptive_count.get("max_event_count"), base_count)))
+                scale_power = max(0.0, safe_float(adaptive_count.get("scale_power"), 1.0))
+                previous_us = row.get("prev_sample_timestamp_us", manifest_event_window.get("start_timestamp_us"))
+                if previous_us is not None:
+                    delta_us = max(1.0, float(effective_end) - float(previous_us))
+                    scaled = float(base_count) * ((delta_us / reference_us) ** scale_power)
+                    resolved_count = int(np.clip(round(scaled), min_count, max_count))
+                    effective["event_count_target"] = resolved_count
+                    effective["adaptive_count_resolved"] = {
+                        "base_event_count": int(base_count),
+                        "delta_us": float(delta_us),
+                        "reference_us": float(reference_us),
+                        "scale_power": float(scale_power),
+                        "min_event_count": int(min_count),
+                        "max_event_count": int(max_count),
+                        "resolved_event_count": int(resolved_count),
+                    }
+            effective.pop("start_timestamp_us", None)
         elif manifest_event_window.get("start_timestamp_us") is not None:
             effective["start_timestamp_us"] = int(manifest_event_window["start_timestamp_us"])
         return effective

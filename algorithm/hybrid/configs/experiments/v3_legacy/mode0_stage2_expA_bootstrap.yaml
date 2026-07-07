@@ -1,0 +1,6 @@
+# Compatibility alias for the historical Exp-A stage2 bootstrap preset.
+
+extends: mode0_stage2_maskcentroid_bootstrap.yaml
+
+experiment:
+  name: hbtxr_mode0_stage2_expA_bootstrap

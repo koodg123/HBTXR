@@ -1,11 +1,13 @@
 from __future__ import annotations
 
 import json
+import itertools
 import inspect
 import math
 import random
 import sys
 import time
+from fnmatch import fnmatch
 from pathlib import Path
 from typing import Any
 
@@ -22,6 +24,7 @@ except Exception:  # pragma: no cover - plain-text fallback is covered instead
 from src.data.loader import make_loader_by_mode
 from src.optim.common import optimizer_hypers_dir, write_json
 from src.optim.registry import build_optimizer
+from src.pools.lr_schedulers import build_lr_scheduler
 from src.models.export_pruned import export_structural_student
 from src.models.pruning import (
     is_legacy_masking_enabled,
@@ -396,33 +399,7 @@ def _build_scheduler(
     *,
     optimizer_meta: dict[str, Any] | None = None,
 ):
-    if optimizer_meta is not None and not bool(optimizer_meta.get("external_scheduler_allowed", True)):
-        return None
-    scheduler_cfg = training_cfg.get("scheduler") or {}
-    scheduler_type = str(scheduler_cfg.get("type", "none")).strip().lower()
-    if scheduler_type == "none":
-        return None
-    if scheduler_type == "cosine":
-        return torch.optim.lr_scheduler.CosineAnnealingLR(
-            optimizer,
-            T_max=max(1, int(total_epochs)),
-            eta_min=float(scheduler_cfg.get("min_lr", 0.0)),
-        )
-    if scheduler_type == "step":
-        return torch.optim.lr_scheduler.StepLR(
-            optimizer,
-            step_size=int(scheduler_cfg.get("step_size", 10)),
-            gamma=float(scheduler_cfg.get("gamma", 0.5)),
-        )
-    if scheduler_type == "plateau":
-        return torch.optim.lr_scheduler.ReduceLROnPlateau(
-            optimizer,
-            mode=_metric_mode(str(scheduler_cfg.get("metric_name") or training_cfg.get("best_metric_name") or "")),
-            factor=float(scheduler_cfg.get("factor", 0.5)),
-            patience=int(scheduler_cfg.get("patience", 5)),
-            threshold=float(scheduler_cfg.get("threshold", 0.0)),
-        )
-    raise ValueError(f"Unsupported scheduler type: {scheduler_type}")
+    return build_lr_scheduler(optimizer, training_cfg, total_epochs, optimizer_meta=optimizer_meta)
 
 
 def _current_lr(optimizer: torch.optim.Optimizer) -> float:
@@ -461,6 +438,73 @@ def _write_optimizer_reports(
         "modifiers": optimizer_meta.get("modifiers") or {},
     }
     write_json(hypers_dir / "optimizer_diff_summary.json", diff_summary)
+
+
+def _pattern_list(value: Any) -> list[str]:
+    if value is None:
+        return []
+    if isinstance(value, str):
+        return [value]
+    if isinstance(value, (list, tuple)):
+        return [str(item) for item in value if str(item).strip()]
+    return [str(value)]
+
+
+def _name_matches_any(name: str, patterns: list[str]) -> bool:
+    return any(fnmatch(name, pattern) or pattern in name for pattern in patterns)
+
+
+def _apply_trainable_filter(
+    model: nn.Module,
+    training_cfg: dict[str, Any],
+    *,
+    output_dir: Path,
+    console_logger: _ConsoleLogger,
+) -> dict[str, Any] | None:
+    trainable_cfg = training_cfg.get("trainable") or {}
+    include = _pattern_list(trainable_cfg.get("include") or training_cfg.get("trainable_include"))
+    exclude = _pattern_list(trainable_cfg.get("exclude") or training_cfg.get("trainable_exclude"))
+    if not include and not exclude:
+        return None
+
+    base = model.module if isinstance(model, nn.DataParallel) else model
+    trainable_names: list[str] = []
+    frozen_names: list[str] = []
+    total_params = 0
+    trainable_params = 0
+    for name, param in base.named_parameters():
+        total_params += int(param.numel())
+        should_train = True if not include else _name_matches_any(name, include)
+        if exclude and _name_matches_any(name, exclude):
+            should_train = False
+        param.requires_grad_(should_train)
+        if should_train:
+            trainable_names.append(name)
+            trainable_params += int(param.numel())
+        else:
+            frozen_names.append(name)
+
+    if not trainable_names:
+        raise ValueError(f"training.trainable filter left no trainable parameters. include={include} exclude={exclude}")
+
+    report = {
+        "include": include,
+        "exclude": exclude,
+        "trainable_param_count": trainable_params,
+        "total_param_count": total_params,
+        "frozen_param_count": total_params - trainable_params,
+        "trainable_tensor_count": len(trainable_names),
+        "frozen_tensor_count": len(frozen_names),
+        "trainable_names": trainable_names,
+        "frozen_name_sample": frozen_names[:64],
+    }
+    write_json(optimizer_hypers_dir(output_dir) / "trainable_filter.json", report)
+    console_logger.write(
+        "[trainable-filter] "
+        f"trainable_tensors={len(trainable_names)} frozen_tensors={len(frozen_names)} "
+        f"trainable_params={trainable_params}/{total_params}"
+    )
+    return report
 
 
 def make_loader(manifest_path: str, cfg: dict, shuffle: bool):
@@ -735,6 +779,7 @@ def _epoch_loop(
     best_metric_name: str | None = None,
     best_metric_value: float | None = None,
     active_head: str = "all",
+    max_batches: int | None = None,
 ) -> dict[str, float]:
     training = optimizer is not None
     uses_sampled_params = training and hasattr(optimizer, "sampled_params")
@@ -750,6 +795,9 @@ def _epoch_loop(
     if training:
         optimizer.zero_grad(set_to_none=True)
     total_steps = len(loader)
+    if max_batches is not None and int(max_batches) > 0:
+        total_steps = min(total_steps, int(max_batches))
+        loader = itertools.islice(loader, int(max_batches))
     enabled_heads = _enabled_heads_from_model(model)
     if console_logger is not None and epoch is not None and total_epochs is not None:
         console_logger.start_epoch(phase=phase, epoch=epoch, total_epochs=total_epochs, total_steps=total_steps)
@@ -878,6 +926,12 @@ class TrainingSession:
 
         self.model = build_model(self.cfg, role="student")
         self.model, self.device, self.resolved_device = _resolve_device_and_wrap(self.model, str(self.training_cfg.get("device", "cpu")))
+        self.trainable_filter_report = _apply_trainable_filter(
+            self.model,
+            self.training_cfg,
+            output_dir=self.output_dir,
+            console_logger=self.console_logger,
+        )
         self.optimizer, self.optimizer_resolved, self.optimizer_meta, optimizer_summary = build_optimizer(self.model, self.cfg)
         self.scheduler = _build_scheduler(
             self.optimizer,
@@ -978,7 +1032,11 @@ class TrainingSession:
         self.checkpoint_specs = (
             [{"metric": "metric_search_p10_pct", "filename": "best_search_p10.pt"}, {"metric": "metric_search_p5_pct", "filename": "best_search_p5.pt"}]
             if self.stage == "stage1"
-            else [{"metric": "metric_track_p10_pct", "filename": "best_track_p10.pt"}, {"metric": "metric_track_p5_pct", "filename": "best_track_p5.pt"}]
+            else [
+                {"metric": "metric_track_p10_pct", "filename": "best_track_p10.pt"},
+                {"metric": "metric_track_p5_pct", "filename": "best_track_p5.pt"},
+                {"metric": "metric_track_center_px", "filename": "best_metric_track_center_px.pt"},
+            ]
         )
         if all(spec["metric"] != self.best_metric_name for spec in self.checkpoint_specs):
             safe_metric_name = "".join(ch if ch.isalnum() or ch in {"_", "-"} else "_" for ch in self.best_metric_name)
@@ -1019,6 +1077,7 @@ class TrainingSession:
         scaler = self.scaler if training else None
         phase = "train" if training else "val"
         if training:
+            max_batches = self.training_cfg.get("max_train_batches")
             return _epoch_loop(
                 model=self.model,
                 loader=loader,
@@ -1041,8 +1100,10 @@ class TrainingSession:
                 best_metric_name=self.best_metric_name,
                 best_metric_value=self.best_control_value,
                 active_head=self.active_head,
+                max_batches=None if max_batches in (None, "") else int(max_batches),
             )
         with torch.no_grad():
+            max_batches = self.training_cfg.get("max_val_batches")
             return _epoch_loop(
                 model=self.model,
                 loader=loader,
@@ -1065,6 +1126,7 @@ class TrainingSession:
                 best_metric_name=self.best_metric_name,
                 best_metric_value=self.best_control_value,
                 active_head=self.active_head,
+                max_batches=None if max_batches in (None, "") else int(max_batches),
             )
 
     def _save_epoch_artifacts(self, *, epoch: int, train_stats: dict[str, float], val_stats: dict[str, float] | None) -> None:

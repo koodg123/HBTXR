@@ -1,0 +1,30 @@
+# Stage2 fine-tune: track head plus the final backbone block from the current
+# centerloss best-center test leader. This probes whether a small shared
+# feature-space adjustment transfers better than head-only or all-head updates.
+
+extends: mode1_stage2_raw_event_count_lr1e-5_nodistill_trackheadonly_centerloss_finetune_fullwidth.yaml
+
+training:
+  epochs: 16
+  lr: 2.0e-6
+  optimizer:
+    name: adamw
+    lr: 2.0e-6
+    weight_decay: 5.0e-5
+    betas: [0.9, 0.999]
+    eps: 1.0e-8
+    kwargs: {}
+  trainable:
+    include:
+      - "track_head.*"
+      - "backbone.attn_stages.5.*"
+      - "backbone.mlp_stages.5.*"
+      - "backbone.norm.*"
+  early_stopping:
+    enabled: true
+    patience: 4
+    start_epoch: 3
+    min_delta: 0.002
+
+experiment:
+  name: raw_mode1_stage2_lr2e-6_nodistill_tracklastblock_centerloss_finetune_fullwidth

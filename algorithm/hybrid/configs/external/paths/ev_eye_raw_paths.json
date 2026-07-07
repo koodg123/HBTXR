@@ -1,0 +1,10 @@
+{
+  "project_root": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/software",
+  "raw_root": "/home/kjm26/project/dataset/EV_Eye/raw_data/Data_davis",
+  "canonical_root": "/home/kjm26/project/dataset/EV_Eye/canonical",
+  "indexes_root": "/home/kjm26/project/dataset/EV_Eye/canonical/indexes",
+  "manifests_root": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/software/data/_internal/manifests",
+  "annotation_root": "/home/kjm26/project/dataset/EV_Eye/raw_data/Data_davis",
+  "groundedsam_root": null,
+  "preview_root": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/software/data/_internal/previews"
+}

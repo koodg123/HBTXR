@@ -1,0 +1,84 @@
+# Preset: mode0 + stage2 mask-centroid bootstrap
+# Purpose:
+# - keep raw CSV supervision
+# - enable event branch for hybrid tracking
+# - bootstrap stage2 from the mask-centroid stage1 experiment
+
+extends: ../../configs/base.yaml
+
+model:
+  heads:
+    # stage2 enables event head and keeps the mask branch for search-center fusion
+    event: true
+    mask: true
+  search:
+    # keep search-center routing consistent with the stage1 bootstrap checkpoint
+    xy_from_mask_centroid: true
+
+data:
+  mode: mode0
+  canonical_name: canonical0
+  manifest_name: manifest0
+  mode0:
+    resize_policy: sensor_full_letterbox
+    event_builder:
+      # interval_all uses the full interval between prev/current timestamps
+      policy: interval_all
+      accumulation: fast_causal_linear
+      causal_weight_power: 1.0
+      fast_causal_limit: 25.0
+      polarity_split: true
+
+training:
+  # stage2 = frame-event hybrid tracking
+  stage: stage2
+  epochs: 50
+  batch_size: 8
+  best_metric_name: metric_track_p10_pct
+  scheduler:
+    type: cosine
+    warmup_epochs: 5
+    min_lr: 1.0e-7
+  early_stopping:
+    enabled: false
+    patience: 10
+    start_epoch: 6
+
+distillation:
+  enabled: false
+  feature_similarity: true
+  feature_weight: 0.1
+  state_similarity: true
+  state_weight: 0.15
+  prediction_similarity: true
+  prediction_weight: 0.1
+  mask_similarity: false
+  kd:
+    enabled: true
+    temperature: 1.0
+    weight: 0.05
+  rkd:
+    enabled: true
+    distance_weight: 0.02
+
+regularization_ssl:
+  enabled: false
+  force_with_teacher: false
+
+pruning:
+  enabled: false
+  scheme: structural_width
+  student:
+    width_ratio: 0.6666667
+  export:
+    enabled: true
+
+experiment:
+  name: hbtxr_mode0_stage2_maskcentroid_bootstrap
+  init_checkpoint: runs/mode0_stage1_expA_maskcentroid50_from_ciou100_20260401_044109/train/best_search_p10.pt
+
+loss:
+  # Stage2 sanity: geo terms dominate too early on mode0 and mask the rest of the signal.
+  search_geo_weight: 0.0
+  event_geo_weight: 0.0
+  track_geo_weight: 0.0

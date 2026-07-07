@@ -4,8 +4,10 @@ from collections.abc import Callable
 from typing import Dict
 
 import torch
+from torch.nn import functional as F
 
 from src.loss.common import ellipse_gwd_loss, sigmoid_bce_with_mask, smooth_l1_with_mask, trig_l2_loss
+from src.loss.common import weighted_reduce
 
 
 def pupil_branch_losses(
@@ -71,3 +73,28 @@ def pupil_obb_aux_losses(
     angle_loss = rotated_angle_loss_fn(pred[:, 4], target_box[:, 4], weights) * float(angle_weight)
     conf_loss = sigmoid_bce_with_mask(pred[:, 5], torch.ones_like(pred[:, 5]), weights) * float(conf_weight)
     return {f"{prefix}_obb_aux": overlap_loss, f"{prefix}_obb_aux_angle": angle_loss, f"{prefix}_obb_aux_conf": conf_loss}
+
+
+def pupil_center_candidate_losses(
+    *,
+    candidate_xy: torch.Tensor,
+    candidate_logits: torch.Tensor,
+    candidate_delta: torch.Tensor,
+    target_state: torch.Tensor,
+    weights: torch.Tensor,
+    loss_cfg: Dict,
+    prefix: str = "search_center_candidate",
+) -> Dict[str, torch.Tensor]:
+    margin = float(loss_cfg.get(f"{prefix}_p10_margin_px", 10.0))
+    temperature = max(float(loss_cfg.get(f"{prefix}_temperature_px", 1.0)), 1.0e-6)
+    error = torch.linalg.norm(candidate_xy - target_state[:, None, :2], dim=-1)
+    labels = (error <= margin).to(dtype=candidate_logits.dtype)
+    bce = F.binary_cross_entropy_with_logits(candidate_logits, labels, reduction="none")
+    min_error = error.min(dim=1).values
+    min_threshold = F.softplus((min_error - margin) / temperature)
+    delta_norm = torch.linalg.norm(candidate_delta, dim=-1)
+    return {
+        f"{prefix}_p10_bce": weighted_reduce(bce, weights) * float(loss_cfg.get(f"{prefix}_p10_bce_weight", 0.0)),
+        f"{prefix}_min_soft_threshold": weighted_reduce(min_threshold, weights) * float(loss_cfg.get(f"{prefix}_min_soft_threshold_weight", 0.0)),
+        f"{prefix}_delta_l2": weighted_reduce(delta_norm.pow(2), weights) * float(loss_cfg.get(f"{prefix}_delta_l2_weight", 0.0)),
+    }

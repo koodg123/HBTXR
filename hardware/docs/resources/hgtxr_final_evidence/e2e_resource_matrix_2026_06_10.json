@@ -1,0 +1,310 @@
+{
+  "policy": {
+    "e_pending": true,
+    "no_new_hls_or_vivado_run": true,
+    "resource_authority": "HLS csynth.xml",
+    "vivado_authority": "routed timing and power reports"
+  },
+  "root": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR",
+  "rows": [
+    {
+      "artifacts": {
+        "bit": {
+          "exists": true,
+          "path": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/pynq/hgtxr/hgtxr_e2e_m_axi.bit"
+        },
+        "hwh": {
+          "exists": true,
+          "path": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/pynq/hgtxr/hgtxr_e2e_m_axi.hwh"
+        }
+      },
+      "board_status": "bit-hwh-ready",
+      "delta_vs_a1_pct": {
+        "dsp": 0.6,
+        "latency_cycles": 14.3,
+        "lut": 3.76,
+        "uram": 0.0
+      },
+      "hls": {
+        "available": {
+          "bram_18k": 624,
+          "dsp": 1728,
+          "ff": 460800,
+          "lut": 230400,
+          "uram": 96
+        },
+        "estimated_clock_ns": 3.744,
+        "latency_cycles": 81514836,
+        "latency_real_time": "0.408 sec",
+        "resources": {
+          "bram_18k": 326,
+          "dsp": 334,
+          "ff": 46502,
+          "lut": 84220,
+          "uram": 64
+        },
+        "target_clock_ns": 5.0,
+        "top": "hgtxr_e2e_m_axi_top",
+        "utilization_pct": {
+          "bram_18k": 52.24,
+          "dsp": 19.33,
+          "ff": 10.09,
+          "lut": 36.55,
+          "uram": 66.67
+        }
+      },
+      "id": "A2",
+      "interface": "m_axi + AXI-Lite",
+      "label": "A2 E2E m_axi",
+      "memory_banks": 8,
+      "parallelism": 8,
+      "selection_path": "Path 1, first",
+      "sources": {
+        "hls_report": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/hgtxr_e2e_m_axi_hls/solution_e2e_q4w8a/syn/report/csynth.xml",
+        "power_report": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/build/vivado/hgtxr_e2e_m_axi_overlay/hgtxr_e2e_m_axi_overlay.runs/impl_1/hgtxr_e2e_m_axi_system_wrapper_power_routed.rpt",
+        "timing_report": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/build/vivado/hgtxr_e2e_m_axi_overlay/hgtxr_e2e_m_axi_overlay.runs/impl_1/hgtxr_e2e_m_axi_system_wrapper_timing_summary_routed.rpt"
+      },
+      "vivado": {
+        "power": {
+          "device_static_w": 0.703,
+          "dynamic_w": 3.356,
+          "total_on_chip_w": 4.06
+        },
+        "timing": {
+          "ths_ns": 0.0,
+          "tns_ns": 0.0,
+          "whs_ns": 0.01,
+          "wns_ns": 1.926
+        }
+      }
+    },
+    {
+      "artifacts": {
+        "bit": {
+          "exists": true,
+          "path": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/pynq/hgtxr/hgtxr_e2e_axis_dma.bit"
+        },
+        "hwh": {
+          "exists": true,
+          "path": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/pynq/hgtxr/hgtxr_e2e_axis_dma.hwh"
+        }
+      },
+      "board_status": "bit-hwh-ready",
+      "delta_vs_a1_pct": {
+        "dsp": 0.0,
+        "latency_cycles": 0.0,
+        "lut": 0.0,
+        "uram": 0.0
+      },
+      "hls": {
+        "available": {
+          "bram_18k": 624,
+          "dsp": 1728,
+          "ff": 460800,
+          "lut": 230400,
+          "uram": 96
+        },
+        "estimated_clock_ns": 3.744,
+        "latency_cycles": 71316968,
+        "latency_real_time": "0.357 sec",
+        "resources": {
+          "bram_18k": 298,
+          "dsp": 332,
+          "ff": 43804,
+          "lut": 81168,
+          "uram": 64
+        },
+        "target_clock_ns": 5.0,
+        "top": "hgtxr_e2e_axis_top",
+        "utilization_pct": {
+          "bram_18k": 47.76,
+          "dsp": 19.21,
+          "ff": 9.51,
+          "lut": 35.23,
+          "uram": 66.67
+        }
+      },
+      "id": "A1",
+      "interface": "AXI-Stream + AXI DMA + AXI-Lite",
+      "label": "A1 E2E AXIS/DMA",
+      "memory_banks": 8,
+      "parallelism": 8,
+      "selection_path": "Path 1, after A2",
+      "sources": {
+        "hls_report": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/hgtxr_e2e_axis_hls/solution_e2e_q4w8a/syn/report/csynth.xml",
+        "power_report": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/build/vivado/hgtxr_e2e_axis_dma_overlay/hgtxr_e2e_axis_dma_overlay.runs/impl_1/hgtxr_e2e_axis_dma_system_wrapper_power_routed.rpt",
+        "timing_report": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/build/vivado/hgtxr_e2e_axis_dma_overlay/hgtxr_e2e_axis_dma_overlay.runs/impl_1/hgtxr_e2e_axis_dma_system_wrapper_timing_summary_routed.rpt"
+      },
+      "vivado": {
+        "power": {
+          "device_static_w": 0.692,
+          "dynamic_w": 2.783,
+          "total_on_chip_w": 3.476
+        },
+        "timing": {
+          "ths_ns": 0.0,
+          "tns_ns": 0.0,
+          "whs_ns": 0.009,
+          "wns_ns": 4.12
+        }
+      }
+    },
+    {
+      "artifacts": {
+        "bit": {
+          "exists": true,
+          "path": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/pynq/hgtxr/hgtxr_e2e_axis_dma_par16.bit"
+        },
+        "hwh": {
+          "exists": true,
+          "path": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/pynq/hgtxr/hgtxr_e2e_axis_dma_par16.hwh"
+        }
+      },
+      "board_status": "bit-hwh-ready",
+      "delta_vs_a1_pct": {
+        "dsp": 81.93,
+        "latency_cycles": -47.41,
+        "lut": 57.59,
+        "uram": 0.0
+      },
+      "hls": {
+        "available": {
+          "bram_18k": 624,
+          "dsp": 1728,
+          "ff": 460800,
+          "lut": 230400,
+          "uram": 96
+        },
+        "estimated_clock_ns": 3.953,
+        "latency_cycles": 37508072,
+        "latency_real_time": "0.188 sec",
+        "resources": {
+          "bram_18k": 338,
+          "dsp": 604,
+          "ff": 59507,
+          "lut": 127916,
+          "uram": 64
+        },
+        "target_clock_ns": 5.0,
+        "top": "hgtxr_e2e_axis_top",
+        "utilization_pct": {
+          "bram_18k": 54.17,
+          "dsp": 34.95,
+          "ff": 12.91,
+          "lut": 55.52,
+          "uram": 66.67
+        }
+      },
+      "id": "C1",
+      "interface": "AXI-Stream + AXI DMA + AXI-Lite",
+      "label": "C1 PAR16 AXIS/DMA",
+      "memory_banks": 8,
+      "parallelism": 16,
+      "selection_path": "Path 2, C parallelism",
+      "sources": {
+        "hls_report": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/hgtxr_e2e_axis_par16_hls/solution_e2e_q4w8a/syn/report/csynth.xml",
+        "power_report": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/build/vivado/hgtxr_e2e_axis_dma_par16_overlay/hgtxr_e2e_axis_dma_par16_overlay.runs/impl_1/hgtxr_e2e_axis_dma_par16_system_wrapper_power_routed.rpt",
+        "timing_report": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/build/vivado/hgtxr_e2e_axis_dma_par16_overlay/hgtxr_e2e_axis_dma_par16_overlay.runs/impl_1/hgtxr_e2e_axis_dma_par16_system_wrapper_timing_summary_routed.rpt"
+      },
+      "vivado": {
+        "power": {
+          "device_static_w": 0.692,
+          "dynamic_w": 2.783,
+          "total_on_chip_w": 3.475
+        },
+        "timing": {
+          "ths_ns": 0.0,
+          "tns_ns": 0.0,
+          "whs_ns": 0.01,
+          "wns_ns": 4.723
+        }
+      }
+    },
+    {
+      "artifacts": {
+        "bit": {
+          "exists": true,
+          "path": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/pynq/hgtxr/hgtxr_e2e_axis_dma_c3b_mem16.bit"
+        },
+        "hwh": {
+          "exists": true,
+          "path": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/pynq/hgtxr/hgtxr_e2e_axis_dma_c3b_mem16.hwh"
+        }
+      },
+      "board_status": "ready-for-board-smoke",
+      "delta_vs_a1_pct": {
+        "dsp": 81.93,
+        "latency_cycles": -47.41,
+        "lut": 55.86,
+        "uram": 0.0
+      },
+      "hls": {
+        "available": {
+          "bram_18k": 624,
+          "dsp": 1728,
+          "ff": 460800,
+          "lut": 230400,
+          "uram": 96
+        },
+        "estimated_clock_ns": 3.953,
+        "latency_cycles": 37508072,
+        "latency_real_time": "0.188 sec",
+        "resources": {
+          "bram_18k": 332,
+          "dsp": 604,
+          "ff": 59505,
+          "lut": 126506,
+          "uram": 64
+        },
+        "target_clock_ns": 5.0,
+        "top": "hgtxr_e2e_axis_top",
+        "utilization_pct": {
+          "bram_18k": 53.21,
+          "dsp": 34.95,
+          "ff": 12.91,
+          "lut": 54.91,
+          "uram": 66.67
+        }
+      },
+      "id": "C3b",
+      "interface": "AXI-Stream + AXI DMA + AXI-Lite",
+      "label": "C3b PAR16 MEM16 AXIS/DMA",
+      "memory_banks": 16,
+      "parallelism": 16,
+      "selection_path": "Path 2, C memory-bank refinement",
+      "sources": {
+        "hls_report": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/hgtxr_e2e_axis_par16_c3b_mem16_hls/solution_e2e_q4w8a/syn/report/csynth.xml",
+        "power_report": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/build/vivado/hgtxr_e2e_axis_dma_c3b_mem16_overlay/hgtxr_e2e_axis_dma_c3b_mem16_overlay.runs/impl_1/hgtxr_e2e_axis_dma_c3b_mem16_system_wrapper_power_routed.rpt",
+        "timing_report": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/build/vivado/hgtxr_e2e_axis_dma_c3b_mem16_overlay/hgtxr_e2e_axis_dma_c3b_mem16_overlay.runs/impl_1/hgtxr_e2e_axis_dma_c3b_mem16_system_wrapper_timing_summary_routed.rpt"
+      },
+      "vivado": {
+        "power": {
+          "device_static_w": 0.692,
+          "dynamic_w": 2.784,
+          "total_on_chip_w": 3.476
+        },
+        "timing": {
+          "ths_ns": 0.0,
+          "tns_ns": 0.0,
+          "whs_ns": 0.01,
+          "wns_ns": 4.415
+        }
+      }
+    }
+  ],
+  "status": "pass",
+  "summary": {
+    "best_latency_variants": [
+      "C1",
+      "C3b"
+    ],
+    "highest_dsp_variants": [
+      "C1",
+      "C3b"
+    ],
+    "lowest_lut_c_variant": "C3b",
+    "reason": "C3b keeps PAR16 DSP/latency gain while reducing LUT versus C1 and retaining positive routed WNS.",
+    "recommended_board_smoke_variant": "C3b",
+    "variant_count": 4
+  }
+}

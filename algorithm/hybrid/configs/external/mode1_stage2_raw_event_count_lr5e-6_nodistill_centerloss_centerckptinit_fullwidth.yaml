@@ -1,0 +1,36 @@
+# Stage2 fine-tune: all-head centerloss objective from the center-checkpoint
+# best-center checkpoint. Keeps search/event supervision to reduce track-only
+# validation overfit; disables teacher pull.
+
+extends: mode1_stage2_raw_event_count_lr1e-4_weakdistill_centerloss_fullwidth.yaml
+
+training:
+  epochs: 20
+  lr: 5.0e-6
+  optimizer:
+    name: adamw
+    lr: 5.0e-6
+    weight_decay: 5.0e-5
+    betas: [0.9, 0.999]
+    eps: 1.0e-8
+    kwargs: {}
+  scheduler:
+    type: plateau
+    metric_name: metric_track_center_px
+    factor: 0.5
+    patience: 2
+  early_stopping:
+    enabled: true
+    patience: 5
+    start_epoch: 4
+    min_delta: 0.005
+
+distillation:
+  enabled: false
+  teacher_student: false
+
+regularization_ssl:
+  enabled: false
+
+experiment:
+  name: raw_mode1_stage2_lr5e-6_nodistill_centerloss_centerckptinit_fullwidth

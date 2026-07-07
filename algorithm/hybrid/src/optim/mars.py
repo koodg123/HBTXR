@@ -1,6 +1,6 @@
 # Source: https://raw.githubusercontent.com/AGI-Arena/MARS/main/MARS/optimizers/mars.py
 # Upstream: AGI-Arena/MARS MARS/optimizers/mars.py
-# Diff: see docs/src/optimizers/mars_diff.md
+# Diff: see docs/hbtxr/optimizers/mars_diff.md
 
 from __future__ import annotations
 

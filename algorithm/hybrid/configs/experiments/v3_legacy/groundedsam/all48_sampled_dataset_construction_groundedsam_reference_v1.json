@@ -1,0 +1,44 @@
+{
+  "name": "all48_sampled_dataset_construction_groundedsam_reference_v1",
+  "date": "2026-03-29",
+  "status": "reference_snapshot",
+  "intent": "Reference Grounded-SAM option snapshot used by the all-48 sampled dataset-construction experiment.",
+  "sample_contract": {
+    "source_batch_root": "workspace_session_samples_7/roi_crop_prompted_all48_v10_native_then_crop128_rescue_same8samples",
+    "sample_count": 8,
+    "seed_prefix": "roi-crop-prompted-preview-v1",
+    "link_mode": "symlink"
+  },
+  "groundedsam_eye_stage": {
+    "path": "bbox_only_eye_region_runtime",
+    "classes": [
+      "human eye",
+      "periocular region",
+      "eyelid contour",
+      "eye"
+    ],
+    "box_threshold": 0.25,
+    "text_threshold": 0.3,
+    "nms_threshold": 0.8,
+    "max_box_area_ratio": 0.85,
+    "border_margin_px": 3,
+    "max_border_touches": 3
+  },
+  "eye_region_mask_contract": {
+    "type": "rasterized_bbox_mask",
+    "description": "The experiment stores eye-region masks by rasterizing the resolved Grounded-SAM eye ROI bbox."
+  },
+  "reference_post_filters": {
+    "crop_mask_area_ratio_max": 0.3,
+    "crop_bbox_fill_max": 0.85
+  },
+  "pupil_annotation_contract": {
+    "source": "raw_csv_when_available",
+    "groundedsam_pupil_used": false,
+    "notes": [
+      "This experiment does not use Grounded-SAM to generate pupil geometry.",
+      "Pupil mask, bbox, and state are generated only from raw CSV positive ellipse supervision.",
+      "CSV region-zero rows are treated as state-only, not geometry-complete."
+    ]
+  }
+}

@@ -1,0 +1,19 @@
+# Preset: mode0 + stage1 + Exp-E without ROI Align
+# Purpose:
+# - predict eye ROI bbox from global pooled token via MLP0
+# - project the predicted eye box into an eye-conditioned token
+# - refine the full token sequence with self-attention
+# - predict pupil region bbox from the attended eye token via MLP1
+
+extends: mode0_stage1_roi_bbox_with_roi_attention.yaml
+
+model:
+  search:
+    roi_bbox_head:
+      use_roi_align: false
+
+training:
+  epochs: 50
+
+experiment:
+  name: hbtxr_mode0_stage1_roi_bbox_without_roi_attention50

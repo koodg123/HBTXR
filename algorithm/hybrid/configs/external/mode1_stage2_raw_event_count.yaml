@@ -1,0 +1,23 @@
+# Preset: mode1 + stage2 raw event-count window
+# Purpose:
+# - original frame + raw event voxel tracking path
+# - align each frame with a fixed-count event window, without interpolation
+# - use this for the requested FECET-style EVENT COUNT WINDOW training path
+
+extends: mode1_stage2.yaml
+
+data:
+  mode: mode1
+  canonical_name: canonical1
+  manifest_name: manifest1
+  mode1:
+    event_builder:
+      policy: fixed_count
+      event_count_target: 5000
+      accumulation: fast_causal_linear
+      causal_weight_power: 1.0
+      fast_causal_limit: 25.0
+      polarity_split: true
+
+experiment:
+  name: hbtxr_mode1_stage2_raw_event_count

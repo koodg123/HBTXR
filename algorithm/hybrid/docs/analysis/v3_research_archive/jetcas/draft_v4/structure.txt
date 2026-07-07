@@ -1,0 +1,172 @@
+** JETCAS
+** 2 Column
+================================================================================================================================================================================================================================
+[Contributions]
+* Dataset Contract
+    - Frame Interpolation and Dense Annotation
+    - Event Accumulation
+* Algorithm
+    - Modality-aware Transformer
+    - Runtime-aware Scheduler
+    - Implicity Model Slimming
+* Hardware
+    - Quantization and Non-linear Approximation
+    - Intra-Stage Dataflow, Multi-Stage Pipeline
+    - Patch Embedding Module
+    - Transformer Module
+================================================================================================================================================================================================================================
+[Figure]
+- System Overview
+- Time-Synchronous and Geometry-Stable Hybrid Supervision
+- Modality-aware Transformer Architecture
+- Runtime-aware Scheduler
+- Implicity Model Slimming
+- Hardware Architecture
+
+[Table]
+- Evaluation of the Proposed HBTXR
+    - Algorithm Results
+    - Hardware Implementation Results
+- Algorithm Comparison
+- Hardware Comparison
+- Ablation Study
+================================================================================================================================================================================================================================
+0. Title
+    - HBTXR: A Hybrid Frame/Event Based Eye Tracking System via Algorithm–Hardware Co-Design for On-Device Extended Reality
+    - HBTXR: An Algorithm-Hardware Co-Designd Hybrid Frame/Event Based Eye Tracking System for On-Device Extended Reality
+================================================================================================================================================================================================================================
+1. Abstract
+    - Eye tracking is a key enabling technology for extended reality (XR), supporting gaze-based interaction, foveated rendering, and privacy-preserving on-device perception.
+    - However, existing approaches still suffer from a structural trade-off between semantic robustness and temporal responsiveness.
+    - Frame-based methods provide stable visual cues but incur high bandwidth cost and relatively large latency, whereas event-based methods offer high temporal resolution but remain limited in relocalization stability and representation consistency.
+    - To address these limitations, we prpose HBTXR, an algorithm-hardware co-designed hybrid eye tracking system that tightly integrates frame search and event track for on-device XR applications.
+    - HBTXR is built upon four key components: 
+        1) a time-synchronous and geometry-stable supervision flow that aligns frame and event under one shared geometric representation,
+        2) a modality-aware hybrid eye tracking transformer model with decoupled head,
+        3) a runtime-adaptive two-stage scheduler for efficient on-device eye tracking, and 
+        4) an FPGA-based accelerator architecture with a transformer engine, streaming-based feature reuse, and FSM-based runtime control. 
+    - Experimental results show that HBTXR achieves a pupil-center error of 0.42 pixels, a gaze error of 0.68$^\circ$, and an end-to-end latency of 0.57 ms in track mode, while maintaining a search success rate of 97.8\%.
+    - These results demonstrate that HBTXR provides a practical solution for real-time on-device eye tracking in next-generation XR systems.
+================================================================================================================================================================================================================================
+2. Introduction
+    [Eye Tracking on XR]
+    - Eye tracking has become a key enabling component of extended reality (XR) systems, supporting gaze-based interaction, foveated rendering, attention-aware interfaces, and privacy-preserving on-device perception~\cite{plopski2022eye,kwon2023xrbench}. 
+    - In practical head-mounted XR devices, however, eye tracking must satisfy several requirements simultaneously: it must be semantically robust enough to recover the pupil under appearance variation, temporally responsive enough to track rapid eye motion with very low latency, and efficient enough to operate within tight on-device power, bandwidth, and form-factor constraints. 
+    - These requirements make practical XR eye tracking fundamentally different from offline or server-assisted gaze estimation.
+    [Frame-based Methods]
+    - Conventional frame-based eye-tracking methods provide stable spatial cues and reliable semantic information for pupil localization and gaze estimation~\cite{li2018etracker,feng2022real,chen2022real,jain2025flattrack}. 
+    - Their main advantage lies in global robustness: frame observations preserve appearance structure that is helpful for relocalization, geometric fitting, and calibration-aware regression. However, dense image acquisition incurs substantial memory traffic and bandwidth overhead, and its effective temporal responsiveness is limited when rapid eye motion must be tracked continuously. 
+    - In XR settings, these drawbacks translate into higher latency and reduced suitability for tightly integrated on-device deployment.
+    [Event-based Methods]
+    - Event-based eye tracking offers a compelling alternative because they generate asynchronous and sparse brightness-change measurements with very high temporal resolution~\cite{lenero20113}. 
+    - This sensing paradigm is naturally well aligned with rapid eye dynamics and has motivated a growing body of event-based eye tracking research \cite{wang2024event,chen2025event}. 
+    - Recent methods have shown that event sensing can support high-frequency eye tracking, low-latency gaze estimation, adaptive event slicing, anti-blink tracking, and efficient ellipse-aware regression~\cite{chen20233et,li2023track,li2024gaze,sen2024eyetraes,zhang2024swift,ding2025facet}. 
+    - Event-based and neuromorphic approaches have also demonstrated strong potential for low-power deployment~\cite{lai2026efficient,sui2026event,bonazzi2024retina}. 
+    - Nevertheless, event-only pipelines still face practical limitations. 
+    - While they are effective for high-rate local motion propagation, they often struggle with robust re-acquisition after blinks, abrupt state changes, long-term drift, or weak event activity. 
+    - In other words, event sensing is strong for fast incremental updates, but it is not always sufficient for reliable semantic correction on its own.
+    [Proposed HBTXR]
+    - This work addresses that gap through HBTXR, an algorithm-hardware co-designed hybrid eye-tracking system for on-device XR applications. 
+    - The core idea of HBTXR is to explicitly separate Frame Search and Event Track within a unified hybrid tracking framework. 
+    - Search is responsible for robust relocalization and anchor refresh using semantically stable frame cues, whereas Track performs low-latency residual update conditioned on the previous state and recent event observations. 
+    - To support this separation, HBTXR introduces geometry-stable hybrid supervision, a shared-backbone hybrid transformer with decoupled prediction heads, a runtime-aware Search/Track scheduler, and a deployment architecture based on mode-aware mixed-granularity execution.
+    
+    - Fig.~\ref{fig:overview} shows the overall concept of HBTXR. 
+    - The system combines canonicalized frame-event inputs, a shared transformer-oriented representation path, decoupled Search/Event/Track/Mask heads, and a host-controlled scheduler that coordinates refresh-oriented and reuse-oriented execution.
+    - This overall organization is motivated by the observation that practical XR eye tracking requires supervision, model structure, runtime policy, and deployment mapping to be designed jointly rather than separately.
+    [Contributions Summary]
+    - The main contributions of this work are summarized as follows.
+    \begin{itemize}
+        \item We propose a \textbf{Time-synchronous and geometry-stable supervision flow} that preserves raw event evidence, aligns frame cues, event cues, previous states, and pupil targets under a shared geometric representation, and enables consistent Search-driven relocalization and Track-driven residual learning.
+        \item We design a \textbf{Modality-aware vision transformer model} with a shared backbone and decoupled Search, Event-Validation, Track, and Mask heads for robust refresh and low-latency update.
+        \item We develop a \textbf{Runtime-aware search and track scheduler} that switches between refresh-oriented and state-persistent operating modes using confidence, similarity, event density, and eye-state signals.
+        \item We present a \textbf{Mixed-granularity streaming accelerator rchitecture} that maps HBTXR onto a shared accelerator substrate through front-half feature reuse, cut-point buffering, and low-overhead control for on-device XR execution.
+    \end{itemize}
+
+    [Structure of this Paper]
+    - Accordingly, HBTXR is designed as a hybrid Search-and-Track system whose supervision, model structure, runtime policy, and deployment path are considered jointly rather than separately. 
+    - The remainder of this paper is organized as follows. 
+    - Section~II reviews prior work on frame-based, event-based, and hybrid eye tracking, as well as deployment-oriented accelerator designs. 
+    - Section~III presents the proposed HBTXR algorithm. 
+    - Section~IV describes the proposed HBTXR accelerator. 
+    - Section~V reports the experimental setup, comparisons, and ablation studies. 
+    - Finally, Section~VI concludes the paper.
+================================================================================================================================================================================================================================
+3. Related Works
+    A. Frame-based Eye Tracking
+        - 
+    B. Event-based Eye Tracking
+        - 
+    C. Hybrid Frame-Event Eye Tracking
+        - 
+    D. Deployment-Oriented and Hardware Accelerator 
+        - 
+    E. Summary
+        - 
+================================================================================================================================================================================================================================
+4. Proposed HBTXR Algorithm
+    A. Framework Design
+        1) Problem Formulation
+            - Eye Model (Eye Region ROI Mask / Pupil Mask)
+            - Objectness
+        2) Framework Overview
+    B. Time Syncronous and Geometry Stable Hybrid Supervision
+        - Dataset Problem
+        1) Frame Interpolation (Timelens)
+        2) Dense Annotation (Grounded-SAM)
+        3) Event Accumulation (All Frame-to-Frame Event Accumulation using Timestamp Weighting)
+    C. Modality-aware Transformer Architecture
+        1) Front-end (Patch Embedding)
+        2) Backbone (MHA, MLP)
+        3) Back-end (Head)
+    D. Runtime-aware Search and Track Scheduler
+        - Search Mode : Condition / 
+        - Track Mode
+        - Mode Switching (Quality Assesment)
+    E. Training Pipeline and Loss Function
+        1) 2-Stage Training
+        2) Implicity Network Slimming
+            - Self-supervised Distillation
+            - Slimmed Model : Network Depth, Embeddim, MLP Ratio, Num. Channels Parameter Reduction
+================================================================================================================================================================================================================================
+5. Proposed HBTXR Hardware
+    A. Design Challenges and Co-design Principles
+    B. Quantization and Non-linear Approximation
+        1) Quantization
+        2) Non-linear Approximation
+    C. Accelerator Architecture
+        1) Intra-Stage Dataflow
+        2) Multi-Stage Pipeline
+        3) Streaming-Oriented Feature Delivery
+    D. Patch Embedding Module
+    E. Transformer Module
+    F. Head Module
+    G. CPU-FPGA Workload Partition (Scheduler)
+================================================================================================================================================================================================================================
+6. Experimental Results
+    A. Experiments Setup
+        - Dataset
+        - Software / Hardware
+        - Hyper-parameters
+        - Workstation
+    B. Proposed HBTXR Evaluation
+        1) Event-only vs Frame only vs Hybrid Accuracy and Latency
+        2) Hardware Implementation Results (Resources, Power, Latency Breakdown)
+    C. Comparison with Other Eye Tracking Algorithm
+    D. Comparison with Other Accelerator
+        - Eye Tracking
+        - ViT
+        - Object Detection / Tracking
+    E. Ablation Study
+================================================================================================================================================================================================================================
+7. Conclusion
+
+================================================================================================================================================================================================================================
+8. Authors
+Jaemyung Kim, Jung Sung Hoon, Lee Young Jae and Seong-Cheon Park
+Jaemyung Kim, Jung Sung Hoon, Lee Young Jae and Seong-Cheon Park are with the AI SoC Infrastructure Research Section, Electronics and Telecommunications Research Institute, Seongnam 13488, Republic of Korea (e-mail: jm1322@etri.re.kr; tamtam211@etri.re.kr; lyj4295@etri.re.kr; scpark@etri.re.kr;).
+================================================================================================================================================================================================================================
+9. Acknowledgements
+This work was partly supported by the Institute of Information & communications Technology Planning & Evaluation(IITP) grant funded by the Korea government(MSIT) (26HT1200, Development of analog PIM semiconductor based on eFlash for on-device edge AI and 26HT1100, Technology development of smart edge device SW development platform) and Korea Evaluation Institute of Industrial Technology(KEIT) grant funded by the Korea government(MOTIE)
+This work was partly supported by the Technology Innovation Program (Development and Practice of an On-device AI Functionality and Performance Testing Framework based on NPU, RS-2025-02307650, 50%) funded by the Ministry of Trade, Industry & Energy (MOTIE, Korea) and ETRI grant funded by the Korea government (25ZT1100, 25YT1100, 50%).
+Corresponding author: Jaemyung Kim.

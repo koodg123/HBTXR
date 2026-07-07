@@ -1,0 +1,6 @@
+# Compatibility alias for the historical Exp-A preset name.
+
+extends: mode0_stage1_dense_maskcentroid_bootstrap.yaml
+
+experiment:
+  name: hbtxr_mode0_stage1_expA_maskcentroid50

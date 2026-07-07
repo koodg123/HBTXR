@@ -1,0 +1,55 @@
+# XR-26: P10-boundary head-only polish from XR-06C P10 leader.
+#
+# Purpose:
+# - stop XR-22 trainable-polish after XR-24/XR-25 no-promotion.
+# - return to XR-06C best-P10 as init and teacher.
+# - add a differentiable P10-boundary surrogate focused near the 10 px metric
+#   boundary on both track/state and track/state_aux.
+# - freeze trunk and train only track heads to reduce representation drift.
+
+extends: mode1_stage2_raw_event_count_lr5e-7_weakdistill_trackonly_trackstateaux_supportadaptive_fullwidth.yaml
+
+model:
+  heads:
+    search: false
+    event: false
+    track: true
+    track_state_aux: true
+
+training:
+  epochs: 8
+  lr: 5.0e-7
+  best_metric_name: metric_track_p10_pct
+  optimizer:
+    name: adamw
+    lr: 5.0e-7
+    weight_decay: 5.0e-5
+    betas: [0.9, 0.999]
+    eps: 1.0e-8
+    kwargs: {}
+  scheduler:
+    type: plateau
+    metric_name: metric_track_p10_pct
+    factor: 0.5
+    patience: 2
+  early_stopping:
+    enabled: true
+    patience: 3
+    start_epoch: 4
+    min_delta: 0.01
+  trainable:
+    include:
+      - "track_head.*"
+      - "track_state_aux_head.*"
+
+loss:
+  track_center_hinge_weight: 0.0
+  track_center_hinge_sq_weight: 0.0
+  track_p10_boundary_weight: 0.02
+  track_state_aux_p10_boundary_weight: 0.01
+  track_p10_boundary_margin_px: 10.0
+  track_p10_boundary_band_px: 4.0
+  track_p10_boundary_temperature_px: 1.0
+
+experiment:
+  name: raw_mode1_stage2_lr5e-7_weakdistill_trackonly_trackstateaux_supportadaptive_p10boundary_headonly_fullwidth

@@ -1,0 +1,55 @@
+# XR-15E: conservative track-adapter/coordinate-head follow-up.
+#
+# XR-15D no-distillation at LR 3e-6 drifted away from the XR-15C/XR-06C
+# gates. This variant keeps the same bounded trainable scope but lowers LR and
+# anchors the student to the init checkpoint with very weak teacher-student
+# distillation.
+
+extends: mode1_stage2_raw_event_count_lr3e-6_nodistill_trackadapters_centerloss_finetune_fullwidth.yaml
+
+training:
+  epochs: 12
+  lr: 5.0e-7
+  optimizer:
+    name: adamw
+    lr: 5.0e-7
+    weight_decay: 5.0e-5
+    betas: [0.9, 0.999]
+    eps: 1.0e-8
+    kwargs: {}
+  scheduler:
+    type: plateau
+    metric_name: metric_track_center_px
+    factor: 0.5
+    patience: 2
+  early_stopping:
+    enabled: true
+    patience: 5
+    start_epoch: 4
+    min_delta: 0.005
+
+distillation:
+  enabled: true
+  teacher_student: true
+  ema_decay: 0.9995
+  feature_similarity: true
+  feature_weight: 0.0025
+  state_similarity: true
+  state_weight: 0.0025
+  prediction_similarity: true
+  prediction_weight: 0.0025
+  mask_similarity: false
+  teacher_init_checkpoint: null
+  force_teacher_from_student: false
+  kd:
+    enabled: false
+    weight: 0.0
+  rkd:
+    enabled: false
+    distance_weight: 0.0
+
+regularization_ssl:
+  enabled: false
+
+experiment:
+  name: raw_mode1_stage2_lr5e-7_weakdistill_trackadapters_centerloss_finetune_fullwidth

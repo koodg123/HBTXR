@@ -1,0 +1,39 @@
+# XR-25: ADOPT-defaults validation from XR-22 tri-leader soup.
+#
+# Purpose:
+# - continue the XR-24 XR-22-anchor P10-recovery hypothesis.
+# - replace AdamW with ADOPT using ADOPT's actual upstream defaults
+#   betas=[0.9, 0.9999], eps=1e-6.
+# - avoid broad optimizer sweep; isolate the beta/eps-default question called
+#   out after XR-23/XR-24 no-promotion closeout.
+
+extends: mode1_stage2_raw_event_count_lr1p25e-7_weakdistill_trackonly_trackstateaux_supportadaptive_xr22p10recovery_fullwidth.yaml
+
+training:
+  epochs: 8
+  lr: 1.25e-7
+  best_metric_name: metric_track_p10_pct
+  optimizer:
+    name: adopt
+    lr: 1.25e-7
+    weight_decay: 5.0e-5
+    betas: [0.9, 0.9999]
+    eps: 1.0e-6
+    kwargs: {}
+  scheduler:
+    type: plateau
+    metric_name: metric_track_p10_pct
+    factor: 0.5
+    patience: 2
+  early_stopping:
+    enabled: true
+    patience: 3
+    start_epoch: 4
+    min_delta: 0.01
+
+loss:
+  track_center_hinge_weight: 0.0
+  track_center_hinge_sq_weight: 0.0
+
+experiment:
+  name: raw_mode1_stage2_lr1p25e-7_weakdistill_trackonly_trackstateaux_supportadaptive_xr22p10recovery_adoptdefaults_fullwidth

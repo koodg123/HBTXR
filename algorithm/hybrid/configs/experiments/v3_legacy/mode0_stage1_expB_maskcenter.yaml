@@ -1,0 +1,6 @@
+# Compatibility alias for the historical Exp-B preset name.
+
+extends: mode0_stage1_dense_maskcenter_guidance.yaml
+
+experiment:
+  name: hbtxr_mode0_stage1_expB_maskcenter50

@@ -1,0 +1,11 @@
+{
+  "max_abs_delta_from_float_host": 0.06201046705245972,
+  "output": "docs/resources/s2_block_full_q4w8a_head64_outputs_hls_q8_2026_06_10.f32bin",
+  "quantization": "ap_fixed<8,4> host-view truncation to 1/16 step",
+  "shape": [
+    6,
+    2,
+    192
+  ],
+  "source": "docs/resources/s2_block_full_q4w8a_head64_outputs_2026_06_10.npz"
+}

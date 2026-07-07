@@ -9,7 +9,7 @@ from torch import nn
 
 
 PROJECT_ROOT = Path(__file__).resolve().parents[3]
-OPTIMIZER_DOCS_ROOT = PROJECT_ROOT / "docs" / "src" / "optimizers"
+OPTIMIZER_DOCS_ROOT = PROJECT_ROOT / "docs" / "hbtxr" / "optimizers"
 
 
 def resolve_optimizer_cfg(training_cfg: dict[str, Any]) -> dict[str, Any]:
@@ -91,7 +91,7 @@ def source_header(name: str, source: str, upstream: str) -> str:
         [
             f"# Source: {source}",
             f"# Upstream: {upstream}",
-            f"# Diff: see docs/src/optimizers/{name}_diff.md",
+            f"# Diff: see docs/hbtxr/optimizers/{name}_diff.md",
         ]
     )
 

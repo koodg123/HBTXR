@@ -1,0 +1,69 @@
+{
+  "status": "blocked",
+  "source_mode": "final-signoff",
+  "source_summary": {
+    "ok": 96,
+    "warn": 5,
+    "fail": 2
+  },
+  "blocker_count": 2,
+  "warning_count": 5,
+  "blockers": [
+    {
+      "name": "requested XR-VITs sibling",
+      "kind": "reference-input",
+      "detail": "missing; no approved replacement policy; XR_Accel candidate exists and candidate audit recommends it, approval still required: /home/kjm26/project/PRJXR/XR-VIT/XR_Accel; see generated/signoff/xr_vits_unblock_packet_2026_06_10.md; dry-run policy command: python3 tools/create_xr_vits_replacement_policy.py --root /home/kjm26/project/PRJXR/XR-VIT/HGTXR --approve --approved-by <approved-by> --reason \"Approve XR_Accel as XR-VITs replacement for HGTXR third-goal signoff\" --dry-run",
+      "path": "/home/kjm26/project/PRJXR/XR-VITs",
+      "action": "Restore the XR-VITs sibling checkout or record an approved replacement source.",
+      "commands": []
+    },
+    {
+      "name": "C3b AXIS/DMA physical smoke result",
+      "kind": "physical-board-smoke",
+      "detail": "not captured at canonical path yet; see generated/signoff/final_unblock_commands_2026_06_10.md; dry-run import: python3 tools/run_third_goal_final_signoff.py --root /home/kjm26/project/PRJXR/XR-VIT/HGTXR --import-c3b-smoke-json /path/to/e2e_axis_dma_c3b_mem16_file_smoke.json --dry-run-import-c3b-smoke --allow-blocked",
+      "path": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/pynq/hgtxr/e2e_axis_dma_c3b_mem16_file_smoke.json",
+      "action": "Run the C3b bundle on ZCU104 PYNQ, validate it on-board, then import the JSON on host.",
+      "commands": [
+        "tar -xzf e2e_axis_dma_c3b_mem16_smoke_bundle.tar.gz",
+        "cd e2e_axis_dma_c3b_mem16_smoke_bundle",
+        "./run_e2e_axis_dma_c3b_mem16_file_smoke.sh",
+        "./validate_e2e_axis_dma_c3b_mem16_file_smoke.sh",
+        "python3 tools/import_pynq_smoke_result.py /path/to/e2e_axis_dma_c3b_mem16_file_smoke.json --preset axis-c3b-mem16"
+      ]
+    }
+  ],
+  "warnings": [
+    {
+      "name": "tool spec-kit",
+      "detail": "not found on PATH",
+      "path": ""
+    },
+    {
+      "name": "tool specify",
+      "detail": "not found on PATH",
+      "path": ""
+    },
+    {
+      "name": "legacy PYNQ hwh stale old-flow IP",
+      "detail": "hgtxr_top_0 found; ignored because E2E m_axi artifacts are checked separately",
+      "path": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/pynq/hgtxr/hgtxr.hwh"
+    },
+    {
+      "name": "VREF-P0 successor physical smoke result",
+      "detail": "not captured yet; successor promotion remains gated by valid ZCU104 smoke JSON",
+      "path": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/pynq/hgtxr/e2e_axis_dma_vref_p0_softmax_input_x2_dsp_mixed_stream_file_smoke.json"
+    },
+    {
+      "name": "VREF-P0-02 QKV URAM physical smoke result",
+      "detail": "not captured yet; QKV URAM successor promotion remains gated by valid ZCU104 smoke JSON",
+      "path": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/pynq/hgtxr/e2e_axis_dma_vref_p0_softmax_input_x2_qkv_uram_file_smoke.json"
+    }
+  ],
+  "next_commands": [
+    "tar -xzf e2e_axis_dma_c3b_mem16_smoke_bundle.tar.gz",
+    "cd e2e_axis_dma_c3b_mem16_smoke_bundle",
+    "./run_e2e_axis_dma_c3b_mem16_file_smoke.sh",
+    "./validate_e2e_axis_dma_c3b_mem16_file_smoke.sh",
+    "python3 tools/import_pynq_smoke_result.py /path/to/e2e_axis_dma_c3b_mem16_file_smoke.json --preset axis-c3b-mem16"
+  ]
+}

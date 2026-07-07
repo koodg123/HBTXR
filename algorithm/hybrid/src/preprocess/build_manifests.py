@@ -114,6 +114,22 @@ def _annotation_sort_key(annotation: dict[str, Any]) -> tuple[int, int, str]:
     )
 
 
+def _session_package_from_index_row(canonical_root: Path, session: dict[str, Any]) -> dict[str, Any]:
+    package_path = session.get("session_package_path")
+    if package_path:
+        return read_json(resolve_stored_path(canonical_root, package_path))
+
+    session_key = str(session.get("session_key", "")).strip("/")
+    if session_key:
+        legacy_meta_path = canonical_root / "sessions" / session_key / "meta.json"
+        if legacy_meta_path.exists():
+            return read_json(legacy_meta_path)
+
+    # Backward compatibility for older EV-Eye canonical indexes that stored all
+    # session-level fields directly in indexes/sessions.jsonl.
+    return dict(session)
+
+
 def _row_event_window(
     annotation: dict[str, Any],
     *,
@@ -307,7 +323,7 @@ def build_manifests(
     split_rows: dict[str, list[dict[str, Any]]] = {"train": [], "val": [], "test": []}
     annotation_failure_rows: list[dict[str, Any]] = []
     for session in session_rows:
-        session_package = read_json(resolve_stored_path(canonical_root, session["session_package_path"]))
+        session_package = _session_package_from_index_row(canonical_root, session)
         annotation_store_path = str(session["annotation_store_path"])
         annotations = read_jsonl(resolve_stored_path(canonical_root, annotation_store_path))
         annotations = sorted(annotations, key=_annotation_sort_key)

@@ -1,0 +1,26 @@
+# Stage2 track-only fine-tune with weak teacher-student distillation plus a
+# light SimDR-style coordinate auxiliary.
+#
+# Intended use: XR-12 after XR-11 no-promotion. Preserve the XR-06C
+# weak-distill/direct-aux leader contract and add only low-weight training-only
+# coordinate-distribution supervision from track/fused.
+
+extends: mode1_stage2_raw_event_count_lr5e-6_weakdistill_trackonly_trackstateaux_finetune_fullwidth.yaml
+
+model:
+  heads:
+    track_state_aux: true
+    track_state_simdr: true
+    track_state_simdr_bins: 64
+
+loss:
+  track_state_aux_center_l2_weight: 0.0005
+  track_state_aux_axis_log_weight: 0.0125
+  track_state_aux_angle_cos_weight: 0.005
+  track_state_simdr_weight: 0.0001
+  track_state_simdr_bins: 64
+  track_state_simdr_sigma: 1.5
+  track_state_simdr_coordinate_max: 255.0
+
+experiment:
+  name: raw_mode1_stage2_lr5e-6_weakdistill_trackonly_trackstateaux_simdr_fullwidth

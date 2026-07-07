@@ -1,0 +1,23 @@
+# Stage2 fine-tune from the alpha0.094 interpolated test leader.
+# Very conservative: only track_head is trainable to reduce test-transfer drift.
+
+extends: mode1_stage2_raw_event_count_lr1e-5_nodistill_trackheadonly_centerloss_finetune_fullwidth.yaml
+
+training:
+  epochs: 12
+  lr: 2.0e-6
+  optimizer:
+    name: adamw
+    lr: 2.0e-6
+    weight_decay: 5.0e-5
+    betas: [0.9, 0.999]
+    eps: 1.0e-8
+    kwargs: {}
+  early_stopping:
+    enabled: true
+    patience: 3
+    start_epoch: 3
+    min_delta: 0.001
+
+experiment:
+  name: raw_mode1_stage2_lr2e-6_nodistill_trackheadonly_centerloss_alphainit_finetune_fullwidth

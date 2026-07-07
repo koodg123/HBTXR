@@ -1,6 +1,6 @@
 # Source: https://raw.githubusercontent.com/google/automl/master/lion/lion_pytorch.py
 # Upstream: google/automl lion_pytorch.py
-# Diff: see docs/src/optimizers/lion_diff.md
+# Diff: see docs/hbtxr/optimizers/lion_diff.md
 
 from __future__ import annotations
 

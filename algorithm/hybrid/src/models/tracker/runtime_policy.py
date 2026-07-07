@@ -48,6 +48,10 @@ class RuntimeStepPolicy:
             next_cache = self.prime_patch_cache(frame)
         outputs["runtime/state"] = decision.state
         outputs["runtime/reason"] = decision.reason
+        outputs["runtime/ellipse_state"] = outputs["track/state"] if decision.state == "track" else outputs["search/state"]
+        outputs["runtime/search_conf"] = torch.full((frame.shape[0],), float(search_conf), device=frame.device)
+        outputs["runtime/track_conf"] = torch.full((frame.shape[0],), float(track_conf), device=frame.device)
+        outputs["runtime/track_quality"] = torch.full((frame.shape[0],), float(track_quality), device=frame.device)
         outputs["runtime/patch_cache"] = next_cache
         outputs["runtime/cache_valid"] = torch.full((frame.shape[0],), 1.0 if next_cache.valid else 0.0, device=frame.device)
         return outputs

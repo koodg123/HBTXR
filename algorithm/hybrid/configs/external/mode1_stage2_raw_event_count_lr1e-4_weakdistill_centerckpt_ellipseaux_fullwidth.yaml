@@ -1,0 +1,22 @@
+# Stage2 accuracy ablation: center-error checkpointing with FACET-style
+# ellipse auxiliary supervision on search/event branches.
+
+extends: mode1_stage2_raw_event_count_lr1e-4_weakdistill_centerckpt_fullwidth.yaml
+
+model:
+  heads:
+    search_obb_aux: true
+    event_obb_aux: true
+
+loss:
+  search_obb_aux_mode: rotated_bbox
+  search_obb_aux_weight: 0.001
+  search_obb_aux_angle_weight: 0.01
+  search_obb_aux_conf_weight: 0.01
+  event_obb_aux_mode: rotated_bbox
+  event_obb_aux_weight: 0.001
+  event_obb_aux_angle_weight: 0.01
+  event_obb_aux_conf_weight: 0.01
+
+experiment:
+  name: raw_mode1_stage2_lr1e-4_weakdistill_centerckpt_ellipseaux_fullwidth

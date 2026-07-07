@@ -1,6 +1,6 @@
 # Source: https://raw.githubusercontent.com/nikhilvyas/SOAP/main/soap.py
 # Upstream: nikhilvyas/SOAP soap.py
-# Diff: see docs/src/optimizers/soap_diff.md
+# Diff: see docs/hbtxr/optimizers/soap_diff.md
 
 from __future__ import annotations
 

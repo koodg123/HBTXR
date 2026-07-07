@@ -1,0 +1,33 @@
+# ViT-Accel Codebase Per-Source Index
+
+| Item | Analysis |
+|---|---|
+| `AHCPTQ` | [analysis.md](AHCPTQ/analysis.md) |
+| `AURA-FlashAttention-AISC-Accelerator` | [analysis.md](AURA-FlashAttention-AISC-Accelerator/analysis.md) |
+| `CoQMoE` | [analysis.md](CoQMoE/analysis.md) |
+| `Edge-MoE` | [analysis.md](Edge-MoE/analysis.md) |
+| `FlexLLM` | [analysis.md](FlexLLM/analysis.md) |
+| `HG-PIPE` | [analysis.md](HG-PIPE/analysis.md) |
+| `HLS-Acceleration-of-LLaMA2` | [analysis.md](HLS-Acceleration-of-LLaMA2/analysis.md) |
+| `HLSTransformation` | [analysis.md](HLSTransformation/analysis.md) |
+| `LLM_FPGA` | [analysis.md](LLM_FPGA/analysis.md) |
+| `LUT-LLM` | [analysis.md](LUT-LLM/analysis.md) |
+| `M3ViT` | [analysis.md](M3ViT/analysis.md) |
+| `P2-ViT` | [analysis.md](P2-ViT/analysis.md) |
+| `TATAA` | [analysis.md](TATAA/analysis.md) |
+| `TeraFly` | [analysis.md](TeraFly/analysis.md) |
+| `Tiny-GPT-on-Vortex-GPGPU-for-AMD-Alveo-U280` | [analysis.md](Tiny-GPT-on-Vortex-GPGPU-for-AMD-Alveo-U280/analysis.md) |
+| `TinyTransformer` | [analysis.md](TinyTransformer/analysis.md) |
+| `Transformer-Accelerator-Based-on-FPGA` | [analysis.md](Transformer-Accelerator-Based-on-FPGA/analysis.md) |
+| `Trio-ViT` | [analysis.md](Trio-ViT/analysis.md) |
+| `UbiMoE` | [analysis.md](UbiMoE/analysis.md) |
+| `ViT-FPGA-TPU` | [analysis.md](ViT-FPGA-TPU/analysis.md) |
+| `ViTALiTy` | [analysis.md](ViTALiTy/analysis.md) |
+| `ViTCoD` | [analysis.md](ViTCoD/analysis.md) |
+| `efficient-transformer-accelerator` | [analysis.md](efficient-transformer-accelerator/analysis.md) |
+| `flightllm_test_demo` | [analysis.md](flightllm_test_demo/analysis.md) |
+| `hls-fpga-accelerators` | [analysis.md](hls-fpga-accelerators/analysis.md) |
+| `llama-fpga` | [analysis.md](llama-fpga/analysis.md) |
+| `lut-gemm` | [analysis.md](lut-gemm/analysis.md) |
+| `ternaryLLM` | [analysis.md](ternaryLLM/analysis.md) |
+| `transformer-hls-thesis` | [analysis.md](transformer-hls-thesis/analysis.md) |

@@ -1,0 +1,41 @@
+# References Hardware Codebase Per-Source Index
+
+| Item | Analysis |
+|---|---|
+| `A.U.R.A.---FlashAttention-ASIC-Accelerator` | [analysis.md](A.U.R.A.---FlashAttention-ASIC-Accelerator/analysis.md) |
+| `AGNA-FCCM2023` | [analysis.md](AGNA-FCCM2023/analysis.md) |
+| `DPACS` | [analysis.md](DPACS/analysis.md) |
+| `Diff-DiT` | [analysis.md](Diff-DiT/analysis.md) |
+| `ESDA` | [analysis.md](ESDA/analysis.md) |
+| `Edge-MoE` | [analysis.md](Edge-MoE/analysis.md) |
+| `FPGA_Friendly_SpinQuant` | [analysis.md](FPGA_Friendly_SpinQuant/analysis.md) |
+| `FlexCNN` | [analysis.md](FlexCNN/analysis.md) |
+| `FlexLLM` | [analysis.md](FlexLLM/analysis.md) |
+| `HG-PIPE` | [analysis.md](HG-PIPE/analysis.md) |
+| `HLS-Acceleration-of-LLaMA2` | [analysis.md](HLS-Acceleration-of-LLaMA2/analysis.md) |
+| `HiSpMM` | [analysis.md](HiSpMM/analysis.md) |
+| `HiSpMV` | [analysis.md](HiSpMV/analysis.md) |
+| `HiSparse` | [analysis.md](HiSparse/analysis.md) |
+| `Kria-YOLOv4-Tiny-FPGA-Accelerator` | [analysis.md](Kria-YOLOv4-Tiny-FPGA-Accelerator/analysis.md) |
+| `LLM_FPGA` | [analysis.md](LLM_FPGA/analysis.md) |
+| `Lightening-Transformer-AE` | [analysis.md](Lightening-Transformer-AE/analysis.md) |
+| `MSD-FCCM23` | [analysis.md](MSD-FCCM23/analysis.md) |
+| `MobileVit-AI-Hardware-Accelerator` | [analysis.md](MobileVit-AI-Hardware-Accelerator/analysis.md) |
+| `REMOT-FPGA-22` | [analysis.md](REMOT-FPGA-22/analysis.md) |
+| `TATAA` | [analysis.md](TATAA/analysis.md) |
+| `TMMA` | [analysis.md](TMMA/analysis.md) |
+| `Transformer-Accelerator-Based-on-FPGA` | [analysis.md](Transformer-Accelerator-Based-on-FPGA/analysis.md) |
+| `Transformer_dataflow` | [analysis.md](Transformer_dataflow/analysis.md) |
+| `ViM-Q-FCCM-2026` | [analysis.md](ViM-Q-FCCM-2026/analysis.md) |
+| `ViT-Accelerator` | [analysis.md](ViT-Accelerator/analysis.md) |
+| `ViT-Accelerator-on-FPGA-with-INT8-quantization` | [analysis.md](ViT-Accelerator-on-FPGA-with-INT8-quantization/analysis.md) |
+| `ViT-FPGA-TPU` | [analysis.md](ViT-FPGA-TPU/analysis.md) |
+| `ViTALiTy` | [analysis.md](ViTALiTy/analysis.md) |
+| `ViTCoD` | [analysis.md](ViTCoD/analysis.md) |
+| `acap-gemm-sa` | [analysis.md](acap-gemm-sa/analysis.md) |
+| `efficient-transformer-accelerator` | [analysis.md](efficient-transformer-accelerator/analysis.md) |
+| `hls-spmv` | [analysis.md](hls-spmv/analysis.md) |
+| `submission` | [analysis.md](submission/analysis.md) |
+| `trans-fat` | [analysis.md](trans-fat/analysis.md) |
+| `transformer-hls-thesis` | [analysis.md](transformer-hls-thesis/analysis.md) |
+| `vit-tiny-accelerator` | [analysis.md](vit-tiny-accelerator/analysis.md) |

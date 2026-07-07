@@ -1,0 +1,60 @@
+# Preset: mode0 + stage1 + Exp-E ROI-attention bbox cascade
+# Purpose:
+# - predict eye ROI bbox from global pooled token via MLP0
+# - ROI Align on the predicted eye region
+# - refine pooled ROI tokens with self-attention
+# - predict pupil region bbox from ROI token via MLP1
+
+extends: mode0_stage1.yaml
+
+model:
+  heads:
+    eye: false
+    search: false
+    event: false
+    track: false
+    mask: false
+    aux: false
+  search:
+    eye_detector:
+      mode: pooled
+    roi_bbox_head:
+      enabled: true
+      roi_size: [4, 4]
+      attn_heads: 4
+      attn_layers: 1
+      attn_mlp_ratio: 2.0
+      detach_eye_boxes: true
+      min_box_size: 4.0
+
+training:
+  stage: stage1
+  epochs: 100
+  batch_size: 32
+  best_metric_name: metric_pupil_bbox_iou
+  scheduler:
+    type: cosine
+    warmup_epochs: 5
+    min_lr: 1.0e-7
+  early_stopping:
+    enabled: false
+    patience: 8
+    start_epoch: 5
+
+experiment:
+  name: hbtxr_mode0_stage1_roi_bbox_with_roi_attention
+
+loss:
+  eye_weight: 1.0
+  eye_conf_weight: 0.1
+  pupil_bbox_weight: 1.0
+  pupil_bbox_conf_weight: 0.1
+  mask_weight: 0.0
+  search_xy_weight: 0.0
+  search_ab_weight: 0.0
+  search_trig_weight: 0.0
+  search_geo_weight: 0.0
+  search_ciou_weight: 0.0
+  search_conf_weight: 0.0
+  constraint_center_weight: 0.0
+  aux_weight: 0.0

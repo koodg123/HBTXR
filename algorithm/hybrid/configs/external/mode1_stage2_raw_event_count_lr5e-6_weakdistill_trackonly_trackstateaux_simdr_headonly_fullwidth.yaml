@@ -1,0 +1,26 @@
+# Stage2 head-only weak-distill SimDR fine-tune.
+#
+# Intended use: XR-13 after XR-11/XR-12 full-model SimDR no center/P10
+# promotion. Preserve the XR-06C weak-distill/direct-aux leader contract, keep
+# the low-weight SimDR auxiliary, and freeze the trunk to reduce representation
+# drift.
+
+extends: mode1_stage2_raw_event_count_lr5e-6_weakdistill_trackonly_trackstateaux_simdr_fullwidth.yaml
+
+training:
+  lr: 5.0e-7
+  optimizer:
+    name: adamw
+    lr: 5.0e-7
+    weight_decay: 5.0e-5
+    betas: [0.9, 0.999]
+    eps: 1.0e-8
+    kwargs: {}
+  trainable:
+    include:
+      - "track_head.*"
+      - "track_state_aux_head.*"
+      - "track_state_simdr_head.*"
+
+experiment:
+  name: raw_mode1_stage2_lr5e-6_weakdistill_trackonly_trackstateaux_simdr_headonly_fullwidth

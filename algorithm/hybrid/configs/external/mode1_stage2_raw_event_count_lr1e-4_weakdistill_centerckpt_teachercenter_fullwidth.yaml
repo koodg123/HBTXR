@@ -1,0 +1,18 @@
+# Stage2 accuracy ablation: center-error checkpointing with teacher initialized
+# from the current center-error leader.
+
+extends: mode1_stage2_raw_event_count_lr1e-4_weakdistill_centerckpt_fullwidth.yaml
+
+distillation:
+  teacher_init_checkpoint: runs/raw_mode1_stage2_count10000_lr1e-4_weakdistill_centerckpt_fullwidth_20260610_213707/train/best_metric_track_center_px.pt
+  force_teacher_from_student: false
+  ema_decay: 0.999
+  feature_similarity: true
+  feature_weight: 0.02
+  state_similarity: true
+  state_weight: 0.03
+  prediction_similarity: true
+  prediction_weight: 0.02
+
+experiment:
+  name: raw_mode1_stage2_lr1e-4_weakdistill_centerckpt_teachercenter_fullwidth

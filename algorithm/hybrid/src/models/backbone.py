@@ -32,9 +32,10 @@ class PartialDeiTTiny(nn.Module):
         )
         self.norm = nn.LayerNorm(embed_dim)
 
-    def forward(self, tokens: torch.Tensor) -> tuple[torch.Tensor, torch.Tensor]:
+    def forward(self, tokens: torch.Tensor, *, depth_limit: int | None = None) -> tuple[torch.Tensor, torch.Tensor]:
         x = tokens
-        for attn_stage, mlp_stage in zip(self.attn_stages, self.mlp_stages):
+        stage_count = len(self.attn_stages) if depth_limit is None else max(0, min(len(self.attn_stages), int(depth_limit)))
+        for attn_stage, mlp_stage in zip(self.attn_stages[:stage_count], self.mlp_stages[:stage_count]):
             x = attn_stage(x)
             x = mlp_stage(x)
         x = self.norm(x)

@@ -202,6 +202,10 @@ class _BaseStepRunner:
     def _ema_update_teacher(self) -> None:
         if self.teacher_model is None:
             return
+        if not bool(self.distillation_cfg.get("ema_update_enabled", True)):
+            return
+        if bool(getattr(self.teacher_model, "is_fixed_ensemble_teacher", False)):
+            return
         self.ema_update_fn(
             self.teacher_model,
             self.unwrap_model_fn(self.model),

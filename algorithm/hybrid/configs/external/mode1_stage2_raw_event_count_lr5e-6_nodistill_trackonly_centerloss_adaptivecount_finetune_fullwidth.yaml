@@ -1,0 +1,39 @@
+# Stage2 paper-driven adaptive slicing probe.
+# Keeps the strongest track-only fine-tune surface but scales fixed-count windows
+# by previous/current timestamp delta, motivated by variable eye-motion rates.
+
+extends: mode1_stage2_raw_event_count_lr5e-6_nodistill_trackonly_centerloss_finetune_fullwidth.yaml
+
+data:
+  mode1:
+    event_builder:
+      policy: fixed_count
+      event_count_target: 5000
+      accumulation: fast_causal_linear
+      causal_weight_power: 1.0
+      fast_causal_limit: 25.0
+      adaptive_count:
+        enabled: true
+        reference_us: 10000
+        min_event_count: 5000
+        max_event_count: 20000
+        scale_power: 1.0
+
+training:
+  epochs: 12
+  lr: 5.0e-6
+  optimizer:
+    name: adamw
+    lr: 5.0e-6
+    weight_decay: 5.0e-5
+    betas: [0.9, 0.999]
+    eps: 1.0e-8
+    kwargs: {}
+  early_stopping:
+    enabled: true
+    patience: 3
+    start_epoch: 3
+    min_delta: 0.001
+
+experiment:
+  name: raw_mode1_stage2_lr5e-6_nodistill_trackonly_centerloss_adaptivecount_finetune_fullwidth

@@ -20,6 +20,7 @@ class TrackSearchSchedulerFSM:
         similarity_threshold: float = 0.5,
         density_threshold: float = 0.002,
         relocalize_cooldown: int = 2,
+        max_track_updates: int | None = None,
     ) -> None:
         self.search_conf_threshold = float(search_conf_threshold)
         self.track_conf_threshold = float(track_conf_threshold)
@@ -27,12 +28,15 @@ class TrackSearchSchedulerFSM:
         self.similarity_threshold = float(similarity_threshold)
         self.density_threshold = float(density_threshold)
         self.relocalize_cooldown = int(relocalize_cooldown)
+        self.max_track_updates = None if max_track_updates is None else int(max_track_updates)
         self.state = "search"
         self.cooldown = 0
+        self.track_updates = 0
 
     def reset(self) -> None:
         self.state = "search"
         self.cooldown = 0
+        self.track_updates = 0
 
     def step(
         self,
@@ -51,6 +55,7 @@ class TrackSearchSchedulerFSM:
             changed = self.state != "search"
             self.state = "search"
             self.cooldown = self.relocalize_cooldown
+            self.track_updates = 0
             return SchedulerDecision(state=self.state, changed=changed, reason="closed_eye")
 
         if self.state == "track":
@@ -62,7 +67,14 @@ class TrackSearchSchedulerFSM:
             ):
                 self.state = "search"
                 self.cooldown = self.relocalize_cooldown
+                self.track_updates = 0
                 return SchedulerDecision(state=self.state, changed=True, reason="track_degraded")
+            if self.max_track_updates is not None and self.track_updates >= self.max_track_updates:
+                self.state = "search"
+                self.cooldown = self.relocalize_cooldown
+                self.track_updates = 0
+                return SchedulerDecision(state=self.state, changed=True, reason="track_duration_limit")
+            self.track_updates += 1
             return SchedulerDecision(state=self.state, changed=False, reason="track_keep")
 
         if self.cooldown > 0:
@@ -76,5 +88,6 @@ class TrackSearchSchedulerFSM:
             and event_density >= self.density_threshold
         ):
             self.state = "track"
+            self.track_updates = 0
             return SchedulerDecision(state=self.state, changed=True, reason="track_ready")
         return SchedulerDecision(state=self.state, changed=False, reason="search_keep")

@@ -1,0 +1,11 @@
+# Stage2 track-only fine-tune with squared decoded-center hinge supervision.
+# Penalizes large center-threshold misses more strongly than the linear hinge.
+
+extends: mode1_stage2_raw_event_count_lr5e-6_nodistill_trackonly_centerloss_adaptivecount_finetune_fullwidth.yaml
+
+loss:
+  track_center_hinge_sq_weight: 0.005
+  track_center_hinge_margin_px: 10.0
+
+experiment:
+  name: raw_mode1_stage2_lr5e-6_nodistill_trackonly_centerhingesq10_finetune_fullwidth

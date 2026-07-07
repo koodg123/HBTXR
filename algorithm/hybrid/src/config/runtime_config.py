@@ -72,14 +72,23 @@ def build_dataset_kwargs(data_cfg: dict[str, Any] | None) -> dict[str, Any]:
         **dict(cfg.get("components") or {}),
         **dict(mode_cfg.get("components") or {}),
     }
+    augmentation_cfg = {
+        **dict(cfg.get("augmentation") or {}),
+        **dict(mode_cfg.get("augmentation") or {}),
+    }
     return {
         "input_size": tuple(mode_cfg.get("input_size", cfg.get("input_size", [256, 256]))),
+        "frame_input_size": tuple(mode_cfg.get("frame_input_size", cfg.get("frame_input_size", mode_cfg.get("input_size", cfg.get("input_size", [256, 256]))))),
+        "event_input_size": tuple(mode_cfg.get("event_input_size", cfg.get("event_input_size", mode_cfg.get("input_size", cfg.get("input_size", [256, 256]))))),
         "resize_policy": str(mode_cfg.get("resize_policy", cfg.get("resize_policy", "facet_square_direct"))),
         "canonical_root": mode_cfg.get("canonical_root", cfg.get("canonical_root")),
         "cache_root": loader_cfg.get("cache_root", cfg.get("cache_root")),
         "use_cache": bool(loader_cfg.get("use_cache", cfg.get("use_cache", True))),
         "per_channel_normalize": bool(loader_cfg.get("per_channel_normalize", cfg.get("per_channel_normalize", True))),
         "event_builder": {**DEFAULT_EVENT_BUILDER, **event_builder_cfg},
+        "augmentation": augmentation_cfg,
+        "track_target_override_path": mode_cfg.get("track_target_override_path", cfg.get("track_target_override_path")),
+        "allow_test_target_override": bool(mode_cfg.get("allow_test_target_override", cfg.get("allow_test_target_override", False))),
         "data_mode": mode_contract["mode"],
         "canonical_name": mode_contract["canonical_name"],
         "manifest_name": mode_contract["manifest_name"],

@@ -1,0 +1,97 @@
+# Preset: mode0 + stage1 foundation
+# Purpose:
+# - use raw CSV pupil supervision
+# - train search / eye / mask heads without event branch
+# Main options you will usually edit here:
+# - training.epochs, training.batch_size
+# - training.scheduler.*
+# - distillation.enabled / pruning.enabled
+# - experiment.name
+
+extends: ../../configs/base.yaml
+
+model:
+  heads:
+    # full Stage1 foundation run: keep search / eye / mask active
+    eye: true
+    search: true
+    event: false
+    track: false
+    mask: true
+    aux: false
+  search:
+    eye_detector:
+      mode: dense
+
+data:
+  # mode0 = raw CSV ellipse/state + rasterized pupil mask + heuristic eye ROI bbox
+  mode: mode0
+  canonical_name: canonical0
+  manifest_name: manifest0
+  mode0:
+    resize_policy: sensor_full_letterbox
+
+training:
+  # stage1 full search / eye / mask foundation run on full-sensor letterbox input
+  stage: stage1
+  epochs: 100
+  batch_size: 32
+  # Keep checkpoint selection aligned with downstream pupil-search quality.
+  # Eye ROI quality is still tracked via metric_eye_iou / metric_eye_center_px.
+  best_metric_name: metric_search_p10_pct
+  scheduler:
+    type: cosine
+    warmup_epochs: 5
+    min_lr: 1.0e-7
+  early_stopping:
+    enabled: false
+    patience: 8
+    start_epoch: 5
+
+distillation:
+  enabled: false
+  feature_similarity: true
+  feature_weight: 0.1
+  state_similarity: true
+  state_weight: 0.1
+  prediction_similarity: true
+  prediction_weight: 0.05
+  mask_similarity: true
+  mask_weight: 0.05
+  kd:
+    enabled: false
+  rkd:
+    enabled: false
+
+regularization_ssl:
+  enabled: false
+  self_consistency: false
+
+pruning:
+  enabled: false
+  scheme: structural_width
+  student:
+    width_ratio: 0.6666667
+  export:
+    enabled: true
+
+experiment:
+  name: hbtxr_mode0_stage1
+
+loss:
+  eye_weight: 1.0
+  eye_conf_weight: 0.1
+  eye_box_weight: 1.0
+  eye_obj_weight: 1.0
+  eye_tal_topk: 10
+  eye_tal_alpha: 0.5
+  eye_tal_beta: 6.0
+  mask_weight: 0.2
+  search_xy_weight: 0.25
+  search_ab_weight: 0.25
+  search_trig_weight: 0.5
+  search_geo_weight: 0.0
+  search_ciou_weight: 0.25
+  search_conf_weight: 0.05
+  constraint_center_weight: 0.1
+  aux_weight: 0.0

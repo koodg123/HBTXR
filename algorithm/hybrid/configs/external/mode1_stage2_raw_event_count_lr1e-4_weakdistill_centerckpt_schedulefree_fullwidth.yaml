@@ -1,0 +1,13 @@
+# Stage2 accuracy ablation: center-error checkpointing with schedule-free AdamW.
+
+extends: mode1_stage2_raw_event_count_lr1e-4_weakdistill_centerckpt_fullwidth.yaml
+
+training:
+  optimizer_modifiers:
+    schedule_free: true
+  scheduler:
+    type: none
+    metric_name: metric_track_center_px
+
+experiment:
+  name: raw_mode1_stage2_lr1e-4_weakdistill_centerckpt_schedulefree_fullwidth

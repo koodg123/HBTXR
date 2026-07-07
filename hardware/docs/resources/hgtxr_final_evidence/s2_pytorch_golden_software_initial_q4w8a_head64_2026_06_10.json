@@ -1,0 +1,86 @@
+{
+  "approx_meta": {
+    "attention": {
+      "head_dim": 64,
+      "num_heads": 3,
+      "score_scale_shift": 3,
+      "use_hgpipe_lut_math": true
+    },
+    "block_count": 486,
+    "fallback_count": 0,
+    "max_packed_roundtrip_error": 0.072168730199337,
+    "packed_roundtrip": true,
+    "per_layer_approx": [
+      {
+        "approx_abs_max": 1.75,
+        "layer": 0
+      },
+      {
+        "approx_abs_max": 1.75,
+        "layer": 1
+      },
+      {
+        "approx_abs_max": 1.75,
+        "layer": 2
+      },
+      {
+        "approx_abs_max": 1.75,
+        "layer": 3
+      },
+      {
+        "approx_abs_max": 1.75,
+        "layer": 4
+      },
+      {
+        "approx_abs_max": 1.75,
+        "layer": 5
+      }
+    ],
+    "record_count": 486
+  },
+  "approximation_limitations": [
+    "S2 approximation omits Linear biases",
+    "S2 approximation uses HLS compact LUT GELU/softmax approximations instead of exact PyTorch math",
+    "S2 approximation uses HLS piecewise pre-LN rsqrt instead of exact LayerNorm rsqrt"
+  ],
+  "checkpoint": "hardware/refs/weights/software_initial_weights.pt",
+  "compare": [
+    {
+      "max_abs_error": 1.3122098445892334,
+      "mean_abs_error": 0.3286984460040306,
+      "name": "approx_independent_vs_exact_independent",
+      "rmse": 0.4092502325519225,
+      "shape": [
+        6,
+        2,
+        192
+      ]
+    },
+    {
+      "max_abs_error": 2.4335280656814575,
+      "mean_abs_error": 0.4658622802158384,
+      "name": "exact_independent_vs_exact_sequential",
+      "rmse": 0.6427221804461279,
+      "shape": [
+        6,
+        2,
+        192
+      ]
+    }
+  ],
+  "config": "software/configs/base.yaml",
+  "contract": "exact PyTorch per-layer block outputs plus current S2 approximation outputs; exact_independent applies one attention+MLP pair independently to the same token input per layer",
+  "layout": {
+    "bit_width": 4,
+    "blocks": 6,
+    "bus_width": 128,
+    "embed_dim": 192,
+    "int_width": 2,
+    "mlp_ratio": 4,
+    "tile_channels": 64,
+    "tile_ff": 64
+  },
+  "out_npz": "docs/resources/s2_pytorch_golden_software_initial_q4w8a_head64_2026_06_10.npz",
+  "status": "pass",
+  "tokens": 2
+}

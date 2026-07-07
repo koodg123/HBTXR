@@ -1,0 +1,217 @@
+{
+  "c3b_smoke_contract": {
+    "active_import_command": "python3 tools/import_pynq_smoke_result.py /path/to/e2e_axis_dma_c3b_mem16_file_smoke.json --preset axis-c3b-mem16 --root /home/kjm26/project/PRJXR/XR-VIT/HGTXR --json-out /tmp/c3b_smoke_import_2026_06_10.json --validation-out /tmp/c3b_smoke_import_validation_2026_06_10.json",
+    "canonical_result_path": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/pynq/hgtxr/e2e_axis_dma_c3b_mem16_file_smoke.json",
+    "dry_run_import_command": "python3 tools/import_pynq_smoke_result.py /path/to/e2e_axis_dma_c3b_mem16_file_smoke.json --preset axis-c3b-mem16 --root /home/kjm26/project/PRJXR/XR-VIT/HGTXR --dry-run --json-out /tmp/c3b_smoke_import_2026_06_10.json --validation-out /tmp/c3b_smoke_import_validation_2026_06_10.json",
+    "preset": "axis-c3b-mem16",
+    "status": "pass",
+    "validate_command": "python3 tools/validate_pynq_smoke_result.py /path/to/e2e_axis_dma_c3b_mem16_file_smoke.json --preset axis-c3b-mem16"
+  },
+  "readiness_status": "ready-for-board",
+  "remaining_blockers": [
+    "C3b AXIS/DMA physical smoke result",
+    "requested XR-VITs sibling"
+  ],
+  "root": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR",
+  "safety": {
+    "creates_board_result": false,
+    "creates_xr_vits_policy": false,
+    "executes_commands": false,
+    "executes_network": false,
+    "operator_must_replace_placeholders": true,
+    "writes_canonical_inputs": false
+  },
+  "sections": [
+    {
+      "commands": [
+        "python3 tools/check_final_blocker_closure_readiness.py --root /home/kjm26/project/PRJXR/XR-VIT/HGTXR --c3b-no-require-paths --json-out /tmp/hgtxr_final_blocker_readiness_current.json --markdown-out /tmp/hgtxr_final_blocker_readiness_current.md",
+        "python3 tools/check_final_blocker_closure_readiness.py --root /home/kjm26/project/PRJXR/XR-VIT/HGTXR --c3b-smoke-json /path/to/e2e_axis_dma_c3b_mem16_file_smoke.json --xr-vits-mode exact --json-out /tmp/hgtxr_final_blocker_readiness_exact.json --markdown-out /tmp/hgtxr_final_blocker_readiness_exact.md",
+        "python3 tools/check_final_blocker_closure_readiness.py --root /home/kjm26/project/PRJXR/XR-VIT/HGTXR --c3b-smoke-json /path/to/e2e_axis_dma_c3b_mem16_file_smoke.json --xr-vits-mode replacement --approved-by <approved-by> --reason \"Approve XR_Accel as XR-VITs replacement for HGTXR third-goal signoff\" --json-out /tmp/hgtxr_final_blocker_readiness_replacement.json --markdown-out /tmp/hgtxr_final_blocker_readiness_replacement.md"
+      ],
+      "expected_result": "status=would-clear-with-candidates before running side-effectful final unblock command.",
+      "id": "U0",
+      "reason": "Check whether supplied C3b smoke and XR-VITs choices would clear final blockers before writing canonical unblock inputs.",
+      "status": "advisory-no-side-effects",
+      "title": "Dry-run final blocker closure readiness"
+    },
+    {
+      "commands": [
+        "python3 tools/run_third_goal_final_signoff.py --root /home/kjm26/project/PRJXR/XR-VIT/HGTXR --zcu104-host <zcu104-ip-or-host> --zcu104-user xilinx --execute-zcu104-smoke --allow-blocked",
+        "python3 tools/run_zcu104_c3b_smoke_remote.py --root /home/kjm26/project/PRJXR/XR-VIT/HGTXR --host <zcu104-ip-or-host> --user xilinx --execute",
+        "python3 tools/run_third_goal_final_signoff.py --root /home/kjm26/project/PRJXR/XR-VIT/HGTXR --import-c3b-smoke-json /path/to/e2e_axis_dma_c3b_mem16_file_smoke.json --allow-blocked",
+        "python3 tools/validate_pynq_smoke_result.py /path/to/e2e_axis_dma_c3b_mem16_file_smoke.json --preset axis-c3b-mem16",
+        "python3 tools/import_pynq_smoke_result.py /path/to/e2e_axis_dma_c3b_mem16_file_smoke.json --preset axis-c3b-mem16 --root /home/kjm26/project/PRJXR/XR-VIT/HGTXR --dry-run --json-out /tmp/c3b_smoke_import_2026_06_10.json --validation-out /tmp/c3b_smoke_import_validation_2026_06_10.json",
+        "python3 tools/import_pynq_smoke_result.py /path/to/e2e_axis_dma_c3b_mem16_file_smoke.json --preset axis-c3b-mem16 --root /home/kjm26/project/PRJXR/XR-VIT/HGTXR --json-out /tmp/c3b_smoke_import_2026_06_10.json --validation-out /tmp/c3b_smoke_import_validation_2026_06_10.json"
+      ],
+      "contract": {
+        "canonical_result_path": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/pynq/hgtxr/e2e_axis_dma_c3b_mem16_file_smoke.json",
+        "expected_out_raw": [
+          32,
+          -13,
+          26,
+          -6,
+          14,
+          -11
+        ],
+        "preset": "axis-c3b-mem16",
+        "status": "pass"
+      },
+      "evidence_after": [
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/pynq/hgtxr/e2e_axis_dma_c3b_mem16_file_smoke.json",
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/signoff/zcu104_c3b_smoke_remote_run_2026_06_10.json"
+      ],
+      "id": "U1",
+      "precheck": [
+        "python3 tools/check_c3b_board_smoke_readiness.py --root /home/kjm26/project/PRJXR/XR-VIT/HGTXR"
+      ],
+      "reason": "Final signoff needs a real board-produced C3b smoke JSON.",
+      "status": "pending-board-run",
+      "title": "Run C3b ZCU104 smoke through SSH/SCP"
+    },
+    {
+      "id": "U2",
+      "options": [
+        {
+          "commands": [
+            "test -d /home/kjm26/project/PRJXR/XR-VITs",
+            "python3 tools/check_third_goal_preflight.py --root /home/kjm26/project/PRJXR/XR-VIT/HGTXR --mode final-signoff"
+          ],
+          "evidence_after": [
+            "/home/kjm26/project/PRJXR/XR-VITs"
+          ],
+          "id": "U2a",
+          "title": "Restore exact XR-VITs sibling"
+        },
+        {
+          "commands": [
+            "python3 tools/run_third_goal_final_signoff.py --root /home/kjm26/project/PRJXR/XR-VIT/HGTXR --approve-xr-vits-replacement --dry-run-xr-vits-replacement --xr-vits-approved-by <approved-by> --xr-vits-replacement-reason \"Approve XR_Accel as XR-VITs replacement for HGTXR third-goal signoff\" --allow-blocked",
+            "python3 tools/create_xr_vits_replacement_policy.py --root /home/kjm26/project/PRJXR/XR-VIT/HGTXR --approve --approved-by <approved-by> --reason \"Approve XR_Accel as XR-VITs replacement for HGTXR third-goal signoff\" --dry-run",
+            "python3 tools/create_xr_vits_replacement_policy.py --root /home/kjm26/project/PRJXR/XR-VIT/HGTXR --approve --approved-by <approved-by> --reason \"Approve XR_Accel as XR-VITs replacement for HGTXR third-goal signoff\"",
+            "python3 tools/run_third_goal_final_signoff.py --root /home/kjm26/project/PRJXR/XR-VIT/HGTXR --approve-xr-vits-replacement --xr-vits-approved-by <approved-by> --xr-vits-replacement-reason \"Approve XR_Accel as XR-VITs replacement for HGTXR third-goal signoff\" --allow-blocked"
+          ],
+          "evidence_after": [
+            "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/xr_vits_replacement_policy.json"
+          ],
+          "id": "U2b",
+          "integrity_required": {
+            "candidate_audit": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/xr_vits_candidate_audit_2026_06_10.json",
+            "generator": "tools/create_xr_vits_replacement_policy.py",
+            "legacy_policy_clears_final_signoff": false,
+            "policy_path": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/xr_vits_replacement_policy.json",
+            "required": true,
+            "required_policy_fields": [
+              "candidate_audit_fingerprint",
+              "candidate_audit_recommendation_snapshot",
+              "candidate_audit_meta",
+              "approval_event",
+              "policy_fingerprint"
+            ],
+            "validator": "tools/check_final_blocker_closure_readiness.py"
+          },
+          "title": "Approve XR_Accel replacement policy"
+        }
+      ],
+      "reason": "Final signoff requires the exact XR-VITs sibling or explicit replacement approval.",
+      "status": "pending-user-choice",
+      "title": "Resolve XR-VITs reference gate"
+    },
+    {
+      "id": "U4",
+      "options": [
+        {
+          "commands": [
+            "test -d /home/kjm26/project/PRJXR/XR-VITs",
+            "python3 tools/run_third_goal_final_signoff.py --root /home/kjm26/project/PRJXR/XR-VIT/HGTXR --import-c3b-smoke-json /path/to/e2e_axis_dma_c3b_mem16_file_smoke.json"
+          ],
+          "evidence_after": [
+            "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/pynq/hgtxr/e2e_axis_dma_c3b_mem16_file_smoke.json",
+            "/home/kjm26/project/PRJXR/XR-VITs",
+            "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/third_goal_final_signoff_run_2026_06_10.json"
+          ],
+          "id": "U4a",
+          "title": "Import C3b result with restored XR-VITs"
+        },
+        {
+          "commands": [
+            "python3 tools/run_third_goal_final_signoff.py --root /home/kjm26/project/PRJXR/XR-VIT/HGTXR --import-c3b-smoke-json /path/to/e2e_axis_dma_c3b_mem16_file_smoke.json --dry-run-import-c3b-smoke --approve-xr-vits-replacement --dry-run-xr-vits-replacement --xr-vits-approved-by <approved-by> --xr-vits-replacement-reason \"Approve XR_Accel as XR-VITs replacement for HGTXR third-goal signoff\" --allow-blocked",
+            "python3 tools/create_xr_vits_replacement_policy.py --root /home/kjm26/project/PRJXR/XR-VIT/HGTXR --approve --approved-by <approved-by> --reason \"Approve XR_Accel as XR-VITs replacement for HGTXR third-goal signoff\" --dry-run",
+            "python3 tools/create_xr_vits_replacement_policy.py --root /home/kjm26/project/PRJXR/XR-VIT/HGTXR --approve --approved-by <approved-by> --reason \"Approve XR_Accel as XR-VITs replacement for HGTXR third-goal signoff\"",
+            "python3 tools/run_third_goal_final_signoff.py --root /home/kjm26/project/PRJXR/XR-VIT/HGTXR --import-c3b-smoke-json /path/to/e2e_axis_dma_c3b_mem16_file_smoke.json --approve-xr-vits-replacement --xr-vits-approved-by <approved-by> --xr-vits-replacement-reason \"Approve XR_Accel as XR-VITs replacement for HGTXR third-goal signoff\""
+          ],
+          "evidence_after": [
+            "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/pynq/hgtxr/e2e_axis_dma_c3b_mem16_file_smoke.json",
+            "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/xr_vits_replacement_policy.json",
+            "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/third_goal_final_signoff_run_2026_06_10.json"
+          ],
+          "id": "U4b",
+          "integrity_required": {
+            "candidate_audit": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/xr_vits_candidate_audit_2026_06_10.json",
+            "generator": "tools/create_xr_vits_replacement_policy.py",
+            "legacy_policy_clears_final_signoff": false,
+            "policy_path": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/xr_vits_replacement_policy.json",
+            "required": true,
+            "required_policy_fields": [
+              "candidate_audit_fingerprint",
+              "candidate_audit_recommendation_snapshot",
+              "candidate_audit_meta",
+              "approval_event",
+              "policy_fingerprint"
+            ],
+            "validator": "tools/check_final_blocker_closure_readiness.py"
+          },
+          "title": "Import C3b result and approve XR_Accel"
+        }
+      ],
+      "reason": "Use after a real C3b smoke JSON is copied back and the XR-VITs decision is known.",
+      "status": "pending-user-choice",
+      "title": "Combined one-shot unblock"
+    },
+    {
+      "commands": [
+        "python3 tools/run_third_goal_final_signoff.py --root /home/kjm26/project/PRJXR/XR-VIT/HGTXR --zcu104-host <zcu104-ip-or-host> --zcu104-user xilinx --require-qkv-uram-physical-smoke --allow-blocked",
+        "python3 tools/run_third_goal_final_signoff.py --root /home/kjm26/project/PRJXR/XR-VIT/HGTXR --zcu104-host <zcu104-ip-or-host> --zcu104-user xilinx --execute-qkv-uram-smoke --allow-blocked",
+        "python3 tools/validate_pynq_smoke_result.py /path/to/e2e_axis_dma_vref_p0_softmax_input_x2_qkv_uram_file_smoke.json --preset axis-vref-p0-softmax-input-x2-qkv-uram",
+        "python3 tools/run_third_goal_final_signoff.py --root /home/kjm26/project/PRJXR/XR-VIT/HGTXR --import-qkv-uram-smoke-json /path/to/e2e_axis_dma_vref_p0_softmax_input_x2_qkv_uram_file_smoke.json --dry-run-import-qkv-uram-smoke --allow-blocked",
+        "python3 tools/run_third_goal_final_signoff.py --root /home/kjm26/project/PRJXR/XR-VIT/HGTXR --import-qkv-uram-smoke-json /path/to/e2e_axis_dma_vref_p0_softmax_input_x2_qkv_uram_file_smoke.json --require-qkv-uram-physical-smoke --allow-blocked"
+      ],
+      "evidence_after": [
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/pynq/hgtxr/e2e_axis_dma_vref_p0_softmax_input_x2_qkv_uram_file_smoke.json",
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/qkv_uram_smoke_import_2026_06_16.json",
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/zcu104_vref_p0_softmax_input_x2_qkv_uram_smoke_remote_run_2026_06_10.json"
+      ],
+      "expected_result": "QKV physical smoke validates only optional successor promotion; default final blockers remain C3b smoke and XR-VITs gate.",
+      "id": "U5",
+      "reason": "QKV URAM is not required for default final signoff, but this path validates the successor before any promotion claim.",
+      "status": "optional-ready-for-board-run",
+      "title": "Optional QKV URAM successor smoke and promotion check"
+    },
+    {
+      "commands": [
+        "python3 tools/run_third_goal_final_signoff.py --root /home/kjm26/project/PRJXR/XR-VIT/HGTXR"
+      ],
+      "expected_result": "status=pass, final_preflight_failures=0",
+      "id": "U3",
+      "reason": "Run after U1/U2 are cleared.",
+      "status": "pending",
+      "title": "Run final signoff"
+    }
+  ],
+  "source_final_audit_status": "blocked",
+  "status": "pending-unblock",
+  "xr_vits_packet_status": "pending-user-choice",
+  "xr_vits_policy_integrity": {
+    "candidate_audit": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/xr_vits_candidate_audit_2026_06_10.json",
+    "generator": "tools/create_xr_vits_replacement_policy.py",
+    "legacy_policy_clears_final_signoff": false,
+    "policy_path": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/xr_vits_replacement_policy.json",
+    "required": true,
+    "required_policy_fields": [
+      "candidate_audit_fingerprint",
+      "candidate_audit_recommendation_snapshot",
+      "candidate_audit_meta",
+      "approval_event",
+      "policy_fingerprint"
+    ],
+    "validator": "tools/check_final_blocker_closure_readiness.py"
+  }
+}

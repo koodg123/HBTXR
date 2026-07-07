@@ -1,0 +1,54 @@
+# XR-15: support-adaptive fixed-count event-window probe.
+#
+# Purpose:
+# - keep the XR-06C track-only weak-distill/direct-aux contract intact.
+# - change event evidence density instead of repeating low-sim loss/sampler
+#   weighting or unusable search/event fallback.
+# - preserve fixed_count policy while allowing per-row support adaptation around
+#   the fixed255k leader.
+
+extends: mode1_stage2_raw_event_count_lr5e-6_weakdistill_trackonly_trackstateaux_finetune_fullwidth.yaml
+
+data:
+  mode1:
+    event_builder:
+      policy: fixed_count
+      # The runner enables and overrides these values. Defaults keep the config
+      # loadable standalone without changing the raw manifest contract check.
+      event_count_target: 5000
+      adaptive_count:
+        enabled: false
+        reference_us: 4000003
+        min_event_count: 192000
+        max_event_count: 320000
+        scale_power: 0.5
+
+training:
+  epochs: 12
+  lr: 5.0e-7
+  best_metric_name: metric_track_center_px
+  optimizer:
+    name: adamw
+    lr: 5.0e-7
+    weight_decay: 5.0e-5
+    betas: [0.9, 0.999]
+    eps: 1.0e-8
+    kwargs: {}
+  scheduler:
+    type: plateau
+    metric_name: metric_track_center_px
+    factor: 0.5
+    patience: 2
+  early_stopping:
+    enabled: true
+    patience: 5
+    start_epoch: 4
+    min_delta: 0.005
+
+loss:
+  track_state_aux_center_l2_weight: 0.0005
+  track_state_aux_axis_log_weight: 0.0125
+  track_state_aux_angle_cos_weight: 0.005
+
+experiment:
+  name: raw_mode1_stage2_lr5e-7_weakdistill_trackonly_trackstateaux_supportadaptive_fullwidth

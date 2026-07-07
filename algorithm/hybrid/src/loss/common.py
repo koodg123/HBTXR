@@ -53,9 +53,18 @@ def state_to_covariance(state: torch.Tensor, eps: float = 1e-6) -> Tuple[torch.T
 
 
 def mat_sqrt_2x2(mat: torch.Tensor, eps: float = 1e-6) -> torch.Tensor:
-    evals, evecs = torch.linalg.eigh(mat)
-    evals = evals.clamp_min(eps).sqrt()
-    return evecs @ torch.diag_embed(evals) @ evecs.transpose(-1, -2)
+    a = mat[..., 0, 0]
+    b = 0.5 * (mat[..., 0, 1] + mat[..., 1, 0])
+    d = mat[..., 1, 1]
+    det_sqrt = torch.sqrt((a * d - b * b).clamp_min(eps))
+    denom = torch.sqrt((a + d + 2.0 * det_sqrt).clamp_min(eps))
+    out00 = (a + det_sqrt) / denom
+    out01 = b / denom
+    out11 = (d + det_sqrt) / denom
+    return torch.stack(
+        [torch.stack([out00, out01], dim=-1), torch.stack([out01, out11], dim=-1)],
+        dim=-2,
+    )
 
 
 def ellipse_gwd_like(pred_state: torch.Tensor, tgt_state: torch.Tensor, eps: float = 1e-6) -> torch.Tensor:

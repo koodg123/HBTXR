@@ -1,0 +1,15 @@
+group	source_root	item	category	priority	analysis_file
+vit-accel	analysis/vit-accel	codebases/existing	previous detailed analyses	P0	vit-accel/codebases/INTEGRATED_CODEBASE_ANALYSIS.md
+vit-accel	analysis/vit-accel	papers/existing	previous detailed analyses	P0	vit-accel/papers/INTEGRATED_PAPER_ANALYSIS.md
+ViT	/home/kjm26/project/PRJXR/References/ViT	AMD_QTViT	lightweight EfficientViT reference	P2	vit/codebases/INTEGRATED_ANALYSIS.md
+ViT	/home/kjm26/project/PRJXR/References/ViT	Castling-ViT	attention replacement reference	P3	vit/codebases/INTEGRATED_ANALYSIS.md
+ViT	/home/kjm26/project/PRJXR/References/ViT	FQ-ViT	PTQ and calibration	P1	vit/codebases/INTEGRATED_ANALYSIS.md
+ViT	/home/kjm26/project/PRJXR/References/ViT	M3ViT	MoE and conditional compute	P1	vit/codebases/INTEGRATED_ANALYSIS.md
+ViT	/home/kjm26/project/PRJXR/References/ViT	Next-ViT	mobile deployment	P1	vit/codebases/INTEGRATED_ANALYSIS.md
+ViT	/home/kjm26/project/PRJXR/References/ViT	P2-ViT	PoT quantization	P0	vit/codebases/INTEGRATED_ANALYSIS.md
+ViT	/home/kjm26/project/PRJXR/References/ViT	PTQ4ViT	PTQ calibration	P1	vit/codebases/INTEGRATED_ANALYSIS.md
+ViT	/home/kjm26/project/PRJXR/References/ViT	RepViT	mobile hybrid backbone	P1	vit/codebases/INTEGRATED_ANALYSIS.md
+ViT	/home/kjm26/project/PRJXR/References/ViT	ShiftAddViT	operator replacement	P2	vit/codebases/INTEGRATED_ANALYSIS.md
+ViT	/home/kjm26/project/PRJXR/References/ViT	ViTALiTy	linear/Taylor attention	P1/P2	vit/codebases/INTEGRATED_ANALYSIS.md
+Hardware	/home/kjm26/project/PRJXR/References/Hardware	37 top-level repositories	FPGA/ASIC/HLS/RTL accelerator corpus	P0-P3	hardware/codebases/INTEGRATED_ANALYSIS.md
+HW_Framework	/home/kjm26/project/PRJXR/References/HW_Framework	11 top-level repositories	HLS/compiler/DSL/framework corpus	P0-P3	hw-framework/frameworks/INTEGRATED_ANALYSIS.md

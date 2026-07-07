@@ -132,7 +132,7 @@ def _normalize_head_selection(normalized: dict[str, Any]) -> None:
         for loss_key in loss_keys:
             loss_cfg[loss_key] = 0.0
 
-    if active != "track":
+    if active not in {"search", "track"}:
         loss_cfg["constraint_center_weight"] = 0.0
     if active != "all":
         loss_cfg["consistency_weight"] = 0.0
@@ -280,7 +280,10 @@ def resolve_student_model_spec(cfg: dict[str, Any]) -> StudentModelSpec:
 def resolve_model_role_cfg(cfg: dict[str, Any], *, role: str = "student") -> dict[str, Any]:
     normalized = normalize_compression_cfg(cfg)
     model_cfg = deepcopy(normalized.get("model") or {})
+    role_override = deepcopy(model_cfg.get(role) or {}) if role != "student" else {}
     if role == "teacher" or not is_structural_pruning_enabled(normalized):
+        if role_override:
+            model_cfg.update(role_override)
         model_cfg.setdefault("adapter_hidden_dim", model_cfg.get("embed_dim", 192))
         model_cfg.setdefault("prev_state_hidden_dim", model_cfg.get("embed_dim", 192))
         model_cfg.setdefault("head_hidden_dim", model_cfg.get("embed_dim", 192))

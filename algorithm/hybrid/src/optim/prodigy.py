@@ -1,6 +1,6 @@
 # Source: https://raw.githubusercontent.com/konstmish/prodigy/main/prodigyopt/prodigy.py
 # Upstream: konstmish/prodigy prodigyopt/prodigy.py
-# Diff: see docs/src/optimizers/prodigy_diff.md
+# Diff: see docs/hbtxr/optimizers/prodigy_diff.md
 
 from __future__ import annotations
 

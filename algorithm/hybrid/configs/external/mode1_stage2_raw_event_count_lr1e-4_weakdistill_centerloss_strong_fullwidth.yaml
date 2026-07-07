@@ -1,0 +1,9 @@
+# Stage2 accuracy ablation: weak distillation, full-width, stronger center prior.
+
+extends: mode1_stage2_raw_event_count_lr1e-4_weakdistill_centerloss_fullwidth.yaml
+
+loss:
+  constraint_center_weight: 0.10
+
+experiment:
+  name: raw_mode1_stage2_lr1e-4_weakdistill_centerloss_strong_fullwidth

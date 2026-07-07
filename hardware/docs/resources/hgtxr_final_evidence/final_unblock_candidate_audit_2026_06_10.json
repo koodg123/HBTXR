@@ -1,0 +1,33 @@
+{
+  "c3b_smoke": {
+    "errors": [
+      "--c3b-smoke-json is required to preview C3b blocker clearance"
+    ],
+    "path": "",
+    "status": "missing",
+    "would_clear": false
+  },
+  "remaining_blockers": [
+    "C3b AXIS/DMA physical smoke result",
+    "requested XR-VITs sibling"
+  ],
+  "root": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR",
+  "safety": {
+    "creates_board_result": false,
+    "creates_xr_vits_policy": false,
+    "executes_network": false,
+    "writes_canonical_inputs": false
+  },
+  "status": "blocked",
+  "would_clear_all": false,
+  "xr_vits": {
+    "errors": [
+      "requested XR-VITs path missing: /home/kjm26/project/PRJXR/XR-VITs"
+    ],
+    "mode": "exact",
+    "replacement_path": "",
+    "requested_path": "/home/kjm26/project/PRJXR/XR-VITs",
+    "status": "fail",
+    "would_clear": false
+  }
+}

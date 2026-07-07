@@ -1,0 +1,21 @@
+# Stage2 fine-tune: all-head centerloss objective from the center-checkpoint
+# best-center checkpoint with very weak EMA distillation retained.
+
+extends: mode1_stage2_raw_event_count_lr5e-6_nodistill_centerloss_centerckptinit_fullwidth.yaml
+
+distillation:
+  enabled: true
+  teacher_student: true
+  ema_decay: 0.9995
+  feature_similarity: true
+  feature_weight: 0.005
+  state_similarity: true
+  state_weight: 0.005
+  prediction_similarity: true
+  prediction_weight: 0.005
+  kd:
+    enabled: false
+    weight: 0.0
+
+experiment:
+  name: raw_mode1_stage2_lr5e-6_weakdistill_centerloss_centerckptinit_fullwidth

@@ -1,0 +1,27 @@
+# Preset: mode2 + stage1 + optimizer pool benchmark
+# Purpose:
+# - benchmark optimizer candidates on interpolated-frame stage1 training
+# - keep the pool entrypoint config-driven without changing manifests or train loop code
+
+extends: ../../configs/mode2_stage1.yaml                                                      # start from the normal mode2 stage1 preset
+
+training:
+  optimizer_pool:
+    enabled: true                                                               # run pool instead of single optimizer
+    compare_mode: sweep                                                         # sweep all listed candidates
+    implemented_only: true                                                      # skip placeholder/unimplemented entries
+    candidates:
+      - name: adamw
+      - name: lion
+      - name: prodigy
+      - name: adopt
+      - name: adam_mini
+      - name: adema_mix
+      - name: ivon
+      - name: sophia_g
+      - name: mars
+      - name: soap
+      - name: musgd
+
+experiment:
+  name: hbtxr_mode2_stage1_optimizer_pool                                       # run name prefix

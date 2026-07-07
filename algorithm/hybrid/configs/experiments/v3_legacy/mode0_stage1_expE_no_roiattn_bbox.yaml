@@ -1,0 +1,6 @@
+# Compatibility alias for the historical Exp-E no-ROI-attention preset name.
+
+extends: mode0_stage1_roi_bbox_without_roi_attention.yaml
+
+experiment:
+  name: hbtxr_mode0_stage1_expE_no_roiattn_bbox

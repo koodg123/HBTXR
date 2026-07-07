@@ -24,6 +24,7 @@ def compute_metrics(batch: Dict[str, torch.Tensor], outputs: Dict[str, torch.Ten
                 "metric_search_center_px": (search_error * (quality * geom)).sum() / (quality * geom).sum().clamp_min(1e-6),
                 "metric_search_p10_pct": _hit_rate_percent(search_error, 10.0, quality * geom),
                 "metric_search_p5_pct": _hit_rate_percent(search_error, 5.0, quality * geom),
+                "metric_search_p1_pct": _hit_rate_percent(search_error, 1.0, quality * geom),
             }
         )
     if "event/pupil" in outputs or "event/state" in outputs:
@@ -43,6 +44,7 @@ def compute_metrics(batch: Dict[str, torch.Tensor], outputs: Dict[str, torch.Ten
                 "metric_track_center_px": (track_error * (quality * track_geom)).sum() / (quality * track_geom).sum().clamp_min(1e-6),
                 "metric_track_p10_pct": _hit_rate_percent(track_error, 10.0, quality * track_geom),
                 "metric_track_p5_pct": _hit_rate_percent(track_error, 5.0, quality * track_geom),
+                "metric_track_p1_pct": _hit_rate_percent(track_error, 1.0, quality * track_geom),
             }
         )
         if "track/pupil" in outputs:

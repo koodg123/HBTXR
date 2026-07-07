@@ -1,0 +1,12 @@
+# Stage2 track-only fine-tune with decoded-center L2 plus stronger ellipse geometry.
+# Paper-backed probe: FACET/HBTXR pupil-state supervision should reward full
+# (x,y,a,b,theta) consistency, not center only.
+
+extends: mode1_stage2_raw_event_count_lr5e-6_nodistill_trackonly_centerl2_finetune_fullwidth.yaml
+
+loss:
+  track_center_l2_weight: 0.0025
+  track_geo_weight: 0.75
+
+experiment:
+  name: raw_mode1_stage2_lr5e-6_nodistill_trackonly_centerl2_geo075_finetune_fullwidth

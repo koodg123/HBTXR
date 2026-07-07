@@ -1,6 +1,6 @@
 # Source: https://raw.githubusercontent.com/huggingface/pytorch-image-models/main/timm/optim/adopt.py
 # Upstream: timm/optim/adopt.py adapted from iShohei220/adopt
-# Diff: see docs/src/optimizers/adopt_diff.md
+# Diff: see docs/hbtxr/optimizers/adopt_diff.md
 
 from __future__ import annotations
 

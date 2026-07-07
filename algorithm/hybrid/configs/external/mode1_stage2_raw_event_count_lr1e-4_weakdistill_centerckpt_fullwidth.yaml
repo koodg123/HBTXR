@@ -1,0 +1,19 @@
+# Stage2 accuracy ablation: weak distillation, full-width, center-error checkpointing.
+
+extends: mode1_stage2_raw_event_count_lr1e-4_weakdistill_fullwidth.yaml
+
+training:
+  best_metric_name: metric_track_center_px
+  scheduler:
+    type: plateau
+    metric_name: metric_track_center_px
+    factor: 0.5
+    patience: 3
+  early_stopping:
+    enabled: true
+    patience: 8
+    start_epoch: 6
+    min_delta: 0.01
+
+experiment:
+  name: raw_mode1_stage2_lr1e-4_weakdistill_centerckpt_fullwidth

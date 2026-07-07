@@ -1,6 +1,6 @@
 # Source: https://pytorch.org/docs/stable/generated/torch.optim.AdamW.html
 # Upstream: torch.optim.AdamW (PyTorch built-in)
-# Diff: see docs/src/optimizers/adamw_diff.md
+# Diff: see docs/hbtxr/optimizers/adamw_diff.md
 
 from __future__ import annotations
 

@@ -1,6 +1,6 @@
 # Source: https://raw.githubusercontent.com/team-approx-bayes/ivon/refs/heads/main/ivon/_ivon.py
 # Upstream: team-approx-bayes/ivon ivon/_ivon.py
-# Diff: see docs/src/optimizers/ivon_diff.md
+# Diff: see docs/hbtxr/optimizers/ivon_diff.md
 
 from __future__ import annotations
 

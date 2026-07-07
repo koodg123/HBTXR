@@ -26,6 +26,8 @@ model:
     eye_variant: yolo26_bbox                                                    # legacy | yolo26_bbox | yolo26_point | yolo_detect | sot_center | sot_corner
     eye_reg_max: 1                                                              # 1 | 2+; DFL bins for yolo26_point eye head
     search: true                                                                # bool; frame search head
+    search_variant: legacy                                                      # legacy | residual_mlp | deep_residual_mlp
+    search_residual_hidden_dim: null                                             # optional hidden dim for residual search head variants
     event: true                                                                 # bool; event search head
     track: true                                                                 # bool; track residual head
     mask: true                                                                  # bool; dense mask head
@@ -34,6 +36,11 @@ model:
     event_bbox_aux: false                                                       # bool; pooled event pupil bbox auxiliary head
     search_obb_aux: false                                                       # bool; pooled search pupil rotated-bbox auxiliary head
     event_obb_aux: false                                                        # bool; pooled event pupil rotated-bbox auxiliary head
+    search_center_candidate: false                                               # bool; train candidate center deltas around frame-search prediction
+    search_center_candidate_count: 4                                             # candidate count for Stage1 Search candidate head
+    search_center_candidate_max_delta_px: 8.0                                    # max candidate delta around current search center
+    search_center_candidate_as_search_state: false                               # bool; route selected candidate into search/state
+    search_center_candidate_blend: 1.0                                           # blend factor when selected candidate updates search/state
   search:
     xy_from_mask_centroid: false                                                # bool; replace search x/y with soft mask centroid
   mask:
@@ -105,6 +112,16 @@ data:
   # data.components is intentionally omitted from the main surface.
   # The loader already resolves dataset components to split_v1 by default.
   # Add data.components only in experimental presets when you need to pin alternates.
+  augmentation:
+    enabled: false                                                              # train-only label-safe frame/event intensity augmentation
+    probability: 1.0                                                            # probability of applying augmentation to a train sample
+    seed: 42                                                                    # deterministic sample_id-based augmentation seed
+    frame_gain: [1.0, 1.0]                                                       # multiplicative frame intensity range
+    frame_bias: 0.0                                                             # additive frame intensity shift after normalization
+    frame_noise_std: 0.0                                                        # Gaussian frame noise after normalization
+    event_gain: [1.0, 1.0]                                                       # multiplicative event tensor range
+    event_dropout: 0.0                                                          # random event tensor dropout probability
+    event_noise_std: 0.0                                                        # Gaussian event tensor noise
 
   # mode0:
   # - raw CSV supervision

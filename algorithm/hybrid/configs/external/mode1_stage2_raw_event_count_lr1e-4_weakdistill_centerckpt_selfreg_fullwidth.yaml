@@ -1,0 +1,21 @@
+# Stage2 accuracy ablation: center-error checkpointing with light local-global
+# self-regularization across search/event/track representations.
+
+extends: mode1_stage2_raw_event_count_lr1e-4_weakdistill_centerckpt_fullwidth.yaml
+
+regularization_ssl:
+  enabled: true
+  force_with_teacher: true
+  feature_similarity: true
+  feature_weight: 0.01
+  state_similarity: true
+  state_weight: 0.02
+  prediction_similarity: true
+  prediction_weight: 0.01
+  cross_modal_contrastive: true
+  contrastive_weight: 0.01
+  self_consistency: true
+  self_consistency_weight: 0.01
+
+experiment:
+  name: raw_mode1_stage2_lr1e-4_weakdistill_centerckpt_selfreg_fullwidth

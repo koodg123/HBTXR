@@ -1,6 +1,6 @@
 # Source: E:/WSL/Shared/ETRI_SYNC/HBTXR/references/ultralytics-main/ultralytics/optim/muon.py
 # Upstream: ultralytics/optim/muon.py
-# Diff: see docs/src/optimizers/musgd_diff.md
+# Diff: see docs/hbtxr/optimizers/musgd_diff.md
 
 from __future__ import annotations
 

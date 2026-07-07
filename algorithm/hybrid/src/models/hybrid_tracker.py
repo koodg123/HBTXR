@@ -35,6 +35,10 @@ class HBTXRTracker(nn.Module):
         mlp_hidden_dim: int | None = None,
         patch_size: int = 16,
         input_size: tuple[int, int] = (256, 256),
+        frame_input_size: tuple[int, int] | None = None,
+        event_input_size: tuple[int, int] | None = None,
+        event_cut_depth: int | None = None,
+        track_depth: int | None = None,
         dropout: float = 0.0,
         aux_classes: int = 5,
         adapter_hidden_dim: int | None = None,
@@ -45,6 +49,8 @@ class HBTXRTracker(nn.Module):
         structural_width_ratio: float = 1.0,
         eye_head_variant: str = "legacy",
         eye_reg_max: int = 1,
+        search_head_variant: str = "legacy",
+        search_head_residual_hidden_dim: int | None = None,
         enable_eye_head: bool = True,
         enable_search_head: bool = True,
         enable_event_head: bool = True,
@@ -55,6 +61,31 @@ class HBTXRTracker(nn.Module):
         enable_event_bbox_aux_head: bool = False,
         enable_search_obb_aux_head: bool = False,
         enable_event_obb_aux_head: bool = False,
+        enable_search_center_candidate_head: bool = False,
+        enable_track_state_aux_head: bool = False,
+        enable_track_state_simdr_head: bool = False,
+        enable_track_center_heatmap_head: bool = False,
+        enable_track_center_refine_head: bool = False,
+        enable_track_center_candidate_head: bool = False,
+        track_state_simdr_bins: int = 64,
+        track_center_heatmap_grid: int = 32,
+        track_center_refine_max_delta_px: float = 4.0,
+        track_center_candidate_count: int = 4,
+        track_center_candidate_max_delta_px: float = 8.0,
+        search_center_candidate_count: int = 4,
+        search_center_candidate_max_delta_px: float = 8.0,
+        track_state_simdr_as_track_state: bool = False,
+        track_state_simdr_coordinate_max: float = 255.0,
+        track_state_simdr_blend: float = 1.0,
+        track_center_heatmap_as_track_state: bool = False,
+        track_center_heatmap_coordinate_max: float = 255.0,
+        track_center_heatmap_blend: float = 1.0,
+        track_center_refine_as_track_state: bool = False,
+        track_center_refine_blend: float = 1.0,
+        track_center_candidate_as_track_state: bool = False,
+        track_center_candidate_blend: float = 1.0,
+        search_center_candidate_as_search_state: bool = False,
+        search_center_candidate_blend: float = 1.0,
         mask_variant: str = "legacy",
         runtime_cfg: dict[str, Any] | None = None,
         pruning_cfg: dict[str, Any] | None = None,
@@ -80,6 +111,10 @@ class HBTXRTracker(nn.Module):
         ).build()
         self.embed_dim = int(embed_dim)
         self.input_size = tuple(int(v) for v in input_size)
+        self.frame_input_size = tuple(int(v) for v in (frame_input_size or self.input_size))
+        self.event_input_size = tuple(int(v) for v in (event_input_size or self.input_size))
+        self.event_cut_depth = None if event_cut_depth is None else int(event_cut_depth)
+        self.track_depth = int(track_depth if track_depth is not None else event_cut_depth) if (track_depth is not None or event_cut_depth is not None) else None
         self.pruning_cfg = normalized.pruning_cfg
         self.patch_embed_cfg = normalized.patch_embed_cfg
         self.search_cfg = normalized.search_cfg
@@ -149,6 +184,8 @@ class HBTXRTracker(nn.Module):
             frame_adapter=self.frame_adapter,
             event_adapter=self.event_adapter,
             backbone=self.backbone,
+            event_depth_limit=self.event_cut_depth,
+            track_depth_limit=self.track_depth,
             **encoder_kwargs,
         )
         head_factory = head_factory_cls(
@@ -158,6 +195,10 @@ class HBTXRTracker(nn.Module):
             head_hidden_dim=head_hidden_dim,
             track_head_hidden_dim=track_head_hidden_dim,
             mask_hidden_dim=mask_hidden_dim,
+            search_head_variant=search_head_variant,
+            search_head_residual_hidden_dim=search_head_residual_hidden_dim,
+            search_center_candidate_count=search_center_candidate_count,
+            search_center_candidate_max_delta_px=search_center_candidate_max_delta_px,
             eye_detector_mode=self.eye_detector_mode,
             eye_head_variant=self.eye_head_variant,
             eye_reg_max=self.eye_reg_max,
@@ -166,6 +207,11 @@ class HBTXRTracker(nn.Module):
             search_use_roi_bbox_head=self.search_use_roi_bbox_head,
             roi_bbox_use_external_eye=self.roi_bbox_use_external_eye,
             mask_cfg=self.mask_cfg,
+            track_state_simdr_bins=track_state_simdr_bins,
+            track_center_heatmap_grid=track_center_heatmap_grid,
+            track_center_refine_max_delta_px=track_center_refine_max_delta_px,
+            track_center_candidate_count=track_center_candidate_count,
+            track_center_candidate_max_delta_px=track_center_candidate_max_delta_px,
             **head_factory_kwargs,
         )
         head_modules = head_factory.build(
@@ -179,6 +225,12 @@ class HBTXRTracker(nn.Module):
             enable_event_bbox_aux_head=enable_event_bbox_aux_head,
             enable_search_obb_aux_head=enable_search_obb_aux_head,
             enable_event_obb_aux_head=enable_event_obb_aux_head,
+            enable_search_center_candidate_head=enable_search_center_candidate_head,
+            enable_track_state_aux_head=enable_track_state_aux_head,
+            enable_track_state_simdr_head=enable_track_state_simdr_head,
+            enable_track_center_heatmap_head=enable_track_center_heatmap_head,
+            enable_track_center_refine_head=enable_track_center_refine_head,
+            enable_track_center_candidate_head=enable_track_center_candidate_head,
         )
         self.eye_head = head_modules.eye_head
         self.search_head = head_modules.search_head
@@ -187,8 +239,14 @@ class HBTXRTracker(nn.Module):
         self.event_bbox_aux_head = head_modules.event_bbox_aux_head
         self.search_obb_aux_head = head_modules.search_obb_aux_head
         self.event_obb_aux_head = head_modules.event_obb_aux_head
+        self.search_center_candidate_head = head_modules.search_center_candidate_head
         self.roi_bbox_head = head_modules.roi_bbox_head
         self.track_head = head_modules.track_head
+        self.track_state_aux_head = head_modules.track_state_aux_head
+        self.track_state_simdr_head = head_modules.track_state_simdr_head
+        self.track_center_heatmap_head = head_modules.track_center_heatmap_head
+        self.track_center_refine_head = head_modules.track_center_refine_head
+        self.track_center_candidate_head = head_modules.track_center_candidate_head
         self.mask_head = head_modules.mask_head
         self.aux_head = head_modules.aux_head
         self.search_refiner = refiner_cls(
@@ -210,6 +268,7 @@ class HBTXRTracker(nn.Module):
             search_head=self.search_head,
             search_bbox_aux_head=self.search_bbox_aux_head,
             search_obb_aux_head=self.search_obb_aux_head,
+            search_center_candidate_head=self.search_center_candidate_head,
             roi_bbox_head=self.roi_bbox_head,
             mask_head=self.mask_head,
             aux_head=self.aux_head,
@@ -217,6 +276,8 @@ class HBTXRTracker(nn.Module):
             eye_head_variant=self.eye_head_variant,
             roi_bbox_use_external_eye=self.roi_bbox_use_external_eye,
             refiner=self.search_refiner,
+            candidate_as_search_state=search_center_candidate_as_search_state,
+            candidate_blend=search_center_candidate_blend,
             **search_branch_kwargs,
         )
         self.event_branch = event_branch_cls(
@@ -238,9 +299,24 @@ class HBTXRTracker(nn.Module):
         self.track_branch = track_branch_cls(
             prev_state_encoder=self.prev_state_encoder,
             track_head=self.track_head,
+            track_state_aux_head=self.track_state_aux_head,
+            track_state_simdr_head=self.track_state_simdr_head,
+            track_center_heatmap_head=self.track_center_heatmap_head,
+            track_center_refine_head=self.track_center_refine_head,
+            track_center_candidate_head=self.track_center_candidate_head,
             apply_width_mask=self.encoder.apply_width_mask,
             apply_track_mask=self.encoder.apply_track_mask,
             decode_state=self.track_codec.decode,
+            simdr_as_track_state=track_state_simdr_as_track_state,
+            simdr_coordinate_max=track_state_simdr_coordinate_max,
+            simdr_blend=track_state_simdr_blend,
+            heatmap_as_track_state=track_center_heatmap_as_track_state,
+            heatmap_coordinate_max=track_center_heatmap_coordinate_max,
+            heatmap_blend=track_center_heatmap_blend,
+            refine_as_track_state=track_center_refine_as_track_state,
+            refine_blend=track_center_refine_blend,
+            candidate_as_track_state=track_center_candidate_as_track_state,
+            candidate_blend=track_center_candidate_blend,
             **track_branch_kwargs,
         )
         self.scheduler = TrackSearchSchedulerFSM(**self.runtime_cfg)
