@@ -1,0 +1,70 @@
+{
+  "package_root": "/home/kjm26/project/PRJXR/HBTXR/analysis/RESULTS/EX-Gaze/latest_checkpoint",
+  "files": [
+    {
+      "path": "EX-Gaze_latest_last_snapshot.ckpt",
+      "bytes": 1738863
+    },
+    {
+      "path": "EX-Gaze_result_package_manifest.json",
+      "bytes": 1542
+    },
+    {
+      "path": "EX-Gaze_subject37_48_dropped_blink_predictions.csv",
+      "bytes": 1862666
+    },
+    {
+      "path": "EX-Gaze_subject37_48_error_distribution_by_subject_motion.csv",
+      "bytes": 5119
+    },
+    {
+      "path": "EX-Gaze_subject37_48_error_distribution_report.md",
+      "bytes": 1608
+    },
+    {
+      "path": "EX-Gaze_subject37_48_inference_metadata.json",
+      "bytes": 3840
+    },
+    {
+      "path": "EX-Gaze_subject37_48_joined_motion_counts.csv",
+      "bytes": 272
+    },
+    {
+      "path": "EX-Gaze_subject37_48_motion_error_stats.csv",
+      "bytes": 310
+    },
+    {
+      "path": "EX-Gaze_subject37_48_subject_error_stats.csv",
+      "bytes": 1068
+    },
+    {
+      "path": "EX-Gaze_subject37_48_test_inference_report.md",
+      "bytes": 1608
+    },
+    {
+      "path": "EX-Gaze_subject37_48_test_joined_motion_error.csv",
+      "bytes": 114357474
+    },
+    {
+      "path": "EX-Gaze_subject37_48_test_sample_predictions.csv",
+      "bytes": 114217799
+    },
+    {
+      "path": "EX-Gaze_subject37_48_unmatched_predictions.csv",
+      "bytes": 1862668
+    },
+    {
+      "path": "EX-Gaze_test_inference_metadata.json",
+      "bytes": 1215
+    },
+    {
+      "path": "JETCAS_REPLY_TABLES (Error-Distributions)_EX-Gaze.xlsx",
+      "bytes": 8858
+    },
+    {
+      "path": "checkpoints/EX-Gaze_epoch043_latest_last_snapshot.ckpt",
+      "bytes": 1738863
+    }
+  ],
+  "generated_at": "2026-07-04T23:59:02"
+}

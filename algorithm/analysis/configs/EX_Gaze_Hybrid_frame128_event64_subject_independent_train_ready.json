@@ -1,0 +1,59 @@
+{
+  "experiment_name": "EX_Gaze_Hybrid_frame128_event64_subject_independent",
+  "model_family": "EX-Gaze-adapted",
+  "status": "train-ready-dryrun-only",
+  "dataset": {
+    "storage_mode": "compact_manifest_live_loader",
+    "tag": "train_ready",
+    "source_root": "/home/kjm26/project/dataset/XR/EV_Eye/raw_data/DeanDataset_full_unet_subject_independent",
+    "dataset_root": "/home/kjm26/project/dataset/XR/EV_Eye/target_data/EX_Gaze_Hybrid_frame128_event64_subject_independent/train_ready",
+    "splits": {
+      "train": {
+        "manifest": "train/labels.csv",
+        "subjects": "1-32",
+        "samples": 968873
+      },
+      "val": {
+        "manifest": "val/labels.csv",
+        "subjects": "33-36",
+        "samples": 122776
+      },
+      "test": {
+        "manifest": "test/labels.csv",
+        "subjects": "37-48",
+        "samples": 366171
+      }
+    },
+    "inputs": {
+      "frame": "1x128x128 float32 live-resized from Data_davis frame",
+      "input_volume": "2x64x64 float32 live-binned from FACET cached events",
+      "event_patches": "8x2x16x16 float32 live-derived from input_volume and previous pre_state",
+      "pre_state": "[x,y,a,b,angle] in 64x64 event coordinates from the previous row in the same subject/eye/session",
+      "pupil": "[x,y,a,b,angle] in 128x128 frame coordinates"
+    }
+  },
+  "training": {
+    "epochs": 70,
+    "batch_size": 32,
+    "num_workers": 4,
+    "optimizer": "Adam",
+    "learning_rate": 0.001,
+    "weight_decay": 0.00001,
+    "scheduler": {
+      "type": "StepLR",
+      "step_size": 10,
+      "gamma": 0.7,
+      "warmup_lr": 0.00001,
+      "warmup_epochs": 5
+    }
+  },
+  "gpu_plan": {
+    "intended_gpu": 1,
+    "launch_status": "not_launched"
+  },
+  "notes": [
+    "This config records the HBTXR-matched training contract before implementation of the final EX-Gaze training loop.",
+    "The original EX-Gaze config uses a patch preprocessor. This adapted contract keeps the original pre-state patch logic but fixes event patches to 8x2x16x16 from a 2x64x64 event volume.",
+    "Samples without a previous row in the same subject/eye/session are excluded from EX-Gaze tracking pairs."
+  ]
+}

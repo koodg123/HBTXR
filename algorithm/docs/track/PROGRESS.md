@@ -27,6 +27,12 @@ Last updated: 2026-07-07
       maintained package surfaces.
 - [x] Move the refactor summary under `algorithm/docs/track/refactor` so root
       package structure remains clean.
+- [x] Import selected `HANDOVER/HBTXR` EV-Eye and EX-Gaze hybrid analysis
+      scripts, configs, reports, metadata, and compact result summaries.
+- [x] Archive `IMPL_REPOS/SW/FECET-HBTXR` and `SWIFT-HBTXR` as optional
+      future porting sources under `algorithm/archive/imports`.
+- [x] Document the selective import and large-artifact exclusions in
+      `algorithm/docs/track/IMPL_REPOS_HANDOVER_IMPORT_2026_07_08.md`.
 
 ## In Progress Or Next
 
@@ -40,6 +46,8 @@ Last updated: 2026-07-07
       `hardware`, and `quantization`.
 - [ ] Promote archived legacy scripts/tests only after API adaptation and
       validation.
+- [ ] Adapt the imported EV-Eye/EX-Gaze scripts to the current
+      `algorithm/hybrid/src` package before treating them as active workflows.
 
 ## Current Key Metrics
 

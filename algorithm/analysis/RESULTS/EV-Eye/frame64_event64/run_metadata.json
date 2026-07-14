@@ -1,0 +1,16 @@
+{
+  "option": "frame64_event64",
+  "input_width": 64,
+  "input_height": 64,
+  "event_shape": [
+    2,
+    64,
+    64
+  ],
+  "event_usage": "not consumed by EV-Eye pretrained UNet; retained as comparison-option metadata",
+  "pretrained_root": "/home/kjm26/project/dataset/XR/EV_Eye/processed_data/Pre-trained_models",
+  "labelled_root": "/home/kjm26/project/dataset/XR/EV_Eye/raw_data/Data_davis_labelled_with_mask",
+  "data_root": "/home/kjm26/project/dataset/XR/EV_Eye/raw_data/Data_davis",
+  "motion_labels": "/home/kjm26/project/PRJXR/HBTXR/analysis/motion-label-packages/outputs/RowLabels_test37_48_motion_NoBlink.csv",
+  "num_predictions": 2238
+}

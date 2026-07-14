@@ -1,0 +1,17 @@
+{
+  "config": "analysis/configs/EV_Eye_Hybrid_frame128_event64_subject_independent_train_ready.json",
+  "model": "ev-eye",
+  "device": "cuda:0",
+  "cuda_visible_devices": "0",
+  "cudnn_enabled": true,
+  "cudnn_version": 91900,
+  "dataset_root": "/home/kjm26/project/dataset/XR/EV_Eye/target_data/EV_Eye_Hybrid_frame128_event64_subject_independent/train_ready",
+  "source_root": "/home/kjm26/project/dataset/XR/EV_Eye/raw_data/DeanDataset_full_unet_subject_independent",
+  "epochs": 70,
+  "batch_size": 32,
+  "num_workers": 4,
+  "train_len": 968873,
+  "val_len": 122776,
+  "dry_run": false,
+  "torch": "2.11.0+cu128"
+}
