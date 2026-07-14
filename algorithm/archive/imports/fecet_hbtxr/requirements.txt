@@ -1,0 +1,14 @@
+# Core runtime
+torch>=2.2
+numpy>=1.24
+pillow>=10.0
+pyyaml>=6.0
+opencv-python>=4.8
+
+# Verification
+pytest>=8.0
+
+# Grounded-SAM note:
+# The annotation wrapper imports code from the external repository passed by
+# --grounded-sam-root. Install that repository's extra dependencies in the same
+# environment when using annotation-mode csv_then_gsam or grounded_sam.

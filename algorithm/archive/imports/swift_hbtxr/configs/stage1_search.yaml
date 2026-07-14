@@ -1,0 +1,18 @@
+extends: base.yaml
+
+training:
+  stage: stage1
+  epochs: 20
+  batch_size: 8
+  best_metric_name: metric_search_p10_pct
+  scheduler:
+    type: cosine
+    warmup_epochs: 2
+    min_lr: 3.0e-6
+  early_stopping:
+    enabled: true
+    patience: 8
+    start_epoch: 5
+
+experiment:
+  name: swift_stage1
