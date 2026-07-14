@@ -1,0 +1,219 @@
+{
+  "status": "candidate-found",
+  "requested_path": "/home/kjm26/project/PRJXR/XR-VITs",
+  "approved_replacement": false,
+  "recommendation": {
+    "role": "candidate-xr-accel",
+    "path": "/home/kjm26/project/PRJXR/XR-VIT/XR_Accel",
+    "score": 99,
+    "reason": "highest score for ZCU104/cyclic/DeiT/HLS evidence"
+  },
+  "candidates": [
+    {
+      "path": "/home/kjm26/project/PRJXR/XR-VIT/XR_Accel",
+      "role": "candidate-xr-accel",
+      "exists": true,
+      "score": 99,
+      "file_count": 1315,
+      "hls_file_count": 97,
+      "zcu104_configs": [
+        "configs/designs/deit_tiny_cyclic_zcu104.json",
+        "configs/designs/hbtxr_cyclic_zcu104.json",
+        "configs/designs/hbtxr_streaming_zcu104.json",
+        "configs/experiments/zcu104_deit_tiny_baseline_cyclic.json",
+        "configs/experiments/zcu104_full_deit_tiny_fit.json",
+        "configs/experiments/zcu104_hbtxr_option_a_cyclic.json",
+        "configs/experiments/zcu104_hbtxr_option_a_streaming.json",
+        "configs/experiments/zcu104_hbtxr_option_b_cyclic.json",
+        "configs/experiments/zcu104_hbtxr_option_b_streaming.json",
+        "configs/experiments/zcu104_hbtxr_option_c_cyclic.json",
+        "configs/experiments/zcu104_hbtxr_option_c_streaming.json",
+        "configs/targets/zcu104.json"
+      ],
+      "cyclic_deit_configs": [
+        "configs/designs/deit_tiny_cyclic_zcu104.json",
+        "configs/designs/hbtxr_cyclic_zcu104.json",
+        "configs/experiments/zcu104_deit_tiny_baseline_cyclic.json",
+        "configs/experiments/zcu104_full_deit_tiny_fit.json",
+        "configs/experiments/zcu104_hbtxr_option_a_cyclic.json",
+        "configs/experiments/zcu104_hbtxr_option_b_cyclic.json",
+        "configs/experiments/zcu104_hbtxr_option_c_cyclic.json",
+        "workspace/artifacts/reports/zcu104/deit_tiny_baseline_cyclic/deit_tiny_cyclic_zcu104/deit_cyclic_maxperf_csim_verify.json"
+      ],
+      "primitive_hits": {
+        "layernorm": [
+          "workspace/hardware/case/LAYERNORM_1X2.cpp",
+          "workspace/hardware/case/LAYERNORM_2X1.cpp",
+          "workspace/hardware/case/LAYERNORM_2X2.cpp",
+          "workspace/hardware/src/layernorm.h"
+        ],
+        "gelu": [
+          "workspace/hardware/case/GELU.cpp",
+          "workspace/hardware/case/refs/mlp_0_geluq_input.txt",
+          "workspace/hardware/case/refs/mlp_0_geluq_output.txt",
+          "workspace/hardware/case/refs/mlp_0_geluq_scalars.txt",
+          "workspace/hardware/case/refs/mlp_0_geluq_table_m.txt",
+          "workspace/hardware/case/refs/mlp_10_geluq_input.txt",
+          "workspace/hardware/case/refs/mlp_10_geluq_output.txt",
+          "workspace/hardware/case/refs/mlp_10_geluq_scalars.txt"
+        ],
+        "softmax": [
+          "workspace/hardware/case/SOFTMAX_1X2.cpp",
+          "workspace/hardware/case/SOFTMAX_2X1.cpp",
+          "workspace/hardware/case/SOFTMAX_2X2.cpp",
+          "workspace/hardware/case/refs/attn_0_softmaxq_exp_opp_table_m.txt",
+          "workspace/hardware/case/refs/attn_0_softmaxq_input.txt",
+          "workspace/hardware/case/refs/attn_0_softmaxq_output.txt",
+          "workspace/hardware/case/refs/attn_0_softmaxq_recip_scaled_table_m_one.txt",
+          "workspace/hardware/case/refs/attn_0_softmaxq_recip_scaled_table_m_two.txt"
+        ],
+        "quant": [
+          "workspace/hardware/case/QUANT.cpp",
+          "workspace/hardware/src/quant.h"
+        ]
+      },
+      "vivado_zcu104": [
+        "workspace/hardware/vivado/boards/zcu104.tcl"
+      ],
+      "cyclic_top": [
+        "automation/__pycache__/cyclic_top.cpython-310.pyc",
+        "automation/cyclic_top.py",
+        "workspace/hardware/case_cyclic_zcu104/CYCLIC_VIT_TOP.cpp",
+        "workspace/hardware/src/cyclic_vit.h"
+      ],
+      "top_hls_samples": [
+        "workspace/flow/scripts/utils/deit_cyclic_csim_only.tcl",
+        "workspace/flow/scripts/utils/deit_cyclic_csynth_only.tcl",
+        "workspace/hardware/case/ATTN0.cpp",
+        "workspace/hardware/case/ATTN1.cpp",
+        "workspace/hardware/case/ATTN10.cpp",
+        "workspace/hardware/case/ATTN11.cpp",
+        "workspace/hardware/case/ATTN2.cpp",
+        "workspace/hardware/case/ATTN3.cpp",
+        "workspace/hardware/case/ATTN4.cpp",
+        "workspace/hardware/case/ATTN5.cpp",
+        "workspace/hardware/case/ATTN6.cpp",
+        "workspace/hardware/case/ATTN7.cpp",
+        "workspace/hardware/case/ATTN8.cpp",
+        "workspace/hardware/case/ATTN9.cpp",
+        "workspace/hardware/case/GELU.cpp",
+        "workspace/hardware/case/HEAD.cpp",
+        "workspace/hardware/case/HEAD_SPLIT.cpp",
+        "workspace/hardware/case/LAYERNORM_1X2.cpp",
+        "workspace/hardware/case/LAYERNORM_2X1.cpp",
+        "workspace/hardware/case/LAYERNORM_2X2.cpp"
+      ],
+      "readme_exists": true
+    },
+    {
+      "path": "/home/kjm26/project/PRJXR/XR-VIT/ViT_Accel",
+      "role": "candidate-vit-accel",
+      "exists": true,
+      "score": 90,
+      "file_count": 2916,
+      "hls_file_count": 229,
+      "zcu104_configs": [
+        "configs/experiments/zcu104_deit_tiny_variant_fit.json",
+        "configs/experiments/zcu104_full_deit_tiny_fit.json",
+        "configs/models/deit_tiny_variant_zcu104.json",
+        "configs/targets/zcu104.json",
+        "workspace/hardware/vivado/boards/zcu104.tcl"
+      ],
+      "cyclic_deit_configs": [
+        "configs/experiments/zcu104_deit_tiny_variant_fit.json",
+        "configs/experiments/zcu104_full_deit_tiny_fit.json",
+        "configs/models/deit_tiny_variant_zcu104.json"
+      ],
+      "primitive_hits": {
+        "layernorm": [
+          "workspace/artifacts/deploy/vck190/vck190_full_deit_tiny_fit/pynq_step5/spinal_export/ATTN0_do_layernorm_attn_inst_lnq_lnb_ROM_AUTO_1R.dat",
+          "workspace/artifacts/deploy/vck190/vck190_full_deit_tiny_fit/pynq_step5/spinal_export/ATTN0_do_layernorm_attn_inst_lnq_lnw_ROM_AUTO_1R.dat",
+          "workspace/artifacts/deploy/vck190/vck190_full_deit_tiny_fit/pynq_step5/spinal_export/ATTN0_do_layernorm_attn_inst_lnq_rsqrt_table_ROM_AUTO_1R.dat",
+          "workspace/artifacts/deploy/vck190/vck190_full_deit_tiny_fit/pynq_step5/spinal_export/ATTN10_do_layernorm_attn_inst_lnq_lnb_ROM_AUTO_1R.dat",
+          "workspace/artifacts/deploy/vck190/vck190_full_deit_tiny_fit/pynq_step5/spinal_export/ATTN10_do_layernorm_attn_inst_lnq_lnw_ROM_AUTO_1R.dat",
+          "workspace/artifacts/deploy/vck190/vck190_full_deit_tiny_fit/pynq_step5/spinal_export/ATTN10_do_layernorm_attn_inst_lnq_rsqrt_table_ROM_AUTO_1R.dat",
+          "workspace/artifacts/deploy/vck190/vck190_full_deit_tiny_fit/pynq_step5/spinal_export/ATTN11_do_layernorm_attn_inst_lnq_lnb_ROM_AUTO_1R.dat",
+          "workspace/artifacts/deploy/vck190/vck190_full_deit_tiny_fit/pynq_step5/spinal_export/ATTN11_do_layernorm_attn_inst_lnq_lnw_ROM_AUTO_1R.dat"
+        ],
+        "gelu": [
+          "workspace/artifacts/deploy/vck190/vck190_full_deit_tiny_fit/pynq_step5/spinal_export/MLP0_do_gelu_mlp_inst_ge_table_ROM_AUTO_1R.dat",
+          "workspace/artifacts/deploy/vck190/vck190_full_deit_tiny_fit/pynq_step5/spinal_export/MLP10_do_gelu_mlp_inst_ge_table_ROM_AUTO_1R.dat",
+          "workspace/artifacts/deploy/vck190/vck190_full_deit_tiny_fit/pynq_step5/spinal_export/MLP11_do_gelu_mlp_inst_ge_table_ROM_AUTO_1R.dat",
+          "workspace/artifacts/deploy/vck190/vck190_full_deit_tiny_fit/pynq_step5/spinal_export/MLP1_do_gelu_mlp_inst_ge_table_ROM_AUTO_1R.dat",
+          "workspace/artifacts/deploy/vck190/vck190_full_deit_tiny_fit/pynq_step5/spinal_export/MLP2_do_gelu_mlp_inst_ge_table_ROM_AUTO_1R.dat",
+          "workspace/artifacts/deploy/vck190/vck190_full_deit_tiny_fit/pynq_step5/spinal_export/MLP3_do_gelu_mlp_inst_ge_table_ROM_AUTO_1R.dat",
+          "workspace/artifacts/deploy/vck190/vck190_full_deit_tiny_fit/pynq_step5/spinal_export/MLP4_do_gelu_mlp_inst_ge_table_ROM_AUTO_1R.dat",
+          "workspace/artifacts/deploy/vck190/vck190_full_deit_tiny_fit/pynq_step5/spinal_export/MLP5_do_gelu_mlp_inst_ge_table_ROM_AUTO_1R.dat"
+        ],
+        "softmax": [
+          "workspace/artifacts/deploy/vck190/vck190_full_deit_tiny_fit/pynq_step5/spinal_export/ATTN0_do_softmax_12_attn_inst_softmax_qk_head1_buffer_652_RAM_AUTO_1R1W.dat",
+          "workspace/artifacts/deploy/vck190/vck190_full_deit_tiny_fit/pynq_step5/spinal_export/ATTN0_do_softmax_12_attn_inst_softmax_qk_head1_exp_score_653_RAM_AUTO_1R1W.dat",
+          "workspace/artifacts/deploy/vck190/vck190_full_deit_tiny_fit/pynq_step5/spinal_export/ATTN0_do_softmax_12_attn_inst_softmax_qk_head1_exp_table_ROM_AUTO_1R.dat",
+          "workspace/artifacts/deploy/vck190/vck190_full_deit_tiny_fit/pynq_step5/spinal_export/ATTN0_do_softmax_12_attn_inst_softmax_qk_head1_recip_table_one_ROM_AUTO_1R.dat",
+          "workspace/artifacts/deploy/vck190/vck190_full_deit_tiny_fit/pynq_step5/spinal_export/ATTN0_do_softmax_12_attn_inst_softmax_qk_head1_recip_table_two_ROM_AUTO_1R.dat",
+          "workspace/artifacts/deploy/vck190/vck190_full_deit_tiny_fit/pynq_step5/spinal_export/ATTN10_do_softmax_10_attn_inst_softmax_qk_head1_buffer_659_RAM_AUTO_1R1W.dat",
+          "workspace/artifacts/deploy/vck190/vck190_full_deit_tiny_fit/pynq_step5/spinal_export/ATTN10_do_softmax_10_attn_inst_softmax_qk_head1_exp_score_660_RAM_AUTO_1R1W.dat",
+          "workspace/artifacts/deploy/vck190/vck190_full_deit_tiny_fit/pynq_step5/spinal_export/ATTN10_do_softmax_10_attn_inst_softmax_qk_head1_exp_table_ROM_AUTO_1R.dat"
+        ],
+        "quant": [
+          "workspace/artifacts/deploy/vck190/vck190_full_deit_tiny_fit/pynq_step5/spinal_export/ATTN0_do_quant_1_attn_inst_quant_v_table_ROM_AUTO_1R.dat",
+          "workspace/artifacts/deploy/vck190/vck190_full_deit_tiny_fit/pynq_step5/spinal_export/ATTN0_do_quant_3_attn_inst_quant_q_table_ROM_AUTO_1R.dat",
+          "workspace/artifacts/deploy/vck190/vck190_full_deit_tiny_fit/pynq_step5/spinal_export/ATTN0_do_quant_4_attn_inst_quant_k_table_ROM_AUTO_1R.dat",
+          "workspace/artifacts/deploy/vck190/vck190_full_deit_tiny_fit/pynq_step5/spinal_export/ATTN0_do_quant_attn_inst_quant_a_table_ROM_AUTO_1R.dat",
+          "workspace/artifacts/deploy/vck190/vck190_full_deit_tiny_fit/pynq_step5/spinal_export/ATTN10_do_quant_1_attn_inst_quant_a_table_ROM_AUTO_1R.dat",
+          "workspace/artifacts/deploy/vck190/vck190_full_deit_tiny_fit/pynq_step5/spinal_export/ATTN10_do_quant_2_1_attn_inst_quant_v_table_ROM_AUTO_1R.dat",
+          "workspace/artifacts/deploy/vck190/vck190_full_deit_tiny_fit/pynq_step5/spinal_export/ATTN10_do_quant_2_attn_inst_quant_k_table_ROM_AUTO_1R.dat",
+          "workspace/artifacts/deploy/vck190/vck190_full_deit_tiny_fit/pynq_step5/spinal_export/ATTN10_do_quant_attn_inst_quant_q_table_ROM_AUTO_1R.dat"
+        ]
+      },
+      "vivado_zcu104": [
+        "workspace/hardware/vivado/boards/zcu104.tcl"
+      ],
+      "cyclic_top": [],
+      "top_hls_samples": [
+        "workspace/artifacts/deploy/vck190/vck190_full_deit_tiny_fit/pynq_step5/generated/HGPIPE_VIVADO_TOP.v",
+        "workspace/artifacts/deploy/vck190/vck190_full_deit_tiny_fit/pynq_step5/generated/source_manifest.tcl",
+        "workspace/artifacts/deploy/vck190/vck190_full_deit_tiny_fit/pynq_step5/package/ip/src/HGPIPE_VIVADO_TOP.v",
+        "workspace/artifacts/deploy/vck190/vck190_full_deit_tiny_fit/pynq_step5/package/ip/src/all.v",
+        "workspace/artifacts/deploy/vck190/vck190_full_deit_tiny_fit/pynq_step5/package/ip/xgui/HGPIPE_VIVADO_TOP_v1_0.tcl",
+        "workspace/artifacts/deploy/vck190/vck190_full_deit_tiny_fit/pynq_step5/package/run_package_ip.tcl",
+        "workspace/artifacts/deploy/vck190/vck190_full_deit_tiny_fit/pynq_step5/spinal_export/BlockSequence_bb_replaced.v",
+        "workspace/artifacts/deploy/vck190/vck190_full_deit_tiny_fit/pynq_step5/spinal_export/BlockSequence_replaced.v",
+        "workspace/hardware/SPINAL/BlockSequence.v",
+        "workspace/hardware/SPINAL/BlockSequence_bb.v",
+        "workspace/hardware/SPINAL/src/main/verilog/ATTN0/all.v",
+        "workspace/hardware/SPINAL/src/main/verilog/ATTN1/all.v",
+        "workspace/hardware/SPINAL/src/main/verilog/ATTN10/all.v",
+        "workspace/hardware/SPINAL/src/main/verilog/ATTN11/all.v",
+        "workspace/hardware/SPINAL/src/main/verilog/ATTN2/all.v",
+        "workspace/hardware/SPINAL/src/main/verilog/ATTN3/all.v",
+        "workspace/hardware/SPINAL/src/main/verilog/ATTN4/all.v",
+        "workspace/hardware/SPINAL/src/main/verilog/ATTN5/all.v",
+        "workspace/hardware/SPINAL/src/main/verilog/ATTN6/all.v",
+        "workspace/hardware/SPINAL/src/main/verilog/ATTN7/all.v"
+      ],
+      "readme_exists": true
+    },
+    {
+      "path": "/home/kjm26/project/PRJXR/XR-VIT/analysis/XR_Accel",
+      "role": "candidate-analysis-xr-accel",
+      "exists": true,
+      "score": 0,
+      "file_count": 6,
+      "hls_file_count": 0,
+      "zcu104_configs": [],
+      "cyclic_deit_configs": [],
+      "primitive_hits": {
+        "layernorm": [],
+        "gelu": [],
+        "softmax": [],
+        "quant": []
+      },
+      "vivado_zcu104": [],
+      "cyclic_top": [],
+      "top_hls_samples": [],
+      "readme_exists": true
+    }
+  ],
+  "policy": "Do not treat any candidate as XR-VITs until the user approves the replacement or the exact requested path is restored."
+}

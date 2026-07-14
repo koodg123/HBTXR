@@ -1,0 +1,192 @@
+{
+  "checks": [
+    {
+      "detail": "weight_bits=4 activation_bits=8",
+      "name": "config_q4w_q8a",
+      "status": "pass"
+    },
+    {
+      "detail": "refs/weights/e2e_m_axi_active196_b6_ff768_q4_u32_manifest.json",
+      "name": "packed_weight_manifest",
+      "status": "pass"
+    },
+    {
+      "detail": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/refs/weights/e2e_m_axi_active196_b6_ff768_q4_u32.bin",
+      "name": "packed_weight_binary_exists",
+      "status": "pass"
+    },
+    {
+      "detail": "45b7aef9446c512cf74030975f55cd1f7407f2a27c2ea75603353132489d0a31",
+      "name": "packed_weight_sha256_matches_manifest",
+      "status": "pass"
+    },
+    {
+      "detail": "binary=12192768 manifest=12192768",
+      "name": "packed_weight_byte_count_matches_manifest",
+      "status": "pass"
+    },
+    {
+      "detail": "2",
+      "name": "packed_weight_expected_runtime_state",
+      "status": "pass"
+    },
+    {
+      "detail": "[32, -13, 26, -6, 14, -11]",
+      "name": "packed_weight_expected_c3b_output",
+      "status": "pass"
+    },
+    {
+      "detail": "{'axis_strict_golden': True, 'm_axi_strict_golden': True}",
+      "name": "testbench_strict_golden_compare",
+      "status": "pass"
+    },
+    {
+      "detail": "runtime=2 failures=0 outputs=[18, -3, 3, -2, 1, -4]",
+      "name": "c3b_axis_csim_strict_csim",
+      "status": "pass"
+    },
+    {
+      "detail": "runtime=2 failures=0 outputs=[58, -51, 42, -28, 36, -41]",
+      "name": "vref_softmax_input_x2_csim_strict_csim",
+      "status": "pass"
+    },
+    {
+      "detail": "runtime=2 failures=0 outputs=[58, -51, 42, -28, 36, -41]",
+      "name": "qkv_uram_csim_strict_csim",
+      "status": "pass"
+    }
+  ],
+  "claim_supported": "Local strict CSim proves deterministic synthetic Q4 weight vectors and Q8 activation path match golden SW references for available E2E AXIS variants.",
+  "csim_logs": [
+    {
+      "failures": 0,
+      "has_pass_marker": true,
+      "has_zero_errors": true,
+      "name": "c3b_axis_csim",
+      "outputs": [
+        18,
+        -3,
+        3,
+        -2,
+        1,
+        -4
+      ],
+      "path": "generated/hgtxr_e2e_axis_par16_c3b_mem16_csim/solution_e2e_q4w8a/csim/report/hgtxr_e2e_axis_top_csim.log",
+      "runtime_state": 2,
+      "status": "pass"
+    },
+    {
+      "failures": 0,
+      "has_pass_marker": true,
+      "has_zero_errors": true,
+      "name": "vref_softmax_input_x2_csim",
+      "outputs": [
+        58,
+        -51,
+        42,
+        -28,
+        36,
+        -41
+      ],
+      "path": "generated/hgtxr_e2e_axis_vref_p0_softmax_input_x2_csim/solution_e2e_q4w8a/csim/report/hgtxr_e2e_axis_top_csim.log",
+      "runtime_state": 2,
+      "status": "pass"
+    },
+    {
+      "failures": 0,
+      "has_pass_marker": true,
+      "has_zero_errors": true,
+      "name": "qkv_uram_csim",
+      "outputs": [
+        58,
+        -51,
+        42,
+        -28,
+        36,
+        -41
+      ],
+      "path": "generated/hgtxr_e2e_axis_vref_p0_softmax_input_x2_qkv_uram_csim/solution_e2e_q4w8a/csim/report/hgtxr_e2e_axis_top_csim.log",
+      "runtime_state": 2,
+      "status": "pass"
+    }
+  ],
+  "date_tag": "2026_06_16",
+  "fail_count": 0,
+  "failed_checks": [],
+  "hardware_root": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware",
+  "manifest": {
+    "binary": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/refs/weights/e2e_m_axi_active196_b6_ff768_q4_u32.bin",
+    "binary_bytes": 12192768,
+    "binary_bytes_matches_manifest": true,
+    "binary_exists": true,
+    "binary_sha256": "45b7aef9446c512cf74030975f55cd1f7407f2a27c2ea75603353132489d0a31",
+    "binary_sha256_matches_manifest": true,
+    "bytes": 12192768,
+    "dtype": "uint32",
+    "expected_c3b_raw_ok": true,
+    "expected_raw": [
+      32,
+      -13,
+      26,
+      -6,
+      14,
+      -11
+    ],
+    "expected_runtime_state": 2,
+    "expected_runtime_state_ok": true,
+    "has_mixed_sign_probe_weights": true,
+    "known_offset_checks": {
+      "block0_wq_diag0": 7,
+      "head_diag1": -8,
+      "patch_channel0_elem0": 1,
+      "patch_channel2_elem0": -1
+    },
+    "layout": {
+      "block_weight_elem_base": 49152,
+      "blocks": 6,
+      "bus_width_bits": 256,
+      "e2e_weight_words_256b": 381024,
+      "embed": 192,
+      "ff_dim": 768,
+      "head_weight_elem_base": 2707968,
+      "patch": 16,
+      "patch_weight_elem_base": 0,
+      "q4_lanes_per_256b_word": 64,
+      "required_weight_words_256b": 42330,
+      "state": 6,
+      "u32_per_256b_word": 8,
+      "weight_bits": 4
+    },
+    "path": "refs/weights/e2e_m_axi_active196_b6_ff768_q4_u32_manifest.json",
+    "provenance": {
+      "golden_header": "hardware/hls/tb/e2e_axis_vector_active196_b6_ff768_golden.hpp",
+      "mirrors": "hardware/hls/tb/tb_hgtxr_e2e_m_axi_top.cpp::init_q4_vector_weights",
+      "source": "hardware/pynq/hgtxr/e2e_m_axi_weights.py"
+    },
+    "sha256": "45b7aef9446c512cf74030975f55cd1f7407f2a27c2ea75603353132489d0a31",
+    "status": "pass"
+  },
+  "pass_count": 11,
+  "precision": {
+    "activation_bits": 8,
+    "activation_format": "q8/hgtxr_data_t boundary per config",
+    "weight_bits": 4,
+    "weight_format": "signed-q4-packed-in-uint32/AXI-256"
+  },
+  "remaining_scope": [
+    "ZCU104 physical board smoke remains separate Req4/final gate.",
+    "This is not exhaustive over every possible arbitrary weight tensor."
+  ],
+  "root": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR",
+  "safety": {
+    "creates_board_result": false,
+    "creates_xr_vits_policy": false,
+    "executes_commands": false,
+    "writes_canonical_inputs": false
+  },
+  "status": "pass",
+  "testbench_checks": {
+    "axis_strict_golden": true,
+    "m_axi_strict_golden": true
+  }
+}

@@ -1,0 +1,1205 @@
+{
+  "contract": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/refs/hgpipe_lut_math_contract.json",
+  "contract_schema": "hgtxr.hgpipe_lut_math_contract.v1",
+  "contract_summary": {
+    "passed_ref_checks": 97,
+    "total_checked_samples": 5899008,
+    "total_ref_checks": 97
+  },
+  "date_tag": "2026_06_16",
+  "hardware_root": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware",
+  "implementation_sources": [
+    "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/hls/include/hgtxr_cyclic_math.hpp",
+    "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/hls/include/hgtxr_e2e_vit.hpp"
+  ],
+  "operators": [
+    {
+      "checked_samples": 903360,
+      "contract_count": 25,
+      "guide_markers": {
+        "do_layernorm": true,
+        "layernorm.h": true,
+        "requant": true
+      },
+      "implementation_markers": {
+        "HGTXR_E2E_USE_HGPIPE_INT_LAYERNORMQ": true,
+        "hgtxr_e2e_hgpipe_lnq_requant_raw": true,
+        "hgtxr_e2e_layernorm": true
+      },
+      "missing": [],
+      "operator": "LayerNorm",
+      "property_check_count": 2,
+      "property_fail_count": 0,
+      "status": "pass",
+      "vref_markers": {
+        "-DHGTXR_E2E_HGPIPE_LAYERNORM_INPUT_SCALE=": true,
+        "-DHGTXR_E2E_HGPIPE_LAYERNORM_OUTPUT_SCALE=": true,
+        "-DHGTXR_E2E_USE_HGPIPE_INT_LAYERNORMQ=1": true,
+        "-DHGTXR_E2E_USE_HGPIPE_LNQ_GAMMA_RAW=1": true
+      }
+    },
+    {
+      "checked_samples": 1806336,
+      "contract_count": 12,
+      "guide_markers": {
+        "GeLU": true,
+        "do_gelu": true,
+        "gelu.h": true
+      },
+      "implementation_markers": {
+        "HGTXR_E2E_USE_HGPIPE_INT_GELUQ": true,
+        "hgtxr_e2e_gelu": true,
+        "hgtxr_hgpipe_geluq64_int": true
+      },
+      "missing": [],
+      "operator": "GeLU",
+      "property_check_count": 37,
+      "property_fail_count": 0,
+      "status": "pass",
+      "vref_markers": {
+        "-DHGTXR_E2E_HGPIPE_GELUQ_INPUT_SCALE=": true,
+        "-DHGTXR_E2E_HGPIPE_GELUQ_OUTPUT_SCALE=": true,
+        "-DHGTXR_E2E_USE_HGPIPE_INT_GELUQ=1": true
+      }
+    },
+    {
+      "checked_samples": 1382976,
+      "contract_count": 12,
+      "guide_markers": {
+        "Softmax": true,
+        "do_softmax": true,
+        "softmax.h": true
+      },
+      "implementation_markers": {
+        "HGTXR_E2E_USE_HGPIPE_INT_SOFTMAXQ": true,
+        "hgtxr_e2e_hgpipe_softmax_exp_raw": true,
+        "hgtxr_e2e_hgpipe_softmax_requant_raw": true
+      },
+      "missing": [],
+      "operator": "Softmax",
+      "property_check_count": 26,
+      "property_fail_count": 0,
+      "status": "pass",
+      "vref_markers": {
+        "-DHGTXR_E2E_HGPIPE_SOFTMAX_INPUT_SCALE=": true,
+        "-DHGTXR_E2E_HGPIPE_SOFTMAX_PROB_SCALE=": true,
+        "-DHGTXR_E2E_USE_HGPIPE_INT_SOFTMAXQ=1": true
+      }
+    },
+    {
+      "checked_samples": 1806336,
+      "contract_count": 48,
+      "guide_markers": {
+        "do_quant": true,
+        "quant.h": true,
+        "quantize_clamp": true
+      },
+      "implementation_markers": {
+        "HGTXR_BIT_WIDTH": true,
+        "HGTXR_WEIGHT_BIT_WIDTH": true,
+        "hgtxr_clamp_int": true,
+        "hgtxr_hgpipe_int_table_lookup": true
+      },
+      "missing": [],
+      "operator": "Quantization",
+      "property_check_count": 146,
+      "property_fail_count": 0,
+      "status": "pass",
+      "vref_markers": {
+        "-DHGTXR_E2E_USE_HGPIPE_INT_GELUQ=1": true,
+        "-DHGTXR_E2E_USE_HGPIPE_INT_LAYERNORMQ=1": true,
+        "-DHGTXR_E2E_USE_HGPIPE_INT_SOFTMAXQ=1": true
+      }
+    }
+  ],
+  "property_checks": [
+    {
+      "detail": "16/16",
+      "name": "gelu_table_length_matches_entries",
+      "status": "pass"
+    },
+    {
+      "detail": "64/64",
+      "name": "gelu_quantized_mlp0_table_length_matches_entries",
+      "status": "pass"
+    },
+    {
+      "detail": "63/63",
+      "name": "gelu_quantized_mlp0_cursor_bound_matches_entries",
+      "status": "pass"
+    },
+    {
+      "detail": "range=[0,7] min=0.0 max=7.0",
+      "name": "gelu_quantized_mlp0_integer_output_table_range",
+      "status": "pass"
+    },
+    {
+      "detail": "64/64",
+      "name": "gelu_quantized_mlp1_table_length_matches_entries",
+      "status": "pass"
+    },
+    {
+      "detail": "63/63",
+      "name": "gelu_quantized_mlp1_cursor_bound_matches_entries",
+      "status": "pass"
+    },
+    {
+      "detail": "range=[0,7] min=0.0 max=7.0",
+      "name": "gelu_quantized_mlp1_integer_output_table_range",
+      "status": "pass"
+    },
+    {
+      "detail": "64/64",
+      "name": "gelu_quantized_mlp10_table_length_matches_entries",
+      "status": "pass"
+    },
+    {
+      "detail": "63/63",
+      "name": "gelu_quantized_mlp10_cursor_bound_matches_entries",
+      "status": "pass"
+    },
+    {
+      "detail": "range=[0,7] min=0.0 max=7.0",
+      "name": "gelu_quantized_mlp10_integer_output_table_range",
+      "status": "pass"
+    },
+    {
+      "detail": "64/64",
+      "name": "gelu_quantized_mlp11_table_length_matches_entries",
+      "status": "pass"
+    },
+    {
+      "detail": "63/63",
+      "name": "gelu_quantized_mlp11_cursor_bound_matches_entries",
+      "status": "pass"
+    },
+    {
+      "detail": "range=[0,7] min=0.0 max=7.0",
+      "name": "gelu_quantized_mlp11_integer_output_table_range",
+      "status": "pass"
+    },
+    {
+      "detail": "64/64",
+      "name": "quant_attn0_q_table_length_matches_entries",
+      "status": "pass"
+    },
+    {
+      "detail": "63/63",
+      "name": "quant_attn0_q_cursor_bound_matches_entries",
+      "status": "pass"
+    },
+    {
+      "detail": "range=[-4,3] min=-4.0 max=3.0",
+      "name": "quant_attn0_q_integer_output_table_range",
+      "status": "pass"
+    },
+    {
+      "detail": "64/64",
+      "name": "quant_attn0_k_table_length_matches_entries",
+      "status": "pass"
+    },
+    {
+      "detail": "63/63",
+      "name": "quant_attn0_k_cursor_bound_matches_entries",
+      "status": "pass"
+    },
+    {
+      "detail": "range=[-4,3] min=-4.0 max=3.0",
+      "name": "quant_attn0_k_integer_output_table_range",
+      "status": "pass"
+    },
+    {
+      "detail": "64/64",
+      "name": "quant_attn0_v_table_length_matches_entries",
+      "status": "pass"
+    },
+    {
+      "detail": "63/63",
+      "name": "quant_attn0_v_cursor_bound_matches_entries",
+      "status": "pass"
+    },
+    {
+      "detail": "range=[-4,3] min=-4.0 max=3.0",
+      "name": "quant_attn0_v_integer_output_table_range",
+      "status": "pass"
+    },
+    {
+      "detail": "64/64",
+      "name": "quant_attn0_a_table_length_matches_entries",
+      "status": "pass"
+    },
+    {
+      "detail": "63/63",
+      "name": "quant_attn0_a_cursor_bound_matches_entries",
+      "status": "pass"
+    },
+    {
+      "detail": "range=[-4,3] min=-4.0 max=3.0",
+      "name": "quant_attn0_a_integer_output_table_range",
+      "status": "pass"
+    },
+    {
+      "detail": "64/64",
+      "name": "quant_attn1_q_table_length_matches_entries",
+      "status": "pass"
+    },
+    {
+      "detail": "63/63",
+      "name": "quant_attn1_q_cursor_bound_matches_entries",
+      "status": "pass"
+    },
+    {
+      "detail": "range=[-4,3] min=-4.0 max=3.0",
+      "name": "quant_attn1_q_integer_output_table_range",
+      "status": "pass"
+    },
+    {
+      "detail": "64/64",
+      "name": "quant_attn1_k_table_length_matches_entries",
+      "status": "pass"
+    },
+    {
+      "detail": "63/63",
+      "name": "quant_attn1_k_cursor_bound_matches_entries",
+      "status": "pass"
+    },
+    {
+      "detail": "range=[-4,3] min=-4.0 max=3.0",
+      "name": "quant_attn1_k_integer_output_table_range",
+      "status": "pass"
+    },
+    {
+      "detail": "64/64",
+      "name": "quant_attn1_v_table_length_matches_entries",
+      "status": "pass"
+    },
+    {
+      "detail": "63/63",
+      "name": "quant_attn1_v_cursor_bound_matches_entries",
+      "status": "pass"
+    },
+    {
+      "detail": "range=[-4,3] min=-4.0 max=3.0",
+      "name": "quant_attn1_v_integer_output_table_range",
+      "status": "pass"
+    },
+    {
+      "detail": "64/64",
+      "name": "quant_attn1_a_table_length_matches_entries",
+      "status": "pass"
+    },
+    {
+      "detail": "63/63",
+      "name": "quant_attn1_a_cursor_bound_matches_entries",
+      "status": "pass"
+    },
+    {
+      "detail": "range=[-4,3] min=-4.0 max=3.0",
+      "name": "quant_attn1_a_integer_output_table_range",
+      "status": "pass"
+    },
+    {
+      "detail": "32/32",
+      "name": "softmax_attn0_exp_table_length_matches_entries",
+      "status": "pass"
+    },
+    {
+      "detail": "16/16",
+      "name": "softmax_exp_table_length_matches_entries",
+      "status": "pass"
+    },
+    {
+      "detail": "32/32",
+      "name": "layernorm_rsqrt_table_length_matches_entries",
+      "status": "pass"
+    },
+    {
+      "detail": "64/64",
+      "name": "quant_attn2_q_table_length_matches_entries",
+      "status": "pass"
+    },
+    {
+      "detail": "63/63",
+      "name": "quant_attn2_q_cursor_bound_matches_entries",
+      "status": "pass"
+    },
+    {
+      "detail": "range=[-4,3] min=-4.0 max=3.0",
+      "name": "quant_attn2_q_integer_output_table_range",
+      "status": "pass"
+    },
+    {
+      "detail": "64/64",
+      "name": "quant_attn2_k_table_length_matches_entries",
+      "status": "pass"
+    },
+    {
+      "detail": "63/63",
+      "name": "quant_attn2_k_cursor_bound_matches_entries",
+      "status": "pass"
+    },
+    {
+      "detail": "range=[-4,3] min=-4.0 max=3.0",
+      "name": "quant_attn2_k_integer_output_table_range",
+      "status": "pass"
+    },
+    {
+      "detail": "64/64",
+      "name": "quant_attn2_v_table_length_matches_entries",
+      "status": "pass"
+    },
+    {
+      "detail": "63/63",
+      "name": "quant_attn2_v_cursor_bound_matches_entries",
+      "status": "pass"
+    },
+    {
+      "detail": "range=[-4,3] min=-4.0 max=3.0",
+      "name": "quant_attn2_v_integer_output_table_range",
+      "status": "pass"
+    },
+    {
+      "detail": "64/64",
+      "name": "quant_attn2_a_table_length_matches_entries",
+      "status": "pass"
+    },
+    {
+      "detail": "63/63",
+      "name": "quant_attn2_a_cursor_bound_matches_entries",
+      "status": "pass"
+    },
+    {
+      "detail": "range=[-4,3] min=-4.0 max=3.0",
+      "name": "quant_attn2_a_integer_output_table_range",
+      "status": "pass"
+    },
+    {
+      "detail": "64/64",
+      "name": "quant_attn3_q_table_length_matches_entries",
+      "status": "pass"
+    },
+    {
+      "detail": "63/63",
+      "name": "quant_attn3_q_cursor_bound_matches_entries",
+      "status": "pass"
+    },
+    {
+      "detail": "range=[-4,3] min=-4.0 max=3.0",
+      "name": "quant_attn3_q_integer_output_table_range",
+      "status": "pass"
+    },
+    {
+      "detail": "64/64",
+      "name": "quant_attn3_k_table_length_matches_entries",
+      "status": "pass"
+    },
+    {
+      "detail": "63/63",
+      "name": "quant_attn3_k_cursor_bound_matches_entries",
+      "status": "pass"
+    },
+    {
+      "detail": "range=[-4,3] min=-4.0 max=3.0",
+      "name": "quant_attn3_k_integer_output_table_range",
+      "status": "pass"
+    },
+    {
+      "detail": "64/64",
+      "name": "quant_attn3_v_table_length_matches_entries",
+      "status": "pass"
+    },
+    {
+      "detail": "63/63",
+      "name": "quant_attn3_v_cursor_bound_matches_entries",
+      "status": "pass"
+    },
+    {
+      "detail": "range=[-4,3] min=-4.0 max=3.0",
+      "name": "quant_attn3_v_integer_output_table_range",
+      "status": "pass"
+    },
+    {
+      "detail": "64/64",
+      "name": "quant_attn3_a_table_length_matches_entries",
+      "status": "pass"
+    },
+    {
+      "detail": "63/63",
+      "name": "quant_attn3_a_cursor_bound_matches_entries",
+      "status": "pass"
+    },
+    {
+      "detail": "range=[-4,3] min=-4.0 max=3.0",
+      "name": "quant_attn3_a_integer_output_table_range",
+      "status": "pass"
+    },
+    {
+      "detail": "64/64",
+      "name": "quant_attn4_q_table_length_matches_entries",
+      "status": "pass"
+    },
+    {
+      "detail": "63/63",
+      "name": "quant_attn4_q_cursor_bound_matches_entries",
+      "status": "pass"
+    },
+    {
+      "detail": "range=[-4,3] min=-4.0 max=3.0",
+      "name": "quant_attn4_q_integer_output_table_range",
+      "status": "pass"
+    },
+    {
+      "detail": "64/64",
+      "name": "quant_attn4_k_table_length_matches_entries",
+      "status": "pass"
+    },
+    {
+      "detail": "63/63",
+      "name": "quant_attn4_k_cursor_bound_matches_entries",
+      "status": "pass"
+    },
+    {
+      "detail": "range=[-4,3] min=-4.0 max=3.0",
+      "name": "quant_attn4_k_integer_output_table_range",
+      "status": "pass"
+    },
+    {
+      "detail": "64/64",
+      "name": "quant_attn4_v_table_length_matches_entries",
+      "status": "pass"
+    },
+    {
+      "detail": "63/63",
+      "name": "quant_attn4_v_cursor_bound_matches_entries",
+      "status": "pass"
+    },
+    {
+      "detail": "range=[-4,3] min=-4.0 max=3.0",
+      "name": "quant_attn4_v_integer_output_table_range",
+      "status": "pass"
+    },
+    {
+      "detail": "64/64",
+      "name": "quant_attn4_a_table_length_matches_entries",
+      "status": "pass"
+    },
+    {
+      "detail": "63/63",
+      "name": "quant_attn4_a_cursor_bound_matches_entries",
+      "status": "pass"
+    },
+    {
+      "detail": "range=[-4,3] min=-4.0 max=3.0",
+      "name": "quant_attn4_a_integer_output_table_range",
+      "status": "pass"
+    },
+    {
+      "detail": "64/64",
+      "name": "quant_attn5_q_table_length_matches_entries",
+      "status": "pass"
+    },
+    {
+      "detail": "63/63",
+      "name": "quant_attn5_q_cursor_bound_matches_entries",
+      "status": "pass"
+    },
+    {
+      "detail": "range=[-4,3] min=-4.0 max=3.0",
+      "name": "quant_attn5_q_integer_output_table_range",
+      "status": "pass"
+    },
+    {
+      "detail": "64/64",
+      "name": "quant_attn5_k_table_length_matches_entries",
+      "status": "pass"
+    },
+    {
+      "detail": "63/63",
+      "name": "quant_attn5_k_cursor_bound_matches_entries",
+      "status": "pass"
+    },
+    {
+      "detail": "range=[-4,3] min=-4.0 max=3.0",
+      "name": "quant_attn5_k_integer_output_table_range",
+      "status": "pass"
+    },
+    {
+      "detail": "64/64",
+      "name": "quant_attn5_v_table_length_matches_entries",
+      "status": "pass"
+    },
+    {
+      "detail": "63/63",
+      "name": "quant_attn5_v_cursor_bound_matches_entries",
+      "status": "pass"
+    },
+    {
+      "detail": "range=[-4,3] min=-4.0 max=3.0",
+      "name": "quant_attn5_v_integer_output_table_range",
+      "status": "pass"
+    },
+    {
+      "detail": "64/64",
+      "name": "quant_attn5_a_table_length_matches_entries",
+      "status": "pass"
+    },
+    {
+      "detail": "63/63",
+      "name": "quant_attn5_a_cursor_bound_matches_entries",
+      "status": "pass"
+    },
+    {
+      "detail": "range=[-4,3] min=-4.0 max=3.0",
+      "name": "quant_attn5_a_integer_output_table_range",
+      "status": "pass"
+    },
+    {
+      "detail": "64/64",
+      "name": "quant_attn6_q_table_length_matches_entries",
+      "status": "pass"
+    },
+    {
+      "detail": "63/63",
+      "name": "quant_attn6_q_cursor_bound_matches_entries",
+      "status": "pass"
+    },
+    {
+      "detail": "range=[-4,3] min=-4.0 max=3.0",
+      "name": "quant_attn6_q_integer_output_table_range",
+      "status": "pass"
+    },
+    {
+      "detail": "64/64",
+      "name": "quant_attn6_k_table_length_matches_entries",
+      "status": "pass"
+    },
+    {
+      "detail": "63/63",
+      "name": "quant_attn6_k_cursor_bound_matches_entries",
+      "status": "pass"
+    },
+    {
+      "detail": "range=[-4,3] min=-4.0 max=3.0",
+      "name": "quant_attn6_k_integer_output_table_range",
+      "status": "pass"
+    },
+    {
+      "detail": "64/64",
+      "name": "quant_attn6_v_table_length_matches_entries",
+      "status": "pass"
+    },
+    {
+      "detail": "63/63",
+      "name": "quant_attn6_v_cursor_bound_matches_entries",
+      "status": "pass"
+    },
+    {
+      "detail": "range=[-4,3] min=-4.0 max=3.0",
+      "name": "quant_attn6_v_integer_output_table_range",
+      "status": "pass"
+    },
+    {
+      "detail": "64/64",
+      "name": "quant_attn6_a_table_length_matches_entries",
+      "status": "pass"
+    },
+    {
+      "detail": "63/63",
+      "name": "quant_attn6_a_cursor_bound_matches_entries",
+      "status": "pass"
+    },
+    {
+      "detail": "range=[-4,3] min=-4.0 max=3.0",
+      "name": "quant_attn6_a_integer_output_table_range",
+      "status": "pass"
+    },
+    {
+      "detail": "64/64",
+      "name": "quant_attn7_q_table_length_matches_entries",
+      "status": "pass"
+    },
+    {
+      "detail": "63/63",
+      "name": "quant_attn7_q_cursor_bound_matches_entries",
+      "status": "pass"
+    },
+    {
+      "detail": "range=[-4,3] min=-4.0 max=3.0",
+      "name": "quant_attn7_q_integer_output_table_range",
+      "status": "pass"
+    },
+    {
+      "detail": "64/64",
+      "name": "quant_attn7_k_table_length_matches_entries",
+      "status": "pass"
+    },
+    {
+      "detail": "63/63",
+      "name": "quant_attn7_k_cursor_bound_matches_entries",
+      "status": "pass"
+    },
+    {
+      "detail": "range=[-4,3] min=-4.0 max=3.0",
+      "name": "quant_attn7_k_integer_output_table_range",
+      "status": "pass"
+    },
+    {
+      "detail": "64/64",
+      "name": "quant_attn7_v_table_length_matches_entries",
+      "status": "pass"
+    },
+    {
+      "detail": "63/63",
+      "name": "quant_attn7_v_cursor_bound_matches_entries",
+      "status": "pass"
+    },
+    {
+      "detail": "range=[-4,3] min=-4.0 max=3.0",
+      "name": "quant_attn7_v_integer_output_table_range",
+      "status": "pass"
+    },
+    {
+      "detail": "64/64",
+      "name": "quant_attn7_a_table_length_matches_entries",
+      "status": "pass"
+    },
+    {
+      "detail": "63/63",
+      "name": "quant_attn7_a_cursor_bound_matches_entries",
+      "status": "pass"
+    },
+    {
+      "detail": "range=[-4,3] min=-4.0 max=3.0",
+      "name": "quant_attn7_a_integer_output_table_range",
+      "status": "pass"
+    },
+    {
+      "detail": "64/64",
+      "name": "quant_attn8_q_table_length_matches_entries",
+      "status": "pass"
+    },
+    {
+      "detail": "63/63",
+      "name": "quant_attn8_q_cursor_bound_matches_entries",
+      "status": "pass"
+    },
+    {
+      "detail": "range=[-4,3] min=-4.0 max=3.0",
+      "name": "quant_attn8_q_integer_output_table_range",
+      "status": "pass"
+    },
+    {
+      "detail": "64/64",
+      "name": "quant_attn8_k_table_length_matches_entries",
+      "status": "pass"
+    },
+    {
+      "detail": "63/63",
+      "name": "quant_attn8_k_cursor_bound_matches_entries",
+      "status": "pass"
+    },
+    {
+      "detail": "range=[-4,3] min=-4.0 max=3.0",
+      "name": "quant_attn8_k_integer_output_table_range",
+      "status": "pass"
+    },
+    {
+      "detail": "64/64",
+      "name": "quant_attn8_v_table_length_matches_entries",
+      "status": "pass"
+    },
+    {
+      "detail": "63/63",
+      "name": "quant_attn8_v_cursor_bound_matches_entries",
+      "status": "pass"
+    },
+    {
+      "detail": "range=[-4,3] min=-4.0 max=3.0",
+      "name": "quant_attn8_v_integer_output_table_range",
+      "status": "pass"
+    },
+    {
+      "detail": "64/64",
+      "name": "quant_attn8_a_table_length_matches_entries",
+      "status": "pass"
+    },
+    {
+      "detail": "63/63",
+      "name": "quant_attn8_a_cursor_bound_matches_entries",
+      "status": "pass"
+    },
+    {
+      "detail": "range=[-4,3] min=-4.0 max=3.0",
+      "name": "quant_attn8_a_integer_output_table_range",
+      "status": "pass"
+    },
+    {
+      "detail": "64/64",
+      "name": "quant_attn9_q_table_length_matches_entries",
+      "status": "pass"
+    },
+    {
+      "detail": "63/63",
+      "name": "quant_attn9_q_cursor_bound_matches_entries",
+      "status": "pass"
+    },
+    {
+      "detail": "range=[-4,3] min=-4.0 max=3.0",
+      "name": "quant_attn9_q_integer_output_table_range",
+      "status": "pass"
+    },
+    {
+      "detail": "64/64",
+      "name": "quant_attn9_k_table_length_matches_entries",
+      "status": "pass"
+    },
+    {
+      "detail": "63/63",
+      "name": "quant_attn9_k_cursor_bound_matches_entries",
+      "status": "pass"
+    },
+    {
+      "detail": "range=[-4,3] min=-4.0 max=3.0",
+      "name": "quant_attn9_k_integer_output_table_range",
+      "status": "pass"
+    },
+    {
+      "detail": "64/64",
+      "name": "quant_attn9_v_table_length_matches_entries",
+      "status": "pass"
+    },
+    {
+      "detail": "63/63",
+      "name": "quant_attn9_v_cursor_bound_matches_entries",
+      "status": "pass"
+    },
+    {
+      "detail": "range=[-4,3] min=-4.0 max=3.0",
+      "name": "quant_attn9_v_integer_output_table_range",
+      "status": "pass"
+    },
+    {
+      "detail": "64/64",
+      "name": "quant_attn9_a_table_length_matches_entries",
+      "status": "pass"
+    },
+    {
+      "detail": "63/63",
+      "name": "quant_attn9_a_cursor_bound_matches_entries",
+      "status": "pass"
+    },
+    {
+      "detail": "range=[-4,3] min=-4.0 max=3.0",
+      "name": "quant_attn9_a_integer_output_table_range",
+      "status": "pass"
+    },
+    {
+      "detail": "64/64",
+      "name": "quant_attn10_q_table_length_matches_entries",
+      "status": "pass"
+    },
+    {
+      "detail": "63/63",
+      "name": "quant_attn10_q_cursor_bound_matches_entries",
+      "status": "pass"
+    },
+    {
+      "detail": "range=[-4,3] min=-4.0 max=3.0",
+      "name": "quant_attn10_q_integer_output_table_range",
+      "status": "pass"
+    },
+    {
+      "detail": "64/64",
+      "name": "quant_attn10_k_table_length_matches_entries",
+      "status": "pass"
+    },
+    {
+      "detail": "63/63",
+      "name": "quant_attn10_k_cursor_bound_matches_entries",
+      "status": "pass"
+    },
+    {
+      "detail": "range=[-4,3] min=-4.0 max=3.0",
+      "name": "quant_attn10_k_integer_output_table_range",
+      "status": "pass"
+    },
+    {
+      "detail": "64/64",
+      "name": "quant_attn10_v_table_length_matches_entries",
+      "status": "pass"
+    },
+    {
+      "detail": "63/63",
+      "name": "quant_attn10_v_cursor_bound_matches_entries",
+      "status": "pass"
+    },
+    {
+      "detail": "range=[-4,3] min=-4.0 max=3.0",
+      "name": "quant_attn10_v_integer_output_table_range",
+      "status": "pass"
+    },
+    {
+      "detail": "64/64",
+      "name": "quant_attn10_a_table_length_matches_entries",
+      "status": "pass"
+    },
+    {
+      "detail": "63/63",
+      "name": "quant_attn10_a_cursor_bound_matches_entries",
+      "status": "pass"
+    },
+    {
+      "detail": "range=[-4,3] min=-4.0 max=3.0",
+      "name": "quant_attn10_a_integer_output_table_range",
+      "status": "pass"
+    },
+    {
+      "detail": "64/64",
+      "name": "quant_attn11_q_table_length_matches_entries",
+      "status": "pass"
+    },
+    {
+      "detail": "63/63",
+      "name": "quant_attn11_q_cursor_bound_matches_entries",
+      "status": "pass"
+    },
+    {
+      "detail": "range=[-4,3] min=-4.0 max=3.0",
+      "name": "quant_attn11_q_integer_output_table_range",
+      "status": "pass"
+    },
+    {
+      "detail": "64/64",
+      "name": "quant_attn11_k_table_length_matches_entries",
+      "status": "pass"
+    },
+    {
+      "detail": "63/63",
+      "name": "quant_attn11_k_cursor_bound_matches_entries",
+      "status": "pass"
+    },
+    {
+      "detail": "range=[-4,3] min=-4.0 max=3.0",
+      "name": "quant_attn11_k_integer_output_table_range",
+      "status": "pass"
+    },
+    {
+      "detail": "64/64",
+      "name": "quant_attn11_v_table_length_matches_entries",
+      "status": "pass"
+    },
+    {
+      "detail": "63/63",
+      "name": "quant_attn11_v_cursor_bound_matches_entries",
+      "status": "pass"
+    },
+    {
+      "detail": "range=[-4,3] min=-4.0 max=3.0",
+      "name": "quant_attn11_v_integer_output_table_range",
+      "status": "pass"
+    },
+    {
+      "detail": "64/64",
+      "name": "quant_attn11_a_table_length_matches_entries",
+      "status": "pass"
+    },
+    {
+      "detail": "63/63",
+      "name": "quant_attn11_a_cursor_bound_matches_entries",
+      "status": "pass"
+    },
+    {
+      "detail": "range=[-4,3] min=-4.0 max=3.0",
+      "name": "quant_attn11_a_integer_output_table_range",
+      "status": "pass"
+    },
+    {
+      "detail": "64/64",
+      "name": "gelu_quantized_mlp2_table_length_matches_entries",
+      "status": "pass"
+    },
+    {
+      "detail": "63/63",
+      "name": "gelu_quantized_mlp2_cursor_bound_matches_entries",
+      "status": "pass"
+    },
+    {
+      "detail": "range=[0,7] min=0.0 max=7.0",
+      "name": "gelu_quantized_mlp2_integer_output_table_range",
+      "status": "pass"
+    },
+    {
+      "detail": "64/64",
+      "name": "gelu_quantized_mlp3_table_length_matches_entries",
+      "status": "pass"
+    },
+    {
+      "detail": "63/63",
+      "name": "gelu_quantized_mlp3_cursor_bound_matches_entries",
+      "status": "pass"
+    },
+    {
+      "detail": "range=[0,7] min=0.0 max=7.0",
+      "name": "gelu_quantized_mlp3_integer_output_table_range",
+      "status": "pass"
+    },
+    {
+      "detail": "64/64",
+      "name": "gelu_quantized_mlp4_table_length_matches_entries",
+      "status": "pass"
+    },
+    {
+      "detail": "63/63",
+      "name": "gelu_quantized_mlp4_cursor_bound_matches_entries",
+      "status": "pass"
+    },
+    {
+      "detail": "range=[0,7] min=0.0 max=7.0",
+      "name": "gelu_quantized_mlp4_integer_output_table_range",
+      "status": "pass"
+    },
+    {
+      "detail": "64/64",
+      "name": "gelu_quantized_mlp5_table_length_matches_entries",
+      "status": "pass"
+    },
+    {
+      "detail": "63/63",
+      "name": "gelu_quantized_mlp5_cursor_bound_matches_entries",
+      "status": "pass"
+    },
+    {
+      "detail": "range=[0,7] min=0.0 max=7.0",
+      "name": "gelu_quantized_mlp5_integer_output_table_range",
+      "status": "pass"
+    },
+    {
+      "detail": "64/64",
+      "name": "gelu_quantized_mlp6_table_length_matches_entries",
+      "status": "pass"
+    },
+    {
+      "detail": "63/63",
+      "name": "gelu_quantized_mlp6_cursor_bound_matches_entries",
+      "status": "pass"
+    },
+    {
+      "detail": "range=[0,7] min=0.0 max=7.0",
+      "name": "gelu_quantized_mlp6_integer_output_table_range",
+      "status": "pass"
+    },
+    {
+      "detail": "64/64",
+      "name": "gelu_quantized_mlp7_table_length_matches_entries",
+      "status": "pass"
+    },
+    {
+      "detail": "63/63",
+      "name": "gelu_quantized_mlp7_cursor_bound_matches_entries",
+      "status": "pass"
+    },
+    {
+      "detail": "range=[0,7] min=0.0 max=7.0",
+      "name": "gelu_quantized_mlp7_integer_output_table_range",
+      "status": "pass"
+    },
+    {
+      "detail": "64/64",
+      "name": "gelu_quantized_mlp8_table_length_matches_entries",
+      "status": "pass"
+    },
+    {
+      "detail": "63/63",
+      "name": "gelu_quantized_mlp8_cursor_bound_matches_entries",
+      "status": "pass"
+    },
+    {
+      "detail": "range=[0,7] min=0.0 max=7.0",
+      "name": "gelu_quantized_mlp8_integer_output_table_range",
+      "status": "pass"
+    },
+    {
+      "detail": "64/64",
+      "name": "gelu_quantized_mlp9_table_length_matches_entries",
+      "status": "pass"
+    },
+    {
+      "detail": "63/63",
+      "name": "gelu_quantized_mlp9_cursor_bound_matches_entries",
+      "status": "pass"
+    },
+    {
+      "detail": "range=[0,7] min=0.0 max=7.0",
+      "name": "gelu_quantized_mlp9_integer_output_table_range",
+      "status": "pass"
+    },
+    {
+      "detail": "32/32",
+      "name": "softmax_attn1_exp_table_length_matches_entries",
+      "status": "pass"
+    },
+    {
+      "detail": "32/32",
+      "name": "softmax_attn2_exp_table_length_matches_entries",
+      "status": "pass"
+    },
+    {
+      "detail": "32/32",
+      "name": "softmax_attn3_exp_table_length_matches_entries",
+      "status": "pass"
+    },
+    {
+      "detail": "32/32",
+      "name": "softmax_attn4_exp_table_length_matches_entries",
+      "status": "pass"
+    },
+    {
+      "detail": "32/32",
+      "name": "softmax_attn5_exp_table_length_matches_entries",
+      "status": "pass"
+    },
+    {
+      "detail": "32/32",
+      "name": "softmax_attn6_exp_table_length_matches_entries",
+      "status": "pass"
+    },
+    {
+      "detail": "32/32",
+      "name": "softmax_attn7_exp_table_length_matches_entries",
+      "status": "pass"
+    },
+    {
+      "detail": "32/32",
+      "name": "softmax_attn8_exp_table_length_matches_entries",
+      "status": "pass"
+    },
+    {
+      "detail": "32/32",
+      "name": "softmax_attn9_exp_table_length_matches_entries",
+      "status": "pass"
+    },
+    {
+      "detail": "32/32",
+      "name": "softmax_attn10_exp_table_length_matches_entries",
+      "status": "pass"
+    },
+    {
+      "detail": "32/32",
+      "name": "softmax_attn11_exp_table_length_matches_entries",
+      "status": "pass"
+    },
+    {
+      "detail": "len=16",
+      "name": "softmax_exp_nonnegative_finite_nonincreasing",
+      "status": "pass"
+    },
+    {
+      "detail": "len=32",
+      "name": "layernorm_rsqrt_positive_finite",
+      "status": "pass"
+    },
+    {
+      "detail": "len=32",
+      "name": "softmax_attn0_exp_nonnegative_finite_nonincreasing",
+      "status": "pass"
+    },
+    {
+      "detail": "len=32",
+      "name": "softmax_attn1_exp_nonnegative_finite_nonincreasing",
+      "status": "pass"
+    },
+    {
+      "detail": "len=32",
+      "name": "softmax_attn2_exp_nonnegative_finite_nonincreasing",
+      "status": "pass"
+    },
+    {
+      "detail": "len=32",
+      "name": "softmax_attn3_exp_nonnegative_finite_nonincreasing",
+      "status": "pass"
+    },
+    {
+      "detail": "len=32",
+      "name": "softmax_attn4_exp_nonnegative_finite_nonincreasing",
+      "status": "pass"
+    },
+    {
+      "detail": "len=32",
+      "name": "softmax_attn5_exp_nonnegative_finite_nonincreasing",
+      "status": "pass"
+    },
+    {
+      "detail": "len=32",
+      "name": "softmax_attn6_exp_nonnegative_finite_nonincreasing",
+      "status": "pass"
+    },
+    {
+      "detail": "len=32",
+      "name": "softmax_attn7_exp_nonnegative_finite_nonincreasing",
+      "status": "pass"
+    },
+    {
+      "detail": "len=32",
+      "name": "softmax_attn8_exp_nonnegative_finite_nonincreasing",
+      "status": "pass"
+    },
+    {
+      "detail": "len=32",
+      "name": "softmax_attn9_exp_nonnegative_finite_nonincreasing",
+      "status": "pass"
+    },
+    {
+      "detail": "len=32",
+      "name": "softmax_attn10_exp_nonnegative_finite_nonincreasing",
+      "status": "pass"
+    },
+    {
+      "detail": "len=32",
+      "name": "softmax_attn11_exp_nonnegative_finite_nonincreasing",
+      "status": "pass"
+    },
+    {
+      "detail": "[-128, 127]/[-128, 127]",
+      "name": "quantize_clamp_signed_range_matches_bits",
+      "status": "pass"
+    },
+    {
+      "detail": "[0, 255]/[0, 255]",
+      "name": "quantize_clamp_unsigned_range_matches_bits",
+      "status": "pass"
+    }
+  ],
+  "property_summary": {
+    "check_count": 211,
+    "fail_count": 0,
+    "pass_count": 211,
+    "status": "pass"
+  },
+  "reference_sources": [
+    "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/docs/SRC_CASE_MODULE_GUIDE.md",
+    "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/analysis/vit-accel/codebases/HG-PIPE/analysis.md"
+  ],
+  "residual_risk": [
+    "This is local sampled/reference-vector equivalence plus deterministic contract property checks, not a formal proof over every possible input.",
+    "Final E2E hardware signoff still depends on C3b physical smoke and XR-VITs source/replacement policy."
+  ],
+  "safety": {
+    "creates_board_result": false,
+    "executes_hls": false,
+    "executes_network": false,
+    "writes_canonical_inputs": false
+  },
+  "status": "pass",
+  "vref_successor": {
+    "artifact": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/signoff/vref_p0_pot_scale_successor_softmax_input_x2_2026_06_16.json",
+    "csim_log": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/hgtxr_e2e_axis_vref_p0_softmax_input_x2_csim/solution_e2e_q4w8a/csim/report/hgtxr_e2e_axis_top_csim.log",
+    "csim_status": "pass",
+    "custom_scale_flags_present": true,
+    "expected_markers": [
+      "E2E AXIS vector comparison passed",
+      "runtime_state=2 count=6 last=1 failures=0",
+      "CSim done with 0 errors"
+    ],
+    "missing_markers": []
+  }
+}

@@ -1,0 +1,2278 @@
+{
+  "allow_blocked": true,
+  "blocker_count": 2,
+  "c3b_import_status": "skipped",
+  "c3b_smoke_contract_status": "pass",
+  "c3b_smoke_discovery_status": "missing",
+  "c3b_transfer_manifest_status": "pass",
+  "candidate_audit_status": "blocked",
+  "canonical_evidence_root": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources",
+  "completion_status": "blocked",
+  "final_audit_status": "blocked",
+  "final_blocker_closure_status": "blocked",
+  "final_bundle_validation_status": "pass",
+  "final_evidence_manifest_status": "pass",
+  "final_preflight_summary": {
+    "fail": 2,
+    "ok": 96,
+    "warn": 5
+  },
+  "final_unblock_closeout_packet_status": "ready-for-operator-unblock",
+  "final_unblock_closeout_validation_status": "pass",
+  "final_unblock_intake_status": "blocked",
+  "generated_signoff_root": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/signoff",
+  "mirrored_artifact_count": 92,
+  "mirrored_artifact_duplicate_count": 0,
+  "mirrored_artifact_integrity": [
+    {
+      "mirror": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/c3b_board_smoke_readiness_2026_06_10.json",
+      "mirror_exists": true,
+      "mirror_sha256": "742814452ee0d4cae1ae9c511ee5da42ad96b1939c9484b45f65cfb29425d004",
+      "mirror_size": 1625,
+      "sha256_match": true,
+      "source": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/signoff/c3b_board_smoke_readiness_2026_06_10.json",
+      "source_exists": true,
+      "source_sha256": "742814452ee0d4cae1ae9c511ee5da42ad96b1939c9484b45f65cfb29425d004",
+      "source_size": 1625,
+      "status": "pass"
+    },
+    {
+      "mirror": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/c3b_board_smoke_readiness_2026_06_10.md",
+      "mirror_exists": true,
+      "mirror_sha256": "9ea7c1ae950cde81954858f51507f8d81e7764acd62c6402b7cf334858f1eca8",
+      "mirror_size": 1508,
+      "sha256_match": true,
+      "source": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/signoff/c3b_board_smoke_readiness_2026_06_10.md",
+      "source_exists": true,
+      "source_sha256": "9ea7c1ae950cde81954858f51507f8d81e7764acd62c6402b7cf334858f1eca8",
+      "source_size": 1508,
+      "status": "pass"
+    },
+    {
+      "mirror": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/third_goal_final_signoff_2026_06_10.json",
+      "mirror_exists": true,
+      "mirror_sha256": "5d58be0990ab0dcc30200f0b8079b1c773ff31cf3c6470b582c84965b22ae90c",
+      "mirror_size": 26033,
+      "sha256_match": true,
+      "source": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/signoff/third_goal_final_signoff_2026_06_10.json",
+      "source_exists": true,
+      "source_sha256": "5d58be0990ab0dcc30200f0b8079b1c773ff31cf3c6470b582c84965b22ae90c",
+      "source_size": 26033,
+      "status": "pass"
+    },
+    {
+      "mirror": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/final_signoff_audit_2026_06_10.json",
+      "mirror_exists": true,
+      "mirror_sha256": "bb922efcfd86266cc2c04cfb959590dfe7a8746645b61285e4b54c678af5a99b",
+      "mirror_size": 3441,
+      "sha256_match": true,
+      "source": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/signoff/final_signoff_audit_2026_06_10.json",
+      "source_exists": true,
+      "source_sha256": "bb922efcfd86266cc2c04cfb959590dfe7a8746645b61285e4b54c678af5a99b",
+      "source_size": 3441,
+      "status": "pass"
+    },
+    {
+      "mirror": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/final_signoff_audit_2026_06_10.md",
+      "mirror_exists": true,
+      "mirror_sha256": "c40a572f1d777552fafb938b9af4027eb1c7f0d83044f2352c71efa357d4014f",
+      "mirror_size": 2519,
+      "sha256_match": true,
+      "source": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/signoff/final_signoff_audit_2026_06_10.md",
+      "source_exists": true,
+      "source_sha256": "c40a572f1d777552fafb938b9af4027eb1c7f0d83044f2352c71efa357d4014f",
+      "source_size": 2519,
+      "status": "pass"
+    },
+    {
+      "mirror": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/third_goal_completion_audit_2026_06_10.json",
+      "mirror_exists": true,
+      "mirror_sha256": "83694a2fd8402b21763be6c01162728a327861c6b5ef9a042a067e4433144865",
+      "mirror_size": 8196,
+      "sha256_match": true,
+      "source": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/signoff/third_goal_completion_audit_2026_06_10.json",
+      "source_exists": true,
+      "source_sha256": "83694a2fd8402b21763be6c01162728a327861c6b5ef9a042a067e4433144865",
+      "source_size": 8196,
+      "status": "pass"
+    },
+    {
+      "mirror": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/third_goal_completion_audit_2026_06_10.md",
+      "mirror_exists": true,
+      "mirror_sha256": "e2c109583510f1d6bfe4583987415fcfd62027a2499339891ddb51e03e0beb51",
+      "mirror_size": 4937,
+      "sha256_match": true,
+      "source": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/signoff/third_goal_completion_audit_2026_06_10.md",
+      "source_exists": true,
+      "source_sha256": "e2c109583510f1d6bfe4583987415fcfd62027a2499339891ddb51e03e0beb51",
+      "source_size": 4937,
+      "status": "pass"
+    },
+    {
+      "mirror": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/third_goal_unblock_checklist_2026_06_10.json",
+      "mirror_exists": true,
+      "mirror_sha256": "071f3c3dcc2d55362d6007b5c9c6ac26de745f12cc47be5eefc6f9b690b0a2af",
+      "mirror_size": 4720,
+      "sha256_match": true,
+      "source": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/signoff/third_goal_unblock_checklist_2026_06_10.json",
+      "source_exists": true,
+      "source_sha256": "071f3c3dcc2d55362d6007b5c9c6ac26de745f12cc47be5eefc6f9b690b0a2af",
+      "source_size": 4720,
+      "status": "pass"
+    },
+    {
+      "mirror": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/third_goal_unblock_checklist_2026_06_10.md",
+      "mirror_exists": true,
+      "mirror_sha256": "d71fdff161a73bf2dd9b7d69fb2cc18074a162aeab25c4a8732e477ffed8c621",
+      "mirror_size": 3068,
+      "sha256_match": true,
+      "source": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/signoff/third_goal_unblock_checklist_2026_06_10.md",
+      "source_exists": true,
+      "source_sha256": "d71fdff161a73bf2dd9b7d69fb2cc18074a162aeab25c4a8732e477ffed8c621",
+      "source_size": 3068,
+      "status": "pass"
+    },
+    {
+      "mirror": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/zcu104_c3b_smoke_remote_run_2026_06_10.json",
+      "mirror_exists": true,
+      "mirror_sha256": "06f25279706c2a280ffdb5c1d8ea929d185d098b8f0e7105796c0623202719ad",
+      "mirror_size": 2392,
+      "sha256_match": true,
+      "source": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/signoff/zcu104_c3b_smoke_remote_run_2026_06_10.json",
+      "source_exists": true,
+      "source_sha256": "06f25279706c2a280ffdb5c1d8ea929d185d098b8f0e7105796c0623202719ad",
+      "source_size": 2392,
+      "status": "pass"
+    },
+    {
+      "mirror": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/zcu104_c3b_smoke_remote_run_2026_06_10.md",
+      "mirror_exists": true,
+      "mirror_sha256": "4f23cb4e80f2f3d48f90664b317d14a36eb15202c2b4f7c6fee0f1111dd9d23c",
+      "mirror_size": 1749,
+      "sha256_match": true,
+      "source": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/signoff/zcu104_c3b_smoke_remote_run_2026_06_10.md",
+      "source_exists": true,
+      "source_sha256": "4f23cb4e80f2f3d48f90664b317d14a36eb15202c2b4f7c6fee0f1111dd9d23c",
+      "source_size": 1749,
+      "status": "pass"
+    },
+    {
+      "mirror": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/c3b_smoke_transfer_manifest_2026_06_10.json",
+      "mirror_exists": true,
+      "mirror_sha256": "d5790083c30815929b619f137898e5b1153adeaf497e4967d6d23fbf2f2e88a2",
+      "mirror_size": 2297,
+      "sha256_match": true,
+      "source": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/signoff/c3b_smoke_transfer_manifest_2026_06_10.json",
+      "source_exists": true,
+      "source_sha256": "d5790083c30815929b619f137898e5b1153adeaf497e4967d6d23fbf2f2e88a2",
+      "source_size": 2297,
+      "status": "pass"
+    },
+    {
+      "mirror": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/c3b_smoke_transfer_manifest_2026_06_10.md",
+      "mirror_exists": true,
+      "mirror_sha256": "e941f1e56ac04b6596329bc364202d466e0e61c3016c18da8a7d1284124e18c6",
+      "mirror_size": 1590,
+      "sha256_match": true,
+      "source": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/signoff/c3b_smoke_transfer_manifest_2026_06_10.md",
+      "source_exists": true,
+      "source_sha256": "e941f1e56ac04b6596329bc364202d466e0e61c3016c18da8a7d1284124e18c6",
+      "source_size": 1590,
+      "status": "pass"
+    },
+    {
+      "mirror": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/e2e_axis_dma_c3b_mem16_smoke_bundle.tar.gz.sha256",
+      "mirror_exists": true,
+      "mirror_sha256": "1f082bf9ec7e71c10a0caa475a8a3ac0e333e1c175829e4119832c9b53f86687",
+      "mirror_size": 109,
+      "sha256_match": true,
+      "source": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/signoff/e2e_axis_dma_c3b_mem16_smoke_bundle.tar.gz.sha256",
+      "source_exists": true,
+      "source_sha256": "1f082bf9ec7e71c10a0caa475a8a3ac0e333e1c175829e4119832c9b53f86687",
+      "source_size": 109,
+      "status": "pass"
+    },
+    {
+      "mirror": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/c3b_smoke_result_contract_2026_06_10.json",
+      "mirror_exists": true,
+      "mirror_sha256": "06b459926d8719bc709d9eb6e1e96ca26fc4ed5bd7a6874bd095e5194ac27df8",
+      "mirror_size": 2268,
+      "sha256_match": true,
+      "source": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/signoff/c3b_smoke_result_contract_2026_06_10.json",
+      "source_exists": true,
+      "source_sha256": "06b459926d8719bc709d9eb6e1e96ca26fc4ed5bd7a6874bd095e5194ac27df8",
+      "source_size": 2268,
+      "status": "pass"
+    },
+    {
+      "mirror": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/c3b_smoke_result_contract_2026_06_10.md",
+      "mirror_exists": true,
+      "mirror_sha256": "1c2a6e1af4034d1e0a3596194d0d73df9dcbf70cec5049e0a0ece6b49f88133a",
+      "mirror_size": 1652,
+      "sha256_match": true,
+      "source": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/signoff/c3b_smoke_result_contract_2026_06_10.md",
+      "source_exists": true,
+      "source_sha256": "1c2a6e1af4034d1e0a3596194d0d73df9dcbf70cec5049e0a0ece6b49f88133a",
+      "source_size": 1652,
+      "status": "pass"
+    },
+    {
+      "mirror": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/xr_vits_unblock_packet_2026_06_10.json",
+      "mirror_exists": true,
+      "mirror_sha256": "128072f3670b19c2a4700941ac2866faa93de2855235bd98d27060326dc41cdb",
+      "mirror_size": 3561,
+      "sha256_match": true,
+      "source": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/signoff/xr_vits_unblock_packet_2026_06_10.json",
+      "source_exists": true,
+      "source_sha256": "128072f3670b19c2a4700941ac2866faa93de2855235bd98d27060326dc41cdb",
+      "source_size": 3561,
+      "status": "pass"
+    },
+    {
+      "mirror": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/xr_vits_unblock_packet_2026_06_10.md",
+      "mirror_exists": true,
+      "mirror_sha256": "5a773da20535bd2b00893b7a54cac4a478754f8d7475900cc807d412aa2dff14",
+      "mirror_size": 1861,
+      "sha256_match": true,
+      "source": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/signoff/xr_vits_unblock_packet_2026_06_10.md",
+      "source_exists": true,
+      "source_sha256": "5a773da20535bd2b00893b7a54cac4a478754f8d7475900cc807d412aa2dff14",
+      "source_size": 1861,
+      "status": "pass"
+    },
+    {
+      "mirror": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/xr_vits_replacement_policy_preview_2026_06_10.json",
+      "mirror_exists": true,
+      "mirror_sha256": "113cac4c84bbfce4677a216cedd2d3425122f5caa095f16bd8cbc78a86a35096",
+      "mirror_size": 4688,
+      "sha256_match": true,
+      "source": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/signoff/xr_vits_replacement_policy_preview_2026_06_10.json",
+      "source_exists": true,
+      "source_sha256": "113cac4c84bbfce4677a216cedd2d3425122f5caa095f16bd8cbc78a86a35096",
+      "source_size": 4688,
+      "status": "pass"
+    },
+    {
+      "mirror": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/xr_vits_replacement_policy_preview_2026_06_10.md",
+      "mirror_exists": true,
+      "mirror_sha256": "5f887d501ff8fbb5559e81e87a72f8dae9774d9aa826647797be123585d27de7",
+      "mirror_size": 1241,
+      "sha256_match": true,
+      "source": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/signoff/xr_vits_replacement_policy_preview_2026_06_10.md",
+      "source_exists": true,
+      "source_sha256": "5f887d501ff8fbb5559e81e87a72f8dae9774d9aa826647797be123585d27de7",
+      "source_size": 1241,
+      "status": "pass"
+    },
+    {
+      "mirror": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/xr_vits_reference_resolution_2026_06_10.json",
+      "mirror_exists": true,
+      "mirror_sha256": "173ff8591e11024e8e9b29dd21dcdd1cfd832f3878acaba7ff91a0d067f9e3fc",
+      "mirror_size": 2227,
+      "sha256_match": true,
+      "source": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/signoff/xr_vits_reference_resolution_2026_06_10.json",
+      "source_exists": true,
+      "source_sha256": "173ff8591e11024e8e9b29dd21dcdd1cfd832f3878acaba7ff91a0d067f9e3fc",
+      "source_size": 2227,
+      "status": "pass"
+    },
+    {
+      "mirror": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/xr_vits_reference_resolution_2026_06_10.md",
+      "mirror_exists": true,
+      "mirror_sha256": "7e19ce1f06aa1f8617f3c37a882610581285da7bb325f6e96e48453fff0567da",
+      "mirror_size": 1272,
+      "sha256_match": true,
+      "source": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/signoff/xr_vits_reference_resolution_2026_06_10.md",
+      "source_exists": true,
+      "source_sha256": "7e19ce1f06aa1f8617f3c37a882610581285da7bb325f6e96e48453fff0567da",
+      "source_size": 1272,
+      "status": "pass"
+    },
+    {
+      "mirror": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/final_unblock_commands_2026_06_10.json",
+      "mirror_exists": true,
+      "mirror_sha256": "101ab0e4e406b4b0050c05f547e46567eb10406dc815b1d52b8caf01705bc4cd",
+      "mirror_size": 14465,
+      "sha256_match": true,
+      "source": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/signoff/final_unblock_commands_2026_06_10.json",
+      "source_exists": true,
+      "source_sha256": "101ab0e4e406b4b0050c05f547e46567eb10406dc815b1d52b8caf01705bc4cd",
+      "source_size": 14465,
+      "status": "pass"
+    },
+    {
+      "mirror": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/final_unblock_commands_2026_06_10.md",
+      "mirror_exists": true,
+      "mirror_sha256": "a28e526761519ab912b58639d59ad6fdcacdd590cabc636dcf257db394433d85",
+      "mirror_size": 8491,
+      "sha256_match": true,
+      "source": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/signoff/final_unblock_commands_2026_06_10.md",
+      "source_exists": true,
+      "source_sha256": "a28e526761519ab912b58639d59ad6fdcacdd590cabc636dcf257db394433d85",
+      "source_size": 8491,
+      "status": "pass"
+    },
+    {
+      "mirror": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/final_unblock_intake_2026_06_10.json",
+      "mirror_exists": true,
+      "mirror_sha256": "fa84e40c89fc7a90a16d9e8d7b64d2ecfbe19fed465cd9df4b467a8223dcdeac",
+      "mirror_size": 11097,
+      "sha256_match": true,
+      "source": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/signoff/final_unblock_intake_2026_06_10.json",
+      "source_exists": true,
+      "source_sha256": "fa84e40c89fc7a90a16d9e8d7b64d2ecfbe19fed465cd9df4b467a8223dcdeac",
+      "source_size": 11097,
+      "status": "pass"
+    },
+    {
+      "mirror": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/final_unblock_intake_2026_06_10.md",
+      "mirror_exists": true,
+      "mirror_sha256": "bfdaf19964593b42c9b726a721bb6e859bd11009a68f946eae55054ec42c0085",
+      "mirror_size": 1641,
+      "sha256_match": true,
+      "source": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/signoff/final_unblock_intake_2026_06_10.md",
+      "source_exists": true,
+      "source_sha256": "bfdaf19964593b42c9b726a721bb6e859bd11009a68f946eae55054ec42c0085",
+      "source_size": 1641,
+      "status": "pass"
+    },
+    {
+      "mirror": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/final_unblock_closeout_packet_2026_06_10.json",
+      "mirror_exists": true,
+      "mirror_sha256": "189f330c68da3f42ed86ba27506ae7d57b5d08fd1c8732653860962f7107485b",
+      "mirror_size": 17035,
+      "sha256_match": true,
+      "source": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/signoff/final_unblock_closeout_packet_2026_06_10.json",
+      "source_exists": true,
+      "source_sha256": "189f330c68da3f42ed86ba27506ae7d57b5d08fd1c8732653860962f7107485b",
+      "source_size": 17035,
+      "status": "pass"
+    },
+    {
+      "mirror": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/final_unblock_closeout_packet_2026_06_10.md",
+      "mirror_exists": true,
+      "mirror_sha256": "e1d63f47ac079a4e5f5d25d38db0b9d68bcb15898461cb099c924cf3507cb945",
+      "mirror_size": 7089,
+      "sha256_match": true,
+      "source": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/signoff/final_unblock_closeout_packet_2026_06_10.md",
+      "source_exists": true,
+      "source_sha256": "e1d63f47ac079a4e5f5d25d38db0b9d68bcb15898461cb099c924cf3507cb945",
+      "source_size": 7089,
+      "status": "pass"
+    },
+    {
+      "mirror": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/final_unblock_closeout_packet_validation_2026_06_10.json",
+      "mirror_exists": true,
+      "mirror_sha256": "282e634a5b8e98a6c3693a357de602654abd96e58220f1fb930e91432b82fb48",
+      "mirror_size": 13802,
+      "sha256_match": true,
+      "source": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/signoff/final_unblock_closeout_packet_validation_2026_06_10.json",
+      "source_exists": true,
+      "source_sha256": "282e634a5b8e98a6c3693a357de602654abd96e58220f1fb930e91432b82fb48",
+      "source_size": 13802,
+      "status": "pass"
+    },
+    {
+      "mirror": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/final_unblock_closeout_packet_validation_2026_06_10.md",
+      "mirror_exists": true,
+      "mirror_sha256": "ebf5fc91e398e212a56a36c46b4e730de7e3251c52e56d650100c323cd4d0312",
+      "mirror_size": 10564,
+      "sha256_match": true,
+      "source": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/signoff/final_unblock_closeout_packet_validation_2026_06_10.md",
+      "source_exists": true,
+      "source_sha256": "ebf5fc91e398e212a56a36c46b4e730de7e3251c52e56d650100c323cd4d0312",
+      "source_size": 10564,
+      "status": "pass"
+    },
+    {
+      "mirror": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/e2e_resource_matrix_2026_06_10.json",
+      "mirror_exists": true,
+      "mirror_sha256": "347c500164e91f1033c7899e0e76643ce0148805a2f935b75fb8894a0e486fec",
+      "mirror_size": 9977,
+      "sha256_match": true,
+      "source": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/signoff/e2e_resource_matrix_2026_06_10.json",
+      "source_exists": true,
+      "source_sha256": "347c500164e91f1033c7899e0e76643ce0148805a2f935b75fb8894a0e486fec",
+      "source_size": 9977,
+      "status": "pass"
+    },
+    {
+      "mirror": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/e2e_resource_matrix_2026_06_10.md",
+      "mirror_exists": true,
+      "mirror_sha256": "4e30eea98fac40ad147dc98dccc5c7a476beb0c2a32bca9bc7d79f11843efe8d",
+      "mirror_size": 3797,
+      "sha256_match": true,
+      "source": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/signoff/e2e_resource_matrix_2026_06_10.md",
+      "source_exists": true,
+      "source_sha256": "4e30eea98fac40ad147dc98dccc5c7a476beb0c2a32bca9bc7d79f11843efe8d",
+      "source_size": 3797,
+      "status": "pass"
+    },
+    {
+      "mirror": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/selected_path_execution_audit_2026_06_10.json",
+      "mirror_exists": true,
+      "mirror_sha256": "87012d7f1e8efa8e0c1713064d9e7ff0ab9ec8e91c14b664d713fac584f3997e",
+      "mirror_size": 4258,
+      "sha256_match": true,
+      "source": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/signoff/selected_path_execution_audit_2026_06_10.json",
+      "source_exists": true,
+      "source_sha256": "87012d7f1e8efa8e0c1713064d9e7ff0ab9ec8e91c14b664d713fac584f3997e",
+      "source_size": 4258,
+      "status": "pass"
+    },
+    {
+      "mirror": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/selected_path_execution_audit_2026_06_10.md",
+      "mirror_exists": true,
+      "mirror_sha256": "20e790262fcd6252add7be952314ed92f2e7de23fb47a48debb64326c61259f8",
+      "mirror_size": 2392,
+      "sha256_match": true,
+      "source": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/signoff/selected_path_execution_audit_2026_06_10.md",
+      "source_exists": true,
+      "source_sha256": "20e790262fcd6252add7be952314ed92f2e7de23fb47a48debb64326c61259f8",
+      "source_size": 2392,
+      "status": "pass"
+    },
+    {
+      "mirror": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/e2e_resource_policy_audit_2026_06_10.json",
+      "mirror_exists": true,
+      "mirror_sha256": "1d33169829a31016c3480981a8185ebfd805948c673212e677792cbb8ddc0c80",
+      "mirror_size": 6818,
+      "sha256_match": true,
+      "source": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/signoff/e2e_resource_policy_audit_2026_06_10.json",
+      "source_exists": true,
+      "source_sha256": "1d33169829a31016c3480981a8185ebfd805948c673212e677792cbb8ddc0c80",
+      "source_size": 6818,
+      "status": "pass"
+    },
+    {
+      "mirror": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/e2e_resource_policy_audit_2026_06_10.md",
+      "mirror_exists": true,
+      "mirror_sha256": "41ac11f4dbdc7d7aac3aff04e14208b298ad4c7cd777df6d59766e11d09566a8",
+      "mirror_size": 3458,
+      "sha256_match": true,
+      "source": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/signoff/e2e_resource_policy_audit_2026_06_10.md",
+      "source_exists": true,
+      "source_sha256": "41ac11f4dbdc7d7aac3aff04e14208b298ad4c7cd777df6d59766e11d09566a8",
+      "source_size": 3458,
+      "status": "pass"
+    },
+    {
+      "mirror": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/final_unblock_candidate_audit_2026_06_10.json",
+      "mirror_exists": true,
+      "mirror_sha256": "11ed56fb558a0ecca945958aa8c486694e0d151a8aa6e89388d260a983d7bc18",
+      "mirror_size": 823,
+      "sha256_match": true,
+      "source": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/signoff/final_unblock_candidate_audit_2026_06_10.json",
+      "source_exists": true,
+      "source_sha256": "11ed56fb558a0ecca945958aa8c486694e0d151a8aa6e89388d260a983d7bc18",
+      "source_size": 823,
+      "status": "pass"
+    },
+    {
+      "mirror": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/final_unblock_candidate_audit_2026_06_10.md",
+      "mirror_exists": true,
+      "mirror_sha256": "3a6752d8c4ac2f10826dec77a7c231030ff3c4aa5c4ad0c888768e73cb118c4e",
+      "mirror_size": 640,
+      "sha256_match": true,
+      "source": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/signoff/final_unblock_candidate_audit_2026_06_10.md",
+      "source_exists": true,
+      "source_sha256": "3a6752d8c4ac2f10826dec77a7c231030ff3c4aa5c4ad0c888768e73cb118c4e",
+      "source_size": 640,
+      "status": "pass"
+    },
+    {
+      "mirror": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/third_goal_requirements_trace_2026_06_10.json",
+      "mirror_exists": true,
+      "mirror_sha256": "db4dc6990e7ff24395136dd0a159d8229b71cf45803893a0a4351cf850fde10a",
+      "mirror_size": 19558,
+      "sha256_match": true,
+      "source": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/signoff/third_goal_requirements_trace_2026_06_10.json",
+      "source_exists": true,
+      "source_sha256": "db4dc6990e7ff24395136dd0a159d8229b71cf45803893a0a4351cf850fde10a",
+      "source_size": 19558,
+      "status": "pass"
+    },
+    {
+      "mirror": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/third_goal_requirements_trace_2026_06_10.md",
+      "mirror_exists": true,
+      "mirror_sha256": "f1dd887f2e4e2420d953376a584a00d0af8cad5923b475de9684fe2efa65ba85",
+      "mirror_size": 5364,
+      "sha256_match": true,
+      "source": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/signoff/third_goal_requirements_trace_2026_06_10.md",
+      "source_exists": true,
+      "source_sha256": "f1dd887f2e4e2420d953376a584a00d0af8cad5923b475de9684fe2efa65ba85",
+      "source_size": 5364,
+      "status": "pass"
+    },
+    {
+      "mirror": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/spec_plan_conformance_audit_2026_06_10.json",
+      "mirror_exists": true,
+      "mirror_sha256": "548cae49a7897f872886fb1fc4e208ec9ec3313b1b76b33dd026b648ba5865fc",
+      "mirror_size": 13126,
+      "sha256_match": true,
+      "source": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/signoff/spec_plan_conformance_audit_2026_06_10.json",
+      "source_exists": true,
+      "source_sha256": "548cae49a7897f872886fb1fc4e208ec9ec3313b1b76b33dd026b648ba5865fc",
+      "source_size": 13126,
+      "status": "pass"
+    },
+    {
+      "mirror": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/spec_plan_conformance_audit_2026_06_10.md",
+      "mirror_exists": true,
+      "mirror_sha256": "8b21f612c5b9f76f07f00e6c2f1124b36770366f877a41aeb8acddb49e2ccdb2",
+      "mirror_size": 8005,
+      "sha256_match": true,
+      "source": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/signoff/spec_plan_conformance_audit_2026_06_10.md",
+      "source_exists": true,
+      "source_sha256": "8b21f612c5b9f76f07f00e6c2f1124b36770366f877a41aeb8acddb49e2ccdb2",
+      "source_size": 8005,
+      "status": "pass"
+    },
+    {
+      "mirror": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/final_operator_handoff_2026_06_10.json",
+      "mirror_exists": true,
+      "mirror_sha256": "3fb6e6925a3a7d0d3a31974c4ab022686da620543eae003fa730096221ed51a1",
+      "mirror_size": 9278,
+      "sha256_match": true,
+      "source": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/signoff/final_operator_handoff_2026_06_10.json",
+      "source_exists": true,
+      "source_sha256": "3fb6e6925a3a7d0d3a31974c4ab022686da620543eae003fa730096221ed51a1",
+      "source_size": 9278,
+      "status": "pass"
+    },
+    {
+      "mirror": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/final_operator_handoff_2026_06_10.md",
+      "mirror_exists": true,
+      "mirror_sha256": "a6a59213ceaccfa0418baebad44fd6dfd54d14c56c58343f8d8beb4ac229b1b0",
+      "mirror_size": 6865,
+      "sha256_match": true,
+      "source": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/signoff/final_operator_handoff_2026_06_10.md",
+      "source_exists": true,
+      "source_sha256": "a6a59213ceaccfa0418baebad44fd6dfd54d14c56c58343f8d8beb4ac229b1b0",
+      "source_size": 6865,
+      "status": "pass"
+    },
+    {
+      "mirror": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/final_operator_handoff_validation_2026_06_10.json",
+      "mirror_exists": true,
+      "mirror_sha256": "2ced6c915bf09a321acabdfa2515d43fecbb0cdcb7db6c8ac06c02a29e3bc791",
+      "mirror_size": 31902,
+      "sha256_match": true,
+      "source": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/signoff/final_operator_handoff_validation_2026_06_10.json",
+      "source_exists": true,
+      "source_sha256": "2ced6c915bf09a321acabdfa2515d43fecbb0cdcb7db6c8ac06c02a29e3bc791",
+      "source_size": 31902,
+      "status": "pass"
+    },
+    {
+      "mirror": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/final_operator_handoff_validation_2026_06_10.md",
+      "mirror_exists": true,
+      "mirror_sha256": "21b5a0323053ea008ab9af16eaed19fa4923fd192b56a08ea0b8cf40d14c6202",
+      "mirror_size": 24481,
+      "sha256_match": true,
+      "source": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/signoff/final_operator_handoff_validation_2026_06_10.md",
+      "source_exists": true,
+      "source_sha256": "21b5a0323053ea008ab9af16eaed19fa4923fd192b56a08ea0b8cf40d14c6202",
+      "source_size": 24481,
+      "status": "pass"
+    },
+    {
+      "mirror": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/final_signoff_bundle_validation_2026_06_10.json",
+      "mirror_exists": true,
+      "mirror_sha256": "7eb11699b308867c3c7431607131099aa05700be5a8d7d8671e71ba6767d1ade",
+      "mirror_size": 36034,
+      "sha256_match": true,
+      "source": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/signoff/final_signoff_bundle_validation_2026_06_10.json",
+      "source_exists": true,
+      "source_sha256": "7eb11699b308867c3c7431607131099aa05700be5a8d7d8671e71ba6767d1ade",
+      "source_size": 36034,
+      "status": "pass"
+    },
+    {
+      "mirror": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/final_signoff_bundle_validation_2026_06_10.md",
+      "mirror_exists": true,
+      "mirror_sha256": "69f570e16998acc0910fc9b712ca8aa86efb2f31a9de20175c16ca6c2a1adcac",
+      "mirror_size": 24741,
+      "sha256_match": true,
+      "source": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/signoff/final_signoff_bundle_validation_2026_06_10.md",
+      "source_exists": true,
+      "source_sha256": "69f570e16998acc0910fc9b712ca8aa86efb2f31a9de20175c16ca6c2a1adcac",
+      "source_size": 24741,
+      "status": "pass"
+    },
+    {
+      "mirror": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/c3b_smoke_candidate_discovery_2026_06_10.json",
+      "mirror_exists": true,
+      "mirror_sha256": "b44f76f59d639d9d51a955128402723f87c6940028a83b163ec50ddae0cee145",
+      "mirror_size": 609,
+      "sha256_match": true,
+      "source": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/signoff/c3b_smoke_candidate_discovery_2026_06_10.json",
+      "source_exists": true,
+      "source_sha256": "b44f76f59d639d9d51a955128402723f87c6940028a83b163ec50ddae0cee145",
+      "source_size": 609,
+      "status": "pass"
+    },
+    {
+      "mirror": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/c3b_smoke_candidate_discovery_2026_06_10.md",
+      "mirror_exists": true,
+      "mirror_sha256": "36335dfbe85e25b75d5e3e1acdd4d7d20322497d91953a4ec88a4b9f324e7d42",
+      "mirror_size": 543,
+      "sha256_match": true,
+      "source": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/signoff/c3b_smoke_candidate_discovery_2026_06_10.md",
+      "source_exists": true,
+      "source_sha256": "36335dfbe85e25b75d5e3e1acdd4d7d20322497d91953a4ec88a4b9f324e7d42",
+      "source_size": 543,
+      "status": "pass"
+    },
+    {
+      "mirror": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/pynq_smoke_candidate_discovery_c3b_2026_06_16.json",
+      "mirror_exists": true,
+      "mirror_sha256": "30e703d76f7359f4586adfa704522d68e97c85a7999610df37926beeb6991acd",
+      "mirror_size": 720,
+      "sha256_match": true,
+      "source": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/signoff/pynq_smoke_candidate_discovery_c3b_2026_06_16.json",
+      "source_exists": true,
+      "source_sha256": "30e703d76f7359f4586adfa704522d68e97c85a7999610df37926beeb6991acd",
+      "source_size": 720,
+      "status": "pass"
+    },
+    {
+      "mirror": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/pynq_smoke_candidate_discovery_c3b_2026_06_16.md",
+      "mirror_exists": true,
+      "mirror_sha256": "7851425c6f23466c7813b3122d335e8282e018cae73361d50bb19e885a9e4035",
+      "mirror_size": 563,
+      "sha256_match": true,
+      "source": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/signoff/pynq_smoke_candidate_discovery_c3b_2026_06_16.md",
+      "source_exists": true,
+      "source_sha256": "7851425c6f23466c7813b3122d335e8282e018cae73361d50bb19e885a9e4035",
+      "source_size": 563,
+      "status": "pass"
+    },
+    {
+      "mirror": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/vref_successor_smoke_candidate_discovery_2026_06_10.json",
+      "mirror_exists": true,
+      "mirror_sha256": "c7d8cc1e8bfa19d38da17c79d24c559c04b84097893e956a6ae9159c54dacc71",
+      "mirror_size": 805,
+      "sha256_match": true,
+      "source": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/signoff/vref_successor_smoke_candidate_discovery_2026_06_10.json",
+      "source_exists": true,
+      "source_sha256": "c7d8cc1e8bfa19d38da17c79d24c559c04b84097893e956a6ae9159c54dacc71",
+      "source_size": 805,
+      "status": "pass"
+    },
+    {
+      "mirror": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/vref_successor_smoke_candidate_discovery_2026_06_10.md",
+      "mirror_exists": true,
+      "mirror_sha256": "0cdc487916eef6b8a0666312fd82ba9386f1964f61723085f4a14da4337f0144",
+      "mirror_size": 595,
+      "sha256_match": true,
+      "source": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/signoff/vref_successor_smoke_candidate_discovery_2026_06_10.md",
+      "source_exists": true,
+      "source_sha256": "0cdc487916eef6b8a0666312fd82ba9386f1964f61723085f4a14da4337f0144",
+      "source_size": 595,
+      "status": "pass"
+    },
+    {
+      "mirror": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/pynq_smoke_candidate_discovery_vref_p0_2026_06_16.json",
+      "mirror_exists": true,
+      "mirror_sha256": "c7d8cc1e8bfa19d38da17c79d24c559c04b84097893e956a6ae9159c54dacc71",
+      "mirror_size": 805,
+      "sha256_match": true,
+      "source": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/signoff/pynq_smoke_candidate_discovery_vref_p0_2026_06_16.json",
+      "source_exists": true,
+      "source_sha256": "c7d8cc1e8bfa19d38da17c79d24c559c04b84097893e956a6ae9159c54dacc71",
+      "source_size": 805,
+      "status": "pass"
+    },
+    {
+      "mirror": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/pynq_smoke_candidate_discovery_vref_p0_2026_06_16.md",
+      "mirror_exists": true,
+      "mirror_sha256": "0cdc487916eef6b8a0666312fd82ba9386f1964f61723085f4a14da4337f0144",
+      "mirror_size": 595,
+      "sha256_match": true,
+      "source": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/signoff/pynq_smoke_candidate_discovery_vref_p0_2026_06_16.md",
+      "source_exists": true,
+      "source_sha256": "0cdc487916eef6b8a0666312fd82ba9386f1964f61723085f4a14da4337f0144",
+      "source_size": 595,
+      "status": "pass"
+    },
+    {
+      "mirror": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/qkv_uram_smoke_candidate_discovery_2026_06_16.json",
+      "mirror_exists": true,
+      "mirror_sha256": "b3ef6bf831d3f15637f7c17001980a73c6a03e10222d82a520ccfbfcb9fe144a",
+      "mirror_size": 798,
+      "sha256_match": true,
+      "source": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/signoff/qkv_uram_smoke_candidate_discovery_2026_06_16.json",
+      "source_exists": true,
+      "source_sha256": "b3ef6bf831d3f15637f7c17001980a73c6a03e10222d82a520ccfbfcb9fe144a",
+      "source_size": 798,
+      "status": "pass"
+    },
+    {
+      "mirror": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/qkv_uram_smoke_candidate_discovery_2026_06_16.md",
+      "mirror_exists": true,
+      "mirror_sha256": "4a48306e5fe82a17df233bb9ea30ca9c1f5cd0fda3ae9c73db3154320e1f4606",
+      "mirror_size": 587,
+      "sha256_match": true,
+      "source": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/signoff/qkv_uram_smoke_candidate_discovery_2026_06_16.md",
+      "source_exists": true,
+      "source_sha256": "4a48306e5fe82a17df233bb9ea30ca9c1f5cd0fda3ae9c73db3154320e1f4606",
+      "source_size": 587,
+      "status": "pass"
+    },
+    {
+      "mirror": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/vref_p0_qkv_uram_cache_successor_2026_06_16.json",
+      "mirror_exists": true,
+      "mirror_sha256": "7839a638334e174925e1a2bc2c104526f51e195dc12d7239be7f7c20a378a64d",
+      "mirror_size": 14104,
+      "sha256_match": true,
+      "source": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/signoff/vref_p0_qkv_uram_cache_successor_2026_06_16.json",
+      "source_exists": true,
+      "source_sha256": "7839a638334e174925e1a2bc2c104526f51e195dc12d7239be7f7c20a378a64d",
+      "source_size": 14104,
+      "status": "pass"
+    },
+    {
+      "mirror": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/vref_p0_qkv_uram_cache_successor_2026_06_16.md",
+      "mirror_exists": true,
+      "mirror_sha256": "ef8f674f34b2c98d52bf126978605ee92bf3d8622b1f326a30de9344120333da",
+      "mirror_size": 6455,
+      "sha256_match": true,
+      "source": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/signoff/vref_p0_qkv_uram_cache_successor_2026_06_16.md",
+      "source_exists": true,
+      "source_sha256": "ef8f674f34b2c98d52bf126978605ee92bf3d8622b1f326a30de9344120333da",
+      "source_size": 6455,
+      "status": "pass"
+    },
+    {
+      "mirror": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/vref_p0_pot_scale_audit_2026_06_16.json",
+      "mirror_exists": true,
+      "mirror_sha256": "457b4c68156e00499df8b8324b14ca218720a0f89ec1bb12a83800dd4163e0c8",
+      "mirror_size": 6370,
+      "sha256_match": true,
+      "source": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/signoff/vref_p0_pot_scale_audit_2026_06_16.json",
+      "source_exists": true,
+      "source_sha256": "457b4c68156e00499df8b8324b14ca218720a0f89ec1bb12a83800dd4163e0c8",
+      "source_size": 6370,
+      "status": "pass"
+    },
+    {
+      "mirror": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/vref_p0_pot_scale_audit_2026_06_16.md",
+      "mirror_exists": true,
+      "mirror_sha256": "05276020e92764e1cabeb3b58a3c7cf4522e14cdb9ad36d1f0780aac0520fd7d",
+      "mirror_size": 1776,
+      "sha256_match": true,
+      "source": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/signoff/vref_p0_pot_scale_audit_2026_06_16.md",
+      "source_exists": true,
+      "source_sha256": "05276020e92764e1cabeb3b58a3c7cf4522e14cdb9ad36d1f0780aac0520fd7d",
+      "source_size": 1776,
+      "status": "pass"
+    },
+    {
+      "mirror": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/vref_p0_pot_scale_sweep_2026_06_16.json",
+      "mirror_exists": true,
+      "mirror_sha256": "edfafde66af439c17a3db06d86d5eeef763535f17a462757431097b83fdbdeb2",
+      "mirror_size": 77689,
+      "sha256_match": true,
+      "source": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/signoff/vref_p0_pot_scale_sweep_2026_06_16.json",
+      "source_exists": true,
+      "source_sha256": "edfafde66af439c17a3db06d86d5eeef763535f17a462757431097b83fdbdeb2",
+      "source_size": 77689,
+      "status": "pass"
+    },
+    {
+      "mirror": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/vref_p0_pot_scale_sweep_2026_06_16.md",
+      "mirror_exists": true,
+      "mirror_sha256": "7b32ca758a7bee341e9608e68534e0d27eefa3c9415f968e6095762191b5e311",
+      "mirror_size": 6278,
+      "sha256_match": true,
+      "source": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/signoff/vref_p0_pot_scale_sweep_2026_06_16.md",
+      "source_exists": true,
+      "source_sha256": "7b32ca758a7bee341e9608e68534e0d27eefa3c9415f968e6095762191b5e311",
+      "source_size": 6278,
+      "status": "pass"
+    },
+    {
+      "mirror": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/req5_q4q8_swhw_match_audit_2026_06_16.json",
+      "mirror_exists": true,
+      "mirror_sha256": "90b38f69e9caf9d718f6ed7848caa22ae60b913a904a701522634e6b297e83f7",
+      "mirror_size": 5664,
+      "sha256_match": true,
+      "source": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/signoff/req5_q4q8_swhw_match_audit_2026_06_16.json",
+      "source_exists": true,
+      "source_sha256": "90b38f69e9caf9d718f6ed7848caa22ae60b913a904a701522634e6b297e83f7",
+      "source_size": 5664,
+      "status": "pass"
+    },
+    {
+      "mirror": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/req5_q4q8_swhw_match_audit_2026_06_16.md",
+      "mirror_exists": true,
+      "mirror_sha256": "daa4e287edbecebcd1ba3a482d88a7b0d6efe5d56108146fa859093f970e4570",
+      "mirror_size": 1619,
+      "sha256_match": true,
+      "source": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/signoff/req5_q4q8_swhw_match_audit_2026_06_16.md",
+      "source_exists": true,
+      "source_sha256": "daa4e287edbecebcd1ba3a482d88a7b0d6efe5d56108146fa859093f970e4570",
+      "source_size": 1619,
+      "status": "pass"
+    },
+    {
+      "mirror": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/p2_vit_scale_calibration_report_2026_06_16.json",
+      "mirror_exists": true,
+      "mirror_sha256": "dec211a65b3d3542f276a27cfc2d7b6d247a3f7317fb72d9bcd6e1868e7947e1",
+      "mirror_size": 4877,
+      "sha256_match": true,
+      "source": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/signoff/p2_vit_scale_calibration_report_2026_06_16.json",
+      "source_exists": true,
+      "source_sha256": "dec211a65b3d3542f276a27cfc2d7b6d247a3f7317fb72d9bcd6e1868e7947e1",
+      "source_size": 4877,
+      "status": "pass"
+    },
+    {
+      "mirror": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/p2_vit_scale_calibration_report_2026_06_16.md",
+      "mirror_exists": true,
+      "mirror_sha256": "69fab87eb28686b82b711c4a571bf12e19d47165063312c2cefb58dadda51ea8",
+      "mirror_size": 2236,
+      "sha256_match": true,
+      "source": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/signoff/p2_vit_scale_calibration_report_2026_06_16.md",
+      "source_exists": true,
+      "source_sha256": "69fab87eb28686b82b711c4a571bf12e19d47165063312c2cefb58dadda51ea8",
+      "source_size": 2236,
+      "status": "pass"
+    },
+    {
+      "mirror": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/req1_environment_audit_2026_06_16.json",
+      "mirror_exists": true,
+      "mirror_sha256": "988be2daf4996d981a5cd1d281f57cf3706bf0a7201cf9189f2040ec4c778fc9",
+      "mirror_size": 4050,
+      "sha256_match": true,
+      "source": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/signoff/req1_environment_audit_2026_06_16.json",
+      "source_exists": true,
+      "source_sha256": "988be2daf4996d981a5cd1d281f57cf3706bf0a7201cf9189f2040ec4c778fc9",
+      "source_size": 4050,
+      "status": "pass"
+    },
+    {
+      "mirror": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/req1_environment_audit_2026_06_16.md",
+      "mirror_exists": true,
+      "mirror_sha256": "f3ad210be0c544859d2c19cc6fa5e6bdaf036ead93c6347523780b3a538d46ef",
+      "mirror_size": 2824,
+      "sha256_match": true,
+      "source": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/signoff/req1_environment_audit_2026_06_16.md",
+      "source_exists": true,
+      "source_sha256": "f3ad210be0c544859d2c19cc6fa5e6bdaf036ead93c6347523780b3a538d46ef",
+      "source_size": 2824,
+      "status": "pass"
+    },
+    {
+      "mirror": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/req6_parameterization_audit_2026_06_16.json",
+      "mirror_exists": true,
+      "mirror_sha256": "74179f1bcb6134c9efe6f4a2a0b13ecac1081f2818778d6f7107972860daf834",
+      "mirror_size": 15941,
+      "sha256_match": true,
+      "source": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/signoff/req6_parameterization_audit_2026_06_16.json",
+      "source_exists": true,
+      "source_sha256": "74179f1bcb6134c9efe6f4a2a0b13ecac1081f2818778d6f7107972860daf834",
+      "source_size": 15941,
+      "status": "pass"
+    },
+    {
+      "mirror": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/req6_parameterization_audit_2026_06_16.md",
+      "mirror_exists": true,
+      "mirror_sha256": "d2cc3adad889d9d41f63d4d6541c317cad39b470e0ba226d23b6c5af7885a185",
+      "mirror_size": 7722,
+      "sha256_match": true,
+      "source": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/signoff/req6_parameterization_audit_2026_06_16.md",
+      "source_exists": true,
+      "source_sha256": "d2cc3adad889d9d41f63d4d6541c317cad39b470e0ba226d23b6c5af7885a185",
+      "source_size": 7722,
+      "status": "pass"
+    },
+    {
+      "mirror": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/req9_deit_image_reference_audit_2026_06_16.json",
+      "mirror_exists": true,
+      "mirror_sha256": "a58c9dcf7196635f14d498606d3d1c711e6509e20c511767b953c88b34454057",
+      "mirror_size": 3731,
+      "sha256_match": true,
+      "source": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/signoff/req9_deit_image_reference_audit_2026_06_16.json",
+      "source_exists": true,
+      "source_sha256": "a58c9dcf7196635f14d498606d3d1c711e6509e20c511767b953c88b34454057",
+      "source_size": 3731,
+      "status": "pass"
+    },
+    {
+      "mirror": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/req9_deit_image_reference_audit_2026_06_16.md",
+      "mirror_exists": true,
+      "mirror_sha256": "99c0edf7c8d3e2e8418d900ca7a97ed96809a61aa1ea5044f1ed463edf56976a",
+      "mirror_size": 2607,
+      "sha256_match": true,
+      "source": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/signoff/req9_deit_image_reference_audit_2026_06_16.md",
+      "source_exists": true,
+      "source_sha256": "99c0edf7c8d3e2e8418d900ca7a97ed96809a61aa1ea5044f1ed463edf56976a",
+      "source_size": 2607,
+      "status": "pass"
+    },
+    {
+      "mirror": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/xr_vits_gate_audit_2026_06_16.json",
+      "mirror_exists": true,
+      "mirror_sha256": "7c10a230026db2c94c8319a351f32c7e59331b723860b3a1ecb15a1cc3dbfdf4",
+      "mirror_size": 5965,
+      "sha256_match": true,
+      "source": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/signoff/xr_vits_gate_audit_2026_06_16.json",
+      "source_exists": true,
+      "source_sha256": "7c10a230026db2c94c8319a351f32c7e59331b723860b3a1ecb15a1cc3dbfdf4",
+      "source_size": 5965,
+      "status": "pass"
+    },
+    {
+      "mirror": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/xr_vits_gate_audit_2026_06_16.md",
+      "mirror_exists": true,
+      "mirror_sha256": "b31b929000f2c1b5d2fc12414d2c6b35d1b9bd4e75e5d0df9a54660b0c8d0600",
+      "mirror_size": 1357,
+      "sha256_match": true,
+      "source": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/signoff/xr_vits_gate_audit_2026_06_16.md",
+      "source_exists": true,
+      "source_sha256": "b31b929000f2c1b5d2fc12414d2c6b35d1b9bd4e75e5d0df9a54660b0c8d0600",
+      "source_size": 1357,
+      "status": "pass"
+    },
+    {
+      "mirror": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/c3b_physical_smoke_gate_audit_2026_06_16.json",
+      "mirror_exists": true,
+      "mirror_sha256": "64c0e933aac0162d850078c44de51dea990a282ce39896af8554b4059199389c",
+      "mirror_size": 4029,
+      "sha256_match": true,
+      "source": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/signoff/c3b_physical_smoke_gate_audit_2026_06_16.json",
+      "source_exists": true,
+      "source_sha256": "64c0e933aac0162d850078c44de51dea990a282ce39896af8554b4059199389c",
+      "source_size": 4029,
+      "status": "pass"
+    },
+    {
+      "mirror": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/c3b_physical_smoke_gate_audit_2026_06_16.md",
+      "mirror_exists": true,
+      "mirror_sha256": "32e6350cdecbefc20278b30843319b05b4261b3ae4d967445c67e27b7b05bc71",
+      "mirror_size": 1145,
+      "sha256_match": true,
+      "source": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/signoff/c3b_physical_smoke_gate_audit_2026_06_16.md",
+      "source_exists": true,
+      "source_sha256": "32e6350cdecbefc20278b30843319b05b4261b3ae4d967445c67e27b7b05bc71",
+      "source_size": 1145,
+      "status": "pass"
+    },
+    {
+      "mirror": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/vref_p0_buffer_lifetime_audit_2026_06_16.json",
+      "mirror_exists": true,
+      "mirror_sha256": "4de3f829eb46012ee9bd40c144dc096147d4995a38f6adcb95009db99ad5dad6",
+      "mirror_size": 15810,
+      "sha256_match": true,
+      "source": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/signoff/vref_p0_buffer_lifetime_audit_2026_06_16.json",
+      "source_exists": true,
+      "source_sha256": "4de3f829eb46012ee9bd40c144dc096147d4995a38f6adcb95009db99ad5dad6",
+      "source_size": 15810,
+      "status": "pass"
+    },
+    {
+      "mirror": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/vref_p0_buffer_lifetime_audit_2026_06_16.md",
+      "mirror_exists": true,
+      "mirror_sha256": "05b343b5468ba5d810f541d4dc551af1560bd99b5b80d1d1d616ef7b3814b967",
+      "mirror_size": 6208,
+      "sha256_match": true,
+      "source": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/signoff/vref_p0_buffer_lifetime_audit_2026_06_16.md",
+      "source_exists": true,
+      "source_sha256": "05b343b5468ba5d810f541d4dc551af1560bd99b5b80d1d1d616ef7b3814b967",
+      "source_size": 6208,
+      "status": "pass"
+    },
+    {
+      "mirror": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/hgpipe_operator_audit_2026_06_16.json",
+      "mirror_exists": true,
+      "mirror_sha256": "27f8c5adcb5dc87cc1870fc569b7344988477b8f55d1d8f610e01fdbf7b5664e",
+      "mirror_size": 32179,
+      "sha256_match": true,
+      "source": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/signoff/hgpipe_operator_audit_2026_06_16.json",
+      "source_exists": true,
+      "source_sha256": "27f8c5adcb5dc87cc1870fc569b7344988477b8f55d1d8f610e01fdbf7b5664e",
+      "source_size": 32179,
+      "status": "pass"
+    },
+    {
+      "mirror": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/hgpipe_operator_audit_2026_06_16.md",
+      "mirror_exists": true,
+      "mirror_sha256": "4c4444f34e50450dfc39a8f60fa1482acf108c7cc1f9264aa91bf63193e84d32",
+      "mirror_size": 1263,
+      "sha256_match": true,
+      "source": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/signoff/hgpipe_operator_audit_2026_06_16.md",
+      "source_exists": true,
+      "source_sha256": "4c4444f34e50450dfc39a8f60fa1482acf108c7cc1f9264aa91bf63193e84d32",
+      "source_size": 1263,
+      "status": "pass"
+    },
+    {
+      "mirror": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/final_blocker_closure_readiness_2026_06_10.json",
+      "mirror_exists": true,
+      "mirror_sha256": "25ff68310de4c3ddd42eb2b0e89660f1173e1cb743d37a559052217cf45e5494",
+      "mirror_size": 6461,
+      "sha256_match": true,
+      "source": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/signoff/final_blocker_closure_readiness_2026_06_10.json",
+      "source_exists": true,
+      "source_sha256": "25ff68310de4c3ddd42eb2b0e89660f1173e1cb743d37a559052217cf45e5494",
+      "source_size": 6461,
+      "status": "pass"
+    },
+    {
+      "mirror": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/final_blocker_closure_readiness_2026_06_10.md",
+      "mirror_exists": true,
+      "mirror_sha256": "7f874bb33807472823a43fc48ea5105872be8a8a281b3dda505f800766db34f5",
+      "mirror_size": 1851,
+      "sha256_match": true,
+      "source": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/signoff/final_blocker_closure_readiness_2026_06_10.md",
+      "source_exists": true,
+      "source_sha256": "7f874bb33807472823a43fc48ea5105872be8a8a281b3dda505f800766db34f5",
+      "source_size": 1851,
+      "status": "pass"
+    },
+    {
+      "mirror": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/third_goal_source_audit_2026_06_16.json",
+      "mirror_exists": true,
+      "mirror_sha256": "bc4cbde1519e9758a46715db30533f6b0b4671e8b1fd79b877f1dc71f4855a3b",
+      "mirror_size": 143370,
+      "sha256_match": true,
+      "source": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/signoff/third_goal_source_audit_2026_06_16.json",
+      "source_exists": true,
+      "source_sha256": "bc4cbde1519e9758a46715db30533f6b0b4671e8b1fd79b877f1dc71f4855a3b",
+      "source_size": 143370,
+      "status": "pass"
+    },
+    {
+      "mirror": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/third_goal_source_audit_2026_06_16.md",
+      "mirror_exists": true,
+      "mirror_sha256": "d3f71dd153771a2de9e69e3217536d4f864fc1c4b824b09f1faa86d7782fdc03",
+      "mirror_size": 17827,
+      "sha256_match": true,
+      "source": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/signoff/third_goal_source_audit_2026_06_16.md",
+      "source_exists": true,
+      "source_sha256": "d3f71dd153771a2de9e69e3217536d4f864fc1c4b824b09f1faa86d7782fdc03",
+      "source_size": 17827,
+      "status": "pass"
+    },
+    {
+      "mirror": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/third_goal_current_audit_2026_06_16.json",
+      "mirror_exists": true,
+      "mirror_sha256": "7442e03b82c1c16e927f14685a75d1dcb1b41511391c9ef8bbaf9c8a4164591b",
+      "mirror_size": 61373,
+      "sha256_match": true,
+      "source": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/signoff/third_goal_current_audit_2026_06_16.json",
+      "source_exists": true,
+      "source_sha256": "7442e03b82c1c16e927f14685a75d1dcb1b41511391c9ef8bbaf9c8a4164591b",
+      "source_size": 61373,
+      "status": "pass"
+    },
+    {
+      "mirror": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/third_goal_current_audit_2026_06_16.md",
+      "mirror_exists": true,
+      "mirror_sha256": "98f286a5068fd60480efe0c0ae0a197a8df84994aa8b7131e6c37d93dea6e87a",
+      "mirror_size": 8189,
+      "sha256_match": true,
+      "source": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/signoff/third_goal_current_audit_2026_06_16.md",
+      "source_exists": true,
+      "source_sha256": "98f286a5068fd60480efe0c0ae0a197a8df84994aa8b7131e6c37d93dea6e87a",
+      "source_size": 8189,
+      "status": "pass"
+    },
+    {
+      "mirror": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/final_evidence_manifest_2026_06_10.json",
+      "mirror_exists": true,
+      "mirror_sha256": "5370f94dabf6202da6dc05bc73ba23804d8920c6a7d5d5c8c7862c8fc3c2cd4f",
+      "mirror_size": 120340,
+      "sha256_match": true,
+      "source": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/signoff/final_evidence_manifest_2026_06_10.json",
+      "source_exists": true,
+      "source_sha256": "5370f94dabf6202da6dc05bc73ba23804d8920c6a7d5d5c8c7862c8fc3c2cd4f",
+      "source_size": 120340,
+      "status": "pass"
+    },
+    {
+      "mirror": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/final_evidence_manifest_2026_06_10.md",
+      "mirror_exists": true,
+      "mirror_sha256": "1738fee99e82f3685dd824fad9e19fed080ac75209d1dbb34dd9774fe25b69c4",
+      "mirror_size": 63941,
+      "sha256_match": true,
+      "source": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/signoff/final_evidence_manifest_2026_06_10.md",
+      "source_exists": true,
+      "source_sha256": "1738fee99e82f3685dd824fad9e19fed080ac75209d1dbb34dd9774fe25b69c4",
+      "source_size": 63941,
+      "status": "pass"
+    },
+    {
+      "mirror": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/third_goal_final_signoff_run_2026_06_10.json",
+      "mirror_exists": true,
+      "reason": "self-referential-final-runner-summary",
+      "source": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/signoff/third_goal_final_signoff_run_2026_06_10.json",
+      "source_exists": true,
+      "status": "excluded"
+    },
+    {
+      "mirror": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/third_goal_final_signoff_run_2026_06_10.md",
+      "mirror_exists": true,
+      "reason": "self-referential-final-runner-summary",
+      "source": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/signoff/third_goal_final_signoff_run_2026_06_10.md",
+      "source_exists": true,
+      "status": "excluded"
+    }
+  ],
+  "mirrored_artifact_integrity_checked_count": 90,
+  "mirrored_artifact_integrity_count": 92,
+  "mirrored_artifact_integrity_excluded_count": 2,
+  "mirrored_artifact_integrity_fail_count": 0,
+  "mirrored_artifact_integrity_failures": [],
+  "mirrored_artifact_integrity_status": "pass",
+  "mirrored_artifact_unique_count": 92,
+  "mirrored_artifacts": [
+    "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/c3b_board_smoke_readiness_2026_06_10.json",
+    "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/c3b_board_smoke_readiness_2026_06_10.md",
+    "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/third_goal_final_signoff_2026_06_10.json",
+    "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/final_signoff_audit_2026_06_10.json",
+    "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/final_signoff_audit_2026_06_10.md",
+    "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/third_goal_completion_audit_2026_06_10.json",
+    "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/third_goal_completion_audit_2026_06_10.md",
+    "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/third_goal_unblock_checklist_2026_06_10.json",
+    "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/third_goal_unblock_checklist_2026_06_10.md",
+    "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/zcu104_c3b_smoke_remote_run_2026_06_10.json",
+    "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/zcu104_c3b_smoke_remote_run_2026_06_10.md",
+    "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/c3b_smoke_transfer_manifest_2026_06_10.json",
+    "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/c3b_smoke_transfer_manifest_2026_06_10.md",
+    "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/e2e_axis_dma_c3b_mem16_smoke_bundle.tar.gz.sha256",
+    "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/c3b_smoke_result_contract_2026_06_10.json",
+    "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/c3b_smoke_result_contract_2026_06_10.md",
+    "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/xr_vits_unblock_packet_2026_06_10.json",
+    "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/xr_vits_unblock_packet_2026_06_10.md",
+    "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/xr_vits_replacement_policy_preview_2026_06_10.json",
+    "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/xr_vits_replacement_policy_preview_2026_06_10.md",
+    "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/xr_vits_reference_resolution_2026_06_10.json",
+    "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/xr_vits_reference_resolution_2026_06_10.md",
+    "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/final_unblock_commands_2026_06_10.json",
+    "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/final_unblock_commands_2026_06_10.md",
+    "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/final_unblock_intake_2026_06_10.json",
+    "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/final_unblock_intake_2026_06_10.md",
+    "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/final_unblock_closeout_packet_2026_06_10.json",
+    "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/final_unblock_closeout_packet_2026_06_10.md",
+    "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/final_unblock_closeout_packet_validation_2026_06_10.json",
+    "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/final_unblock_closeout_packet_validation_2026_06_10.md",
+    "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/e2e_resource_matrix_2026_06_10.json",
+    "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/e2e_resource_matrix_2026_06_10.md",
+    "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/selected_path_execution_audit_2026_06_10.json",
+    "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/selected_path_execution_audit_2026_06_10.md",
+    "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/e2e_resource_policy_audit_2026_06_10.json",
+    "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/e2e_resource_policy_audit_2026_06_10.md",
+    "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/final_unblock_candidate_audit_2026_06_10.json",
+    "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/final_unblock_candidate_audit_2026_06_10.md",
+    "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/third_goal_requirements_trace_2026_06_10.json",
+    "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/third_goal_requirements_trace_2026_06_10.md",
+    "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/spec_plan_conformance_audit_2026_06_10.json",
+    "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/spec_plan_conformance_audit_2026_06_10.md",
+    "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/final_operator_handoff_2026_06_10.json",
+    "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/final_operator_handoff_2026_06_10.md",
+    "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/final_operator_handoff_validation_2026_06_10.json",
+    "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/final_operator_handoff_validation_2026_06_10.md",
+    "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/final_signoff_bundle_validation_2026_06_10.json",
+    "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/final_signoff_bundle_validation_2026_06_10.md",
+    "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/c3b_smoke_candidate_discovery_2026_06_10.json",
+    "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/c3b_smoke_candidate_discovery_2026_06_10.md",
+    "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/pynq_smoke_candidate_discovery_c3b_2026_06_16.json",
+    "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/pynq_smoke_candidate_discovery_c3b_2026_06_16.md",
+    "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/vref_successor_smoke_candidate_discovery_2026_06_10.json",
+    "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/vref_successor_smoke_candidate_discovery_2026_06_10.md",
+    "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/pynq_smoke_candidate_discovery_vref_p0_2026_06_16.json",
+    "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/pynq_smoke_candidate_discovery_vref_p0_2026_06_16.md",
+    "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/qkv_uram_smoke_candidate_discovery_2026_06_16.json",
+    "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/qkv_uram_smoke_candidate_discovery_2026_06_16.md",
+    "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/vref_p0_qkv_uram_cache_successor_2026_06_16.json",
+    "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/vref_p0_qkv_uram_cache_successor_2026_06_16.md",
+    "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/vref_p0_pot_scale_audit_2026_06_16.json",
+    "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/vref_p0_pot_scale_audit_2026_06_16.md",
+    "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/vref_p0_pot_scale_sweep_2026_06_16.json",
+    "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/vref_p0_pot_scale_sweep_2026_06_16.md",
+    "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/req5_q4q8_swhw_match_audit_2026_06_16.json",
+    "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/req5_q4q8_swhw_match_audit_2026_06_16.md",
+    "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/p2_vit_scale_calibration_report_2026_06_16.json",
+    "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/p2_vit_scale_calibration_report_2026_06_16.md",
+    "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/req1_environment_audit_2026_06_16.json",
+    "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/req1_environment_audit_2026_06_16.md",
+    "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/req6_parameterization_audit_2026_06_16.json",
+    "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/req6_parameterization_audit_2026_06_16.md",
+    "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/req9_deit_image_reference_audit_2026_06_16.json",
+    "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/req9_deit_image_reference_audit_2026_06_16.md",
+    "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/xr_vits_gate_audit_2026_06_16.json",
+    "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/xr_vits_gate_audit_2026_06_16.md",
+    "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/c3b_physical_smoke_gate_audit_2026_06_16.json",
+    "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/c3b_physical_smoke_gate_audit_2026_06_16.md",
+    "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/vref_p0_buffer_lifetime_audit_2026_06_16.json",
+    "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/vref_p0_buffer_lifetime_audit_2026_06_16.md",
+    "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/hgpipe_operator_audit_2026_06_16.json",
+    "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/hgpipe_operator_audit_2026_06_16.md",
+    "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/final_blocker_closure_readiness_2026_06_10.json",
+    "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/final_blocker_closure_readiness_2026_06_10.md",
+    "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/third_goal_source_audit_2026_06_16.json",
+    "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/third_goal_source_audit_2026_06_16.md",
+    "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/third_goal_current_audit_2026_06_16.json",
+    "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/third_goal_current_audit_2026_06_16.md",
+    "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/final_evidence_manifest_2026_06_10.json",
+    "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/final_evidence_manifest_2026_06_10.md",
+    "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/third_goal_final_signoff_run_2026_06_10.json",
+    "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/third_goal_final_signoff_run_2026_06_10.md"
+  ],
+  "operator_handoff_status": "pending-operator-actions",
+  "operator_handoff_validation_status": "pass",
+  "p2_vit_scale_calibration_status": "pass",
+  "pynq_c3b_smoke_discovery_status": "missing",
+  "pynq_vref_smoke_discovery_status": "missing",
+  "qkv_uram_import_status": "skipped",
+  "qkv_uram_remote_execute": false,
+  "qkv_uram_remote_status": "skipped",
+  "qkv_uram_required_for_final_signoff": false,
+  "qkv_uram_smoke_discovery_status": "missing",
+  "readiness_status": "ready-for-board",
+  "remaining_blocker_detail_count": 2,
+  "remaining_blocker_details": {
+    "C3b AXIS/DMA physical smoke result": {
+      "kind": "canonical-pynq-smoke-json",
+      "paths": [
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/pynq/hgtxr/e2e_axis_dma_c3b_mem16_file_smoke.json"
+      ],
+      "status": "missing",
+      "would_clear": false
+    },
+    "requested XR-VITs sibling": {
+      "closure_options": [
+        {
+          "kind": "exact-source",
+          "path": "/home/kjm26/project/PRJXR/XR-VITs",
+          "status": "missing"
+        },
+        {
+          "kind": "approved-replacement-policy",
+          "path": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/xr_vits_replacement_policy.json",
+          "status": "missing"
+        }
+      ],
+      "kind": "exact-source-or-approved-replacement-policy",
+      "mode": "missing",
+      "paths": [
+        "/home/kjm26/project/PRJXR/XR-VITs",
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/xr_vits_replacement_policy.json"
+      ],
+      "would_clear": false
+    }
+  },
+  "remaining_blocker_input_paths": {
+    "C3b AXIS/DMA physical smoke result": [
+      "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/pynq/hgtxr/e2e_axis_dma_c3b_mem16_file_smoke.json"
+    ],
+    "requested XR-VITs sibling": [
+      "/home/kjm26/project/PRJXR/XR-VITs",
+      "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/xr_vits_replacement_policy.json"
+    ]
+  },
+  "remaining_blockers": [
+    "requested XR-VITs sibling",
+    "C3b AXIS/DMA physical smoke result"
+  ],
+  "requirements_trace_status": "blocked",
+  "resource_matrix_status": "pass",
+  "resource_policy_status": "pass",
+  "root": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR",
+  "selected_path_status": "pass",
+  "spec_plan_status": "pass",
+  "status": "blocked",
+  "steps": [
+    {
+      "argv": [
+        "--root",
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR",
+        "--host",
+        "zcu104.local",
+        "--remote-dir",
+        "/home/xilinx/hgtxr_c3b_smoke",
+        "--json-out",
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/signoff/zcu104_c3b_smoke_remote_run_2026_06_10.json",
+        "--markdown-out",
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/signoff/zcu104_c3b_smoke_remote_run_2026_06_10.md",
+        "--user",
+        "xilinx"
+      ],
+      "exit_code": 0,
+      "name": "zcu104-remote-dry-run"
+    },
+    {
+      "argv": [
+        "--root",
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR",
+        "--json-out",
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/signoff/c3b_smoke_transfer_manifest_2026_06_10.json",
+        "--markdown-out",
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/signoff/c3b_smoke_transfer_manifest_2026_06_10.md",
+        "--sha256-out",
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/signoff/e2e_axis_dma_c3b_mem16_smoke_bundle.tar.gz.sha256"
+      ],
+      "exit_code": 0,
+      "name": "c3b-smoke-transfer-manifest"
+    },
+    {
+      "argv": [
+        "--root",
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR",
+        "--json-out",
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/signoff/c3b_smoke_result_contract_2026_06_10.json",
+        "--markdown-out",
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/signoff/c3b_smoke_result_contract_2026_06_10.md"
+      ],
+      "exit_code": 0,
+      "name": "c3b-smoke-result-contract"
+    },
+    {
+      "argv": [
+        "--root",
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR",
+        "--approve",
+        "--approved-by",
+        "<approved-by>",
+        "--approved-at",
+        "1970-01-01T00:00:00Z",
+        "--reason",
+        "Approve XR_Accel as XR-VITs replacement for HGTXR third-goal signoff",
+        "--dry-run",
+        "--preview-json-out",
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/signoff/xr_vits_replacement_policy_preview_2026_06_10.json",
+        "--preview-markdown-out",
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/signoff/xr_vits_replacement_policy_preview_2026_06_10.md"
+      ],
+      "exit_code": 0,
+      "name": "xr-vits-replacement-policy-preview"
+    },
+    {
+      "argv": [
+        "--root",
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR",
+        "--json-out",
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/signoff/xr_vits_unblock_packet_2026_06_10.json",
+        "--markdown-out",
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/signoff/xr_vits_unblock_packet_2026_06_10.md"
+      ],
+      "exit_code": 1,
+      "name": "xr-vits-unblock-packet"
+    },
+    {
+      "argv": [
+        "--root",
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR",
+        "--json-out",
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/signoff/xr_vits_reference_resolution_2026_06_10.json",
+        "--markdown-out",
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/signoff/xr_vits_reference_resolution_2026_06_10.md"
+      ],
+      "exit_code": 0,
+      "name": "xr-vits-reference-resolution"
+    },
+    {
+      "argv": [
+        "--root",
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR",
+        "--json-out",
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/signoff/c3b_board_smoke_readiness_2026_06_10.json",
+        "--markdown-out",
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/signoff/c3b_board_smoke_readiness_2026_06_10.md"
+      ],
+      "exit_code": 0,
+      "name": "c3b-readiness"
+    },
+    {
+      "argv": [
+        "--root",
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR",
+        "--mode",
+        "final-signoff",
+        "--json-out",
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/signoff/third_goal_final_signoff_2026_06_10.json"
+      ],
+      "exit_code": 1,
+      "name": "final-preflight"
+    },
+    {
+      "argv": [
+        "--preflight-json",
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/signoff/third_goal_final_signoff_2026_06_10.json",
+        "--json-out",
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/signoff/final_signoff_audit_2026_06_10.json",
+        "--markdown-out",
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/signoff/final_signoff_audit_2026_06_10.md"
+      ],
+      "exit_code": 1,
+      "name": "final-audit"
+    },
+    {
+      "argv": [
+        "--root",
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR",
+        "--preflight-json",
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/signoff/third_goal_final_signoff_2026_06_10.json",
+        "--json-out",
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/signoff/third_goal_completion_audit_2026_06_10.json",
+        "--markdown-out",
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/signoff/third_goal_completion_audit_2026_06_10.md"
+      ],
+      "exit_code": 1,
+      "name": "completion-audit"
+    },
+    {
+      "argv": [
+        "--root",
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR",
+        "--final-audit",
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/signoff/final_signoff_audit_2026_06_10.json",
+        "--completion-audit",
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/signoff/third_goal_completion_audit_2026_06_10.json",
+        "--json-out",
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/signoff/third_goal_unblock_checklist_2026_06_10.json",
+        "--markdown-out",
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/signoff/third_goal_unblock_checklist_2026_06_10.md"
+      ],
+      "exit_code": 1,
+      "name": "unblock-checklist"
+    },
+    {
+      "argv": [
+        "--root",
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR",
+        "--final-audit",
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/signoff/final_signoff_audit_2026_06_10.json",
+        "--readiness-json",
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/signoff/c3b_board_smoke_readiness_2026_06_10.json",
+        "--xr-vits-packet-json",
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/signoff/xr_vits_unblock_packet_2026_06_10.json",
+        "--c3b-contract-json",
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/signoff/c3b_smoke_result_contract_2026_06_10.json",
+        "--json-out",
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/signoff/final_unblock_commands_2026_06_10.json",
+        "--markdown-out",
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/signoff/final_unblock_commands_2026_06_10.md"
+      ],
+      "exit_code": 1,
+      "name": "final-unblock-command-card"
+    },
+    {
+      "argv": [
+        "--root",
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR",
+        "--json-out",
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/signoff/e2e_resource_matrix_2026_06_10.json",
+        "--markdown-out",
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/signoff/e2e_resource_matrix_2026_06_10.md"
+      ],
+      "exit_code": 0,
+      "name": "resource-matrix"
+    },
+    {
+      "argv": [
+        "--root",
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR",
+        "--resource-matrix",
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/signoff/e2e_resource_matrix_2026_06_10.json",
+        "--json-out",
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/signoff/e2e_resource_policy_audit_2026_06_10.json",
+        "--markdown-out",
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/signoff/e2e_resource_policy_audit_2026_06_10.md"
+      ],
+      "exit_code": 0,
+      "name": "resource-policy-audit"
+    },
+    {
+      "argv": [
+        "--root",
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR",
+        "--resource-matrix",
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/signoff/e2e_resource_matrix_2026_06_10.json",
+        "--json-out",
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/signoff/selected_path_execution_audit_2026_06_10.json",
+        "--markdown-out",
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/signoff/selected_path_execution_audit_2026_06_10.md"
+      ],
+      "exit_code": 0,
+      "name": "selected-path-execution-audit"
+    },
+    {
+      "argv": [
+        "--root",
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR",
+        "--json-out",
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/signoff/final_unblock_candidate_audit_2026_06_10.json",
+        "--markdown-out",
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/signoff/final_unblock_candidate_audit_2026_06_10.md",
+        "--xr-vits-mode",
+        "exact"
+      ],
+      "exit_code": 1,
+      "name": "final-unblock-candidate-audit"
+    },
+    {
+      "argv": [
+        "--root",
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR",
+        "--completion-audit",
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/signoff/third_goal_completion_audit_2026_06_10.json",
+        "--resource-matrix",
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/signoff/e2e_resource_matrix_2026_06_10.json",
+        "--command-card",
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/signoff/final_unblock_commands_2026_06_10.json",
+        "--signoff-run",
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/signoff/third_goal_final_signoff_run_2026_06_10.json",
+        "--candidate-audit",
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/signoff/final_unblock_candidate_audit_2026_06_10.json",
+        "--xr-vits-resolution",
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/signoff/xr_vits_reference_resolution_2026_06_10.json",
+        "--evidence-manifest",
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/final_evidence_manifest_2026_06_10.json",
+        "--json-out",
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/signoff/third_goal_requirements_trace_2026_06_10.json",
+        "--markdown-out",
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/signoff/third_goal_requirements_trace_2026_06_10.md"
+      ],
+      "exit_code": 1,
+      "name": "requirements-trace"
+    },
+    {
+      "argv": [
+        "--root",
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR",
+        "--json-out",
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/signoff/spec_plan_conformance_audit_2026_06_10.json",
+        "--markdown-out",
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/signoff/spec_plan_conformance_audit_2026_06_10.md"
+      ],
+      "exit_code": 1,
+      "name": "spec-plan-conformance-audit"
+    },
+    {
+      "argv": [
+        "--root",
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR",
+        "--command-card",
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/signoff/final_unblock_commands_2026_06_10.json",
+        "--requirements-trace",
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/signoff/third_goal_requirements_trace_2026_06_10.json",
+        "--readiness",
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/signoff/c3b_board_smoke_readiness_2026_06_10.json",
+        "--candidate-audit",
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/signoff/final_unblock_candidate_audit_2026_06_10.json",
+        "--xr-vits-resolution",
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/signoff/xr_vits_reference_resolution_2026_06_10.json",
+        "--json-out",
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/signoff/final_operator_handoff_2026_06_10.json",
+        "--markdown-out",
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/signoff/final_operator_handoff_2026_06_10.md"
+      ],
+      "exit_code": 1,
+      "name": "final-operator-handoff"
+    },
+    {
+      "argv": [
+        "--root",
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR",
+        "--handoff",
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/signoff/final_operator_handoff_2026_06_10.json",
+        "--json-out",
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/signoff/final_operator_handoff_validation_2026_06_10.json",
+        "--markdown-out",
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/signoff/final_operator_handoff_validation_2026_06_10.md"
+      ],
+      "exit_code": 1,
+      "name": "final-operator-handoff-validation"
+    },
+    {
+      "argv": [
+        "--root",
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR",
+        "--json-out",
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/signoff/final_signoff_bundle_validation_2026_06_10.json",
+        "--markdown-out",
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/signoff/final_signoff_bundle_validation_2026_06_10.md"
+      ],
+      "exit_code": 1,
+      "name": "final-signoff-bundle-validation"
+    },
+    {
+      "argv": [
+        "--root",
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR",
+        "--json-out",
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/signoff/c3b_smoke_candidate_discovery_2026_06_10.json",
+        "--markdown-out",
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/signoff/c3b_smoke_candidate_discovery_2026_06_10.md"
+      ],
+      "exit_code": 1,
+      "name": "c3b-smoke-candidate-discovery"
+    },
+    {
+      "argv": [
+        "--root",
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR",
+        "--preset",
+        "axis-c3b-mem16",
+        "--json-out",
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/signoff/pynq_smoke_candidate_discovery_c3b_2026_06_16.json",
+        "--markdown-out",
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/signoff/pynq_smoke_candidate_discovery_c3b_2026_06_16.md"
+      ],
+      "exit_code": 1,
+      "name": "pynq-c3b-smoke-candidate-discovery"
+    },
+    {
+      "argv": [
+        "--root",
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR",
+        "--preset",
+        "axis-vref-p0-softmax-input-x2-dsp-mixed-stream",
+        "--json-out",
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/signoff/vref_successor_smoke_candidate_discovery_2026_06_10.json",
+        "--markdown-out",
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/signoff/vref_successor_smoke_candidate_discovery_2026_06_10.md"
+      ],
+      "exit_code": 1,
+      "name": "vref-successor-smoke-candidate-discovery"
+    },
+    {
+      "argv": [
+        "--root",
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR",
+        "--preset",
+        "axis-vref-p0-softmax-input-x2-dsp-mixed-stream",
+        "--json-out",
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/signoff/pynq_smoke_candidate_discovery_vref_p0_2026_06_16.json",
+        "--markdown-out",
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/signoff/pynq_smoke_candidate_discovery_vref_p0_2026_06_16.md"
+      ],
+      "exit_code": 1,
+      "name": "pynq-vref-smoke-candidate-discovery"
+    },
+    {
+      "argv": [
+        "--root",
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR",
+        "--preset",
+        "axis-vref-p0-softmax-input-x2-qkv-uram",
+        "--json-out",
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/signoff/qkv_uram_smoke_candidate_discovery_2026_06_16.json",
+        "--markdown-out",
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/signoff/qkv_uram_smoke_candidate_discovery_2026_06_16.md"
+      ],
+      "exit_code": 1,
+      "name": "qkv-uram-smoke-candidate-discovery"
+    },
+    {
+      "argv": [
+        "--root",
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR",
+        "--json-out",
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/signoff/vref_p0_qkv_uram_cache_successor_2026_06_16.json",
+        "--markdown-out",
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/signoff/vref_p0_qkv_uram_cache_successor_2026_06_16.md"
+      ],
+      "exit_code": 0,
+      "name": "vref-p0-qkv-uram-cache-successor"
+    },
+    {
+      "argv": [
+        "--root",
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR",
+        "--json-out",
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/signoff/vref_p0_pot_scale_audit_2026_06_16.json",
+        "--markdown-out",
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/signoff/vref_p0_pot_scale_audit_2026_06_16.md"
+      ],
+      "exit_code": 0,
+      "name": "vref-p0-pot-scale-audit"
+    },
+    {
+      "argv": [
+        "--root",
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR",
+        "--json-out",
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/signoff/vref_p0_pot_scale_sweep_2026_06_16.json",
+        "--markdown-out",
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/signoff/vref_p0_pot_scale_sweep_2026_06_16.md"
+      ],
+      "exit_code": 0,
+      "name": "vref-p0-pot-scale-sweep"
+    },
+    {
+      "argv": [
+        "--root",
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR",
+        "--json-out",
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/signoff/req5_q4q8_swhw_match_audit_2026_06_16.json",
+        "--markdown-out",
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/signoff/req5_q4q8_swhw_match_audit_2026_06_16.md"
+      ],
+      "exit_code": 0,
+      "name": "req5-q4q8-swhw-match-audit"
+    },
+    {
+      "argv": [
+        "--root",
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR",
+        "--json-out",
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/signoff/p2_vit_scale_calibration_report_2026_06_16.json",
+        "--markdown-out",
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/signoff/p2_vit_scale_calibration_report_2026_06_16.md"
+      ],
+      "exit_code": 0,
+      "name": "p2-vit-scale-calibration-report"
+    },
+    {
+      "argv": [
+        "--root",
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR",
+        "--json-out",
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/signoff/req1_environment_audit_2026_06_16.json",
+        "--markdown-out",
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/signoff/req1_environment_audit_2026_06_16.md"
+      ],
+      "exit_code": 0,
+      "name": "req1-environment-audit"
+    },
+    {
+      "argv": [
+        "--root",
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR",
+        "--json-out",
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/signoff/req6_parameterization_audit_2026_06_16.json",
+        "--markdown-out",
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/signoff/req6_parameterization_audit_2026_06_16.md"
+      ],
+      "exit_code": 0,
+      "name": "req6-parameterization-audit"
+    },
+    {
+      "argv": [
+        "--root",
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR",
+        "--json-out",
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/signoff/req9_deit_image_reference_audit_2026_06_16.json",
+        "--markdown-out",
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/signoff/req9_deit_image_reference_audit_2026_06_16.md"
+      ],
+      "exit_code": 0,
+      "name": "req9-deit-image-reference-audit"
+    },
+    {
+      "argv": [
+        "--root",
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR",
+        "--json-out",
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/signoff/xr_vits_gate_audit_2026_06_16.json",
+        "--markdown-out",
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/signoff/xr_vits_gate_audit_2026_06_16.md"
+      ],
+      "exit_code": 0,
+      "name": "xr-vits-gate-audit"
+    },
+    {
+      "argv": [
+        "--root",
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR",
+        "--json-out",
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/signoff/c3b_physical_smoke_gate_audit_2026_06_16.json",
+        "--markdown-out",
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/signoff/c3b_physical_smoke_gate_audit_2026_06_16.md"
+      ],
+      "exit_code": 0,
+      "name": "c3b-physical-smoke-gate-audit"
+    },
+    {
+      "argv": [
+        "--root",
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR",
+        "--resource-matrix",
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/signoff/e2e_resource_matrix_2026_06_10.json",
+        "--json-out",
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/signoff/vref_p0_buffer_lifetime_audit_2026_06_16.json",
+        "--markdown-out",
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/signoff/vref_p0_buffer_lifetime_audit_2026_06_16.md"
+      ],
+      "exit_code": 0,
+      "name": "vref-p0-buffer-lifetime-audit"
+    },
+    {
+      "argv": [
+        "--root",
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR",
+        "--json-out",
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/signoff/hgpipe_operator_audit_2026_06_16.json",
+        "--markdown-out",
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/signoff/hgpipe_operator_audit_2026_06_16.md"
+      ],
+      "exit_code": 0,
+      "name": "hgpipe-operator-audit"
+    },
+    {
+      "argv": [
+        "--root",
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR",
+        "--json-out",
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/signoff/final_blocker_closure_readiness_2026_06_10.json",
+        "--markdown-out",
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/signoff/final_blocker_closure_readiness_2026_06_10.md",
+        "--xr-vits-mode",
+        "exact"
+      ],
+      "exit_code": 1,
+      "name": "final-blocker-closure-readiness"
+    },
+    {
+      "argv": [
+        "--root",
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR",
+        "--json-out",
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/signoff/final_unblock_intake_2026_06_10.json",
+        "--markdown-out",
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/signoff/final_unblock_intake_2026_06_10.md",
+        "--xr-vits-mode",
+        "exact"
+      ],
+      "exit_code": 1,
+      "name": "final-unblock-intake"
+    },
+    {
+      "argv": [
+        "--root",
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR",
+        "--json-out",
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/signoff/final_unblock_closeout_packet_2026_06_10.json",
+        "--markdown-out",
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/signoff/final_unblock_closeout_packet_2026_06_10.md"
+      ],
+      "exit_code": 0,
+      "name": "final-unblock-closeout-packet"
+    },
+    {
+      "argv": [
+        "--root",
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR",
+        "--packet",
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/signoff/final_unblock_closeout_packet_2026_06_10.json",
+        "--json-out",
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/signoff/final_unblock_closeout_packet_validation_2026_06_10.json",
+        "--markdown-out",
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/signoff/final_unblock_closeout_packet_validation_2026_06_10.md"
+      ],
+      "exit_code": 0,
+      "name": "final-unblock-closeout-validation"
+    },
+    {
+      "argv": [
+        "--root",
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR",
+        "--json-out",
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/signoff/third_goal_source_audit_2026_06_16.json",
+        "--markdown-out",
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/signoff/third_goal_source_audit_2026_06_16.md"
+      ],
+      "exit_code": 0,
+      "name": "third-goal-source-audit"
+    },
+    {
+      "argv": [
+        "--root",
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR",
+        "--json-out",
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/signoff/third_goal_current_audit_2026_06_16.json",
+        "--markdown-out",
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/signoff/third_goal_current_audit_2026_06_16.md"
+      ],
+      "exit_code": 0,
+      "name": "third-goal-current-audit"
+    },
+    {
+      "argv": [
+        "--root",
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR",
+        "--json-out",
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/signoff/third_goal_source_audit_2026_06_16.json",
+        "--markdown-out",
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/signoff/third_goal_source_audit_2026_06_16.md"
+      ],
+      "exit_code": 0,
+      "name": "third-goal-source-audit-refresh"
+    },
+    {
+      "argv": [
+        "--root",
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR",
+        "--json-out",
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/signoff/final_evidence_manifest_2026_06_10.json",
+        "--markdown-out",
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/signoff/final_evidence_manifest_2026_06_10.md"
+      ],
+      "exit_code": 1,
+      "name": "final-evidence-manifest"
+    },
+    {
+      "argv": [
+        "--root",
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR",
+        "--completion-audit",
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/signoff/third_goal_completion_audit_2026_06_10.json",
+        "--resource-matrix",
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/signoff/e2e_resource_matrix_2026_06_10.json",
+        "--command-card",
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/signoff/final_unblock_commands_2026_06_10.json",
+        "--signoff-run",
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/signoff/third_goal_final_signoff_run_2026_06_10.json",
+        "--candidate-audit",
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/signoff/final_unblock_candidate_audit_2026_06_10.json",
+        "--xr-vits-resolution",
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/signoff/xr_vits_reference_resolution_2026_06_10.json",
+        "--evidence-manifest",
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/final_evidence_manifest_2026_06_10.json",
+        "--json-out",
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/signoff/third_goal_requirements_trace_2026_06_10.json",
+        "--markdown-out",
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/signoff/third_goal_requirements_trace_2026_06_10.md"
+      ],
+      "exit_code": 1,
+      "name": "requirements-trace-final-refresh"
+    },
+    {
+      "argv": [
+        "--root",
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR",
+        "--command-card",
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/signoff/final_unblock_commands_2026_06_10.json",
+        "--requirements-trace",
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/signoff/third_goal_requirements_trace_2026_06_10.json",
+        "--readiness",
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/signoff/c3b_board_smoke_readiness_2026_06_10.json",
+        "--candidate-audit",
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/signoff/final_unblock_candidate_audit_2026_06_10.json",
+        "--xr-vits-resolution",
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/signoff/xr_vits_reference_resolution_2026_06_10.json",
+        "--json-out",
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/signoff/final_operator_handoff_2026_06_10.json",
+        "--markdown-out",
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/signoff/final_operator_handoff_2026_06_10.md"
+      ],
+      "exit_code": 1,
+      "name": "final-operator-handoff-final-refresh"
+    },
+    {
+      "argv": [
+        "--root",
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR",
+        "--handoff",
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/signoff/final_operator_handoff_2026_06_10.json",
+        "--json-out",
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/signoff/final_operator_handoff_validation_2026_06_10.json",
+        "--markdown-out",
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/signoff/final_operator_handoff_validation_2026_06_10.md"
+      ],
+      "exit_code": 1,
+      "name": "final-operator-handoff-validation-final-refresh"
+    },
+    {
+      "argv": [
+        "--root",
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR",
+        "--json-out",
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/signoff/final_signoff_bundle_validation_2026_06_10.json",
+        "--markdown-out",
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/signoff/final_signoff_bundle_validation_2026_06_10.md"
+      ],
+      "exit_code": 1,
+      "name": "final-signoff-bundle-validation-final-refresh"
+    },
+    {
+      "argv": [
+        "--root",
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR",
+        "--json-out",
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/signoff/final_evidence_manifest_2026_06_10.json",
+        "--markdown-out",
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/signoff/final_evidence_manifest_2026_06_10.md"
+      ],
+      "exit_code": 1,
+      "name": "final-evidence-manifest-final-refresh"
+    },
+    {
+      "argv": [
+        "--root",
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR",
+        "--json-out",
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/signoff/spec_plan_conformance_audit_2026_06_10.json",
+        "--markdown-out",
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/signoff/spec_plan_conformance_audit_2026_06_10.md"
+      ],
+      "exit_code": 0,
+      "name": "spec-plan-conformance-final-refresh"
+    },
+    {
+      "argv": [
+        "--root",
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR",
+        "--json-out",
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/signoff/final_evidence_manifest_2026_06_10.json",
+        "--markdown-out",
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/signoff/final_evidence_manifest_2026_06_10.md"
+      ],
+      "exit_code": 0,
+      "name": "final-evidence-manifest-post-spec-refresh"
+    },
+    {
+      "argv": [
+        "--root",
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR",
+        "--preflight-json",
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/signoff/third_goal_final_signoff_2026_06_10.json",
+        "--json-out",
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/signoff/third_goal_completion_audit_2026_06_10.json",
+        "--markdown-out",
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/signoff/third_goal_completion_audit_2026_06_10.md"
+      ],
+      "exit_code": 1,
+      "name": "completion-audit-final-refresh"
+    },
+    {
+      "argv": [
+        "--root",
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR",
+        "--completion-audit",
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/signoff/third_goal_completion_audit_2026_06_10.json",
+        "--resource-matrix",
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/signoff/e2e_resource_matrix_2026_06_10.json",
+        "--command-card",
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/signoff/final_unblock_commands_2026_06_10.json",
+        "--signoff-run",
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/signoff/third_goal_final_signoff_run_2026_06_10.json",
+        "--candidate-audit",
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/signoff/final_unblock_candidate_audit_2026_06_10.json",
+        "--xr-vits-resolution",
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/signoff/xr_vits_reference_resolution_2026_06_10.json",
+        "--evidence-manifest",
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/final_evidence_manifest_2026_06_10.json",
+        "--json-out",
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/signoff/third_goal_requirements_trace_2026_06_10.json",
+        "--markdown-out",
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/signoff/third_goal_requirements_trace_2026_06_10.md"
+      ],
+      "exit_code": 1,
+      "name": "requirements-trace-post-completion-refresh"
+    },
+    {
+      "argv": [
+        "--root",
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR",
+        "--command-card",
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/signoff/final_unblock_commands_2026_06_10.json",
+        "--requirements-trace",
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/signoff/third_goal_requirements_trace_2026_06_10.json",
+        "--readiness",
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/signoff/c3b_board_smoke_readiness_2026_06_10.json",
+        "--candidate-audit",
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/signoff/final_unblock_candidate_audit_2026_06_10.json",
+        "--xr-vits-resolution",
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/signoff/xr_vits_reference_resolution_2026_06_10.json",
+        "--json-out",
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/signoff/final_operator_handoff_2026_06_10.json",
+        "--markdown-out",
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/signoff/final_operator_handoff_2026_06_10.md"
+      ],
+      "exit_code": 1,
+      "name": "final-operator-handoff-post-completion-refresh"
+    },
+    {
+      "argv": [
+        "--root",
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR",
+        "--handoff",
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/signoff/final_operator_handoff_2026_06_10.json",
+        "--json-out",
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/signoff/final_operator_handoff_validation_2026_06_10.json",
+        "--markdown-out",
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/signoff/final_operator_handoff_validation_2026_06_10.md"
+      ],
+      "exit_code": 0,
+      "name": "final-operator-handoff-validation-post-completion-refresh"
+    },
+    {
+      "argv": [
+        "--root",
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR",
+        "--json-out",
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/signoff/final_signoff_bundle_validation_2026_06_10.json",
+        "--markdown-out",
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/signoff/final_signoff_bundle_validation_2026_06_10.md"
+      ],
+      "exit_code": 0,
+      "name": "final-signoff-bundle-validation-post-completion-refresh"
+    },
+    {
+      "argv": [
+        "--root",
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR",
+        "--json-out",
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/signoff/final_evidence_manifest_2026_06_10.json",
+        "--markdown-out",
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/signoff/final_evidence_manifest_2026_06_10.md"
+      ],
+      "exit_code": 0,
+      "name": "final-evidence-manifest-post-completion-refresh"
+    },
+    {
+      "argv": [
+        "--root",
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR",
+        "--json-out",
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/signoff/spec_plan_conformance_audit_2026_06_10.json",
+        "--markdown-out",
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/signoff/spec_plan_conformance_audit_2026_06_10.md"
+      ],
+      "exit_code": 0,
+      "name": "spec-plan-conformance-post-completion-refresh"
+    },
+    {
+      "argv": [
+        "--root",
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR",
+        "--json-out",
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/signoff/final_evidence_manifest_2026_06_10.json",
+        "--markdown-out",
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/signoff/final_evidence_manifest_2026_06_10.md"
+      ],
+      "exit_code": 0,
+      "name": "final-evidence-manifest-post-spec-completion-refresh"
+    },
+    {
+      "argv": [
+        "--root",
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR",
+        "--completion-audit",
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/signoff/third_goal_completion_audit_2026_06_10.json",
+        "--resource-matrix",
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/signoff/e2e_resource_matrix_2026_06_10.json",
+        "--command-card",
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/signoff/final_unblock_commands_2026_06_10.json",
+        "--signoff-run",
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/signoff/third_goal_final_signoff_run_2026_06_10.json",
+        "--candidate-audit",
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/signoff/final_unblock_candidate_audit_2026_06_10.json",
+        "--xr-vits-resolution",
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/signoff/xr_vits_reference_resolution_2026_06_10.json",
+        "--evidence-manifest",
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/final_evidence_manifest_2026_06_10.json",
+        "--json-out",
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/signoff/third_goal_requirements_trace_2026_06_10.json",
+        "--markdown-out",
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/signoff/third_goal_requirements_trace_2026_06_10.md"
+      ],
+      "exit_code": 1,
+      "name": "requirements-trace-final-contract-refresh"
+    },
+    {
+      "argv": [
+        "--root",
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR",
+        "--command-card",
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/signoff/final_unblock_commands_2026_06_10.json",
+        "--requirements-trace",
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/signoff/third_goal_requirements_trace_2026_06_10.json",
+        "--readiness",
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/signoff/c3b_board_smoke_readiness_2026_06_10.json",
+        "--candidate-audit",
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/signoff/final_unblock_candidate_audit_2026_06_10.json",
+        "--xr-vits-resolution",
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/signoff/xr_vits_reference_resolution_2026_06_10.json",
+        "--json-out",
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/signoff/final_operator_handoff_2026_06_10.json",
+        "--markdown-out",
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/signoff/final_operator_handoff_2026_06_10.md"
+      ],
+      "exit_code": 1,
+      "name": "final-operator-handoff-final-contract-refresh"
+    },
+    {
+      "argv": [
+        "--root",
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR",
+        "--handoff",
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/signoff/final_operator_handoff_2026_06_10.json",
+        "--json-out",
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/signoff/final_operator_handoff_validation_2026_06_10.json",
+        "--markdown-out",
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/signoff/final_operator_handoff_validation_2026_06_10.md"
+      ],
+      "exit_code": 0,
+      "name": "final-operator-handoff-validation-final-contract-refresh"
+    },
+    {
+      "argv": [
+        "--root",
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR",
+        "--json-out",
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/signoff/final_signoff_bundle_validation_2026_06_10.json",
+        "--markdown-out",
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/signoff/final_signoff_bundle_validation_2026_06_10.md"
+      ],
+      "exit_code": 0,
+      "name": "final-signoff-bundle-validation-final-contract-refresh"
+    },
+    {
+      "argv": [
+        "--root",
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR",
+        "--json-out",
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/signoff/final_evidence_manifest_2026_06_10.json",
+        "--markdown-out",
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/signoff/final_evidence_manifest_2026_06_10.md"
+      ],
+      "exit_code": 0,
+      "name": "final-evidence-manifest-final-contract-refresh"
+    },
+    {
+      "argv": [
+        "--root",
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR",
+        "--json-out",
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/signoff/spec_plan_conformance_audit_2026_06_10.json",
+        "--markdown-out",
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/signoff/spec_plan_conformance_audit_2026_06_10.md"
+      ],
+      "exit_code": 0,
+      "name": "spec-plan-conformance-final-contract-refresh"
+    },
+    {
+      "argv": [
+        "--root",
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR",
+        "--json-out",
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/signoff/final_evidence_manifest_2026_06_10.json",
+        "--markdown-out",
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/signoff/final_evidence_manifest_2026_06_10.md"
+      ],
+      "exit_code": 0,
+      "name": "final-evidence-manifest-post-final-contract-refresh"
+    }
+  ],
+  "third_goal_current_audit_status": "blocked-external",
+  "third_goal_source_audit_status": "pass",
+  "unblock_status": "pending-unblock",
+  "vref_smoke_discovery_status": "missing",
+  "vref_successor_import_status": "skipped",
+  "vref_successor_remote_execute": false,
+  "vref_successor_remote_status": "skipped",
+  "vref_successor_required_for_final_signoff": false,
+  "xr_vits_packet_status": "pending-user-choice",
+  "xr_vits_policy_preview_status": "pass",
+  "xr_vits_policy_status": "skipped",
+  "xr_vits_reference_resolution_status": "candidate-ready-needs-approval",
+  "zcu104_remote_execute": false,
+  "zcu104_remote_status": "dry-run"
+}

@@ -1,0 +1,10 @@
+{
+  "approved_replacement": false,
+  "requested_path": "/home/kjm26/project/PRJXR/XR-VITs",
+  "replacement_path": "/home/kjm26/project/PRJXR/XR-VIT/XR_Accel",
+  "replacement_role": "candidate-xr-accel",
+  "candidate_audit": "docs/resources/xr_vits_candidate_audit_2026_06_10.json",
+  "approved_by": "",
+  "approved_at": "",
+  "reason": "XR_Accel scored 99 in candidate audit, but replacement is not approved until approved_replacement is true."
+}

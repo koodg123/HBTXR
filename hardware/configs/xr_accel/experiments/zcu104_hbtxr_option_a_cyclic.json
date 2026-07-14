@@ -1,0 +1,23 @@
+{
+  "name": "zcu104_hbtxr_option_a_cyclic",
+  "model": "configs/models/hbtxr_option_a.json",
+  "target": "configs/targets/zcu104.json",
+  "design": "configs/designs/hbtxr_cyclic_zcu104.json",
+  "top_module": "HGPIPE_VIVADO_TOP",
+  "artifacts": {
+    "instances_subdir": [
+      "target",
+      "model",
+      "design"
+    ],
+    "reports_subdir": [
+      "target",
+      "model",
+      "design"
+    ],
+    "build_subdir": [
+      "target",
+      "experiment"
+    ]
+  }
+}

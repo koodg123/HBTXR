@@ -1,0 +1,123 @@
+{
+  "check_count": 13,
+  "checks": [
+    {
+      "detail": "Linux",
+      "name": "platform_linux",
+      "status": "pass"
+    },
+    {
+      "detail": {
+        "BUG_REPORT_URL": "https://bugs.launchpad.net/ubuntu/",
+        "HOME_URL": "https://www.ubuntu.com/",
+        "ID": "ubuntu",
+        "ID_LIKE": "debian",
+        "NAME": "Ubuntu",
+        "PRETTY_NAME": "Ubuntu 22.04.5 LTS",
+        "PRIVACY_POLICY_URL": "https://www.ubuntu.com/legal/terms-and-policies/privacy-policy",
+        "SUPPORT_URL": "https://help.ubuntu.com/",
+        "UBUNTU_CODENAME": "jammy",
+        "VERSION": "22.04.5 LTS (Jammy Jellyfish)",
+        "VERSION_CODENAME": "jammy",
+        "VERSION_ID": "22.04"
+      },
+      "name": "ubuntu_id",
+      "status": "pass"
+    },
+    {
+      "detail": "22.04",
+      "name": "ubuntu_version_22_04",
+      "status": "pass"
+    },
+    {
+      "detail": "Linux version 6.8.0-124-generic (buildd@lcy02-amd64-109) (x86_64-linux-gnu-gcc-12 (Ubuntu 12.3.0-1ubuntu1~22.04.3) 12.3.0, GNU ld (GNU Binutils for Ubuntu) 2.38) #124~22.04.1-Ubuntu SMP PREEMPT_DYNAMIC Tue May 26 21:05:19 UTC ",
+      "name": "not_wsl_kernel",
+      "status": "pass"
+    },
+    {
+      "detail": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR",
+      "name": "hgtxr_root_expected_suffix",
+      "status": "pass"
+    },
+    {
+      "detail": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware",
+      "name": "hardware_root_expected_suffix",
+      "status": "pass"
+    },
+    {
+      "detail": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware",
+      "name": "hardware_root_expected_prefix",
+      "status": "pass"
+    },
+    {
+      "detail": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware",
+      "name": "hardware_root_exists",
+      "status": "pass"
+    },
+    {
+      "detail": [],
+      "name": "no_legacy_wsl_or_xilinx_paths",
+      "status": "pass"
+    },
+    {
+      "detail": "/tools/Xilinx/Vitis_HLS/2023.2/bin/vitis_hls",
+      "name": "vitis_hls_tools_xilinx_exists",
+      "status": "pass"
+    },
+    {
+      "detail": "/tools/Xilinx/Vitis_HLS/2023.2/bin/vitis_hls",
+      "name": "vitis_hls_tools_xilinx_executable",
+      "status": "pass"
+    },
+    {
+      "detail": "/tools/Xilinx/Vivado/2023.2/bin/vivado",
+      "name": "vivado_tools_xilinx_exists",
+      "status": "pass"
+    },
+    {
+      "detail": "/tools/Xilinx/Vivado/2023.2/bin/vivado",
+      "name": "vivado_tools_xilinx_executable",
+      "status": "pass"
+    }
+  ],
+  "date_tag": "2026_06_16",
+  "environment": {
+    "os_release": {
+      "BUG_REPORT_URL": "https://bugs.launchpad.net/ubuntu/",
+      "HOME_URL": "https://www.ubuntu.com/",
+      "ID": "ubuntu",
+      "ID_LIKE": "debian",
+      "NAME": "Ubuntu",
+      "PRETTY_NAME": "Ubuntu 22.04.5 LTS",
+      "PRIVACY_POLICY_URL": "https://www.ubuntu.com/legal/terms-and-policies/privacy-policy",
+      "SUPPORT_URL": "https://help.ubuntu.com/",
+      "UBUNTU_CODENAME": "jammy",
+      "VERSION": "22.04.5 LTS (Jammy Jellyfish)",
+      "VERSION_CODENAME": "jammy",
+      "VERSION_ID": "22.04"
+    },
+    "platform_release": "6.8.0-124-generic",
+    "platform_system": "Linux",
+    "proc_version": "Linux version 6.8.0-124-generic (buildd@lcy02-amd64-109) (x86_64-linux-gnu-gcc-12 (Ubuntu 12.3.0-1ubuntu1~22.04.3) 12.3.0, GNU ld (GNU Binutils for Ubuntu) 2.38) #124~22.04.1-Ubuntu SMP PREEMPT_DYNAMIC Tue May 26 21:05:19 UTC ",
+    "vitis_hls": "/tools/Xilinx/Vitis_HLS/2023.2/bin/vitis_hls",
+    "vivado": "/tools/Xilinx/Vivado/2023.2/bin/vivado"
+  },
+  "fail_count": 0,
+  "hardware_root": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware",
+  "pass_count": 13,
+  "policy": {
+    "expected_hardware_suffix": "project/PRJXR/XR-VIT/HGTXR/hardware",
+    "expected_project_prefix": "/home/kjm26/project/",
+    "ubuntu_linux_required": true,
+    "wsl_legacy_path_rejected": true,
+    "xilinx_root": "/tools/Xilinx"
+  },
+  "root": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR",
+  "safety": {
+    "executes_hls": false,
+    "executes_tools": false,
+    "executes_vivado": false,
+    "writes_canonical_inputs": false
+  },
+  "status": "pass"
+}

@@ -1,0 +1,274 @@
+{
+  "base_candidate": "VREF-P0-01-softmax_input_x2-dsp_mixed_stream",
+  "candidate": "VREF-P0-02-qkv-weight-cache-uram",
+  "check_count": 10,
+  "checks": [
+    {
+      "detail": [],
+      "name": "csim_pass",
+      "status": "pass"
+    },
+    {
+      "detail": [],
+      "name": "csynth_pass",
+      "status": "pass"
+    },
+    {
+      "detail": 498485,
+      "name": "latency_lte_c3b",
+      "status": "pass",
+      "threshold": 37508072
+    },
+    {
+      "detail": 4.069,
+      "name": "estimated_clock_lte_target",
+      "status": "pass",
+      "threshold": 5.0
+    },
+    {
+      "detail": 128,
+      "name": "dsp_lte_c3b",
+      "status": "pass",
+      "threshold": 604
+    },
+    {
+      "detail": 43236,
+      "name": "lut_lte_c3b",
+      "status": "pass",
+      "threshold": 126506
+    },
+    {
+      "detail": 40,
+      "name": "uram_lte_c3b",
+      "status": "pass",
+      "threshold": 64
+    },
+    {
+      "detail": {
+        "dsp_mixed_stream": 144,
+        "qkv_uram": 114
+      },
+      "name": "bram_reduced_vs_dsp_mixed_stream",
+      "status": "pass"
+    },
+    {
+      "detail": {
+        "dsp_mixed_stream": 32,
+        "qkv_uram": 40
+      },
+      "name": "uram_increased_vs_dsp_mixed_stream",
+      "status": "pass"
+    },
+    {
+      "detail": {
+        "default": 88,
+        "qkv_uram": 40
+      },
+      "name": "uram_reduced_vs_default",
+      "status": "pass"
+    }
+  ],
+  "comparison": {
+    "default": {
+      "estimated_clock_ns": 4.069,
+      "latency_cycles": 498485,
+      "missing_fields": [],
+      "path": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/hgtxr_e2e_axis_vref_p0_softmax_input_x2_csynth/solution_e2e_q4w8a/syn/report/csynth.xml",
+      "resources": {
+        "bram_18k": 64,
+        "dsp": 128,
+        "ff": 19664,
+        "lut": 43236,
+        "uram": 88
+      },
+      "status": "pass"
+    },
+    "delta_vs_dsp_mixed_stream": {
+      "bram_18k": -30,
+      "dsp": 0,
+      "lut": 0,
+      "uram": 8
+    },
+    "dsp_mixed_stream": {
+      "estimated_clock_ns": 4.069,
+      "latency_cycles": 498485,
+      "missing_fields": [],
+      "path": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/hgtxr_e2e_axis_vref_p0_softmax_input_x2_dsp_mixed_stream_csynth/solution_e2e_q4w8a/syn/report/csynth.xml",
+      "resources": {
+        "bram_18k": 144,
+        "dsp": 128,
+        "ff": 19664,
+        "lut": 43236,
+        "uram": 32
+      },
+      "status": "pass"
+    }
+  },
+  "csim": {
+    "expected_markers": [
+      "E2E AXIS vector comparison passed",
+      "runtime_state=2 count=6 last=1 failures=0",
+      "CSim done with 0 errors"
+    ],
+    "missing_markers": [],
+    "path": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/hgtxr_e2e_axis_vref_p0_softmax_input_x2_qkv_uram_csim/solution_e2e_q4w8a/csim/report/hgtxr_e2e_axis_top_csim.log",
+    "status": "pass"
+  },
+  "csynth": {
+    "estimated_clock_ns": 4.069,
+    "latency_cycles": 498485,
+    "missing_fields": [],
+    "path": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/hgtxr_e2e_axis_vref_p0_softmax_input_x2_qkv_uram_csynth/solution_e2e_q4w8a/syn/report/csynth.xml",
+    "resources": {
+      "bram_18k": 114,
+      "dsp": 128,
+      "ff": 19664,
+      "lut": 43236,
+      "uram": 40
+    },
+    "status": "pass"
+  },
+  "date_tag": "2026_06_16",
+  "fail_count": 0,
+  "ip_package": {
+    "checks": [
+      {
+        "name": "component_xml_exists",
+        "path": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/hgtxr_e2e_axis_vref_p0_softmax_input_x2_qkv_uram_ip/solution_e2e_q4w8a/impl/ip/component.xml",
+        "status": "pass"
+      },
+      {
+        "name": "export_zip_exists",
+        "path": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/hgtxr_e2e_axis_vref_p0_softmax_input_x2_qkv_uram_ip/solution_e2e_q4w8a/impl/export.zip",
+        "status": "pass"
+      }
+    ],
+    "command": "LD_LIBRARY_PATH=/tools/Xilinx/Vitis_HLS/2023.2/lib/lnx64.o/Rhel/9:$LD_LIBRARY_PATH HGTXR_E2E_PROJECT_NAME=hgtxr_e2e_axis_vref_p0_softmax_input_x2_qkv_uram_ip HGTXR_E2E_SCALE=custom HGTXR_E2E_RESOURCE_POLICY=dsp_mixed_stream HGTXR_E2E_CUSTOM_SCALE_FLAGS='-DHGTXR_E2E_BLOCKS=2 -DHGTXR_E2E_ACTIVE_TOKENS=16 -DHGTXR_E2E_PATCH_GRID_H=1 -DHGTXR_E2E_PATCH_GRID_W=16 -DHGTXR_E2E_FF_DIM=32 -DHGTXR_E2E_STRICT_GOLDEN=1 -DHGTXR_E2E_USE_VREF_P0_HGPIPE_LNQ_ACTIVE16_SOFTMAX_INPUT_X2_GOLDEN=1 -DHGTXR_E2E_USE_HGPIPE_INT_GELUQ=1 -DHGTXR_E2E_HGPIPE_GELUQ_INPUT_SCALE=16 -DHGTXR_E2E_HGPIPE_GELUQ_OUTPUT_SCALE=4 -DHGTXR_E2E_USE_HGPIPE_INT_SOFTMAXQ=1 -DHGTXR_E2E_HGPIPE_SOFTMAX_INPUT_SCALE=32 -DHGTXR_E2E_HGPIPE_SOFTMAX_PROB_SCALE=4 -DHGTXR_E2E_USE_HGPIPE_INT_LAYERNORMQ=1 -DHGTXR_E2E_USE_HGPIPE_LNQ_GAMMA_RAW=1 -DHGTXR_E2E_HGPIPE_LAYERNORM_INPUT_SCALE=16 -DHGTXR_E2E_HGPIPE_LAYERNORM_OUTPUT_SCALE=4 -DHGTXR_E2E_HGPIPE_LAYERNORM_BIAS_SHIFT=33 -DHGTXR_E2E_URAM_QKV_WEIGHT_CACHE=1' /tools/Xilinx/Vitis_HLS/2023.2/bin/vitis_hls -f /home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/vivado/scripts/package_e2e_axis_ip.tcl",
+    "component_xml": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/hgtxr_e2e_axis_vref_p0_softmax_input_x2_qkv_uram_ip/solution_e2e_q4w8a/impl/ip/component.xml",
+    "export_zip": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/hgtxr_e2e_axis_vref_p0_softmax_input_x2_qkv_uram_ip/solution_e2e_q4w8a/impl/export.zip",
+    "ip_dir": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/hgtxr_e2e_axis_vref_p0_softmax_input_x2_qkv_uram_ip/solution_e2e_q4w8a/impl/ip",
+    "missing": [],
+    "project_name": "hgtxr_e2e_axis_vref_p0_softmax_input_x2_qkv_uram_ip",
+    "status": "pass"
+  },
+  "macro": "HGTXR_E2E_URAM_QKV_WEIGHT_CACHE=1",
+  "overlay": {
+    "artifact_name": "hgtxr_e2e_axis_dma_vref_p0_softmax_input_x2_qkv_uram",
+    "bd_name": "hgtxr_e2e_axis_dma_vref_p0_softmax_input_x2_qkv_uram_system",
+    "checks": [
+      {
+        "name": "overlay_bit_exists",
+        "path": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/build/vivado/overlay/hgtxr_e2e_axis_dma_vref_p0_softmax_input_x2_qkv_uram_overlay/hgtxr_e2e_axis_dma_vref_p0_softmax_input_x2_qkv_uram.bit",
+        "status": "pass"
+      },
+      {
+        "name": "overlay_hwh_exists",
+        "path": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/build/vivado/overlay/hgtxr_e2e_axis_dma_vref_p0_softmax_input_x2_qkv_uram_overlay/hgtxr_e2e_axis_dma_vref_p0_softmax_input_x2_qkv_uram.hwh",
+        "status": "pass"
+      },
+      {
+        "name": "pynq_bit_exists",
+        "path": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/pynq/hgtxr/hgtxr_e2e_axis_dma_vref_p0_softmax_input_x2_qkv_uram.bit",
+        "status": "pass"
+      },
+      {
+        "name": "pynq_hwh_exists",
+        "path": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/pynq/hgtxr/hgtxr_e2e_axis_dma_vref_p0_softmax_input_x2_qkv_uram.hwh",
+        "status": "pass"
+      },
+      {
+        "detail": 4.517,
+        "name": "timing_wns_gte_c3b",
+        "status": "pass",
+        "threshold": 4.415
+      },
+      {
+        "detail": 0,
+        "name": "route_errors_zero",
+        "status": "pass"
+      }
+    ],
+    "command": "LD_LIBRARY_PATH=/tools/Xilinx/Vivado/2023.2/lib/lnx64.o/Rhel/9:$LD_LIBRARY_PATH /tools/Xilinx/Vivado/2023.2/bin/vivado -mode batch -source /home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/vivado/scripts/build_e2e_axis_dma_bitstream.tcl -tclargs -project_name hgtxr_e2e_axis_dma_vref_p0_softmax_input_x2_qkv_uram_overlay -bd_name hgtxr_e2e_axis_dma_vref_p0_softmax_input_x2_qkv_uram_system -artifact_name hgtxr_e2e_axis_dma_vref_p0_softmax_input_x2_qkv_uram -hls_ip_repo /home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/hgtxr_e2e_axis_vref_p0_softmax_input_x2_qkv_uram_ip/solution_e2e_q4w8a/impl/ip",
+    "impl_dir": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/build/vivado/hgtxr_e2e_axis_dma_vref_p0_softmax_input_x2_qkv_uram_overlay/hgtxr_e2e_axis_dma_vref_p0_softmax_input_x2_qkv_uram_overlay.runs/impl_1",
+    "nonpass": [],
+    "overlay_bit": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/build/vivado/overlay/hgtxr_e2e_axis_dma_vref_p0_softmax_input_x2_qkv_uram_overlay/hgtxr_e2e_axis_dma_vref_p0_softmax_input_x2_qkv_uram.bit",
+    "overlay_hwh": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/build/vivado/overlay/hgtxr_e2e_axis_dma_vref_p0_softmax_input_x2_qkv_uram_overlay/hgtxr_e2e_axis_dma_vref_p0_softmax_input_x2_qkv_uram.hwh",
+    "project_dir": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/build/vivado/hgtxr_e2e_axis_dma_vref_p0_softmax_input_x2_qkv_uram_overlay",
+    "project_name": "hgtxr_e2e_axis_dma_vref_p0_softmax_input_x2_qkv_uram_overlay",
+    "pynq_bit": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/pynq/hgtxr/hgtxr_e2e_axis_dma_vref_p0_softmax_input_x2_qkv_uram.bit",
+    "pynq_hwh": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/pynq/hgtxr/hgtxr_e2e_axis_dma_vref_p0_softmax_input_x2_qkv_uram.hwh",
+    "route_status": {
+      "fully_routed_nets": 19846,
+      "routable_nets": 19846,
+      "routing_error_nets": 0
+    },
+    "route_status_report": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/build/vivado/hgtxr_e2e_axis_dma_vref_p0_softmax_input_x2_qkv_uram_overlay/hgtxr_e2e_axis_dma_vref_p0_softmax_input_x2_qkv_uram_overlay.runs/impl_1/hgtxr_e2e_axis_dma_vref_p0_softmax_input_x2_qkv_uram_system_wrapper_route_status.rpt",
+    "runme_log": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/build/vivado/hgtxr_e2e_axis_dma_vref_p0_softmax_input_x2_qkv_uram_overlay/hgtxr_e2e_axis_dma_vref_p0_softmax_input_x2_qkv_uram_overlay.runs/impl_1/runme.log",
+    "status": "pass",
+    "timing": {
+      "ths_failing_endpoints": 0,
+      "ths_ns": 0.0,
+      "tns_failing_endpoints": 0,
+      "tns_ns": 0.0,
+      "whs_ns": 0.01,
+      "wns_ns": 4.517
+    },
+    "timing_report": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/build/vivado/hgtxr_e2e_axis_dma_vref_p0_softmax_input_x2_qkv_uram_overlay/hgtxr_e2e_axis_dma_vref_p0_softmax_input_x2_qkv_uram_overlay.runs/impl_1/hgtxr_e2e_axis_dma_vref_p0_softmax_input_x2_qkv_uram_system_wrapper_timing_summary_routed.rpt"
+  },
+  "pass_count": 10,
+  "physical_smoke": {
+    "checked_paths": [
+      "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/pynq/hgtxr/e2e_axis_dma_vref_p0_softmax_input_x2_qkv_uram_file_smoke.json",
+      "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/pynq/e2e_axis_dma_vref_p0_softmax_input_x2_qkv_uram_file_smoke.json"
+    ],
+    "result_json": "",
+    "status": "missing"
+  },
+  "promotion": {
+    "note": "Successor-only evidence; C3b remains protected baseline.",
+    "remaining": [
+      "physical_smoke_json"
+    ],
+    "status": "hls-resource-pass-routed-pending"
+  },
+  "pynq_plumbing": {
+    "artifact_prefix": "hgtxr_e2e_axis_dma_vref_p0_softmax_input_x2_qkv_uram",
+    "bundle_dir": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/pynq/e2e_axis_dma_vref_p0_softmax_input_x2_qkv_uram_smoke_bundle",
+    "dry_run_import_command": "python3 tools/import_pynq_smoke_result.py /path/to/e2e_axis_dma_vref_p0_softmax_input_x2_qkv_uram_file_smoke.json --preset axis-vref-p0-softmax-input-x2-qkv-uram --dry-run",
+    "expected_result_json": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/pynq/hgtxr/e2e_axis_dma_vref_p0_softmax_input_x2_qkv_uram_file_smoke.json",
+    "package_command": "python3 tools/package_e2e_axis_dma_pynq_bundle.py --variant vref-p0-softmax-input-x2-qkv-uram --out-dir /home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/pynq/e2e_axis_dma_vref_p0_softmax_input_x2_qkv_uram_smoke_bundle --tar /home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/pynq/e2e_axis_dma_vref_p0_softmax_input_x2_qkv_uram_smoke_bundle.tar.gz",
+    "preset": "axis-vref-p0-softmax-input-x2-qkv-uram",
+    "remote_dry_run_command": "python3 tools/run_zcu104_c3b_smoke_remote.py --profile vref-p0-softmax-input-x2-qkv-uram --host <zcu104-ip-or-host> --user xilinx",
+    "run_script": "run_e2e_axis_dma_vref_p0_softmax_input_x2_qkv_uram_file_smoke.sh",
+    "session_command": "python3 tools/prepare_zcu104_smoke_session.py --variant vref-p0-softmax-input-x2-qkv-uram --preset axis-vref-p0-softmax-input-x2-qkv-uram --bundle-dir /home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/pynq/e2e_axis_dma_vref_p0_softmax_input_x2_qkv_uram_smoke_bundle --tar /home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/pynq/e2e_axis_dma_vref_p0_softmax_input_x2_qkv_uram_smoke_bundle.tar.gz --root /home/kjm26/project/PRJXR/XR-VIT/HGTXR",
+    "status": "ready-for-artifacts",
+    "tar": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/pynq/e2e_axis_dma_vref_p0_softmax_input_x2_qkv_uram_smoke_bundle.tar.gz",
+    "validate_script": "validate_e2e_axis_dma_vref_p0_softmax_input_x2_qkv_uram_file_smoke.sh",
+    "variant": "vref-p0-softmax-input-x2-qkv-uram"
+  },
+  "resource_policy": "dsp_mixed_stream",
+  "root": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR",
+  "safety": {
+    "creates_board_result": false,
+    "executes_hls": false,
+    "executes_vivado": false,
+    "overwrites_c3b_artifacts": false,
+    "writes_hls_source": false
+  },
+  "source": {
+    "base_csynth_xml": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/hgtxr_e2e_axis_vref_p0_softmax_input_x2_dsp_mixed_stream_csynth/solution_e2e_q4w8a/syn/report/csynth.xml",
+    "csim_log": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/hgtxr_e2e_axis_vref_p0_softmax_input_x2_qkv_uram_csim/solution_e2e_q4w8a/csim/report/hgtxr_e2e_axis_top_csim.log",
+    "default_csynth_xml": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/hgtxr_e2e_axis_vref_p0_softmax_input_x2_csynth/solution_e2e_q4w8a/syn/report/csynth.xml",
+    "hgtxr_e2e_vit": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/hls/include/hgtxr_e2e_vit.hpp",
+    "qkv_csynth_xml": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/hgtxr_e2e_axis_vref_p0_softmax_input_x2_qkv_uram_csynth/solution_e2e_q4w8a/syn/report/csynth.xml"
+  },
+  "status": "pass",
+  "thresholds": {
+    "dsp": 604,
+    "estimated_clock_ns": 5.0,
+    "latency_cycles": 37508072,
+    "lut": 126506,
+    "routed_wns_ns": 4.415,
+    "uram": 64
+  }
+}

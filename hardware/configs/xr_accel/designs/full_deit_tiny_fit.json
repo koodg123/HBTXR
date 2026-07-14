@@ -1,0 +1,24 @@
+{
+  "name": "full_deit_tiny_fit",
+  "mode": "full_model_fit",
+  "allow_model_variant": false,
+  "clock_period_ns": 2.5,
+  "fifo_depth": 128,
+  "strategy_order": [
+    "reduce_parallelism",
+    "rebalance_fifo",
+    "block_reuse",
+    "stage_collapse",
+    "offchip_weights",
+    "relax_clock"
+  ],
+  "benchmark_units": [
+    "PATCH_EMBED",
+    "ATTN0",
+    "MLP0",
+    "HEAD",
+    "CHAIN_1_STAGE",
+    "FULL_TOP"
+  ],
+  "parallelism_scale": 1.0
+}

@@ -1,0 +1,382 @@
+{
+  "mode": "board-ready",
+  "summary": {
+    "ok": 57,
+    "warn": 7,
+    "fail": 0
+  },
+  "checks": [
+    {
+      "status": "ok",
+      "name": "HGTXR root",
+      "detail": "exists",
+      "path": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR"
+    },
+    {
+      "status": "ok",
+      "name": "hardware root",
+      "detail": "exists",
+      "path": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware"
+    },
+    {
+      "status": "ok",
+      "name": "Vitis HLS 2023.2",
+      "detail": "exists",
+      "path": "/tools/Xilinx/Vitis_HLS/2023.2/bin/vitis_hls"
+    },
+    {
+      "status": "ok",
+      "name": "Vivado 2023.2",
+      "detail": "exists",
+      "path": "/tools/Xilinx/Vivado/2023.2/bin/vivado"
+    },
+    {
+      "status": "warn",
+      "name": "tool spec-kit",
+      "detail": "not found on PATH"
+    },
+    {
+      "status": "warn",
+      "name": "tool specify",
+      "detail": "not found on PATH"
+    },
+    {
+      "status": "warn",
+      "name": "requested PAPER_PRJXR DeiT image",
+      "detail": "missing",
+      "path": "/home/kjm26/project/PRJXR/XR-VIT/PAPER_PRJXR/05_RESOURCES/DeiT-Tiny C-Syn Results.png"
+    },
+    {
+      "status": "ok",
+      "name": "HGPIPE substitute DeiT image",
+      "detail": "exists",
+      "path": "/home/kjm26/project/PRJXR/XR-VIT/HGPIPE/DeiT-Tiny C-Syn Results.png"
+    },
+    {
+      "status": "warn",
+      "name": "requested XR-VITs sibling",
+      "detail": "missing",
+      "path": "/home/kjm26/project/PRJXR/XR-VITs"
+    },
+    {
+      "status": "ok",
+      "name": "HGPIPE root",
+      "detail": "exists",
+      "path": "/home/kjm26/project/PRJXR/XR-VIT/HGPIPE"
+    },
+    {
+      "status": "ok",
+      "name": "ZCU104 E2E Q4W8A config",
+      "detail": "exists",
+      "path": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/configs/zcu104_e2e_q4w8a_defines.h"
+    },
+    {
+      "status": "ok",
+      "name": "macro HGTXR_PARALLELISM_FACTOR",
+      "detail": "8"
+    },
+    {
+      "status": "ok",
+      "name": "macro HGTXR_BUS_WIDTH",
+      "detail": "256"
+    },
+    {
+      "status": "ok",
+      "name": "macro HGTXR_BIT_WIDTH",
+      "detail": "8"
+    },
+    {
+      "status": "ok",
+      "name": "macro HGTXR_WEIGHT_BIT_WIDTH",
+      "detail": "4"
+    },
+    {
+      "status": "ok",
+      "name": "macro HGTXR_BUFFER_SIZE",
+      "detail": "256"
+    },
+    {
+      "status": "ok",
+      "name": "macro HGTXR_FIFO_DEPTH",
+      "detail": "128"
+    },
+    {
+      "status": "ok",
+      "name": "macro HGTXR_E2E_ACTIVE_TOKENS",
+      "detail": "196"
+    },
+    {
+      "status": "ok",
+      "name": "macro HGTXR_E2E_BLOCKS",
+      "detail": "6"
+    },
+    {
+      "status": "ok",
+      "name": "macro HGTXR_E2E_FF_DIM",
+      "detail": "768"
+    },
+    {
+      "status": "ok",
+      "name": "macro HGTXR_E2E_DENSE_PAR",
+      "detail": "8"
+    },
+    {
+      "status": "warn",
+      "name": "E2E CSim log",
+      "detail": "not visible under generated E2E trees",
+      "path": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/hgtxr_e2e_hls"
+    },
+    {
+      "status": "ok",
+      "name": "E2E packaged IP component.xml",
+      "detail": "4 visible",
+      "path": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/hgtxr_e2e_axis_hls/solution_e2e_q4w8a/impl/ip/component.xml"
+    },
+    {
+      "status": "ok",
+      "name": "E2E csynth report",
+      "detail": "185 visible across AXIS E2E, A1 AXIS/DMA E2E, C1 PAR16 AXIS/DMA E2E, C3b PAR16 MEM16 AXIS/DMA E2E, m_axi E2E",
+      "path": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/hgtxr_e2e_hls/solution_e2e_q4w8a/syn/report/csynth.rpt"
+    },
+    {
+      "status": "ok",
+      "name": "board flow selected E2E m_axi",
+      "detail": "package/build scripts target hgtxr_e2e_m_axi_top",
+      "path": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/vivado/scripts/build_e2e_m_axi_bitstream.tcl"
+    },
+    {
+      "status": "ok",
+      "name": "selected E2E AXIS top",
+      "detail": "hgtxr_e2e_axis_top exposes AXIS ports",
+      "path": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/hls/src/hgtxr_e2e_axis_top.cpp"
+    },
+    {
+      "status": "ok",
+      "name": "selected E2E m_axi top",
+      "detail": "A2 wrapper exposes memory-mapped ports",
+      "path": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/hls/src/hgtxr_e2e_m_axi_top.cpp"
+    },
+    {
+      "status": "ok",
+      "name": "PYNQ E2E m_axi bit",
+      "detail": "exists",
+      "path": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/pynq/hgtxr/hgtxr_e2e_m_axi.bit"
+    },
+    {
+      "status": "ok",
+      "name": "PYNQ E2E m_axi hwh",
+      "detail": "exists",
+      "path": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/pynq/hgtxr/hgtxr_e2e_m_axi.hwh"
+    },
+    {
+      "status": "ok",
+      "name": "PYNQ E2E AXIS/DMA bit",
+      "detail": "exists",
+      "path": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/pynq/hgtxr/hgtxr_e2e_axis_dma.bit"
+    },
+    {
+      "status": "ok",
+      "name": "PYNQ E2E AXIS/DMA hwh",
+      "detail": "exists",
+      "path": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/pynq/hgtxr/hgtxr_e2e_axis_dma.hwh"
+    },
+    {
+      "status": "ok",
+      "name": "PYNQ AXIS/DMA hwh selected E2E IP",
+      "detail": "hgtxr_e2e_axis_top found",
+      "path": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/pynq/hgtxr/hgtxr_e2e_axis_dma.hwh"
+    },
+    {
+      "status": "ok",
+      "name": "PYNQ C1 PAR16 AXIS/DMA bit",
+      "detail": "exists",
+      "path": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/pynq/hgtxr/hgtxr_e2e_axis_dma_par16.bit"
+    },
+    {
+      "status": "ok",
+      "name": "PYNQ C1 PAR16 AXIS/DMA hwh",
+      "detail": "exists",
+      "path": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/pynq/hgtxr/hgtxr_e2e_axis_dma_par16.hwh"
+    },
+    {
+      "status": "ok",
+      "name": "PYNQ C1 PAR16 hwh selected E2E IP",
+      "detail": "hgtxr_e2e_axis_top found",
+      "path": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/pynq/hgtxr/hgtxr_e2e_axis_dma_par16.hwh"
+    },
+    {
+      "status": "ok",
+      "name": "PYNQ C3b PAR16 MEM16 AXIS/DMA bit",
+      "detail": "exists",
+      "path": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/pynq/hgtxr/hgtxr_e2e_axis_dma_c3b_mem16.bit"
+    },
+    {
+      "status": "ok",
+      "name": "PYNQ C3b PAR16 MEM16 AXIS/DMA hwh",
+      "detail": "exists",
+      "path": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/pynq/hgtxr/hgtxr_e2e_axis_dma_c3b_mem16.hwh"
+    },
+    {
+      "status": "ok",
+      "name": "PYNQ C3b PAR16 MEM16 hwh selected E2E IP",
+      "detail": "hgtxr_e2e_axis_top found",
+      "path": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/pynq/hgtxr/hgtxr_e2e_axis_dma_c3b_mem16.hwh"
+    },
+    {
+      "status": "ok",
+      "name": "PYNQ hwh selected E2E IP",
+      "detail": "E2E IP name found",
+      "path": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/pynq/hgtxr/hgtxr_e2e_m_axi.hwh"
+    },
+    {
+      "status": "warn",
+      "name": "legacy PYNQ hwh stale old-flow IP",
+      "detail": "hgtxr_top_0 found; ignored because E2E m_axi artifacts are checked separately",
+      "path": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/pynq/hgtxr/hgtxr.hwh"
+    },
+    {
+      "status": "ok",
+      "name": "E2E m_axi packed Q4 weight manifest",
+      "detail": "exists",
+      "path": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/refs/weights/e2e_m_axi_active196_b6_ff768_q4_u32_manifest.json"
+    },
+    {
+      "status": "ok",
+      "name": "E2E m_axi packed Q4 weight bin",
+      "detail": "exists",
+      "path": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/refs/weights/e2e_m_axi_active196_b6_ff768_q4_u32.bin"
+    },
+    {
+      "status": "ok",
+      "name": "E2E m_axi weight manifest fields",
+      "detail": "required fields present",
+      "path": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/refs/weights/e2e_m_axi_active196_b6_ff768_q4_u32_manifest.json"
+    },
+    {
+      "status": "ok",
+      "name": "E2E m_axi weight expected raw",
+      "detail": "[32, -13, 26, -6, 14, -11]",
+      "path": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/refs/weights/e2e_m_axi_active196_b6_ff768_q4_u32_manifest.json"
+    },
+    {
+      "status": "ok",
+      "name": "E2E m_axi weight runtime state",
+      "detail": "2",
+      "path": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/refs/weights/e2e_m_axi_active196_b6_ff768_q4_u32_manifest.json"
+    },
+    {
+      "status": "ok",
+      "name": "E2E m_axi weight contract",
+      "detail": "A2 Q4W8A active196_b6_ff768 layout",
+      "path": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/refs/weights/e2e_m_axi_active196_b6_ff768_q4_u32_manifest.json"
+    },
+    {
+      "status": "ok",
+      "name": "E2E m_axi weight layout size math",
+      "detail": "shape/bytes/capacity/required/tail values agree",
+      "path": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/refs/weights/e2e_m_axi_active196_b6_ff768_q4_u32_manifest.json"
+    },
+    {
+      "status": "ok",
+      "name": "E2E m_axi weight bytes",
+      "detail": "12192768",
+      "path": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/refs/weights/e2e_m_axi_active196_b6_ff768_q4_u32.bin"
+    },
+    {
+      "status": "ok",
+      "name": "E2E m_axi weight sha256",
+      "detail": "45b7aef9446c512cf74030975f55cd1f7407f2a27c2ea75603353132489d0a31",
+      "path": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/refs/weights/e2e_m_axi_active196_b6_ff768_q4_u32.bin"
+    },
+    {
+      "status": "ok",
+      "name": "E2E m_axi weight tail zero",
+      "detail": "from u32 338640",
+      "path": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/refs/weights/e2e_m_axi_active196_b6_ff768_q4_u32.bin"
+    },
+    {
+      "status": "ok",
+      "name": "E2E m_axi weight Q4 probes",
+      "detail": "known packed nibbles match manifest",
+      "path": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/refs/weights/e2e_m_axi_active196_b6_ff768_q4_u32.bin"
+    },
+    {
+      "status": "ok",
+      "name": "C3b AXIS/DMA PYNQ smoke bundle dir",
+      "detail": "exists",
+      "path": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/pynq/e2e_axis_dma_c3b_mem16_smoke_bundle"
+    },
+    {
+      "status": "ok",
+      "name": "C3b AXIS/DMA PYNQ smoke bundle manifest",
+      "detail": "exists",
+      "path": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/pynq/e2e_axis_dma_c3b_mem16_smoke_bundle/BUNDLE_MANIFEST.json"
+    },
+    {
+      "status": "ok",
+      "name": "C3b AXIS/DMA PYNQ smoke bundle tar",
+      "detail": "exists",
+      "path": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/pynq/e2e_axis_dma_c3b_mem16_smoke_bundle.tar.gz"
+    },
+    {
+      "status": "ok",
+      "name": "C3b AXIS/DMA PYNQ smoke bundle run script",
+      "detail": "exists",
+      "path": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/pynq/e2e_axis_dma_c3b_mem16_smoke_bundle/run_e2e_axis_dma_c3b_mem16_file_smoke.sh"
+    },
+    {
+      "status": "ok",
+      "name": "C3b AXIS/DMA PYNQ smoke bundle validate script",
+      "detail": "exists",
+      "path": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/pynq/e2e_axis_dma_c3b_mem16_smoke_bundle/validate_e2e_axis_dma_c3b_mem16_file_smoke.sh"
+    },
+    {
+      "status": "ok",
+      "name": "C3b AXIS/DMA PYNQ smoke bundle variant",
+      "detail": "c3b-mem16",
+      "path": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/pynq/e2e_axis_dma_c3b_mem16_smoke_bundle/BUNDLE_MANIFEST.json"
+    },
+    {
+      "status": "ok",
+      "name": "C3b AXIS/DMA PYNQ smoke bundle expected output",
+      "detail": "[32, -13, 26, -6, 14, -11], runtime_state=2",
+      "path": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/pynq/e2e_axis_dma_c3b_mem16_smoke_bundle/BUNDLE_MANIFEST.json"
+    },
+    {
+      "status": "ok",
+      "name": "C3b AXIS/DMA PYNQ smoke bundle command",
+      "detail": "variant and file weights selected",
+      "path": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/pynq/e2e_axis_dma_c3b_mem16_smoke_bundle/BUNDLE_MANIFEST.json"
+    },
+    {
+      "status": "ok",
+      "name": "C3b AXIS/DMA PYNQ smoke bundle validation command",
+      "detail": "axis-c3b-mem16 validator selected",
+      "path": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/pynq/e2e_axis_dma_c3b_mem16_smoke_bundle/BUNDLE_MANIFEST.json"
+    },
+    {
+      "status": "ok",
+      "name": "C3b AXIS/DMA PYNQ smoke bundle contents",
+      "detail": "required bit/hwh/helper/weights/run script present",
+      "path": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/pynq/e2e_axis_dma_c3b_mem16_smoke_bundle/BUNDLE_MANIFEST.json"
+    },
+    {
+      "status": "ok",
+      "name": "C3b AXIS/DMA PYNQ smoke bundle tar sha256",
+      "detail": "3de505a6627409b4717ea95e5e76d74f0667c61b601fd96db1e495319adda712",
+      "path": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/pynq/e2e_axis_dma_c3b_mem16_smoke_bundle.tar.gz"
+    },
+    {
+      "status": "ok",
+      "name": "C3b AXIS/DMA PYNQ smoke bundle package",
+      "detail": "tar contents and manifest file hashes validated",
+      "path": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/pynq/e2e_axis_dma_c3b_mem16_smoke_bundle/BUNDLE_MANIFEST.json"
+    },
+    {
+      "status": "warn",
+      "name": "C3b AXIS/DMA physical smoke result",
+      "detail": "not captured yet; run bundle script on ZCU104 and copy JSON back",
+      "path": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/pynq/hgtxr/e2e_axis_dma_c3b_mem16_file_smoke.json"
+    }
+  ]
+}

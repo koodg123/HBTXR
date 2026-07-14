@@ -1,0 +1,22 @@
+{
+  "name": "zcu104_hbtxr_option_c_cyclic",
+  "model": "configs/models/hbtxr_option_c.json",
+  "target": "configs/targets/zcu104.json",
+  "design": "configs/designs/hbtxr_cyclic_zcu104.json",
+  "artifacts": {
+    "instances_subdir": [
+      "target",
+      "model",
+      "design"
+    ],
+    "reports_subdir": [
+      "target",
+      "model",
+      "design"
+    ],
+    "build_subdir": [
+      "target",
+      "experiment"
+    ]
+  }
+}

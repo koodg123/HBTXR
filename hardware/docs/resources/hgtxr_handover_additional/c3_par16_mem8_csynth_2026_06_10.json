@@ -1,0 +1,46 @@
+{
+  "date": "2026-06-10",
+  "path": "C3",
+  "description": "PAR16 compute with MEM_BANK_PAR=8 DSP/LUT cleanup CSynth result",
+  "project": "hardware/generated/hgtxr_e2e_axis_par16_c3_mem8",
+  "report": "hardware/generated/hgtxr_e2e_axis_par16_c3_mem8/solution_e2e_q4w8a/syn/report/csynth.rpt",
+  "configuration": {
+    "HGTXR_E2E_PAR": 16,
+    "HGTXR_E2E_MEM_BANK_PAR": 8,
+    "HGTXR_E2E_RESOURCE_POLICY": "dsp_mixed_stream",
+    "HGTXR_E2E_SCALE": "active196_b6_ff768",
+    "HGTXR_E2E_WEIGHT_VEC_ALIGNED_FASTPATH": 1
+  },
+  "csynth": {
+    "clock_target_ns": 5.0,
+    "clock_estimate_ns": 3.747,
+    "latency_cycles": 48598922,
+    "bram_18k": 292,
+    "dsp": 604,
+    "ff": 56966,
+    "lut": 113124,
+    "uram": 64
+  },
+  "c1_baseline": {
+    "latency_cycles": 37508072,
+    "bram_18k": 338,
+    "dsp": 604,
+    "ff": 59507,
+    "lut": 127916,
+    "uram": 64
+  },
+  "delta_vs_c1": {
+    "latency_cycles": 11090850,
+    "bram_18k": -46,
+    "dsp": 0,
+    "ff": -2541,
+    "lut": -14792,
+    "uram": 0,
+    "lut_reduction_percent": 11.56,
+    "latency_increase_percent": 29.57
+  },
+  "warnings": [
+    "MLP W2 loop reports Final II=2 under MEM_BANK_PAR=8",
+    "C3 MEM8 is a resource-pressure candidate, not the low-latency default"
+  ]
+}

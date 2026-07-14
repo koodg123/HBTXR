@@ -1,0 +1,67 @@
+{
+  "status": "needs-reference-input",
+  "approved_replacements": false,
+  "xr_vit_root": "/home/kjm26/project/PRJXR/XR-VIT",
+  "blocker_count": 1,
+  "blockers": [
+    {
+      "name": "requested XR-VITs sibling",
+      "path": "/home/kjm26/project/PRJXR/XR-VITs",
+      "reason": "requested directory missing",
+      "candidate_count": 3,
+      "required_action": "restore requested checkout or get explicit approval for a replacement source"
+    }
+  ],
+  "image_candidates": [
+    {
+      "path": "/home/kjm26/project/PRJXR/XR-VIT/PAPER_PRJXR/05_RESOURCES/DeiT-Tiny C-Syn Results.png",
+      "role": "requested",
+      "exists": true,
+      "bytes": 69712,
+      "sha256": "90495791e6103be30268320d3b17dce2eaa52d003dd6f341393262745c1c3b79"
+    },
+    {
+      "path": "/home/kjm26/project/PRJXR/XR-VIT/HGPIPE/DeiT-Tiny C-Syn Results.png",
+      "role": "candidate-hgpipe",
+      "exists": true,
+      "bytes": 69712,
+      "sha256": "90495791e6103be30268320d3b17dce2eaa52d003dd6f341393262745c1c3b79"
+    }
+  ],
+  "hls_code_candidates": [
+    {
+      "path": "/home/kjm26/project/PRJXR/XR-VITs",
+      "role": "requested",
+      "exists": false
+    },
+    {
+      "path": "/home/kjm26/project/PRJXR/XR-VIT/XR_Accel",
+      "role": "candidate-xr-accel",
+      "exists": true,
+      "markers": [
+        "README.md"
+      ]
+    },
+    {
+      "path": "/home/kjm26/project/PRJXR/XR-VIT/analysis/XR_Accel",
+      "role": "candidate-analysis-xr-accel",
+      "exists": true,
+      "markers": [
+        "README.md"
+      ]
+    },
+    {
+      "path": "/home/kjm26/project/PRJXR/XR-VIT/ViT_Accel",
+      "role": "candidate-vit-accel",
+      "exists": true,
+      "markers": [
+        "README.md"
+      ]
+    }
+  ],
+  "restore_commands": [
+    "mkdir -p /home/kjm26/project/PRJXR/XR-VIT/PAPER_PRJXR/05_RESOURCES",
+    "cp -a /home/kjm26/project/PRJXR/XR-VIT/HGPIPE/DeiT-Tiny\\ C-Syn\\ Results.png /home/kjm26/project/PRJXR/XR-VIT/PAPER_PRJXR/05_RESOURCES/DeiT-Tiny\\ C-Syn\\ Results.png",
+    "# restore or clone the requested /home/kjm26/project/PRJXR/XR-VITs checkout"
+  ]
+}

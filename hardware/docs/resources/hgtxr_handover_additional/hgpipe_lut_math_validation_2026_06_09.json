@@ -1,0 +1,35 @@
+{
+  "status": "pass",
+  "source_pattern": "HG-PIPE cursor plus clamp plus LUT for GeLU, Softmax exp/recip family, LayerNorm rsqrt, and Quant clamp",
+  "hgpipe_sources": [
+    "impl_repos/HGPIPE/ICCAD24-HG-PIPE/src/gelu.h",
+    "impl_repos/HGPIPE/ICCAD24-HG-PIPE/src/softmax.h",
+    "impl_repos/HGPIPE/ICCAD24-HG-PIPE/src/layernorm.h",
+    "impl_repos/HGPIPE/ICCAD24-HG-PIPE/src/quant.h"
+  ],
+  "hgtxr_sources": [
+    "hardware/hls/include/hgtxr_cyclic_math.hpp",
+    "hardware/hls/include/hgtxr_e2e_vit.hpp",
+    "hardware/configs/zcu104_e2e_q4w8a_defines.h"
+  ],
+  "tables": {
+    "gelu_entries": 16,
+    "exp_entries": 16,
+    "rsqrt_entries": 32
+  },
+  "error_summary": {
+    "gelu_x_range_neg4_pos4": {
+      "max_abs_error": 0.8000702459481923,
+      "mean_abs_error": 0.16943008971738552
+    },
+    "exp_shifted_range_neg8_0": {
+      "max_abs_error": 0.4121303268776535,
+      "mean_abs_error": 0.036589963058172074
+    },
+    "rsqrt_var_range_0p0078125_64": {
+      "max_abs_error": 10.607935343139738,
+      "mean_abs_error": 0.32641258849038657
+    }
+  },
+  "acceptance_note": "This validates bounded compact-LUT behavior for the ZCU104 baseline, not final HG-PIPE per-layer table equivalence."
+}

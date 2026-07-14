@@ -1,0 +1,146 @@
+{
+  "check_count": 10,
+  "checks": [
+    {
+      "detail": "pass",
+      "name": "req5_q4q8_pass",
+      "status": "pass"
+    },
+    {
+      "detail": "{'activation_bits': 8, 'activation_format': 'q8/hgtxr_data_t boundary per config', 'weight_bits': 4, 'weight_format': 'signed-q4-packed-in-uint32/AXI-256'}",
+      "name": "req5_precision_q4w8a",
+      "status": "pass"
+    },
+    {
+      "detail": "pass=11 csim_logs=3",
+      "name": "req5_csim_coverage",
+      "status": "pass"
+    },
+    {
+      "detail": "status=pass fail=0",
+      "name": "pot_scale_readiness_pass",
+      "status": "pass"
+    },
+    {
+      "detail": "14",
+      "name": "pot_scale_readiness_checks",
+      "status": "pass"
+    },
+    {
+      "detail": "status=pass fail=0",
+      "name": "scale_sweep_pass",
+      "status": "pass"
+    },
+    {
+      "detail": "specs=3 candidates=45",
+      "name": "scale_sweep_candidate_coverage",
+      "status": "pass"
+    },
+    {
+      "detail": "{'next_action': 'keep current PoT scales for C3b; use non-current rows only as explicit successor experiments', 'specs_recommending_current': 3, 'total_candidate_count': 45, 'total_fail_count': 0}",
+      "name": "scale_decision_current_for_c3b",
+      "status": "pass"
+    },
+    {
+      "detail": "{'c3b_protection': 'no HLS/Vivado run and no C3b artifact overwrite', 'promotion_gate': 'candidate must regenerate golden header and pass CSim before HLS macro promotion', 'scope': 'SW-only power-of-two scale candidate sweep for reduced E2E vector references', 'source': 'P2-ViT', 'vref': 'VREF-P0-01'}",
+      "name": "successor_only_promotion_policy",
+      "status": "pass"
+    },
+    {
+      "detail": "sweep={'executes_hls': False, 'executes_vivado': False, 'overwrites_c3b_artifacts': False, 'writes_hls_source': False} audit={'executes_hls': False, 'executes_vivado': False, 'overwrites_c3b_artifacts': False, 'writes_hls_source': False}",
+      "name": "no_hardware_side_effects",
+      "status": "pass"
+    }
+  ],
+  "date_tag": "2026_06_16",
+  "fail_count": 0,
+  "failed_checks": [],
+  "hardware_root": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware",
+  "inputs": {
+    "pot_scale_audit": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/signoff/vref_p0_pot_scale_audit_2026_06_16.json",
+    "pot_scale_sweep": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/signoff/vref_p0_pot_scale_sweep_2026_06_16.json",
+    "req5_q4q8_swhw": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/signoff/req5_q4q8_swhw_match_audit_2026_06_16.json"
+  },
+  "pass_count": 10,
+  "per_spec": [
+    {
+      "baseline_expected_raw": [
+        28,
+        -15,
+        12,
+        -8,
+        10,
+        -12
+      ],
+      "candidate_count": 15,
+      "exact_match_count": 10,
+      "fail_count": 0,
+      "pass_count": 15,
+      "recommendation": "keep_current_scales",
+      "recommended_candidate": "current",
+      "spec": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/refs/e2e_axis_vector_hgpipe_math_spec.json"
+    },
+    {
+      "baseline_expected_raw": [
+        22,
+        -7,
+        6,
+        -4,
+        4,
+        -7
+      ],
+      "candidate_count": 15,
+      "exact_match_count": 9,
+      "fail_count": 0,
+      "pass_count": 15,
+      "recommendation": "keep_current_scales",
+      "recommended_candidate": "current",
+      "spec": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/refs/e2e_axis_vector_hgpipe_math_lnq_spec.json"
+    },
+    {
+      "baseline_expected_raw": [
+        58,
+        -51,
+        42,
+        -28,
+        36,
+        -41
+      ],
+      "candidate_count": 15,
+      "exact_match_count": 5,
+      "fail_count": 0,
+      "pass_count": 15,
+      "recommendation": "keep_current_scales",
+      "recommended_candidate": "current",
+      "spec": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/refs/e2e_axis_vector_hgpipe_math_lnq_active16_spec.json"
+    }
+  ],
+  "policy": {
+    "decision": "keep_current_pot_scales_for_c3b",
+    "non_current_candidates": "successor_only_until_header_regen_csim_hls_and_board_evidence",
+    "scope": "SW-first Q4/Q8 scale calibration closure for current C3b baseline",
+    "source": "P2-ViT"
+  },
+  "precision": {
+    "activation_bits": 8,
+    "activation_format": "q8/hgtxr_data_t boundary per config",
+    "weight_bits": 4,
+    "weight_format": "signed-q4-packed-in-uint32/AXI-256"
+  },
+  "root": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR",
+  "safety": {
+    "creates_board_result": false,
+    "creates_xr_vits_policy": false,
+    "executes_hls": false,
+    "executes_vivado": false,
+    "overwrites_c3b_artifacts": false,
+    "writes_hls_source": false
+  },
+  "status": "pass",
+  "sweep_summary": {
+    "next_action": "keep current PoT scales for C3b; use non-current rows only as explicit successor experiments",
+    "specs_recommending_current": 3,
+    "total_candidate_count": 45,
+    "total_fail_count": 0
+  }
+}

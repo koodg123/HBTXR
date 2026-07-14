@@ -1,0 +1,65 @@
+{
+  "attention": {
+    "head_dim": 64,
+    "num_heads": 3,
+    "score_scale_shift": 3,
+    "use_hgpipe_lut_math": true
+  },
+  "block_count": 486,
+  "expected_output": null,
+  "expected_output_compare": null,
+  "input": "hardware/refs/weights/software_initial_weights.pt",
+  "layout": {
+    "bit_width": 4,
+    "blocks": 6,
+    "bus_width": 128,
+    "embed_dim": 192,
+    "int_width": 2,
+    "mlp_ratio": 4,
+    "tile_channels": 64,
+    "tile_ff": 64
+  },
+  "max_expected_output_error": null,
+  "max_matrix_error": 0.072168730199337,
+  "max_output_error": 1.5077283382415771,
+  "max_packed_roundtrip_error": 0.072168730199337,
+  "out_output": "docs/resources/s2_block_full_q4w8a_head64_outputs_2026_06_10.npz",
+  "packed_roundtrip": true,
+  "per_layer": [
+    {
+      "layer": 0,
+      "matrix_max_abs_error": 0.07216860353946686,
+      "output_max_abs_error": 1.3042945861816406
+    },
+    {
+      "layer": 1,
+      "matrix_max_abs_error": 0.072168730199337,
+      "output_max_abs_error": 1.1969393491744995
+    },
+    {
+      "layer": 2,
+      "matrix_max_abs_error": 0.07216765731573105,
+      "output_max_abs_error": 1.5077283382415771
+    },
+    {
+      "layer": 3,
+      "matrix_max_abs_error": 0.07216872274875641,
+      "output_max_abs_error": 1.4181149005889893
+    },
+    {
+      "layer": 4,
+      "matrix_max_abs_error": 0.07216864824295044,
+      "output_max_abs_error": 1.450568675994873
+    },
+    {
+      "layer": 5,
+      "matrix_max_abs_error": 0.07216855883598328,
+      "output_max_abs_error": 1.481317400932312
+    }
+  ],
+  "record_count": 486,
+  "status": "pass",
+  "tokens": 2,
+  "tokens_input": null,
+  "used_synthetic_payload": false
+}

@@ -1,0 +1,63 @@
+{
+  "date": "2026-06-10",
+  "path": "C3b",
+  "description": "PAR16 compute with MEM_BANK_PAR=16 fastpath-only CSynth result",
+  "project": "hardware/generated/hgtxr_e2e_axis_par16_c3b_mem16",
+  "report": "hardware/generated/hgtxr_e2e_axis_par16_c3b_mem16/solution_e2e_q4w8a/syn/report/csynth.rpt",
+  "configuration": {
+    "HGTXR_E2E_PAR": 16,
+    "HGTXR_E2E_MEM_BANK_PAR": 16,
+    "HGTXR_E2E_RESOURCE_POLICY": "dsp_mixed_stream",
+    "HGTXR_E2E_SCALE": "active196_b6_ff768",
+    "HGTXR_E2E_WEIGHT_VEC_ALIGNED_FASTPATH": 1
+  },
+  "csim_reduced": {
+    "output_raw": [18, -3, 3, -2, 1, -4],
+    "runtime_state": 2,
+    "failures": 0
+  },
+  "csynth": {
+    "clock_target_ns": 5.0,
+    "clock_estimate_ns": 3.953,
+    "estimated_fmax_mhz": 252.97,
+    "latency_cycles": 37508072,
+    "interval_cycles": 37508073,
+    "bram_18k": 332,
+    "dsp": 604,
+    "ff": 59505,
+    "lut": 126506,
+    "uram": 64
+  },
+  "comparison": {
+    "c1_baseline": {
+      "latency_cycles": 37508072,
+      "bram_18k": 338,
+      "dsp": 604,
+      "ff": 59507,
+      "lut": 127916,
+      "uram": 64
+    },
+    "c3_mem8": {
+      "latency_cycles": 48598922,
+      "bram_18k": 292,
+      "dsp": 604,
+      "ff": 56966,
+      "lut": 113124,
+      "uram": 64
+    },
+    "delta_vs_c1": {
+      "latency_cycles": 0,
+      "bram_18k": -6,
+      "dsp": 0,
+      "ff": -2,
+      "lut": -1410,
+      "uram": 0,
+      "lut_reduction_percent": 1.1
+    }
+  },
+  "interpretation": [
+    "C3b restores C1-like latency and MLP W2 II=1",
+    "Fastpath-only LUT reduction is small versus C1",
+    "C3/MEM8 LUT reduction mostly comes from lower memory banking, with latency cost"
+  ]
+}

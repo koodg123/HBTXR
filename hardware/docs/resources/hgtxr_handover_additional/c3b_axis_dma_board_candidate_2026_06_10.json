@@ -1,0 +1,49 @@
+{
+  "name": "c3b_axis_dma_board_candidate",
+  "date": "2026-06-10",
+  "hls": {
+    "project": "hgtxr_e2e_axis_par16_c3b_mem16_hls",
+    "scale": "active196_b6_ff768",
+    "parallelism": 16,
+    "memory_bank_parallelism": 16,
+    "resource_policy": "dsp_mixed_stream",
+    "latency_cycles": 37508072,
+    "bram_18k": 332,
+    "dsp": 604,
+    "ff": 59505,
+    "lut": 126506,
+    "uram": 64
+  },
+  "vivado": {
+    "project": "hgtxr_e2e_axis_dma_c3b_mem16_overlay",
+    "block_design": "hgtxr_e2e_axis_dma_c3b_mem16_system",
+    "artifact": "hgtxr_e2e_axis_dma_c3b_mem16",
+    "routed_wns_ns": 4.415,
+    "routed_tns_ns": 0.0,
+    "routed_whs_ns": 0.010,
+    "routed_ths_ns": 0.0,
+    "total_on_chip_power_w": 3.476
+  },
+  "artifacts": {
+    "ip_component": "hardware/generated/hgtxr_e2e_axis_par16_c3b_mem16_hls/solution_e2e_q4w8a/impl/ip/component.xml",
+    "ip_export_zip": "hardware/generated/hgtxr_e2e_axis_par16_c3b_mem16_hls/solution_e2e_q4w8a/impl/export.zip",
+    "bitstream": "hardware/pynq/hgtxr/hgtxr_e2e_axis_dma_c3b_mem16.bit",
+    "hwh": "hardware/pynq/hgtxr/hgtxr_e2e_axis_dma_c3b_mem16.hwh"
+  },
+  "sha256": {
+    "ip_export_zip": "a471fed1d43d2323efd22cc3581cfd7ee1c1cb5a0cfbc69ba57b2877da527e38",
+    "bitstream": "989e77836341467da05d0ccb86f0b4764d38f4711af8fbcb567290b78fe3076d",
+    "hwh": "8ca659da3bbcc061f7299ac18314c00b8ee2112a274990d969635b3f6acf3c90"
+  },
+  "preflight": {
+    "mode": "board-ready",
+    "ok": 45,
+    "warn": 6,
+    "fail": 0,
+    "json_out": "/tmp/hgtxr_third_goal_preflight_board_c3b_mem16_2026_06_10.json"
+  },
+  "open_risks": [
+    "Physical ZCU104 C3b AXIS/DMA smoke has not run.",
+    "Vivado reset-sync and DMA BRAM collision advisory warnings remain to review before final board signoff."
+  ]
+}

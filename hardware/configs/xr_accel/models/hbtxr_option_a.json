@@ -1,0 +1,41 @@
+{
+  "name": "hbtxr_option_a",
+  "kind": "hbtxr",
+  "input_channels": 1,
+  "input_size": 128,
+  "patch_size": 16,
+  "seq_len": 64,
+  "patch_dim": 256,
+  "embed_dim": 192,
+  "mlp_ratio": 4.0,
+  "hidden_dim": 768,
+  "depth": 8,
+  "search_depth": 8,
+  "track_cut_point": 4,
+  "heads": 3,
+  "classes": 8,
+  "head_output_width": 32,
+  "frame": {
+    "channels": 1,
+    "height": 128,
+    "width": 128,
+    "patch_dim": 256,
+    "tokens": 64
+  },
+  "event": {
+    "channels": 2,
+    "height": 64,
+    "width": 64,
+    "patch_dim": 512,
+    "tokens": 16
+  },
+  "output_packet_words": 8,
+  "stream_tiling": {
+    "input_word_bits": 32,
+    "output_word_bits": 32
+  },
+  "block_datawidth_in": [
+    32,
+    32
+  ]
+}

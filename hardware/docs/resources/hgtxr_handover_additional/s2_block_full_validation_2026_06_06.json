@@ -1,0 +1,37 @@
+{
+  "block_count": 40,
+  "expected_output": null,
+  "expected_output_compare": null,
+  "input": null,
+  "layout": {
+    "bit_width": 16,
+    "blocks": 2,
+    "bus_width": 64,
+    "embed_dim": 8,
+    "int_width": 6,
+    "mlp_ratio": 2,
+    "tile_channels": 4,
+    "tile_ff": 4
+  },
+  "max_expected_output_error": null,
+  "max_matrix_error": 0.0,
+  "max_output_error": 0.0,
+  "out_output": null,
+  "per_layer": [
+    {
+      "layer": 0,
+      "matrix_max_abs_error": 0.0,
+      "output_max_abs_error": 0.0
+    },
+    {
+      "layer": 1,
+      "matrix_max_abs_error": 0.0,
+      "output_max_abs_error": 0.0
+    }
+  ],
+  "record_count": 40,
+  "status": "pass",
+  "tokens": 4,
+  "tokens_input": null,
+  "used_synthetic_payload": true
+}

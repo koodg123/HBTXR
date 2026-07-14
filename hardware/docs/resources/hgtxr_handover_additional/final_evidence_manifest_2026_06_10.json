@@ -1,0 +1,2924 @@
+{
+  "artifact_date_tags": [
+    "2026_06_10",
+    "2026_06_16",
+    "undated"
+  ],
+  "artifacts": [
+    {
+      "exists": true,
+      "id": "c3b_readiness_json",
+      "json_parse_status": "pass",
+      "kind": "json",
+      "path": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/c3b_board_smoke_readiness_2026_06_10.json",
+      "relative_path": "docs/resources/c3b_board_smoke_readiness_2026_06_10.json",
+      "required": true,
+      "sha256": "742814452ee0d4cae1ae9c511ee5da42ad96b1939c9484b45f65cfb29425d004",
+      "size_bytes": 1625,
+      "source_date_tag": "2026_06_10",
+      "source_status": "ready-for-board",
+      "status": "pass"
+    },
+    {
+      "exists": true,
+      "id": "c3b_readiness_md",
+      "kind": "markdown",
+      "path": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/c3b_board_smoke_readiness_2026_06_10.md",
+      "relative_path": "docs/resources/c3b_board_smoke_readiness_2026_06_10.md",
+      "required": true,
+      "sha256": "9ea7c1ae950cde81954858f51507f8d81e7764acd62c6402b7cf334858f1eca8",
+      "size_bytes": 1508,
+      "source_date_tag": "2026_06_10",
+      "status": "pass"
+    },
+    {
+      "exists": true,
+      "id": "final_preflight_json",
+      "json_parse_status": "pass",
+      "kind": "json",
+      "path": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/third_goal_final_signoff_2026_06_10.json",
+      "relative_path": "docs/resources/third_goal_final_signoff_2026_06_10.json",
+      "required": true,
+      "sha256": "5d58be0990ab0dcc30200f0b8079b1c773ff31cf3c6470b582c84965b22ae90c",
+      "size_bytes": 26033,
+      "source_date_tag": "2026_06_10",
+      "source_status": "no-status-field",
+      "status": "pass"
+    },
+    {
+      "exists": true,
+      "id": "final_audit_json",
+      "json_parse_status": "pass",
+      "kind": "json",
+      "path": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/final_signoff_audit_2026_06_10.json",
+      "relative_path": "docs/resources/final_signoff_audit_2026_06_10.json",
+      "required": true,
+      "sha256": "bb922efcfd86266cc2c04cfb959590dfe7a8746645b61285e4b54c678af5a99b",
+      "size_bytes": 3441,
+      "source_date_tag": "2026_06_10",
+      "source_status": "blocked",
+      "status": "pass"
+    },
+    {
+      "exists": true,
+      "id": "final_audit_md",
+      "kind": "markdown",
+      "path": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/final_signoff_audit_2026_06_10.md",
+      "relative_path": "docs/resources/final_signoff_audit_2026_06_10.md",
+      "required": true,
+      "sha256": "c40a572f1d777552fafb938b9af4027eb1c7f0d83044f2352c71efa357d4014f",
+      "size_bytes": 2519,
+      "source_date_tag": "2026_06_10",
+      "status": "pass"
+    },
+    {
+      "exists": true,
+      "id": "completion_json",
+      "json_parse_status": "pass",
+      "kind": "json",
+      "path": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/third_goal_completion_audit_2026_06_10.json",
+      "relative_path": "docs/resources/third_goal_completion_audit_2026_06_10.json",
+      "required": true,
+      "sha256": "83694a2fd8402b21763be6c01162728a327861c6b5ef9a042a067e4433144865",
+      "size_bytes": 8196,
+      "source_date_tag": "2026_06_10",
+      "source_status": "blocked",
+      "status": "pass"
+    },
+    {
+      "exists": true,
+      "id": "completion_md",
+      "kind": "markdown",
+      "path": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/third_goal_completion_audit_2026_06_10.md",
+      "relative_path": "docs/resources/third_goal_completion_audit_2026_06_10.md",
+      "required": true,
+      "sha256": "e2c109583510f1d6bfe4583987415fcfd62027a2499339891ddb51e03e0beb51",
+      "size_bytes": 4937,
+      "source_date_tag": "2026_06_10",
+      "status": "pass"
+    },
+    {
+      "exists": true,
+      "id": "unblock_json",
+      "json_parse_status": "pass",
+      "kind": "json",
+      "path": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/third_goal_unblock_checklist_2026_06_10.json",
+      "relative_path": "docs/resources/third_goal_unblock_checklist_2026_06_10.json",
+      "required": true,
+      "sha256": "071f3c3dcc2d55362d6007b5c9c6ac26de745f12cc47be5eefc6f9b690b0a2af",
+      "size_bytes": 4720,
+      "source_date_tag": "2026_06_10",
+      "source_status": "pending-unblock",
+      "status": "pass"
+    },
+    {
+      "exists": true,
+      "id": "unblock_md",
+      "kind": "markdown",
+      "path": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/third_goal_unblock_checklist_2026_06_10.md",
+      "relative_path": "docs/resources/third_goal_unblock_checklist_2026_06_10.md",
+      "required": true,
+      "sha256": "d71fdff161a73bf2dd9b7d69fb2cc18074a162aeab25c4a8732e477ffed8c621",
+      "size_bytes": 3068,
+      "source_date_tag": "2026_06_10",
+      "status": "pass"
+    },
+    {
+      "exists": true,
+      "id": "zcu104_remote_json",
+      "json_parse_status": "pass",
+      "kind": "json",
+      "path": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/zcu104_c3b_smoke_remote_run_2026_06_10.json",
+      "relative_path": "docs/resources/zcu104_c3b_smoke_remote_run_2026_06_10.json",
+      "required": true,
+      "sha256": "06f25279706c2a280ffdb5c1d8ea929d185d098b8f0e7105796c0623202719ad",
+      "size_bytes": 2392,
+      "source_date_tag": "2026_06_10",
+      "source_status": "dry-run",
+      "status": "pass"
+    },
+    {
+      "exists": true,
+      "id": "zcu104_remote_md",
+      "kind": "markdown",
+      "path": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/zcu104_c3b_smoke_remote_run_2026_06_10.md",
+      "relative_path": "docs/resources/zcu104_c3b_smoke_remote_run_2026_06_10.md",
+      "required": true,
+      "sha256": "4f23cb4e80f2f3d48f90664b317d14a36eb15202c2b4f7c6fee0f1111dd9d23c",
+      "size_bytes": 1749,
+      "source_date_tag": "2026_06_10",
+      "status": "pass"
+    },
+    {
+      "exists": true,
+      "id": "c3b_smoke_contract_json",
+      "json_parse_status": "pass",
+      "kind": "json",
+      "path": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/c3b_smoke_result_contract_2026_06_10.json",
+      "relative_path": "docs/resources/c3b_smoke_result_contract_2026_06_10.json",
+      "required": true,
+      "sha256": "06b459926d8719bc709d9eb6e1e96ca26fc4ed5bd7a6874bd095e5194ac27df8",
+      "size_bytes": 2268,
+      "source_date_tag": "2026_06_10",
+      "source_status": "pass",
+      "status": "pass"
+    },
+    {
+      "exists": true,
+      "id": "c3b_smoke_contract_md",
+      "kind": "markdown",
+      "path": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/c3b_smoke_result_contract_2026_06_10.md",
+      "relative_path": "docs/resources/c3b_smoke_result_contract_2026_06_10.md",
+      "required": true,
+      "sha256": "1c2a6e1af4034d1e0a3596194d0d73df9dcbf70cec5049e0a0ece6b49f88133a",
+      "size_bytes": 1652,
+      "source_date_tag": "2026_06_10",
+      "status": "pass"
+    },
+    {
+      "exists": true,
+      "id": "xr_vits_packet_json",
+      "json_parse_status": "pass",
+      "kind": "json",
+      "path": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/xr_vits_unblock_packet_2026_06_10.json",
+      "relative_path": "docs/resources/xr_vits_unblock_packet_2026_06_10.json",
+      "required": true,
+      "sha256": "128072f3670b19c2a4700941ac2866faa93de2855235bd98d27060326dc41cdb",
+      "size_bytes": 3561,
+      "source_date_tag": "2026_06_10",
+      "source_status": "pending-user-choice",
+      "status": "pass"
+    },
+    {
+      "exists": true,
+      "id": "xr_vits_packet_md",
+      "kind": "markdown",
+      "path": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/xr_vits_unblock_packet_2026_06_10.md",
+      "relative_path": "docs/resources/xr_vits_unblock_packet_2026_06_10.md",
+      "required": true,
+      "sha256": "5a773da20535bd2b00893b7a54cac4a478754f8d7475900cc807d412aa2dff14",
+      "size_bytes": 1861,
+      "source_date_tag": "2026_06_10",
+      "status": "pass"
+    },
+    {
+      "exists": true,
+      "id": "xr_vits_policy_preview_json",
+      "json_parse_status": "pass",
+      "kind": "json",
+      "path": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/xr_vits_replacement_policy_preview_2026_06_10.json",
+      "relative_path": "docs/resources/xr_vits_replacement_policy_preview_2026_06_10.json",
+      "required": true,
+      "sha256": "113cac4c84bbfce4677a216cedd2d3425122f5caa095f16bd8cbc78a86a35096",
+      "size_bytes": 4688,
+      "source_date_tag": "2026_06_10",
+      "source_status": "pass",
+      "status": "pass"
+    },
+    {
+      "exists": true,
+      "id": "xr_vits_policy_preview_md",
+      "kind": "markdown",
+      "path": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/xr_vits_replacement_policy_preview_2026_06_10.md",
+      "relative_path": "docs/resources/xr_vits_replacement_policy_preview_2026_06_10.md",
+      "required": true,
+      "sha256": "5f887d501ff8fbb5559e81e87a72f8dae9774d9aa826647797be123585d27de7",
+      "size_bytes": 1241,
+      "source_date_tag": "2026_06_10",
+      "status": "pass"
+    },
+    {
+      "exists": true,
+      "id": "xr_vits_reference_resolution_json",
+      "json_parse_status": "pass",
+      "kind": "json",
+      "path": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/xr_vits_reference_resolution_2026_06_10.json",
+      "relative_path": "docs/resources/xr_vits_reference_resolution_2026_06_10.json",
+      "required": true,
+      "sha256": "173ff8591e11024e8e9b29dd21dcdd1cfd832f3878acaba7ff91a0d067f9e3fc",
+      "size_bytes": 2227,
+      "source_date_tag": "2026_06_10",
+      "source_status": "candidate-ready-needs-approval",
+      "status": "pass"
+    },
+    {
+      "exists": true,
+      "id": "xr_vits_reference_resolution_md",
+      "kind": "markdown",
+      "path": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/xr_vits_reference_resolution_2026_06_10.md",
+      "relative_path": "docs/resources/xr_vits_reference_resolution_2026_06_10.md",
+      "required": true,
+      "sha256": "7e19ce1f06aa1f8617f3c37a882610581285da7bb325f6e96e48453fff0567da",
+      "size_bytes": 1272,
+      "source_date_tag": "2026_06_10",
+      "status": "pass"
+    },
+    {
+      "exists": true,
+      "id": "command_card_json",
+      "json_parse_status": "pass",
+      "kind": "json",
+      "path": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/final_unblock_commands_2026_06_10.json",
+      "relative_path": "docs/resources/final_unblock_commands_2026_06_10.json",
+      "required": true,
+      "sha256": "101ab0e4e406b4b0050c05f547e46567eb10406dc815b1d52b8caf01705bc4cd",
+      "size_bytes": 14465,
+      "source_date_tag": "2026_06_10",
+      "source_status": "pending-unblock",
+      "status": "pass"
+    },
+    {
+      "exists": true,
+      "id": "command_card_md",
+      "kind": "markdown",
+      "path": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/final_unblock_commands_2026_06_10.md",
+      "relative_path": "docs/resources/final_unblock_commands_2026_06_10.md",
+      "required": true,
+      "sha256": "a28e526761519ab912b58639d59ad6fdcacdd590cabc636dcf257db394433d85",
+      "size_bytes": 8491,
+      "source_date_tag": "2026_06_10",
+      "status": "pass"
+    },
+    {
+      "exists": true,
+      "id": "unblock_intake_json",
+      "json_parse_status": "pass",
+      "kind": "json",
+      "path": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/final_unblock_intake_2026_06_10.json",
+      "relative_path": "docs/resources/final_unblock_intake_2026_06_10.json",
+      "required": true,
+      "sha256": "fa84e40c89fc7a90a16d9e8d7b64d2ecfbe19fed465cd9df4b467a8223dcdeac",
+      "size_bytes": 11097,
+      "source_date_tag": "2026_06_10",
+      "source_status": "blocked",
+      "status": "pass"
+    },
+    {
+      "exists": true,
+      "id": "unblock_intake_md",
+      "kind": "markdown",
+      "path": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/final_unblock_intake_2026_06_10.md",
+      "relative_path": "docs/resources/final_unblock_intake_2026_06_10.md",
+      "required": true,
+      "sha256": "bfdaf19964593b42c9b726a721bb6e859bd11009a68f946eae55054ec42c0085",
+      "size_bytes": 1641,
+      "source_date_tag": "2026_06_10",
+      "status": "pass"
+    },
+    {
+      "exists": true,
+      "id": "closeout_packet_json",
+      "json_parse_status": "pass",
+      "kind": "json",
+      "path": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/final_unblock_closeout_packet_2026_06_10.json",
+      "relative_path": "docs/resources/final_unblock_closeout_packet_2026_06_10.json",
+      "required": true,
+      "sha256": "189f330c68da3f42ed86ba27506ae7d57b5d08fd1c8732653860962f7107485b",
+      "size_bytes": 17035,
+      "source_date_tag": "2026_06_10",
+      "source_status": "ready-for-operator-unblock",
+      "status": "pass"
+    },
+    {
+      "exists": true,
+      "id": "closeout_packet_md",
+      "kind": "markdown",
+      "path": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/final_unblock_closeout_packet_2026_06_10.md",
+      "relative_path": "docs/resources/final_unblock_closeout_packet_2026_06_10.md",
+      "required": true,
+      "sha256": "e1d63f47ac079a4e5f5d25d38db0b9d68bcb15898461cb099c924cf3507cb945",
+      "size_bytes": 7089,
+      "source_date_tag": "2026_06_10",
+      "status": "pass"
+    },
+    {
+      "exists": true,
+      "id": "closeout_validation_json",
+      "json_parse_status": "pass",
+      "kind": "json",
+      "path": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/final_unblock_closeout_packet_validation_2026_06_10.json",
+      "relative_path": "docs/resources/final_unblock_closeout_packet_validation_2026_06_10.json",
+      "required": true,
+      "sha256": "282e634a5b8e98a6c3693a357de602654abd96e58220f1fb930e91432b82fb48",
+      "size_bytes": 13802,
+      "source_date_tag": "2026_06_10",
+      "source_status": "pass",
+      "status": "pass"
+    },
+    {
+      "exists": true,
+      "id": "closeout_validation_md",
+      "kind": "markdown",
+      "path": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/final_unblock_closeout_packet_validation_2026_06_10.md",
+      "relative_path": "docs/resources/final_unblock_closeout_packet_validation_2026_06_10.md",
+      "required": true,
+      "sha256": "ebf5fc91e398e212a56a36c46b4e730de7e3251c52e56d650100c323cd4d0312",
+      "size_bytes": 10564,
+      "source_date_tag": "2026_06_10",
+      "status": "pass"
+    },
+    {
+      "exists": true,
+      "id": "resource_matrix_json",
+      "json_parse_status": "pass",
+      "kind": "json",
+      "path": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/e2e_resource_matrix_2026_06_10.json",
+      "relative_path": "docs/resources/e2e_resource_matrix_2026_06_10.json",
+      "required": true,
+      "sha256": "347c500164e91f1033c7899e0e76643ce0148805a2f935b75fb8894a0e486fec",
+      "size_bytes": 9977,
+      "source_date_tag": "2026_06_10",
+      "source_status": "pass",
+      "status": "pass"
+    },
+    {
+      "exists": true,
+      "id": "resource_matrix_md",
+      "kind": "markdown",
+      "path": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/e2e_resource_matrix_2026_06_10.md",
+      "relative_path": "docs/resources/e2e_resource_matrix_2026_06_10.md",
+      "required": true,
+      "sha256": "4e30eea98fac40ad147dc98dccc5c7a476beb0c2a32bca9bc7d79f11843efe8d",
+      "size_bytes": 3797,
+      "source_date_tag": "2026_06_10",
+      "status": "pass"
+    },
+    {
+      "exists": true,
+      "id": "selected_path_json",
+      "json_parse_status": "pass",
+      "kind": "json",
+      "path": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/selected_path_execution_audit_2026_06_10.json",
+      "relative_path": "docs/resources/selected_path_execution_audit_2026_06_10.json",
+      "required": true,
+      "sha256": "87012d7f1e8efa8e0c1713064d9e7ff0ab9ec8e91c14b664d713fac584f3997e",
+      "size_bytes": 4258,
+      "source_date_tag": "2026_06_10",
+      "source_status": "pass",
+      "status": "pass"
+    },
+    {
+      "exists": true,
+      "id": "selected_path_md",
+      "kind": "markdown",
+      "path": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/selected_path_execution_audit_2026_06_10.md",
+      "relative_path": "docs/resources/selected_path_execution_audit_2026_06_10.md",
+      "required": true,
+      "sha256": "20e790262fcd6252add7be952314ed92f2e7de23fb47a48debb64326c61259f8",
+      "size_bytes": 2392,
+      "source_date_tag": "2026_06_10",
+      "status": "pass"
+    },
+    {
+      "exists": true,
+      "id": "resource_policy_json",
+      "json_parse_status": "pass",
+      "kind": "json",
+      "path": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/e2e_resource_policy_audit_2026_06_10.json",
+      "relative_path": "docs/resources/e2e_resource_policy_audit_2026_06_10.json",
+      "required": true,
+      "sha256": "1d33169829a31016c3480981a8185ebfd805948c673212e677792cbb8ddc0c80",
+      "size_bytes": 6818,
+      "source_date_tag": "2026_06_10",
+      "source_status": "pass",
+      "status": "pass"
+    },
+    {
+      "exists": true,
+      "id": "resource_policy_md",
+      "kind": "markdown",
+      "path": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/e2e_resource_policy_audit_2026_06_10.md",
+      "relative_path": "docs/resources/e2e_resource_policy_audit_2026_06_10.md",
+      "required": true,
+      "sha256": "41ac11f4dbdc7d7aac3aff04e14208b298ad4c7cd777df6d59766e11d09566a8",
+      "size_bytes": 3458,
+      "source_date_tag": "2026_06_10",
+      "status": "pass"
+    },
+    {
+      "exists": true,
+      "id": "requirements_trace_json",
+      "json_parse_status": "pass",
+      "kind": "json",
+      "path": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/third_goal_requirements_trace_2026_06_10.json",
+      "relative_path": "docs/resources/third_goal_requirements_trace_2026_06_10.json",
+      "required": true,
+      "sha256": "db4dc6990e7ff24395136dd0a159d8229b71cf45803893a0a4351cf850fde10a",
+      "size_bytes": 19558,
+      "source_date_tag": "2026_06_10",
+      "source_status": "blocked",
+      "status": "pass"
+    },
+    {
+      "exists": true,
+      "id": "requirements_trace_md",
+      "kind": "markdown",
+      "path": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/third_goal_requirements_trace_2026_06_10.md",
+      "relative_path": "docs/resources/third_goal_requirements_trace_2026_06_10.md",
+      "required": true,
+      "sha256": "f1dd887f2e4e2420d953376a584a00d0af8cad5923b475de9684fe2efa65ba85",
+      "size_bytes": 5364,
+      "source_date_tag": "2026_06_10",
+      "status": "pass"
+    },
+    {
+      "exists": true,
+      "id": "spec_plan_json",
+      "json_parse_status": "pass",
+      "kind": "json",
+      "path": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/spec_plan_conformance_audit_2026_06_10.json",
+      "relative_path": "docs/resources/spec_plan_conformance_audit_2026_06_10.json",
+      "required": true,
+      "sha256": "548cae49a7897f872886fb1fc4e208ec9ec3313b1b76b33dd026b648ba5865fc",
+      "size_bytes": 13126,
+      "source_date_tag": "2026_06_10",
+      "source_status": "pass",
+      "status": "pass"
+    },
+    {
+      "exists": true,
+      "id": "spec_plan_md",
+      "kind": "markdown",
+      "path": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/spec_plan_conformance_audit_2026_06_10.md",
+      "relative_path": "docs/resources/spec_plan_conformance_audit_2026_06_10.md",
+      "required": true,
+      "sha256": "8b21f612c5b9f76f07f00e6c2f1124b36770366f877a41aeb8acddb49e2ccdb2",
+      "size_bytes": 8005,
+      "source_date_tag": "2026_06_10",
+      "status": "pass"
+    },
+    {
+      "exists": true,
+      "id": "candidate_audit_json",
+      "json_parse_status": "pass",
+      "kind": "json",
+      "path": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/final_unblock_candidate_audit_2026_06_10.json",
+      "relative_path": "docs/resources/final_unblock_candidate_audit_2026_06_10.json",
+      "required": true,
+      "sha256": "11ed56fb558a0ecca945958aa8c486694e0d151a8aa6e89388d260a983d7bc18",
+      "size_bytes": 823,
+      "source_date_tag": "2026_06_10",
+      "source_status": "blocked",
+      "status": "pass"
+    },
+    {
+      "exists": true,
+      "id": "candidate_audit_md",
+      "kind": "markdown",
+      "path": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/final_unblock_candidate_audit_2026_06_10.md",
+      "relative_path": "docs/resources/final_unblock_candidate_audit_2026_06_10.md",
+      "required": true,
+      "sha256": "3a6752d8c4ac2f10826dec77a7c231030ff3c4aa5c4ad0c888768e73cb118c4e",
+      "size_bytes": 640,
+      "source_date_tag": "2026_06_10",
+      "status": "pass"
+    },
+    {
+      "exists": true,
+      "id": "operator_handoff_json",
+      "json_parse_status": "pass",
+      "kind": "json",
+      "path": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/final_operator_handoff_2026_06_10.json",
+      "relative_path": "docs/resources/final_operator_handoff_2026_06_10.json",
+      "required": true,
+      "sha256": "3fb6e6925a3a7d0d3a31974c4ab022686da620543eae003fa730096221ed51a1",
+      "size_bytes": 9278,
+      "source_date_tag": "2026_06_10",
+      "source_status": "pending-operator-actions",
+      "status": "pass"
+    },
+    {
+      "exists": true,
+      "id": "operator_handoff_md",
+      "kind": "markdown",
+      "path": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/final_operator_handoff_2026_06_10.md",
+      "relative_path": "docs/resources/final_operator_handoff_2026_06_10.md",
+      "required": true,
+      "sha256": "a6a59213ceaccfa0418baebad44fd6dfd54d14c56c58343f8d8beb4ac229b1b0",
+      "size_bytes": 6865,
+      "source_date_tag": "2026_06_10",
+      "status": "pass"
+    },
+    {
+      "exists": true,
+      "id": "operator_handoff_validation_json",
+      "json_parse_status": "pass",
+      "kind": "json",
+      "path": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/final_operator_handoff_validation_2026_06_10.json",
+      "relative_path": "docs/resources/final_operator_handoff_validation_2026_06_10.json",
+      "required": true,
+      "sha256": "2ced6c915bf09a321acabdfa2515d43fecbb0cdcb7db6c8ac06c02a29e3bc791",
+      "size_bytes": 31902,
+      "source_date_tag": "2026_06_10",
+      "source_status": "pass",
+      "status": "pass"
+    },
+    {
+      "exists": true,
+      "id": "operator_handoff_validation_md",
+      "kind": "markdown",
+      "path": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/final_operator_handoff_validation_2026_06_10.md",
+      "relative_path": "docs/resources/final_operator_handoff_validation_2026_06_10.md",
+      "required": true,
+      "sha256": "21b5a0323053ea008ab9af16eaed19fa4923fd192b56a08ea0b8cf40d14c6202",
+      "size_bytes": 24481,
+      "source_date_tag": "2026_06_10",
+      "status": "pass"
+    },
+    {
+      "exists": true,
+      "id": "final_bundle_validation_json",
+      "json_parse_status": "pass",
+      "kind": "json",
+      "path": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/final_signoff_bundle_validation_2026_06_10.json",
+      "relative_path": "docs/resources/final_signoff_bundle_validation_2026_06_10.json",
+      "required": true,
+      "sha256": "7eb11699b308867c3c7431607131099aa05700be5a8d7d8671e71ba6767d1ade",
+      "size_bytes": 36034,
+      "source_date_tag": "2026_06_10",
+      "source_status": "pass",
+      "status": "pass"
+    },
+    {
+      "exists": true,
+      "id": "final_bundle_validation_md",
+      "kind": "markdown",
+      "path": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/final_signoff_bundle_validation_2026_06_10.md",
+      "relative_path": "docs/resources/final_signoff_bundle_validation_2026_06_10.md",
+      "required": true,
+      "sha256": "69f570e16998acc0910fc9b712ca8aa86efb2f31a9de20175c16ca6c2a1adcac",
+      "size_bytes": 24741,
+      "source_date_tag": "2026_06_10",
+      "status": "pass"
+    },
+    {
+      "exists": true,
+      "id": "c3b_smoke_discovery_json",
+      "json_parse_status": "pass",
+      "kind": "json",
+      "path": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/c3b_smoke_candidate_discovery_2026_06_10.json",
+      "relative_path": "docs/resources/c3b_smoke_candidate_discovery_2026_06_10.json",
+      "required": true,
+      "sha256": "b44f76f59d639d9d51a955128402723f87c6940028a83b163ec50ddae0cee145",
+      "size_bytes": 609,
+      "source_date_tag": "2026_06_10",
+      "source_status": "missing",
+      "status": "pass"
+    },
+    {
+      "exists": true,
+      "id": "c3b_smoke_discovery_md",
+      "kind": "markdown",
+      "path": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/c3b_smoke_candidate_discovery_2026_06_10.md",
+      "relative_path": "docs/resources/c3b_smoke_candidate_discovery_2026_06_10.md",
+      "required": true,
+      "sha256": "36335dfbe85e25b75d5e3e1acdd4d7d20322497d91953a4ec88a4b9f324e7d42",
+      "size_bytes": 543,
+      "source_date_tag": "2026_06_10",
+      "status": "pass"
+    },
+    {
+      "exists": true,
+      "id": "pynq_c3b_smoke_discovery_json",
+      "json_parse_status": "pass",
+      "kind": "json",
+      "path": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/pynq_smoke_candidate_discovery_c3b_2026_06_16.json",
+      "relative_path": "docs/resources/pynq_smoke_candidate_discovery_c3b_2026_06_16.json",
+      "required": true,
+      "sha256": "30e703d76f7359f4586adfa704522d68e97c85a7999610df37926beeb6991acd",
+      "size_bytes": 720,
+      "source_date_tag": "2026_06_16",
+      "source_status": "missing",
+      "status": "pass"
+    },
+    {
+      "exists": true,
+      "id": "pynq_c3b_smoke_discovery_md",
+      "kind": "markdown",
+      "path": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/pynq_smoke_candidate_discovery_c3b_2026_06_16.md",
+      "relative_path": "docs/resources/pynq_smoke_candidate_discovery_c3b_2026_06_16.md",
+      "required": true,
+      "sha256": "7851425c6f23466c7813b3122d335e8282e018cae73361d50bb19e885a9e4035",
+      "size_bytes": 563,
+      "source_date_tag": "2026_06_16",
+      "status": "pass"
+    },
+    {
+      "exists": true,
+      "id": "pynq_vref_smoke_discovery_json",
+      "json_parse_status": "pass",
+      "kind": "json",
+      "path": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/pynq_smoke_candidate_discovery_vref_p0_2026_06_16.json",
+      "relative_path": "docs/resources/pynq_smoke_candidate_discovery_vref_p0_2026_06_16.json",
+      "required": true,
+      "sha256": "c7d8cc1e8bfa19d38da17c79d24c559c04b84097893e956a6ae9159c54dacc71",
+      "size_bytes": 805,
+      "source_date_tag": "2026_06_16",
+      "source_status": "missing",
+      "status": "pass"
+    },
+    {
+      "exists": true,
+      "id": "pynq_vref_smoke_discovery_md",
+      "kind": "markdown",
+      "path": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/pynq_smoke_candidate_discovery_vref_p0_2026_06_16.md",
+      "relative_path": "docs/resources/pynq_smoke_candidate_discovery_vref_p0_2026_06_16.md",
+      "required": true,
+      "sha256": "0cdc487916eef6b8a0666312fd82ba9386f1964f61723085f4a14da4337f0144",
+      "size_bytes": 595,
+      "source_date_tag": "2026_06_16",
+      "status": "pass"
+    },
+    {
+      "exists": true,
+      "id": "final_blocker_closure_json",
+      "json_parse_status": "pass",
+      "kind": "json",
+      "path": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/final_blocker_closure_readiness_2026_06_10.json",
+      "relative_path": "docs/resources/final_blocker_closure_readiness_2026_06_10.json",
+      "required": true,
+      "sha256": "25ff68310de4c3ddd42eb2b0e89660f1173e1cb743d37a559052217cf45e5494",
+      "size_bytes": 6461,
+      "source_date_tag": "2026_06_10",
+      "source_status": "blocked",
+      "status": "pass"
+    },
+    {
+      "exists": true,
+      "id": "final_blocker_closure_md",
+      "kind": "markdown",
+      "path": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/final_blocker_closure_readiness_2026_06_10.md",
+      "relative_path": "docs/resources/final_blocker_closure_readiness_2026_06_10.md",
+      "required": true,
+      "sha256": "7f874bb33807472823a43fc48ea5105872be8a8a281b3dda505f800766db34f5",
+      "size_bytes": 1851,
+      "source_date_tag": "2026_06_10",
+      "status": "pass"
+    },
+    {
+      "exists": true,
+      "id": "third_goal_source_audit_json",
+      "json_parse_status": "pass",
+      "kind": "json",
+      "path": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/third_goal_source_audit_2026_06_16.json",
+      "relative_path": "docs/resources/third_goal_source_audit_2026_06_16.json",
+      "required": true,
+      "sha256": "bc4cbde1519e9758a46715db30533f6b0b4671e8b1fd79b877f1dc71f4855a3b",
+      "size_bytes": 143370,
+      "source_date_tag": "2026_06_16",
+      "source_status": "pass",
+      "status": "pass"
+    },
+    {
+      "exists": true,
+      "id": "third_goal_source_audit_md",
+      "kind": "markdown",
+      "path": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/third_goal_source_audit_2026_06_16.md",
+      "relative_path": "docs/resources/third_goal_source_audit_2026_06_16.md",
+      "required": true,
+      "sha256": "d3f71dd153771a2de9e69e3217536d4f864fc1c4b824b09f1faa86d7782fdc03",
+      "size_bytes": 17827,
+      "source_date_tag": "2026_06_16",
+      "status": "pass"
+    },
+    {
+      "exists": true,
+      "id": "third_goal_current_audit_json",
+      "json_parse_status": "pass",
+      "kind": "json",
+      "path": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/third_goal_current_audit_2026_06_16.json",
+      "relative_path": "docs/resources/third_goal_current_audit_2026_06_16.json",
+      "required": true,
+      "sha256": "7442e03b82c1c16e927f14685a75d1dcb1b41511391c9ef8bbaf9c8a4164591b",
+      "size_bytes": 61373,
+      "source_date_tag": "2026_06_16",
+      "source_status": "blocked-external",
+      "status": "pass"
+    },
+    {
+      "exists": true,
+      "id": "third_goal_current_audit_md",
+      "kind": "markdown",
+      "path": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/third_goal_current_audit_2026_06_16.md",
+      "relative_path": "docs/resources/third_goal_current_audit_2026_06_16.md",
+      "required": true,
+      "sha256": "98f286a5068fd60480efe0c0ae0a197a8df84994aa8b7131e6c37d93dea6e87a",
+      "size_bytes": 8189,
+      "source_date_tag": "2026_06_16",
+      "status": "pass"
+    },
+    {
+      "exists": true,
+      "id": "req1_environment_json",
+      "json_parse_status": "pass",
+      "kind": "json",
+      "path": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/req1_environment_audit_2026_06_16.json",
+      "relative_path": "docs/resources/req1_environment_audit_2026_06_16.json",
+      "required": true,
+      "sha256": "988be2daf4996d981a5cd1d281f57cf3706bf0a7201cf9189f2040ec4c778fc9",
+      "size_bytes": 4050,
+      "source_date_tag": "2026_06_16",
+      "source_status": "pass",
+      "status": "pass"
+    },
+    {
+      "exists": true,
+      "id": "req1_environment_md",
+      "kind": "markdown",
+      "path": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/req1_environment_audit_2026_06_16.md",
+      "relative_path": "docs/resources/req1_environment_audit_2026_06_16.md",
+      "required": true,
+      "sha256": "f3ad210be0c544859d2c19cc6fa5e6bdaf036ead93c6347523780b3a538d46ef",
+      "size_bytes": 2824,
+      "source_date_tag": "2026_06_16",
+      "status": "pass"
+    },
+    {
+      "exists": true,
+      "id": "req9_deit_image_json",
+      "json_parse_status": "pass",
+      "kind": "json",
+      "path": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/req9_deit_image_reference_audit_2026_06_16.json",
+      "relative_path": "docs/resources/req9_deit_image_reference_audit_2026_06_16.json",
+      "required": true,
+      "sha256": "a58c9dcf7196635f14d498606d3d1c711e6509e20c511767b953c88b34454057",
+      "size_bytes": 3731,
+      "source_date_tag": "2026_06_16",
+      "source_status": "pass",
+      "status": "pass"
+    },
+    {
+      "exists": true,
+      "id": "req9_deit_image_md",
+      "kind": "markdown",
+      "path": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/req9_deit_image_reference_audit_2026_06_16.md",
+      "relative_path": "docs/resources/req9_deit_image_reference_audit_2026_06_16.md",
+      "required": true,
+      "sha256": "99c0edf7c8d3e2e8418d900ca7a97ed96809a61aa1ea5044f1ed463edf56976a",
+      "size_bytes": 2607,
+      "source_date_tag": "2026_06_16",
+      "status": "pass"
+    },
+    {
+      "exists": true,
+      "id": "qkv_uram_successor_json",
+      "json_parse_status": "pass",
+      "kind": "json",
+      "path": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/vref_p0_qkv_uram_cache_successor_2026_06_16.json",
+      "relative_path": "docs/resources/vref_p0_qkv_uram_cache_successor_2026_06_16.json",
+      "required": true,
+      "sha256": "7839a638334e174925e1a2bc2c104526f51e195dc12d7239be7f7c20a378a64d",
+      "size_bytes": 14104,
+      "source_date_tag": "2026_06_16",
+      "source_status": "pass",
+      "status": "pass"
+    },
+    {
+      "exists": true,
+      "id": "qkv_uram_successor_md",
+      "kind": "markdown",
+      "path": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/vref_p0_qkv_uram_cache_successor_2026_06_16.md",
+      "relative_path": "docs/resources/vref_p0_qkv_uram_cache_successor_2026_06_16.md",
+      "required": true,
+      "sha256": "ef8f674f34b2c98d52bf126978605ee92bf3d8622b1f326a30de9344120333da",
+      "size_bytes": 6455,
+      "source_date_tag": "2026_06_16",
+      "status": "pass"
+    },
+    {
+      "exists": true,
+      "id": "vref_p0_pot_scale_audit_json",
+      "json_parse_status": "pass",
+      "kind": "json",
+      "path": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/vref_p0_pot_scale_audit_2026_06_16.json",
+      "relative_path": "docs/resources/vref_p0_pot_scale_audit_2026_06_16.json",
+      "required": true,
+      "sha256": "457b4c68156e00499df8b8324b14ca218720a0f89ec1bb12a83800dd4163e0c8",
+      "size_bytes": 6370,
+      "source_date_tag": "2026_06_16",
+      "source_status": "pass",
+      "status": "pass"
+    },
+    {
+      "exists": true,
+      "id": "vref_p0_pot_scale_audit_md",
+      "kind": "markdown",
+      "path": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/vref_p0_pot_scale_audit_2026_06_16.md",
+      "relative_path": "docs/resources/vref_p0_pot_scale_audit_2026_06_16.md",
+      "required": true,
+      "sha256": "05276020e92764e1cabeb3b58a3c7cf4522e14cdb9ad36d1f0780aac0520fd7d",
+      "size_bytes": 1776,
+      "source_date_tag": "2026_06_16",
+      "status": "pass"
+    },
+    {
+      "exists": true,
+      "id": "vref_p0_pot_scale_sweep_json",
+      "json_parse_status": "pass",
+      "kind": "json",
+      "path": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/vref_p0_pot_scale_sweep_2026_06_16.json",
+      "relative_path": "docs/resources/vref_p0_pot_scale_sweep_2026_06_16.json",
+      "required": true,
+      "sha256": "edfafde66af439c17a3db06d86d5eeef763535f17a462757431097b83fdbdeb2",
+      "size_bytes": 77689,
+      "source_date_tag": "2026_06_16",
+      "source_status": "pass",
+      "status": "pass"
+    },
+    {
+      "exists": true,
+      "id": "vref_p0_pot_scale_sweep_md",
+      "kind": "markdown",
+      "path": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/vref_p0_pot_scale_sweep_2026_06_16.md",
+      "relative_path": "docs/resources/vref_p0_pot_scale_sweep_2026_06_16.md",
+      "required": true,
+      "sha256": "7b32ca758a7bee341e9608e68534e0d27eefa3c9415f968e6095762191b5e311",
+      "size_bytes": 6278,
+      "source_date_tag": "2026_06_16",
+      "status": "pass"
+    },
+    {
+      "exists": true,
+      "id": "qkv_uram_smoke_discovery_json",
+      "json_parse_status": "pass",
+      "kind": "json",
+      "path": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/qkv_uram_smoke_candidate_discovery_2026_06_16.json",
+      "relative_path": "docs/resources/qkv_uram_smoke_candidate_discovery_2026_06_16.json",
+      "required": true,
+      "sha256": "b3ef6bf831d3f15637f7c17001980a73c6a03e10222d82a520ccfbfcb9fe144a",
+      "size_bytes": 798,
+      "source_date_tag": "2026_06_16",
+      "source_status": "missing",
+      "status": "pass"
+    },
+    {
+      "exists": true,
+      "id": "qkv_uram_smoke_discovery_md",
+      "kind": "markdown",
+      "path": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/qkv_uram_smoke_candidate_discovery_2026_06_16.md",
+      "relative_path": "docs/resources/qkv_uram_smoke_candidate_discovery_2026_06_16.md",
+      "required": true,
+      "sha256": "4a48306e5fe82a17df233bb9ea30ca9c1f5cd0fda3ae9c73db3154320e1f4606",
+      "size_bytes": 587,
+      "source_date_tag": "2026_06_16",
+      "status": "pass"
+    },
+    {
+      "exists": true,
+      "id": "req5_q4q8_swhw_json",
+      "json_parse_status": "pass",
+      "kind": "json",
+      "path": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/req5_q4q8_swhw_match_audit_2026_06_16.json",
+      "relative_path": "docs/resources/req5_q4q8_swhw_match_audit_2026_06_16.json",
+      "required": true,
+      "sha256": "90b38f69e9caf9d718f6ed7848caa22ae60b913a904a701522634e6b297e83f7",
+      "size_bytes": 5664,
+      "source_date_tag": "2026_06_16",
+      "source_status": "pass",
+      "status": "pass"
+    },
+    {
+      "exists": true,
+      "id": "req5_q4q8_swhw_md",
+      "kind": "markdown",
+      "path": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/req5_q4q8_swhw_match_audit_2026_06_16.md",
+      "relative_path": "docs/resources/req5_q4q8_swhw_match_audit_2026_06_16.md",
+      "required": true,
+      "sha256": "daa4e287edbecebcd1ba3a482d88a7b0d6efe5d56108146fa859093f970e4570",
+      "size_bytes": 1619,
+      "source_date_tag": "2026_06_16",
+      "status": "pass"
+    },
+    {
+      "exists": true,
+      "id": "p2_vit_scale_calibration_json",
+      "json_parse_status": "pass",
+      "kind": "json",
+      "path": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/p2_vit_scale_calibration_report_2026_06_16.json",
+      "relative_path": "docs/resources/p2_vit_scale_calibration_report_2026_06_16.json",
+      "required": true,
+      "sha256": "dec211a65b3d3542f276a27cfc2d7b6d247a3f7317fb72d9bcd6e1868e7947e1",
+      "size_bytes": 4877,
+      "source_date_tag": "2026_06_16",
+      "source_status": "pass",
+      "status": "pass"
+    },
+    {
+      "exists": true,
+      "id": "p2_vit_scale_calibration_md",
+      "kind": "markdown",
+      "path": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/p2_vit_scale_calibration_report_2026_06_16.md",
+      "relative_path": "docs/resources/p2_vit_scale_calibration_report_2026_06_16.md",
+      "required": true,
+      "sha256": "69fab87eb28686b82b711c4a571bf12e19d47165063312c2cefb58dadda51ea8",
+      "size_bytes": 2236,
+      "source_date_tag": "2026_06_16",
+      "status": "pass"
+    },
+    {
+      "exists": true,
+      "id": "req6_parameterization_json",
+      "json_parse_status": "pass",
+      "kind": "json",
+      "path": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/req6_parameterization_audit_2026_06_16.json",
+      "relative_path": "docs/resources/req6_parameterization_audit_2026_06_16.json",
+      "required": true,
+      "sha256": "74179f1bcb6134c9efe6f4a2a0b13ecac1081f2818778d6f7107972860daf834",
+      "size_bytes": 15941,
+      "source_date_tag": "2026_06_16",
+      "source_status": "pass",
+      "status": "pass"
+    },
+    {
+      "exists": true,
+      "id": "req6_parameterization_md",
+      "kind": "markdown",
+      "path": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/req6_parameterization_audit_2026_06_16.md",
+      "relative_path": "docs/resources/req6_parameterization_audit_2026_06_16.md",
+      "required": true,
+      "sha256": "d2cc3adad889d9d41f63d4d6541c317cad39b470e0ba226d23b6c5af7885a185",
+      "size_bytes": 7722,
+      "source_date_tag": "2026_06_16",
+      "status": "pass"
+    },
+    {
+      "exists": true,
+      "id": "xr_vits_gate_json",
+      "json_parse_status": "pass",
+      "kind": "json",
+      "path": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/xr_vits_gate_audit_2026_06_16.json",
+      "relative_path": "docs/resources/xr_vits_gate_audit_2026_06_16.json",
+      "required": true,
+      "sha256": "7c10a230026db2c94c8319a351f32c7e59331b723860b3a1ecb15a1cc3dbfdf4",
+      "size_bytes": 5965,
+      "source_date_tag": "2026_06_16",
+      "source_status": "blocked",
+      "status": "pass"
+    },
+    {
+      "exists": true,
+      "id": "xr_vits_gate_md",
+      "kind": "markdown",
+      "path": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/xr_vits_gate_audit_2026_06_16.md",
+      "relative_path": "docs/resources/xr_vits_gate_audit_2026_06_16.md",
+      "required": true,
+      "sha256": "b31b929000f2c1b5d2fc12414d2c6b35d1b9bd4e75e5d0df9a54660b0c8d0600",
+      "size_bytes": 1357,
+      "source_date_tag": "2026_06_16",
+      "status": "pass"
+    },
+    {
+      "exists": true,
+      "id": "c3b_physical_smoke_gate_json",
+      "json_parse_status": "pass",
+      "kind": "json",
+      "path": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/c3b_physical_smoke_gate_audit_2026_06_16.json",
+      "relative_path": "docs/resources/c3b_physical_smoke_gate_audit_2026_06_16.json",
+      "required": true,
+      "sha256": "64c0e933aac0162d850078c44de51dea990a282ce39896af8554b4059199389c",
+      "size_bytes": 4029,
+      "source_date_tag": "2026_06_16",
+      "source_status": "blocked_missing_canonical_physical_smoke_result",
+      "status": "pass"
+    },
+    {
+      "exists": true,
+      "id": "c3b_physical_smoke_gate_md",
+      "kind": "markdown",
+      "path": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/c3b_physical_smoke_gate_audit_2026_06_16.md",
+      "relative_path": "docs/resources/c3b_physical_smoke_gate_audit_2026_06_16.md",
+      "required": true,
+      "sha256": "32e6350cdecbefc20278b30843319b05b4261b3ae4d967445c67e27b7b05bc71",
+      "size_bytes": 1145,
+      "source_date_tag": "2026_06_16",
+      "status": "pass"
+    },
+    {
+      "exists": true,
+      "id": "vref_p0_buffer_lifetime_json",
+      "json_parse_status": "pass",
+      "kind": "json",
+      "path": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/vref_p0_buffer_lifetime_audit_2026_06_16.json",
+      "relative_path": "docs/resources/vref_p0_buffer_lifetime_audit_2026_06_16.json",
+      "required": true,
+      "sha256": "4de3f829eb46012ee9bd40c144dc096147d4995a38f6adcb95009db99ad5dad6",
+      "size_bytes": 15810,
+      "source_date_tag": "2026_06_16",
+      "source_status": "pass",
+      "status": "pass"
+    },
+    {
+      "exists": true,
+      "id": "vref_p0_buffer_lifetime_md",
+      "kind": "markdown",
+      "path": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/vref_p0_buffer_lifetime_audit_2026_06_16.md",
+      "relative_path": "docs/resources/vref_p0_buffer_lifetime_audit_2026_06_16.md",
+      "required": true,
+      "sha256": "05b343b5468ba5d810f541d4dc551af1560bd99b5b80d1d1d616ef7b3814b967",
+      "size_bytes": 6208,
+      "source_date_tag": "2026_06_16",
+      "status": "pass"
+    },
+    {
+      "exists": true,
+      "id": "hgpipe_operator_audit_json",
+      "json_parse_status": "pass",
+      "kind": "json",
+      "path": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/hgpipe_operator_audit_2026_06_16.json",
+      "relative_path": "docs/resources/hgpipe_operator_audit_2026_06_16.json",
+      "required": true,
+      "sha256": "27f8c5adcb5dc87cc1870fc569b7344988477b8f55d1d8f610e01fdbf7b5664e",
+      "size_bytes": 32179,
+      "source_date_tag": "2026_06_16",
+      "source_status": "pass",
+      "status": "pass"
+    },
+    {
+      "exists": true,
+      "id": "hgpipe_operator_audit_md",
+      "kind": "markdown",
+      "path": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/hgpipe_operator_audit_2026_06_16.md",
+      "relative_path": "docs/resources/hgpipe_operator_audit_2026_06_16.md",
+      "required": true,
+      "sha256": "4c4444f34e50450dfc39a8f60fa1482acf108c7cc1f9264aa91bf63193e84d32",
+      "size_bytes": 1263,
+      "source_date_tag": "2026_06_16",
+      "status": "pass"
+    },
+    {
+      "exists": true,
+      "id": "c3b_transfer_manifest_json",
+      "json_parse_status": "pass",
+      "kind": "json",
+      "path": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/c3b_smoke_transfer_manifest_2026_06_10.json",
+      "relative_path": "docs/resources/c3b_smoke_transfer_manifest_2026_06_10.json",
+      "required": true,
+      "sha256": "d5790083c30815929b619f137898e5b1153adeaf497e4967d6d23fbf2f2e88a2",
+      "size_bytes": 2297,
+      "source_date_tag": "2026_06_10",
+      "source_status": "pass",
+      "status": "pass"
+    },
+    {
+      "exists": true,
+      "id": "c3b_transfer_manifest_md",
+      "kind": "markdown",
+      "path": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/c3b_smoke_transfer_manifest_2026_06_10.md",
+      "relative_path": "docs/resources/c3b_smoke_transfer_manifest_2026_06_10.md",
+      "required": true,
+      "sha256": "e941f1e56ac04b6596329bc364202d466e0e61c3016c18da8a7d1284124e18c6",
+      "size_bytes": 1590,
+      "source_date_tag": "2026_06_10",
+      "status": "pass"
+    },
+    {
+      "exists": true,
+      "id": "c3b_bundle_sha256",
+      "kind": "sha256-text",
+      "path": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/e2e_axis_dma_c3b_mem16_smoke_bundle.tar.gz.sha256",
+      "relative_path": "docs/resources/e2e_axis_dma_c3b_mem16_smoke_bundle.tar.gz.sha256",
+      "required": true,
+      "sha256": "1f082bf9ec7e71c10a0caa475a8a3ac0e333e1c175829e4119832c9b53f86687",
+      "size_bytes": 109,
+      "source_date_tag": "undated",
+      "status": "pass"
+    },
+    {
+      "exists": false,
+      "id": "c3b_import_json",
+      "kind": "json",
+      "path": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/c3b_smoke_import_2026_06_10.json",
+      "relative_path": "docs/resources/c3b_smoke_import_2026_06_10.json",
+      "required": false,
+      "source_date_tag": "2026_06_10",
+      "status": "absent-optional"
+    },
+    {
+      "exists": false,
+      "id": "c3b_import_validation_json",
+      "kind": "json",
+      "path": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/c3b_smoke_import_validation_2026_06_10.json",
+      "relative_path": "docs/resources/c3b_smoke_import_validation_2026_06_10.json",
+      "required": false,
+      "source_date_tag": "2026_06_10",
+      "status": "absent-optional"
+    }
+  ],
+  "consistency_checks": [
+    {
+      "detail": "required overlay prefixes present in validate_pynq_smoke_result.py",
+      "name": "pynq_smoke_validator_overlay_prefix_contracts",
+      "status": "pass"
+    },
+    {
+      "detail": "validator compares reported bit/hwh basename to expected artifact name",
+      "name": "pynq_smoke_validator_basename_check",
+      "status": "pass"
+    },
+    {
+      "detail": "overlay basename gate is tied to require_paths",
+      "name": "pynq_smoke_validator_require_paths_gate",
+      "status": "pass"
+    },
+    {
+      "detail": "runner summary exposes exact blocker input paths",
+      "name": "final_runner_remaining_blocker_input_paths_contract",
+      "status": "pass"
+    },
+    {
+      "detail": "runner summary exposes structured blocker details and blocker counts",
+      "name": "final_runner_remaining_blocker_details_contract",
+      "status": "pass"
+    },
+    {
+      "detail": "runner appends summary mirrors, dedupes, and exposes mirror counts",
+      "name": "final_runner_mirrored_artifacts_dedupe_contract",
+      "status": "pass"
+    },
+    {
+      "detail": "runner records generated/signoff to docs/resources mirror integrity",
+      "name": "final_runner_mirrored_artifact_integrity_contract",
+      "status": "pass"
+    },
+    {
+      "detail": "policy tool defines placeholder approver rejection for active writes",
+      "name": "xr_vits_policy_tool_placeholder_guard_contract",
+      "status": "pass"
+    },
+    {
+      "detail": "placeholder approver rejection is gated by non-dry-run active writes",
+      "name": "xr_vits_policy_tool_dry_run_placeholder_allowed",
+      "status": "pass"
+    },
+    {
+      "detail": "final runner blocks when active replacement-policy creation fails",
+      "name": "final_runner_active_policy_failure_blocks",
+      "status": "pass"
+    },
+    {
+      "detail": "['requested XR-VITs sibling', 'C3b AXIS/DMA physical smoke result']",
+      "name": "final_runner_remaining_blockers_present",
+      "status": "pass"
+    },
+    {
+      "detail": "blocker_count=2 list=2",
+      "name": "final_runner_blocker_count_matches_list",
+      "status": "pass"
+    },
+    {
+      "detail": "detail_count=2 details=2",
+      "name": "final_runner_remaining_blocker_detail_count_matches",
+      "status": "pass"
+    },
+    {
+      "detail": "{'C3b AXIS/DMA physical smoke result': ['/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/pynq/hgtxr/e2e_axis_dma_c3b_mem16_file_smoke.json'], 'requested XR-VITs sibling': ['/home/kjm26/project/PRJXR/XR-VITs', '/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/xr_vits_replacement_policy.json']}",
+      "name": "final_runner_remaining_blocker_input_paths_present",
+      "status": "pass"
+    },
+    {
+      "detail": "{'C3b AXIS/DMA physical smoke result': {'kind': 'canonical-pynq-smoke-json', 'paths': ['/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/pynq/hgtxr/e2e_axis_dma_c3b_mem16_file_smoke.json'], 'status': 'missing', 'would_clear': False}, 'requested XR-VITs sibling': {'closure_options': [{'kind': 'exact-source', 'path': '/home/kjm26/project/PRJXR/XR-VITs', 'status': 'missing'}, {'kind': 'approved-replacement-policy', 'path': '/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/xr_vits_replacement_policy.json', 'status': 'missing'}], 'kind': 'exact-source-or-approved-replacement-policy', 'mode': 'missing', 'paths': ['/home/kjm26/project/PRJXR/XR-VITs', '/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/xr_vits_replacement_policy.json'], 'would_clear': False}}",
+      "name": "final_runner_remaining_blocker_details_present",
+      "status": "pass"
+    },
+    {
+      "detail": "[]",
+      "name": "final_runner_remaining_blocker_keys_align",
+      "status": "pass"
+    },
+    {
+      "detail": "all remaining blocker path lists are non-empty",
+      "name": "final_runner_remaining_blocker_input_paths_non_empty",
+      "status": "pass"
+    },
+    {
+      "detail": "38",
+      "name": "final_runner_mirrored_artifacts_present",
+      "status": "pass"
+    },
+    {
+      "detail": "total=38 unique=38",
+      "name": "final_runner_mirrored_artifacts_unique",
+      "status": "pass"
+    },
+    {
+      "detail": "fields=(38,38,0) actual=(38,38,0)",
+      "name": "final_runner_mirrored_artifact_counts_match",
+      "status": "pass"
+    },
+    {
+      "detail": "count=38",
+      "name": "final_runner_mirrored_artifact_integrity_present",
+      "status": "pass"
+    },
+    {
+      "detail": "status=pass fail_count=0",
+      "name": "final_runner_mirrored_artifact_integrity_pass",
+      "status": "pass"
+    },
+    {
+      "detail": "mirrored=38 integrity=38 checked=38 excluded=0",
+      "name": "final_runner_mirrored_artifact_integrity_counts_match",
+      "status": "pass"
+    },
+    {
+      "detail": "pass",
+      "name": "final_runner_c3b_transfer_manifest_status_pass",
+      "status": "pass"
+    },
+    {
+      "detail": "status=pass fail=0",
+      "name": "spec_plan_conformance_pass",
+      "status": "pass"
+    },
+    {
+      "detail": "spec-kit/manual",
+      "name": "spec_plan_manual_fallback_contract",
+      "status": "pass"
+    },
+    {
+      "detail": "zcu104=pass q4q8=pass",
+      "name": "spec_plan_zcu104_q4wq8a_contract",
+      "status": "pass"
+    },
+    {
+      "detail": "parallelism/bus/fifo",
+      "name": "spec_plan_param_knobs_contract",
+      "status": "pass"
+    },
+    {
+      "detail": "spec=pass master=pass choice=pass",
+      "name": "spec_plan_selected_paths_contract",
+      "status": "pass"
+    },
+    {
+      "detail": "/tools/Xilinx",
+      "name": "spec_plan_xilinx_root_contract",
+      "status": "pass"
+    },
+    {
+      "detail": "all-current-docs-fresh",
+      "name": "spec_plan_current_doc_freshness_contract",
+      "status": "pass"
+    },
+    {
+      "detail": "candidate-ready-needs-approval",
+      "name": "xr_vits_resolution_status_known",
+      "status": "pass"
+    },
+    {
+      "detail": "False",
+      "name": "xr_vits_resolution_no_policy_write",
+      "status": "pass"
+    },
+    {
+      "detail": "False",
+      "name": "xr_vits_resolution_no_canonical_write",
+      "status": "pass"
+    },
+    {
+      "detail": "blocked",
+      "name": "final_blocker_closure_status_known",
+      "status": "pass"
+    },
+    {
+      "detail": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/pynq/hgtxr/e2e_axis_dma_c3b_mem16_file_smoke.json",
+      "name": "final_blocker_closure_c3b_canonical_path",
+      "status": "pass"
+    },
+    {
+      "detail": "/home/kjm26/project/PRJXR/XR-VITs",
+      "name": "final_blocker_closure_xr_vits_exact_path",
+      "status": "pass"
+    },
+    {
+      "detail": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/xr_vits_replacement_policy.json",
+      "name": "final_blocker_closure_xr_vits_policy_path",
+      "status": "pass"
+    },
+    {
+      "detail": "{'creates_board_result': False, 'creates_xr_vits_policy': False, 'discovers_pynq_candidates_only': True, 'executes_commands': False, 'writes_canonical_inputs': False}",
+      "name": "final_blocker_closure_discovery_only_safety",
+      "status": "pass"
+    },
+    {
+      "detail": "needs-external-inputs",
+      "name": "final_blocker_closure_operator_plan_status_known",
+      "status": "pass"
+    },
+    {
+      "detail": "['C3b AXIS/DMA physical smoke result', 'requested XR-VITs sibling']",
+      "name": "final_blocker_closure_operator_plan_required_inputs",
+      "status": "pass"
+    },
+    {
+      "detail": "{'acceptance': ['preset axis-c3b-mem16 validates', 'runtime_state is 2', 'out_raw matches expected C3b vector', 'bitfile/hwhfile basenames match hgtxr_e2e_axis_dma_c3b_mem16'], 'blocker': 'C3b AXIS/DMA physical smoke result', 'candidate_path': '', 'candidate_status': 'not-supplied', 'canonical_path': '/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/pynq/hgtxr/e2e_axis_dma_c3b_mem16_file_smoke.json', 'current_status': 'missing', 'kind': 'board-produced-json', 'ready': False}",
+      "name": "final_blocker_closure_operator_plan_c3b_contract",
+      "status": "pass"
+    },
+    {
+      "detail": "{'acceptance': ['exact XR-VITs checkout exists, or', 'replacement policy is generated by create_xr_vits_replacement_policy.py', 'policy has candidate_audit_fingerprint, recommendation snapshot, and policy_fingerprint', 'approved_by is a real non-placeholder identifier'], 'blocker': 'requested XR-VITs sibling', 'candidate_status': 'fail', 'current_status': 'missing', 'exact_path': '/home/kjm26/project/PRJXR/XR-VITs', 'kind': 'exact-source-or-approved-policy', 'policy_path': '/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/xr_vits_replacement_policy.json', 'ready': False, 'replacement_path': ''}",
+      "name": "final_blocker_closure_operator_plan_xr_contract",
+      "status": "pass"
+    },
+    {
+      "detail": "{'c3b-import-dry-run': {'command': 'python3 tools/run_third_goal_final_signoff.py --root /home/kjm26/project/PRJXR/XR-VIT/HGTXR --import-c3b-smoke-json /path/to/e2e_axis_dma_c3b_mem16_file_smoke.json --dry-run-import-c3b-smoke --allow-blocked', 'ready_to_execute': False, 'side_effects': False, 'step': 'c3b-import-dry-run'}, 'xr-vits-policy-preview': {'command': 'python3 tools/run_third_goal_final_signoff.py --root /home/kjm26/project/PRJXR/XR-VIT/HGTXR --approve-xr-vits-replacement --xr-vits-approved-by USER --xr-vits-replacement-reason \"Approve XR_Accel as XR-VITs replacement for HGTXR third-goal signoff\" --dry-run-xr-vits-replacement --allow-blocked', 'ready_to_execute': False, 'side_effects': False, 'step': 'xr-vits-policy-preview'}, 'combined-final-runner-dry-run': {'command': '', 'ready_to_execute': False, 'side_effects': False, 'step': 'combined-final-runner-dry-run'}}",
+      "name": "final_blocker_closure_operator_plan_dry_run_templates",
+      "status": "pass"
+    },
+    {
+      "detail": "{'creates_board_result': False, 'creates_xr_vits_policy': False, 'executes_commands': False, 'templates_only_when_inputs_missing': True, 'writes_canonical_inputs': False}",
+      "name": "final_blocker_closure_operator_plan_no_side_effects",
+      "status": "pass"
+    },
+    {
+      "detail": "missing",
+      "name": "final_blocker_closure_pynq_c3b_discovery_status_known",
+      "status": "pass"
+    },
+    {
+      "detail": "axis-c3b-mem16",
+      "name": "final_blocker_closure_pynq_c3b_discovery_preset",
+      "status": "pass"
+    },
+    {
+      "detail": "0",
+      "name": "final_blocker_closure_pynq_c3b_discovery_candidate_count_numeric",
+      "status": "pass"
+    },
+    {
+      "detail": "0",
+      "name": "final_blocker_closure_pynq_c3b_discovery_pass_count_numeric",
+      "status": "pass"
+    },
+    {
+      "detail": "pass=0 candidates=0",
+      "name": "final_blocker_closure_pynq_c3b_discovery_pass_count_lte_candidate_count",
+      "status": "pass"
+    },
+    {
+      "detail": "",
+      "name": "final_blocker_closure_pynq_c3b_discovery_missing_has_no_recommended_candidate_path",
+      "status": "pass"
+    },
+    {
+      "detail": "{'creates_board_result': False, 'creates_xr_vits_policy': False, 'executes_commands': False, 'writes_canonical_inputs': False}",
+      "name": "final_blocker_closure_pynq_c3b_discovery_safe_no_side_effects",
+      "status": "pass"
+    },
+    {
+      "detail": "missing",
+      "name": "final_blocker_closure_pynq_vref_discovery_status_known",
+      "status": "pass"
+    },
+    {
+      "detail": "axis-vref-p0-softmax-input-x2-dsp-mixed-stream",
+      "name": "final_blocker_closure_pynq_vref_discovery_preset",
+      "status": "pass"
+    },
+    {
+      "detail": "0",
+      "name": "final_blocker_closure_pynq_vref_discovery_candidate_count_numeric",
+      "status": "pass"
+    },
+    {
+      "detail": "0",
+      "name": "final_blocker_closure_pynq_vref_discovery_pass_count_numeric",
+      "status": "pass"
+    },
+    {
+      "detail": "pass=0 candidates=0",
+      "name": "final_blocker_closure_pynq_vref_discovery_pass_count_lte_candidate_count",
+      "status": "pass"
+    },
+    {
+      "detail": "",
+      "name": "final_blocker_closure_pynq_vref_discovery_missing_has_no_recommended_candidate_path",
+      "status": "pass"
+    },
+    {
+      "detail": "{'creates_board_result': False, 'creates_xr_vits_policy': False, 'executes_commands': False, 'writes_canonical_inputs': False}",
+      "name": "final_blocker_closure_pynq_vref_discovery_safe_no_side_effects",
+      "status": "pass"
+    },
+    {
+      "detail": "missing",
+      "name": "final_blocker_closure_qkv_uram_discovery_status_known",
+      "status": "pass"
+    },
+    {
+      "detail": "axis-vref-p0-softmax-input-x2-qkv-uram",
+      "name": "final_blocker_closure_qkv_uram_discovery_preset",
+      "status": "pass"
+    },
+    {
+      "detail": "0",
+      "name": "final_blocker_closure_qkv_uram_discovery_candidate_count_numeric",
+      "status": "pass"
+    },
+    {
+      "detail": "0",
+      "name": "final_blocker_closure_qkv_uram_discovery_pass_count_numeric",
+      "status": "pass"
+    },
+    {
+      "detail": "pass=0 candidates=0",
+      "name": "final_blocker_closure_qkv_uram_discovery_pass_count_lte_candidate_count",
+      "status": "pass"
+    },
+    {
+      "detail": "",
+      "name": "final_blocker_closure_qkv_uram_discovery_missing_has_no_recommended_candidate_path",
+      "status": "pass"
+    },
+    {
+      "detail": "{'creates_board_result': False, 'creates_xr_vits_policy': False, 'executes_commands': False, 'writes_canonical_inputs': False}",
+      "name": "final_blocker_closure_qkv_uram_discovery_safe_no_side_effects",
+      "status": "pass"
+    },
+    {
+      "detail": "missing",
+      "name": "c3b_smoke_discovery_status_known",
+      "status": "pass"
+    },
+    {
+      "detail": "0",
+      "name": "c3b_smoke_discovery_pass_count_numeric",
+      "status": "pass"
+    },
+    {
+      "detail": "missing",
+      "name": "pynq_c3b_smoke_discovery_status_known",
+      "status": "pass"
+    },
+    {
+      "detail": "axis-c3b-mem16",
+      "name": "pynq_c3b_smoke_discovery_preset",
+      "status": "pass"
+    },
+    {
+      "detail": "0",
+      "name": "pynq_c3b_smoke_discovery_candidate_count_numeric",
+      "status": "pass"
+    },
+    {
+      "detail": "0",
+      "name": "pynq_c3b_smoke_discovery_pass_count_numeric",
+      "status": "pass"
+    },
+    {
+      "detail": "pass=0 candidates=0",
+      "name": "pynq_c3b_smoke_discovery_pass_count_lte_candidate_count",
+      "status": "pass"
+    },
+    {
+      "detail": "None",
+      "name": "pynq_c3b_smoke_discovery_missing_has_no_recommended_candidate",
+      "status": "pass"
+    },
+    {
+      "detail": "{'creates_board_result': False, 'creates_xr_vits_policy': False, 'executes_commands': False, 'writes_canonical_inputs': False}",
+      "name": "pynq_c3b_smoke_discovery_safe_no_side_effects",
+      "status": "pass"
+    },
+    {
+      "detail": "missing",
+      "name": "pynq_vref_smoke_discovery_status_known",
+      "status": "pass"
+    },
+    {
+      "detail": "axis-vref-p0-softmax-input-x2-dsp-mixed-stream",
+      "name": "pynq_vref_smoke_discovery_preset",
+      "status": "pass"
+    },
+    {
+      "detail": "0",
+      "name": "pynq_vref_smoke_discovery_candidate_count_numeric",
+      "status": "pass"
+    },
+    {
+      "detail": "0",
+      "name": "pynq_vref_smoke_discovery_pass_count_numeric",
+      "status": "pass"
+    },
+    {
+      "detail": "pass=0 candidates=0",
+      "name": "pynq_vref_smoke_discovery_pass_count_lte_candidate_count",
+      "status": "pass"
+    },
+    {
+      "detail": "None",
+      "name": "pynq_vref_smoke_discovery_missing_has_no_recommended_candidate",
+      "status": "pass"
+    },
+    {
+      "detail": "{'creates_board_result': False, 'creates_xr_vits_policy': False, 'executes_commands': False, 'writes_canonical_inputs': False}",
+      "name": "pynq_vref_smoke_discovery_safe_no_side_effects",
+      "status": "pass"
+    },
+    {
+      "detail": "missing",
+      "name": "qkv_uram_smoke_discovery_status_known",
+      "status": "pass"
+    },
+    {
+      "detail": "axis-vref-p0-softmax-input-x2-qkv-uram",
+      "name": "qkv_uram_smoke_discovery_preset",
+      "status": "pass"
+    },
+    {
+      "detail": "0",
+      "name": "qkv_uram_smoke_discovery_candidate_count_numeric",
+      "status": "pass"
+    },
+    {
+      "detail": "0",
+      "name": "qkv_uram_smoke_discovery_pass_count_numeric",
+      "status": "pass"
+    },
+    {
+      "detail": "pass=0 candidates=0",
+      "name": "qkv_uram_smoke_discovery_pass_count_lte_candidate_count",
+      "status": "pass"
+    },
+    {
+      "detail": "None",
+      "name": "qkv_uram_smoke_discovery_missing_has_no_recommended_candidate",
+      "status": "pass"
+    },
+    {
+      "detail": "{'creates_board_result': False, 'creates_xr_vits_policy': False, 'executes_commands': False, 'writes_canonical_inputs': False}",
+      "name": "qkv_uram_smoke_discovery_safe_no_side_effects",
+      "status": "pass"
+    },
+    {
+      "detail": "pass",
+      "name": "c3b_smoke_contract_pass",
+      "status": "pass"
+    },
+    {
+      "detail": "axis-c3b-mem16",
+      "name": "c3b_smoke_contract_preset",
+      "status": "pass"
+    },
+    {
+      "detail": "{'creates_board_result': False, 'creates_xr_vits_policy': False, 'executes_commands': False, 'writes_canonical_inputs': False}",
+      "name": "c3b_smoke_contract_no_side_effects",
+      "status": "pass"
+    },
+    {
+      "detail": "dict",
+      "name": "c3b_transfer_manifest_loaded_and_typed",
+      "status": "pass"
+    },
+    {
+      "detail": "pass",
+      "name": "c3b_transfer_manifest_pass",
+      "status": "pass"
+    },
+    {
+      "detail": "preset=axis-c3b-mem16 variant=c3b-mem16 target=ZCU104 PYNQ",
+      "name": "c3b_transfer_manifest_preset_variant",
+      "status": "pass"
+    },
+    {
+      "detail": "{'bytes': 593198, 'name': 'e2e_axis_dma_c3b_mem16_smoke_bundle.tar.gz', 'path': '/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/pynq/e2e_axis_dma_c3b_mem16_smoke_bundle.tar.gz', 'sha256': '3de505a6627409b4717ea95e5e76d74f0667c61b601fd96db1e495319adda712', 'sha256_file': 'e2e_axis_dma_c3b_mem16_smoke_bundle.tar.gz.sha256', 'sha256_line': '3de505a6627409b4717ea95e5e76d74f0667c61b601fd96db1e495319adda712  e2e_axis_dma_c3b_mem16_smoke_bundle.tar.gz'}",
+      "name": "c3b_transfer_manifest_tar_shape",
+      "status": "pass"
+    },
+    {
+      "detail": "['/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/pynq/e2e_axis_dma_c3b_mem16_smoke_bundle.tar.gz', '/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/signoff/e2e_axis_dma_c3b_mem16_smoke_bundle.tar.gz.sha256']",
+      "name": "c3b_transfer_manifest_files_contract",
+      "status": "pass"
+    },
+    {
+      "detail": "[]",
+      "name": "c3b_transfer_manifest_bundle_validation_clean",
+      "status": "pass"
+    },
+    {
+      "detail": "manifest=3de505a6627409b4717ea95e5e76d74f0667c61b601fd96db1e495319adda712  e2e_axis_dma_c3b_mem16_smoke_bundle.tar.gz sha256_file=3de505a6627409b4717ea95e5e76d74f0667c61b601fd96db1e495319adda712  e2e_axis_dma_c3b_mem16_smoke_bundle.tar.gz",
+      "name": "c3b_transfer_manifest_sha256_line_matches",
+      "status": "pass"
+    },
+    {
+      "detail": "{'expected_out_raw': [32, -13, 26, -6, 14, -11], 'expected_runtime_state': 2, 'result_json': 'e2e_axis_dma_c3b_mem16_file_smoke.json', 'validation_json': 'e2e_axis_dma_c3b_mem16_file_smoke_validation.json'}",
+      "name": "c3b_transfer_manifest_expected_outputs_contract",
+      "status": "pass"
+    },
+    {
+      "detail": "['sha256sum -c e2e_axis_dma_c3b_mem16_smoke_bundle.tar.gz.sha256']",
+      "name": "c3b_transfer_manifest_board_verify_command",
+      "status": "pass"
+    },
+    {
+      "detail": "['tar -xzf e2e_axis_dma_c3b_mem16_smoke_bundle.tar.gz', 'cd e2e_axis_dma_c3b_mem16_smoke_bundle', './run_e2e_axis_dma_c3b_mem16_file_smoke.sh', './validate_e2e_axis_dma_c3b_mem16_file_smoke.sh']",
+      "name": "c3b_transfer_manifest_board_run_commands",
+      "status": "pass"
+    },
+    {
+      "detail": "{'canonical_result_path': '/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/pynq/hgtxr/e2e_axis_dma_c3b_mem16_file_smoke.json', 'final_signoff_command': 'python3 tools/check_third_goal_preflight.py --root /home/kjm26/project/PRJXR/XR-VIT/HGTXR --mode final-signoff', 'import_command': 'python3 tools/import_pynq_smoke_result.py /path/to/e2e_axis_dma_c3b_mem16_file_smoke.json --preset axis-c3b-mem16 --json-out /tmp/hgtxr_c3b_smoke_import.json --validation-out /tmp/hgtxr_c3b_smoke_validation.json', 'source_on_board': 'e2e_axis_dma_c3b_mem16_file_smoke.json', 'validate_command': 'python3 tools/validate_pynq_smoke_result.py hardware/pynq/hgtxr/e2e_axis_dma_c3b_mem16_file_smoke.json --preset axis-c3b-mem16'}",
+      "name": "c3b_transfer_manifest_copyback_contract",
+      "status": "pass"
+    },
+    {
+      "detail": "3de505a6627409b4717ea95e5e76d74f0667c61b601fd96db1e495319adda712  e2e_axis_dma_c3b_mem16_smoke_bundle.tar.gz",
+      "name": "c3b_transfer_manifest_sha256_file_format",
+      "status": "pass"
+    },
+    {
+      "detail": "transfer=3de505a6627409b4717ea95e5e76d74f0667c61b601fd96db1e495319adda712 readiness=3de505a6627409b4717ea95e5e76d74f0667c61b601fd96db1e495319adda712 sha_file=3de505a6627409b4717ea95e5e76d74f0667c61b601fd96db1e495319adda712  e2e_axis_dma_c3b_mem16_smoke_bundle.tar.gz",
+      "name": "c3b_transfer_manifest_sha_matches_readiness",
+      "status": "pass"
+    },
+    {
+      "detail": "transfer={'bytes': 593198, 'name': 'e2e_axis_dma_c3b_mem16_smoke_bundle.tar.gz', 'path': '/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/pynq/e2e_axis_dma_c3b_mem16_smoke_bundle.tar.gz', 'sha256': '3de505a6627409b4717ea95e5e76d74f0667c61b601fd96db1e495319adda712', 'sha256_file': 'e2e_axis_dma_c3b_mem16_smoke_bundle.tar.gz.sha256', 'sha256_line': '3de505a6627409b4717ea95e5e76d74f0667c61b601fd96db1e495319adda712  e2e_axis_dma_c3b_mem16_smoke_bundle.tar.gz'} readiness={'name': 'e2e_axis_dma_c3b_mem16_smoke_bundle.tar.gz', 'path': '/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/pynq/e2e_axis_dma_c3b_mem16_smoke_bundle.tar.gz', 'sha256': '3de505a6627409b4717ea95e5e76d74f0667c61b601fd96db1e495319adda712', 'sha256_file': '/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/e2e_axis_dma_c3b_mem16_smoke_bundle.tar.gz.sha256', 'sha256_line': '3de505a6627409b4717ea95e5e76d74f0667c61b601fd96db1e495319adda712  e2e_axis_dma_c3b_mem16_smoke_bundle.tar.gz'}",
+      "name": "c3b_transfer_manifest_bundle_to_readiness_alignment",
+      "status": "pass"
+    },
+    {
+      "detail": "pass",
+      "name": "xr_vits_policy_preview_pass",
+      "status": "pass"
+    },
+    {
+      "detail": "preview_only=True active_policy_written=False",
+      "name": "xr_vits_policy_preview_only",
+      "status": "pass"
+    },
+    {
+      "detail": "pass",
+      "name": "xr_vits_policy_preview_integrity_pass",
+      "status": "pass"
+    },
+    {
+      "detail": "fingerprint-bound preview fields present",
+      "name": "xr_vits_policy_preview_required_fields",
+      "status": "pass"
+    },
+    {
+      "detail": "{'approved_at': '1970-01-01T00:00:00Z', 'approver_id': '<approved-by>', 'candidate_audit': 'docs/resources/xr_vits_candidate_audit_2026_06_10.json', 'candidate_audit_fingerprint': '69436e707b1654ee1f725580291feec7634854ba65711aff35093a11ea035152', 'event_id': 'c084f3dc58add659484908487b1966c75e3d1e0a8a0d7e9b667c8a097a1896c1', 'event_type': 'xr_vits_replacement_approval', 'generator': 'tools/create_xr_vits_replacement_policy.py', 'protocol_version': 'hgtxr-xr-vits-replacement-v1', 'reason': 'Approve XR_Accel as XR-VITs replacement for HGTXR third-goal signoff', 'reason_code': 'xr_vits_replacement', 'replacement_path': '/home/kjm26/project/PRJXR/XR-VIT/XR_Accel', 'replacement_role': 'candidate-xr-accel', 'requested_path': '/home/kjm26/project/PRJXR/XR-VITs'}",
+      "name": "xr_vits_policy_preview_approval_event_schema",
+      "status": "pass"
+    },
+    {
+      "detail": "{'approved_at': '1970-01-01T00:00:00Z', 'approver_id': '<approved-by>', 'candidate_audit': 'docs/resources/xr_vits_candidate_audit_2026_06_10.json', 'candidate_audit_fingerprint': '69436e707b1654ee1f725580291feec7634854ba65711aff35093a11ea035152', 'event_id': 'c084f3dc58add659484908487b1966c75e3d1e0a8a0d7e9b667c8a097a1896c1', 'event_type': 'xr_vits_replacement_approval', 'generator': 'tools/create_xr_vits_replacement_policy.py', 'protocol_version': 'hgtxr-xr-vits-replacement-v1', 'reason': 'Approve XR_Accel as XR-VITs replacement for HGTXR third-goal signoff', 'reason_code': 'xr_vits_replacement', 'replacement_path': '/home/kjm26/project/PRJXR/XR-VIT/XR_Accel', 'replacement_role': 'candidate-xr-accel', 'requested_path': '/home/kjm26/project/PRJXR/XR-VITs'}",
+      "name": "xr_vits_policy_preview_approval_event_matches_policy",
+      "status": "pass"
+    },
+    {
+      "detail": "c084f3dc58add659484908487b1966c75e3d1e0a8a0d7e9b667c8a097a1896c1",
+      "name": "xr_vits_policy_preview_approval_event_id",
+      "status": "pass"
+    },
+    {
+      "detail": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/xr_vits_replacement_policy.json",
+      "name": "xr_vits_policy_preview_active_policy_path",
+      "status": "pass"
+    },
+    {
+      "detail": "docs/resources/xr_vits_candidate_audit_2026_06_10.json",
+      "name": "xr_vits_policy_preview_candidate_audit_rel",
+      "status": "pass"
+    },
+    {
+      "detail": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/xr_vits_candidate_audit_2026_06_10.json",
+      "name": "xr_vits_policy_preview_integrity_candidate_path",
+      "status": "pass"
+    },
+    {
+      "detail": "{'creates_board_result': False, 'creates_xr_vits_policy': False, 'executes_commands': False, 'writes_canonical_inputs': False}",
+      "name": "xr_vits_policy_preview_no_side_effects",
+      "status": "pass"
+    },
+    {
+      "detail": "ready-for-operator-unblock",
+      "name": "final_unblock_closeout_packet_ready",
+      "status": "pass"
+    },
+    {
+      "detail": "blocked",
+      "name": "final_unblock_intake_status_known",
+      "status": "pass"
+    },
+    {
+      "detail": "['C3b AXIS/DMA physical smoke result', 'requested XR-VITs sibling']",
+      "name": "final_unblock_intake_blocker_status_keys",
+      "status": "pass"
+    },
+    {
+      "detail": "{'candidate_path': '', 'candidate_status': 'not-supplied', 'candidate_would_clear': False, 'canonical_path': '/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/pynq/hgtxr/e2e_axis_dma_c3b_mem16_file_smoke.json', 'current_status': 'missing', 'current_would_clear': False, 'next_input': 'board-produced C3b smoke JSON', 'next_input_path': '/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/pynq/hgtxr/e2e_axis_dma_c3b_mem16_file_smoke.json', 'ready_for_active_unblock': False, 'remaining_after_candidates': True, 'unblock_action': 'capture ZCU104 C3b smoke, dry-run import it, then import to canonical path'}",
+      "name": "final_unblock_intake_c3b_next_input_path",
+      "status": "pass"
+    },
+    {
+      "detail": "{'candidate_mode': 'exact', 'candidate_replacement_path': '', 'candidate_status': 'fail', 'candidate_would_clear': False, 'current_mode': 'missing', 'current_status': 'missing', 'current_would_clear': False, 'exact_path': '/home/kjm26/project/PRJXR/XR-VITs', 'next_input': 'exact XR-VITs directory or approved replacement policy', 'next_input_path': '/home/kjm26/project/PRJXR/XR-VITs OR /home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/xr_vits_replacement_policy.json', 'policy_path': '/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/xr_vits_replacement_policy.json', 'ready_for_active_unblock': False, 'remaining_after_candidates': True, 'unblock_action': 'restore exact XR-VITs source or approve fingerprint-bound XR_Accel replacement policy'}",
+      "name": "final_unblock_intake_xr_vits_next_input_path",
+      "status": "pass"
+    },
+    {
+      "detail": "[{'action': 'capture ZCU104 C3b smoke, dry-run import it, then import to canonical path', 'blocker': 'C3b AXIS/DMA physical smoke result', 'input': 'board-produced C3b smoke JSON', 'path': '/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/pynq/hgtxr/e2e_axis_dma_c3b_mem16_file_smoke.json'}, {'action': 'restore exact XR-VITs source or approve fingerprint-bound XR_Accel replacement policy', 'blocker': 'requested XR-VITs sibling', 'input': 'exact XR-VITs directory or approved replacement policy', 'path': '/home/kjm26/project/PRJXR/XR-VITs OR /home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/xr_vits_replacement_policy.json'}]",
+      "name": "final_unblock_intake_next_inputs_match_blockers",
+      "status": "pass"
+    },
+    {
+      "detail": "intake=['C3b AXIS/DMA physical smoke result', 'requested XR-VITs sibling'] plan=['C3b AXIS/DMA physical smoke result', 'requested XR-VITs sibling']",
+      "name": "final_unblock_intake_next_inputs_match_operator_plan_required_inputs",
+      "status": "pass"
+    },
+    {
+      "detail": "intake={'C3b AXIS/DMA physical smoke result': {'action': 'capture ZCU104 C3b smoke, dry-run import it, then import to canonical path', 'blocker': 'C3b AXIS/DMA physical smoke result', 'input': 'board-produced C3b smoke JSON', 'path': '/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/pynq/hgtxr/e2e_axis_dma_c3b_mem16_file_smoke.json'}, 'requested XR-VITs sibling': {'action': 'restore exact XR-VITs source or approve fingerprint-bound XR_Accel replacement policy', 'blocker': 'requested XR-VITs sibling', 'input': 'exact XR-VITs directory or approved replacement policy', 'path': '/home/kjm26/project/PRJXR/XR-VITs OR /home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/xr_vits_replacement_policy.json'}} plan={'C3b AXIS/DMA physical smoke result': {'acceptance': ['preset axis-c3b-mem16 validates', 'runtime_state is 2', 'out_raw matches expected C3b vector', 'bitfile/hwhfile basenames match hgtxr_e2e_axis_dma_c3b_mem16'], 'blocker': 'C3b AXIS/DMA physical smoke result', 'candidate_path': '', 'candidate_status': 'not-supplied', 'canonical_path': '/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/pynq/hgtxr/e2e_axis_dma_c3b_mem16_file_smoke.json', 'current_status': 'missing', 'kind': 'board-produced-json', 'ready': False}, 'requested XR-VITs sibling': {'acceptance': ['exact XR-VITs checkout exists, or', 'replacement policy is generated by create_xr_vits_replacement_policy.py', 'policy has candidate_audit_fingerprint, recommendation snapshot, and policy_fingerprint', 'approved_by is a real non-placeholder identifier'], 'blocker': 'requested XR-VITs sibling', 'candidate_status': 'fail', 'current_status': 'missing', 'exact_path': '/home/kjm26/project/PRJXR/XR-VITs', 'kind': 'exact-source-or-approved-policy', 'policy_path': '/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/xr_vits_replacement_policy.json', 'ready': False, 'replacement_path': ''}}",
+      "name": "final_unblock_intake_next_input_paths_match_operator_plan",
+      "status": "pass"
+    },
+    {
+      "detail": "['active-final-runner', 'candidate-audit', 'dry-run-final-runner']",
+      "name": "final_unblock_intake_operator_sequence_contains_expected_steps",
+      "status": "pass"
+    },
+    {
+      "detail": "intake={'candidate-audit': {'command': 'python3 tools/audit_final_unblock_candidates.py --root /home/kjm26/project/PRJXR/XR-VIT/HGTXR --xr-vits-mode exact --json-out /tmp/final_unblock_candidate_audit_2026_06_10.json --markdown-out /tmp/final_unblock_candidate_audit_2026_06_10.md', 'side_effects': False, 'step': 'candidate-audit'}, 'dry-run-final-runner': {'command': '', 'side_effects': False, 'step': 'dry-run-final-runner'}, 'active-final-runner': {'command': '', 'side_effects': True, 'step': 'active-final-runner'}} plan_dry={'command': '', 'ready_to_execute': False, 'side_effects': False, 'step': 'combined-final-runner-dry-run'} plan_active={'command': '', 'ready_to_execute': False, 'side_effects': True, 'step': 'combined-final-runner-active'}",
+      "name": "final_unblock_intake_operator_sequence_matches_operator_plan_commands",
+      "status": "pass"
+    },
+    {
+      "detail": "intake={'candidate-audit': {'command': 'python3 tools/audit_final_unblock_candidates.py --root /home/kjm26/project/PRJXR/XR-VIT/HGTXR --xr-vits-mode exact --json-out /tmp/final_unblock_candidate_audit_2026_06_10.json --markdown-out /tmp/final_unblock_candidate_audit_2026_06_10.md', 'side_effects': False, 'step': 'candidate-audit'}, 'dry-run-final-runner': {'command': '', 'side_effects': False, 'step': 'dry-run-final-runner'}, 'active-final-runner': {'command': '', 'side_effects': True, 'step': 'active-final-runner'}} plan_active={'command': '', 'ready_to_execute': False, 'side_effects': True, 'step': 'combined-final-runner-active'}",
+      "name": "final_unblock_intake_operator_sequence_side_effect_profile",
+      "status": "pass"
+    },
+    {
+      "detail": "{'creates_board_result': False, 'creates_xr_vits_policy': False, 'executes_commands': False, 'writes_canonical_inputs': False}",
+      "name": "final_unblock_intake_no_side_effects",
+      "status": "pass"
+    },
+    {
+      "detail": "{'creates_board_result': False, 'creates_xr_vits_policy': False, 'executes_commands': False, 'executes_network': False, 'writes_canonical_inputs': False}",
+      "name": "final_unblock_closeout_packet_no_side_effects",
+      "status": "pass"
+    },
+    {
+      "detail": "pass",
+      "name": "final_unblock_closeout_validation_pass",
+      "status": "pass"
+    },
+    {
+      "detail": "0",
+      "name": "final_unblock_closeout_validation_fail_zero",
+      "status": "pass"
+    },
+    {
+      "detail": "49",
+      "name": "final_unblock_closeout_validation_check_count",
+      "status": "pass"
+    },
+    {
+      "detail": "131",
+      "name": "final_operator_handoff_validation_check_count",
+      "status": "pass"
+    },
+    {
+      "detail": "152",
+      "name": "final_signoff_bundle_validation_check_count",
+      "status": "pass"
+    },
+    {
+      "detail": "False",
+      "name": "final_unblock_closeout_qkv_gate_optional",
+      "status": "pass"
+    },
+    {
+      "detail": "ready-for-physical-smoke",
+      "name": "final_unblock_closeout_qkv_gate_status_known",
+      "status": "pass"
+    },
+    {
+      "detail": "['python3 tools/run_third_goal_final_signoff.py --root /home/kjm26/project/PRJXR/XR-VIT/HGTXR --zcu104-host <zcu104-ip-or-host> --zcu104-user xilinx --require-qkv-uram-physical-smoke --allow-blocked', 'python3 tools/run_third_goal_final_signoff.py --root /home/kjm26/project/PRJXR/XR-VIT/HGTXR --zcu104-host <zcu104-ip-or-host> --zcu104-user xilinx --execute-qkv-uram-smoke --allow-blocked', 'python3 tools/validate_pynq_smoke_result.py /path/to/e2e_axis_dma_vref_p0_softmax_input_x2_qkv_uram_file_smoke.json --preset axis-vref-p0-softmax-input-x2-qkv-uram', 'python3 tools/run_third_goal_final_signoff.py --root /home/kjm26/project/PRJXR/XR-VIT/HGTXR --import-qkv-uram-smoke-json /path/to/e2e_axis_dma_vref_p0_softmax_input_x2_qkv_uram_file_smoke.json --dry-run-import-qkv-uram-smoke --allow-blocked', 'python3 tools/run_third_goal_final_signoff.py --root /home/kjm26/project/PRJXR/XR-VIT/HGTXR --import-qkv-uram-smoke-json /path/to/e2e_axis_dma_vref_p0_softmax_input_x2_qkv_uram_file_smoke.json --require-qkv-uram-physical-smoke --allow-blocked']",
+      "name": "final_unblock_closeout_qkv_u5_commands_present",
+      "status": "pass"
+    },
+    {
+      "detail": "required=False status=not_captured",
+      "name": "final_unblock_closeout_qkv_required_smoke_status_consistent",
+      "status": "pass"
+    },
+    {
+      "detail": "required=False json=None",
+      "name": "final_unblock_closeout_qkv_required_smoke_json_present",
+      "status": "pass"
+    },
+    {
+      "detail": "pass",
+      "name": "selected_path_audit_pass",
+      "status": "pass"
+    },
+    {
+      "detail": "0",
+      "name": "selected_path_audit_fail_zero",
+      "status": "pass"
+    },
+    {
+      "detail": "22",
+      "name": "selected_path_audit_check_count",
+      "status": "pass"
+    },
+    {
+      "detail": "pending",
+      "name": "selected_path_e_pending",
+      "status": "pass"
+    },
+    {
+      "detail": "pass",
+      "name": "resource_policy_audit_pass",
+      "status": "pass"
+    },
+    {
+      "detail": "0",
+      "name": "resource_policy_audit_fail_zero",
+      "status": "pass"
+    },
+    {
+      "detail": "36",
+      "name": "resource_policy_audit_check_count",
+      "status": "pass"
+    },
+    {
+      "detail": "{\"canonical_mirror_sha256\": true, \"canonical_pair_present\": true, \"docs_singularity\": true, \"expected\": [\"e2e_resource_policy_audit_2026_06_10.json\", \"e2e_resource_policy_audit_2026_06_10.md\"], \"filename_payload_date_match\": true, \"filename_payload_mismatches\": [], \"generated_singularity\": true, \"mirror_hash_mismatches\": [], \"missing\": {\"docs_resources\": [], \"generated_signoff\": []}, \"observed\": {\"docs_resources\": [\"e2e_resource_policy_audit_2026_06_10.json\", \"e2e_resource_policy_audit_2026_06_10.md\"], \"generated_signoff\": [\"e2e_resource_policy_audit_2026_06_10.json\", \"e2e_resource_policy_audit_2026_06_10.md\"]}, \"status\": \"pass\", \"unexpected\": {\"docs_resources\": [], \"generated_signoff\": []}}",
+      "name": "resource_policy_canonical_pair_present",
+      "status": "pass"
+    },
+    {
+      "detail": "{\"canonical_mirror_sha256\": true, \"canonical_pair_present\": true, \"docs_singularity\": true, \"expected\": [\"e2e_resource_policy_audit_2026_06_10.json\", \"e2e_resource_policy_audit_2026_06_10.md\"], \"filename_payload_date_match\": true, \"filename_payload_mismatches\": [], \"generated_singularity\": true, \"mirror_hash_mismatches\": [], \"missing\": {\"docs_resources\": [], \"generated_signoff\": []}, \"observed\": {\"docs_resources\": [\"e2e_resource_policy_audit_2026_06_10.json\", \"e2e_resource_policy_audit_2026_06_10.md\"], \"generated_signoff\": [\"e2e_resource_policy_audit_2026_06_10.json\", \"e2e_resource_policy_audit_2026_06_10.md\"]}, \"status\": \"pass\", \"unexpected\": {\"docs_resources\": [], \"generated_signoff\": []}}",
+      "name": "resource_policy_docs_singularity",
+      "status": "pass"
+    },
+    {
+      "detail": "{\"canonical_mirror_sha256\": true, \"canonical_pair_present\": true, \"docs_singularity\": true, \"expected\": [\"e2e_resource_policy_audit_2026_06_10.json\", \"e2e_resource_policy_audit_2026_06_10.md\"], \"filename_payload_date_match\": true, \"filename_payload_mismatches\": [], \"generated_singularity\": true, \"mirror_hash_mismatches\": [], \"missing\": {\"docs_resources\": [], \"generated_signoff\": []}, \"observed\": {\"docs_resources\": [\"e2e_resource_policy_audit_2026_06_10.json\", \"e2e_resource_policy_audit_2026_06_10.md\"], \"generated_signoff\": [\"e2e_resource_policy_audit_2026_06_10.json\", \"e2e_resource_policy_audit_2026_06_10.md\"]}, \"status\": \"pass\", \"unexpected\": {\"docs_resources\": [], \"generated_signoff\": []}}",
+      "name": "resource_policy_generated_singularity",
+      "status": "pass"
+    },
+    {
+      "detail": "{\"canonical_mirror_sha256\": true, \"canonical_pair_present\": true, \"docs_singularity\": true, \"expected\": [\"e2e_resource_policy_audit_2026_06_10.json\", \"e2e_resource_policy_audit_2026_06_10.md\"], \"filename_payload_date_match\": true, \"filename_payload_mismatches\": [], \"generated_singularity\": true, \"mirror_hash_mismatches\": [], \"missing\": {\"docs_resources\": [], \"generated_signoff\": []}, \"observed\": {\"docs_resources\": [\"e2e_resource_policy_audit_2026_06_10.json\", \"e2e_resource_policy_audit_2026_06_10.md\"], \"generated_signoff\": [\"e2e_resource_policy_audit_2026_06_10.json\", \"e2e_resource_policy_audit_2026_06_10.md\"]}, \"status\": \"pass\", \"unexpected\": {\"docs_resources\": [], \"generated_signoff\": []}}",
+      "name": "resource_policy_filename_payload_date_match",
+      "status": "pass"
+    },
+    {
+      "detail": "{\"canonical_mirror_sha256\": true, \"canonical_pair_present\": true, \"docs_singularity\": true, \"expected\": [\"e2e_resource_policy_audit_2026_06_10.json\", \"e2e_resource_policy_audit_2026_06_10.md\"], \"filename_payload_date_match\": true, \"filename_payload_mismatches\": [], \"generated_singularity\": true, \"mirror_hash_mismatches\": [], \"missing\": {\"docs_resources\": [], \"generated_signoff\": []}, \"observed\": {\"docs_resources\": [\"e2e_resource_policy_audit_2026_06_10.json\", \"e2e_resource_policy_audit_2026_06_10.md\"], \"generated_signoff\": [\"e2e_resource_policy_audit_2026_06_10.json\", \"e2e_resource_policy_audit_2026_06_10.md\"]}, \"status\": \"pass\", \"unexpected\": {\"docs_resources\": [], \"generated_signoff\": []}}",
+      "name": "resource_policy_canonical_mirror_sha256",
+      "status": "pass"
+    },
+    {
+      "detail": "{\"canonical_mirror_sha256\": true, \"canonical_pair_present\": true, \"docs_singularity\": true, \"expected\": [\"e2e_resource_policy_audit_2026_06_10.json\", \"e2e_resource_policy_audit_2026_06_10.md\"], \"filename_payload_date_match\": true, \"filename_payload_mismatches\": [], \"generated_singularity\": true, \"mirror_hash_mismatches\": [], \"missing\": {\"docs_resources\": [], \"generated_signoff\": []}, \"observed\": {\"docs_resources\": [\"e2e_resource_policy_audit_2026_06_10.json\", \"e2e_resource_policy_audit_2026_06_10.md\"], \"generated_signoff\": [\"e2e_resource_policy_audit_2026_06_10.json\", \"e2e_resource_policy_audit_2026_06_10.md\"]}, \"status\": \"pass\", \"unexpected\": {\"docs_resources\": [], \"generated_signoff\": []}}",
+      "name": "resource_policy_audit_single_canonical_artifact_set",
+      "status": "pass"
+    },
+    {
+      "detail": "1",
+      "name": "resource_policy_audit_force_dsp_macro_default",
+      "status": "pass"
+    },
+    {
+      "detail": "1",
+      "name": "resource_policy_audit_force_uram_macro_default",
+      "status": "pass"
+    },
+    {
+      "detail": "1",
+      "name": "resource_policy_audit_small_mem_lutram_macro_default",
+      "status": "pass"
+    },
+    {
+      "detail": "1",
+      "name": "resource_policy_audit_cyclic_weight_tiles_uram_macro_default",
+      "status": "pass"
+    },
+    {
+      "detail": "1",
+      "name": "resource_policy_audit_cyclic_large_temps_uram_macro_default",
+      "status": "pass"
+    },
+    {
+      "detail": "1",
+      "name": "resource_policy_audit_cyclic_small_tile_lutram_macro_default",
+      "status": "pass"
+    },
+    {
+      "detail": "2",
+      "name": "resource_policy_audit_dsp_bind_op_present",
+      "status": "pass"
+    },
+    {
+      "detail": "2",
+      "name": "resource_policy_audit_rmu_smu_dsp_bind_op_present",
+      "status": "pass"
+    },
+    {
+      "detail": "rmu_smu_dsp_mul",
+      "name": "resource_policy_audit_rmu_smu_dsp_helper_defined",
+      "status": "pass"
+    },
+    {
+      "detail": "rmu_smu_dsp_mul_acc",
+      "name": "resource_policy_audit_rmu_smu_dsp_acc_helper_defined",
+      "status": "pass"
+    },
+    {
+      "detail": "RMU projection helper calls",
+      "name": "resource_policy_audit_rmu_projection_uses_dsp_helper",
+      "status": "pass"
+    },
+    {
+      "detail": "SMU relation helper calls",
+      "name": "resource_policy_audit_smu_relation_uses_dsp_helper",
+      "status": "pass"
+    },
+    {
+      "detail": "3",
+      "name": "resource_policy_audit_uram_bind_storage_present",
+      "status": "pass"
+    },
+    {
+      "detail": "3",
+      "name": "resource_policy_audit_lutram_bind_storage_present",
+      "status": "pass"
+    },
+    {
+      "detail": "6",
+      "name": "resource_policy_audit_cyclic_weight_tiles_uram_pragmas",
+      "status": "pass"
+    },
+    {
+      "detail": "4",
+      "name": "resource_policy_audit_cyclic_large_temps_uram_pragmas",
+      "status": "pass"
+    },
+    {
+      "detail": "9",
+      "name": "resource_policy_audit_cyclic_small_tile_lutram_pragmas",
+      "status": "pass"
+    },
+    {
+      "detail": "8",
+      "name": "resource_policy_audit_zcu104_parallelism_default",
+      "status": "pass"
+    },
+    {
+      "detail": "8",
+      "name": "resource_policy_audit_zcu104_dense_parallelism_default",
+      "status": "pass"
+    },
+    {
+      "detail": "128",
+      "name": "resource_policy_audit_zcu104_fifo_depth_default",
+      "status": "pass"
+    },
+    {
+      "detail": "pass",
+      "name": "resource_policy_audit_resource_matrix_pass",
+      "status": "pass"
+    },
+    {
+      "detail": "{'best_latency_variants': ['C1', 'C3b'], 'highest_dsp_variants': ['C1', 'C3b'], 'lowest_lut_c_variant': 'C3b', 'reason': 'C3b keeps PAR16 DSP/latency gain while reducing LUT versus C1 and retaining positive routed WNS.', 'recommended_board_smoke_variant': 'C3b', 'variant_count': 4}",
+      "name": "resource_policy_audit_resource_matrix_recommends_c3b",
+      "status": "pass"
+    },
+    {
+      "detail": "16",
+      "name": "resource_policy_audit_c3b_parallelism_16",
+      "status": "pass"
+    },
+    {
+      "detail": "16",
+      "name": "resource_policy_audit_c3b_memory_banks_16",
+      "status": "pass"
+    },
+    {
+      "detail": "C3b=604 A1=332",
+      "name": "resource_policy_audit_c3b_dsp_increased_vs_a1",
+      "status": "pass"
+    },
+    {
+      "detail": "C3b=126506 C1=127916",
+      "name": "resource_policy_audit_c3b_lut_lower_than_c1",
+      "status": "pass"
+    },
+    {
+      "detail": "64",
+      "name": "resource_policy_audit_c3b_uram_positive",
+      "status": "pass"
+    },
+    {
+      "detail": "C3b=37508072 C1=37508072",
+      "name": "resource_policy_audit_c3b_latency_not_worse_than_c1",
+      "status": "pass"
+    },
+    {
+      "detail": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/hgtxr_e2e_axis_par16_c3b_mem16_hls/solution_e2e_q4w8a/syn/report/csynth.xml",
+      "name": "resource_policy_audit_c3b_csynth_xml_exists",
+      "status": "pass"
+    },
+    {
+      "detail": "csynth={'bram_18k': 332, 'dsp': 604, 'ff': 59505, 'lut': 126506, 'uram': 64} matrix={'bram_18k': 332, 'dsp': 604, 'ff': 59505, 'lut': 126506, 'uram': 64}",
+      "name": "resource_policy_audit_c3b_csynth_resources_match_matrix",
+      "status": "pass"
+    },
+    {
+      "detail": "csynth=37508072 matrix=37508072",
+      "name": "resource_policy_audit_c3b_csynth_latency_matches_matrix",
+      "status": "pass"
+    },
+    {
+      "detail": "604 <= 604",
+      "name": "resource_policy_audit_c3b_csynth_dsp_lte_threshold",
+      "status": "pass"
+    },
+    {
+      "detail": "64 <= 64",
+      "name": "resource_policy_audit_c3b_csynth_uram_lte_threshold",
+      "status": "pass"
+    },
+    {
+      "detail": "126506 <= 126506",
+      "name": "resource_policy_audit_c3b_csynth_lut_lte_threshold",
+      "status": "pass"
+    },
+    {
+      "detail": "37508072 <= 37508072",
+      "name": "resource_policy_audit_c3b_csynth_latency_lte_threshold",
+      "status": "pass"
+    },
+    {
+      "detail": "4.415 >= 4.415",
+      "name": "resource_policy_audit_c3b_routed_wns_gte_threshold",
+      "status": "pass"
+    },
+    {
+      "detail": "pass",
+      "name": "third_goal_source_audit_pass",
+      "status": "pass"
+    },
+    {
+      "detail": "86",
+      "name": "third_goal_source_audit_required_count",
+      "status": "pass"
+    },
+    {
+      "detail": "224",
+      "name": "third_goal_source_audit_source_count",
+      "status": "pass"
+    },
+    {
+      "detail": "[]",
+      "name": "third_goal_source_audit_missing_zero",
+      "status": "pass"
+    },
+    {
+      "detail": "blocked-external",
+      "name": "third_goal_current_audit_status_known",
+      "status": "pass"
+    },
+    {
+      "detail": "12",
+      "name": "third_goal_current_audit_requirements_count",
+      "status": "pass"
+    },
+    {
+      "detail": "blocked",
+      "name": "third_goal_completion_audit_status_known",
+      "status": "pass"
+    },
+    {
+      "detail": "14",
+      "name": "third_goal_completion_audit_item_count",
+      "status": "pass"
+    },
+    {
+      "detail": "stored=11/1/2 computed=11/1/2",
+      "name": "third_goal_completion_audit_counts_match_items",
+      "status": "pass"
+    },
+    {
+      "detail": "pass",
+      "name": "third_goal_completion_audit_req12_manifest_pass",
+      "status": "pass"
+    },
+    {
+      "detail": "trace_blocked=['11'] completion_req11=blocked",
+      "name": "third_goal_completion_audit_req11_matches_trace",
+      "status": "pass"
+    },
+    {
+      "detail": "trace_partial=['4'] completion_req4=partial",
+      "name": "third_goal_completion_audit_req4_matches_trace",
+      "status": "pass"
+    },
+    {
+      "detail": "pass",
+      "name": "req1_environment_audit_pass",
+      "status": "pass"
+    },
+    {
+      "detail": "0",
+      "name": "req1_environment_audit_fail_zero",
+      "status": "pass"
+    },
+    {
+      "detail": "13",
+      "name": "req1_environment_audit_check_count",
+      "status": "pass"
+    },
+    {
+      "detail": "Linux",
+      "name": "req1_environment_audit_platform_linux",
+      "status": "pass"
+    },
+    {
+      "detail": "{'BUG_REPORT_URL': 'https://bugs.launchpad.net/ubuntu/', 'HOME_URL': 'https://www.ubuntu.com/', 'ID': 'ubuntu', 'ID_LIKE': 'debian', 'NAME': 'Ubuntu', 'PRETTY_NAME': 'Ubuntu 22.04.5 LTS', 'PRIVACY_POLICY_URL': 'https://www.ubuntu.com/legal/terms-and-policies/privacy-policy', 'SUPPORT_URL': 'https://help.ubuntu.com/', 'UBUNTU_CODENAME': 'jammy', 'VERSION': '22.04.5 LTS (Jammy Jellyfish)', 'VERSION_CODENAME': 'jammy', 'VERSION_ID': '22.04'}",
+      "name": "req1_environment_audit_ubuntu_id",
+      "status": "pass"
+    },
+    {
+      "detail": "22.04",
+      "name": "req1_environment_audit_ubuntu_version_22_04",
+      "status": "pass"
+    },
+    {
+      "detail": "Linux version 6.8.0-124-generic (buildd@lcy02-amd64-109) (x86_64-linux-gnu-gcc-12 (Ubuntu 12.3.0-1ubuntu1~22.04.3) 12.3.0, GNU ld (GNU Binutils for Ubuntu) 2.38) #124~22.04.1-Ubuntu SMP PREEMPT_DYNAMIC Tue May 26 21:05:19 UTC ",
+      "name": "req1_environment_audit_not_wsl_kernel",
+      "status": "pass"
+    },
+    {
+      "detail": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware",
+      "name": "req1_environment_audit_hardware_root_expected_prefix",
+      "status": "pass"
+    },
+    {
+      "detail": "[]",
+      "name": "req1_environment_audit_no_legacy_wsl_or_xilinx_paths",
+      "status": "pass"
+    },
+    {
+      "detail": "/tools/Xilinx/Vitis_HLS/2023.2/bin/vitis_hls",
+      "name": "req1_environment_audit_vitis_hls_tools_xilinx_executable",
+      "status": "pass"
+    },
+    {
+      "detail": "/tools/Xilinx/Vivado/2023.2/bin/vivado",
+      "name": "req1_environment_audit_vivado_tools_xilinx_executable",
+      "status": "pass"
+    },
+    {
+      "detail": "pass",
+      "name": "req9_deit_image_audit_pass",
+      "status": "pass"
+    },
+    {
+      "detail": "0",
+      "name": "req9_deit_image_audit_fail_zero",
+      "status": "pass"
+    },
+    {
+      "detail": "11",
+      "name": "req9_deit_image_audit_check_count",
+      "status": "pass"
+    },
+    {
+      "detail": "90495791e6103be30268320d3b17dce2eaa52d003dd6f341393262745c1c3b79",
+      "name": "req9_deit_image_requested_sha256_valid",
+      "status": "pass"
+    },
+    {
+      "detail": "/home/kjm26/project/PRJXR/XR-VIT/PAPER_PRJXR/05_RESOURCES/DeiT-Tiny C-Syn Results.png",
+      "name": "req9_deit_image_requested_image_exists",
+      "status": "pass"
+    },
+    {
+      "detail": "89504e470d0a1a0a",
+      "name": "req9_deit_image_requested_image_png_magic",
+      "status": "pass"
+    },
+    {
+      "detail": "{'hgpipe': '90495791e6103be30268320d3b17dce2eaa52d003dd6f341393262745c1c3b79', 'requested': '90495791e6103be30268320d3b17dce2eaa52d003dd6f341393262745c1c3b79'}",
+      "name": "req9_deit_image_hgpipe_substitute_matches_requested_sha256",
+      "status": "pass"
+    },
+    {
+      "detail": "{'docs_copy': '90495791e6103be30268320d3b17dce2eaa52d003dd6f341393262745c1c3b79', 'requested': '90495791e6103be30268320d3b17dce2eaa52d003dd6f341393262745c1c3b79'}",
+      "name": "req9_deit_image_hardware_docs_copy_matches_requested_sha256",
+      "status": "pass"
+    },
+    {
+      "detail": "{'creates_board_result': False, 'creates_xr_vits_policy': False, 'executes_commands': False, 'executes_network': False, 'writes_canonical_inputs': False}",
+      "name": "req9_deit_image_no_side_effects",
+      "status": "pass"
+    },
+    {
+      "detail": "blocked",
+      "name": "xr_vits_gate_status_blocked_or_clear",
+      "status": "pass"
+    },
+    {
+      "detail": "candidate-ready-needs-approval",
+      "name": "xr_vits_gate_current_resolution_expected",
+      "status": "pass"
+    },
+    {
+      "detail": "exists=False path=/home/kjm26/project/PRJXR/XR-VITs",
+      "name": "xr_vits_gate_exact_path_absent_or_clear",
+      "status": "pass"
+    },
+    {
+      "detail": "exists=True path=/home/kjm26/project/PRJXR/XR-VIT/XR_Accel",
+      "name": "xr_vits_gate_replacement_candidate_present",
+      "status": "pass"
+    },
+    {
+      "detail": "True",
+      "name": "xr_vits_gate_candidate_recommendation_matches",
+      "status": "pass"
+    },
+    {
+      "detail": "missing",
+      "name": "xr_vits_gate_active_policy_status_known",
+      "status": "pass"
+    },
+    {
+      "detail": "{'creates_xr_vits_policy': False, 'executes_commands': False, 'executes_network': False, 'writes_canonical_inputs': False}",
+      "name": "xr_vits_gate_no_side_effects",
+      "status": "pass"
+    },
+    {
+      "detail": "blocked_missing_canonical_physical_smoke_result",
+      "name": "c3b_physical_smoke_gate_status_known",
+      "status": "pass"
+    },
+    {
+      "detail": "True",
+      "name": "c3b_physical_smoke_gate_ready_for_board",
+      "status": "pass"
+    },
+    {
+      "detail": "missing",
+      "name": "c3b_physical_smoke_gate_canonical_result_status_known",
+      "status": "pass"
+    },
+    {
+      "detail": "missing",
+      "name": "c3b_physical_smoke_gate_canonical_validation_status_known",
+      "status": "pass"
+    },
+    {
+      "detail": "pass",
+      "name": "c3b_physical_smoke_gate_bundle_pass",
+      "status": "pass"
+    },
+    {
+      "detail": "pass",
+      "name": "c3b_physical_smoke_gate_session_pass",
+      "status": "pass"
+    },
+    {
+      "detail": "{'creates_board_result': False, 'executes_commands': False, 'executes_network': False, 'writes_canonical_inputs': False}",
+      "name": "c3b_physical_smoke_gate_no_side_effects",
+      "status": "pass"
+    },
+    {
+      "detail": "blocked",
+      "name": "third_goal_requirements_trace_status_known",
+      "status": "pass"
+    },
+    {
+      "detail": "['11']",
+      "name": "third_goal_requirements_trace_req11_blocked",
+      "status": "pass"
+    },
+    {
+      "detail": "True",
+      "name": "third_goal_requirements_trace_xr_vits_policy_fields_complete",
+      "status": "pass"
+    },
+    {
+      "detail": "False",
+      "name": "third_goal_requirements_trace_xr_vits_legacy_policy_rejected",
+      "status": "pass"
+    },
+    {
+      "detail": "pass",
+      "name": "qkv_uram_successor_pass",
+      "status": "pass"
+    },
+    {
+      "detail": "40",
+      "name": "qkv_uram_successor_uram_lte_c3b",
+      "status": "pass"
+    },
+    {
+      "detail": "498485",
+      "name": "qkv_uram_successor_latency_lte_c3b",
+      "status": "pass"
+    },
+    {
+      "detail": "128",
+      "name": "qkv_uram_successor_dsp_lte_c3b",
+      "status": "pass"
+    },
+    {
+      "detail": "43236",
+      "name": "qkv_uram_successor_lut_lte_c3b",
+      "status": "pass"
+    },
+    {
+      "detail": "{'dsp_mixed_stream': 144, 'qkv_uram': 114}",
+      "name": "qkv_uram_successor_bram_reduced_vs_dsp_mixed_stream",
+      "status": "pass"
+    },
+    {
+      "detail": "4.517",
+      "name": "qkv_uram_overlay_timing_wns_gte_c3b",
+      "status": "pass"
+    },
+    {
+      "detail": "0",
+      "name": "qkv_uram_overlay_route_errors_zero",
+      "status": "pass"
+    },
+    {
+      "detail": "-30",
+      "name": "qkv_uram_successor_bram_delta_le_zero",
+      "status": "pass"
+    },
+    {
+      "detail": "{'fully_routed_nets': 19846, 'routable_nets': 19846, 'routing_error_nets': 0}",
+      "name": "qkv_uram_overlay_fully_routed",
+      "status": "pass"
+    },
+    {
+      "detail": "pass",
+      "name": "req5_q4q8_swhw_match_pass",
+      "status": "pass"
+    },
+    {
+      "detail": "{'activation_bits': 8, 'activation_format': 'q8/hgtxr_data_t boundary per config', 'weight_bits': 4, 'weight_format': 'signed-q4-packed-in-uint32/AXI-256'}",
+      "name": "req5_q4q8_precision",
+      "status": "pass"
+    },
+    {
+      "detail": "refs/weights/e2e_m_axi_active196_b6_ff768_q4_u32_manifest.json",
+      "name": "req5_q4q8_packed_weight_manifest",
+      "status": "pass"
+    },
+    {
+      "detail": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/refs/weights/e2e_m_axi_active196_b6_ff768_q4_u32.bin",
+      "name": "req5_q4q8_packed_weight_binary_exists",
+      "status": "pass"
+    },
+    {
+      "detail": "45b7aef9446c512cf74030975f55cd1f7407f2a27c2ea75603353132489d0a31",
+      "name": "req5_q4q8_packed_weight_sha256_matches_manifest",
+      "status": "pass"
+    },
+    {
+      "detail": "binary=12192768 manifest=12192768",
+      "name": "req5_q4q8_packed_weight_byte_count_matches_manifest",
+      "status": "pass"
+    },
+    {
+      "detail": "2",
+      "name": "req5_q4q8_packed_weight_expected_runtime_state",
+      "status": "pass"
+    },
+    {
+      "detail": "[32, -13, 26, -6, 14, -11]",
+      "name": "req5_q4q8_packed_weight_expected_c3b_output",
+      "status": "pass"
+    },
+    {
+      "detail": "{'axis_strict_golden': True, 'm_axi_strict_golden': True}",
+      "name": "req5_q4q8_testbench_strict_golden_compare",
+      "status": "pass"
+    },
+    {
+      "detail": "runtime=2 failures=0 outputs=[18, -3, 3, -2, 1, -4]",
+      "name": "req5_q4q8_c3b_axis_csim_strict_csim",
+      "status": "pass"
+    },
+    {
+      "detail": "runtime=2 failures=0 outputs=[58, -51, 42, -28, 36, -41]",
+      "name": "req5_q4q8_vref_softmax_input_x2_csim_strict_csim",
+      "status": "pass"
+    },
+    {
+      "detail": "runtime=2 failures=0 outputs=[58, -51, 42, -28, 36, -41]",
+      "name": "req5_q4q8_qkv_uram_csim_strict_csim",
+      "status": "pass"
+    },
+    {
+      "detail": "pass",
+      "name": "vref_p0_pot_scale_audit_pass",
+      "status": "pass"
+    },
+    {
+      "detail": "checks=14 fail=0",
+      "name": "vref_p0_pot_scale_audit_checks",
+      "status": "pass"
+    },
+    {
+      "detail": "pass",
+      "name": "vref_p0_pot_scale_sweep_pass",
+      "status": "pass"
+    },
+    {
+      "detail": "specs=3 candidates=45 fail=0",
+      "name": "vref_p0_pot_scale_sweep_candidate_coverage",
+      "status": "pass"
+    },
+    {
+      "detail": "{'next_action': 'keep current PoT scales for C3b; use non-current rows only as explicit successor experiments', 'specs_recommending_current': 3, 'total_candidate_count': 45, 'total_fail_count': 0}",
+      "name": "vref_p0_pot_scale_sweep_current_recommended",
+      "status": "pass"
+    },
+    {
+      "detail": "pass",
+      "name": "p2_vit_scale_calibration_pass",
+      "status": "pass"
+    },
+    {
+      "detail": "{'activation_bits': 8, 'activation_format': 'q8/hgtxr_data_t boundary per config', 'weight_bits': 4, 'weight_format': 'signed-q4-packed-in-uint32/AXI-256'}",
+      "name": "p2_vit_scale_calibration_q4w8a",
+      "status": "pass"
+    },
+    {
+      "detail": "policy={'decision': 'keep_current_pot_scales_for_c3b', 'non_current_candidates': 'successor_only_until_header_regen_csim_hls_and_board_evidence', 'scope': 'SW-first Q4/Q8 scale calibration closure for current C3b baseline', 'source': 'P2-ViT'} summary={'next_action': 'keep current PoT scales for C3b; use non-current rows only as explicit successor experiments', 'specs_recommending_current': 3, 'total_candidate_count': 45, 'total_fail_count': 0}",
+      "name": "p2_vit_scale_calibration_current_decision",
+      "status": "pass"
+    },
+    {
+      "detail": "{'next_action': 'keep current PoT scales for C3b; use non-current rows only as explicit successor experiments', 'specs_recommending_current': 3, 'total_candidate_count': 45, 'total_fail_count': 0}",
+      "name": "p2_vit_scale_calibration_candidate_coverage",
+      "status": "pass"
+    },
+    {
+      "detail": "{'creates_board_result': False, 'creates_xr_vits_policy': False, 'executes_hls': False, 'executes_vivado': False, 'overwrites_c3b_artifacts': False, 'writes_hls_source': False}",
+      "name": "p2_vit_scale_calibration_no_side_effects",
+      "status": "pass"
+    },
+    {
+      "detail": "pass",
+      "name": "req6_parameterization_pass",
+      "status": "pass"
+    },
+    {
+      "detail": "{'HGTXR_BIT_WIDTH': 8, 'HGTXR_BUFFER_SIZE': 256, 'HGTXR_BUS_WIDTH': 256, 'HGTXR_FIFO_DEPTH': 128, 'HGTXR_PARALLELISM_FACTOR': 8, 'HGTXR_TILING_FACTOR': 1, 'HGTXR_WEIGHT_BIT_WIDTH': 4}",
+      "name": "req6_parameterization_knobs",
+      "status": "pass"
+    },
+    {
+      "detail": "71",
+      "name": "req6_parameterization_check_count",
+      "status": "pass"
+    },
+    {
+      "detail": "0",
+      "name": "req6_parameterization_fail_zero",
+      "status": "pass"
+    },
+    {
+      "detail": "{'bus_width': 256}",
+      "name": "req6_parameterization_legal_bus_width_byte_aligned",
+      "status": "pass"
+    },
+    {
+      "detail": "{'bit_width': 8, 'bus_width': 256}",
+      "name": "req6_parameterization_legal_bus_width_data_divisible",
+      "status": "pass"
+    },
+    {
+      "detail": "{'bus_width': 256, 'weight_bit_width': 4}",
+      "name": "req6_parameterization_legal_bus_width_weight_divisible",
+      "status": "pass"
+    },
+    {
+      "detail": "{'bit_width': 8, 'weight_bit_width': 4}",
+      "name": "req6_parameterization_legal_weight_width_lte_data_width",
+      "status": "pass"
+    },
+    {
+      "detail": "{'acc_width': 32, 'bit_width': 8}",
+      "name": "req6_parameterization_legal_data_width_lt_acc_width",
+      "status": "pass"
+    },
+    {
+      "detail": "{'heads': 3, 'model_dim': 192}",
+      "name": "req6_parameterization_legal_model_dim_divides_heads",
+      "status": "pass"
+    },
+    {
+      "detail": "{'expected': 64, 'head_dim': 64}",
+      "name": "req6_parameterization_legal_head_dim_matches_model_heads",
+      "status": "pass"
+    },
+    {
+      "detail": "{'expected': 768, 'ff_dim': 768}",
+      "name": "req6_parameterization_legal_ff_dim_matches_mlp_ratio",
+      "status": "pass"
+    },
+    {
+      "detail": "{'dense_par': 8, 'parallelism': 8}",
+      "name": "req6_parameterization_legal_dense_parallelism_matches_req6_parallelism",
+      "status": "pass"
+    },
+    {
+      "detail": "{'dense_par': 8, 'model_dim': 192}",
+      "name": "req6_parameterization_legal_dense_parallelism_divides_embed",
+      "status": "pass"
+    },
+    {
+      "detail": "{'dense_par': 8, 'ff_dim': 768}",
+      "name": "req6_parameterization_legal_dense_parallelism_divides_ff_dim",
+      "status": "pass"
+    },
+    {
+      "detail": "{'dense_par': 8, 'weight_lanes': 64}",
+      "name": "req6_parameterization_legal_weight_lanes_divide_dense_parallelism",
+      "status": "pass"
+    },
+    {
+      "detail": "{'buffer_size': 256}",
+      "name": "req6_parameterization_legal_buffer_size_positive",
+      "status": "pass"
+    },
+    {
+      "detail": "{'fifo_depth': 128}",
+      "name": "req6_parameterization_legal_fifo_depth_positive",
+      "status": "pass"
+    },
+    {
+      "detail": "['hls/include/hgtxr_e2e_vit.hpp:140']",
+      "name": "req6_parameterization_e2e_static_assert_active_tokens_fit",
+      "status": "pass"
+    },
+    {
+      "detail": "['hls/include/hgtxr_e2e_vit.hpp:142']",
+      "name": "req6_parameterization_e2e_static_assert_heads_positive",
+      "status": "pass"
+    },
+    {
+      "detail": "['hls/include/hgtxr_e2e_vit.hpp:143']",
+      "name": "req6_parameterization_e2e_static_assert_head_dim_covers_embed",
+      "status": "pass"
+    },
+    {
+      "detail": "['hls/include/hgtxr_e2e_vit.hpp:145']",
+      "name": "req6_parameterization_e2e_static_assert_dense_par_positive",
+      "status": "pass"
+    },
+    {
+      "detail": "['hls/include/hgtxr_e2e_vit.hpp:146']",
+      "name": "req6_parameterization_e2e_static_assert_dense_par_divides_embed",
+      "status": "pass"
+    },
+    {
+      "detail": "['hls/include/hgtxr_e2e_vit.hpp:148']",
+      "name": "req6_parameterization_e2e_static_assert_dense_par_divides_ff_dim",
+      "status": "pass"
+    },
+    {
+      "detail": "['hls/include/hgtxr_e2e_vit.hpp:150']",
+      "name": "req6_parameterization_e2e_static_assert_weight_lanes_positive",
+      "status": "pass"
+    },
+    {
+      "detail": "['hls/include/hgtxr_e2e_vit.hpp:151']",
+      "name": "req6_parameterization_e2e_static_assert_dense_par_divides_weight_lanes",
+      "status": "pass"
+    },
+    {
+      "detail": "['hls/include/hgtxr_e2e_vit.hpp:153']",
+      "name": "req6_parameterization_e2e_static_assert_axis_width_matches_cyclic_axi",
+      "status": "pass"
+    },
+    {
+      "detail": "vivado/scripts/run_e2e_q4w8a_csim.tcl",
+      "name": "req6_parameterization_csim_tcl_supports_par16_par32",
+      "status": "pass"
+    },
+    {
+      "detail": "vivado/scripts/run_e2e_q4w8a_csynth.tcl",
+      "name": "req6_parameterization_csynth_tcl_supports_par16_par32",
+      "status": "pass"
+    },
+    {
+      "detail": "configs/sweeps/zcu104_cyclic_transformer_sweep.yaml",
+      "name": "req6_parameterization_sweep_yaml_parsed",
+      "status": "pass"
+    },
+    {
+      "detail": "validated_resource_matrix",
+      "name": "req6_parameterization_parallelism_extension_c3b_par16_validated",
+      "status": "pass"
+    },
+    {
+      "detail": "docs/resources/e2e_resource_matrix_2026_06_10.json:C3b",
+      "name": "req6_parameterization_parallelism_extension_c3b_par16_evidence_resource_matrix",
+      "status": "pass"
+    },
+    {
+      "detail": "DSP 604, LUT 126506, URAM 64, latency 37508072 cycles, routed WNS positive.",
+      "name": "req6_parameterization_parallelism_extension_c3b_par16_expected_result",
+      "status": "pass"
+    },
+    {
+      "detail": "exploratory_not_default",
+      "name": "req6_parameterization_parallelism_extension_par32_exploratory_not_default",
+      "status": "pass"
+    },
+    {
+      "detail": "Requires fresh csynth, routed timing, resource-fit audit, and no C3b artifact overwrite.",
+      "name": "req6_parameterization_parallelism_extension_par32_requires_fresh_reports",
+      "status": "pass"
+    },
+    {
+      "detail": "Potential latency reduction with higher DSP/partition pressure and timing risk.",
+      "name": "req6_parameterization_parallelism_extension_par32_records_risk",
+      "status": "pass"
+    },
+    {
+      "detail": "pass",
+      "name": "vref_p0_buffer_lifetime_pass",
+      "status": "pass"
+    },
+    {
+      "detail": "51",
+      "name": "vref_p0_buffer_lifetime_check_count",
+      "status": "pass"
+    },
+    {
+      "detail": "0",
+      "name": "vref_p0_buffer_lifetime_fail_zero",
+      "status": "pass"
+    },
+    {
+      "detail": "1",
+      "name": "vref_p0_buffer_lifetime_force_uram_buffers_enabled",
+      "status": "pass"
+    },
+    {
+      "detail": "1",
+      "name": "vref_p0_buffer_lifetime_small_mem_lutram_enabled",
+      "status": "pass"
+    },
+    {
+      "detail": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/hls/src/hgtxr_e2e_axis_top.cpp:46",
+      "name": "vref_p0_buffer_lifetime_axis_large_gb.q_uram",
+      "status": "pass"
+    },
+    {
+      "detail": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/hls/src/hgtxr_e2e_axis_top.cpp:51",
+      "name": "vref_p0_buffer_lifetime_axis_large_gb.k_uram",
+      "status": "pass"
+    },
+    {
+      "detail": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/hls/src/hgtxr_e2e_axis_top.cpp:56",
+      "name": "vref_p0_buffer_lifetime_axis_large_gb.v_uram",
+      "status": "pass"
+    },
+    {
+      "detail": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/hls/src/hgtxr_e2e_axis_top.cpp:26",
+      "name": "vref_p0_buffer_lifetime_axis_pooled_lutram",
+      "status": "pass"
+    },
+    {
+      "detail": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/hls/include/hgtxr_e2e_vit.hpp:950",
+      "name": "vref_p0_buffer_lifetime_attention_small_score_lutram",
+      "status": "pass"
+    },
+    {
+      "detail": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/hls/include/hgtxr_e2e_vit.hpp:951",
+      "name": "vref_p0_buffer_lifetime_attention_small_prob_lutram",
+      "status": "pass"
+    },
+    {
+      "detail": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/hls/include/hgtxr_e2e_vit.hpp:952",
+      "name": "vref_p0_buffer_lifetime_attention_small_exp_raw_lutram",
+      "status": "pass"
+    },
+    {
+      "detail": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/hls/src/rmu_smu.cpp:61",
+      "name": "vref_p0_buffer_lifetime_rmu_smu_small_score_lutram",
+      "status": "pass"
+    },
+    {
+      "detail": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/hls/src/rmu_smu.cpp:62",
+      "name": "vref_p0_buffer_lifetime_rmu_smu_small_prob_lutram",
+      "status": "pass"
+    },
+    {
+      "detail": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/hls/include/hgtxr_e2e_vit.hpp:852",
+      "name": "vref_p0_buffer_lifetime_qkv_cache_q_weight_cache_uram_successor_branch",
+      "status": "pass"
+    },
+    {
+      "detail": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/hls/include/hgtxr_e2e_vit.hpp:853",
+      "name": "vref_p0_buffer_lifetime_qkv_cache_k_weight_cache_uram_successor_branch",
+      "status": "pass"
+    },
+    {
+      "detail": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/hls/include/hgtxr_e2e_vit.hpp:854",
+      "name": "vref_p0_buffer_lifetime_qkv_cache_v_weight_cache_uram_successor_branch",
+      "status": "pass"
+    },
+    {
+      "detail": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/signoff/vref_p0_qkv_uram_cache_successor_2026_06_16.json",
+      "name": "vref_p0_buffer_lifetime_qkv_successor_file_present",
+      "status": "pass"
+    },
+    {
+      "detail": "pass",
+      "name": "vref_p0_buffer_lifetime_qkv_successor_status_pass",
+      "status": "pass"
+    },
+    {
+      "detail": "HGTXR_E2E_URAM_QKV_WEIGHT_CACHE=1",
+      "name": "vref_p0_buffer_lifetime_qkv_successor_macro_uram_enabled",
+      "status": "pass"
+    },
+    {
+      "detail": "pass",
+      "name": "vref_p0_buffer_lifetime_qkv_successor_csim_pass",
+      "status": "pass"
+    },
+    {
+      "detail": "pass",
+      "name": "vref_p0_buffer_lifetime_qkv_successor_csynth_pass",
+      "status": "pass"
+    },
+    {
+      "detail": "pass",
+      "name": "vref_p0_buffer_lifetime_qkv_successor_overlay_routed",
+      "status": "pass"
+    },
+    {
+      "detail": "8",
+      "name": "vref_p0_buffer_lifetime_qkv_successor_uram_increased_vs_dsp_mixed_stream",
+      "status": "pass"
+    },
+    {
+      "detail": "-30",
+      "name": "vref_p0_buffer_lifetime_qkv_successor_bram_reduced_vs_dsp_mixed_stream",
+      "status": "pass"
+    },
+    {
+      "detail": "40",
+      "name": "vref_p0_buffer_lifetime_qkv_successor_uram_positive",
+      "status": "pass"
+    },
+    {
+      "detail": "{'note': 'Successor-only evidence; C3b remains protected baseline.', 'remaining': ['physical_smoke_json'], 'status': 'hls-resource-pass-routed-pending'}",
+      "name": "vref_p0_buffer_lifetime_qkv_successor_physical_smoke_pending_only",
+      "status": "pass"
+    },
+    {
+      "detail": "C3b=604 A1=332",
+      "name": "vref_p0_buffer_lifetime_c3b_dsp_increased_vs_a1",
+      "status": "pass"
+    },
+    {
+      "detail": "C3b=126506 C1=127916",
+      "name": "vref_p0_buffer_lifetime_c3b_lut_lower_than_c1",
+      "status": "pass"
+    },
+    {
+      "detail": "json object",
+      "name": "third_goal_requirements_trace_hgpipe_operator_audit_file_present",
+      "status": "pass"
+    },
+    {
+      "detail": "pass",
+      "name": "third_goal_requirements_trace_hgpipe_operator_audit_status_pass",
+      "status": "pass"
+    },
+    {
+      "detail": "97/97",
+      "name": "third_goal_requirements_trace_hgpipe_ref_checks_pass",
+      "status": "pass"
+    },
+    {
+      "detail": "97",
+      "name": "third_goal_requirements_trace_hgpipe_ref_check_count",
+      "status": "pass"
+    },
+    {
+      "detail": "5899008",
+      "name": "third_goal_requirements_trace_hgpipe_checked_sample_count",
+      "status": "pass"
+    },
+    {
+      "detail": "pass",
+      "name": "third_goal_requirements_trace_hgpipe_property_summary_status_pass",
+      "status": "pass"
+    },
+    {
+      "detail": "0",
+      "name": "third_goal_requirements_trace_hgpipe_property_summary_no_fail",
+      "status": "pass"
+    },
+    {
+      "detail": "211/211",
+      "name": "third_goal_requirements_trace_hgpipe_property_summary_counts_consistent",
+      "status": "pass"
+    },
+    {
+      "detail": "211",
+      "name": "third_goal_requirements_trace_hgpipe_property_checks_present",
+      "status": "pass"
+    },
+    {
+      "detail": "[]",
+      "name": "third_goal_requirements_trace_hgpipe_operators_all_pass",
+      "status": "pass"
+    },
+    {
+      "detail": "[]",
+      "name": "third_goal_requirements_trace_hgpipe_operator_property_fail_zero",
+      "status": "pass"
+    }
+  ],
+  "current_audit_date_tag": "2026_06_16",
+  "date_tag": "2026_06_10",
+  "date_tag_policy": {
+    "canonical_signoff": "2026_06_10",
+    "current_audit": "2026_06_16",
+    "note": "Manifest intentionally combines canonical signoff artifacts with newer current-audit evidence."
+  },
+  "date_tag_profile": {
+    "canonical": "2026_06_10",
+    "current_audit": "2026_06_16"
+  },
+  "failed_artifacts": [],
+  "failed_consistency_checks": [],
+  "missing_required": [],
+  "optional_count": 2,
+  "present_optional_count": 0,
+  "present_required_count": 86,
+  "required_count": 86,
+  "root": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR",
+  "safety": {
+    "creates_board_result": false,
+    "creates_xr_vits_policy": false,
+    "executes_commands": false,
+    "writes_canonical_inputs": false
+  },
+  "status": "pass",
+  "volatile_excluded": [
+    {
+      "id": "final_signoff_summary_json",
+      "path": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/third_goal_final_signoff_run_2026_06_10.json",
+      "reason": "excluded to avoid self-referential summary hash churn",
+      "relative_path": "docs/resources/third_goal_final_signoff_run_2026_06_10.json"
+    },
+    {
+      "id": "final_signoff_summary_md",
+      "path": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/third_goal_final_signoff_run_2026_06_10.md",
+      "reason": "excluded to avoid self-referential summary hash churn",
+      "relative_path": "docs/resources/third_goal_final_signoff_run_2026_06_10.md"
+    }
+  ]
+}

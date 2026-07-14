@@ -1,0 +1,241 @@
+{
+  "check_count": 36,
+  "checks": [
+    {
+      "detail": "1",
+      "name": "force_dsp_macro_default",
+      "status": "pass"
+    },
+    {
+      "detail": "1",
+      "name": "force_uram_macro_default",
+      "status": "pass"
+    },
+    {
+      "detail": "1",
+      "name": "small_mem_lutram_macro_default",
+      "status": "pass"
+    },
+    {
+      "detail": "1",
+      "name": "cyclic_weight_tiles_uram_macro_default",
+      "status": "pass"
+    },
+    {
+      "detail": "1",
+      "name": "cyclic_large_temps_uram_macro_default",
+      "status": "pass"
+    },
+    {
+      "detail": "1",
+      "name": "cyclic_small_tile_lutram_macro_default",
+      "status": "pass"
+    },
+    {
+      "detail": "2",
+      "name": "dsp_bind_op_present",
+      "status": "pass"
+    },
+    {
+      "detail": "2",
+      "name": "rmu_smu_dsp_bind_op_present",
+      "status": "pass"
+    },
+    {
+      "detail": "rmu_smu_dsp_mul",
+      "name": "rmu_smu_dsp_helper_defined",
+      "status": "pass"
+    },
+    {
+      "detail": "rmu_smu_dsp_mul_acc",
+      "name": "rmu_smu_dsp_acc_helper_defined",
+      "status": "pass"
+    },
+    {
+      "detail": "RMU projection helper calls",
+      "name": "rmu_projection_uses_dsp_helper",
+      "status": "pass"
+    },
+    {
+      "detail": "SMU relation helper calls",
+      "name": "smu_relation_uses_dsp_helper",
+      "status": "pass"
+    },
+    {
+      "detail": "3",
+      "name": "uram_bind_storage_present",
+      "status": "pass"
+    },
+    {
+      "detail": "3",
+      "name": "lutram_bind_storage_present",
+      "status": "pass"
+    },
+    {
+      "detail": "6",
+      "name": "cyclic_weight_tiles_uram_pragmas",
+      "status": "pass"
+    },
+    {
+      "detail": "4",
+      "name": "cyclic_large_temps_uram_pragmas",
+      "status": "pass"
+    },
+    {
+      "detail": "9",
+      "name": "cyclic_small_tile_lutram_pragmas",
+      "status": "pass"
+    },
+    {
+      "detail": "8",
+      "name": "zcu104_parallelism_default",
+      "status": "pass"
+    },
+    {
+      "detail": "8",
+      "name": "zcu104_dense_parallelism_default",
+      "status": "pass"
+    },
+    {
+      "detail": "128",
+      "name": "zcu104_fifo_depth_default",
+      "status": "pass"
+    },
+    {
+      "detail": "pass",
+      "name": "resource_matrix_pass",
+      "status": "pass"
+    },
+    {
+      "detail": "{'best_latency_variants': ['C1', 'C3b'], 'highest_dsp_variants': ['C1', 'C3b'], 'lowest_lut_c_variant': 'C3b', 'reason': 'C3b keeps PAR16 DSP/latency gain while reducing LUT versus C1 and retaining positive routed WNS.', 'recommended_board_smoke_variant': 'C3b', 'variant_count': 4}",
+      "name": "resource_matrix_recommends_c3b",
+      "status": "pass"
+    },
+    {
+      "detail": "16",
+      "name": "c3b_parallelism_16",
+      "status": "pass"
+    },
+    {
+      "detail": "16",
+      "name": "c3b_memory_banks_16",
+      "status": "pass"
+    },
+    {
+      "detail": "C3b=604 A1=332",
+      "name": "c3b_dsp_increased_vs_a1",
+      "status": "pass"
+    },
+    {
+      "detail": "C3b=126506 C1=127916",
+      "name": "c3b_lut_lower_than_c1",
+      "status": "pass"
+    },
+    {
+      "detail": "64",
+      "name": "c3b_uram_positive",
+      "status": "pass"
+    },
+    {
+      "detail": "C3b=37508072 C1=37508072",
+      "name": "c3b_latency_not_worse_than_c1",
+      "status": "pass"
+    },
+    {
+      "detail": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/hgtxr_e2e_axis_par16_c3b_mem16_hls/solution_e2e_q4w8a/syn/report/csynth.xml",
+      "name": "c3b_csynth_xml_exists",
+      "status": "pass"
+    },
+    {
+      "detail": "csynth={'bram_18k': 332, 'dsp': 604, 'ff': 59505, 'lut': 126506, 'uram': 64} matrix={'bram_18k': 332, 'dsp': 604, 'ff': 59505, 'lut': 126506, 'uram': 64}",
+      "name": "c3b_csynth_resources_match_matrix",
+      "status": "pass"
+    },
+    {
+      "detail": "csynth=37508072 matrix=37508072",
+      "name": "c3b_csynth_latency_matches_matrix",
+      "status": "pass"
+    },
+    {
+      "detail": "604 <= 604",
+      "name": "c3b_csynth_dsp_lte_threshold",
+      "status": "pass"
+    },
+    {
+      "detail": "64 <= 64",
+      "name": "c3b_csynth_uram_lte_threshold",
+      "status": "pass"
+    },
+    {
+      "detail": "126506 <= 126506",
+      "name": "c3b_csynth_lut_lte_threshold",
+      "status": "pass"
+    },
+    {
+      "detail": "37508072 <= 37508072",
+      "name": "c3b_csynth_latency_lte_threshold",
+      "status": "pass"
+    },
+    {
+      "detail": "4.415 >= 4.415",
+      "name": "c3b_routed_wns_gte_threshold",
+      "status": "pass"
+    }
+  ],
+  "date_tag": "2026_06_10",
+  "fail_count": 0,
+  "observed": {
+    "bind_op_dsp_count": 2,
+    "bind_storage_lutram_count": 3,
+    "bind_storage_uram_count": 3,
+    "c3b": {
+      "dsp": 604,
+      "latency_cycles": 37508072,
+      "lut": 126506,
+      "memory_banks": 16,
+      "parallelism": 16,
+      "uram": 64
+    },
+    "c3b_csynth": {
+      "latency_cycles": 37508072,
+      "path": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/hgtxr_e2e_axis_par16_c3b_mem16_hls/solution_e2e_q4w8a/syn/report/csynth.xml",
+      "resources": {
+        "bram_18k": 332,
+        "dsp": 604,
+        "ff": 59505,
+        "lut": 126506,
+        "uram": 64
+      }
+    },
+    "cyclic_large_temp_uram_count": 4,
+    "cyclic_small_tile_lutram_count": 9,
+    "cyclic_weight_uram_count": 6,
+    "rmu_smu_bind_op_dsp_count": 2,
+    "rmu_smu_dsp_acc_helper_count": 6,
+    "rmu_smu_dsp_helper_count": 6
+  },
+  "pass_count": 36,
+  "policy": {
+    "cyclic": "legacy cyclic weight tiles and large temporaries prefer URAM; small tile scratch prefers LUTRAM",
+    "dsp": "multipliers route through hgtxr_e2e_dsp_mul helpers with bind_op impl=dsp",
+    "lutram": "small attention row scratch memories use bind_storage impl=lutram",
+    "parallelism": "C3b uses PAR16 and MEM_BANK_PAR16 for the selected board-smoke candidate",
+    "uram": "large Q/K/V weight caches and report-level C3b design use URAM resources"
+  },
+  "root": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR",
+  "safety": {
+    "executes_hls": false,
+    "executes_vivado": false,
+    "writes_canonical_inputs": false,
+    "writes_hls_source": false
+  },
+  "source_files": {
+    "cyclic_params": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/hls/include/hgtxr_cyclic_transformer_params.hpp",
+    "cyclic_top": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/hls/src/hgtxr_top.cpp",
+    "hgtxr_e2e_vit": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/hls/include/hgtxr_e2e_vit.hpp",
+    "resource_matrix": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/signoff/e2e_resource_matrix_2026_06_10.json",
+    "rmu_smu": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/hls/src/rmu_smu.cpp",
+    "zcu104_e2e_config": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/configs/zcu104_e2e_q4w8a_defines.h"
+  },
+  "status": "pass"
+}

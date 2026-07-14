@@ -1,0 +1,30 @@
+{
+  "name": "deit_tiny_cyclic_zcu104",
+  "mode": "cyclic_vit",
+  "allow_model_variant": false,
+  "clock_period_ns": 6.0,
+  "board_clock_period_ns": 6.0,
+  "allow_board_clock_override": true,
+  "case_root": "workspace/hardware/case_cyclic_zcu104",
+  "fifo_depth": 128,
+  "benchmark_units": [
+    "PATCH_EMBED_IMAGE",
+    "MHA_CORE_EVEN",
+    "MLP_CORE_EVEN",
+    "MHA_CORE_ODD",
+    "MLP_CORE_ODD",
+    "DEIT_HEAD",
+    "CYCLIC_VIT_TOP"
+  ],
+  "parallelism_scale": 1.0,
+  "implementation_stage": "deit_tiny_cyclic_classification_v1",
+  "hls_cflags": [
+    "-DHGPIPE_ZCU104_CYCLIC_MAXPERF=1"
+  ],
+  "optimization_goal": "zcu104_max_resource_performance",
+  "optimization_notes": [
+    "Use the ZCU104 cyclic max-performance compile profile for DeiT classification HLS cases.",
+    "Increase patch/head parallelism and token-buffer banking while preserving DeiT exact-match references.",
+    "Final performance/resource claims require CYCLIC_VIT_TOP csynth and board implementation reports."
+  ]
+}

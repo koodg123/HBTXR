@@ -1,0 +1,165 @@
+{
+  "check_count": 22,
+  "checks": [
+    {
+      "detail": "pass",
+      "name": "resource_matrix_pass",
+      "status": "pass"
+    },
+    {
+      "detail": "A1,A2,C1,C3b",
+      "name": "a2_present",
+      "status": "pass"
+    },
+    {
+      "detail": "A1,A2,C1,C3b",
+      "name": "a1_present",
+      "status": "pass"
+    },
+    {
+      "detail": "A1,A2,C1,C3b",
+      "name": "c1_present",
+      "status": "pass"
+    },
+    {
+      "detail": "A1,A2,C1,C3b",
+      "name": "c3b_present",
+      "status": "pass"
+    },
+    {
+      "detail": "True",
+      "name": "e_pending_policy",
+      "status": "pass"
+    },
+    {
+      "detail": "Path 1, first",
+      "name": "path1_a2_selection_first",
+      "status": "pass"
+    },
+    {
+      "detail": "Path 1, after A2",
+      "name": "path1_a1_after_a2",
+      "status": "pass"
+    },
+    {
+      "detail": "{'bit': {'exists': True, 'path': '/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/pynq/hgtxr/hgtxr_e2e_m_axi.bit'}, 'hwh': {'exists': True, 'path': '/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/pynq/hgtxr/hgtxr_e2e_m_axi.hwh'}}",
+      "name": "path1_a2_artifacts_ready",
+      "status": "pass"
+    },
+    {
+      "detail": "{'bit': {'exists': True, 'path': '/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/pynq/hgtxr/hgtxr_e2e_axis_dma.bit'}, 'hwh': {'exists': True, 'path': '/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/pynq/hgtxr/hgtxr_e2e_axis_dma.hwh'}}",
+      "name": "path1_a1_artifacts_ready",
+      "status": "pass"
+    },
+    {
+      "detail": "8",
+      "name": "path1_a2_parallelism_8",
+      "status": "pass"
+    },
+    {
+      "detail": "8",
+      "name": "path1_a1_parallelism_8",
+      "status": "pass"
+    },
+    {
+      "detail": "64",
+      "name": "path1_a2_uram_positive",
+      "status": "pass"
+    },
+    {
+      "detail": "332",
+      "name": "path1_a1_dsp_positive",
+      "status": "pass"
+    },
+    {
+      "detail": "16",
+      "name": "path2_c1_par16",
+      "status": "pass"
+    },
+    {
+      "detail": "16",
+      "name": "path2_c3b_par16",
+      "status": "pass"
+    },
+    {
+      "detail": "16",
+      "name": "path2_c3b_mem16",
+      "status": "pass"
+    },
+    {
+      "detail": "{'bit': {'exists': True, 'path': '/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/pynq/hgtxr/hgtxr_e2e_axis_dma_c3b_mem16.bit'}, 'hwh': {'exists': True, 'path': '/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/pynq/hgtxr/hgtxr_e2e_axis_dma_c3b_mem16.hwh'}}",
+      "name": "path2_c3b_artifacts_ready",
+      "status": "pass"
+    },
+    {
+      "detail": "604 > 332",
+      "name": "path2_c_dsp_gain_vs_a1",
+      "status": "pass"
+    },
+    {
+      "detail": "37508072 < 71316968",
+      "name": "path2_c_latency_gain_vs_a1",
+      "status": "pass"
+    },
+    {
+      "detail": "126506 < 127916",
+      "name": "path2_c3b_lut_below_c1",
+      "status": "pass"
+    },
+    {
+      "detail": "C3b",
+      "name": "path2_c3b_recommended",
+      "status": "pass"
+    }
+  ],
+  "date_tag": "2026_06_10",
+  "fail_count": 0,
+  "observed": {
+    "a1": {
+      "board_status": "bit-hwh-ready",
+      "dsp": 332,
+      "latency_cycles": 71316968,
+      "lut": 81168,
+      "memory_banks": 8,
+      "parallelism": 8,
+      "uram": 64
+    },
+    "a2": {
+      "board_status": "bit-hwh-ready",
+      "dsp": 334,
+      "latency_cycles": 81514836,
+      "lut": 84220,
+      "memory_banks": 8,
+      "parallelism": 8,
+      "uram": 64
+    },
+    "c3b": {
+      "board_status": "ready-for-board-smoke",
+      "dsp": 604,
+      "latency_cycles": 37508072,
+      "lut": 126506,
+      "memory_banks": 16,
+      "parallelism": 16,
+      "uram": 64
+    }
+  },
+  "pass_count": 22,
+  "root": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR",
+  "safety": {
+    "creates_board_result": false,
+    "creates_xr_vits_policy": false,
+    "executes_board_smoke": false,
+    "executes_hls_or_vivado": false,
+    "writes_canonical_inputs": false
+  },
+  "selection": {
+    "e": "pending",
+    "path_1": "A2 then A1",
+    "path_2": "C, with C3b as board-smoke candidate"
+  },
+  "source": {
+    "choice_doc": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/track/CHOICE.md",
+    "resource_matrix": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/signoff/e2e_resource_matrix_2026_06_10.json"
+  },
+  "status": "pass"
+}

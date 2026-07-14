@@ -1356,3 +1356,16 @@ Latest Continuation: Selected Path Execution Audit.
 - [x] Current AQ2 Track: latency `0.895700 ms`, initiation interval `268,711 cycles`, effective wire DMA bandwidth `0.1465 GB/s`, throughput `33.81 GOPS`, implemented total power `6.777 W`.
 - [x] Track final implemented timing remains inside the user-approved `WNS >= -0.500 ns` tolerance with WNS `-0.017 ns`; strict Vivado timing is still not clean for Track.
 - [ ] Board-sampled mean/median/P95/P99 latency, measured DMA counters, SAIF/VCD power, external DDR/sensor I/O rail power, and Conv/ATTN/MLP/Head internal dynamic-power split remain additional-experiment items.
+
+## 2026-07-08 IMPL_REPOS/HANDOVER Import
+- [x] Imported XR_Accel HBTXR-specific architecture, ZCU104 status, validation,
+      and JSON config materials under `hardware/docs/*/xr_accel` and
+      `hardware/configs/xr_accel`.
+- [x] Imported compact HGTXR handover evidence under
+      `hardware/docs/resources/hgtxr_handover_additional`.
+- [x] Imported ViT_Accel documentation as reference-only material under
+      `hardware/docs/references/vit_accel`.
+- [x] Imported ICCAD24 HG-PIPE README/header contracts as legacy hardware
+      reference material under `references/legacy-codebase/hardware`.
+- [x] Documented selection rules and exclusions in
+      `hardware/docs/track/IMPL_REPOS_HANDOVER_IMPORT_2026_07_08.md`.

@@ -1,0 +1,98 @@
+{
+  "bundle": {
+    "bundle_dir": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/pynq/e2e_axis_dma_c3b_mem16_smoke_bundle",
+    "errors": [],
+    "expected_out_raw": [
+      32,
+      -13,
+      26,
+      -6,
+      14,
+      -11
+    ],
+    "expected_runtime_state": 2,
+    "status": "pass",
+    "tar": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/pynq/e2e_axis_dma_c3b_mem16_smoke_bundle.tar.gz",
+    "validation_command": "python3 tools/validate_pynq_smoke_result.py e2e_axis_dma_c3b_mem16_file_smoke.json --preset axis-c3b-mem16 --json-out e2e_axis_dma_c3b_mem16_file_smoke_validation.json"
+  },
+  "canonical_result": {
+    "errors": [
+      "C3b smoke JSON missing: /home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/pynq/hgtxr/e2e_axis_dma_c3b_mem16_file_smoke.json"
+    ],
+    "exists": false,
+    "path": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/pynq/hgtxr/e2e_axis_dma_c3b_mem16_file_smoke.json",
+    "payload_status": null,
+    "status": "missing"
+  },
+  "canonical_validation": {
+    "errors": [],
+    "exists": false,
+    "path": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/pynq/hgtxr/e2e_axis_dma_c3b_mem16_file_smoke_validation.json",
+    "payload_status": null,
+    "preset": null,
+    "result_json": null,
+    "source_sha256": null,
+    "status": "missing"
+  },
+  "date_tag": "2026_06_16",
+  "gate": "HGTXR third-goal Req4 C3b physical smoke",
+  "hardware_root": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware",
+  "next_actions": [
+    "Run generated/pynq/e2e_axis_dma_c3b_mem16_smoke_session.md on ZCU104.",
+    "Copy e2e_axis_dma_c3b_mem16_file_smoke.json back to pynq/hgtxr/.",
+    "Validate with tools/validate_pynq_smoke_result.py --preset axis-c3b-mem16."
+  ],
+  "physical_smoke_pass": false,
+  "preset": "axis-c3b-mem16",
+  "ready_for_board": true,
+  "recommendation": "Do not claim board smoke pass until ZCU104 result JSON is imported to the canonical path and final-signoff preflight passes.",
+  "reference_artifacts": [
+    {
+      "exists": true,
+      "path": "generated/pynq/e2e_axis_dma_c3b_mem16_smoke_bundle/BUNDLE_MANIFEST.json"
+    },
+    {
+      "exists": true,
+      "path": "generated/pynq/e2e_axis_dma_c3b_mem16_smoke_session.json"
+    },
+    {
+      "exists": true,
+      "path": "generated/signoff/zcu104_c3b_smoke_remote_run_2026_06_10.json"
+    }
+  ],
+  "remaining_blockers": [
+    "C3b AXIS/DMA physical smoke result"
+  ],
+  "remote_run": {
+    "exists": true,
+    "path": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/signoff/zcu104_c3b_smoke_remote_run_2026_06_10.json"
+  },
+  "root": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR",
+  "safety": {
+    "creates_board_result": false,
+    "executes_commands": false,
+    "executes_network": false,
+    "writes_canonical_inputs": false
+  },
+  "session": {
+    "board_steps": [
+      "tar -xzf e2e_axis_dma_c3b_mem16_smoke_bundle.tar.gz",
+      "cd e2e_axis_dma_c3b_mem16_smoke_bundle",
+      "./run_e2e_axis_dma_c3b_mem16_file_smoke.sh",
+      "./validate_e2e_axis_dma_c3b_mem16_file_smoke.sh"
+    ],
+    "errors": [],
+    "exists": true,
+    "host_steps": [
+      "python3 tools/run_third_goal_final_signoff.py --root /home/kjm26/project/PRJXR/XR-VIT/HGTXR --import-c3b-smoke-json /path/to/e2e_axis_dma_c3b_mem16_file_smoke.json --dry-run-import-c3b-smoke --allow-blocked",
+      "python3 tools/run_third_goal_final_signoff.py --root /home/kjm26/project/PRJXR/XR-VIT/HGTXR --import-c3b-smoke-json /path/to/e2e_axis_dma_c3b_mem16_file_smoke.json --allow-blocked",
+      "python3 tools/validate_pynq_smoke_result.py hardware/pynq/hgtxr/e2e_axis_dma_c3b_mem16_file_smoke.json --preset axis-c3b-mem16",
+      "python3 tools/check_third_goal_preflight.py --root /home/kjm26/project/PRJXR/XR-VIT/HGTXR --mode final-signoff"
+    ],
+    "path": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/pynq/e2e_axis_dma_c3b_mem16_smoke_session.json",
+    "status": "pass"
+  },
+  "status": "blocked_missing_canonical_physical_smoke_result",
+  "task_id": "T-C3B-GATE-EVAL",
+  "variant": "c3b-mem16"
+}

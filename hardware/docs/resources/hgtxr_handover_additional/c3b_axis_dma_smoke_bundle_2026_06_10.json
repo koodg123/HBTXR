@@ -1,0 +1,46 @@
+{
+  "date": "2026-06-10 KST",
+  "artifact": "C3b PAR16/MEM16 AXIS/DMA PYNQ smoke bundle",
+  "variant": "c3b-mem16",
+  "target": "ZCU104 PYNQ",
+  "bundle_directory": "hardware/generated/pynq/e2e_axis_dma_c3b_mem16_smoke_bundle",
+  "bundle_tarball": "hardware/generated/pynq/e2e_axis_dma_c3b_mem16_smoke_bundle.tar.gz",
+  "bundle_tarball_sha256": "3de505a6627409b4717ea95e5e76d74f0667c61b601fd96db1e495319adda712",
+  "bundle_tarball_bytes": 593198,
+  "manifest": "hardware/generated/pynq/e2e_axis_dma_c3b_mem16_smoke_bundle/BUNDLE_MANIFEST.json",
+  "run_script": "hardware/generated/pynq/e2e_axis_dma_c3b_mem16_smoke_bundle/run_e2e_axis_dma_c3b_mem16_file_smoke.sh",
+  "validation_script": "hardware/generated/pynq/e2e_axis_dma_c3b_mem16_smoke_bundle/validate_e2e_axis_dma_c3b_mem16_file_smoke.sh",
+  "smoke_command": "PYTHONPATH=. python3 -m hgtxr.run_e2e_axis_dma_smoke --variant c3b-mem16 --weights-mode file --weights-bin weights/e2e_m_axi_active196_b6_ff768_q4_u32.bin --expect-out-raw 32 -13 26 -6 14 -11 --json-out e2e_axis_dma_c3b_mem16_file_smoke.json",
+  "validation_command": "python3 tools/validate_pynq_smoke_result.py e2e_axis_dma_c3b_mem16_file_smoke.json --preset axis-c3b-mem16 --json-out e2e_axis_dma_c3b_mem16_file_smoke_validation.json",
+  "expected_out_raw": [32, -13, 26, -6, 14, -11],
+  "expected_runtime_state": 2,
+  "included_bitstream": {
+    "path": "hardware/pynq/hgtxr/hgtxr_e2e_axis_dma_c3b_mem16.bit",
+    "sha256": "989e77836341467da05d0ccb86f0b4764d38f4711af8fbcb567290b78fe3076d"
+  },
+  "included_hwh": {
+    "path": "hardware/pynq/hgtxr/hgtxr_e2e_axis_dma_c3b_mem16.hwh",
+    "sha256": "8ca659da3bbcc061f7299ac18314c00b8ee2112a274990d969635b3f6acf3c90"
+  },
+  "included_weights": {
+    "path": "hardware/refs/weights/e2e_m_axi_active196_b6_ff768_q4_u32.bin",
+    "sha256": "45b7aef9446c512cf74030975f55cd1f7407f2a27c2ea75603353132489d0a31",
+    "bytes": 12192768
+  },
+  "included_validator": {
+    "path": "hardware/tools/validate_pynq_smoke_result.py",
+    "bundle": "tools/validate_pynq_smoke_result.py"
+  },
+  "validation": {
+    "py_compile": "passed",
+    "unittest": "31 tests passed",
+    "static_validate_hgtxr": "passed",
+    "board_ready_preflight": "ok=45 warn=6 fail=0",
+    "json_tool": "passed",
+    "physical_zcu104_smoke": "not_run"
+  },
+  "notes": [
+    "The bundle is self-contained for file-mode C3b AXIS/DMA smoke and local result validation on PYNQ.",
+    "This does not prove physical ZCU104 execution; it closes the transfer/package readiness gap."
+  ]
+}

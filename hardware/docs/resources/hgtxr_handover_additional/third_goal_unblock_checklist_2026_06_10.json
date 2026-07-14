@@ -1,0 +1,91 @@
+{
+  "completion_blocked_items": [
+    {
+      "id": "11",
+      "title": "XR-VITs HLS source requirement is satisfied or explicitly replaced"
+    },
+    {
+      "id": "final",
+      "title": "Final signoff gate"
+    }
+  ],
+  "final_blockers": [
+    "C3b AXIS/DMA physical smoke result",
+    "requested XR-VITs sibling"
+  ],
+  "root": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR",
+  "source_completion_status": "blocked",
+  "source_final_audit_status": "blocked",
+  "status": "pending-unblock",
+  "step_count": 3,
+  "steps": [
+    {
+      "evidence_after": [
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/xr_vits_replacement_policy.json",
+        "/home/kjm26/project/PRJXR/XR-VITs"
+      ],
+      "id": "B1",
+      "options": [
+        {
+          "commands": [
+            "test -d /home/kjm26/project/PRJXR/XR-VITs",
+            "python3 tools/check_third_goal_preflight.py --root /home/kjm26/project/PRJXR/XR-VIT/HGTXR --mode final-signoff"
+          ],
+          "id": "B1a",
+          "title": "Restore exact XR-VITs checkout"
+        },
+        {
+          "commands": [
+            "python3 tools/create_xr_vits_replacement_policy.py --root /home/kjm26/project/PRJXR/XR-VIT/HGTXR --approve --approved-by <name> --reason \"Approve XR_Accel as XR-VITs replacement for HGTXR third-goal signoff\" --dry-run",
+            "python3 tools/create_xr_vits_replacement_policy.py --root /home/kjm26/project/PRJXR/XR-VIT/HGTXR --approve --approved-by <name> --reason \"Approve XR_Accel as XR-VITs replacement for HGTXR third-goal signoff\"",
+            "python3 tools/check_third_goal_preflight.py --root /home/kjm26/project/PRJXR/XR-VIT/HGTXR --mode final-signoff"
+          ],
+          "id": "B1b",
+          "title": "Approve XR_Accel as replacement"
+        }
+      ],
+      "status": "pending-user-choice",
+      "title": "Resolve XR-VITs reference gate",
+      "why": "Final signoff requires the exact XR-VITs sibling or an explicitly approved replacement policy."
+    },
+    {
+      "board_commands": [
+        "tar -xzf e2e_axis_dma_c3b_mem16_smoke_bundle.tar.gz",
+        "cd e2e_axis_dma_c3b_mem16_smoke_bundle",
+        "./run_e2e_axis_dma_c3b_mem16_file_smoke.sh",
+        "./validate_e2e_axis_dma_c3b_mem16_file_smoke.sh"
+      ],
+      "evidence_after": [
+        "generated/signoff/c3b_smoke_import_2026_06_10.json",
+        "generated/signoff/c3b_smoke_import_validation_2026_06_10.json",
+        "generated/signoff/third_goal_final_signoff_run_2026_06_10.json",
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/pynq/hgtxr/e2e_axis_dma_c3b_mem16_file_smoke.json"
+      ],
+      "host_artifacts": [
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/pynq/e2e_axis_dma_c3b_mem16_smoke_bundle.tar.gz",
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/pynq/e2e_axis_dma_c3b_mem16_smoke_session.md"
+      ],
+      "host_commands": [
+        "python3 tools/run_third_goal_final_signoff.py --root /home/kjm26/project/PRJXR/XR-VIT/HGTXR --import-c3b-smoke-json /path/to/e2e_axis_dma_c3b_mem16_file_smoke.json --dry-run-import-c3b-smoke --allow-blocked",
+        "python3 tools/run_third_goal_final_signoff.py --root /home/kjm26/project/PRJXR/XR-VIT/HGTXR --import-c3b-smoke-json /path/to/e2e_axis_dma_c3b_mem16_file_smoke.json --allow-blocked",
+        "python3 tools/validate_pynq_smoke_result.py hardware/pynq/hgtxr/e2e_axis_dma_c3b_mem16_file_smoke.json --preset axis-c3b-mem16",
+        "python3 tools/check_third_goal_preflight.py --root /home/kjm26/project/PRJXR/XR-VIT/HGTXR --mode final-signoff"
+      ],
+      "id": "B2",
+      "status": "pending-board-run",
+      "title": "Run and import C3b ZCU104 physical smoke",
+      "why": "Final signoff requires a real board-produced C3b smoke JSON."
+    },
+    {
+      "commands": [
+        "python3 tools/check_third_goal_preflight.py --root /home/kjm26/project/PRJXR/XR-VIT/HGTXR --mode final-signoff --json-out generated/signoff/third_goal_final_signoff_2026_06_10.json",
+        "python3 tools/write_final_signoff_audit.py --preflight-json generated/signoff/third_goal_final_signoff_2026_06_10.json --json-out generated/signoff/final_signoff_audit_2026_06_10.json --markdown-out generated/signoff/final_signoff_audit_2026_06_10.md",
+        "python3 tools/write_third_goal_completion_audit.py --root /home/kjm26/project/PRJXR/XR-VIT/HGTXR --json-out generated/signoff/third_goal_completion_audit_2026_06_10.json --markdown-out generated/signoff/third_goal_completion_audit_2026_06_10.md"
+      ],
+      "expected_result": "final-signoff fail=0 and completion audit status=pass",
+      "id": "B3",
+      "status": "pending",
+      "title": "Run final host signoff after blockers are cleared"
+    }
+  ]
+}
