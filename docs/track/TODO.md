@@ -8,8 +8,11 @@
 
 ## Analysis Backlog
 
-- Audit the 10 changed/missing HANDOVER/HBTXR files.
-- Analyze HGTXR recovery, ensemble, support-adaptive, teacher, and metric flows.
-- Analyze HGTXR missing regression tests and golden vectors.
-- Analyze XR_Accel cyclic/ZCU104 automation and config schema.
-- Map licenses for ERVT, TENNs-Eye, TDTracker, BRAT, FACET, and Retina sources.
+- [x] Classify the 10 changed/missing HANDOVER/HBTXR files.
+- [x] Analyze HGTXR recovery, ensemble, support-adaptive, teacher, and metric flows.
+- [x] Identify HGTXR regression/golden-vector adaptation priorities.
+- [x] Analyze XR_Accel cyclic/ZCU104 automation and config schema.
+- [ ] Implement data/evaluation/checkpoint contract gates in a separately approved task.
+- [ ] Adapt HGTXR Stage-1/Stage-2 regression fixtures behind current interfaces.
+- [ ] Prototype XR cyclic config validation and automation dry-run.
+- [ ] Map licenses for ERVT, TENNs-Eye, TDTracker, BRAT, FECET, and Retina sources.

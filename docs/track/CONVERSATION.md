@@ -11,3 +11,6 @@
   included.
 - User approved sequential execution of the plan. Local commits and analysis may
   proceed; push and active HANDOVER code promotion remain excluded.
+- Sequential execution produced C0-C3 local commits and a C4 analysis package.
+- No remote push, branch merge, active software/hardware port, board run, or
+  external artifact import was authorized or performed.

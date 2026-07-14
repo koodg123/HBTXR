@@ -1,12 +1,13 @@
 # Todo Checkpoint Draft
 
-- Current todo: C0 plan documentation commit.
-- Active slice: validate and commit only
-  `.agents/plans/2026-07-14-hbtxr-commit-handover-analysis.md` and `docs/**`.
-- Completed: plan approval, baseline audit, three-agent planning review.
-- Evidence refs: canonical plan, Git baseline, static audit counts.
+- Terminal checkpoint: C4 local commit and final Git/document verification.
+- Active slice: confirm the reviewed documentation-only allowlist, commit locally,
+  and require clean worktree/index evidence before completion is reported.
+- Completed: plan approval, baseline audit, three-agent planning review, C0
+  commit `9535d24`, C1 commit `918d0fd`, C2 commit `0901a96`, C3 commit `6b880d5`.
+- Evidence refs: canonical plan, C0-C3 staged manifests and reviews.
 - Blocked on: none.
-- Next step: staged allowlist verification, then C0 commit.
+- Next step: stage exact docs, commit locally, and run the final verification commands.
 
 ## Resume State Hint
 
@@ -17,7 +18,9 @@ not match this checkpoint, stop and reconcile before committing.
 
 - Intent: aligned.
 - Scope: HBTXR only.
-- Compatibility: documentation-only C0.
+- Compatibility: C0 was documentation-only; C1 remains inactive archive only;
+  C2 is evidence/import tooling explicitly blocked from active use pending adaptation;
+  C3 changes only hardware evidence/config/reference paths, not active source.
 - New owners/adapters: none.
-- Evidence: sufficient to start C0.
-- Decision: continue.
+- Evidence: C4 final spec and quality reviews approved.
+- Decision: commit C4 locally, verify, and stop without push.

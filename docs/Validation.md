@@ -6,7 +6,7 @@
 |---|---|---|
 | Repo boundary | `git rev-parse --show-toplevel` | ends in `/HBTXR` |
 | Staged scope | `git diff --cached --name-status` | only slice allowlist |
-| Diff integrity | `git diff --cached --check` | exit 0 |
+| Diff integrity | `git diff --cached --check` | exit 0, or a reviewer-approved provenance-only waiver with exact file/class/count |
 | JSON | parse imported JSON files | 0 parse errors |
 | Python | compile/import targeted Python files | 0 unexpected errors |
 | Shell | `bash -n` on imported shell files | 0 errors |
@@ -16,6 +16,18 @@
 Current pre-plan evidence: 105 JSON, 81 Python, and 26 shell files passed; no
 large file over 10 MiB, nested Git repo, submodule, symlink, or credential-like
 filename was found in the current checkpoint scope.
+
+## Executed Checkpoint Evidence
+
+| Commit | Scope | Key validation | Result |
+|---|---|---|---|
+| `9535d24` | plan/tracking | 17-file allowlist, diff check, spec and quality review | PASS |
+| `918d0fd` | inactive FECET/SWIFT archives | Python 71/71, shell 26/26, artifact scan | PASS with 25-file-format findings waived only for inherited EOF blanks |
+| `0901a96` | EV-Eye/EX-Gaze evidence | Python 10/10, JSON 17/17, CSV 187/187, artifact scan | PASS with 16,743 inherited CSV CRLF findings waived |
+| `6b880d5` | hardware/reference evidence | JSON 88/88, Markdown UTF-8 98/98, artifact and active-source isolation | PASS with exactly 60 enumerated provenance-format findings waived |
+
+The waivers do not apply to active source, future edits, or unlisted formatting
+classes. Runtime, training, synthesis, and board reproduction were not claimed.
 
 ## HANDOVER Analysis Gates
 
@@ -30,6 +42,10 @@ filename was found in the current checkpoint scope.
 | Hardware | interface, pragma, config, golden vector, and tool/board dependency recorded |
 | Artifact | generated/binary/cache disposition explicit |
 | Recommendation | every matrix field complete and priority justified |
+
+The C4 package contains all six required artifacts under `docs/analysis/` and
+uses the common classification vocabulary `NO-OP`, `REFERENCE_ONLY`, `ADAPT`,
+`ACTIVE_CANDIDATE`, `EXCLUDED`, and `LICENSE_BLOCKED`.
 
 ## Remaining Risk
 

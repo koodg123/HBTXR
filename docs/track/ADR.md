@@ -23,3 +23,14 @@
 - Decision: this task produces recommendations only; active code ports require
   a new approved implementation plan.
 - Reason: license, API, data, toolchain, and runtime gates are unresolved.
+
+## ADR-004: Test-First Selective Adaptation
+
+- Status: accepted for recommendation
+- Decision: prioritize data/evaluation/checkpoint contracts, HGTXR behavioral
+  regression tests, and XR cyclic schema/automation before active adapters.
+- Reason: HGTXR common source paths are mostly byte-different and accelerator
+  gaps contain generated/tool-specific content; contracts and golden tests make
+  future choices measurable and reversible.
+- Consequence: useful behavior is re-expressed through current interfaces;
+  legacy trees, generated artifacts, and uncleared sources remain non-active.
