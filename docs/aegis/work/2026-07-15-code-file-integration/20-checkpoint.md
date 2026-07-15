@@ -2,12 +2,12 @@
 
 ## TodoCheckpointDraft
 
-- Current todo: run consolidated verification and close the code/file-only slice.
-- Active slice: tracking evidence, full selected-suite verification, and final review.
+- Current todo: pause safely and preserve a restartable follow-up handoff.
+- Active slice: none; the selected code/file-only slice is closed.
 - Completed: T-010, T-020, T-100, T-110, and T-210 with local commits.
-- Pending: tracking commit and final branch status report.
+- Pending: explicit user selection of a deferred task and its approval gate.
 - Blocked-on: no current blocker; excluded install/experiment/reproduction work remains untouched.
-- Next: verify all selected tests from a clean worktree and record the final evidence.
+- Next: read `.agents/handoff/2026-07-15-hbtxr-follow-up.md`, verify Git state, and select a deferred lane.
 
 ## ResumeStateHint
 
@@ -18,7 +18,7 @@ Never resume from an agent report alone.
 ## DriftCheckDraft
 
 - Intent/scope: aligned with code/file-only user direction.
-- Baseline: selected task commits are complete through T-210 at `fe4df26`.
+- Baseline: selected task implementation is complete through `fe4df26`; closeout is `c75e806`.
 - Compatibility: HANDOVER stayed read-only and the 18 XR reference JSON files stayed unchanged.
 - Review gates: every selected task passed independent specification and quality review.
-- Decision: finish consolidated verification; do not push, merge, or run excluded work.
+- Decision: keep `refactor/hbtxr-structure`; do not push, merge, clean worktrees, or run excluded work.

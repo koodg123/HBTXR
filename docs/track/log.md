@@ -60,3 +60,15 @@ configuration validation (`fe4df26`).
 Every task received separate specification and quality review. HANDOVER remained
 read-only, existing XR reference JSON files were not modified, and no dependency
 installation, reproduction run, experiment, HLS/Vivado/board command, merge,
+release, or push occurred.
+
+## 2026-07-15 Handoff Prepared
+
+The branch was intentionally preserved after the code/file-only slice. Durable
+restart state is stored in `.agents/handoff/2026-07-15-hbtxr-follow-up.md` with
+the continuation pointer beside it. The recorded pre-handoff HEAD is `c75e806`,
+the worktree was clean, and the branch was nine commits ahead of its remote.
+
+The next session must verify Git state first, then select a deferred task from
+`docs/track/TODO.md`; no dependency, experiment, hardware, policy mutation,
+Spec-Kit, cleanup, merge, release, or push action is implicitly authorized.
