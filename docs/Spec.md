@@ -110,3 +110,12 @@ acceptance_criteria:
 
 The analysis output will be the input to a separate implementation plan. No
 active HANDOVER port is authorized by this specification.
+
+## Follow-up Planning Addendum — 2026-07-15
+
+The concrete implementation plan is
+`docs/aegis/plans/2026-07-15-hbtxr-follow-up-implementation.md`. It converts the
+analysis requirements into exact file, test, dependency, review, rollback, and
+approval boundaries. Plan creation is authorized; implementation, dependency
+installation, training, FPGA tools/board access, artifact mutation, LFS,
+Spec-Kit initialization, push, merge, and release remain separately gated.

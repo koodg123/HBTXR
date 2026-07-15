@@ -2,9 +2,12 @@
 
 ## Current State
 
-- Phase: plan approved; sequential execution started.
-- Baseline: `refactor/hbtxr-structure` at `087912c2b27f`.
-- No push or HANDOVER code integration is authorized. C4 analysis and reviews are complete; final local verification remains.
+- Phase: C0-C4 complete; follow-up implementation plan written and awaiting approval.
+- Follow-up baseline: `refactor/hbtxr-structure` at
+  `97cea4ddc33b9af8c58e7d5c75345f74a7775836` before planning edits.
+- No follow-up source implementation, dependency installation, training, FPGA
+  execution, board access, artifact mutation, Spec-Kit initialization, or push
+  is authorized by plan creation.
 
 ## Planned Commits
 
@@ -61,3 +64,16 @@ SHA, and remaining worktree state here. Push remains a separate approval gate.
 - Initial spec review defects were remediated with exact repository SHA/paths,
   target paths, validation commands, risks, dependencies, priorities, and rollback.
 - Final spec review and documentation quality review approved the package.
+
+## Follow-up Planning Evidence — 2026-07-15
+
+- Canonical plan:
+  `docs/aegis/plans/2026-07-15-hbtxr-follow-up-implementation.md`.
+- Twenty-two named sequential tasks, T-000 through T-630 including T-490, each have an individual
+  Task Card, ownership, validation, dependency, commit/no-commit boundary, and
+  rollback/stop rule.
+- E1-E6 and license, artifact/LFS, CRLF, Spec-Kit, and push decisions are mapped
+  to explicit approval gates.
+- Fresh specification/executability and documentation-quality reviews passed
+  after active HLS CRLF/external-root and synthesis metric-gate remediation.
+- Planning changes remain local and uncommitted pending user direction.

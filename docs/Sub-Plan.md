@@ -140,3 +140,10 @@ task_card:
 
 Only the named owner writes each analysis file. The Master alone updates
 `docs/Execution.md`, `docs/Validation.md`, and `docs/track/*` after a wave.
+
+## Follow-up Task Cards
+
+Task Cards T-000 through T-630, ownership, commands, dependencies, approval
+gates, and rollback rules are maintained in
+`docs/aegis/plans/2026-07-15-hbtxr-follow-up-implementation.md`. They supersede
+the completed analysis Task Cards only for the future implementation workstream.

@@ -17,3 +17,17 @@
 - [x] Produced final integration matrix and recommendations.
 - [x] Passed C4 spec re-review and final documentation quality review.
 - [ ] Request separate approval before any push or active code integration.
+
+## 2026-07-15
+
+- [x] Reconfirmed the HBTXR-only repository boundary and clean baseline HEAD.
+- [x] Decomposed follow-up work into software, hardware, experiment, and
+  governance streams using real Codex-native reviewers.
+- [x] Wrote the concrete T-000–T-630 sequential plan and individual Task Cards.
+- [x] Separated dependency, training, C-sim, synthesis, board, CRLF/LFS,
+  Spec-Kit, and push approval gates.
+- [x] Obtained final specification/executability and documentation-quality PASS.
+- [ ] Obtain user approval before any follow-up implementation or commit.
+- [x] User approved the code/file-only execution slice and excluded installation,
+  reproducibility verification, and experiment work.
+- [ ] Execute and review T-010, T-020, T-100, T-110, and T-210.

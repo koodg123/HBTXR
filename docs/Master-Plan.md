@@ -85,7 +85,11 @@ Plan commit
 - HGTXR software: 113 common core paths, only 2 byte-identical; semantic audit required.
 - HGTXR hardware: 394 common paths, 349 changed; overwrite prohibited.
 
-## Approval Gates
+## Historical Analysis-Phase Approval Gates
+
+These labels applied only to the completed 2026-07-14 import/analysis workflow.
+The 2026-07-15 follow-up workstream uses the distinct A–I gate table in its
+canonical plan; meanings must not be carried between the two phases.
 
 - Gate A: plan approval — satisfied on 2026-07-14.
 - Gate B: separate approval before push.
@@ -97,3 +101,12 @@ Plan commit
 Use semantic commits and `git revert`; never destructive reset. Generated
 artifacts stay outside Git so code rollback and artifact retention remain
 independent.
+
+## Follow-up Implementation Workstream — 2026-07-15
+
+The analysis phase is complete. The concrete follow-up workstream is defined in
+`docs/aegis/plans/2026-07-15-hbtxr-follow-up-implementation.md` and remains
+awaiting execution approval. It sequences provenance/artifact governance,
+software contracts, hardware golden/config/dry-run validation, tracker
+characterization, static experiment reproducibility, and separately approved
+training/HLS/synthesis/board gates. This pointer does not authorize execution.

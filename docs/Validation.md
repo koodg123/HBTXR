@@ -52,3 +52,24 @@ uses the common classification vocabulary `NO-OP`, `REFERENCE_ONLY`, `ADAPT`,
 Full training, FPGA tool execution, board measurements, and external artifact
 availability cannot be verified in the analysis phase. They must remain
 explicitly `UNAVAILABLE` or `PENDING`, not inferred as passing.
+
+## Follow-up Plan Validation — 2026-07-15
+
+The follow-up plan is documentation-only. Its acceptance checks are:
+
+- exactly one sequential section and one Task Card for each of T-000 through
+  T-630;
+- explicit E1-E6 coverage and separate dependency, experiment, C-sim,
+  synthesis, board, line-ending/LFS, Spec-Kit, and push gates;
+- exact file ownership, commands, expected result, commit boundary, and
+  rollback/stop condition for every task;
+- current HBTXR remains the runtime owner and HANDOVER remains read-only;
+- `git diff --check` passes and no source, generated artifact, install, run,
+  board, remote, or commit action occurs during planning.
+
+The plan must receive a fresh specification/executability review followed by a
+fresh documentation-quality review before it is presented as execution-ready.
+
+Final evidence: both independent reviews passed; 22 task headings and 22 Task
+Cards match in order and are unique; all required Task Card fields are present;
+`git diff --check` passes; only documentation changed during planning.

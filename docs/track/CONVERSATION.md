@@ -14,3 +14,19 @@
 - Sequential execution produced C0-C3 local commits and a C4 analysis package.
 - No remote push, branch merge, active software/hardware port, board run, or
   external artifact import was authorized or performed.
+
+## 2026-07-15 Decisions
+
+- User requested a concrete plan for additional work after the HANDOVER
+  integration analysis.
+- Plan scope remains only the nested HBTXR repository; HANDOVER is read-only.
+- Planning does not authorize dependency installation, active adaptation,
+  experiment execution, FPGA tools, board access, artifact moves/uploads,
+  Spec-Kit initialization, commits, or push.
+- The canonical follow-up plan is
+  `docs/aegis/plans/2026-07-15-hbtxr-follow-up-implementation.md`.
+- User then narrowed execution to code/file integration only and explicitly
+  excluded installation, reproducibility verification, and experiment work.
+- After dependency/experiment scope review, active tasks are T-010, T-020,
+  T-100, T-110, and T-210. T-120, T-220, and T-490 were removed; push remains
+  excluded.

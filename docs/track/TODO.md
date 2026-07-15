@@ -5,6 +5,8 @@
 - Decide whether Spec-Kit scaffolding may be initialized after a clean checkpoint.
 - Decide Git LFS versus external artifact storage if large artifacts are required.
 - Approve any future push separately.
+- Approve the 2026-07-15 follow-up implementation plan and execution mode.
+- Approve dependency installation before T-000 creates the test environment.
 
 ## Analysis Backlog
 
@@ -16,3 +18,4 @@
 - [ ] Adapt HGTXR Stage-1/Stage-2 regression fixtures behind current interfaces.
 - [ ] Prototype XR cyclic config validation and automation dry-run.
 - [ ] Map licenses for ERVT, TENNs-Eye, TDTracker, BRAT, FECET, and Retina sources.
+- [x] Write the concrete follow-up implementation plan with Task Cards and gates.
