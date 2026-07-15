@@ -31,3 +31,36 @@ after each selected slice.
 - Spec and quality review: pass.
 - No `.gitignore`, LFS, upload, move, deletion, install, reproduction, experiment,
   or push action occurred.
+
+## T-100 evidence
+
+- Commit: `7b3068e`.
+- Dependency-light data contracts and HANDOVER tensor-shape bindings: 14 tests pass.
+- Python compile and CR-at-EOL-aware diff check: pass.
+- Existing runtime payloads are not transformed or reordered by the contract layer.
+- Specification and quality reviews: pass after manifest digest type hardening.
+
+## T-110 evidence
+
+- Commit: `a3530aa`.
+- Evaluation domain/task/policy bridge: 9 tests pass; Python compile and diff check pass.
+- ROI, sensor, and post-transform coordinates use explicit per-axis scaling.
+- Runtime type, overflow, bool/float tolerance, and policy errors fail as contract errors.
+- Specification and quality reviews: pass.
+
+## T-210 evidence
+
+- Commit: `fe4df26`.
+- XR schema/normalizer: 14 tests pass; JSON parse, Python compile, and diff check pass.
+- Eight experiments resolve exactly 18 unique reference JSON files.
+- Existing design/experiment/model/target JSON files have no diff.
+- Source repository/revision, ZCU104 tuple, clocks, AXI width, runtime MMIO, links, and hashes are explicit.
+- Specification and quality reviews: pass after provenance, schema-policy binding, and numeric-error hardening.
+
+## Consolidated verification evidence
+
+- All 67 selected unit tests passed in one fresh run.
+- The source registry validated 11 local candidates and the artifact example validated.
+- Python compilation, JSON parsing, repository boundary, CR-at-EOL-aware diff integrity, and Git fsck passed.
+- The range diff uses `core.whitespace=cr-at-eol` because `data/contracts.py` preserves source CRLF.
+- The existing 18 XR reference JSON files remained unchanged; excluded work was not run.

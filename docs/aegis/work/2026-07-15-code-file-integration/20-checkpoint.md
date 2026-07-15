@@ -2,12 +2,12 @@
 
 ## TodoCheckpointDraft
 
-- Current todo: implement the dependency-light T-100 sample contract.
-- Active slice: T-100 canonical data contract and explicit shape translators.
-- Completed: planning checkpoint, T-010 provenance registry, T-020 artifact policy.
-- Pending: T-100, T-110, T-210, consolidated final verification.
-- Blocked-on: no current blocker; NumPy/PyTorch/pytest remain intentionally uninstalled.
-- Next: inspect the current data contract owner and add the minimum stdlib-testable contract.
+- Current todo: run consolidated verification and close the code/file-only slice.
+- Active slice: tracking evidence, full selected-suite verification, and final review.
+- Completed: T-010, T-020, T-100, T-110, and T-210 with local commits.
+- Pending: tracking commit and final branch status report.
+- Blocked-on: no current blocker; excluded install/experiment/reproduction work remains untouched.
+- Next: verify all selected tests from a clean worktree and record the final evidence.
 
 ## ResumeStateHint
 
@@ -18,7 +18,7 @@ Never resume from an agent report alone.
 ## DriftCheckDraft
 
 - Intent/scope: aligned with code/file-only user direction.
-- Baseline: T-010 and T-020 are committed locally through `28addce`.
-- Compatibility: runtime defaults remain unchanged; dependency and experiment tasks remain excluded.
-- Review gates: T-010 and T-020 spec and quality reviews passed.
-- Decision: continue.
+- Baseline: selected task commits are complete through T-210 at `fe4df26`.
+- Compatibility: HANDOVER stayed read-only and the 18 XR reference JSON files stayed unchanged.
+- Review gates: every selected task passed independent specification and quality review.
+- Decision: finish consolidated verification; do not push, merge, or run excluded work.

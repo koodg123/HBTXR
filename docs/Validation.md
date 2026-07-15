@@ -73,3 +73,21 @@ fresh documentation-quality review before it is presented as execution-ready.
 Final evidence: both independent reviews passed; 22 task headings and 22 Task
 Cards match in order and are unique; all required Task Card fields are present;
 `git diff --check` passes; only documentation changed during planning.
+
+## Code/File-Only Execution Validation — 2026-07-15
+
+| Task | Focused evidence | Result |
+|---|---|---|
+| T-010 | 19 source-registry tests plus live local revision/hash validation | PASS |
+| T-020 | 11 artifact-manifest tests, schema/example validation, payload scan | PASS |
+| T-100 | 14 data-contract tests and Python compile | PASS |
+| T-110 | 9 evaluation-bridge tests and Python compile | PASS |
+| T-210 | 14 XR schema tests, JSON parse, Python compile, 8/18 graph check | PASS |
+
+The final consolidated run repeated all selected focused suites and validators,
+Python compilation, JSON parsing, repository-boundary, CR-at-EOL-aware
+diff-integrity, and fsck checks.
+All commands passed: 67 tests, 11 registry candidates, and one artifact manifest.
+The post-commit clean-worktree check remains the final closeout action.
+Installation, full runtime/training reproduction, experiments, HLS/synthesis,
+board validation, merge, release, and push are not covered or inferred as passing.

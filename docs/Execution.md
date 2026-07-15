@@ -2,12 +2,13 @@
 
 ## Current State
 
-- Phase: C0-C4 complete; follow-up implementation plan written and awaiting approval.
+- Phase: C0-C4 and the approved code/file-only follow-up slice are complete;
+  consolidated verification passed.
 - Follow-up baseline: `refactor/hbtxr-structure` at
   `97cea4ddc33b9af8c58e7d5c75345f74a7775836` before planning edits.
-- No follow-up source implementation, dependency installation, training, FPGA
-  execution, board access, artifact mutation, Spec-Kit initialization, or push
-  is authorized by plan creation.
+- T-010, T-020, T-100, T-110, and T-210 were authorized and committed locally.
+- Dependency installation, training, reproduction, FPGA/board execution,
+  Spec-Kit initialization, merge, release, and push remain excluded.
 
 ## Planned Commits
 
@@ -76,4 +77,19 @@ SHA, and remaining worktree state here. Push remains a separate approval gate.
   to explicit approval gates.
 - Fresh specification/executability and documentation-quality reviews passed
   after active HLS CRLF/external-root and synthesis metric-gate remediation.
-- Planning changes remain local and uncommitted pending user direction.
+- Planning and approved implementation changes remain local; no push occurred.
+
+## Code/File-Only Execution Evidence — 2026-07-15
+
+| Task | Commit(s) | Result |
+|---|---|---|
+| T-010 | `c24030f`, `1764caf` | source registry and revision-bound hashes validated |
+| T-020 | `28addce` | external artifact schema, example, validator, and tests validated |
+| T-100 | `7b3068e` | dependency-light sample/tensor contracts validated |
+| T-110 | `a3530aa` | task-aware coordinate and evaluation policy bridge validated |
+| T-210 | `fe4df26` | XR schema and 8-experiment/18-reference normalizer validated |
+
+All five tasks passed independent specification and quality review. The work
+did not modify HANDOVER or the existing XR design/experiment/model/target JSON
+files and did not invoke excluded install, reproduction, experiment, FPGA,
+board, merge, release, or push actions.

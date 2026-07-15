@@ -27,7 +27,8 @@
 - [x] Separated dependency, training, C-sim, synthesis, board, CRLF/LFS,
   Spec-Kit, and push approval gates.
 - [x] Obtained final specification/executability and documentation-quality PASS.
-- [ ] Obtain user approval before any follow-up implementation or commit.
+- [x] Obtained user approval for the code/file-only follow-up implementation commits.
 - [x] User approved the code/file-only execution slice and excluded installation,
   reproducibility verification, and experiment work.
-- [ ] Execute and review T-010, T-020, T-100, T-110, and T-210.
+- [x] Executed and reviewed T-010, T-020, T-100, T-110, and T-210.
+- [x] Kept all commits local to HBTXR; no push, merge, install, or experiment was performed.

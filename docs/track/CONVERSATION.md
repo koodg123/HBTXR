@@ -30,3 +30,8 @@
 - After dependency/experiment scope review, active tasks are T-010, T-020,
   T-100, T-110, and T-210. T-120, T-220, and T-490 were removed; push remains
   excluded.
+- The user requested resumption from the stopped point; execution resumed at T-110
+  and continued sequentially through T-210 and final verification.
+- The selected tasks were implemented as local semantic commits in HBTXR only;
+  HANDOVER stayed read-only and existing XR reference JSON remained unchanged.
+- Installation, reproducibility runs, experiments, synthesis, board access, merge,
