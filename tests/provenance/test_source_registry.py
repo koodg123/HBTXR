@@ -3,6 +3,7 @@ from __future__ import annotations
 import copy
 import hashlib
 import importlib.util
+import subprocess
 import tempfile
 import unittest
 from pathlib import Path
@@ -173,6 +174,37 @@ class SourceRegistryValidationTest(unittest.TestCase):
         }
         errors = MODULE.validate_registry(document, workspace_root=self.root)
         self.assertTrue(any("credential-like key" in error for error in errors))
+
+    def test_structured_password_key_fails(self) -> None:
+        document = {
+            "schema_version": 1,
+            "metadata": {"password": "hunter2"},
+            "candidates": [self.candidate],
+        }
+        errors = MODULE.validate_registry(document, workspace_root=self.root)
+        self.assertTrue(any("credential-like key" in error for error in errors))
+
+    def test_dirty_file_cannot_be_attributed_to_declared_revision(self) -> None:
+        repo = self.root / "source"
+        subprocess.run(["git", "init"], cwd=repo, check=True, capture_output=True)
+        subprocess.run(["git", "config", "user.email", "test@example.invalid"], cwd=repo, check=True)
+        subprocess.run(["git", "config", "user.name", "Test"], cwd=repo, check=True)
+        subprocess.run(["git", "add", "README.md"], cwd=repo, check=True)
+        subprocess.run(["git", "commit", "-m", "fixture"], cwd=repo, check=True, capture_output=True)
+        revision = subprocess.run(
+            ["git", "rev-parse", "HEAD"], cwd=repo, check=True, capture_output=True, text=True
+        ).stdout.strip()
+
+        (repo / "README.md").write_text("dirty\n", encoding="utf-8")
+        candidate = copy.deepcopy(self.candidate)
+        candidate["source"]["revision"] = revision
+        candidate["source"]["blob_sha256"] = hashlib.sha256(b"dirty\n").hexdigest()
+        errors = MODULE.validate_registry(
+            {"schema_version": 1, "candidates": [candidate]},
+            workspace_root=self.root,
+            require_local=True,
+        )
+        self.assertTrue(any("not the blob at declared revision" in error for error in errors))
 
 
 if __name__ == "__main__":

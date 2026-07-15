@@ -32,6 +32,10 @@ CREDENTIAL_RE = re.compile(
     r"github_pat_[a-z0-9_]{16,}|gh[opusr]_[a-z0-9]{16,}|"
     r"sk-(?:proj-)?[a-z0-9_-]{16,}|(?:AKIA|ASIA)[0-9A-Z]{16})"
 )
+SENSITIVE_KEY_RE = re.compile(
+    r"(?i)^(?:.*[_-])?(?:password|passwd|pwd|secret|token|api[_-]?key|"
+    r"access[_-]?key|private[_-]?key)$"
+)
 
 REQUIRED_CANDIDATE_FIELDS = {
     "candidate_id",
@@ -63,7 +67,12 @@ def _has_credentials(value: Any) -> bool:
     if isinstance(value, str):
         return CREDENTIAL_RE.search(value) is not None
     if isinstance(value, dict):
-        return any(_has_credentials(key) or _has_credentials(item) for key, item in value.items())
+        return any(
+            (isinstance(key, str) and SENSITIVE_KEY_RE.fullmatch(key) is not None)
+            or _has_credentials(key)
+            or _has_credentials(item)
+            for key, item in value.items()
+        )
     if isinstance(value, list):
         return any(_has_credentials(item) for item in value)
     return False
@@ -82,6 +91,10 @@ def _sha256(path: Path) -> str:
         for chunk in iter(lambda: stream.read(1024 * 1024), b""):
             digest.update(chunk)
     return digest.hexdigest()
+
+
+def _sha256_bytes(value: bytes) -> str:
+    return hashlib.sha256(value).hexdigest()
 
 
 def _resolve_allowed_repo(workspace_root: Path, value: Any) -> Path | None:
@@ -245,12 +258,23 @@ def validate_registry(
                             capture_output=True,
                             text=True,
                         ).stdout.strip()
+                        committed_blob = subprocess.run(
+                            ["git", "-C", str(repo_path), "show", f"{revision}:{source['path']}"],
+                            check=True,
+                            capture_output=True,
+                        ).stdout
                     except (OSError, subprocess.CalledProcessError) as exc:
                         errors.append(f"{prefix}.source.repo revision check failed: {exc}")
                     else:
                         if local_revision != revision:
                             errors.append(
                                 f"{prefix}.source.revision mismatch: expected {revision}, got {local_revision}"
+                            )
+                        committed_hash = _sha256_bytes(committed_blob)
+                        if committed_hash != blob_hash:
+                            errors.append(
+                                f"{prefix}.source.blob_sha256 is not the blob at declared revision: "
+                                f"expected {blob_hash}, got {committed_hash}"
                             )
             elif require_local:
                 errors.append(f"{prefix}.source.path does not exist: {source_path}")
