@@ -1,0 +1,36 @@
+{
+  "schema_version": 1,
+  "artifact_id": "hbtxr-reference-checkpoint-v1",
+  "artifact_type": "MODEL_CHECKPOINT",
+  "status": "DECLARED",
+  "content": {
+    "sha256": "1111111111111111111111111111111111111111111111111111111111111111",
+    "byte_count": 1048576,
+    "uri": "s3://hbtxr-artifacts/checkpoints/reference-v1.pt",
+    "replacement_sha256": null
+  },
+  "inputs": {
+    "source_sha256": "2222222222222222222222222222222222222222222222222222222222222222",
+    "config_sha256": "3333333333333333333333333333333333333333333333333333333333333333",
+    "split_sha256": "4444444444444444444444444444444444444444444444444444444444444444"
+  },
+  "environment": {
+    "architecture_version": "hbtxr-hybrid-v1",
+    "tool_version": "documented-externally",
+    "board_version": "not-applicable"
+  },
+  "governance": {
+    "access": "RESTRICTED",
+    "privacy": "DEIDENTIFIED",
+    "license": "VERIFIED"
+  },
+  "generation": {
+    "command": "python -m project.entrypoint --config configs/reference.yaml",
+    "status": "GENERATED"
+  },
+  "validation": {
+    "owner": "artifact-maintainer",
+    "date": "2026-07-15",
+    "claims": ["URI_SYNTAX_VERIFIED"]
+  }
+}
