@@ -69,3 +69,8 @@ references/legacy-codebase/**/.git/
 
 # Large vendored pretrained weights
 third/DeepVOG/deepvog/model/DeepVOG_weights.h5
+
+# Python build artifacts (T-020 forbids build payloads in Git)
+build/
+dist/
+*.egg-info/
