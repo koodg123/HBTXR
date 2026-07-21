@@ -85,3 +85,113 @@
 - Review: amended-spec APPROVED; code-quality APPROVED.
 - Drift: no implementation owner move, Hybrid edit, preserved-zone change,
   repository build artifact, dependency change or premature retirement.
+
+
+## AM-020 dataset owner migration
+
+- Moved the dataset business implementation once to
+  `algorithm/dataset/src/eveye/dataset`; the legacy tree contains only explicit
+  same-name aliases, exact `__all__` declarations and package markers.
+- Extracted DavisEyeCenter and MemmapDavisEyeCenter model/runtime demos into
+  `eveye.engine.tools.inspect_davis_eye_center`; no new console entry point.
+- Rewrote maintained dataset consumers. The sole exception is the exact
+  pre-existing unresolved import in inactive `EllipseMobileNet.py`, with zero
+  maintained consumers and explicit AM-040 disposition.
+- Canonical dataset has no model/engine/event/Hybrid/src upward import. Temporary
+  `EvEye.utils` edges remain until AM-030.
+- Forced Linux temp focused regression: 20 passed across dataset contracts,
+  import origins and Hybrid external dataset tests. Registry names/origins,
+  wrapper identity, NPY shapes/dtypes/centers and ellipse coordinates passed.
+- Spec review APPROVED; quality review APPROVED. Preserved-zone drift zero.
+- No AM-020 commit: dual-case `EvEye`/`eveye` source state must remain on Linux
+  `/tmp` until AM-060 removes the legacy top-level payload.
+
+
+## AM-030 reusable utilities migration
+
+- Canonical leaf utilities moved once to `algorithm/utils/src/eveye/utils`;
+  maintained consumers and canonical dataset now use `eveye.utils`.
+- Legacy compatibility uses explicit aliases and exact `__all__`; no wildcard,
+  `sys.modules`, or `__path__` mechanism.
+- AM-040 exclusions: `NpyCacheFrameStack.py`, `MemmapCacheFrameStack.ipynb`,
+  and `tonicLearning.ipynb` remain in legacy owner because they have
+  orchestration/dataset dependencies. Canonical notebook cells are JSON/AST
+  checked for upward imports.
+- Forced Linux temp focused gate: 24 passed, 1 skipped. The skip is optional
+  PlotDistribution runtime identity because matplotlib/seaborn are unavailable;
+  its structural wrapper contract passed.
+- Compileall, import census, 25 notebook JSON checks, diff checks and preserved
+  zones passed. Spec review APPROVED; quality review APPROVED.
+- No migration commit: dual-case state remains confined to Linux `/tmp`.
+
+
+## AM-040 common/engine/event ownership split
+
+- Registry characterization captured as data before any move (pytest execution
+  deferred by user decision): 7 registry entries with module origin, class
+  identity and constructor signature recorded.
+- Moves: callback and logger to eveye.engine; model_factory to eveye.engine;
+  utils/scripts (45 files) to eveye.engine.tools; EPNet, ElNet and TennSt
+  (15 files) flattened into eveye.event.models; remaining 20 model files into
+  eveye.common.models with directory structure preserved.
+- Predict.py main was extracted first into
+  eveye.engine.tools.predict_shared_ellipse. The os module is imported
+  explicitly there because the source module received it through a wildcard.
+- Verification against the pre-move snapshot: registry key order preserved, all
+  six importable constructors identical in signature, and legacy wrappers
+  resolving to the same objects. TennSt was excluded because import debugpy
+  already failed at HEAD.
+- Defect found and fixed during AM-060 gating: the first rewrite pass omitted
+  the EvEye.utils.scripts to eveye.engine.tools mapping and the
+  algorithm/common/scripts root, leaving 29 broken imports. Corrected across
+  20 files and 48 lines. The structural gate is what surfaced this.
+- Disposition: EllipseMobileNet.py removed as a dead import owner. It had no
+  maintained consumer, cal_loss and its module are absent at HEAD and now, and
+  analysis documentation independently records it as an unused code path. A
+  copy was retained outside the repository before deletion.
+
+## AM-050 config, test and launcher flattening
+
+- common/configs to configs; common/tests/facet to tests/common;
+  common/scripts/facet flattened; facet_main.py renamed to
+  sagemaker_launcher.py.
+- Target basename collisions were checked and none were found before moving.
+- The only references to the old paths were four historical lines in the
+  preserved common/PROVENANCE.md, which were intentionally left unchanged.
+- The facet name no longer appears in any active code path.
+- algorithm/README.md was updated in place to describe the owner packages.
+
+## AM-060 EvEye compatibility owner retirement
+
+- Content audit by AST before deletion: 58 of 61 files were pure re-export
+  wrappers. The three real-content files (NpyCacheFrameStack.py,
+  MemmapCacheFrameStack.ipynb and tonicLearning.ipynb) were migrated to
+  eveye.engine.tools first, so no implementation was lost.
+- Legacy owner removed and pyproject discovery narrowed to eveye only.
+- Contract tests were updated to the post-retirement contract: the legacy
+  wrapper test and the AM-040 exclusion test were replaced by retirement and
+  migration assertions.
+- Retirement gate: legacy directory absent; maintained EvEye import count 0;
+  wheel contains eveye/dataset and eveye/engine with no EvEye, dataset, utils
+  or engine top-level payload; clean-venv arbitrary-CWD import resolves eveye
+  and rejects all four forbidden names; editable install plus train.py --help
+  and validate.py --help pass.
+- algorithm/analysis retains 15 EvEye imports and is now unrunnable. The AM-060
+  verification in the plan explicitly excludes analysis, archive and
+  hardware_reference from the import census, so this is an accepted outcome.
+- Dual-case coexistence is resolved, which lifts the no-commit constraint.
+
+## Environment drift recorded (plan text unchanged)
+
+- ripgrep is unavailable. The dependency gates use an equivalent
+  grep -rEn --include=*.py form with fail-closed exit-code handling, because
+  the negated rg shape in the plan turns a missing directory into a false pass.
+- The venv recipe in the plan does not hold: system Python 3.12 has no torch,
+  and /tmp/hbtxr-am-venv (uv, CPython 3.11.14) has no pip. Using uv pip against
+  that interpreter is the verified recipe.
+- Recorded test counts could not be reproduced: algorithm/tests collects 14
+  items (13 passed, 1 skipped) against the recorded 20 and 24 plus 1. The
+  evidence files never recorded the exact pytest path arguments. AM-900 must
+  use measured values rather than these intermediate figures.
+- Pre-existing defects retained and not hidden: TennSt imports debugpy, and
+  NpyCacheFrameStack imports a CacheFrameStack module that is absent at HEAD.
