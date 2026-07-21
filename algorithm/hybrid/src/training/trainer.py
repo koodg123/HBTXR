@@ -24,7 +24,7 @@ except Exception:  # pragma: no cover - plain-text fallback is covered instead
 from src.data.loader import make_loader_by_mode
 from src.optim.common import optimizer_hypers_dir, write_json
 from src.optim.registry import build_optimizer
-from src.pools.lr_schedulers import build_lr_scheduler
+from src.optim.lr_schedulers import build_lr_scheduler
 from src.models.export_pruned import export_structural_student
 from src.models.pruning import (
     is_legacy_masking_enabled,

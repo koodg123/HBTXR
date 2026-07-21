@@ -6,6 +6,8 @@ from .common import *  # noqa: F401,F403
 from .distillation import *  # noqa: F401,F403
 from .primitives import *  # noqa: F401,F403
 from .stage import *  # noqa: F401,F403
+from . import losses
+from .losses import build_loss, compute_loss, list_loss_names
 
 __all__ = [
     "assigners",
@@ -18,6 +20,10 @@ __all__ = [
     "stage1",
     "stage2",
     "stage_common",
+    "losses",
+    "build_loss",
+    "compute_loss",
+    "list_loss_names",
     *assigners.__all__,
     *common.__all__,
     *primitives.__all__,

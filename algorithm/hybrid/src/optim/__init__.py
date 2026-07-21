@@ -7,6 +7,16 @@ from src.optim.registry import (
     is_optimizer_implemented,
     list_optimizer_names,
 )
+from src.optim.lr_schedulers import (
+    build_lr_scheduler,
+    list_lr_scheduler_names,
+    metric_mode,
+)
+from src.optim.optimizer import (
+    build_named_optimizer,
+    list_implemented_optimizer_names,
+    optimizer_pool_summary,
+)
 
 __all__ = [
     "build_optimizer",
@@ -15,4 +25,10 @@ __all__ = [
     "is_optimizer_implemented",
     "list_optimizer_names",
     "write_optimizer_pool_report",
+    "build_lr_scheduler",
+    "list_lr_scheduler_names",
+    "metric_mode",
+    "build_named_optimizer",
+    "list_implemented_optimizer_names",
+    "optimizer_pool_summary",
 ]
