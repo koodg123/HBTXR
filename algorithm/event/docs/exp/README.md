@@ -107,3 +107,23 @@ Recommended action:
 - Event runs that do not state event-window policy.
 - Hard-subset recovery as a main training recipe.
 - Synthetic v2e results without raw-event distribution checks.
+
+## Smoke commands (AM-080)
+
+Both launchers accept an explicit config path, so they can be invoked from any
+working directory. A bare file name still resolves under `configs/`.
+
+```bash
+export TMPDIR=/tmp TEMP=/tmp TMP=/tmp
+
+# train smoke
+python algorithm/common/scripts/train.py   --config algorithm/event/configs/DavisEyeEllipse_EPNet_local_smoke.yaml
+
+# validate smoke
+python algorithm/common/scripts/validate.py   --config algorithm/event/configs/DavisEyeEllipse_EPNet_local_smoke.yaml
+```
+
+Contract tests for every config in this modality live in
+`algorithm/event/tests/test_event_config_contracts.py`. They load each
+YAML and assert that the referenced model and dataset names are registered in
+`eveye.engine.model_factory` and `eveye.dataset.dataset_factory`.

@@ -133,3 +133,23 @@ Risk:
 - Older distorted-transform Stage1 runs.
 - Bbox cascade variants whose eye stage reports `eye_iou = 0.0`.
 - Frame metrics that do not record the resize/crop policy.
+
+## Smoke commands (AM-080)
+
+Both launchers accept an explicit config path, so they can be invoked from any
+working directory. A bare file name still resolves under `configs/`.
+
+```bash
+export TMPDIR=/tmp TEMP=/tmp TMP=/tmp
+
+# train smoke
+python algorithm/common/scripts/train.py   --config algorithm/frame/configs/DavisEyeEllipse_RGBUNet_local_train_smoke.yaml
+
+# validate smoke
+python algorithm/common/scripts/validate.py   --config algorithm/frame/configs/DavisEyeEllipse_RGBUNet_local_train_smoke.yaml
+```
+
+Contract tests for every config in this modality live in
+`algorithm/frame/tests/test_frame_config_contracts.py`. They load each
+YAML and assert that the referenced model and dataset names are registered in
+`eveye.engine.model_factory` and `eveye.dataset.dataset_factory`.
