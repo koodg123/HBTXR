@@ -258,3 +258,68 @@ second consumer exists. Nothing on the never-move list was touched.
   collection-error count at AM-900 is therefore 6, not the baseline 4: 4
   pre-existing Hybrid errors plus these 2 relocated ones. This is a scope change,
   not a regression.
+
+
+## AM-900 final integration and preservation gate
+
+### Test delta against the AM-000 baseline
+
+Measured with the AM-000 baseline PYTHONPATH (three entries), not the one-entry
+form printed in the plan, so the comparison is like for like.
+
+| Scope | AM-000 baseline | AM-900 | Delta |
+|---|---|---|---|
+| hybrid failed | 16 | 16 | 0 |
+| hybrid collection errors | 4 | 4 | 0 |
+| hybrid subtests passed | 28 | 28 | 0 |
+| hybrid passed | 128 | 151 | +23 |
+
+The +23 is exactly the count of contract tests added by AM-070. Failure and
+error counts are unchanged, so the refactor introduced no regression.
+
+Full four-path run: 16 failed, 242 passed, 1 skipped, 6 errors, 28 subtests
+passed. Every failure is inside algorithm/hybrid/tests/external_pipeline and
+matches the pre-existing defect list recorded at AM-000 (snapshot drift, runtime
+run-root mismatch, surface help paths, config, ci snapshot guard and external
+packages). The new owner, frame and event suites contribute zero failures.
+
+The 6 collection errors are the 4 pre-existing Hybrid ones plus the 2 facet
+tests that AM-050 relocated from common/tests/facet into algorithm/tests/common,
+which fail to import for a missing metavision_core dependency and a missing
+file. Both predate this workstream; the count change is a scope change.
+
+### Test corrections applied during AM-900
+
+Six failures were traced to this workstream and fixed rather than hidden.
+
+- Two were defects in the AM-070 tests themselves. The loss normalization test
+  assumed a dash maps onto stage1, but the normalizer maps a dash to an
+  underscore, so the case now exercises stage2-hybrid which does resolve. The
+  optimizer test assumed a bare optimizer return, while build_named_optimizer
+  returns a four-tuple of optimizer, resolved config, metadata and summary.
+- Four were owner contract assertions that AM-060 legitimately obsoleted: the
+  setuptools mapping and discovery lists still expected an EvEye entry, the
+  legacy origin test expected EvEye to resolve, the dataset wrapper census
+  expected legacy wrapper files, and the inactive-import allowlist still expected
+  the EllipseMobileNet cal_loss line that AM-040 removed. Each was rewritten as a
+  retirement assertion so the contract still has teeth.
+
+### Packaging and preservation gates
+
+- compileall over common, dataset, utils, engine, event and hybrid/src: pass.
+- Wheel build, clean-venv install and isolated import: all six eveye owners
+  resolve and all four forbidden bare names (EvEye, dataset, utils, engine) are
+  absent.
+- Wheel payload contains eveye/dataset and eveye/engine with no forbidden entry.
+- train.py and validate.py help succeed from an unrelated working directory.
+- algorithm/README.md and algorithm/pyproject.toml are present.
+- Preserved zones are blob-identical to baseline ebe862b, their status is empty,
+  and git diff --check is clean.
+- src.pools no longer resolves and optim/pool.py is preserved.
+
+### Residual state
+
+Pre-existing defects deliberately left in place and reported rather than hidden:
+TennSt imports debugpy; NpyCacheFrameStack imports a CacheFrameStack module that
+is absent at HEAD; algorithm/analysis retains 15 EvEye imports and is unrunnable
+after retirement, which the AM-060 verification in the plan explicitly accepts.

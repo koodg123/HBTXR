@@ -8,7 +8,6 @@ from setuptools.config.pyprojecttoml import load_file
 ALGORITHM_ROOT = Path(__file__).resolve().parents[2]
 COMMON_SOURCE_ROOT = ALGORITHM_ROOT / "common" / "src"
 EXPECTED_PACKAGE_DIR = {
-    "EvEye": "common/src/EvEye",
     "eveye.common": "common/src/eveye/common",
     "eveye.dataset": "dataset/src/eveye/dataset",
     "eveye.utils": "utils/src/eveye/utils",
@@ -16,7 +15,6 @@ EXPECTED_PACKAGE_DIR = {
     "eveye.event": "event/src/eveye/event",
 }
 EXPECTED_OWNER_PATHS = {
-    "EvEye": ALGORITHM_ROOT / "common" / "src" / "EvEye",
     "eveye.common": ALGORITHM_ROOT / "common" / "src" / "eveye" / "common",
     "eveye.dataset": ALGORITHM_ROOT / "dataset" / "src" / "eveye" / "dataset",
     "eveye.utils": ALGORITHM_ROOT / "utils" / "src" / "eveye" / "utils",
@@ -36,8 +34,6 @@ EXPECTED_DISCOVERY = {
         "event/src",
     ],
     "include": [
-        "EvEye",
-        "EvEye.*",
         "eveye.common",
         "eveye.common.*",
         "eveye.dataset",
@@ -69,17 +65,11 @@ def test_setuptools_configuration_maps_all_owner_packages() -> None:
     }
 
 
-def test_legacy_eveye_origin_matches_configured_source() -> None:
-    spec = PathFinder.find_spec("EvEye", [str(COMMON_SOURCE_ROOT)])
-
-    assert spec is not None
-    assert spec.origin is not None
-    assert Path(spec.origin).resolve() == (
-        EXPECTED_OWNER_PATHS["EvEye"] / "__init__.py"
-    ).resolve()
-    assert tuple(
-        Path(path).resolve() for path in spec.submodule_search_locations or ()
-    ) == (EXPECTED_OWNER_PATHS["EvEye"].resolve(),)
+def test_legacy_eveye_owner_is_retired() -> None:
+    """AM-060: EvEye is neither configured nor resolvable from any owner root."""
+    assert not (COMMON_SOURCE_ROOT / "EvEye").exists()
+    for source_root in OWNER_SOURCE_ROOTS:
+        assert PathFinder.find_spec("EvEye", [str(source_root)]) is None
 
 
 def test_current_owner_roots_do_not_resolve_bare_packages() -> None:

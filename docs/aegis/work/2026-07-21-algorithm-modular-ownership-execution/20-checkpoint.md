@@ -2,13 +2,13 @@
 
 ## TodoCheckpointDraft
 
-- Active slice: AM-900 final integration gate (AM-040 through AM-090 complete).
+- Active slice: none. AM-000 through AM-900 are complete.
 - Completed: AM-000 baseline/preservation lock, AM-010 package/import
   contract, AM-020 dataset migration, AM-030 utility migration, AM-040 owner split,
   AM-050 config/test/launcher flattening, and AM-060 EvEye retirement; isolated worktree created at baseline SHA; clean checkout verified;
   8,044 preserved blobs and all 20 current-to-target mapping rows recorded;
   `EvEye`, `src`, CLI, config, notebook and dynamic-import consumers censused.
-- Pending: AM-900.
+- Pending: none. Push remains outside this plan and needs separate approval.
 - Evidence refs: `10-intent.md`, `90-evidence.md`,
   `docs/track/algorithm-modular-baseline.md`,
   `docs/provenance/algorithm-modular-paths.tsv`.

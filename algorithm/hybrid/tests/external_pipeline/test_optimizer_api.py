@@ -41,8 +41,14 @@ def test_metadata_exposes_required_keys() -> None:
 
 def test_build_named_optimizer_injects_the_requested_name() -> None:
     model = nn.Linear(4, 2)
-    optimizer = build_named_optimizer(model, "adamw", {"training": {"optimizer": {"lr": 0.001}}})
+    built = build_named_optimizer(model, "adamw", {"training": {"optimizer": {"lr": 0.001}}})
+    assert isinstance(built, tuple) and len(built) == 4
+    optimizer, resolved, metadata, summary = built
     assert isinstance(optimizer, torch.optim.Optimizer)
+    assert resolved["name"] == "adamw"
+    assert resolved["lr"] == 0.001
+    assert "builder" in metadata
+    assert summary["implemented"] is True
 
 
 def test_pool_report_helpers_remain_delegated() -> None:

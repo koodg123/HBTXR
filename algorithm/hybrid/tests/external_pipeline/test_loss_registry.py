@@ -20,8 +20,9 @@ def test_aliases_collapse_to_two_stage_implementations() -> None:
     assert stage1.isdisjoint(stage2)
 
 
-def test_name_normalization_is_case_and_dash_insensitive() -> None:
-    assert build_loss("  STAGE-1  ") is build_loss("stage1")
+def test_name_normalization_strips_case_and_maps_dash_to_underscore() -> None:
+    assert build_loss("  STAGE1  ") is build_loss("stage1")
+    assert build_loss("STAGE2-HYBRID") is build_loss("stage2_hybrid")
 
 
 def test_unknown_name_raises_key_error() -> None:

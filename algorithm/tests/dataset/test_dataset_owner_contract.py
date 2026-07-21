@@ -112,17 +112,10 @@ EXPECTED_WRAPPERS = {
         ),
     ),
 }
-INACTIVE_LEGACY_DATASET_ALLOWLIST = {
-    INACTIVE_ELLIPSE_PATH: {
-        "line": (
-            f"from {LEGACY_DATASET_PACKAGE}.DavisEyeEllipse.losses import cal_loss"
-        ),
-        "reason": (
-            "Pre-existing unresolved dependency in an inactive module; "
-            "AM-040 owns its disposition."
-        ),
-    }
-}
+# AM-040 disposed of the single allowlisted entry by removing the dead
+# EllipseMobileNet owner, so no maintained source may reference the legacy
+# dataset package any more.
+INACTIVE_LEGACY_DATASET_ALLOWLIST: dict[str, dict[str, str]] = {}
 FROZEN_PARTS = {
     "analysis",
     "archive",
@@ -197,55 +190,10 @@ def test_ellipse_coordinate_order_is_preserved() -> None:
     assert ellipse == ((12.5, 20.25), (8.0, 6.0), 45.0)
 
 
-def test_legacy_wrappers_have_explicit_exports_and_canonical_identity() -> None:
-    actual_wrappers = {
-        path.relative_to(LEGACY_ROOT).as_posix()
-        for path in LEGACY_ROOT.rglob("*.py")
-    }
-    assert actual_wrappers == set(EXPECTED_WRAPPERS)
-
-    for relative_path, (canonical_name, expected_exports) in EXPECTED_WRAPPERS.items():
-        path = LEGACY_ROOT / relative_path
-        source = path.read_text()
-        tree = ast.parse(source, filename=str(path))
-        executable_nodes = [
-            node
-            for node in tree.body
-            if not (
-                isinstance(node, ast.Expr)
-                and isinstance(node.value, ast.Constant)
-                and isinstance(node.value.value, str)
-            )
-        ]
-        import_nodes = [node for node in executable_nodes if isinstance(node, ast.ImportFrom)]
-        all_nodes = [node for node in executable_nodes if isinstance(node, ast.Assign)]
-
-        assert all(isinstance(node, (ast.ImportFrom, ast.Assign)) for node in executable_nodes)
-        assert len(import_nodes) == (1 if expected_exports else 0)
-        if import_nodes:
-            import_node = import_nodes[0]
-            assert import_node.module == canonical_name
-            assert tuple(alias.name for alias in import_node.names) == expected_exports
-            assert tuple(alias.asname for alias in import_node.names) == expected_exports
-            assert all(alias.name != "*" for alias in import_node.names)
-        assert len(all_nodes) == 1
-        assert len(all_nodes[0].targets) == 1
-        assert isinstance(all_nodes[0].targets[0], ast.Name)
-        assert all_nodes[0].targets[0].id == "__all__"
-        assert ast.literal_eval(all_nodes[0].value) == list(expected_exports)
-        assert "import *" not in source
-        assert "sys.modules" not in source
-        assert "__path__" not in source
-
-        legacy_suffix = relative_path.removesuffix("/__init__.py").removesuffix(".py")
-        legacy_name = LEGACY_DATASET_PACKAGE
-        if legacy_suffix and legacy_suffix != "__init__":
-            legacy_name += "." + legacy_suffix.replace("/", ".")
-        canonical_module = import_module(canonical_name)
-        legacy_module = import_module(legacy_name)
-        assert legacy_module.__all__ == list(expected_exports)
-        for export in expected_exports:
-            assert getattr(legacy_module, export) is getattr(canonical_module, export)
+def test_legacy_dataset_owner_is_retired() -> None:
+    """AM-060: the legacy EvEye dataset owner and all its wrappers are removed."""
+    assert not LEGACY_ROOT.exists()
+    assert not (ALGORITHM_ROOT / "common" / "src" / "EvEye").exists()
 
 
 def test_dataset_owner_has_no_upward_imports_and_demos_are_extracted() -> None:
