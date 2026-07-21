@@ -195,3 +195,66 @@
   use measured values rather than these intermediate figures.
 - Pre-existing defects retained and not hidden: TennSt imports debugpy, and
   NpyCacheFrameStack imports a CacheFrameStack module that is absent at HEAD.
+
+
+## AM-070 pools dissolution
+
+- losses moved to loss/losses.py, optimizers to optim/optimizer.py under the
+  requested singular name, lr_schedulers to optim, runtime_schedulers to runtime.
+- heads.py and the pools initializer were deleted after confirming zero
+  consumers outside the pools package itself.
+- optim/pool.py is preserved. The single external consumer, training/trainer.py,
+  now imports from src.optim. The loss, optim and runtime initializers re-export
+  the moved APIs so the public surface is unchanged, and src.pools no longer
+  resolves.
+- Four focused contract tests were added and collect cleanly (23 items).
+
+## AM-080 modality surfaces
+
+- load_config now accepts an explicit or absolute config path and keeps the bare
+  file name behaviour, which was demonstrated by loading an absolute event
+  config from an unrelated working directory.
+- Config contract tests were added for both modalities and collect 78 items.
+  They assert that every model name is registered in eveye.engine.model_factory
+  and every dataset name in eveye.dataset.dataset_factory.
+- No frame/src package was created; the frame test asserts its absence.
+- Deviation recorded: the plan names both test files test_config_contracts.py,
+  which pytest cannot import together because the basenames collide and neither
+  directory is a package. Unique basenames were used instead. A global
+  import-mode change or new top-level frame and event packages were rejected as
+  higher risk.
+
+## AM-090 conditional extraction: documented NO-OP
+
+Both preconditions in the plan were evaluated and neither is met.
+
+- Second active modality consumer: absent. frame has no src package and no
+  Python implementation at all, so it cannot consume Hybrid leaves. The event
+  owner and every shared owner (common, dataset, utils, engine) contain zero
+  imports of src.*, so Hybrid remains the only consumer of its own leaves.
+- Parity fixtures: absent. No parity fixture exists anywhere outside archive and
+  reference trees.
+
+The four candidate leaves all exist (utils/paths.py and utils/io.py for path and
+JSON I/O, utils/cache.py with utils/component_registry.py for the cache and
+component registry, utils/state6.py for state6 geometry, and data/transform.py
+with the evaluation package for transform and evaluation contracts), but moving
+any of them would create a shared owner with exactly one consumer. AM-090
+therefore completes as a NO-OP, which is the outcome the plan prescribes when no
+second consumer exists. Nothing on the never-move list was touched.
+
+## AM-900 preparation findings
+
+- The AM-900 command in the plan sets PYTHONPATH to algorithm/hybrid only, while
+  the AM-000 baseline used three entries (algorithm/hybrid,
+  algorithm/hybrid/scripts/external_pipeline and
+  algorithm/hybrid/tests/external_pipeline). Measured: the one-entry form
+  reports 7 collection errors and the three-entry form reports 4, which matches
+  the recorded baseline exactly. AM-900 must use the baseline PYTHONPATH or the
+  delta will be inflated by three environment-induced errors.
+- AM-050 moved two pre-existing broken facet tests from common/tests/facet into
+  algorithm/tests/common, which is inside the AM-900 collection scope. They fail
+  to import for missing metavision_core and a missing file. The expected
+  collection-error count at AM-900 is therefore 6, not the baseline 4: 4
+  pre-existing Hybrid errors plus these 2 relocated ones. This is a scope change,
+  not a regression.
