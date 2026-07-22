@@ -1,5 +1,0 @@
-extends: ../paper/zcu104_option_a.yaml
-experiment:
-  name: paper_reproduce
-notes:
-  status: blocked_for_exact_numerics_until_final_checkpoint_dataset_quant_luts_and_goldens_exist

@@ -1,8 +1,0 @@
-extends: base.yaml
-training:
-  stage: stage2
-  epochs: 30
-experiment:
-  name: hgtxr_stage2_hybrid
-  init_checkpoint: runs/hgtxr_stage1_search/best_search_p10.pt
-

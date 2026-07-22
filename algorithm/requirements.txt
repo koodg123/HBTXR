@@ -1,0 +1,32 @@
+# Merged from requirements/{train,eval,analysis}.txt (deduplicated).
+# Flat-functional layout is NOT pip-installed; build a venv with uv and
+# install these directly, running from the algorithm/ root.
+
+-i https://pypi.tuna.tsinghua.edu.cn/simple
+boto3
+botocore
+sagemaker
+torch==2.2
+lightning  # easier training
+pytorch-lightning
+lightning-bolts  # for linear warmup cosine decay scheduler
+pandas  # to generate submission csv
+h5py  # to load data
+natsort  # to sort the data directories properly
+hydra-core
+opencv-python
+seaborn
+matplotlib
+scikit-learn
+click
+albumentations
+timm
+tonic
+scikit-image
+debugpy
+thop
+-r train.txt
+pandas
+numpy
+openpyxl
+tqdm

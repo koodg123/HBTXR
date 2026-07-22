@@ -1,7 +1,0 @@
-extends: base.yaml
-training:
-  stage: stage1
-  epochs: 20
-experiment:
-  name: hgtxr_stage1_search
-

@@ -1,7 +1,0 @@
-extends: ../base.yaml
-training:
-  epochs: 1
-  batch_size: 2
-experiment:
-  name: smoke
-  output_dir: runs/smoke

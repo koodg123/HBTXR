@@ -1,6 +1,0 @@
-# Compatibility alias for the historical Exp-D preset name.
-
-extends: mode0_stage1_dense_maskcascade.yaml
-
-experiment:
-  name: hbtxr_mode0_stage1_expD_maskcascade50
