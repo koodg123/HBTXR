@@ -8,7 +8,7 @@ FACET_ROOT = Path(__file__).resolve().parents[3]
 if str(FACET_ROOT) not in sys.path:
     sys.path.insert(0, str(FACET_ROOT))
 
-from engine.tools.check_reproduction_status import (
+from engine.tools.reporting.check_reproduction_status import (
     validate_comparison_json,
     validate_eval_result_json,
     validate_summary_json,

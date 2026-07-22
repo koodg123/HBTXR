@@ -12,7 +12,7 @@ from engine.tools.process_model_output import process_model_output
 from engine.tools.load_config import load_config
 from dataset.dataset_factory import make_dataloader
 from engine.model_factory import make_model
-from engine.tools.find_center import find_center, write_centers
+from engine.tools.datatools.find_center import find_center, write_centers
 
 config_path = "OutputGroundTruth.yaml"
 folder_path = "/mnt/data2T/junyuan/eye-tracking/EV_Eye_dataset/raw_data/Data_davis"
