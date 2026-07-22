@@ -12,14 +12,14 @@ from timm.scheduler.step_lr import StepLRScheduler
 
 from models.backbones.deit import DeiTConfig, build_deit
 from models.heads.hbtxr_head import HBTXRHead
-from models.losses.hbtxr_loss import HBTXRCtdetLoss
-from models.metrics.hbtxr_metric import (
+from models.losses.ellipse_loss import HBTXRCtdetLoss
+from models.metrics.ellipse_metric import (
     cal_batch_ap,
     cal_batch_iou,
     cal_mean_distance,
     p_acc,
 )
-from models.postprocess.hbtxr_predict import post_process
+from models.postprocess.ellipse_predict import post_process
 
 
 LOSS_WEIGHT = {

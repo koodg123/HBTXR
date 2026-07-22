@@ -36,7 +36,7 @@ if str(REPO_ROOT) not in sys.path:
 
 from dataset.DavisEyeEllipse.DavisEyeEllipseDataset import DavisEyeEllipseDataset
 from models.detectors.hbtxr import HBTXR
-from models.postprocess.hbtxr_predict import post_process
+from models.postprocess.ellipse_predict import post_process
 
 
 SESSION_TO_CODE = {

@@ -1,7 +1,7 @@
 """Executable prediction demo for the shared ellipse model.
 
 AM-040 extraction: moved out of the shared model owner so that
-models.postprocess.hbtxr_predict keeps no execution payload.
+models.postprocess.ellipse_predict keeps no execution payload.
 `os` is imported explicitly here because the source module received it
 implicitly through a wildcard import of utils.visualization.
 """
@@ -12,7 +12,7 @@ import os
 def main():
     from models.detectors.hbtxr import HBTXR
     from models.detectors.elnet import Creat_MyNet
-    from models.postprocess.hbtxr_predict import predict_txt
+    from models.postprocess.ellipse_predict import predict_txt
 
     index = 0
     model = HBTXR(

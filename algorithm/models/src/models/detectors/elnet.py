@@ -63,9 +63,9 @@ else:
         f"Got {_DCN_IMPL!r}."
     )
 
-from models.losses.ep_loss import *
-from models.postprocess.ep_predict import *
-from models.metrics.ep_metric import *
+from models.losses.ellipse_loss import *
+from models.postprocess.ellipse_predict import *
+from models.metrics.ellipse_metric import *
 
 BN_MOMENTUM = 0.1
 logger = logging.getLogger(__name__)

@@ -4,7 +4,7 @@ import torch.nn.functional as F
 import numpy as np
 import cv2
 from torch.autograd import Variable
-from models.postprocess.hbtxr_predict import topk
+from models.postprocess.ellipse_predict import topk
 
 
 def _neg_loss(pred, gt):
@@ -396,9 +396,9 @@ class WeightLoss(nn.Module):
         return loss
 
 
-class HBTXRCtdetLoss(torch.nn.Module):
+class CtdetLoss(torch.nn.Module):
     def __init__(self, loss_weight):
-        super(HBTXRCtdetLoss, self).__init__()
+        super(CtdetLoss, self).__init__()
         self.crit = FocalLoss()
         self.crit_reg = RegL1Loss()
         self.crit_ab = RegL1Loss()
@@ -502,3 +502,6 @@ class HBTXRCtdetLoss(torch.nn.Module):
         }
 
         return total_loss, loss_show
+
+# HBTXR historically named this loss HBTXRCtdetLoss; keep the alias.
+HBTXRCtdetLoss = CtdetLoss

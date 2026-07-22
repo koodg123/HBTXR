@@ -17,9 +17,9 @@ from models.backbones.mobilenetv3 import (
     MobileNetV3Backbone,
 )
 from models.heads.ep_head import EPHead
-from models.losses.ep_loss import *
-from models.postprocess.ep_predict import *
-from models.metrics.ep_metric import *
+from models.losses.ellipse_loss import *
+from models.postprocess.ellipse_predict import *
+from models.metrics.ellipse_metric import *
 
 LOSS_WEIGHT = {
     "hm_weight": 1,
