@@ -1,1 +1,3 @@
-"""models.tracker — flat-functional skeleton (filled during rewrite)."""
+from .hybrid_tracker import HBTXRTracker
+
+__all__ = ["HBTXRTracker"]
