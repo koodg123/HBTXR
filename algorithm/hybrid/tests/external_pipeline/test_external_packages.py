@@ -5,8 +5,8 @@ import importlib.util
 import json
 from pathlib import Path
 
-from src.preprocess.path_utils import resolve_paths
-from src.utils.external_packages import (
+from hybrid.preprocess.path_utils import resolve_paths
+from hybrid.utils.external_packages import (
     build_clone_command,
     builtin_package_specs,
     default_external_repo_roots,

@@ -8,18 +8,18 @@ from _bootstrap import ensure_project_src_on_path
 
 PROJECT_ROOT = ensure_project_src_on_path()
 
-from src.preprocess.build_manifests import build_manifests
-from src.preprocess.annotation_backends import (
+from hybrid.preprocess.build_manifests import build_manifests
+from hybrid.preprocess.annotation_backends import (
     DEFAULT_ANNOTATION_BACKEND,
     SUPPORTED_ANNOTATION_BACKENDS,
 )
-from src.preprocess.canonicalize import DEFAULT_EVENT_SIZE, DEFAULT_FRAME_SIZE, canonicalize_dataset
-from src.preprocess.event_generation import (
+from hybrid.preprocess.canonicalize import DEFAULT_EVENT_SIZE, DEFAULT_FRAME_SIZE, canonicalize_dataset
+from hybrid.preprocess.event_generation import (
     DEFAULT_EVENT_GENERATION_BACKEND,
     SUPPORTED_EVENT_GENERATION_BACKENDS,
 )
-from src.preprocess.path_utils import add_common_path_args, resolve_paths
-from src.preprocess.progress import print_progress
+from hybrid.preprocess.path_utils import add_common_path_args, resolve_paths
+from hybrid.preprocess.progress import print_progress
 
 
 def build_argparser() -> argparse.ArgumentParser:

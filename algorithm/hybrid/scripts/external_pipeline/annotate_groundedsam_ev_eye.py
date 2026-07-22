@@ -7,17 +7,17 @@ from _bootstrap import ensure_project_src_on_path
 
 PROJECT_ROOT = ensure_project_src_on_path()
 
-from src.preprocess.groundedsam_build import (
+from hybrid.preprocess.groundedsam_build import (
     DEFAULT_CLASSES,
     annotate_dataset_with_groundedsam,
     annotate_dataset_with_groundedsam_multi,
     parse_groundedsam_devices,
 )
-from src.preprocess.annotation_backends import (
+from hybrid.preprocess.annotation_backends import (
     DEFAULT_ANNOTATION_BACKEND,
     SUPPORTED_ANNOTATION_BACKENDS,
 )
-from src.preprocess.path_utils import add_common_path_args, resolve_paths
+from hybrid.preprocess.path_utils import add_common_path_args, resolve_paths
 
 
 def _comma_split(text: str) -> list[str]:

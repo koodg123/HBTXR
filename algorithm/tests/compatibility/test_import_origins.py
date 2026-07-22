@@ -16,6 +16,7 @@ EXPECTED_PACKAGE_DIR = {
     "utils": "utils/src/utils",
     "engine": "engine/src/engine",
     "event": "event/src/event",
+    "hybrid": "hybrid/src/hybrid",
 }
 EXPECTED_OWNER_PATHS = {
     name: ALGORITHM_ROOT / Path(rel) for name, rel in EXPECTED_PACKAGE_DIR.items()

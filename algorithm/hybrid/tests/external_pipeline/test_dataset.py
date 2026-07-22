@@ -3,11 +3,11 @@ from __future__ import annotations
 import numpy as np
 from PIL import Image
 
-from src.data.contracts import BuiltEventInput, ResolvedRoi
-from src.data.dataset import EVEyeHBTXRDataset, Mode2Dataset, _build_event_frame, _build_transform, _resolve_xywh
-from src.data.loader import build_dataset_kwargs
-from src.preprocess.build_manifests import build_manifests
-from src.preprocess.canonicalize import canonicalize_dataset
+from hybrid.data.contracts import BuiltEventInput, ResolvedRoi
+from hybrid.data.dataset import EVEyeHBTXRDataset, Mode2Dataset, _build_event_frame, _build_transform, _resolve_xywh
+from hybrid.data.loader import build_dataset_kwargs
+from hybrid.preprocess.build_manifests import build_manifests
+from hybrid.preprocess.canonicalize import canonicalize_dataset
 
 
 def test_dataset_supports_fixed_count_and_time_bin(synthetic_workspace):

@@ -5,11 +5,11 @@ from pathlib import Path
 import numpy as np
 from PIL import Image, ImageDraw
 
-from src.data.dataset import Mode2Dataset
-from src.preprocess.build_manifests import build_manifests
-from src.preprocess.canonicalize import canonicalize_dataset
-from src.preprocess.event_generation import generate_event_packets, resolve_event_generation_backend
-from src.preprocess.interpolation import (
+from hybrid.data.dataset import Mode2Dataset
+from hybrid.preprocess.build_manifests import build_manifests
+from hybrid.preprocess.canonicalize import canonicalize_dataset
+from hybrid.preprocess.event_generation import generate_event_packets, resolve_event_generation_backend
+from hybrid.preprocess.interpolation import (
     build_alpha_schedule,
     compute_insert_count,
     interpolate_pair,
@@ -17,8 +17,8 @@ from src.preprocess.interpolation import (
     resolve_interpolation_backend,
     unwrap_timelens_checkpoint_state_dict,
 )
-from src.utils.io import read_json, read_jsonl, write_jsonl
-from src.utils.state6 import xywht_to_xyabuv
+from hybrid.utils.io import read_json, read_jsonl, write_jsonl
+from hybrid.utils.state6 import xywht_to_xyabuv
 
 
 def _build_target_fps_raw_workspace(tmp_path: Path) -> dict[str, Path]:
@@ -145,7 +145,7 @@ def test_timelens_backend_requires_checkpoint_when_not_provided(tmp_path: Path):
 
 
 def test_timelens_backend_uses_runtime_adapter_when_available(tmp_path: Path, monkeypatch):
-    from src.preprocess import interpolation as interpolation_module
+    from hybrid.preprocess import interpolation as interpolation_module
 
     events_path = tmp_path / "events.npz"
     np.savez_compressed(
@@ -180,7 +180,7 @@ def test_timelens_backend_uses_runtime_adapter_when_available(tmp_path: Path, mo
 
 
 def test_timelens_xl_backend_uses_runtime_adapter_when_available(tmp_path: Path, monkeypatch):
-    from src.preprocess import interpolation as interpolation_module
+    from hybrid.preprocess import interpolation as interpolation_module
 
     events_path = tmp_path / "events.npz"
     np.savez_compressed(
@@ -215,7 +215,7 @@ def test_timelens_xl_backend_uses_runtime_adapter_when_available(tmp_path: Path,
 
 
 def test_timelens_xl_backend_accepts_raw_events_txt_when_runtime_is_available(tmp_path: Path, monkeypatch):
-    from src.preprocess import interpolation as interpolation_module
+    from hybrid.preprocess import interpolation as interpolation_module
 
     raw_root = tmp_path / "raw" / "user01" / "left" / "session_1_0_1" / "events"
     raw_root.mkdir(parents=True, exist_ok=True)
@@ -247,7 +247,7 @@ def test_timelens_xl_backend_accepts_raw_events_txt_when_runtime_is_available(tm
 
 
 def test_resolve_timelens_xl_checkpoint_prefers_shared_workspace_checkpoint(tmp_path: Path, monkeypatch):
-    from src.preprocess import interpolation as interpolation_module
+    from hybrid.preprocess import interpolation as interpolation_module
 
     repo_root = tmp_path / "Third" / "FI"
     repo_root.mkdir(parents=True, exist_ok=True)
@@ -285,7 +285,7 @@ def test_unwrap_timelens_checkpoint_state_dict_accepts_native_finetune_format():
 
 
 def test_v2e_event_generation_backend_uses_runtime_adapter_when_available(monkeypatch):
-    from src.preprocess import event_generation as event_generation_module
+    from hybrid.preprocess import event_generation as event_generation_module
 
     captured_kwargs = {}
 
@@ -386,7 +386,7 @@ def test_mode2_target_fps_generates_expected_synthetic_count(tmp_path: Path):
 
 
 def test_mode2_timelens_backend_wires_into_canonicalize(tmp_path: Path, monkeypatch):
-    from src.preprocess import interpolation as interpolation_module
+    from hybrid.preprocess import interpolation as interpolation_module
 
     workspace = _build_target_fps_raw_workspace(tmp_path)
     checkpoint_path = workspace["groundedsam_root"] / "refined_model" / "attention.bin"

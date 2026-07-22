@@ -3,8 +3,8 @@ from __future__ import annotations
 import numpy as np
 from pathlib import Path
 
-from src.preprocess.target_fps_build import build_target_fps_dataset
-from src.preprocess.timelens_xl_finetune import build_timelens_xl_run_argv, export_timelens_xl_finetune_dataset
+from hybrid.preprocess.target_fps_build import build_target_fps_dataset
+from hybrid.preprocess.timelens_xl_finetune import build_timelens_xl_run_argv, export_timelens_xl_finetune_dataset
 
 from tests.test_target_fps_build import _build_target_fps_raw_workspace
 

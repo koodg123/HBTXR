@@ -21,8 +21,8 @@ from _config import (
     resolve_run_contract,
     write_run_artifacts,
 )
-from src.models.export_pruned import export_structural_student
-from src.training.trainer import build_model
+from hybrid.models.export_pruned import export_structural_student
+from hybrid.training.trainer import build_model
 
 
 def parse_args() -> argparse.Namespace:

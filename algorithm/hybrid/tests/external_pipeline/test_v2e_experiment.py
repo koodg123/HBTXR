@@ -7,10 +7,10 @@ from pathlib import Path
 
 import numpy as np
 
-from src.preprocess import event_generation as event_generation_module
-from src.preprocess.event_generation import _V2eRuntime, _ensure_v2e_optional_imports
-from src.preprocess.v2e_experiment import compare_target_fps_roots
-from src.utils.io import write_jsonl
+from hybrid.preprocess import event_generation as event_generation_module
+from hybrid.preprocess.event_generation import _V2eRuntime, _ensure_v2e_optional_imports
+from hybrid.preprocess.v2e_experiment import compare_target_fps_roots
+from hybrid.utils.io import write_jsonl
 
 
 def _write_fake_target_session(

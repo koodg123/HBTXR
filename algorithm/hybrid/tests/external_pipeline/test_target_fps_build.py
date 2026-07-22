@@ -6,8 +6,8 @@ from pathlib import Path
 import numpy as np
 from PIL import Image
 
-from src.preprocess.io_utils import FrameRecord
-from src.preprocess.target_fps_build import (
+from hybrid.preprocess.io_utils import FrameRecord
+from hybrid.preprocess.target_fps_build import (
     build_target_fps_dataset,
     build_target_fps_dataset_plan,
     build_target_frame_plan,
@@ -15,7 +15,7 @@ from src.preprocess.target_fps_build import (
     discover_target_fps_session_jobs,
     resolve_target_fps_root,
 )
-from src.utils.io import read_json, read_jsonl, write_jsonl
+from hybrid.utils.io import read_json, read_jsonl, write_jsonl
 
 
 def _build_target_fps_raw_workspace(tmp_path: Path) -> dict[str, Path]:

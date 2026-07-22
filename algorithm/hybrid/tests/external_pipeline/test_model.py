@@ -2,10 +2,10 @@ from __future__ import annotations
 
 import torch
 
-from src.models.hybrid_tracker import HBTXRTracker
-from src.models.pruning import normalize_compression_cfg
-from src.runtime.tracker import RuntimeHBTXRTracker
-from src.training.trainer import build_model
+from hybrid.models.hybrid_tracker import HBTXRTracker
+from hybrid.models.pruning import normalize_compression_cfg
+from hybrid.runtime.tracker import RuntimeHBTXRTracker
+from hybrid.training.trainer import build_model
 
 
 def _batch(batch_size: int = 2) -> dict[str, torch.Tensor]:

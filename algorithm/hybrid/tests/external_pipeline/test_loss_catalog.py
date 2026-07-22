@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import torch
 
-from src.training.losses import (
+from hybrid.training.losses import (
     AdaptiveWingLoss,
     AnchorConsistencyLoss,
     AuxClassificationLoss,

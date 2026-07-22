@@ -21,9 +21,9 @@ if [ ! -x "$PYTHON_BIN" ]; then
 fi
 
 if [ -n "${PYTHONPATH:-}" ]; then
-    export PYTHONPATH="$PROJECT_ROOT:$PYTHONPATH"
+    export PYTHONPATH="$PROJECT_ROOT/src:$PYTHONPATH"
 else
-    export PYTHONPATH="$PROJECT_ROOT"
+    export PYTHONPATH="$PROJECT_ROOT/src"
 fi
 
 sanitize_component() {

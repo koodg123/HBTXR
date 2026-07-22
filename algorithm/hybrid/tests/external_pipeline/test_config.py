@@ -4,17 +4,17 @@ import json
 import shutil
 from pathlib import Path
 
-from src.config.run_contract import collect_reference_only_reports as shared_collect_reference_only_reports
-from src.config.run_contract import default_checkpoint_for_stage as shared_default_checkpoint_for_stage
-from src.config.run_contract import resolve_experiment_name as shared_resolve_experiment_name
-from src.config.run_contract import resolve_manifest_path as shared_resolve_manifest_path
-from src.config.run_contract import resolve_resume_root as shared_resolve_resume_root
-from src.config.run_contract import resolve_run_contract as shared_resolve_run_contract
-from src.config.run_contract import resolve_training_entry as shared_resolve_training_entry
-from src.config.run_contract import write_run_artifacts as shared_write_run_artifacts
-from src.config.runtime_config import build_dataset_kwargs as shared_build_dataset_kwargs
-from src.config.runtime_config import resolve_mode_contract as shared_resolve_mode_contract
-from src.data.loader import build_dataset_kwargs as loader_build_dataset_kwargs
+from hybrid.config.run_contract import collect_reference_only_reports as shared_collect_reference_only_reports
+from hybrid.config.run_contract import default_checkpoint_for_stage as shared_default_checkpoint_for_stage
+from hybrid.config.run_contract import resolve_experiment_name as shared_resolve_experiment_name
+from hybrid.config.run_contract import resolve_manifest_path as shared_resolve_manifest_path
+from hybrid.config.run_contract import resolve_resume_root as shared_resolve_resume_root
+from hybrid.config.run_contract import resolve_run_contract as shared_resolve_run_contract
+from hybrid.config.run_contract import resolve_training_entry as shared_resolve_training_entry
+from hybrid.config.run_contract import write_run_artifacts as shared_write_run_artifacts
+from hybrid.config.runtime_config import build_dataset_kwargs as shared_build_dataset_kwargs
+from hybrid.config.runtime_config import resolve_mode_contract as shared_resolve_mode_contract
+from hybrid.data.loader import build_dataset_kwargs as loader_build_dataset_kwargs
 
 from _config import (
     apply_config_overrides,

@@ -4,7 +4,7 @@ import pytest
 import torch
 from torch import nn
 
-from src.optim.lr_schedulers import build_lr_scheduler, list_lr_scheduler_names, metric_mode
+from hybrid.optim.lr_schedulers import build_lr_scheduler, list_lr_scheduler_names, metric_mode
 
 
 def _optimizer() -> torch.optim.Optimizer:

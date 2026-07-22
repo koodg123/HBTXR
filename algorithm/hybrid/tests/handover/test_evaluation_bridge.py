@@ -6,7 +6,7 @@ import unittest
 from dataclasses import FrozenInstanceError
 from pathlib import Path
 
-SRC_ROOT = Path(__file__).resolve().parents[2] / "src"
+SRC_ROOT = Path(__file__).resolve().parents[2] / "src" / "hybrid"
 PACKAGE_DIR = SRC_ROOT / "evaluation"
 SPEC = importlib.util.spec_from_file_location(
     "evaluation",

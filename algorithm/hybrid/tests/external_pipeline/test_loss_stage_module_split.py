@@ -2,10 +2,10 @@ from __future__ import annotations
 
 import torch
 
-import src.loss.metrics as split_metrics
-import src.loss.stage as facade_stage
-import src.loss.stage1 as split_stage1
-import src.loss.stage2 as split_stage2
+import hybrid.loss.metrics as split_metrics
+import hybrid.loss.stage as facade_stage
+import hybrid.loss.stage1 as split_stage1
+import hybrid.loss.stage2 as split_stage2
 
 
 def _loss_cfg() -> dict[str, float]:

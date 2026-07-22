@@ -5,9 +5,9 @@ from pathlib import Path
 import json
 import torch
 
-from src.preprocess.build_manifests import build_manifests
-from src.training.trainer import build_model
-from src.training.trainer import train
+from hybrid.preprocess.build_manifests import build_manifests
+from hybrid.training.trainer import build_model
+from hybrid.training.trainer import train
 
 
 def _smoke_cfg(stage: str, canonical_root: Path, *, ssl_enabled: bool = False, pruning_enabled: bool = False) -> dict:

@@ -7,13 +7,13 @@ from typing import Any
 
 import torch
 
-from src.data.dataset import EVEyeHBTXRDataset, Mode2Dataset
-from src.loss.metrics import compute_metrics
-from src.loss.stage1 import compute_stage1_losses
-from src.loss.stage2 import compute_stage2_losses
-from src.models.hybrid_tracker import HBTXRTracker
-from src.preprocess.build_manifests import build_manifests
-from src.preprocess.canonicalize import canonicalize_dataset
+from hybrid.data.dataset import EVEyeHBTXRDataset, Mode2Dataset
+from hybrid.loss.metrics import compute_metrics
+from hybrid.loss.stage1 import compute_stage1_losses
+from hybrid.loss.stage2 import compute_stage2_losses
+from hybrid.models.hybrid_tracker import HBTXRTracker
+from hybrid.preprocess.build_manifests import build_manifests
+from hybrid.preprocess.canonicalize import canonicalize_dataset
 
 
 SNAPSHOT_PATH = Path(__file__).resolve().parent / "snapshots" / "output_contracts.json"

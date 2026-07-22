@@ -3,7 +3,7 @@ from __future__ import annotations
 import torch
 from torch import nn
 
-from src.optim.optimizer import (
+from hybrid.optim.optimizer import (
     build_named_optimizer,
     expand_optimizer_pool_candidates,
     get_optimizer_metadata,

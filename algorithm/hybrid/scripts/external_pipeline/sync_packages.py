@@ -10,7 +10,7 @@ from _bootstrap import ensure_project_src_on_path
 
 PROJECT_ROOT = ensure_project_src_on_path()
 
-from src.utils.external_packages import (
+from hybrid.utils.external_packages import (
     ExternalPackageSpec,
     build_clone_command,
     build_update_commands,

@@ -5,8 +5,8 @@ from pathlib import Path
 import torch
 from torch import nn
 
-from src.models.hybrid_tracker import HBTXRTracker
-from src.models.preload.pretrained_loader import load_pretrained_weights, write_pretrained_report
+from hybrid.models.hybrid_tracker import HBTXRTracker
+from hybrid.models.preload.pretrained_loader import load_pretrained_weights, write_pretrained_report
 
 
 def test_pretrained_loader_selective_load_and_report(tmp_path: Path):

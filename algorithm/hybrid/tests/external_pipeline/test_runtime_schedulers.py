@@ -2,8 +2,8 @@ from __future__ import annotations
 
 import pytest
 
-from src.models.controller import TrackSearchSchedulerFSM
-from src.runtime.runtime_schedulers import (
+from hybrid.models.controller import TrackSearchSchedulerFSM
+from hybrid.runtime.runtime_schedulers import (
     build_runtime_scheduler,
     get_runtime_scheduler_class,
     list_runtime_scheduler_names,

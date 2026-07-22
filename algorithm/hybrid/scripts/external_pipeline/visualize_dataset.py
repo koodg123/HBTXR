@@ -18,7 +18,7 @@ from _config import (
     write_run_artifacts,
 )
 from _viz import event_to_image, frame_to_image, mask_to_image, save_panel
-from src.training.trainer import make_loader
+from hybrid.training.trainer import make_loader
 
 
 def parse_args() -> argparse.Namespace:

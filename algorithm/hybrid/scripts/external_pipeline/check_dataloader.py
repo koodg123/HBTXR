@@ -10,7 +10,7 @@ from _bootstrap import ensure_project_src_on_path
 PROJECT_ROOT = ensure_project_src_on_path()
 
 from _config import apply_config_overrides, load_config, resolve_manifest_path
-from src.training.trainer import make_loader
+from hybrid.training.trainer import make_loader
 
 
 def parse_args() -> argparse.Namespace:

@@ -1,7 +1,7 @@
 from __future__ import annotations
 
-from src.preprocess.io_utils import EllipseAnnotation
-from src.preprocess.raw_ellipse_blink import (
+from hybrid.preprocess.io_utils import EllipseAnnotation
+from hybrid.preprocess.raw_ellipse_blink import (
     RawEllipseBlinkHeuristicConfig,
     apply_groundedsam_store_blink_metadata,
     analyze_raw_ellipse_blink_candidates,

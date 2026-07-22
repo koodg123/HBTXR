@@ -13,15 +13,15 @@ from PIL import Image, ImageDraw
 
 
 PROJECT_ROOT = Path(__file__).resolve().parents[2]
-SRC_ROOT = PROJECT_ROOT
+SRC_ROOT = PROJECT_ROOT / "src"
 SCRIPTS_ROOT = PROJECT_ROOT / "scripts"
 
 for path in (SRC_ROOT, SCRIPTS_ROOT):
     if str(path) not in sys.path:
         sys.path.insert(0, str(path))
 
-from src.utils.io import write_json, write_jsonl
-from src.utils.state6 import xywht_to_xyabuv
+from hybrid.utils.io import write_json, write_jsonl
+from hybrid.utils.state6 import xywht_to_xyabuv
 
 
 @pytest.fixture

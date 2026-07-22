@@ -3,13 +3,13 @@ from __future__ import annotations
 import pytest
 import numpy as np
 
-from src.preprocess import canonicalize as canonicalize_module
-from src.preprocess.build_manifests import build_manifests
-from src.preprocess.canonicalize import canonicalize_dataset
-from src.preprocess.canonicalize_pipeline import CanonicalSessionProcessor
-from src.preprocess.groundedsam_build import _resolve_runtime_device, _session_belongs_to_shard, parse_groundedsam_devices
-from src.preprocess.groundedsam_pipeline import GroundedSamRuntimeFactory, GroundedSamSummaryWriter
-from src.utils.io import read_json, read_jsonl
+from hybrid.preprocess import canonicalize as canonicalize_module
+from hybrid.preprocess.build_manifests import build_manifests
+from hybrid.preprocess.canonicalize import canonicalize_dataset
+from hybrid.preprocess.canonicalize_pipeline import CanonicalSessionProcessor
+from hybrid.preprocess.groundedsam_build import _resolve_runtime_device, _session_belongs_to_shard, parse_groundedsam_devices
+from hybrid.preprocess.groundedsam_pipeline import GroundedSamRuntimeFactory, GroundedSamSummaryWriter
+from hybrid.utils.io import read_json, read_jsonl
 
 
 def test_build_manifests_v3_schema(synthetic_workspace):

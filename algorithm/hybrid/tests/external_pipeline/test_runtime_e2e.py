@@ -4,8 +4,8 @@ import json
 import sys
 from pathlib import Path
 
-from src.preprocess.build_manifests import build_manifests
-from src.preprocess.canonicalize import canonicalize_dataset
+from hybrid.preprocess.build_manifests import build_manifests
+from hybrid.preprocess.canonicalize import canonicalize_dataset
 from _config import latest_run_root
 
 from eval_hbtxr import main as eval_main

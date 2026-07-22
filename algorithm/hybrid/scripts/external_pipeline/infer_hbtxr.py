@@ -22,7 +22,7 @@ from _config import (
     resolve_run_contract,
     write_run_artifacts,
 )
-from src.training.trainer import build_model, checkpoint_summary_metadata, make_loader, move_to_device
+from hybrid.training.trainer import build_model, checkpoint_summary_metadata, make_loader, move_to_device
 
 
 def resolve_device(cfg: dict) -> torch.device:

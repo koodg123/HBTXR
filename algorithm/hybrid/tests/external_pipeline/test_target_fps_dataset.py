@@ -2,9 +2,9 @@ from __future__ import annotations
 
 from pathlib import Path
 
-from src.data.dataset import EVEyeHBTXRDataset, Mode2Dataset
-from src.preprocess.build_manifests import build_manifests
-from src.preprocess.target_fps_canonical import canonicalize_target_fps_dataset
+from hybrid.data.dataset import EVEyeHBTXRDataset, Mode2Dataset
+from hybrid.preprocess.build_manifests import build_manifests
+from hybrid.preprocess.target_fps_canonical import canonicalize_target_fps_dataset
 
 from tests.test_target_fps_canonical import _build_target_fps_canonical_workspace
 

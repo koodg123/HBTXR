@@ -6,10 +6,10 @@ from pathlib import Path
 import numpy as np
 from PIL import Image
 
-from src.preprocess.target_fps_build import build_target_fps_dataset, resolve_target_fps_root
-from src.preprocess.target_fps_canonical import canonicalize_target_fps_dataset
-from src.utils.io import read_json, read_jsonl, write_jsonl
-from src.utils.paths import resolve_canonical_dataset_root
+from hybrid.preprocess.target_fps_build import build_target_fps_dataset, resolve_target_fps_root
+from hybrid.preprocess.target_fps_canonical import canonicalize_target_fps_dataset
+from hybrid.utils.io import read_json, read_jsonl, write_jsonl
+from hybrid.utils.paths import resolve_canonical_dataset_root
 
 from tests.test_target_fps_build import _build_target_fps_annotation_workspace
 

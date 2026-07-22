@@ -19,8 +19,8 @@ from _config import (
     resolve_training_entry,
     write_run_artifacts,
 )
-from src.optim.pool import expand_optimizer_pool_candidates, write_optimizer_pool_report
-from src.training.trainer import train
+from hybrid.optim.pool import expand_optimizer_pool_candidates, write_optimizer_pool_report
+from hybrid.training.trainer import train
 
 
 def parse_args() -> argparse.Namespace:

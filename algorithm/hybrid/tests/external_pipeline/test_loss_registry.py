@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import pytest
 
-from src.loss.losses import build_loss, compute_loss, list_loss_names
+from hybrid.loss.losses import build_loss, compute_loss, list_loss_names
 
 EXPECTED_ALIASES = ["hybrid", "search", "stage1", "stage1_search", "stage2", "stage2_hybrid"]
 
@@ -31,7 +31,7 @@ def test_unknown_name_raises_key_error() -> None:
 
 
 def test_compute_loss_delegates_with_active_head(monkeypatch) -> None:
-    from src.loss import losses as losses_module
+    from hybrid.loss import losses as losses_module
 
     captured = {}
 

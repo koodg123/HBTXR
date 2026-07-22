@@ -9,7 +9,7 @@ from dataclasses import FrozenInstanceError
 from pathlib import Path
 
 HYBRID_ROOT = Path(__file__).resolve().parents[2]
-SRC_ROOT = HYBRID_ROOT / "src"
+SRC_ROOT = HYBRID_ROOT / "src" / "hybrid"
 CONTRACTS_PATH = SRC_ROOT / "data" / "contracts.py"
 CONTRACTS_SPEC = importlib.util.spec_from_file_location(
     "_hbtxr_data_contracts_under_test", CONTRACTS_PATH

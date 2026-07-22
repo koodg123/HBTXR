@@ -4,7 +4,7 @@ import pytest
 
 from pathlib import Path
 
-from src.preprocess.groundedsam_eye_region_bbox import (
+from hybrid.preprocess.groundedsam_eye_region_bbox import (
     _box_area_ratio_xyxy,
     _count_touched_borders,
     _eye_bbox_rejection_reason,

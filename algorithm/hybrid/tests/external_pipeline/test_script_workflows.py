@@ -4,8 +4,8 @@ from pathlib import Path
 
 from check_dataloader import inspect_dataloader
 from export_hbtxr import export_from_checkpoint
-from src.preprocess.build_manifests import build_manifests
-from src.training.trainer import train
+from hybrid.preprocess.build_manifests import build_manifests
+from hybrid.training.trainer import train
 
 
 def _structural_cfg(stage: str, canonical_root: Path) -> dict:

@@ -6,7 +6,7 @@ from typing import Any
 
 import yaml
 
-from src.config.run_contract import (
+from hybrid.config.run_contract import (
     collect_reference_only_reports as _shared_collect_reference_only_reports,
     default_checkpoint_for_stage as _shared_default_checkpoint_for_stage,
     latest_run_root as _shared_latest_run_root,
@@ -19,7 +19,7 @@ from src.config.run_contract import (
     resolve_training_entry as _shared_resolve_training_entry,
     write_run_artifacts as _shared_write_run_artifacts,
 )
-from src.config.runtime_config import (
+from hybrid.config.runtime_config import (
     build_dataset_kwargs as _shared_build_dataset_kwargs,
     mode_defaults as _shared_mode_defaults,
     resolve_data_mode as _shared_resolve_data_mode,
