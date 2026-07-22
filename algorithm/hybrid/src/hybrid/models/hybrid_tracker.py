@@ -1,6 +1,8 @@
 from __future__ import annotations
 
 from typing import Any
+import inspect
+from dataclasses import field, fields, make_dataclass
 
 import torch
 from torch import nn
@@ -468,3 +470,47 @@ class HBTXRTracker(nn.Module):
             event_density=event_density,
             closed_eye_flag=closed_eye_flag,
         )
+
+
+def _build_hbtxr_tracker_config():
+    """Build a frozen dataclass mirroring HBTXRTracker.__init__ exactly.
+
+    Introspecting the signature keeps the config in perfect sync with the
+    constructor, so the two can never disagree.
+    """
+    signature = inspect.signature(HBTXRTracker.__init__)
+    specs = []
+    for name, parameter in signature.parameters.items():
+        if name == "self":
+            continue
+        annotation = (
+            parameter.annotation
+            if parameter.annotation is not inspect.Parameter.empty
+            else Any
+        )
+        if parameter.default is inspect.Parameter.empty:
+            specs.append((name, annotation))
+        else:
+            specs.append((name, annotation, field(default=parameter.default)))
+
+    def to_kwargs(self) -> dict[str, Any]:
+        """Expand the config back into constructor keyword arguments."""
+        return {f.name: getattr(self, f.name) for f in fields(self)}
+
+    return make_dataclass(
+        "HBTXRTrackerConfig",
+        specs,
+        frozen=True,
+        namespace={"to_kwargs": to_kwargs},
+    )
+
+
+HBTXRTrackerConfig = _build_hbtxr_tracker_config()
+
+
+def _hbtxr_tracker_from_config(cls, config: HBTXRTrackerConfig) -> HBTXRTracker:
+    """Construct an HBTXRTracker from a single HBTXRTrackerConfig object."""
+    return cls(**config.to_kwargs())
+
+
+HBTXRTracker.from_config = classmethod(_hbtxr_tracker_from_config)
