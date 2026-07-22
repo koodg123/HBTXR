@@ -1,0 +1,23 @@
+# Shared data contract for the reimplemented HBTXR experiments.
+# Consumed by engine.data.factory -> dataset.hbtxr.loader (mode resolution,
+# event builder, sampler). Override per experiment as needed.
+data:
+  mode: mode1                    # mode0 | mode1 | mode2
+  canonical_name: canonical1
+  manifest_name: manifest1
+  canonical_root: null           # workspace root containing canonical bundles
+  input_size: [128, 128]         # loader output [H, W]; matches model.img_size
+  resize_policy: facet_square_direct
+  cache_root: null
+  use_cache: true
+  per_channel_normalize: true
+  event_builder:
+    policy: fixed_count          # fixed_count | time_bin | interval_all
+    time_bin_us: 5000
+    event_count_target: 5000
+    accumulation: fast_causal_linear
+    causal_weight_power: 1.0
+    fast_causal_limit: 25.0
+    polarity_split: true         # 2-channel event tensor (Conv-E expects 2)
+  augmentation:
+    enabled: false               # train-only label-safe intensity augmentation

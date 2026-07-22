@@ -1,0 +1,23 @@
+# Frame distillation experiment: distill a small student (cfg.model) from a larger
+# frozen teacher.
+#   python -m engine.distill.entrypoint -c configs/experiment/frame_distill.yaml
+include:
+  - configs/experiment/frame_hbtxr.yaml   # student = frame model + data/training
+distill:
+  weight: 1.0                             # total = task_loss + weight * distill_loss
+  teacher:
+    model:
+      target: models.frame.FrameModel
+      embed_dim: 384                      # larger-capacity teacher
+      patch_size: 16
+      img_size: 128
+      backbone:
+        depth: 12
+        cut_point: 6
+        num_heads: 6
+        mlp_ratio: 4.0
+      head: bbox
+      with_mask: true
+      with_roi: true
+      with_reliability: true
+    ckpt_path: null                       # set to a trained teacher checkpoint

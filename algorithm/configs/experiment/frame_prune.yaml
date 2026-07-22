@@ -1,0 +1,12 @@
+# Frame pruning experiment: prune a trained frame checkpoint, then fine-tune.
+#   python -m engine.compress.entrypoint -c configs/experiment/frame_prune.yaml \
+#       --ckpt runs/frame_hbtxr/train/final.pt -o runs/frame_hbtxr/pruned.pt
+include:
+  - configs/experiment/frame_hbtxr.yaml
+pruning:
+  amount: 0.3            # fraction of Linear/Conv weights removed
+  structured: false      # false=global L1-unstructured, true=per-layer Ln-structured
+  n: 2                   # Ln norm when structured
+  dim: 0                 # prune dim when structured
+  ckpt_path: null        # set to a trained checkpoint (or pass --ckpt)
+  output: runs/frame_hbtxr/pruned.pt

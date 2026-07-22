@@ -1,0 +1,8 @@
+# Event-only HBTXR training experiment (standalone direct detector, Conv-E stem).
+#   python -m engine.train.entrypoint -c configs/experiment/event_hbtxr.yaml
+include:
+  - configs/modality/event/hbtxr.yaml
+  - configs/base/data.yaml
+  - configs/base/training.yaml
+experiment:
+  name: event_hbtxr

@@ -1,0 +1,16 @@
+# Hybrid HBTXR training experiment (shared backbone: search + track branches).
+#   python -m engine.train.entrypoint -c configs/experiment/hybrid_hbtxr.yaml
+# Search is supervised with a box target, track with an anchor-relative residual
+# (GT-anchor teacher forcing); the scheduler is inference-only.
+include:
+  - configs/modality/hybrid/hbtxr.yaml
+  - configs/base/data.yaml
+  - configs/base/training.yaml
+experiment:
+  name: hybrid_hbtxr
+training:
+  loss_weights:        # track residual uses the 'ellipse' term; no mask branch here
+    box: 1.0
+    ellipse: 1.0
+    reliability: 0.5
+    eye_box: 0.5

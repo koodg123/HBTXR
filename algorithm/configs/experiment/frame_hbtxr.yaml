@@ -1,0 +1,10 @@
+# Frame-only HBTXR training experiment (standalone direct detector).
+#   python -m engine.train.entrypoint -c configs/experiment/frame_hbtxr.yaml
+include:
+  - configs/modality/frame/hbtxr.yaml   # model: + train: fragment
+  - configs/base/data.yaml              # data:
+  - configs/base/training.yaml          # training:
+experiment:
+  name: frame_hbtxr
+  # project_root: null  -> cwd; manifests default to
+  # <project_root>/manifests/manifest1/{train,val,test}_manifest.jsonl

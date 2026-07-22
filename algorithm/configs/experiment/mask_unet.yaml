@@ -1,0 +1,11 @@
+# Standalone pupil-mask UNet training experiment (segmentation, not HBTXR detect).
+#   python -m engine.train.entrypoint -c configs/experiment/mask_unet.yaml
+include:
+  - configs/modality/mask/unet.yaml
+  - configs/base/data.yaml
+  - configs/base/training.yaml
+experiment:
+  name: mask_unet
+training:
+  loss_weights:        # segmentation: only the dense mask term is active
+    mask: 1.0

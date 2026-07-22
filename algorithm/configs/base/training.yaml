@@ -1,0 +1,27 @@
+# Shared training defaults for the reimplemented HBTXR experiments.
+# Consumed by common.optim.build_optimizer (training.optimizer),
+# common.schedulers.build_lr_scheduler (training.scheduler), the loader
+# (batch_size/num_workers/pin_memory/sampler/seed) and engine.train.Trainer
+# (device/epochs/loss_weights).
+training:
+  optimizer:
+    name: adamw                  # see common.optim.registry for the full set
+    lr: 0.0003
+    weight_decay: 0.05
+    betas: [0.9, 0.999]
+    eps: 1.0e-8
+  scheduler:
+    type: cosine                 # none | cosine | step | plateau
+    min_lr: 1.0e-6
+  batch_size: 8
+  num_workers: 4
+  pin_memory: auto
+  device: cpu                    # cpu | cuda | ...
+  epochs: 50
+  seed: 42
+  loss_weights:                  # merged over engine.train.losses.DEFAULT_WEIGHTS
+    box: 1.0
+    ellipse: 1.0
+    mask: 1.0
+    reliability: 0.5
+    eye_box: 0.5
