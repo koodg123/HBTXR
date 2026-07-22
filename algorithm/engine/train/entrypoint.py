@@ -29,6 +29,7 @@ from engine.data.adapter import resolve_modality
 from engine.data.factory import build_dataloader
 from engine.model_factory import make_model
 from engine.runspec.run_contract import resolve_training_entry
+from engine.tools.checkpoint import save_checkpoint
 from engine.tools.load_config import load_config
 from engine.train.trainer import Trainer, TrainConfig
 
@@ -81,6 +82,14 @@ def run_train(
     )
     trainer = Trainer(model, optimizer, train_config, scheduler=scheduler)
     trainer.fit(train_loader)
+
+    output_dir = entry.get("output_dir")
+    if output_dir:
+        save_checkpoint(
+            model,
+            Path(output_dir) / "final.pt",
+            meta={"modality": modality, "epochs": epochs, "config_path": str(config_path)},
+        )
     return trainer
 
 
