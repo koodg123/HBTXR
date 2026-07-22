@@ -2,7 +2,7 @@
 
 Paper-canonical: PupilBoxHead (search, Eq 2) and PupilEllipseHead (track, Eq 7).
 Auxiliary: PupilMaskHead (Eq stage-1), ReliabilityHead (Eq 17-18), EyeRegionHead
-(g_eye, Eq 15). Alternative: CenterHeatmapHead. Any modality selects its head by
+(g_eye, Eq 15). Alternatives: Single/MultiCenterHeatmapHead. Any modality selects its head by
 name through build_head(), so heads are swapped by config, not per-model code.
 """
 from models.heads.bbox import PupilBoxHead
