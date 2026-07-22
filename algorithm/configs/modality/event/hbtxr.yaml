@@ -1,0 +1,20 @@
+# Event-only HBTXR model (standalone direct detector).
+# Symmetric to frame-only: event voxel -> Conv-E -> full-depth ViT -> head -> ellipse state.
+# Same default head as frame (bbox). Direct detection -> no anchor, no teacher-forcing.
+model:
+  target: models.event.EventModel
+  embed_dim: 192
+  patch_size: 16
+  backbone:
+    depth: 8
+    cut_point: 4
+    num_heads: 3
+    mlp_ratio: 4.0
+  head: bbox          # <-- same as frame-only; swap here (bbox | ellipse | ...)
+  with_mask: true
+  with_roi: true
+  with_reliability: true
+train:
+  losses: [box, mask]
+  anchor_source: null        # direct detection, no anchor
+  backbone_init: null

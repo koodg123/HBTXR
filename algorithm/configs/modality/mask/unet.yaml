@@ -1,0 +1,9 @@
+# Standalone pupil-mask segmentation model (UNet) — separate task from HBTXR.
+model:
+  target: models.mask.MaskModel
+  in_chans: 1
+  base_ch: 32
+  num_classes: 1
+train:
+  losses: [mask]             # dice / BCE on the pupil mask
+  backbone_init: null

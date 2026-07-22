@@ -1,0 +1,20 @@
+# Frame-only HBTXR model (search path, standalone direct detector).
+# Independently trainable: frame -> Conv-F -> full-depth ViT -> head -> ellipse state.
+model:
+  target: models.frame.FrameModel
+  embed_dim: 192
+  patch_size: 16
+  img_size: 128
+  backbone:
+    depth: 8          # L (full search depth)
+    cut_point: 4      # c (unused by the standalone detector)
+    num_heads: 3
+    mlp_ratio: 4.0
+  head: bbox          # <-- swap the head here: bbox | ellipse | heatmap | ...
+  with_mask: true
+  with_roi: true
+  with_reliability: true
+train:
+  losses: [box, mask]       # direct box regression + aux mask
+  anchor_source: null        # direct detection: no anchor needed
+  backbone_init: null

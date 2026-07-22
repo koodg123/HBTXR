@@ -1,0 +1,27 @@
+# Hybrid HBTXR model (paper full system): shared backbone + search/track + scheduler.
+# search (frame, full depth, box head, anchor refresh) + track (event, early-exit,
+# ellipse-residual head) selected at runtime by the reliability-driven FSM.
+model:
+  target: models.hybrid.HybridModel
+  embed_dim: 192
+  patch_size: 16
+  backbone:
+    depth: 8          # L: full search depth
+    cut_point: 4      # c: track early-exit depth
+    num_heads: 3
+    mlp_ratio: 4.0
+  search_head: bbox   # <-- swap search head (default bbox, paper)
+  track_head: ellipse # <-- swap track head (default ellipse-residual, paper)
+  with_roi: true
+  scheduler:          # hybrid-only runtime FSM (paper Eq 20-21)
+    tau_search: 0.5   # tau^+_s : accept refreshed anchor
+    tau_event: 0.5    # tau^-_e : retain event track
+    d_max: 16         # D_max : max consecutive track updates
+    w_search_c: 0.5
+    w_search_q: 0.5
+    w_event_c: 0.5
+    w_event_q: 0.5
+train:
+  losses: [box, ellipse, reliability, mask]
+  anchor_source: gt          # track residual trained against GT anchor (or "search")
+  backbone_init: null        # optionally a frame-only ckpt (paper staged training)
