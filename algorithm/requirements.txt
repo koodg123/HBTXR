@@ -1,32 +1,38 @@
-# Merged from requirements/{train,eval,analysis}.txt (deduplicated).
-# Flat-functional layout is NOT pip-installed; build a venv with uv and
-# install these directly, running from the algorithm/ root.
+# HBTXR algorithm dependencies (flat-functional layout).
+#
+# The package is NOT pip-installed. Build a venv with uv and install these, then
+# run everything from the algorithm/ root (top-level packages: models, common,
+# utils, dataset, engine):
+#
+#     uv venv && uv pip install -r requirements.txt
+#
+# Derived from the actual imports in algorithm/ (no Lightning / click / hydra /
+# sagemaker / timm — the reimplemented stack uses a custom trainer + argparse).
 
--i https://pypi.tuna.tsinghua.edu.cn/simple
-boto3
-botocore
-sagemaker
-torch==2.2
-lightning  # easier training
-pytorch-lightning
-lightning-bolts  # for linear warmup cosine decay scheduler
-pandas  # to generate submission csv
-h5py  # to load data
-natsort  # to sort the data directories properly
-hydra-core
-opencv-python
-seaborn
-matplotlib
-scikit-learn
-click
-albumentations
-timm
-tonic
-scikit-image
-debugpy
-thop
--r train.txt
-pandas
+# --- core runtime (models + engine) ---
+torch>=2.2,<3
+torchvision
+torchmetrics
 numpy
-openpyxl
+pyyaml            # config loading (engine.tools.load_config)
+
+# --- dataset pipeline (loaders, preprocessing, event/frame synthesis) ---
+opencv-python     # cv2
+pillow            # PIL
+scipy
+scikit-image      # skimage
+h5py
+hdf5plugin
+natsort
+numba
+tonic             # event-camera datasets / transforms
+dv-processing     # DVS event stream processing
+albumentations    # image/label-safe augmentation
+
+# --- analysis / visualization ---
+matplotlib
+seaborn
 tqdm
+
+# --- dev / test ---
+pytest
