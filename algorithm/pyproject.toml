@@ -15,9 +15,10 @@ requires-python = ">=3.10"
 "engine" = "engine/src/engine"
 "event" = "event/src/event"
 "hybrid" = "hybrid/src/hybrid"
+"apps" = "apps/src/apps"
 
 [tool.setuptools.packages.find]
-where = ["common/src", "dataset/src", "utils/src", "engine/src", "event/src", "hybrid/src"]
+where = ["common/src", "dataset/src", "utils/src", "engine/src", "event/src", "hybrid/src", "apps/src"]
 include = [
     "common",
     "common.*",
@@ -31,5 +32,7 @@ include = [
     "event.*",
     "hybrid",
     "hybrid.*",
+    "apps",
+    "apps.*",
 ]
 namespaces = true

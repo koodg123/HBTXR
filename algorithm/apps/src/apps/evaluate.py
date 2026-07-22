@@ -1,20 +1,27 @@
-import lightning
-import torch
-import click
-import numpy as np
 import os
 
-from engine.tools.load_config import load_config
-from engine.logger.logger_factory import make_logger
-from engine.callback.callback_factory import make_callbacks
+import click
+import lightning
+import numpy as np
+import torch
+
+from common.paths import is_configured, resolve
 from dataset.dataset_factory import make_dataloader
+from engine.callback.callback_factory import make_callbacks
+from engine.logger.logger_factory import make_logger
 from engine.model_factory import make_model
+from engine.tools.load_config import load_config
 
 
 @click.command()
 @click.option("--config", "-c", type=str, default="MemmapDavisEyeCenter_TennSt.yaml")
-@click.option("--num_validations", "-n", type=int, default=10)
-def main(config: str, num_validations: int) -> None:
+@click.option("--repeat", "-n", type=int, default=1, help="number of validation passes to average")
+def main(config: str, repeat: int) -> None:
+    """Validate a model. With --repeat > 1 the metrics are averaged.
+
+    This replaces the former validate.py and validate10times.py; a single pass
+    (repeat=1) reproduces validate.py, and repeat=N reproduces validate10times.
+    """
     torch.set_float32_matmul_precision("medium")
     config = load_config(config)
     runtime_cfg = config.get("runtime", {})
@@ -27,9 +34,7 @@ def main(config: str, num_validations: int) -> None:
         torch.backends.cudnn.enabled = False
 
     val_dataloader = make_dataloader(config["dataloader"]["val"])
-
-    model_cfg = config["model"]
-    model = make_model(model_cfg)
+    model = make_model(config["model"])
 
     trainer_cfg = config.get("trainer", {})
     devices = os.environ.get("FACET_DEVICES", trainer_cfg.get("devices", "auto"))
@@ -47,39 +52,31 @@ def main(config: str, num_validations: int) -> None:
         callbacks=make_callbacks(config["callback"]),
     )
 
+    ckpt_path = config["val"].get("ckpt_path")
     metrics_list = []
-
-    for _ in range(num_validations):
-        metrics = trainer.validate(
-            model=model,
-            dataloaders=val_dataloader,
-            ckpt_path=config["val"].get("ckpt_path"),
-        )
+    for _ in range(max(1, repeat)):
+        metrics = trainer.validate(model=model, dataloaders=val_dataloader, ckpt_path=ckpt_path)
         metrics_list.append(metrics)
 
-    # Compute averages
+    if repeat <= 1:
+        return
+
     avg_metrics = {
         key: np.mean([m[0][key] for m in metrics_list])
         for key in metrics_list[0][0].keys()
     }
-
-    # Print averages
-    print("Average Metrics over {} validations:".format(num_validations))
+    print("Average Metrics over {} validations:".format(repeat))
     for key, value in avg_metrics.items():
         print(f"{key}: {value}")
 
-    # Get the checkpoint file path and extract the file name
-    ckpt_path = config["val"].get("ckpt_path")
-    if ckpt_path:
-        parent_dir = os.path.dirname(os.path.dirname(ckpt_path))
-        dir_name = os.path.basename(parent_dir)
-        output_path = "/mnt/data2T/junyuan/eye-tracking/Results"
-        os.makedirs(output_path, exist_ok=True)
-        result_file_name = f"{output_path}/{dir_name}.txt"
-
-        # Write the results to a file
-        with open(result_file_name, 'w') as f:
-            f.write("Average Metrics over {} validations:\n".format(num_validations))
+    # Results are written under the configured output root instead of a
+    # hard-coded absolute path (see common.paths / algorithm/.env.example).
+    if ckpt_path and is_configured("output"):
+        dir_name = os.path.basename(os.path.dirname(os.path.dirname(ckpt_path)))
+        result_file = resolve("output", "results", f"{dir_name}.txt")
+        result_file.parent.mkdir(parents=True, exist_ok=True)
+        with open(result_file, "w") as f:
+            f.write("Average Metrics over {} validations:\n".format(repeat))
             for key, value in avg_metrics.items():
                 f.write(f"{key}: {value}\n")
 
