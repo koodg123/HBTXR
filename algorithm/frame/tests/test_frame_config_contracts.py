@@ -8,7 +8,7 @@ import yaml
 from dataset.dataset_factory import DATASET_CLASSES
 from engine.model_factory import MODEL_CLASSES
 
-CONFIG_DIR = Path(__file__).resolve().parents[1] / "configs"
+CONFIG_DIR = Path(__file__).resolve().parents[2] / "configs" / "experiment" / "frame"
 
 
 def _config_paths() -> list[Path]:

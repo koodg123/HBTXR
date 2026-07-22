@@ -8,7 +8,7 @@ import yaml
 from dataset.dataset_factory import DATASET_CLASSES
 from engine.model_factory import MODEL_CLASSES
 
-CONFIG_DIR = Path(__file__).resolve().parents[1] / "configs"
+CONFIG_DIR = Path(__file__).resolve().parents[2] / "configs" / "experiment" / "event"
 
 
 def _config_paths() -> list[Path]:
@@ -64,7 +64,7 @@ def test_event_only_models_resolve_to_the_event_owner() -> None:
 
 
 def test_event_owner_package_exists() -> None:
-    models_root = Path(__file__).resolve().parents[1] / "src" / "eveye" / "event" / "models"
+    models_root = Path(__file__).resolve().parents[1] / "src" / "event" / "models"
     assert models_root.is_dir()
     assert (models_root / "TennSt.py").is_file()
     assert (models_root / "EPNet").is_dir()
