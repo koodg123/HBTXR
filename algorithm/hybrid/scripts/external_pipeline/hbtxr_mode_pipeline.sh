@@ -5,7 +5,7 @@ fi
 set -euo pipefail
 
 SCRIPT_DIR=$(CDPATH= cd -- "$(dirname -- "$0")" && pwd)
-PROJECT_ROOT=$(CDPATH= cd -- "$SCRIPT_DIR/.." && pwd)
+PROJECT_ROOT=$(CDPATH= cd -- "$SCRIPT_DIR/../.." && pwd)
 cd "$PROJECT_ROOT"
 
 PYTHON_BIN="${PYTHON_BIN:-$PROJECT_ROOT/.venv/bin/python}"
@@ -21,9 +21,9 @@ if [ ! -x "$PYTHON_BIN" ]; then
 fi
 
 if [ -n "${PYTHONPATH:-}" ]; then
-    export PYTHONPATH="$PROJECT_ROOT/src:$PYTHONPATH"
+    export PYTHONPATH="$PROJECT_ROOT:$PYTHONPATH"
 else
-    export PYTHONPATH="$PROJECT_ROOT/src"
+    export PYTHONPATH="$PROJECT_ROOT"
 fi
 
 sanitize_component() {
@@ -293,19 +293,19 @@ echo "[INFO] split=${SPLIT}"
 
 case "$ACTION" in
     train)
-        cmd=("$PYTHON_BIN" "$PROJECT_ROOT/scripts/train_hbtxr.py" "${common_args[@]}")
+        cmd=("$PYTHON_BIN" "$SCRIPT_DIR/train_hbtxr.py" "${common_args[@]}")
         if [ -n "$CHECKPOINT_PATH" ]; then
             cmd+=(--init-checkpoint "$CHECKPOINT_PATH")
         fi
         ;;
     eval)
-        cmd=("$PYTHON_BIN" "$PROJECT_ROOT/scripts/eval_hbtxr.py" "${common_args[@]}" --split "$SPLIT")
+        cmd=("$PYTHON_BIN" "$SCRIPT_DIR/eval_hbtxr.py" "${common_args[@]}" --split "$SPLIT")
         if [ -n "$CHECKPOINT_PATH" ]; then
             cmd+=(--checkpoint "$CHECKPOINT_PATH")
         fi
         ;;
     infer)
-        cmd=("$PYTHON_BIN" "$PROJECT_ROOT/scripts/infer_hbtxr.py" "${common_args[@]}" --split "$SPLIT")
+        cmd=("$PYTHON_BIN" "$SCRIPT_DIR/infer_hbtxr.py" "${common_args[@]}" --split "$SPLIT")
         if [ -n "$CHECKPOINT_PATH" ]; then
             cmd+=(--checkpoint "$CHECKPOINT_PATH")
         fi
@@ -313,13 +313,13 @@ case "$ACTION" in
     vis)
         case "$VIS_KIND" in
             dataset)
-                cmd=("$PYTHON_BIN" "$PROJECT_ROOT/scripts/visualize_dataset.py" "${common_args[@]}" --split "$SPLIT")
+                cmd=("$PYTHON_BIN" "$SCRIPT_DIR/visualize_dataset.py" "${common_args[@]}" --split "$SPLIT")
                 ;;
             inference)
-                cmd=("$PYTHON_BIN" "$PROJECT_ROOT/scripts/visualize_inference_results.py" "${common_args[@]}" --split "$SPLIT")
+                cmd=("$PYTHON_BIN" "$SCRIPT_DIR/visualize_inference_results.py" "${common_args[@]}" --split "$SPLIT")
                 ;;
             runtime)
-                cmd=("$PYTHON_BIN" "$PROJECT_ROOT/scripts/visualize_runtime.py" "${common_args[@]}" --split "$SPLIT")
+                cmd=("$PYTHON_BIN" "$SCRIPT_DIR/visualize_runtime.py" "${common_args[@]}" --split "$SPLIT")
                 ;;
             *)
                 echo "[ERROR] Unknown vis kind: $VIS_KIND" >&2
@@ -328,10 +328,10 @@ case "$ACTION" in
         esac
         ;;
     dataloader)
-        cmd=("$PYTHON_BIN" "$PROJECT_ROOT/scripts/check_dataloader.py" "${common_args[@]}" --split "$SPLIT")
+        cmd=("$PYTHON_BIN" "$SCRIPT_DIR/check_dataloader.py" "${common_args[@]}" --split "$SPLIT")
         ;;
     export)
-        cmd=("$PYTHON_BIN" "$PROJECT_ROOT/scripts/export_hbtxr.py" "${common_args[@]}")
+        cmd=("$PYTHON_BIN" "$SCRIPT_DIR/export_hbtxr.py" "${common_args[@]}")
         if [ -n "$CHECKPOINT_PATH" ]; then
             cmd+=(--checkpoint "$CHECKPOINT_PATH")
         fi

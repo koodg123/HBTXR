@@ -12,8 +12,8 @@ import pytest
 from PIL import Image, ImageDraw
 
 
-PROJECT_ROOT = Path(__file__).resolve().parents[1]
-SRC_ROOT = PROJECT_ROOT / "src"
+PROJECT_ROOT = Path(__file__).resolve().parents[2]
+SRC_ROOT = PROJECT_ROOT
 SCRIPTS_ROOT = PROJECT_ROOT / "scripts"
 
 for path in (SRC_ROOT, SCRIPTS_ROOT):

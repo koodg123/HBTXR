@@ -5,7 +5,7 @@ fi
 set -euo pipefail
 
 SCRIPT_DIR=$(CDPATH= cd -- "$(dirname -- "$0")" && pwd)
-PROJECT_ROOT=$(CDPATH= cd -- "$SCRIPT_DIR/.." && pwd)
+PROJECT_ROOT=$(CDPATH= cd -- "$SCRIPT_DIR/../.." && pwd)
 cd "$PROJECT_ROOT"
 
 DEFAULT_PATHS_CONFIG="$PROJECT_ROOT/configs/paths/ev_eye_groundedsam_paths.json"

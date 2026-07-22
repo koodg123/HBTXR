@@ -42,7 +42,7 @@ def _deep_update(base: dict, extra: dict) -> dict:
 
 
 def _project_root() -> Path:
-    return Path(__file__).resolve().parents[1]
+    return Path(__file__).resolve().parents[2]
 
 
 def _resolve_experimental_config_alias(config_path: Path) -> Path:
