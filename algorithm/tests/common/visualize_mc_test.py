@@ -1,3 +1,5 @@
+import pytest
+pytest.importorskip("metavision_core")
 import click
 import numpy as np
 import cv2

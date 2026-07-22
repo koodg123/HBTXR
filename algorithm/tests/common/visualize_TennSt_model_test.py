@@ -1,3 +1,5 @@
+import pytest
+pytest.importorskip("metavision_core")
 import torch
 import cv2
 import time
