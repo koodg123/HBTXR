@@ -9,24 +9,24 @@ description = "Reorganized HBTXR algorithm, training, evaluation, and packaging 
 requires-python = ">=3.10"
 
 [tool.setuptools.package-dir]
-"eveye.common" = "common/src/eveye/common"
-"eveye.dataset" = "dataset/src/eveye/dataset"
-"eveye.utils" = "utils/src/eveye/utils"
-"eveye.engine" = "engine/src/eveye/engine"
-"eveye.event" = "event/src/eveye/event"
+"common" = "common/src/common"
+"dataset" = "dataset/src/dataset"
+"utils" = "utils/src/utils"
+"engine" = "engine/src/engine"
+"event" = "event/src/event"
 
 [tool.setuptools.packages.find]
 where = ["common/src", "dataset/src", "utils/src", "engine/src", "event/src"]
 include = [
-    "eveye.common",
-    "eveye.common.*",
-    "eveye.dataset",
-    "eveye.dataset.*",
-    "eveye.utils",
-    "eveye.utils.*",
-    "eveye.engine",
-    "eveye.engine.*",
-    "eveye.event",
-    "eveye.event.*",
+    "common",
+    "common.*",
+    "dataset",
+    "dataset.*",
+    "utils",
+    "utils.*",
+    "engine",
+    "engine.*",
+    "event",
+    "event.*",
 ]
 namespaces = true

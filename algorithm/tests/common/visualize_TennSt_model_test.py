@@ -4,21 +4,21 @@ import time
 import pandas as pd
 from tqdm import tqdm
 from pathlib import Path
-from eveye.utils.dvs_common_utils.base.EventsIterator import EventsIterator
-from eveye.utils.processor.TxtProcessor import TxtProcessor
-from eveye.utils.dvs_common_utils.representation.TorchFrameStack import (
+from utils.dvs_common_utils.base.EventsIterator import EventsIterator
+from utils.processor.TxtProcessor import TxtProcessor
+from utils.dvs_common_utils.representation.TorchFrameStack import (
     TorchFrameStack,
 )
-from eveye.utils.dvs_common_utils.representation.FrameStack import FrameStackBuilder
-from eveye.utils.dvs_common_utils.processor.EventRandomAffine import (
+from utils.dvs_common_utils.representation.FrameStack import FrameStackBuilder
+from utils.dvs_common_utils.processor.EventRandomAffine import (
     EventRandomAffine,
     rand_range,
 )
-from eveye.utils.visualization.visualization import *
-from eveye.dataset.DavisEyeCenter.losses import process_detector_prediction
-from eveye.engine.tools.load_config import load_config
-from eveye.dataset.dataset_factory import make_dataloader
-from eveye.engine.model_factory import make_model
+from utils.visualization.visualization import *
+from dataset.DavisEyeCenter.losses import process_detector_prediction
+from engine.tools.load_config import load_config
+from dataset.dataset_factory import make_dataloader
+from engine.model_factory import make_model
 
 start_time = time.time()
 

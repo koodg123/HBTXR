@@ -2,11 +2,11 @@ import torch
 import numpy as np
 import pandas as pd
 
-from eveye.engine.tools.load_config import load_config
-from eveye.dataset.dataset_factory import make_dataset
-from eveye.engine.model_factory import make_model
-from eveye.engine.tools.load_config import load_config
-from eveye.dataset.DavisEyeCenter.losses import process_detector_prediction
+from engine.tools.load_config import load_config
+from dataset.dataset_factory import make_dataset
+from engine.model_factory import make_model
+from engine.tools.load_config import load_config
+from dataset.DavisEyeCenter.losses import process_detector_prediction
 
 
 def main():

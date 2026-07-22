@@ -5,8 +5,8 @@ from pathlib import Path
 import pytest
 import yaml
 
-from eveye.dataset.dataset_factory import DATASET_CLASSES
-from eveye.engine.model_factory import MODEL_CLASSES
+from dataset.dataset_factory import DATASET_CLASSES
+from engine.model_factory import MODEL_CLASSES
 
 CONFIG_DIR = Path(__file__).resolve().parents[1] / "configs"
 
@@ -60,7 +60,7 @@ EVENT_ONLY_MODELS = ("EPNet", "ElNet", "TennSt")
 def test_event_only_models_resolve_to_the_event_owner() -> None:
     for name in EVENT_ONLY_MODELS:
         module_name, _ = MODEL_CLASSES[name]
-        assert module_name.startswith("eveye.event.models"), f"{name} is not owned by the event package"
+        assert module_name.startswith("event.models"), f"{name} is not owned by the event package"
 
 
 def test_event_owner_package_exists() -> None:

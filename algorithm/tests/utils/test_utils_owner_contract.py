@@ -10,20 +10,20 @@ import pytest
 
 
 ALGORITHM_ROOT = Path(__file__).resolve().parents[2]
-CANONICAL_ROOT = ALGORITHM_ROOT / "utils" / "src" / "eveye" / "utils"
+CANONICAL_ROOT = ALGORITHM_ROOT / "utils" / "src" / "utils"
 LEGACY_ROOT = ALGORITHM_ROOT / "common" / "src" / "EvEye" / "utils"
 EXCLUDED_CACHE_MODULE = "cache/NpyCacheFrameStack.py"
 EXCLUDED_OPERATIONAL_NOTEBOOKS = (
     "cache/MemmapCacheFrameStack.ipynb",
     "tonic/tonicLearning.ipynb",
 )
-OPTIONAL_IDENTITY_MODULE = "eveye.utils.tonic.functional.PlotDistribution"
+OPTIONAL_IDENTITY_MODULE = "utils.tonic.functional.PlotDistribution"
 EXPECTED_WRAPPERS = {
-    "__init__.py": ("eveye.utils", ()),
-    "PupilTracker.py": ("eveye.utils.PupilTracker", ("PupilTracker",)),
-    "cache/__init__.py": ("eveye.utils.cache", ()),
+    "__init__.py": ("utils", ()),
+    "PupilTracker.py": ("utils.PupilTracker", ("PupilTracker",)),
+    "cache/__init__.py": ("utils.cache", ()),
     "cache/MemmapCacheStructedEvents.py": (
-        "eveye.utils.cache.MemmapCacheStructedEvents",
+        "utils.cache.MemmapCacheStructedEvents",
         (
             "merge_structed_arrays", "get_indices", "create_memmap", "load_memmap",
             "cache_structed_events", "cache_structed_ellipses", "cache_structed_data",
@@ -32,77 +32,77 @@ EXPECTED_WRAPPERS = {
             "get_nums", "main",
         ),
     ),
-    "dvs_common_utils/__init__.py": ("eveye.utils.dvs_common_utils", ()),
-    "dvs_common_utils/base/__init__.py": ("eveye.utils.dvs_common_utils.base", ()),
+    "dvs_common_utils/__init__.py": ("utils.dvs_common_utils", ()),
+    "dvs_common_utils/base/__init__.py": ("utils.dvs_common_utils.base", ()),
     "dvs_common_utils/base/EventsIterator.py": (
-        "eveye.utils.dvs_common_utils.base.EventsIterator", ("EventsIterator", "main")
+        "utils.dvs_common_utils.base.EventsIterator", ("EventsIterator", "main")
     ),
     "dvs_common_utils/base/RawDtype.py": (
-        "eveye.utils.dvs_common_utils.base.RawDtype",
+        "utils.dvs_common_utils.base.RawDtype",
         ("raw_event_type", "raw_label_type", "raw_ellipse_type"),
     ),
     "dvs_common_utils/processor/__init__.py": (
-        "eveye.utils.dvs_common_utils.processor", ()
+        "utils.dvs_common_utils.processor", ()
     ),
     "dvs_common_utils/processor/EventRandomAffine.py": (
-        "eveye.utils.dvs_common_utils.processor.EventRandomAffine",
+        "utils.dvs_common_utils.processor.EventRandomAffine",
         ("rand_range", "temporal_shift", "temporal_scale", "EventRandomAffine", "main"),
     ),
     "dvs_common_utils/processor/NumpyEventFrameRandomAffine.py": (
-        "eveye.utils.dvs_common_utils.processor.NumpyEventFrameRandomAffine",
+        "utils.dvs_common_utils.processor.NumpyEventFrameRandomAffine",
         ("rand_range", "NumpyEventFrameRandomAffine"),
     ),
     "dvs_common_utils/representation/__init__.py": (
-        "eveye.utils.dvs_common_utils.representation", ()
+        "utils.dvs_common_utils.representation", ()
     ),
     "dvs_common_utils/representation/FrameStack.py": (
-        "eveye.utils.dvs_common_utils.representation.FrameStack",
+        "utils.dvs_common_utils.representation.FrameStack",
         ("FrameStackBuilder", "main"),
     ),
     "dvs_common_utils/representation/Histgram.py": (
-        "eveye.utils.dvs_common_utils.representation.Histgram",
+        "utils.dvs_common_utils.representation.Histgram",
         ("HistgramBuilder", "main"),
     ),
     "dvs_common_utils/representation/TimeSurface.py": (
-        "eveye.utils.dvs_common_utils.representation.TimeSurface",
+        "utils.dvs_common_utils.representation.TimeSurface",
         ("TimeSurfaceBuilder", "main"),
     ),
     "dvs_common_utils/representation/TorchFrameStack.py": (
-        "eveye.utils.dvs_common_utils.representation.TorchFrameStack",
+        "utils.dvs_common_utils.representation.TorchFrameStack",
         ("TorchFrameStack",),
     ),
-    "processor/__init__.py": ("eveye.utils.processor", ()),
+    "processor/__init__.py": ("utils.processor", ()),
     "processor/HDF5Processor.py": (
-        "eveye.utils.processor.HDF5Processor", ("HDF5Processor", "main")
+        "utils.processor.HDF5Processor", ("HDF5Processor", "main")
     ),
     "processor/TxtProcessor.py": (
-        "eveye.utils.processor.TxtProcessor", ("TxtProcessor", "main")
+        "utils.processor.TxtProcessor", ("TxtProcessor", "main")
     ),
-    "tonic/__init__.py": ("eveye.utils.tonic", ()),
-    "tonic/functional/__init__.py": ("eveye.utils.tonic.functional", ()),
+    "tonic/__init__.py": ("utils.tonic", ()),
+    "tonic/functional/__init__.py": ("utils.tonic.functional", ()),
     "tonic/functional/CutMaxCount.py": (
-        "eveye.utils.tonic.functional.CutMaxCount",
+        "utils.tonic.functional.CutMaxCount",
         ("cut_max_count", "tensor_cut_max_count"),
     ),
     "tonic/functional/PlotDistribution.py": (
-        "eveye.utils.tonic.functional.PlotDistribution", ("plot_histogram", "plot_KDE")
+        "utils.tonic.functional.PlotDistribution", ("plot_histogram", "plot_KDE")
     ),
     "tonic/functional/ToFrameStack.py": (
-        "eveye.utils.tonic.functional.ToFrameStack",
+        "utils.tonic.functional.ToFrameStack",
         ("normalize", "bilinear_interpolation", "to_frame_stack_numpy", "main"),
     ),
-    "tonic/slicers/__init__.py": ("eveye.utils.tonic.slicers", ()),
+    "tonic/slicers/__init__.py": ("utils.tonic.slicers", ()),
     "tonic/slicers/SliceEventsAtIndices.py": (
-        "eveye.utils.tonic.slicers.SliceEventsAtIndices",
+        "utils.tonic.slicers.SliceEventsAtIndices",
         ("slice_events_at_timepoints",),
     ),
     "tonic/slicers/SliceWithTimestampAndCount.py": (
-        "eveye.utils.tonic.slicers.SliceWithTimestampAndCount",
+        "utils.tonic.slicers.SliceWithTimestampAndCount",
         ("slice_events_by_timestamp_and_count",),
     ),
-    "visualization/__init__.py": ("eveye.utils.visualization", ()),
+    "visualization/__init__.py": ("utils.visualization", ()),
     "visualization/visualization.py": (
-        "eveye.utils.visualization.visualization",
+        "utils.visualization.visualization",
         (
             "visualize", "visualizeHWC", "load_image", "save_image",
             "save_batch_images", "resize_image", "ensure_same_size",
@@ -142,11 +142,11 @@ def _notebook_imported_modules(path: Path) -> list[str]:
 
 
 def test_cache_event_processor_and_visualization_characterization(tmp_path: Path) -> None:
-    cache = import_module("eveye.utils.cache.MemmapCacheStructedEvents")
-    frame_stack = import_module("eveye.utils.tonic.functional.ToFrameStack")
-    raw_dtype = import_module("eveye.utils.dvs_common_utils.base.RawDtype")
-    txt = import_module("eveye.utils.processor.TxtProcessor")
-    visualization = import_module("eveye.utils.visualization.visualization")
+    cache = import_module("utils.cache.MemmapCacheStructedEvents")
+    frame_stack = import_module("utils.tonic.functional.ToFrameStack")
+    raw_dtype = import_module("utils.dvs_common_utils.base.RawDtype")
+    txt = import_module("utils.processor.TxtProcessor")
+    visualization = import_module("utils.visualization.visualization")
 
     arrays = [
         np.asarray([(0, 1, 2, 0)], dtype=raw_dtype.raw_event_type),
@@ -192,8 +192,8 @@ def test_optional_plot_wrapper_identity_when_dependencies_are_available() -> Non
 
 def test_utils_are_leaf_and_dataset_uses_only_canonical_utils() -> None:
     forbidden = (
-        "EvEye", "eveye.dataset", "eveye.common", "eveye.engine",
-        "eveye.event", "eveye.hybrid", "src", "dvs_common_utils",
+        "EvEye", "dataset", "common", "engine",
+        "event", "eveye.hybrid", "src", "dvs_common_utils",
     )
     canonical_sources = [
         *CANONICAL_ROOT.rglob("*.py"),
@@ -210,7 +210,7 @@ def test_utils_are_leaf_and_dataset_uses_only_canonical_utils() -> None:
             for module in modules for prefix in forbidden
         ), f"upward or legacy dependency in {path}"
 
-    dataset_root = ALGORITHM_ROOT / "dataset" / "src" / "eveye" / "dataset"
+    dataset_root = ALGORITHM_ROOT / "dataset" / "src" / "dataset"
     for path in dataset_root.rglob("*.py"):
         assert not any(
             module == "EvEye.utils" or module.startswith("EvEye.utils.")
@@ -220,14 +220,14 @@ def test_utils_are_leaf_and_dataset_uses_only_canonical_utils() -> None:
 
 def test_am040_exclusions_migrated_to_engine_tools() -> None:
     """AM-060: the three former exclusions now live under the engine tools owner."""
-    tools_root = ALGORITHM_ROOT / "engine" / "src" / "eveye" / "engine" / "tools"
+    tools_root = ALGORITHM_ROOT / "engine" / "src" / "engine" / "tools"
 
     cache_module = tools_root / "NpyCacheFrameStack.py"
     assert cache_module.is_file()
     assert not (CANONICAL_ROOT / EXCLUDED_CACHE_MODULE).exists()
     cache_source = cache_module.read_text()
-    assert "eveye.engine.tools.CacheFrameStack" in cache_source
-    assert "eveye.utils.dvs_common_utils" in cache_source
+    assert "engine.tools.CacheFrameStack" in cache_source
+    assert "utils.dvs_common_utils" in cache_source
 
     cache_notebook_path = tools_root / "MemmapCacheFrameStack.ipynb"
     tonic_notebook_path = tools_root / "tonicLearning.ipynb"
@@ -236,10 +236,10 @@ def test_am040_exclusions_migrated_to_engine_tools() -> None:
         json.loads(notebook_path.read_text())
     cache_notebook = cache_notebook_path.read_text()
     tonic_notebook = tonic_notebook_path.read_text()
-    assert "eveye.engine.tools.CacheFrameStack" in cache_notebook
-    assert "eveye.utils.dvs_common_utils" in cache_notebook
-    assert "eveye.dataset.DavisEyeCenter" in tonic_notebook
-    assert "eveye.utils" in tonic_notebook
+    assert "engine.tools.CacheFrameStack" in cache_notebook
+    assert "utils.dvs_common_utils" in cache_notebook
+    assert "dataset.DavisEyeCenter" in tonic_notebook
+    assert "utils" in tonic_notebook
 
     moved_prefixes = (
         "EvEye.utils.PupilTracker", "EvEye.utils.cache.MemmapCacheStructedEvents",

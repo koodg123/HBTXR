@@ -152,4 +152,4 @@ python algorithm/common/scripts/validate.py   --config algorithm/frame/configs/D
 Contract tests for every config in this modality live in
 `algorithm/frame/tests/test_frame_config_contracts.py`. They load each
 YAML and assert that the referenced model and dataset names are registered in
-`eveye.engine.model_factory` and `eveye.dataset.dataset_factory`.
+`engine.model_factory` and `dataset.dataset_factory`.

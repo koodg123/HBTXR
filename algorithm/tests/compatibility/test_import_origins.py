@@ -6,44 +6,29 @@ from pathlib import Path
 from setuptools.config.pyprojecttoml import load_file
 
 ALGORITHM_ROOT = Path(__file__).resolve().parents[2]
-COMMON_SOURCE_ROOT = ALGORITHM_ROOT / "common" / "src"
+
+# After the eveye namespace was removed, every owner is a bare top-level package
+# discovered from its own src root. This is deliberate: the project accepts the
+# top-level-name collision risk in exchange for shorter imports.
 EXPECTED_PACKAGE_DIR = {
-    "eveye.common": "common/src/eveye/common",
-    "eveye.dataset": "dataset/src/eveye/dataset",
-    "eveye.utils": "utils/src/eveye/utils",
-    "eveye.engine": "engine/src/eveye/engine",
-    "eveye.event": "event/src/eveye/event",
+    "common": "common/src/common",
+    "dataset": "dataset/src/dataset",
+    "utils": "utils/src/utils",
+    "engine": "engine/src/engine",
+    "event": "event/src/event",
 }
 EXPECTED_OWNER_PATHS = {
-    "eveye.common": ALGORITHM_ROOT / "common" / "src" / "eveye" / "common",
-    "eveye.dataset": ALGORITHM_ROOT / "dataset" / "src" / "eveye" / "dataset",
-    "eveye.utils": ALGORITHM_ROOT / "utils" / "src" / "eveye" / "utils",
-    "eveye.engine": ALGORITHM_ROOT / "engine" / "src" / "eveye" / "engine",
-    "eveye.event": ALGORITHM_ROOT / "event" / "src" / "eveye" / "event",
+    name: ALGORITHM_ROOT / Path(rel) for name, rel in EXPECTED_PACKAGE_DIR.items()
 }
 OWNER_SOURCE_ROOTS = tuple(
-    ALGORITHM_ROOT / owner / "src"
-    for owner in ("common", "dataset", "utils", "engine", "event")
+    ALGORITHM_ROOT / owner / "src" for owner in EXPECTED_PACKAGE_DIR
 )
 EXPECTED_DISCOVERY = {
-    "where": [
-        "common/src",
-        "dataset/src",
-        "utils/src",
-        "engine/src",
-        "event/src",
-    ],
+    "where": [owner + "/src" for owner in EXPECTED_PACKAGE_DIR],
     "include": [
-        "eveye.common",
-        "eveye.common.*",
-        "eveye.dataset",
-        "eveye.dataset.*",
-        "eveye.utils",
-        "eveye.utils.*",
-        "eveye.engine",
-        "eveye.engine.*",
-        "eveye.event",
-        "eveye.event.*",
+        entry
+        for owner in EXPECTED_PACKAGE_DIR
+        for entry in (owner, owner + ".*")
     ],
     "namespaces": True,
 }
@@ -60,22 +45,29 @@ def test_setuptools_configuration_maps_all_owner_packages() -> None:
         package: (ALGORITHM_ROOT / relative_path).resolve()
         for package, relative_path in setuptools_config["package-dir"].items()
     } == {
-        package: path.resolve()
-        for package, path in EXPECTED_OWNER_PATHS.items()
+        package: path.resolve() for package, path in EXPECTED_OWNER_PATHS.items()
     }
 
 
-def test_legacy_eveye_owner_is_retired() -> None:
-    """AM-060: EvEye is neither configured nor resolvable from any owner root."""
-    assert not (COMMON_SOURCE_ROOT / "EvEye").exists()
+def test_each_owner_resolves_as_a_bare_top_level_package() -> None:
+    for name, path in EXPECTED_OWNER_PATHS.items():
+        spec = PathFinder.find_spec(name, [str(path.parent)])
+        assert spec is not None, name + " must resolve from its own src root"
+        # Owners are a mix of regular packages (with __init__.py, so spec.origin
+        # points at it) and namespace packages (origin is None, the directory is
+        # in submodule_search_locations). Both must resolve to the owner dir.
+        if spec.origin is not None:
+            assert Path(spec.origin).resolve() == (path / "__init__.py").resolve()
+        else:
+            locations = [Path(p).resolve() for p in (spec.submodule_search_locations or ())]
+            assert path.resolve() in locations
+
+
+def test_eveye_namespace_no_longer_resolves() -> None:
     for source_root in OWNER_SOURCE_ROOTS:
-        assert PathFinder.find_spec("EvEye", [str(source_root)]) is None
+        assert PathFinder.find_spec("eveye", [str(source_root)]) is None
+    assert not any((root / "eveye").exists() for root in OWNER_SOURCE_ROOTS)
 
 
-def test_current_owner_roots_do_not_resolve_bare_packages() -> None:
-    for bare_name in ("dataset", "utils", "engine"):
-        for source_root in OWNER_SOURCE_ROOTS:
-            assert PathFinder.find_spec(bare_name, [str(source_root)]) is None, (
-                f"{bare_name!r} unexpectedly resolves from {source_root}; "
-                "owner roots must contribute only mapped eveye portions"
-            )
+def test_legacy_eveye_owner_is_retired() -> None:
+    assert not (ALGORITHM_ROOT / "common" / "src" / "EvEye").exists()

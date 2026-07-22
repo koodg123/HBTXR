@@ -10,7 +10,7 @@ import torch
 
 
 ALGORITHM_ROOT = Path(__file__).resolve().parents[2]
-CANONICAL_ROOT = ALGORITHM_ROOT / "dataset" / "src" / "eveye" / "dataset"
+CANONICAL_ROOT = ALGORITHM_ROOT / "dataset" / "src" / "dataset"
 LEGACY_ROOT = ALGORITHM_ROOT / "common" / "src" / "EvEye" / "dataset"
 LEGACY_DATASET_PACKAGE = "EvEye" + ".dataset"
 INACTIVE_ELLIPSE_MODULE = "Ellipse" + "MobileNet"
@@ -34,44 +34,44 @@ EXPECTED_DATASETS = {
     ),
 }
 EXPECTED_WRAPPERS = {
-    "__init__.py": ("eveye.dataset", ()),
+    "__init__.py": ("dataset", ()),
     "dataset_factory.py": (
-        "eveye.dataset.dataset_factory",
+        "dataset.dataset_factory",
         ("DATASET_CLASSES", "worker_init_fn", "make_dataloader", "make_dataset"),
     ),
-    "DavisWithMask/__init__.py": ("eveye.dataset.DavisWithMask", ()),
+    "DavisWithMask/__init__.py": ("dataset.DavisWithMask", ()),
     "DavisWithMask/DavisWithMaskDataset.py": (
-        "eveye.dataset.DavisWithMask.DavisWithMaskDataset",
+        "dataset.DavisWithMask.DavisWithMaskDataset",
         ("DavisWithMaskDataset",),
     ),
-    "Test/__init__.py": ("eveye.dataset.Test", ()),
+    "Test/__init__.py": ("dataset.Test", ()),
     "Test/TestDataset.py": (
-        "eveye.dataset.Test.TestDataset",
+        "dataset.Test.TestDataset",
         ("TestDataset",),
     ),
-    "DavisEyeCenter/__init__.py": ("eveye.dataset.DavisEyeCenter", ()),
+    "DavisEyeCenter/__init__.py": ("dataset.DavisEyeCenter", ()),
     "DavisEyeCenter/DavisEyeCenterDataset.py": (
-        "eveye.dataset.DavisEyeCenter.DavisEyeCenterDataset",
+        "dataset.DavisEyeCenter.DavisEyeCenterDataset",
         ("DavisEyeCenterDataset",),
     ),
     "DavisEyeCenter/NpyDavisEyeCenterDataset.py": (
-        "eveye.dataset.DavisEyeCenter.NpyDavisEyeCenterDataset",
+        "dataset.DavisEyeCenter.NpyDavisEyeCenterDataset",
         ("NpyDavisEyeCenterDataset",),
     ),
     "DavisEyeCenter/DatDavisEyeCenterDataset.py": (
-        "eveye.dataset.DavisEyeCenter.DatDavisEyeCenterDataset",
+        "dataset.DavisEyeCenter.DatDavisEyeCenterDataset",
         ("DatDavisEyeCenterDataset",),
     ),
     "DavisEyeCenter/MemmapDavisEyeCenterDataset.py": (
-        "eveye.dataset.DavisEyeCenter.MemmapDavisEyeCenterDataset",
+        "dataset.DavisEyeCenter.MemmapDavisEyeCenterDataset",
         ("MemmapDavisEyeCenterDataset",),
     ),
     "DavisEyeCenter/TestTextDavisEyeDataset.py": (
-        "eveye.dataset.DavisEyeCenter.TestTextDavisEyeDataset",
+        "dataset.DavisEyeCenter.TestTextDavisEyeDataset",
         ("TestTextDavisEyeDataset",),
     ),
     "DavisEyeCenter/losses.py": (
-        "eveye.dataset.DavisEyeCenter.losses",
+        "dataset.DavisEyeCenter.losses",
         (
             "OutputHook",
             "MacsEstimationHook",
@@ -83,21 +83,21 @@ EXPECTED_WRAPPERS = {
             "p_acc",
         ),
     ),
-    "DavisEyeEllipse/__init__.py": ("eveye.dataset.DavisEyeEllipse", ()),
+    "DavisEyeEllipse/__init__.py": ("dataset.DavisEyeEllipse", ()),
     "DavisEyeEllipse/DavisEyeEllipseDataset.py": (
-        "eveye.dataset.DavisEyeEllipse.DavisEyeEllipseDataset",
+        "dataset.DavisEyeEllipse.DavisEyeEllipseDataset",
         ("DavisEyeEllipseDataset",),
     ),
     "DavisEyeEllipse/DavisEyeEllipseFrameDataset.py": (
-        "eveye.dataset.DavisEyeEllipse.DavisEyeEllipseFrameDataset",
+        "dataset.DavisEyeEllipse.DavisEyeEllipseFrameDataset",
         ("natural_key", "parse_frame_timestamp", "DavisEyeEllipseFrameDataset"),
     ),
     "DavisEyeEllipse/DavisEyeEllipseCenterSequenceDataset.py": (
-        "eveye.dataset.DavisEyeEllipse.DavisEyeEllipseCenterSequenceDataset",
+        "dataset.DavisEyeEllipse.DavisEyeEllipseCenterSequenceDataset",
         ("DavisEyeEllipseCenterSequenceDataset",),
     ),
     "DavisEyeEllipse/utils.py": (
-        "eveye.dataset.DavisEyeEllipse.utils",
+        "dataset.DavisEyeEllipse.utils",
         (
             "cal_ellipse_area",
             "convert_to_ellipse",
@@ -139,21 +139,21 @@ def _maintained_sources():
 
 
 def test_factory_registry_names_and_origins_are_canonical() -> None:
-    factory = import_module("eveye.dataset.dataset_factory")
+    factory = import_module("dataset.dataset_factory")
 
     assert tuple(factory.DATASET_CLASSES) == tuple(EXPECTED_DATASETS)
     for class_name, relative_module in EXPECTED_DATASETS.items():
-        module = import_module(f"eveye.dataset.{relative_module}")
+        module = import_module(f"dataset.{relative_module}")
         assert factory.DATASET_CLASSES[class_name] is getattr(module, class_name)
         assert factory.DATASET_CLASSES[class_name].__module__ == (
-            f"eveye.dataset.{relative_module}"
+            f"dataset.{relative_module}"
         )
     assert Path(factory.__file__).resolve().is_relative_to(CANONICAL_ROOT.resolve())
 
 
 def test_npy_sample_preserves_shapes_dtypes_and_center_coordinates(tmp_path: Path) -> None:
     module = import_module(
-        "eveye.dataset.DavisEyeCenter.NpyDavisEyeCenterDataset"
+        "dataset.DavisEyeCenter.NpyDavisEyeCenterDataset"
     )
     data = np.arange(48, dtype=np.float64).reshape(2, 3, 4, 2)
     center = np.asarray([[12.5, 20.25], [31.75, 42.5]], dtype=np.float64)
@@ -181,7 +181,7 @@ def test_npy_sample_preserves_shapes_dtypes_and_center_coordinates(tmp_path: Pat
 
 
 def test_ellipse_coordinate_order_is_preserved() -> None:
-    utils = import_module("eveye.dataset.DavisEyeEllipse.utils")
+    utils = import_module("dataset.DavisEyeEllipse.utils")
 
     ellipse = utils.convert_to_ellipse(
         np.asarray([40000, 12.5, 20.25, 8.0, 6.0, 45.0], dtype=np.float32)
@@ -199,11 +199,11 @@ def test_legacy_dataset_owner_is_retired() -> None:
 def test_dataset_owner_has_no_upward_imports_and_demos_are_extracted() -> None:
     forbidden_prefixes = (
         "EvEye.model",
-        "eveye.engine.callback",
-        "eveye.engine.logger",
-        "eveye.common",
-        "eveye.engine",
-        "eveye.event",
+        "engine.callback",
+        "engine.logger",
+        "common",
+        "engine",
+        "event",
         "src",
     )
     for path in CANONICAL_ROOT.rglob("*.py"):
@@ -234,7 +234,7 @@ def test_dataset_owner_has_no_upward_imports_and_demos_are_extracted() -> None:
             for node in ast.walk(tree)
         )
 
-    inspection_tool = import_module("eveye.engine.tools.inspect_davis_eye_center")
+    inspection_tool = import_module("engine.tools.inspect_davis_eye_center")
     assert callable(inspection_tool.inspect_davis_eye_center)
     assert callable(inspection_tool.inspect_memmap_davis_eye_center)
     assert callable(inspection_tool.main)

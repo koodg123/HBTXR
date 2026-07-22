@@ -6,13 +6,13 @@ import natsort
 import itertools
 
 from tqdm import tqdm
-from eveye.utils.dvs_common_utils.representation.Histgram import HistgramBuilder
-from eveye.utils.dvs_common_utils.representation.TimeSurface import TimeSurfaceBuilder
-from eveye.utils.dvs_common_utils.representation.FrameStack import FrameStackBuilder
+from utils.dvs_common_utils.representation.Histgram import HistgramBuilder
+from utils.dvs_common_utils.representation.TimeSurface import TimeSurfaceBuilder
+from utils.dvs_common_utils.representation.FrameStack import FrameStackBuilder
 
-from eveye.utils.dvs_common_utils.base.EventsIterator import EventsIterator
-from eveye.utils.processor.TxtProcessor import TxtProcessor
-from eveye.utils.visualization.visualization import save_image, save_batch_images
+from utils.dvs_common_utils.base.EventsIterator import EventsIterator
+from utils.processor.TxtProcessor import TxtProcessor
+from utils.visualization.visualization import save_image, save_batch_images
 
 base_path = "/mnt/data2T/junyuan/eye-tracking/datasets/DavisEyeCenterDataset/train"
 ouptut_base_path = "/mnt/data2T/junyuan/eye-tracking/outputs/EventsFrames"

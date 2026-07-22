@@ -5,8 +5,8 @@ from pathlib import Path
 import pytest
 import yaml
 
-from eveye.dataset.dataset_factory import DATASET_CLASSES
-from eveye.engine.model_factory import MODEL_CLASSES
+from dataset.dataset_factory import DATASET_CLASSES
+from engine.model_factory import MODEL_CLASSES
 
 CONFIG_DIR = Path(__file__).resolve().parents[1] / "configs"
 

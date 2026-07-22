@@ -5,11 +5,11 @@ import cv2
 
 from tqdm import tqdm
 from pathlib import Path
-from eveye.utils.visualization.visualization import *
-from eveye.engine.tools.process_model_output import process_model_output
-from eveye.engine.tools.load_config import load_config
-from eveye.dataset.dataset_factory import make_dataloader
-from eveye.engine.model_factory import make_model
+from utils.visualization.visualization import *
+from engine.tools.process_model_output import process_model_output
+from engine.tools.load_config import load_config
+from dataset.dataset_factory import make_dataloader
+from engine.model_factory import make_model
 
 
 @click.command()

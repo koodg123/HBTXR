@@ -23,13 +23,13 @@ Canonical imports use the `eveye.*` namespace, one package per owner:
 
 | Package | Source root |
 |---|---|
-| `eveye.common` | `common/src/eveye/common` |
-| `eveye.dataset` | `dataset/src/eveye/dataset` |
-| `eveye.utils` | `utils/src/eveye/utils` |
-| `eveye.engine` | `engine/src/eveye/engine` |
-| `eveye.event` | `event/src/eveye/event` |
+| `common` | `common/src/eveye/common` |
+| `dataset` | `dataset/src/eveye/dataset` |
+| `utils` | `utils/src/eveye/utils` |
+| `engine` | `engine/src/eveye/engine` |
+| `event` | `event/src/eveye/event` |
 
-Example: `from eveye.engine.model_factory import make_model`.
+Example: `from engine.model_factory import make_model`.
 
 ## Import Compatibility
 

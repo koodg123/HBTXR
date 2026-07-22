@@ -3,11 +3,11 @@ import torch
 import click
 import os
 
-from eveye.engine.tools.load_config import load_config
-from eveye.engine.logger.logger_factory import make_logger
-from eveye.engine.callback.callback_factory import make_callbacks
-from eveye.dataset.dataset_factory import make_dataloader
-from eveye.engine.model_factory import make_model
+from engine.tools.load_config import load_config
+from engine.logger.logger_factory import make_logger
+from engine.callback.callback_factory import make_callbacks
+from dataset.dataset_factory import make_dataloader
+from engine.model_factory import make_model
 
 
 @click.command()
