@@ -13,12 +13,12 @@ requires-python = ">=3.10"
 "dataset" = "dataset/src/dataset"
 "utils" = "utils/src/utils"
 "engine" = "engine/src/engine"
-"event" = "event/src/event"
+"models" = "models/src/models"
 "hybrid" = "hybrid/src/hybrid"
 "apps" = "apps/src/apps"
 
 [tool.setuptools.packages.find]
-where = ["common/src", "dataset/src", "utils/src", "engine/src", "event/src", "hybrid/src", "apps/src"]
+where = ["common/src", "dataset/src", "utils/src", "engine/src", "models/src", "hybrid/src", "apps/src"]
 include = [
     "common",
     "common.*",
@@ -28,8 +28,8 @@ include = [
     "utils.*",
     "engine",
     "engine.*",
-    "event",
-    "event.*",
+    "models",
+    "models.*",
     "hybrid",
     "hybrid.*",
     "apps",

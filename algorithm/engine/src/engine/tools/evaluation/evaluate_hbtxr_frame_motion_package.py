@@ -35,8 +35,8 @@ if str(REPO_ROOT) not in sys.path:
     sys.path.insert(0, str(REPO_ROOT))
 
 from dataset.dataset_factory import make_dataset
-from common.models.DavisEyeEllipse.HBTXR.HBTXR import HBTXR
-from common.models.DavisEyeEllipse.HBTXR.Predict import post_process
+from models.DavisEyeEllipse.HBTXR.HBTXR import HBTXR
+from models.DavisEyeEllipse.HBTXR.Predict import post_process
 
 
 SESSION_TO_CODE = {

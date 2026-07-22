@@ -4,7 +4,7 @@ import torch.nn.functional as F
 import numpy as np
 import cv2
 from torch.autograd import Variable
-from event.models.EPNet.Predict import topk
+from models.EPNet.Predict import topk
 
 
 def _neg_loss(pred, gt):

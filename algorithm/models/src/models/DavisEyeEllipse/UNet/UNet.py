@@ -15,7 +15,7 @@ from lightning.pytorch.utilities.types import (
 from timm.scheduler.step_lr import StepLRScheduler
 from typing import Any
 
-from common.models.DavisEyeEllipse.UNet.Metric import *
+from models.DavisEyeEllipse.UNet.Metric import *
 
 """
 Unet model for semantic segmentation

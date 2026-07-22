@@ -1,7 +1,7 @@
 """Executable prediction demo for the shared ellipse model.
 
 AM-040 extraction: moved out of the shared model owner so that
-common.models.DavisEyeEllipse.HBTXR.Predict keeps no execution payload.
+models.DavisEyeEllipse.HBTXR.Predict keeps no execution payload.
 `os` is imported explicitly here because the source module received it
 implicitly through a wildcard import of utils.visualization.
 """
@@ -10,9 +10,9 @@ import os
 
 
 def main():
-    from common.models.DavisEyeEllipse.HBTXR.HBTXR import HBTXR
-    from event.models.ElNet.ElNet import Creat_MyNet
-    from common.models.DavisEyeEllipse.HBTXR.Predict import predict_txt
+    from models.DavisEyeEllipse.HBTXR.HBTXR import HBTXR
+    from models.ElNet.ElNet import Creat_MyNet
+    from models.DavisEyeEllipse.HBTXR.Predict import predict_txt
 
     index = 0
     model = HBTXR(

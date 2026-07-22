@@ -15,7 +15,7 @@ EXPECTED_PACKAGE_DIR = {
     "dataset": "dataset/src/dataset",
     "utils": "utils/src/utils",
     "engine": "engine/src/engine",
-    "event": "event/src/event",
+    "models": "models/src/models",
     "hybrid": "hybrid/src/hybrid",
     "apps": "apps/src/apps",
 }

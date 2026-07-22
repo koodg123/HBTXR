@@ -22,8 +22,8 @@ import torch
 import yaml
 from torch.utils.data import DataLoader
 from tqdm import tqdm
-from common.models.DavisEyeEllipse.HBTXR.HBTXR import HBTXR
-from common.models.DavisEyeEllipse.HBTXR.Predict import post_process
+from models.DavisEyeEllipse.HBTXR.HBTXR import HBTXR
+from models.DavisEyeEllipse.HBTXR.Predict import post_process
 
 
 def parse_args() -> argparse.Namespace:

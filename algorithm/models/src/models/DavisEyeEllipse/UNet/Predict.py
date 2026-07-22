@@ -9,7 +9,7 @@ from thop import profile
 from pathlib import Path
 from tqdm import tqdm
 from natsort import natsorted
-from common.models.DavisEyeEllipse.UNet.UNet import UNet
+from models.DavisEyeEllipse.UNet.UNet import UNet
 from utils.visualization.visualization import *
 
 

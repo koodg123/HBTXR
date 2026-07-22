@@ -4,7 +4,7 @@ import torch.nn.functional as F
 import numpy as np
 import cv2
 from torch.autograd import Variable
-from common.models.DavisEyeEllipse.HBTXR.Predict import topk
+from models.DavisEyeEllipse.HBTXR.Predict import topk
 
 
 def _neg_loss(pred, gt):

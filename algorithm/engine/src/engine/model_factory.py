@@ -3,13 +3,13 @@ from typing import Any
 
 
 MODEL_CLASSES: dict[str, tuple[str, str]] = dict(
-    DeepLabV3=("common.models.DavisWithMask.DeepLabV3", "DeepLabV3"),
-    ConvLSTM=("common.models.CitiBike.ConvLSTM", "ConvLSTM"),
-    TennSt=("event.models.TennSt", "TennSt"),
-    EPNet=("event.models.EPNet.EPNet", "EPNet"),
-    HBTXR=("common.models.DavisEyeEllipse.HBTXR.HBTXR", "HBTXR"),
-    ElNet=("event.models.ElNet.ElNet", "Creat_MyNet"),
-    UNet=("common.models.DavisEyeEllipse.UNet.UNet", "UNet"),
+    DeepLabV3=("models.DavisWithMask.DeepLabV3", "DeepLabV3"),
+    ConvLSTM=("models.CitiBike.ConvLSTM", "ConvLSTM"),
+    TennSt=("models.TennSt", "TennSt"),
+    EPNet=("models.EPNet.EPNet", "EPNet"),
+    HBTXR=("models.DavisEyeEllipse.HBTXR.HBTXR", "HBTXR"),
+    ElNet=("models.ElNet.ElNet", "Creat_MyNet"),
+    UNet=("models.DavisEyeEllipse.UNet.UNet", "UNet"),
 )
 
 
@@ -40,7 +40,7 @@ def main():
     # input = torch.randn(1, 1, 256, 256)
     # model_path = "/mnt/data2T/junyuan/eye-tracking/logs/RGBUNet/version_0/checkpoints/epoch=27-val_mean_distance=0.3231.ckpt"
 
-    from event.models.ElNet.ElNet import Creat_MyNet
+    from models.ElNet.ElNet import Creat_MyNet
 
     model = Creat_MyNet(
         base_name="dla34",

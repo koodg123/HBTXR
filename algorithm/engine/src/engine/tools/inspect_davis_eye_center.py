@@ -40,7 +40,7 @@ def inspect_davis_eye_center() -> None:
 
 
 def inspect_memmap_davis_eye_center() -> None:
-    from event.models.TennSt import TennSt
+    from models.TennSt import TennSt
 
     dataset = MemmapDavisEyeCenterDataset(
         root_path="/mnt/data2T/junyuan/eye-tracking/datasets/MemmapDavisEyeCenterDataset",

@@ -10,16 +10,16 @@ from lightning.pytorch.utilities.types import (
 )
 from timm.scheduler.step_lr import StepLRScheduler
 
-from common.models.DavisEyeEllipse.HBTXR.Backbone.DeiT import DeiTConfig, build_deit
-from common.models.DavisEyeEllipse.HBTXR.Head.HBTXRHead import HBTXRHead
-from common.models.DavisEyeEllipse.HBTXR.Loss import HBTXRCtdetLoss
-from common.models.DavisEyeEllipse.HBTXR.Metric import (
+from models.DavisEyeEllipse.HBTXR.Backbone.DeiT import DeiTConfig, build_deit
+from models.DavisEyeEllipse.HBTXR.Head.HBTXRHead import HBTXRHead
+from models.DavisEyeEllipse.HBTXR.Loss import HBTXRCtdetLoss
+from models.DavisEyeEllipse.HBTXR.Metric import (
     cal_batch_ap,
     cal_batch_iou,
     cal_mean_distance,
     p_acc,
 )
-from common.models.DavisEyeEllipse.HBTXR.Predict import post_process
+from models.DavisEyeEllipse.HBTXR.Predict import post_process
 
 
 LOSS_WEIGHT = {

@@ -12,7 +12,7 @@ from utils.visualization.visualization import *
 from utils.tonic.functional.CutMaxCount import cut_max_count
 from dataset.DavisEyeEllipse.utils import *
 
-# from common.models.DavisEyeEllipse.HBTXR.HBTXR import HBTXR
+# from models.DavisEyeEllipse.HBTXR.HBTXR import HBTXR
 
 torch.set_printoptions(sci_mode=False)
 
