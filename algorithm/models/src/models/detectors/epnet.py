@@ -13,13 +13,13 @@ from lightning.pytorch.utilities.types import (
 )
 from functools import partial
 from timm.scheduler.step_lr import StepLRScheduler
-from models.EPNet.Backbone.MobileNetV3Backbone import (
+from models.backbones.mobilenetv3 import (
     MobileNetV3Backbone,
 )
-from models.EPNet.Head.EPHead import EPHead
-from models.EPNet.Loss import *
-from models.EPNet.Predict import *
-from models.EPNet.Metric import *
+from models.heads.ep_head import EPHead
+from models.losses.ep_loss import *
+from models.postprocess.ep_predict import *
+from models.metrics.ep_metric import *
 
 LOSS_WEIGHT = {
     "hm_weight": 1,

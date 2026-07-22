@@ -12,7 +12,7 @@ from utils.visualization.visualization import *
 from utils.tonic.functional.CutMaxCount import cut_max_count
 from dataset.DavisEyeEllipse.utils import *
 
-# from models.EPNet.EPNet import EPNet
+# from models.detectors.epnet import EPNet
 
 torch.set_printoptions(sci_mode=False)
 
@@ -418,8 +418,8 @@ def test_inference_time(model, model_path, device="cuda:0"):
 
 
 def main():
-    from models.EPNet.EPNet import EPNet
-    from models.ElNet.ElNet import Creat_MyNet
+    from models.detectors.epnet import EPNet
+    from models.detectors.elnet import Creat_MyNet
 
     index = 0
     model = EPNet(

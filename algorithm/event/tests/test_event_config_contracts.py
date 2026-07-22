@@ -64,11 +64,12 @@ def test_event_only_models_resolve_to_the_event_owner() -> None:
 
 
 def test_event_models_live_in_the_models_owner() -> None:
-    models_root = Path(__file__).resolve().parents[2] / "models" / "src" / "models"
-    assert models_root.is_dir()
-    assert (models_root / "TennSt.py").is_file()
-    assert (models_root / "EPNet").is_dir()
-    assert (models_root / "ElNet").is_dir()
+    # R5-2 reorganized the models owner by role: event-only detectors live under
+    # models/detectors as snake_case modules.
+    detectors = Path(__file__).resolve().parents[2] / "models" / "src" / "models" / "detectors"
+    assert detectors.is_dir()
+    for module in ("tennst.py", "epnet.py", "elnet.py"):
+        assert (detectors / module).is_file()
     assert not (Path(__file__).resolve().parents[1] / "src").exists()
 
 

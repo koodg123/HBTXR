@@ -29,7 +29,7 @@ _DCN_IMPL = os.environ.get("ELNET_DCN_IMPL", "torchvision").lower()
 if _DCN_IMPL == "native":
     from DCNv2.dcn_v2 import DCN
 elif _DCN_IMPL == "torchvision":
-    from models.ElNet.torchvision_dcn import DCN
+    from models.blocks.torchvision_dcn import DCN
 elif _DCN_IMPL == "conv2d":
     logging.getLogger(__name__).warning(
         "ELNET_DCN_IMPL=conv2d uses a plain Conv2d fallback. "
@@ -63,9 +63,9 @@ else:
         f"Got {_DCN_IMPL!r}."
     )
 
-from models.EPNet.Loss import *
-from models.EPNet.Predict import *
-from models.EPNet.Metric import *
+from models.losses.ep_loss import *
+from models.postprocess.ep_predict import *
+from models.metrics.ep_metric import *
 
 BN_MOMENTUM = 0.1
 logger = logging.getLogger(__name__)

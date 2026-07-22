@@ -13,7 +13,7 @@ import torch
 from PIL import Image
 from tqdm import tqdm
 
-from models.DavisEyeEllipse.UNet.UNet import UNet
+from models.detectors.unet_ellipse import UNet
 from engine.tools.datatools.build_dean_dataset_from_ev_eye import (
     ELLIPSE_DTYPE,
     EVENT_DTYPE,
@@ -374,7 +374,7 @@ def main():
     parser.add_argument(
         "--checkpoint",
         type=Path,
-        help="Lightning checkpoint for models.DavisEyeEllipse.UNet.UNet.",
+        help="Lightning checkpoint for models.detectors.unet_ellipse.",
     )
     parser.add_argument(
         "--output-root",

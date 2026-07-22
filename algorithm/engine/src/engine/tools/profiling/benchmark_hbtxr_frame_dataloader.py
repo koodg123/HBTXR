@@ -10,7 +10,7 @@ from torch.utils.data import DataLoader
 from dataset.DavisEyeEllipse.DavisEyeEllipseFrameDataset import (
     DavisEyeEllipseFrameDataset,
 )
-from models.DavisEyeEllipse.HBTXR.HBTXR import HBTXR
+from models.detectors.hbtxr import HBTXR
 
 
 def make_loader(dataset, batch_size: int, workers: int, prefetch: int):

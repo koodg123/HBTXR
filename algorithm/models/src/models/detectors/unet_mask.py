@@ -15,7 +15,7 @@ from lightning.pytorch.utilities.types import (
 from timm.scheduler.step_lr import StepLRScheduler
 from typing import Any
 
-from models.DavisWithMask.validation import get_auc
+from models.metrics.mask_validation import get_auc
 
 """
 Unet model for semantic segmentation
