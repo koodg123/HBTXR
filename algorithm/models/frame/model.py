@@ -12,7 +12,7 @@ differing only in the input stem, so there is no duplicated forward logic.
 """
 from __future__ import annotations
 
-from dataclasses import dataclass, field
+from dataclasses import dataclass, field, replace
 
 import torch
 from torch import nn
@@ -49,7 +49,10 @@ class DirectPupilDetector(nn.Module):
         self.config = cfg
         dim = cfg.embed_dim
         self.patch_embed = build_patch_embed(cfg.modality, embed_dim=dim, patch_size=cfg.patch_size)
-        self.backbone = ViTBackbone(cfg.backbone)
+        # model.embed_dim is the single source of truth: keep the backbone width in
+        # sync so setting embed_dim (without also setting backbone.embed_dim) is valid.
+        backbone_cfg = cfg.backbone if cfg.backbone.embed_dim == dim else replace(cfg.backbone, embed_dim=dim)
+        self.backbone = ViTBackbone(backbone_cfg)
         self.head = build_head(cfg.head, dim, hidden_dim=cfg.head_hidden_dim)
         self.mask_head = build_head("mask", dim) if cfg.with_mask else None
         self.roi_head = build_head("roi_guidance", dim) if cfg.with_roi else None

@@ -16,7 +16,7 @@ frame-only checkpoint (optional, paper staged training). Heads are config-swappa
 """
 from __future__ import annotations
 
-from dataclasses import dataclass, field
+from dataclasses import dataclass, field, replace
 
 import torch
 from torch import nn
@@ -46,7 +46,9 @@ class HybridModel(nn.Module):
         self.config = cfg
         dim = cfg.embed_dim
         # ONE shared backbone: full depth for search, early-exit (B_1:c) for track.
-        self.backbone = ViTBackbone(cfg.backbone)
+        # model.embed_dim is authoritative: keep the backbone width in sync with it.
+        backbone_cfg = cfg.backbone if cfg.backbone.embed_dim == dim else replace(cfg.backbone, embed_dim=dim)
+        self.backbone = ViTBackbone(backbone_cfg)
         self.frame_stem = FramePatchEmbed(embed_dim=dim, patch_size=cfg.patch_size)
         self.event_stem = EventPatchEmbed(embed_dim=dim, patch_size=cfg.patch_size)
         self.search_head = build_head(cfg.search_head, dim, hidden_dim=cfg.head_hidden_dim)
