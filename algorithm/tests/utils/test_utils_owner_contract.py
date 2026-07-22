@@ -229,8 +229,9 @@ def test_am040_exclusions_migrated_to_engine_tools() -> None:
     assert "engine.tools.CacheFrameStack" in cache_source
     assert "utils.dvs_common_utils" in cache_source
 
-    cache_notebook_path = tools_root / "MemmapCacheFrameStack.ipynb"
-    tonic_notebook_path = tools_root / "tonicLearning.ipynb"
+    notebooks_root = ALGORITHM_ROOT / "notebooks" / "engine" / "tools"
+    cache_notebook_path = notebooks_root / "MemmapCacheFrameStack.ipynb"
+    tonic_notebook_path = notebooks_root / "tonicLearning.ipynb"
     for notebook_path in (cache_notebook_path, tonic_notebook_path):
         assert notebook_path.is_file()
         json.loads(notebook_path.read_text())
