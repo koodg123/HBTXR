@@ -7,6 +7,7 @@ hybrid / mask):
 - ellipse     : ellipse-state / residual regression (smooth L1 on x, y, a, b, theta).
 - mask        : BCE + soft-Dice on the dense pupil mask.
 - reliability : BCE on (confidence, IoU-quality) vs targets.
+- eye_box     : eye-region ROI-guidance regression (smooth L1 on x, y, w, h) — g_eye head.
 
 ``compute_losses(outputs, targets, weights)`` assembles the terms that are present
 in both ``outputs`` and ``targets`` into a weighted total. Heavier geometric
@@ -25,6 +26,7 @@ DEFAULT_WEIGHTS: dict[str, float] = {
     "state": 0.0,
     "mask": 1.0,
     "reliability": 0.5,
+    "eye_box": 0.5,
 }
 
 
@@ -68,6 +70,8 @@ def compute_losses(
         losses["mask"] = mask_loss(outputs["mask"], targets["mask"])
     if "reliability" in outputs and "reliability" in targets:
         losses["reliability"] = reliability_loss(outputs["reliability"], targets["reliability"])
+    if "eye_box" in outputs and "eye_box" in targets:
+        losses["eye_box"] = box_loss(outputs["eye_box"], targets["eye_box"])
 
     if losses:
         total = sum(w.get(name, 1.0) * value for name, value in losses.items())
