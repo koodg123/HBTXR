@@ -12,7 +12,7 @@ from torch import nn
 
 from models.heads.bbox import PupilBoxHead
 from models.heads.ellipse import PupilEllipseHead
-from models.heads.heatmap import CenterHeatmapHead
+from models.heads.heatmap import MultiCenterHeatmapHead, SingleCenterHeatmapHead
 from models.heads.mask import PupilMaskHead
 from models.heads.reliability import ReliabilityHead
 from models.heads.roi_guidance import EyeRegionHead
@@ -23,7 +23,11 @@ HEAD_REGISTRY: dict[str, type[nn.Module]] = {
     "mask": PupilMaskHead,
     "reliability": ReliabilityHead,
     "roi_guidance": EyeRegionHead,
-    "heatmap": CenterHeatmapHead,
+    # heatmap alternatives: "heatmap" aliases the faithful CenterNet multi-head
+    # (= the parked HBTXR/EPNet head); "heatmap_single" is the minimal variant.
+    "heatmap": MultiCenterHeatmapHead,
+    "heatmap_multi": MultiCenterHeatmapHead,
+    "heatmap_single": SingleCenterHeatmapHead,
 }
 
 

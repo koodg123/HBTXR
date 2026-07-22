@@ -8,7 +8,7 @@ name through build_head(), so heads are swapped by config, not per-model code.
 from models.heads.bbox import PupilBoxHead
 from models.heads.ellipse import PupilEllipseHead
 from models.heads.factory import HEAD_REGISTRY, build_head, list_head_names
-from models.heads.heatmap import CenterHeatmapHead
+from models.heads.heatmap import MultiCenterHeatmapHead, SingleCenterHeatmapHead
 from models.heads.mask import PupilMaskHead
 from models.heads.reliability import ReliabilityHead
 from models.heads.roi_guidance import EyeRegionHead
@@ -19,7 +19,8 @@ __all__ = [
     "PupilMaskHead",
     "ReliabilityHead",
     "EyeRegionHead",
-    "CenterHeatmapHead",
+    "SingleCenterHeatmapHead",
+    "MultiCenterHeatmapHead",
     "build_head",
     "list_head_names",
     "HEAD_REGISTRY",
