@@ -1,1 +1,3 @@
-"""utils — flat-functional skeleton (filled during rewrite)."""
+"""Reusable low-level utilities for HBTXR algorithm packages."""
+
+__all__ = []
