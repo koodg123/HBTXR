@@ -74,3 +74,6 @@ third/DeepVOG/deepvog/model/DeepVOG_weights.h5
 build/
 dist/
 *.egg-info/
+
+# Relocated experiment results (4.8GB, preserved on disk, not tracked)
+archive/RESULTS/
