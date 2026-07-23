@@ -1,0 +1,52 @@
+{
+  "schema_version": "hbtxr-import-scc-evidence.v1",
+  "commit": "ebe862b11506e819c5bd5abc925299fc5fbb6f1a",
+  "method": "manual static edge review over committed blobs",
+  "claim_type": "inference",
+  "confidence": "medium",
+  "groups": [
+    {
+      "id": "quantization-api-artifacts",
+      "nodes": [
+        "quantization/src/api.py",
+        "quantization/src/artifact_imagenet.py",
+        "quantization/src/artifact_patch.py"
+      ],
+      "edges": [
+        {"path": "quantization/src/api.py", "line": 10, "from": "quantization.src.api", "to": "quantization.src.artifact_imagenet", "scope": "module"},
+        {"path": "quantization/src/api.py", "line": 11, "from": "quantization.src.api", "to": "quantization.src.artifact_patch", "scope": "module"},
+        {"path": "quantization/src/artifact_imagenet.py", "line": 34, "from": "quantization.src.artifact_imagenet", "to": "quantization.src.api", "scope": "function-local"},
+        {"path": "quantization/src/artifact_patch.py", "line": 64, "from": "quantization.src.artifact_patch", "to": "quantization.src.api", "scope": "function-local"}
+      ],
+      "decision_gate": "Refactor only if a reproducible import failure, duplicated contract, or measurable owner ambiguity is demonstrated; otherwise document the accepted lazy boundary."
+    },
+    {
+      "id": "hybrid-event-generation",
+      "nodes": [
+        "algorithm/hybrid/src/preprocess/event_generation.py",
+        "algorithm/hybrid/src/preprocess/target_fps_build.py"
+      ],
+      "edges": [
+        {"path": "algorithm/hybrid/src/preprocess/target_fps_build.py", "line": 17, "from": "src.preprocess.target_fps_build", "to": "src.preprocess.event_generation", "scope": "module"},
+        {"path": "algorithm/hybrid/src/preprocess/event_generation.py", "line": 155, "from": "src.preprocess.event_generation", "to": "src.preprocess.target_fps_build", "scope": "function-local"}
+      ],
+      "decision_gate": "Refactor only if the lazy edge causes a concrete failure or a shared contract has two active owners; otherwise retain and document it."
+    },
+    {
+      "id": "hybrid-annotation-backends",
+      "nodes": [
+        "algorithm/hybrid/src/preprocess/annotation_backends.py",
+        "algorithm/hybrid/src/preprocess/groundedsam_build.py"
+      ],
+      "edges": [
+        {"path": "algorithm/hybrid/src/preprocess/groundedsam_build.py", "line": 18, "from": "src.preprocess.groundedsam_build", "to": "src.preprocess.annotation_backends", "scope": "module"},
+        {"path": "algorithm/hybrid/src/preprocess/annotation_backends.py", "line": 344, "from": "src.preprocess.annotation_backends", "to": "src.preprocess.groundedsam_build", "scope": "function-local"}
+      ],
+      "decision_gate": "Refactor only after a concrete import/runtime failure or duplicated factory ownership is evidenced; otherwise keep the lazy adapter boundary."
+    }
+  ],
+  "limitations": [
+    "The reverse edges are function-local and do not prove import-time failure.",
+    "The evidence is static and does not execute registry, plugin, or dynamic import behavior."
+  ]
+}

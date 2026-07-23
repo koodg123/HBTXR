@@ -1,0 +1,104 @@
+{
+  "schema": "hbtxr-semantic-census.v1",
+  "commit": "ebe862b11506e819c5bd5abc925299fc5fbb6f1a",
+  "source_view": "committed-blobs",
+  "tracked_files": 12856,
+  "total_bytes": 2183270747,
+  "text_lines": 10705773,
+  "code_lines_proxy": 8967553,
+  "files_by_zone": {
+    "docs": 457,
+    "maintained": 740,
+    "artifact": 371,
+    "analysis": 883,
+    "test": 179,
+    "archive": 684,
+    "reference": 6295,
+    "vendor": 3247
+  },
+  "files_by_language": {
+    "Markdown": 1596,
+    "Other": 4866,
+    "JSON": 510,
+    "YAML": 533,
+    "Python": 3721,
+    "Shell": 236,
+    "TOML": 14,
+    "TeX": 14,
+    "C/C++ Header": 499,
+    "C++ Header": 55,
+    "C++": 178,
+    "Tcl": 280,
+    "CUDA": 29,
+    "CUDA Header": 24,
+    "Verilog": 30,
+    "Scala": 15,
+    "MATLAB/Objective-C": 17,
+    "reStructuredText": 7,
+    "JavaScript": 22,
+    "TypeScript": 209,
+    "XML": 1
+  },
+  "python_parse_status": {
+    "parsed": 3711,
+    "parsed-invalid-type-comment:64": 4,
+    "syntax-error:1": 3,
+    "syntax-error:37": 1,
+    "syntax-error:14": 1,
+    "syntax-error:27": 1
+  },
+  "python_symbols": 30351,
+  "python_symbol_kinds": {
+    "function": 26617,
+    "class": 3732,
+    "async-function": 2
+  },
+  "nonpython_symbols": 20423,
+  "findings": 2233,
+  "findings_by_rule": {
+    "large-function": 316,
+    "high-branch-density": 278,
+    "hard-coded-absolute-path": 507,
+    "broad-except": 75,
+    "work-marker": 214,
+    "bare-except": 6,
+    "dynamic-execution": 52,
+    "very-long-line": 324,
+    "library-print": 290,
+    "large-class": 53,
+    "too-many-parameters": 69,
+    "wildcard-import": 34,
+    "mutable-default": 5,
+    "invalid-type-comment": 4,
+    "python-syntax-error": 6
+  },
+  "findings_by_zone": {
+    "analysis": 440,
+    "test": 322,
+    "maintained": 1463,
+    "reference": 8
+  },
+  "findings_by_severity": {
+    "medium": 657,
+    "high": 746,
+    "low": 830
+  },
+  "duplicate_groups": 245,
+  "duplicate_symbol_rows": 638,
+  "nonempty_cross_authority_duplicate_blob_groups": 519,
+  "nonempty_cross_authority_duplicate_blob_rows": 1280,
+  "dead_code_candidates": 695,
+  "method": {
+    "source": "git ls-tree and git cat-file --batch committed blobs; working-tree content is never read",
+    "python": "stdlib AST parse attempt for every committed .py blob; project modules are never imported",
+    "non_python": "conservative declaration regexes for supported source languages",
+    "line_counts": "decoded tracked text files; comment count is a language-agnostic proxy",
+    "limitations": [
+      "dynamic dispatch and runtime plugin registration are not resolved",
+      "non-Python regex symbols are structural candidates, not compiler-verified declarations",
+      "dead-code candidates are low-confidence name-reference heuristics",
+      "duplicate-blobs.csv excludes zero-byte blobs because empty placeholders are not cleanup-equivalent content",
+      "binary, dataset, image, notebook cell, and paper semantics are outside this static source census"
+    ]
+  }
+}

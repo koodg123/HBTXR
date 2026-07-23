@@ -93,3 +93,52 @@ All five tasks passed independent specification and quality review. The work
 did not modify HANDOVER or the existing XR design/experiment/model/target JSON
 files and did not invoke excluded install, reproduction, experiment, FPGA,
 board, merge, release, or push actions.
+
+## Semantic Census Execution Evidence — 2026-07-15
+
+- Baseline mode at commit `ebe862b`; no prior recon pack existed.
+- All tracked files were recorded in `file-inventory.csv`.
+- Python was parsed with stdlib AST without importing project modules.
+- Maintained/analysis/test received deep complexity, duplicate, import, and line-rule analysis.
+- Archive/reference/vendor received full file and symbol-line census but did not contribute active refactor debt.
+- Three Codex-native read-only agents covered architecture, Python, and non-Python/repository hygiene.
+- The Master resolved type-comment false positives and nested-reference authority drift before freezing the canonical inventory.
+- Adversarial review found that the first scan had read dirty working-tree text. The Master regenerated every inventory from `git cat-file` committed blobs, preserved the superseded snapshot under `/tmp`, and revalidated the canonical `source_view=committed-blobs` output.
+- Follow-up plan review split proposal/transfer/deletion gates, constrained package discovery to named packages, made SCC refactoring conditional on concrete evidence, and replaced placeholder delta paths.
+- User decision update preserves `algorithm/{common,event,frame,hybrid}` and `algorithm/hybrid/src`, makes Quantization the only default named-package migration, records Hybrid migration as conditional NO-OP, and retains `references/**` permanently for comparison experiments.
+- Analysis and planning only; no production implementation or destructive cleanup occurred.
+
+## 2026-07-16 Session Handover
+
+- Consulted `agentops:handoff` and gathered live repository, HEAD, dirty-worktree, tracker, plan, decision, and sparse-worktree evidence.
+- Created one authoritative continuation document and one pointer prompt under `.agents/handoff/`.
+- Preserved the inherited documentation/recon changes; no production/reference code, commit, push, install, experiment, or cleanup action was performed.
+- Two read-only evidence agents were interrupted after WSL shell latency; direct evidence collection was used and an independent final evaluator remains required.
+
+## 2026-07-21 Algorithm Naming And Pools Planning
+
+- Revalidated `refactor/hbtxr-structure` at `ebe862b11506e819c5bd5abc925299fc5fbb6f1a`; the inherited planning/recon dirty state was preserved and `algorithm/**` had no working-tree diff before this planning edit.
+- Three Codex-native read-only agents independently analyzed the FACET-name census, pool/domain architecture, and durable-document consistency.
+- Added RC-120 and RC-130 to the canonical semantic plan, including exact replacements, preserved zones, domain owners, task dependencies, verification, rollback, and retirement gates.
+- Corrected RC-210 to reuse existing `data/contracts.py`, `data/components.py`, `training/checkpoints.py`, and `training/step_runner.py`, and serialized its `trainer.py` work after RC-130.
+- Independent T-718 review initially found an incomplete frozen-zone check; the plan was corrected to compare baseline-to-current path/blob state plus untracked additions across every frozen zone, after which the reviewer approved it with no blocking issue.
+- T-719 replaced the proposed `HBTXR_*` environment aliases with existing config owners and one neutral standalone CLI flag; existing HBTXR project/model/config identity remains outside this narrow revision.
+- Independent follow-up review approved the T-719 revision with no blocking issue.
+- Planning/docs only: no algorithm source/test move, deletion, execution, commit, push, or cleanup was performed.
+
+## 2026-07-21 Algorithm Modular Ownership Planning
+
+- Created `docs/aegis/plans/2026-07-21-algorithm-modular-ownership-refactor.md`
+  as the follow-on authority for algorithm ownership and pools disposition.
+- Preserved `analysis`, `archive`, `artifacts`, and `requirements` as frozen
+  paths/blobs and retained root README/pyproject paths.
+- Selected staged `eveye.*` shared packaging to avoid bare generic imports.
+- Split the implementation roadmap into dataset, utility, common/engine/event,
+  config/test/script, EvEye retirement, Hybrid pools, modality validation, and
+  conditional Hybrid shared-leaf tasks.
+- Revised pools ownership so four APIs survive in domain packages and
+  `optim/pool.py` remains distinct.
+- Independent T-727 review found and closed environment, reverse-import, and
+  extraction-order defects; the third review returned `Approved`.
+- Planning documentation only; no production source/test move or test execution
+  was performed.

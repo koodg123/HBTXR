@@ -35,3 +35,42 @@
 - The selected tasks were implemented as local semantic commits in HBTXR only;
   HANDOVER stayed read-only and existing XR reference JSON remained unchanged.
 - Installation, reproducibility runs, experiments, synthesis, board access, merge,
+  and push remained excluded.
+
+## 2026-07-15 Algorithm And Reference Decisions
+
+- The user confirmed that `algorithm/event`, `algorithm/frame`, and `algorithm/hybrid` are intentional modality surfaces and requested the plan be updated accordingly.
+- The user wants `references/**` retained for comparison experiments.
+- The revised plan preserves the current algorithm layout, applies default package cleanup only to Quantization, and treats Hybrid namespace migration as conditional with a default NO-OP.
+- Reference deletion, rename, deduplication, and external-pointer replacement are excluded.
+
+## 2026-07-16 Handover Decision
+
+- The user requested a durable HANDOVER containing current progress, conversation decisions, and performed work, plus a prompt that a separate session can use to resume.
+- The HANDOVER is documentation only; it does not expand authority to commit, push, install, experiment, delete, clean the worktree, or start an unselected implementation task.
+
+## 2026-07-21 Algorithm Naming And Pools Decision
+
+- The user requested removal of the `facet` name from the algorithm tree except reference-facing material, and requested removal of `pools`.
+- The plan interprets the exclusion as preserving reference/archive/analysis/provenance/history and exact FACET reference paths, filenames, citations, and project identity.
+- Active paths/contracts use existing semantic config keys or neutral CLI/API names; no `HBTXR_*` replacement environment namespace or permanent old-name alias is planned.
+- `algorithm/hybrid/src/pools` is planned for complete removal. Unused facades are not recreated; LR scheduler moves to `src.optim.lr_schedulers`.
+- `algorithm/hybrid/src/optim/pool.py` is explicitly retained because it implements optimizer candidate/report behavior rather than the removed generic facade.
+- This decision revised planning documents only and did not authorize implementation, tests, deletion, commit, push, or cleanup.
+- The user subsequently rejected the proposed `HBTXR_*` replacement names. This is scoped to replacement controls; it does not authorize a global rename of existing HBTXR project/model/config/reference identity.
+
+## 2026-07-21 Algorithm Modular Ownership Decision
+
+- The user requested a concrete plan based on the architecture analysis.
+- `analysis`, `archive`, `artifacts`, `requirements`, `README.md`, and
+  `pyproject.toml` must remain in place.
+- The active target roots are `common`, `dataset`, `utils`, `engine`, `docs`,
+  `configs`, `tests`, `frame`, `event`, and `hybrid`.
+- Hybrid retains its special fusion/search-track behavior. Shared extraction is
+  conditional on a real second consumer.
+- `pools` is removed, but loss, optimizer, LR scheduler and runtime scheduler
+  APIs are retained in their Hybrid domain packages; `optim/pool.py` remains.
+- The user requested the target code tree and the meaning/content of each owner.
+- This decision produced plans/docs only and did not authorize implementation.
+- Independent T-727 review approved the concrete plan after its blocking
+  findings were corrected; implementation remains gated on a separate selection.

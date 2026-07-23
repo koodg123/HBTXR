@@ -91,3 +91,70 @@ All commands passed: 67 tests, 11 registry candidates, and one artifact manifest
 The post-commit clean-worktree check remains the final closeout action.
 Installation, full runtime/training reproduction, experiments, HLS/synthesis,
 board validation, merge, release, and push are not covered or inferred as passing.
+
+## Semantic Census Validation — 2026-07-15
+
+Validation must prove:
+
+- `semantic-summary.json` commit equals `ebe862b` and tracked file count equals 12,856;
+- `file-inventory.csv` has one header plus 12,856 rows;
+- `python-symbols.csv` and `nonpython-symbols.csv` line evidence resolves to tracked files;
+- maintained runtime syntax errors are zero; invalid type comments are classified separately;
+- all fact/inference evidence in `codebase-recon.json` resolves;
+- the stored Python equivalent validator passes; the installed shell validator is separately recorded as blocked by CRLF and missing `jq`;
+- no production source, remote, commit, or deletion action is included in the census.
+
+The plan additionally requires exact CLI/schema/contract snapshots and a delta
+recon before any old owner, Quantization shim, or non-reference binary is retired.
+Validation fails on any `references/**` deletion, rename, deduplication,
+external-pointer replacement, or content-hash drift. Hybrid namespace migration
+remains NO-OP unless supported-workflow evidence and explicit approval are present.
+
+## Session Handover Validation — 2026-07-16
+
+Validation requires both handover files to be non-empty, all required headings and metadata fields to match the `agentops:handoff` format, the prompt to contain `Read first:` and `First action:`, live HEAD to equal the recorded 40-hex SHA, no production/reference diff, and an independent read-only PASS. The inherited dirty worktree is expected and must be described rather than cleaned. AgentOps closeout is recorded unavailable when `ao` is not exposed.
+
+## Algorithm Naming And Pools Plan Validation — 2026-07-21
+
+Planning validation requires:
+
+- RC-120 and RC-130 appear in batch readiness, the authoritative dependency table, task bodies, RC-900 gates, risks, retirement and progress;
+- RC-120 distinguishes active owned names from an exact line-level reference/history allowlist and requires zero baseline-to-current frozen-zone path/blob drift or untracked addition;
+- the historical RC-130 review covered an only-LR policy that is now superseded
+  by the AM domain-API retention policy;
+- RC-210 follows RC-130 for shared `trainer.py` ownership and reuses existing data/training modules;
+- Master/Sub/Spec/Execution/Validation/tracking documents agree that implementation has not started;
+- `git diff --check` passes and the documentation diff does not include algorithm source/test, reference, deletion, commit, push, or cleanup actions.
+
+Future RC-120 execution must prove active legacy contract search is empty and every remaining `facet` match is allowlisted. Pools execution follows AM-070: it must prove `src/pools` and maintained `src.pools` consumers are absent, all four domain APIs remain behavior-compatible, all Hybrid tests pass, and `src/optim/pool.py` remains present and consumed.
+
+RC-120 must additionally prove that `(FACET|HBTXR)_(DISABLE_CUDNN|DEVICES|CKPT_PATH)` and `/tmp/(facet|hbtxr)_unet_dataset_smoke` are absent from active algorithm code/config. Characterization must cover `runtime.disable_cudnn`, `trainer.devices`, `train.ckpt_path`, evaluator config loading, and the standalone builder `--disable-cudnn` plus `disable_cudnn` metadata.
+
+Independent T-718 result: PASS after the frozen-zone gate was strengthened to compare the approved baseline against current path/blob state and untracked additions for all reference/history zones. No blocking plan issue remains.
+
+T-718 follow-up result for the T-719 naming revision: PASS. The reviewer confirmed that no `HBTXR_*` replacement environment control remains in the plan and that config/CLI ownership, scope, ADR, and verification are consistent.
+
+## Algorithm Modular Ownership Plan Validation — 2026-07-21
+
+The previous T-718 PASS is not completion evidence for the new owner policy.
+Fresh validation must confirm:
+
+- `algorithm/{analysis,archive,artifacts,requirements}` are path/blob frozen;
+- `algorithm/{README.md,pyproject.toml}` remain at the root paths;
+- the active target roots and current-to-target mapping appear in the plan;
+- shared code uses `eveye.*` and the plan creates no bare generic package;
+- frame remains without an empty source package until a real owner exists;
+- event-only and shared models have explicit owners;
+- `src.pools` is removed while `loss/losses.py`, `optim/optimizer.py`,
+  `optim/lr_schedulers.py`, `runtime/runtime_schedulers.py`, and `optim/pool.py`
+  remain with behavior-parity gates;
+- Master/Sub/Spec/Execution/Validation/tracking docs all say implementation has
+  not started;
+- `git diff --check` and placeholder/trailing-whitespace scans pass.
+
+T-727 result: PASS after three review rounds. The final plan orders the
+DavisEyeCenter and HBTXR demo extractions before their implementation moves,
+separates dependency-bearing editable tests from dependency-free wheel payload
+checks, verifies direct-script help from an arbitrary CWD, enforces lower-owner
+import direction, and keeps all preserved zones unchanged. No production
+algorithm diff was present.

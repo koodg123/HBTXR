@@ -1,0 +1,180 @@
+{
+  "schema_version": "codebase-recon.v1",
+  "mode": "baseline",
+  "commit": "ebe862b11506e819c5bd5abc925299fc5fbb6f1a",
+  "flows": [
+    {
+      "entry": "algorithm/hybrid/scripts/external_pipeline/train_hbtxr.py",
+      "domain": "algorithm/hybrid/src/training/trainer.py and algorithm/hybrid/src/data",
+      "integration": "manifest, checkpoint, dataset, model, optimizer, and training session boundary",
+      "tests": "algorithm/hybrid/tests/external_pipeline/test_train_pipeline.py and test_runtime_e2e.py"
+    },
+    {
+      "entry": "algorithm/hybrid/src/evaluation/__init__.py",
+      "domain": "dependency-free evaluation contracts and coordinate conversion",
+      "integration": "algorithm/hybrid/src/evaluation/handover_bridge.py",
+      "tests": "algorithm/hybrid/tests/handover/test_evaluation_bridge.py"
+    },
+    {
+      "entry": "quantization/src/cli.py",
+      "domain": "quantization/src/pipeline.py and quantization/src/api.py",
+      "integration": "case discovery, LUT/integer kernel, golden comparison, and report emission",
+      "tests": "quantization/tests/test_cli.py and quantization/tests/test_package_api.py"
+    },
+    {
+      "entry": "hardware/configs/xr_accel/*.json",
+      "domain": "hardware/tools/xr_accel_config.py",
+      "integration": "schema normalization and Vivado/HLS command surface",
+      "tests": "hardware/tests/test_xr_accel_config_schema.py"
+    },
+    {
+      "entry": "docs/provenance/handover-source-registry.json",
+      "domain": "tools/provenance/validate_source_registry.py",
+      "integration": "rights, path, SHA-256, and committed-blob validation",
+      "tests": "tests/provenance/test_source_registry.py"
+    }
+  ],
+  "claims": [
+    {
+      "kind": "fact",
+      "text": "The semantic census reads committed blobs pinned to ebe862b and covers all 12,856 tracked paths without reading working-tree content.",
+      "confidence": "high",
+      "evidence": [
+        "/mnt/d/dataset/EV_Eye/paper_works/HBTXR-Pool/HBTXR/.agents/recon/2026-07-15-semantic-census/inventory/semantic-summary.json",
+        "/mnt/d/dataset/EV_Eye/paper_works/HBTXR-Pool/HBTXR/.agents/recon/2026-07-15-semantic-census/inventory/file-inventory.csv"
+      ]
+    },
+    {
+      "kind": "fact",
+      "text": "Static parsing was attempted for all 3,721 committed Python blobs without importing project modules: 3,711 parsed normally, four required fallback parsing because of invalid type comments, and six legacy reference blobs failed parsing.",
+      "confidence": "high",
+      "evidence": [
+        "/mnt/d/dataset/EV_Eye/paper_works/HBTXR-Pool/HBTXR/.agents/recon/2026-07-15-semantic-census/inventory/semantic-summary.json",
+        "/mnt/d/dataset/EV_Eye/paper_works/HBTXR-Pool/HBTXR/.agents/recon/2026-07-15-semantic-census/inventory/line-findings.csv"
+      ]
+    },
+    {
+      "kind": "fact",
+      "text": "Hybrid training flows from the external pipeline CLI through trainer.train and TrainingSession into dataset, model, optimizer, and epoch execution.",
+      "confidence": "high",
+      "evidence": [
+        "/mnt/d/dataset/EV_Eye/paper_works/HBTXR-Pool/HBTXR/algorithm/hybrid/scripts/external_pipeline/train_hbtxr.py:211",
+        "/mnt/d/dataset/EV_Eye/paper_works/HBTXR-Pool/HBTXR/algorithm/hybrid/src/training/trainer.py:1282",
+        "/mnt/d/dataset/EV_Eye/paper_works/HBTXR-Pool/HBTXR/algorithm/hybrid/tests/external_pipeline/test_train_pipeline.py:245"
+      ]
+    },
+    {
+      "kind": "fact",
+      "text": "Hybrid and quantization both expose a top-level package named src while hybrid scripts also inject a repository path at runtime.",
+      "confidence": "high",
+      "evidence": [
+        "/mnt/d/dataset/EV_Eye/paper_works/HBTXR-Pool/HBTXR/algorithm/hybrid/scripts/external_pipeline/_bootstrap.py:7",
+        "/mnt/d/dataset/EV_Eye/paper_works/HBTXR-Pool/HBTXR/algorithm/pyproject.toml:11",
+        "/mnt/d/dataset/EV_Eye/paper_works/HBTXR-Pool/HBTXR/quantization/pyproject.toml:12"
+      ]
+    },
+    {
+      "kind": "fact",
+      "text": "quantization/src/artifact_patch.py defines two public functions twice without aliasing the earlier implementations.",
+      "confidence": "high",
+      "evidence": [
+        "/mnt/d/dataset/EV_Eye/paper_works/HBTXR-Pool/HBTXR/quantization/src/artifact_patch.py:240",
+        "/mnt/d/dataset/EV_Eye/paper_works/HBTXR-Pool/HBTXR/quantization/src/artifact_patch.py:446",
+        "/mnt/d/dataset/EV_Eye/paper_works/HBTXR-Pool/HBTXR/quantization/src/artifact_patch.py:331",
+        "/mnt/d/dataset/EV_Eye/paper_works/HBTXR-Pool/HBTXR/quantization/src/artifact_patch.py:663"
+      ]
+    },
+    {
+      "kind": "fact",
+      "text": "Two dated hardware update modules perform file reads and writes at import time.",
+      "confidence": "high",
+      "evidence": [
+        "/mnt/d/dataset/EV_Eye/paper_works/HBTXR-Pool/HBTXR/hardware/tools/update_e2e_full_docs_2026_06_09.py:13",
+        "/mnt/d/dataset/EV_Eye/paper_works/HBTXR-Pool/HBTXR/hardware/tools/update_e2e_full_vit_2026_06_09.py:33"
+      ]
+    },
+    {
+      "kind": "fact",
+      "text": "Four maintained hardware functions span 908 to 1,954 lines.",
+      "confidence": "high",
+      "evidence": [
+        "/mnt/d/dataset/EV_Eye/paper_works/HBTXR-Pool/HBTXR/hardware/tools/write_final_evidence_manifest.py:601",
+        "/mnt/d/dataset/EV_Eye/paper_works/HBTXR-Pool/HBTXR/hardware/tools/run_third_goal_final_signoff.py:597",
+        "/mnt/d/dataset/EV_Eye/paper_works/HBTXR-Pool/HBTXR/hardware/tools/validate_final_operator_handoff.py:394",
+        "/mnt/d/dataset/EV_Eye/paper_works/HBTXR-Pool/HBTXR/hardware/tools/validate_final_signoff_bundle.py:518"
+      ]
+    },
+    {
+      "kind": "inference",
+      "text": "The size, branch structure, and statements in the four large hardware functions indicate mixed validation, orchestration, I/O, and rendering responsibilities that should be characterized before decomposition.",
+      "confidence": "medium",
+      "evidence": [
+        "/mnt/d/dataset/EV_Eye/paper_works/HBTXR-Pool/HBTXR/hardware/tools/write_final_evidence_manifest.py:601",
+        "/mnt/d/dataset/EV_Eye/paper_works/HBTXR-Pool/HBTXR/hardware/tools/run_third_goal_final_signoff.py:597",
+        "/mnt/d/dataset/EV_Eye/paper_works/HBTXR-Pool/HBTXR/hardware/tools/validate_final_operator_handoff.py:394",
+        "/mnt/d/dataset/EV_Eye/paper_works/HBTXR-Pool/HBTXR/hardware/tools/validate_final_signoff_bundle.py:518"
+      ]
+    },
+    {
+      "kind": "fact",
+      "text": "The active hardware behavioral source of truth is HLS C++ rather than the placeholder RTL directory.",
+      "confidence": "high",
+      "evidence": [
+        "/mnt/d/dataset/EV_Eye/paper_works/HBTXR-Pool/HBTXR/hardware/rtl/README.md:3",
+        "/mnt/d/dataset/EV_Eye/paper_works/HBTXR-Pool/HBTXR/hardware/hls/include/common.h:19",
+        "/mnt/d/dataset/EV_Eye/paper_works/HBTXR-Pool/HBTXR/hardware/vivado/scripts/create_hls_project.tcl:50"
+      ]
+    },
+    {
+      "kind": "inference",
+      "text": "The unrelated src namespaces and path injection can select the wrong package when hybrid and quantization share one interpreter environment.",
+      "confidence": "high",
+      "evidence": [
+        "/mnt/d/dataset/EV_Eye/paper_works/HBTXR-Pool/HBTXR/algorithm/hybrid/scripts/external_pipeline/_bootstrap.py:7",
+        "/mnt/d/dataset/EV_Eye/paper_works/HBTXR-Pool/HBTXR/quantization/src/__init__.py:1"
+      ]
+    },
+    {
+      "kind": "inference",
+      "text": "Repository governance should retain references permanently in-repository with provenance and relationship manifests; externalization or deletion review applies only to separately approved non-reference binaries.",
+      "confidence": "high",
+      "evidence": [
+        "/mnt/d/dataset/EV_Eye/paper_works/HBTXR-Pool/HBTXR/references/README.md:3",
+        "/mnt/d/dataset/EV_Eye/paper_works/HBTXR-Pool/HBTXR/.agents/recon/2026-07-15-semantic-census/inventory/file-inventory.csv",
+        "/mnt/d/dataset/EV_Eye/paper_works/HBTXR-Pool/HBTXR/.agents/recon/2026-07-15-semantic-census/inventory/duplicate-functions.csv",
+        "/mnt/d/dataset/EV_Eye/paper_works/HBTXR-Pool/HBTXR/.agents/recon/2026-07-15-semantic-census/inventory/duplicate-blobs.csv"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "text": "Whether deployed environments currently install hybrid and quantization into the same Python environment is not established.",
+      "confidence": "low",
+      "evidence": []
+    },
+    {
+      "kind": "unknown",
+      "text": "External consumers of current src imports, CLI JSON schemas, reference paths, and hardware artifact paths have not been enumerated.",
+      "confidence": "medium",
+      "evidence": []
+    }
+  ],
+  "coverage": {
+    "inspected": [
+      "all 12,856 paths and committed blob identities in file-inventory.csv",
+      "stdlib AST parse attempts for all 3,721 committed Python blobs without importing project code",
+      "all function/class line spans from the 3,711 normal and four fallback-parsed Python blobs in python-symbols.csv; six failures are enumerated in line-findings.csv",
+      "supported non-Python declarations in nonpython-symbols.csv",
+      "maintained, analysis, and test line-level static findings",
+      "representative algorithm, evaluation, quantization, hardware, and provenance flows",
+      "archive/reference/vendor boundaries and tracked artifact categories"
+    ],
+    "uninspected": [
+      "binary, model, image, and dataset payload semantics",
+      "PDF and paper body semantics",
+      "Jupyter notebook cell-level execution semantics",
+      "runtime-only dynamic dispatch and plugin registration",
+      "external downstream consumers outside this repository",
+      "build, test, training, hardware synthesis, and experiment behavior"
+    ]
+  }
+}

@@ -110,3 +110,74 @@ awaiting execution approval. It sequences provenance/artifact governance,
 software contracts, hardware golden/config/dry-run validation, tracker
 characterization, static experiment reproducibility, and separately approved
 training/HLS/synthesis/board gates. This pointer does not authorize execution.
+
+## Standalone HBTXR Selective Integration Workstream — 2026-07-15
+
+The separate repository `/mnt/d/dataset/EV_Eye/paper_works/HBTXR` is not a
+branch/worktree of this checkout. Its `annotation` revision `2ff5262` is treated
+as read-only evidence. The canonical plan is
+`docs/aegis/plans/2026-07-15-standalone-hbtxr-selective-integration.md`; the
+file-level evidence is
+`docs/analysis/STANDALONE-HBTXR-SELECTIVE-INTEGRATION-MATRIX.md`.
+
+The workstream excludes bulk merge, cherry-pick, data/results/weights,
+dependency installation, reproduction, experiments, runtime model execution,
+archive replacement, push, and merge. Future code execution is blocked until
+source rights and the 346x260/346x240/640x480 coordinate contract are resolved.
+FECET and HG-PIPE have no new active-code task; SWIFT runtime candidates require
+a separate future plan.
+
+## Semantic Refactor and Cleanup Workstream — 2026-07-15
+
+A committed-blob semantic census at commit `ebe862b` covers all 12,856 tracked files,
+attempts static parsing for all 3,721 Python files, and records 30,351 Python function/class symbols and 20,423
+non-Python structural symbols. Canonical artifacts are under
+`.agents/recon/2026-07-15-semantic-census/`; the human synthesis and decision
+matrix are under `docs/analysis/`.
+
+The execution plan is
+`docs/aegis/plans/2026-07-15-hbtxr-semantic-refactor-cleanup.md`. Its order is
+repair, package/API refactor, owner decomposition, then manifest-first cleanup.
+It does not authorize code implementation, external archive mutation, deletion,
+commit, push, merge, or release. The algorithm modality layout and
+`algorithm/hybrid/src` remain canonical. Quantization named-package cleanup is
+the default package task; Hybrid namespace migration is conditional and defaults
+to NO-OP. `references/**` remains permanent in-repository comparison material and
+must not be deleted, renamed, deduplicated, or replaced by external pointers.
+Non-reference binary retirement still requires evidence and separate approval.
+
+## Session Continuation Workstream — 2026-07-16
+
+The authoritative pause point is `.agents/handoff/2026-07-16-hbtxr-semantic-refactor-planning.md`; its paired prompt is only a pointer. Continuation must verify HEAD and the inherited dirty worktree before choosing a lane. This workstream documents state only and does not authorize implementation, commit, push, install, experiment, or cleanup.
+
+## Algorithm Active-Name And Pools Retirement Workstream — 2026-07-21
+
+The user selected a bounded algorithm-only planning change. The canonical
+semantic plan now includes RC-120 and RC-130. RC-120 flattens
+`common/scripts/facet` and `common/tests/facet`, renames repository-owned active
+FACET contracts, and preserves `algorithm/common/src/EvEye` plus source-faithful
+reference/history identity. Removed FACET controls are absorbed by existing
+config keys or one semantic CLI flag; no `HBTXR_*` replacement environment
+variables are introduced. The original RC-130 removed
+`algorithm/hybrid/src/pools` and retained only the LR scheduler plus
+`src.optim.pool`; that pools disposition is superseded by the modular ownership
+workstream below. This historical revision authorized no implementation.
+
+## Algorithm Modular Ownership Workstream — 2026-07-21
+
+The later user decision supersedes the `EvEye`-permanent and only-LR portions of
+the preceding workstream. The authoritative plan is
+`docs/aegis/plans/2026-07-21-algorithm-modular-ownership-refactor.md`.
+
+The plan preserves `algorithm/{analysis,archive,artifacts,requirements}` in place
+without path/blob drift and keeps `algorithm/{README.md,pyproject.toml}` at their
+root paths. Active ownership is staged across `common`, `dataset`, `utils`,
+`engine`, `docs`, `configs`, `tests`, `frame`, `event`, and `hybrid`. Shared code
+uses the named `eveye.*` namespace; no bare `dataset`, `utils`, or `engine`
+package is introduced. Hybrid-special behavior remains under Hybrid.
+
+`src.pools` is retired, but its loss, optimizer, LR scheduler, and runtime
+scheduler APIs move respectively to `src.loss.losses`, `src.optim.optimizer`,
+`src.optim.lr_schedulers`, and `src.runtime.runtime_schedulers`. `src.optim.pool`
+remains the separate optimizer experiment/report feature. All source moves are
+gated; implementation has not started.

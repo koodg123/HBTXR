@@ -22,6 +22,19 @@
 - [ ] Map licenses for ERVT, TENNs-Eye, TDTracker, BRAT, FECET, and Retina sources.
 - [ ] Audit CRLF/tooling governance and record decisions as T-600.
 - [x] Write the concrete follow-up implementation plan with Task Cards and gates.
+- [x] Classify standalone HBTXR annotation and `references/impl` content.
+- [x] Write the standalone HBTXR selective integration plan and file matrix.
+- [ ] SI-000: generalize provenance validation for an explicit external repo and committed source view.
+- [ ] SI-010: verify standalone authorship/license and freeze no-op decisions.
+- [ ] SI-020: resolve 346x260, 346x240, and 640x480 coordinate frames in ADR-005.
+- [ ] SI-100: add annotation record contracts after SI-010/SI-020 approval.
+- [ ] SI-110: add dependency-free annotation metrics after SI-100.
+- [ ] SI-120: add dependency-free uncertainty metrics after SI-110.
+- [ ] SI-130: curate annotation evidence without importing numeric results.
+- [ ] SI-200: consider SWIFT anti-blink/checkpoint behavior only through a separate license/runtime-approved plan.
+- Permanent no-op: do not re-import FECET archives or HG-PIPE code/tests/configs.
+- Permanent exclusions: standalone samples, datasets, results, tables, figures,
+  weights, locks, environments, downloads, reproduction, and experiments.
 - Scope Fence: HBTXR listed paths; HANDOVER read-only; no external mutation.
 - Baseline Lock: verify branch, HEAD, tools, licenses, and inputs before each wave.
 - Approved Behavior: the selected five-task slice is complete; every deferred task needs a new selection and its applicable gate.
@@ -31,3 +44,49 @@
 - Drift: stop on owner, source, license, tool, split, or board drift and revise the plan.
 - Evidence: preserve commands, staged manifests, reviews, commit SHAs, and uncovered risks.
 - Advisory boundary: branch-local completion is not merge, release, or push authority.
+
+## Semantic Refactor and Cleanup Backlog
+
+- [x] Generate baseline file/function/class/line semantic census at `ebe862b`.
+- [x] Validate architecture, Python, and non-Python findings through three read-only agents.
+- [x] Write the RC/CL execution plan and cleanup decision matrix.
+- [ ] RC-010: characterize and remove shadowed artifact-patch definitions.
+- [ ] RC-020: make dated hardware update scripts import-safe and fix invalid type comments.
+- [ ] RC-030: map all `src`, CLI, PYTHONPATH, and external package consumers.
+- [ ] RC-100A: preserve current Hybrid ownership and minimally harden the bootstrap/import contract.
+- [ ] RC-100B: migrate only Quantization from generic `src` to `hgpipe_quantization` with a measured compatibility shim.
+- [ ] RC-100C: migrate Hybrid namespace only after supported-workflow collision evidence and explicit approval; otherwise record NO-OP.
+- [ ] RC-110: replace the quantization CLI wrapper chain with explicit command registration.
+- [ ] RC-120: flatten common script/test paths, retire active repository-owned FACET names, and absorb old environment controls into existing config or neutral CLI controls without `HBTXR_*` replacements.
+- [ ] RC-130: move LR schedulers to `src.optim`, remove `src.pools`, and preserve `src.optim.pool` after consumer characterization.
+- [ ] RC-200: split hardware validator/signoff rules, I/O, orchestration, and rendering.
+- [ ] RC-210: after RC-130, reuse existing contracts/components/checkpoints/step-runner owners and split only residual hybrid data/training responsibilities.
+- [ ] RC-220: evaluate deferred-cycle necessity; refactor only evidenced SCCs, and narrow broad exception/fixed-path boundaries.
+- [ ] RC-300: consolidate approved active duplicates and canonical API owners.
+- [ ] CL-000: add a fail-closed repository asset/provenance manifest.
+- [ ] CL-100: catalog `references/**` as permanent in-repository comparison assets with provenance and hashes.
+- [x] CL-101: CANCELLED — no transfer-as-replacement for `references/**`.
+- [x] CL-102: CANCELLED — no deletion of `references/**`.
+- [ ] CL-110: add a hardware artifact locator while retaining checked-in fallbacks.
+- [ ] CL-111: transfer approved hardware binaries only after immutable target and read-back approval.
+- [ ] CL-112: remove checked-in binary fallbacks only after a separate exact-allowlist approval.
+- [ ] CL-120: record exact-copy owner/provenance relationships without changing reference snapshots.
+- [x] CL-121: CANCELLED for `references/**`; non-reference duplication requires a separate plan.
+- [ ] CL-130: audit README/layout/naming/evidence drift without moving files.
+- [ ] CL-131: apply only separately approved documentation/path/evidence migrations.
+- [ ] RC-900: run component regression and produce a validated delta recon.
+- Gate: `references/**` deletion, rename, deduplication, external-pointer replacement, and hash drift are prohibited.
+- Gate: no destructive non-reference cleanup, external archive mutation, commit, push, or merge without separate authorization.
+- Gate: RC-120/RC-130 planning is complete but implementation requires a new selected batch; required external old-name consumer stops retirement for a separate compatibility decision.
+
+## Algorithm Modular Ownership
+
+- [x] AM planning: define target roots, meanings, source mapping and preservation.
+- [ ] AM-000: record preserved-zone and import-consumer baselines.
+- [ ] AM-010: validate `eveye.*` package discovery and isolated wheel imports.
+- [ ] AM-020/030/040: migrate dataset, utils, common/engine/event in order.
+- [ ] AM-050/060: move configs/tests/scripts, then retire EvEye after zero use.
+- [ ] AM-070: remove pools and retain four domain APIs plus `optim/pool.py`.
+- [ ] AM-080: add frame/event config contract tests and runnable documentation.
+- [ ] AM-090: extract Hybrid shared leaves only with a second consumer; otherwise NO-OP.
+- [ ] AM-900: run full regression, package, import and preservation gates.

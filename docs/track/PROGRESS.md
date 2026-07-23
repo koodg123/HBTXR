@@ -32,3 +32,52 @@
   reproducibility verification, and experiment work.
 - [x] Executed and reviewed T-010, T-020, T-100, T-110, and T-210.
 - [x] Kept all commits local to HBTXR; no push, merge, install, or experiment was performed.
+- [x] Compared the independent standalone HBTXR repository at pinned revision `2ff5262`.
+- [x] Classified 2,594 annotation files and all 264 `references/impl` files.
+- [x] Verified FECET/SWIFT archive equivalence and HG-PIPE active-code no-op status.
+- [x] Identified source-rights and coordinate-frame blockers before active adaptation.
+- [x] Saved a concrete SI-000–SI-200 selective integration plan and file matrix.
+- [ ] Obtain explicit execution approval after rights and coordinate decisions are available.
+- [x] Completed a committed-blob baseline census of all 12,856 tracked files and attempted static parsing of all 3,721 Python files.
+- [x] Extracted 30,351 Python and 20,423 non-Python structural symbols with line evidence.
+- [x] Separated active/test/analysis code from artifact/archive/reference/vendor authority.
+- [x] Confirmed shadowed definitions, import-time writes, package ambiguity, and major complexity hotspots.
+- [x] Classified manifest-first cleanup candidates for legacy data, binaries, duplicates, docs, and paths.
+- [x] Saved the validated recon, semantic report, decision matrix, and executable RC/CL plan.
+- [ ] Obtain explicit approval before implementing any RC/CL task.
+- [x] Updated the plan to preserve the algorithm modality layout and current Hybrid implementation owner.
+- [x] Split RC-100 into Hybrid contract preservation, Quantization-only package cleanup, and conditional Hybrid migration with default NO-OP.
+- [x] Made `references/**` permanent in-repository comparison assets and cancelled CL-101, CL-102, and reference CL-121.
+- [ ] Obtain separate approval and completed provenance gates before any non-reference deletion or externalization.
+
+## 2026-07-16
+
+- [x] Revalidated `refactor/hbtxr-structure` at `ebe862b` and ahead/behind `0/0`.
+- [x] Captured the 12 modified tracking/planning docs, 14-file semantic recon, and five untracked plan/analysis artifacts.
+- [x] Confirmed production and `references/**` diffs are empty.
+- [x] Wrote the authoritative session HANDOVER and pointer-style continuation prompt.
+- [ ] Obtain a new user selection before committing the dirty planning package or executing any RC/CL/SI task.
+
+## 2026-07-21
+
+- [x] Confirmed the requested scope is algorithm planning only and preserves references/history, `EvEye`, modality directories, and the Hybrid `src` root.
+- [x] Counted active FACET-name matches, verified common flattening has no basename collisions, and identified the single maintained `src.pools` runtime consumer.
+- [x] Added RC-120 and RC-130 with exact replacements, owner map, dependencies, verification, stop, rollback, and retirement gates.
+- [x] Recorded the earlier only-LR pools decision; superseded by the modular
+  ownership decision retaining four domain APIs.
+- [x] Preserved `src.optim.pool` as the separate optimizer candidate/report feature.
+- [x] Passed independent T-718 plan review after closing its baseline-to-current frozen-zone validation finding.
+- [x] Removed the proposed `HBTXR_*` replacement environment names from RC-120; existing config keys and one neutral standalone CLI option are now canonical.
+- [x] Passed independent follow-up review of the neutral replacement-control plan.
+- [ ] Obtain explicit implementation selection before moving, renaming, or deleting algorithm files or running RC-120/RC-130 tests.
+
+### Modular ownership revision
+
+- [x] Superseded permanent `EvEye` ownership and only-LR pools disposition for planning.
+- [x] Preserved analysis/archive/artifacts/requirements and root README/pyproject paths.
+- [x] Defined the active target tree, responsibility meanings and exact move map.
+- [x] Retained loss/optimizer/LR/runtime scheduler APIs under Hybrid domains.
+- [x] Selected staged `eveye.*` packaging and explicit compatibility retirement gates.
+- [x] Passed independent T-727 review after closing environment,
+  reverse-import, and extraction-order blockers.
+- [ ] Implementation not started.
