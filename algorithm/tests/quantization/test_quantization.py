@@ -91,3 +91,31 @@ def test_observer_symmetric_scale():
     obs.observe(torch.tensor([-2.0, 1.0, 0.5]))
     scale, zp = obs.qparams()
     assert zp == 0 and abs(scale - 2.0 / 127) < 1e-6
+
+
+def test_gelu_lut_approximates_float():
+    import torch.nn.functional as F
+
+    from quantization.lut_calibrate import build_gelu_lut
+    from quantization.nonlinear import GeLULUT
+
+    torch.manual_seed(0)
+    payload = build_gelu_lut((torch.randn(8192) * 1.5).numpy(), entries=256)
+    lut = GeLULUT(payload["scalars"], payload["table"],
+                  input_scale=payload["input_scale"], output_scale=payload["output_scale"])
+    x = torch.linspace(-3.0, 3.0, 400)
+    err = (lut(x) - F.gelu(x, approximate="tanh")).abs()
+    assert float(err.mean()) < 0.08
+
+
+def test_calibrate_gelu_luts_replaces_gelu():
+    from torch import nn
+
+    from quantization.nonlinear import calibrate_gelu_luts
+
+    model = _make("models.frame.FrameModel")
+    before = sum(1 for m in model.modules() if isinstance(m, nn.GELU))
+    inserted = calibrate_gelu_luts(model, [torch.rand(2, 1, 64, 64)])
+    assert before > 0 and len(inserted) == before
+    assert sum(1 for m in model.modules() if isinstance(m, nn.GELU)) == 0
+    assert model(torch.rand(1, 1, 64, 64))["box"].shape == (1, 5)
