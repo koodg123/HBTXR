@@ -8,14 +8,104 @@ are checked bit-exact against.
 - ``table_quantize``: ReQuant / GeLU — cursor = (x + b) >> s, clamp, table lookup.
 - ``layernorm_quantize``: integer LayerNorm (integer mean, rsqrt table, affine, clamp).
 - ``softmax_quantize``: integer Softmax (max-subtract, exp table, dual reciprocal tables).
+- ``requant``: dyadic requantization ``clamp((acc*mult + round) >> shift + zp)``.
+- ``int_matmul`` / ``int_conv2d``: pure-int accumulation (weight×act and act×act).
+- ``dyadic_params``: best ``(multiplier, shift)`` for a float scale ratio.
 
-Requant / int-matmul / int-conv torch kernels for the deployment graph are added in
-Part C (ilayers); this module stays the pure-int golden.
+The torch deployment kernels (ilayers/int_functional.py) are checked bit-exact
+against ``requant`` / ``int_matmul`` / ``int_conv2d`` here; this module stays the
+pure-int golden.
 """
 from __future__ import annotations
 
 from quantization.scheme import clamp_int as clamp
 from quantization.scheme import quantize_clamp
+
+
+def dyadic_params(scale: float, *, shift_min: int = 1, shift_max: int = 31) -> tuple[int, int, float]:
+    """Best ``(multiplier, shift, effective)`` with ``effective = multiplier / 2^shift``.
+
+    Pure-int port of the HG-PIPE ``_dyadic_approx`` (references/): a float scale ratio
+    becomes an integer multiply + right shift for the HW requant unit.
+    """
+    if scale <= 0:
+        raise ValueError("scale must be positive")
+    best: tuple[float, int, int, float] | None = None
+    for shift in range(shift_min, shift_max + 1):
+        multiplier = max(1, round(scale * (1 << shift)))
+        effective = multiplier / float(1 << shift)
+        error = abs(effective - scale)
+        if best is None or error < best[0]:
+            best = (error, multiplier, shift, effective)
+    assert best is not None
+    return int(best[1]), int(best[2]), float(best[3])
+
+
+def requant(acc: list[int], multiplier: int, shift: int, *, bits: int = 8, signed: bool = True,
+            zero_point: int = 0) -> list[int]:
+    """Dyadic requant: ``clamp((a*multiplier + round) >> shift + zp)`` per element.
+
+    ``round = 2^(shift-1)`` gives round-half-up before the arithmetic right shift —
+    the standard fixed-point requant a hardware multiplier+shifter performs.
+    """
+    if shift < 0:
+        raise ValueError("shift must be non-negative")
+    rnd = (1 << (shift - 1)) if shift > 0 else 0
+    return [quantize_clamp(((a * multiplier + rnd) >> shift) + zero_point, bits, signed) for a in acc]
+
+
+def int_matmul(a: list[list[int]], b: list[list[int]]) -> list[list[int]]:
+    """Pure-int ``[M,K] @ [K,N] -> [M,N]`` accumulation (no overflow); the MAC golden."""
+    if not a or not b:
+        raise ValueError("int_matmul requires non-empty operands")
+    m, k, n = len(a), len(b), len(b[0])
+    if any(len(row) != k for row in a):
+        raise ValueError("inner dimension mismatch")
+    out = [[0] * n for _ in range(m)]
+    for i in range(m):
+        ai = a[i]
+        row = out[i]
+        for kk in range(k):
+            aik = ai[kk]
+            if aik == 0:
+                continue
+            bk = b[kk]
+            for j in range(n):
+                row[j] += aik * bk[j]
+    return out
+
+
+def int_conv2d(inp: list[list[list[int]]], weight: list[list[list[list[int]]]], *,
+               stride: int = 1) -> list[list[list[int]]]:
+    """Pure-int non-padded conv: ``inp[Cin,H,W]``, ``weight[Cout,Cin,kh,kw]`` -> ``[Cout,Ho,Wo]``.
+
+    Golden for a strided PatchEmbed conv (kernel == stride == patch_size gives the
+    non-overlapping ViT patch embedding).
+    """
+    cin = len(inp)
+    height, width = len(inp[0]), len(inp[0][0])
+    cout = len(weight)
+    kh, kw = len(weight[0][0]), len(weight[0][0][0])
+    ho = (height - kh) // stride + 1
+    wo = (width - kw) // stride + 1
+    out = [[[0] * wo for _ in range(ho)] for _ in range(cout)]
+    for oc in range(cout):
+        w_oc = weight[oc]
+        for oy in range(ho):
+            iy0 = oy * stride
+            for ox in range(wo):
+                ix0 = ox * stride
+                acc = 0
+                for ic in range(cin):
+                    w_ic = w_oc[ic]
+                    in_ic = inp[ic]
+                    for dy in range(kh):
+                        in_row = in_ic[iy0 + dy]
+                        w_row = w_ic[dy]
+                        for dx in range(kw):
+                            acc += in_row[ix0 + dx] * w_row[dx]
+                out[oc][oy][ox] = acc
+    return out
 
 
 def table_quantize(inputs: list[int], scalars: list[int], table: list[int]) -> list[int]:
@@ -133,4 +223,12 @@ def softmax_quantize(
     return outputs
 
 
-__all__ = ["table_quantize", "layernorm_quantize", "softmax_quantize"]
+__all__ = [
+    "table_quantize",
+    "layernorm_quantize",
+    "softmax_quantize",
+    "dyadic_params",
+    "requant",
+    "int_matmul",
+    "int_conv2d",
+]
