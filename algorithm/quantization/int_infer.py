@@ -49,10 +49,12 @@ def int_linear_forward(quant_linear: QuantLinear, x: torch.Tensor) -> torch.Tens
 
 def verify_int_linear(quant_linear: QuantLinear, x: torch.Tensor, *, atol: float = 1e-4) -> tuple[bool, float]:
     """Return (matches, max_abs_diff) between the integer and fake-quant paths."""
-    y_int = int_linear_forward(quant_linear, x)
-    y_fq = quant_linear(x)
-    max_diff = float((y_int - y_fq).abs().max())
-    return bool(torch.allclose(y_int, y_fq, atol=atol)), max_diff
+    with torch.no_grad():
+        y_int = int_linear_forward(quant_linear, x)
+        y_fq = quant_linear(x)
+        max_diff = float((y_int - y_fq).abs().max())
+        matches = bool(torch.allclose(y_int, y_fq, atol=atol))
+    return matches, max_diff
 
 
 __all__ = ["quantize_to_int", "int_linear_forward", "verify_int_linear"]

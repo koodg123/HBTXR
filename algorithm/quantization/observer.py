@@ -27,8 +27,9 @@ class MinMaxObserver:
             self.max_abs = value
 
     def qparams(self) -> tuple[float, int]:
-        qmax = max(abs(self.dtype.qmin), self.dtype.qmax)
-        scale = max(self.max_abs, 1e-8) / float(qmax)
+        # symmetric: map max_abs onto the positive qmax (HG-PIPE convention), so the
+        # peak maps to +qmax with the -qmin slot as headroom (no clamp at the peak).
+        scale = max(self.max_abs, 1e-8) / float(self.dtype.qmax)
         return scale, 0
 
 

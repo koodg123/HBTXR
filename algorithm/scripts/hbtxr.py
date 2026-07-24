@@ -8,6 +8,7 @@ Thin front-end over the engine entrypoints; forwards the remaining args verbatim
     python scripts/hbtxr.py infer    -c configs/experiment/frame_hbtxr.yaml -o preds.csv
     python scripts/hbtxr.py distill  -c configs/experiment/frame_distill.yaml
     python scripts/hbtxr.py prune    -c configs/experiment/frame_prune.yaml
+    python scripts/hbtxr.py quantize -c configs/experiment/frame_quant.yaml --ckpt runs/.../final.pt
 
 Each subcommand maps to ``python -m engine.<area>.entrypoint`` and accepts the same
 options; see that module's ``--help``.
@@ -29,6 +30,7 @@ _COMMANDS = {
     "predict": "engine.infer.entrypoint",
     "distill": "engine.distill.entrypoint",
     "prune": "engine.compress.entrypoint",
+    "quantize": "quantization.entrypoint",
 }
 
 
