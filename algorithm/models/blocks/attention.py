@@ -28,6 +28,7 @@ class MultiHeadAttention(nn.Module):
         self.head_dim = dim // num_heads
         self.scale = self.head_dim ** -0.5
         self.qkv = nn.Linear(dim, dim * 3, bias=qkv_bias)
+        self.attn_softmax = nn.Softmax(dim=-1)  # a module (not F.softmax) so it is quant-swappable
         self.attn_drop = nn.Dropout(attn_drop)
         self.proj = nn.Linear(dim, dim)
         self.proj_drop = nn.Dropout(proj_drop)
@@ -38,6 +39,6 @@ class MultiHeadAttention(nn.Module):
         qkv = qkv.permute(2, 0, 3, 1, 4)
         query, key, value = qkv[0], qkv[1], qkv[2]
         attn = (query @ key.transpose(-2, -1)) * self.scale
-        attn = self.attn_drop(attn.softmax(dim=-1))
+        attn = self.attn_drop(self.attn_softmax(attn))
         out = (attn @ value).transpose(1, 2).reshape(batch, tokens, channels)
         return self.proj_drop(self.proj(out))

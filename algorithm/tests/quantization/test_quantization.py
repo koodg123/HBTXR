@@ -119,3 +119,60 @@ def test_calibrate_gelu_luts_replaces_gelu():
     assert before > 0 and len(inserted) == before
     assert sum(1 for m in model.modules() if isinstance(m, nn.GELU)) == 0
     assert model(torch.rand(1, 1, 64, 64))["box"].shape == (1, 5)
+
+
+def test_layernorm_lut_replaces_and_close():
+    from torch import nn
+
+    from quantization.nonlinear import calibrate_layernorm_luts
+
+    torch.manual_seed(0)
+    model = _make("models.frame.FrameModel")
+    before = sum(1 for m in model.modules() if isinstance(m, nn.LayerNorm))
+    img = torch.rand(4, 1, 64, 64)
+    with torch.no_grad():
+        out_fp = model(img)["box"].clone()
+    inserted = calibrate_layernorm_luts(model, [img])
+    assert before > 0 and len(inserted) == before
+    assert sum(1 for m in model.modules() if isinstance(m, nn.LayerNorm)) == 0
+    with torch.no_grad():
+        out_lut = model(img)["box"]
+    assert torch.isfinite(out_lut).all()
+    assert float((out_lut - out_fp).norm() / (out_fp.norm() + 1e-8)) < 0.5
+
+
+def test_softmax_lut_replaces_and_close():
+    from torch import nn
+
+    from quantization.nonlinear import calibrate_softmax_luts
+
+    torch.manual_seed(0)
+    model = _make("models.frame.FrameModel")
+    before = sum(1 for m in model.modules() if isinstance(m, nn.Softmax))
+    img = torch.rand(4, 1, 64, 64)
+    with torch.no_grad():
+        out_fp = model(img)["box"].clone()
+    inserted = calibrate_softmax_luts(model, [img])
+    assert before > 0 and len(inserted) == before
+    assert sum(1 for m in model.modules() if isinstance(m, nn.Softmax)) == 0
+    with torch.no_grad():
+        out_lut = model(img)["box"]
+    assert torch.isfinite(out_lut).all()
+    assert float((out_lut - out_fp).norm() / (out_fp.norm() + 1e-8)) < 0.5
+
+
+def test_all_nonlinear_luts_together():
+    from quantization.nonlinear import calibrate_gelu_luts, calibrate_layernorm_luts, calibrate_softmax_luts
+
+    torch.manual_seed(0)
+    model = _make("models.frame.FrameModel")
+    img = torch.rand(4, 1, 64, 64)
+    with torch.no_grad():
+        out_fp = model(img)["box"].clone()
+    calibrate_gelu_luts(model, [img])
+    calibrate_layernorm_luts(model, [img])
+    calibrate_softmax_luts(model, [img])
+    with torch.no_grad():
+        out_lut = model(img)["box"]
+    assert torch.isfinite(out_lut).all()
+    assert float((out_lut - out_fp).norm() / (out_fp.norm() + 1e-8)) < 0.6

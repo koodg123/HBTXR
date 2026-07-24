@@ -19,7 +19,9 @@ from dataclasses import dataclass
 
 import numpy as np
 
-from quantization.scheme import INT8, QuantDtype
+from typing import Callable
+
+from quantization.scheme import INT8, UINT8, QuantDtype
 
 
 @dataclass(frozen=True)
@@ -67,30 +69,33 @@ def _symmetric_scale(max_abs: float, dtype: QuantDtype) -> float:
     return max(float(max_abs), 1e-8) / float(dtype.qmax)
 
 
-def build_gelu_lut(
-    activations,
+def build_function_lut(
+    samples,
+    func: Callable[[np.ndarray], np.ndarray],
     *,
     entries: int = 256,
     input_dtype: QuantDtype = INT8,
     output_dtype: QuantDtype = INT8,
 ) -> dict[str, object]:
-    """Calibrate a pointwise GeLU LUT from observed GeLU-input activations.
+    """Calibrate a pointwise integer LUT approximating ``func`` over observed samples.
 
-    Returns ``{scalars, table, input_scale, output_scale}`` where integer GeLU is
+    Returns ``{scalars, table, input_scale, output_scale}`` where the integer op is
     ``y = table[clamp((round(x/input_scale) + offset) >> shift, 0, bound)] * output_scale``.
+    Use ``input_dtype=UINT8`` when the samples are non-negative (variance, exp arg,
+    softmax denominator) for a finer input grid.
     """
-    x = np.asarray(activations, dtype=np.float64).reshape(-1)
+    x = np.asarray(samples, dtype=np.float64).reshape(-1)
     if x.size == 0:
-        raise ValueError("calibration activations must not be empty")
+        raise ValueError("calibration samples must not be empty")
 
     input_scale = _symmetric_scale(float(np.abs(x).max()), input_dtype)
     x_int = np.rint(x / input_scale).astype(np.int64)
     params = make_pot_index_params(int(x_int.min()), int(x_int.max()), entries=entries)
 
     coords_real = coordinates_for(params).astype(np.float64) * input_scale
-    gelu_real = gelu_tanh(coords_real)
-    output_scale = _symmetric_scale(float(np.abs(gelu_real).max()), output_dtype)
-    table = np.clip(np.rint(gelu_real / output_scale), output_dtype.qmin, output_dtype.qmax).astype(np.int64)
+    y_real = np.asarray(func(coords_real), dtype=np.float64)
+    output_scale = _symmetric_scale(float(np.abs(y_real).max()), output_dtype)
+    table = np.clip(np.rint(y_real / output_scale), output_dtype.qmin, output_dtype.qmax).astype(np.int64)
 
     return {
         "scalars": params.scalars,
@@ -100,11 +105,18 @@ def build_gelu_lut(
     }
 
 
+def build_gelu_lut(activations, *, entries: int = 256, input_dtype: QuantDtype = INT8, output_dtype: QuantDtype = INT8) -> dict[str, object]:
+    """Calibrate a pointwise GeLU LUT from observed GeLU-input activations."""
+    return build_function_lut(activations, gelu_tanh, entries=entries, input_dtype=input_dtype, output_dtype=output_dtype)
+
+
 __all__ = [
     "PotIndexParams",
     "make_pot_index_params",
     "coordinates_for",
     "cursor_for",
     "gelu_tanh",
+    "build_function_lut",
     "build_gelu_lut",
+    "UINT8",
 ]
