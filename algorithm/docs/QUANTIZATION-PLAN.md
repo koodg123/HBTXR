@@ -16,8 +16,19 @@ verified pure-integer inference graph.
   integer graph (I tier)** covering **every** ViT module and functional op.
 - **Progress**: Part A ✅ (`665ae48`, 12/12 regression). Part B ✅ (`d65dbcf` core +
   `1725ec8` overrides/entrypoint) — granularity / sym-asym / scale_type / calibration
-  (minmax·percentile·mse·kl) + per-layer overrides; **31/31 pytest**, matrix report in
-  `docs/QUANTIZATION-PARTB-REPORT.md`. Part C ⏳ next.
+  (minmax·percentile·mse·kl) + per-layer overrides; matrix report in
+  `docs/QUANTIZATION-PARTB-REPORT.md`. Part C 🔵 in progress:
+  - C0 ✅ (`6762e74`) QTensor + i_ops golden (requant/int_matmul/int_conv2d/dyadic_params)
+    + torch int_functional, bit-exact.
+  - C1 ✅ (`97a38d2`) ILinear (per-tensor/per-channel weight, asym-act zp fold) + IConv2d.
+  - C2 ✅ (`8f614d6`) IMatMul (act×act, attention).
+  - C3 🔵 IGeLU ✅ (`3684414`, bit-exact vs table_quantize); **ILayerNorm / ISoftmax
+    pending** (fully-integer mean/var/rsqrt + exp/recip via i_ops layernorm_quantize/
+    softmax_quantize goldens — need HG-PIPE calibrate_rsqrt/softmax scalars, a distinct
+    calib path).
+  - C4 ✅ (`3684414`) IAdd / ICat / IPool (scale alignment).
+  - C5 ⏳ ilayers/vit.py integer ViT assembly + convert.py Q→I. C6 ⏳ export_int + whole-graph test.
+  - **pytest 56/56** (12 regression + 19 config-matrix + 25 int-graph).
 
 ## 1. Integer representation policy (HW-faithful)
 
