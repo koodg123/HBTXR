@@ -19,7 +19,7 @@ import torch
 from torch import nn
 
 from quantization.convert import insert_fake_quant
-from quantization.observer import MinMaxObserver
+from quantization.observer import build_observer
 from quantization.qlayers.linear import QLinear, QuantConfig
 
 ForwardFn = Callable[[nn.Module, Any], Any]
@@ -30,10 +30,10 @@ def _registry(model: nn.Module) -> dict[str, QLinear]:
 
 
 def calibrate_weights(model: nn.Module, registry: dict[str, QLinear] | None = None) -> None:
-    """Set each weight quantizer scale from the static weight max-abs."""
+    """Set each weight quantizer scale from the static weight range (per its spec)."""
     registry = registry or _registry(model)
     for quant in registry.values():
-        observer = MinMaxObserver(quant.weight_fq.dtype)
+        observer = build_observer(quant.weight_fq.spec)
         observer.observe(quant.linear.weight)
         quant.weight_fq.set_qparams(*observer.qparams())
 
@@ -48,9 +48,9 @@ def calibrate_activations(
 ) -> None:
     """Set each activation quantizer scale from observed inputs over ``batches``."""
     registry = registry or _registry(model)
-    observers = {name: MinMaxObserver(quant.act_fq.dtype) for name, quant in registry.items()}
+    observers = {name: build_observer(quant.act_fq.spec) for name, quant in registry.items()}
 
-    def make_hook(observer: MinMaxObserver):
+    def make_hook(observer):
         def hook(_module, inputs):
             if inputs:
                 observer.observe(inputs[0])

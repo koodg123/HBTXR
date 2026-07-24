@@ -22,11 +22,13 @@ from quantization.convert import (
 )
 from quantization.ilayers.linear import int_linear_forward, verify_int_linear
 from quantization.lut_calibrate import build_function_lut, build_gelu_lut
+from quantization.observer import AffineObserver, MinMaxObserver, build_observer
 from quantization.q_ops import AffineFakeQuantizer, LUTFakeQuantizer
 from quantization.qat import prepare_qat
 from quantization.qlayers.linear import QLinear, QuantConfig
 from quantization.qlayers.nonlinear import QGeLU, QLayerNorm, QSoftmax
 from quantization.scheme import INT4, INT8, UINT8, QuantDtype, qrange, quantize_clamp
+from quantization.spec import CalibrationSpec, QuantScheme, TensorQuantSpec, apply_scale_type
 
 __all__ = [
     # scheme
@@ -36,6 +38,15 @@ __all__ = [
     "INT4",
     "qrange",
     "quantize_clamp",
+    # configurable spec
+    "TensorQuantSpec",
+    "QuantScheme",
+    "CalibrationSpec",
+    "apply_scale_type",
+    # observers
+    "MinMaxObserver",
+    "AffineObserver",
+    "build_observer",
     # q primitives / layers
     "AffineFakeQuantizer",
     "LUTFakeQuantizer",

@@ -16,7 +16,9 @@ from typing import Iterable
 import torch
 from torch import nn
 
+from quantization.grouping import from_slots, to_slots
 from quantization.scheme import QuantDtype, INT8
+from quantization.spec import TensorQuantSpec
 
 
 def ste_round(x: torch.Tensor) -> torch.Tensor:
@@ -25,28 +27,50 @@ def ste_round(x: torch.Tensor) -> torch.Tensor:
 
 
 class AffineFakeQuantizer(nn.Module):
-    """Affine fake quantization with STE rounding (QAT-ready)."""
+    """Affine fake quantization with STE rounding (QAT-ready), configurable per ``spec``.
 
-    def __init__(self, dtype: QuantDtype = INT8, *, scale: float = 1.0, zero_point: int = 0) -> None:
+    ``scale`` / ``zero_point`` are per-slot buffers (shape ``[num_slots]``) driven by
+    the granularity in ``spec`` (grouping.to_slots). A bare ``dtype`` construction
+    keeps the original per-tensor symmetric behaviour with scalar-like ``[1]`` params.
+    """
+
+    def __init__(
+        self,
+        dtype: QuantDtype = INT8,
+        *,
+        scale: float = 1.0,
+        zero_point: int = 0,
+        spec: TensorQuantSpec | None = None,
+    ) -> None:
         super().__init__()
         if scale <= 0:
             raise ValueError("scale must be positive")
-        self.dtype = dtype
-        self.qmin = dtype.qmin
-        self.qmax = dtype.qmax
-        self.register_buffer("scale", torch.tensor(float(scale)))
-        self.register_buffer("zero_point", torch.tensor(float(int(zero_point))))
+        self.spec = spec or TensorQuantSpec(bits=dtype.bits, signed=dtype.signed)
+        self.dtype = self.spec.dtype
+        self.qmin = self.dtype.qmin
+        self.qmax = self.dtype.qmax
+        # per-slot buffers; start as [1] and get replaced (any [S]) at calibration.
+        self.register_buffer("scale", torch.tensor([float(scale)]))
+        self.register_buffer("zero_point", torch.tensor([float(int(zero_point))]))
 
-    def set_qparams(self, scale: float, zero_point: int = 0) -> None:
-        if scale <= 0:
+    def set_qparams(self, scale, zero_point=0) -> None:
+        scale_t = torch.as_tensor(scale, dtype=torch.float32).reshape(-1)
+        if bool((scale_t <= 0).any()):
             raise ValueError("scale must be positive")
-        self.scale.fill_(float(scale))
-        self.zero_point.fill_(float(int(zero_point)))
+        zp_t = torch.as_tensor(zero_point, dtype=torch.float32).reshape(-1)
+        if zp_t.numel() == 1 and scale_t.numel() > 1:
+            zp_t = zp_t.expand_as(scale_t).clone()
+        self.scale = scale_t.to(self.scale.device)          # updates the registered buffer
+        self.zero_point = zp_t.to(self.zero_point.device)
 
     def forward(self, x: torch.Tensor) -> torch.Tensor:
-        q = ste_round(x / self.scale + self.zero_point)
+        slots = to_slots(x, self.spec)                       # [S, k]
+        scale = self.scale.view(-1, 1)
+        zero_point = self.zero_point.view(-1, 1)
+        q = ste_round(slots / scale + zero_point)
         q = torch.clamp(q, self.qmin, self.qmax)
-        return (q - self.zero_point) * self.scale
+        deq = (q - zero_point) * scale
+        return from_slots(deq, x.shape, self.spec)
 
 
 class LUTFakeQuantizer(nn.Module):
