@@ -12,6 +12,7 @@ from quantization.i_ops import dyadic_params, int_conv2d, int_matmul as g_int_ma
 from quantization.ilayers.conv import IConv2d
 from quantization.ilayers.int_functional import int_matmul as t_int_matmul, requant as t_requant
 from quantization.ilayers.linear import ILinear
+from quantization.ilayers.matmul import IMatMul
 from quantization.ilayers.qtensor import QTensor
 from quantization.observer import build_observer
 from quantization.qlayers.linear import QLinear, QuantConfig
@@ -180,3 +181,28 @@ def test_iconv2d_matches_fakequant_conv():
         out = iconv(x)
     assert out.shape == ref.shape
     assert torch.allclose(out, ref, atol=1e-4), f"max diff {(out - ref).abs().max():.2e}"
+
+
+# --- IMatMul (act x act, attention) ------------------------------------------
+
+def test_imatmul_matches_fakequant_and_close():
+    torch.manual_seed(6)
+    # batched attention scores: Q @ K^T over [B, H, N, d]
+    q = torch.randn(2, 3, 5, 8)
+    k = torch.randn(2, 3, 5, 8)
+    a, b = q, k.transpose(-2, -1)
+    s_a = float(a.abs().max()) / 127.0
+    s_b = float(b.abs().max()) / 127.0
+
+    a_fq = torch.round(a / s_a).clamp(-128, 127) * s_a
+    b_fq = torch.round(b / s_b).clamp(-128, 127) * s_b
+    ref = a_fq @ b_fq
+
+    im = IMatMul(s_a, s_b)
+    with torch.no_grad():
+        out = im(a, b)
+        acc = im.forward_accumulator(a, b)
+    assert torch.allclose(out, ref, atol=1e-4), f"max diff {(out - ref).abs().max():.2e}"
+    assert torch.allclose(acc.dequantize(), ref, atol=1e-4)
+    # close to the true float product
+    assert float((out - (a @ b)).norm() / ((a @ b).norm() + 1e-8)) < 0.1

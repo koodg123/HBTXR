@@ -7,6 +7,7 @@ matmul, tensor_ops, vit) land with the integer-graph phases.
 from quantization.ilayers.conv import IConv2d
 from quantization.ilayers.int_functional import int_matmul, requant
 from quantization.ilayers.linear import ILinear, int_linear_forward, quantize_to_int, verify_int_linear
+from quantization.ilayers.matmul import IMatMul
 from quantization.ilayers.qtensor import QTensor
 
 __all__ = [
@@ -18,4 +19,5 @@ __all__ = [
     "verify_int_linear",
     "ILinear",
     "IConv2d",
+    "IMatMul",
 ]
