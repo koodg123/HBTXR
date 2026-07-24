@@ -13,6 +13,7 @@ Later phases add insertion into HBTXR models, calibration + PTQ, QAT, and intege
 inference (see the phased plan).
 """
 from quantization.fake_quant import AffineFakeQuantizer, LUTFakeQuantizer
+from quantization.insert import QuantConfig, QuantLinear, collect_quantizers, insert_fake_quant
 from quantization.scheme import INT4, INT8, UINT8, QuantDtype, qrange, quantize_clamp
 
 __all__ = [
@@ -24,4 +25,8 @@ __all__ = [
     "quantize_clamp",
     "AffineFakeQuantizer",
     "LUTFakeQuantizer",
+    "QuantConfig",
+    "QuantLinear",
+    "insert_fake_quant",
+    "collect_quantizers",
 ]
