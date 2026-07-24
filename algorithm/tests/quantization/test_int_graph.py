@@ -8,14 +8,24 @@ torch = pytest.importorskip("torch")
 from torch import nn
 from torch.nn import functional as F
 
-from quantization.i_ops import dyadic_params, int_conv2d, int_matmul as g_int_matmul, requant as g_requant
+from quantization.i_ops import (
+    dyadic_params,
+    int_conv2d,
+    int_matmul as g_int_matmul,
+    requant as g_requant,
+    table_quantize as g_table_quantize,
+)
 from quantization.ilayers.conv import IConv2d
 from quantization.ilayers.int_functional import int_matmul as t_int_matmul, requant as t_requant
 from quantization.ilayers.linear import ILinear
 from quantization.ilayers.matmul import IMatMul
+from quantization.ilayers.nonlinear import IGeLU
 from quantization.ilayers.qtensor import QTensor
+from quantization.ilayers.tensor_ops import IAdd, ICat, IPool
+from quantization.lut_calibrate import build_gelu_lut
 from quantization.observer import build_observer
 from quantization.qlayers.linear import QLinear, QuantConfig
+from quantization.qlayers.nonlinear import QGeLU
 from quantization.scheme import INT8, UINT8
 from quantization.spec import TensorQuantSpec
 
@@ -206,3 +216,76 @@ def test_imatmul_matches_fakequant_and_close():
     assert torch.allclose(acc.dequantize(), ref, atol=1e-4)
     # close to the true float product
     assert float((out - (a @ b)).norm() / ((a @ b).norm() + 1e-8)) < 0.1
+
+
+# --- IGeLU (integer LUT, bit-exact vs table_quantize golden) -----------------
+
+def test_igelu_matches_table_quantize_golden():
+    torch.manual_seed(8)
+    payload = build_gelu_lut((torch.randn(8192) * 1.5).numpy(), entries=256)
+    qg = QGeLU(payload["scalars"], payload["table"],
+               input_scale=payload["input_scale"], output_scale=payload["output_scale"])
+    ig = IGeLU.from_qgelu(qg)
+    # input QTensor already at the LUT input scale -> IGeLU is the golden lookup
+    x_int = torch.randint(-40, 40, (3, 16), dtype=torch.int32)
+    qt = QTensor(x_int, scale=ig.input_scale, zero_point=0.0, dtype=INT8)
+    out = ig(qt)
+    golden = torch.tensor(
+        g_table_quantize(x_int.reshape(-1).tolist(), [ig.b, ig.s, ig.bound], ig.table.tolist()),
+        dtype=torch.int32,
+    ).reshape(x_int.shape)
+    assert torch.equal(out.int_data, golden)
+    assert out.dtype is INT8
+
+
+def test_igelu_close_to_float_gelu():
+    import torch.nn.functional as F
+
+    torch.manual_seed(9)
+    payload = build_gelu_lut((torch.randn(8192) * 1.5).numpy(), entries=256)
+    qg = QGeLU(payload["scalars"], payload["table"],
+               input_scale=payload["input_scale"], output_scale=payload["output_scale"])
+    ig = IGeLU.from_qgelu(qg)
+    x = torch.linspace(-3, 3, 200)
+    qt = QTensor.quantize(x, ig.input_scale, 0.0, INT8)
+    y = ig(qt).dequantize()
+    assert float((y - F.gelu(x, approximate="tanh")).abs().mean()) < 0.08
+
+
+# --- IAdd / ICat / IPool (scale alignment) -----------------------------------
+
+def test_iadd_aligns_scales():
+    torch.manual_seed(10)
+    a = torch.randn(4, 6) * 2.0
+    b = torch.randn(4, 6) * 0.5
+    qa = QTensor.quantize(a, float(a.abs().max()) / 127.0, 0.0, INT8)
+    qb = QTensor.quantize(b, float(b.abs().max()) / 127.0, 0.0, INT8)
+    ref = qa.dequantize() + qb.dequantize()
+    s_out = float(ref.abs().max()) / 127.0
+    out = IAdd(s_out)(qa, qb)
+    assert torch.allclose(out.dequantize(), ref, atol=3 * s_out)
+
+
+def test_icat_aligns_and_concats():
+    torch.manual_seed(11)
+    parts = [torch.randn(2, 5) * s for s in (1.0, 3.0)]
+    qparts = [QTensor.quantize(p, float(p.abs().max()) / 127.0, 0.0, INT8) for p in parts]
+    ref = torch.cat([q.dequantize() for q in qparts], dim=-1)
+    s_out = float(ref.abs().max()) / 127.0
+    out = ICat(s_out, dim=-1)(qparts)
+    assert out.int_data.shape == (2, 10)
+    assert torch.allclose(out.dequantize(), ref, atol=3 * s_out)
+
+
+def test_ipool_integer_mean():
+    torch.manual_seed(12)
+    x = torch.randn(2, 7, 4) * 1.5  # [B, tokens, C]
+    qt = QTensor.quantize(x, float(x.abs().max()) / 127.0, 0.0, INT8)
+    ref = qt.dequantize().mean(dim=1)
+    out = IPool(dim=1)(qt)
+    assert out.int_data.shape == (2, 4)
+    assert torch.allclose(out.dequantize(), ref, atol=2 * _scalar_scale(qt))
+
+
+def _scalar_scale(qt):
+    return float(qt.scale)

@@ -8,7 +8,9 @@ from quantization.ilayers.conv import IConv2d
 from quantization.ilayers.int_functional import int_matmul, requant
 from quantization.ilayers.linear import ILinear, int_linear_forward, quantize_to_int, verify_int_linear
 from quantization.ilayers.matmul import IMatMul
+from quantization.ilayers.nonlinear import IGeLU
 from quantization.ilayers.qtensor import QTensor
+from quantization.ilayers.tensor_ops import IAdd, ICat, IPool
 
 __all__ = [
     "QTensor",
@@ -20,4 +22,8 @@ __all__ = [
     "ILinear",
     "IConv2d",
     "IMatMul",
+    "IGeLU",
+    "IAdd",
+    "ICat",
+    "IPool",
 ]
