@@ -5,10 +5,32 @@ import pytest
 
 torch = pytest.importorskip("torch")
 
+from torch import nn
+from torch.nn import functional as F
+
 from quantization.i_ops import dyadic_params, int_conv2d, int_matmul as g_int_matmul, requant as g_requant
+from quantization.ilayers.conv import IConv2d
 from quantization.ilayers.int_functional import int_matmul as t_int_matmul, requant as t_requant
+from quantization.ilayers.linear import ILinear
 from quantization.ilayers.qtensor import QTensor
+from quantization.observer import build_observer
+from quantization.qlayers.linear import QLinear, QuantConfig
 from quantization.scheme import INT8, UINT8
+from quantization.spec import TensorQuantSpec
+
+
+def _calibrated_qlinear(weight_spec, act_spec, in_f=12, out_f=8):
+    torch.manual_seed(7)
+    lin = nn.Linear(in_f, out_f)
+    ql = QLinear(lin, QuantConfig(weight_spec=weight_spec, act_spec=act_spec))
+    ow = build_observer(ql.weight_fq.spec)
+    ow.observe(lin.weight)
+    ql.weight_fq.set_qparams(*ow.qparams())
+    x = torch.randn(20, in_f) * 2.0 + 0.5
+    oa = build_observer(ql.act_fq.spec)
+    oa.observe(x)
+    ql.act_fq.set_qparams(*oa.qparams())
+    return ql, x
 
 
 # --- QTensor -----------------------------------------------------------------
@@ -101,3 +123,60 @@ def test_int_conv2d_matches_torch_conv():
         inp.unsqueeze(0).float(), weight.float(), stride=patch
     ).squeeze(0).round().to(torch.int64)
     assert torch.equal(golden, ref)
+
+
+# --- ILinear reproduces QLinear (weight×act) ---------------------------------
+
+@pytest.mark.parametrize("weight_gran", ["per-tensor", "per-channel"])
+@pytest.mark.parametrize("act_symmetric", [True, False])
+def test_ilinear_matches_qlinear(weight_gran, act_symmetric):
+    wspec = TensorQuantSpec(granularity=weight_gran, ch_axis=0)
+    aspec = TensorQuantSpec(ch_axis=-1, symmetric=act_symmetric)
+    ql, x = _calibrated_qlinear(wspec, aspec)
+    il = ILinear.from_qlinear(ql)
+    with torch.no_grad():
+        y_fq = ql(x)
+        y_int = il(x)
+    assert torch.allclose(y_int, y_fq, atol=1e-4), f"max diff {(y_int - y_fq).abs().max():.2e}"
+
+
+def test_ilinear_accumulator_qtensor():
+    ql, x = _calibrated_qlinear(TensorQuantSpec(granularity="per-channel", ch_axis=0),
+                                TensorQuantSpec(ch_axis=-1))
+    il = ILinear.from_qlinear(ql)
+    with torch.no_grad():
+        acc = il.forward_accumulator(x)
+        recon = acc.dequantize()
+        if il.bias is not None:
+            recon = recon + il.bias
+        assert torch.allclose(recon, il(x), atol=1e-4)
+    assert acc.int_data.dtype == torch.int32
+
+
+def test_ilinear_rejects_per_group_weight():
+    ql, _ = _calibrated_qlinear(TensorQuantSpec(granularity="per-group", group_size=4, ch_axis=0),
+                                TensorQuantSpec(ch_axis=-1))
+    with pytest.raises(NotImplementedError):
+        ILinear.from_qlinear(ql)
+
+
+# --- IConv2d reproduces a fake-quant conv ------------------------------------
+
+def test_iconv2d_matches_fakequant_conv():
+    torch.manual_seed(5)
+    conv = nn.Conv2d(1, 6, kernel_size=4, stride=4)
+    x = torch.rand(2, 1, 16, 16)
+    s_x = float(x.abs().max()) / 127.0
+
+    # fake-quant reference: dequantized int activation × dequantized per-channel int weight
+    x_fq = torch.round(x / s_x).clamp(-128, 127) * s_x
+    max_abs = conv.weight.detach().abs().amax(dim=(1, 2, 3)).clamp_min(1e-8)
+    s_w = max_abs / 127.0
+    w_fq = torch.round(conv.weight / s_w.view(-1, 1, 1, 1)).clamp(-128, 127) * s_w.view(-1, 1, 1, 1)
+    ref = F.conv2d(x_fq, w_fq, conv.bias, stride=4)
+
+    iconv = IConv2d.from_conv(conv, act_scale=s_x)
+    with torch.no_grad():
+        out = iconv(x)
+    assert out.shape == ref.shape
+    assert torch.allclose(out, ref, atol=1e-4), f"max diff {(out - ref).abs().max():.2e}"
