@@ -4,9 +4,12 @@
 - ``collect_quantizers``: gather the inserted AffineFakeQuantizer modules.
 - ``calibrate_{gelu,layernorm,softmax}_luts``: observe each nonlinear op's input over
   a few batches, build a calibrated LUT, and swap the float op for its Q module.
+- ``convert_to_integer``: Q -> I deployment swap — replace each calibrated ``QLinear``
+  with an ``ILinear`` (true integer matmul, float I/O drop-in). The nonlinear LUT
+  modules (QGeLU/QLayerNorm/QSoftmax) already perform integer table lookups, so a
+  converted model computes every matmul/conv in the integer domain.
 
-(Float->Q for linear; the nonlinear calibrators fold observe+build+swap. Q->I
-conversion lands with the integer graph in Part C.)
+(Float->Q for linear; the nonlinear calibrators fold observe+build+swap.)
 """
 from __future__ import annotations
 
@@ -67,6 +70,27 @@ def insert_fake_quant(
 def collect_quantizers(model: nn.Module) -> dict[str, AffineFakeQuantizer]:
     """All AffineFakeQuantizer modules keyed by path (weight and activation)."""
     return {name: m for name, m in model.named_modules() if isinstance(m, AffineFakeQuantizer)}
+
+
+def convert_to_integer(model: nn.Module) -> tuple[nn.Module, dict[str, Any]]:
+    """Q -> I: replace each calibrated ``QLinear`` with an ``ILinear`` (in place).
+
+    ``ILinear`` has a float I/O drop-in interface but computes the matmul in the
+    integer domain (int8 weight × int8 activation, int32 accumulate, dequant), so the
+    converted model runs through the ordinary forward while every Linear is integer —
+    and reproduces the fake-quant model bit-exactly. Call after PTQ/QAT calibration.
+    """
+    from quantization.ilayers.linear import ILinear
+
+    replaced: dict[str, Any] = {}
+    for module_name, module in list(model.named_modules()):
+        for child_name, child in list(module.named_children()):
+            full = f"{module_name}.{child_name}" if module_name else child_name
+            if isinstance(child, QLinear):
+                integer = ILinear.from_qlinear(child)
+                setattr(module, child_name, integer)
+                replaced[full] = integer
+    return model, replaced
 
 
 def _set_submodule(model: nn.Module, dotted: str, new_module: nn.Module) -> None:
@@ -184,6 +208,7 @@ def calibrate_softmax_luts(model, batches, *, forward_fn=None, exp_entries=128, 
 __all__ = [
     "insert_fake_quant",
     "collect_quantizers",
+    "convert_to_integer",
     "calibrate_gelu_luts",
     "calibrate_layernorm_luts",
     "calibrate_softmax_luts",

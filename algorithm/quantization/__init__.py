@@ -18,6 +18,7 @@ from quantization.convert import (
     calibrate_layernorm_luts,
     calibrate_softmax_luts,
     collect_quantizers,
+    convert_to_integer,
     insert_fake_quant,
 )
 from quantization.ilayers.linear import int_linear_forward, verify_int_linear
@@ -58,6 +59,7 @@ __all__ = [
     # convert / calibrate / qat
     "insert_fake_quant",
     "collect_quantizers",
+    "convert_to_integer",
     "calibrate_gelu_luts",
     "calibrate_layernorm_luts",
     "calibrate_softmax_luts",

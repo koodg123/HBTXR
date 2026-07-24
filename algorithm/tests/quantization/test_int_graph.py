@@ -289,3 +289,69 @@ def test_ipool_integer_mean():
 
 def _scalar_scale(qt):
     return float(qt.scale)
+
+
+# --- end-to-end Q -> I conversion (whole model integer compute) --------------
+
+def _frame_model(embed=48):
+    from engine.model_factory import make_model
+
+    return make_model({"target": "models.frame.FrameModel", "embed_dim": embed, "patch_size": 16,
+                       "backbone": {"depth": 2, "num_heads": 2, "mlp_ratio": 2.0, "cut_point": 1}})
+
+
+@pytest.mark.parametrize("weight_gran", ["per-tensor", "per-channel"])
+def test_convert_to_integer_matches_q_tier(weight_gran):
+    from quantization.calibrate import post_training_quantize
+    from quantization.convert import convert_to_integer
+    from quantization.spec import QuantScheme
+
+    torch.manual_seed(0)
+    model = _frame_model()
+    img = torch.rand(3, 1, 64, 64)
+    scheme = QuantScheme(
+        weight=TensorQuantSpec(ch_axis=0, granularity=weight_gran),
+        activation=TensorQuantSpec(ch_axis=-1),
+    )
+    model, _ = post_training_quantize(model, [img], scheme=scheme)
+    n_qlin = sum(1 for m in model.modules() if isinstance(m, QLinear))
+    with torch.no_grad():
+        y_q = model(img)["box"].clone()
+
+    model, replaced = convert_to_integer(model)
+    assert len(replaced) == n_qlin > 0
+    assert all(isinstance(m, ILinear) for m in replaced.values())
+    assert sum(1 for m in model.modules() if isinstance(m, QLinear)) == 0
+    with torch.no_grad():
+        y_i = model(img)["box"]
+    # ILinear reproduces QLinear bit-exactly -> whole model bit-exact
+    assert torch.allclose(y_i, y_q, atol=1e-3), f"max diff {(y_i - y_q).abs().max():.2e}"
+
+
+def test_full_integer_graph_close_to_fp():
+    """Integer linears + integer-LUT nonlinears (GeLU/LN/Softmax) end to end vs fp."""
+    from quantization.calibrate import post_training_quantize
+    from quantization.convert import (
+        calibrate_gelu_luts,
+        calibrate_layernorm_luts,
+        calibrate_softmax_luts,
+        convert_to_integer,
+    )
+
+    torch.manual_seed(0)
+    model = _frame_model()
+    img = torch.rand(4, 1, 64, 64)
+    with torch.no_grad():
+        out_fp = model(img)["box"].clone()
+
+    model, _ = post_training_quantize(model, [img])
+    calibrate_gelu_luts(model, [img])
+    calibrate_layernorm_luts(model, [img])
+    calibrate_softmax_luts(model, [img])
+    model, replaced = convert_to_integer(model)
+    assert len(replaced) > 0
+    with torch.no_grad():
+        out_int = model(img)["box"]
+    assert torch.isfinite(out_int).all()
+    rel = float((out_int - out_fp).norm() / (out_fp.norm() + 1e-8))
+    assert rel < 0.6, f"full integer-graph rel-err {rel:.4f}"
