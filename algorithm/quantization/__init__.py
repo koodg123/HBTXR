@@ -12,8 +12,10 @@ HBTXR ViT (models.backbones.vit / models.blocks / models.heads):
 Later phases add insertion into HBTXR models, calibration + PTQ, QAT, and integer
 inference (see the phased plan).
 """
+from quantization.calibrate import calibrate, post_training_quantize
 from quantization.fake_quant import AffineFakeQuantizer, LUTFakeQuantizer
 from quantization.insert import QuantConfig, QuantLinear, collect_quantizers, insert_fake_quant
+from quantization.qat import prepare_qat
 from quantization.scheme import INT4, INT8, UINT8, QuantDtype, qrange, quantize_clamp
 
 __all__ = [
@@ -29,4 +31,7 @@ __all__ = [
     "QuantLinear",
     "insert_fake_quant",
     "collect_quantizers",
+    "calibrate",
+    "post_training_quantize",
+    "prepare_qat",
 ]
