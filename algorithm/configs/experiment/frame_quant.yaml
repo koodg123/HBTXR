@@ -1,13 +1,38 @@
-# Frame HBTXR quantization experiment (HW-friendly int8).
+# Frame HBTXR quantization experiment (HW-friendly, fully configurable).
 #   python -m quantization.entrypoint -c configs/experiment/frame_quant.yaml \
 #       --ckpt runs/frame_hbtxr/train/final.pt -o runs/frame_hbtxr/quantized.pt
 include:
   - configs/experiment/frame_hbtxr.yaml
 quantization:
-  mode: ptq            # ptq | qat
-  weight_bits: 8
-  act_bits: 8
-  skip: []             # module-name substrings to leave in fp (e.g. ["head"])
+  mode: ptq                 # ptq | qat
   num_calib_batches: 8
-  ckpt_path: null      # trained fp checkpoint to quantize (or pass --ckpt)
+  ckpt_path: null           # trained fp checkpoint to quantize (or pass --ckpt)
   output: runs/frame_hbtxr/quantized.pt
+  skip: []                  # module-name substrings to leave in fp (e.g. ["head"])
+
+  # Per-tensor-role quant spec. Each supports:
+  #   bits, signed, symmetric,
+  #   granularity: per-tensor | per-channel | per-group | per-block
+  #   group_size (per-group) / block_size: [out, in] (per-block)
+  #   scale_type: float | dyadic | pot
+  #   calibration: {method: minmax|percentile|kl|mse, percentile, num_bins, mse_grid}
+  weight:
+    bits: 8
+    granularity: per-channel       # one scale per out-channel (HW-friendly, low error)
+    symmetric: true
+    scale_type: float
+    calibration: {method: minmax}
+  activation:
+    bits: 8
+    granularity: per-tensor
+    symmetric: true
+    scale_type: float
+    calibration: {method: minmax}
+
+  # Per-layer mixed-precision / mixed-config overrides (first match wins per field).
+  # overrides:
+  #   - match: "attn.qkv"
+  #     weight: {bits: 4, granularity: per-group, group_size: 32}
+  #   - match: "head"
+  #     activation: {calibration: {method: percentile, percentile: 99.99}}
+  overrides: []

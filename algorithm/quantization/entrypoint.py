@@ -31,22 +31,13 @@ from engine.train.trainer import Trainer, TrainConfig
 
 from quantization.calibrate import post_training_quantize
 from quantization.qat import prepare_qat
-from quantization.qlayers.linear import QuantConfig
-from quantization.scheme import QuantDtype
+from quantization.spec import QuantScheme
 
 
 def _make_forward_fn(modality: str) -> Callable[[Any, dict], Any]:
     if modality.startswith("hybrid"):
         return lambda model, batch: model.search_step(batch["frame"])
     return lambda model, batch: model(batch["image"])
-
-
-def _quant_config(quant_cfg: dict[str, Any]) -> QuantConfig:
-    return QuantConfig(
-        weight_dtype=QuantDtype(int(quant_cfg.get("weight_bits", 8)), signed=True),
-        act_dtype=QuantDtype(int(quant_cfg.get("act_bits", 8)), signed=True),
-        skip=tuple(quant_cfg.get("skip", []) or []),
-    )
 
 
 def _project_root(cfg: dict[str, Any], override: str | None) -> Path:
@@ -79,14 +70,14 @@ def run_quantize(
 
     entry = resolve_training_entry(cfg, config_path=config_path, project_root=root)
     forward_fn = _make_forward_fn(modality)
-    qconfig = _quant_config(quant_cfg)
+    scheme = QuantScheme.from_config(quant_cfg)
     n_calib = int(quant_cfg.get("num_calib_batches", 8))
 
     calib_loader = build_dataloader(entry["train_manifest"], cfg, shuffle=False, modality=modality)
     calib_batches = list(itertools.islice(calib_loader, n_calib))
 
     if mode == "qat":
-        model, _registry = prepare_qat(model, config=qconfig, calib_batches=calib_batches, forward_fn=forward_fn, device=dev)
+        model, _registry = prepare_qat(model, scheme=scheme, calib_batches=calib_batches, forward_fn=forward_fn, device=dev)
         training_cfg = cfg.get("training") or {}
         epochs = int(training_cfg.get("epochs", training_cfg.get("max_epochs", 1)))
         optimizer, _resolved, optimizer_meta, _summary = build_optimizer(model, cfg)
@@ -100,12 +91,12 @@ def run_quantize(
         )
         trainer.fit(build_dataloader(entry["train_manifest"], cfg, shuffle=True, modality=modality))
     else:
-        model, _registry = post_training_quantize(model, calib_batches, config=qconfig, forward_fn=forward_fn, device=dev)
+        model, _registry = post_training_quantize(model, calib_batches, scheme=scheme, forward_fn=forward_fn, device=dev)
 
     out_path = output or quant_cfg.get("output")
     if out_path:
         save_checkpoint(model, Path(out_path), meta={"quantized": True, "mode": mode, "modality": modality,
-                                                     "weight_bits": qconfig.weight_dtype.bits, "act_bits": qconfig.act_dtype.bits})
+                                                     "weight_bits": scheme.weight.bits, "act_bits": scheme.activation.bits})
     return model
 
 

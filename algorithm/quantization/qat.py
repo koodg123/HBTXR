@@ -27,6 +27,7 @@ def prepare_qat(
     model: nn.Module,
     *,
     config: QuantConfig | None = None,
+    scheme=None,
     calib_batches: Iterable[Any] | None = None,
     forward_fn: ForwardFn | None = None,
     device: str = "cpu",
@@ -35,9 +36,10 @@ def prepare_qat(
 
     If ``calib_batches`` is given, both weight and activation scales are calibrated;
     otherwise only the (static) weight scales are set. Returns ``(model, registry)``.
-    Fine-tune the returned model with ``engine.train.Trainer``.
+    A ``QuantScheme`` (Part B) enables per-layer configurable specs. Fine-tune the
+    returned model with ``engine.train.Trainer``.
     """
-    model, registry = insert_fake_quant(model, config)
+    model, registry = insert_fake_quant(model, config, scheme=scheme)
     if calib_batches is not None:
         calibrate(model, calib_batches, forward_fn=forward_fn, device=device)
     else:

@@ -92,11 +92,16 @@ def post_training_quantize(
     calib_batches: Iterable[Any],
     *,
     config: QuantConfig | None = None,
+    scheme=None,
     forward_fn: ForwardFn | None = None,
     device: str = "cpu",
 ) -> tuple[nn.Module, dict[str, QLinear]]:
-    """Insert fake quantizers and calibrate them (PTQ). Returns (model, registry)."""
-    model, registry = insert_fake_quant(model, config)
+    """Insert fake quantizers and calibrate them (PTQ). Returns (model, registry).
+
+    Pass a ``QuantScheme`` (Part B) for per-layer configurable specs; otherwise a
+    uniform ``QuantConfig``.
+    """
+    model, registry = insert_fake_quant(model, config, scheme=scheme)
     calibrate(model, calib_batches, forward_fn=forward_fn, device=device)
     return model, registry
 

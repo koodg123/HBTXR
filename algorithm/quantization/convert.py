@@ -21,21 +21,44 @@ from quantization.q_ops import AffineFakeQuantizer
 from quantization.qlayers.linear import QLinear, QuantConfig
 from quantization.qlayers.nonlinear import QGeLU, QLayerNorm, QSoftmax
 from quantization.scheme import INT8, UINT8, QuantDtype
+from quantization.spec import QuantScheme
 
 ForwardFn = Callable[[nn.Module, Any], Any]
 
 
-def insert_fake_quant(model: nn.Module, config: QuantConfig | None = None) -> tuple[nn.Module, dict[str, QLinear]]:
-    """Replace every eligible ``nn.Linear`` in ``model`` with a ``QLinear``."""
-    cfg = config or QuantConfig()
+def insert_fake_quant(
+    model: nn.Module,
+    config: QuantConfig | None = None,
+    *,
+    scheme: QuantScheme | None = None,
+) -> tuple[nn.Module, dict[str, QLinear]]:
+    """Replace every eligible ``nn.Linear`` in ``model`` with a ``QLinear``.
+
+    With a ``QuantScheme`` (Part B), each Linear's ``(weight, activation)`` spec is
+    resolved *per module path* so ``overrides`` give mixed-precision / mixed-config
+    per layer; otherwise a single ``QuantConfig`` is applied uniformly.
+    """
+    if scheme is not None:
+        skip = scheme.skip
+
+        def config_for(full: str) -> QuantConfig:
+            weight_spec, act_spec = scheme.resolve(full)
+            return QuantConfig(weight_spec=weight_spec, act_spec=act_spec, skip=skip)
+    else:
+        cfg = config or QuantConfig()
+        skip = cfg.skip
+
+        def config_for(full: str) -> QuantConfig:
+            return cfg
+
     registry: dict[str, QLinear] = {}
     for module_name, module in list(model.named_modules()):
         for child_name, child in list(module.named_children()):
             full = f"{module_name}.{child_name}" if module_name else child_name
             if isinstance(child, nn.Linear) and not isinstance(child, QLinear):
-                if any(token in full for token in cfg.skip):
+                if any(token in full for token in skip):
                     continue
-                quant = QLinear(child, cfg)
+                quant = QLinear(child, config_for(full))
                 setattr(module, child_name, quant)
                 registry[full] = quant
     return model, registry
