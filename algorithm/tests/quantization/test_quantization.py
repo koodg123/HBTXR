@@ -9,13 +9,13 @@ from quantization import (
     AffineFakeQuantizer,
     INT8,
     QuantConfig,
-    QuantLinear,
+    QLinear,
     insert_fake_quant,
     post_training_quantize,
     prepare_qat,
     qrange,
 )
-from quantization.int_infer import verify_int_linear
+from quantization.ilayers.linear import verify_int_linear
 from quantization.observer import MinMaxObserver
 
 
@@ -49,7 +49,7 @@ def test_insert_replaces_linears():
     n_lin = sum(1 for m in model.modules() if type(m).__name__ == "Linear")
     model, registry = insert_fake_quant(model)
     assert len(registry) == n_lin > 0
-    assert all(isinstance(q, QuantLinear) for q in registry.values())
+    assert all(isinstance(q, QLinear) for q in registry.values())
     assert model(torch.rand(2, 1, 64, 64))["box"].shape == (2, 5)
 
 
@@ -97,11 +97,11 @@ def test_gelu_lut_approximates_float():
     import torch.nn.functional as F
 
     from quantization.lut_calibrate import build_gelu_lut
-    from quantization.nonlinear import GeLULUT
+    from quantization.qlayers.nonlinear import QGeLU
 
     torch.manual_seed(0)
     payload = build_gelu_lut((torch.randn(8192) * 1.5).numpy(), entries=256)
-    lut = GeLULUT(payload["scalars"], payload["table"],
+    lut = QGeLU(payload["scalars"], payload["table"],
                   input_scale=payload["input_scale"], output_scale=payload["output_scale"])
     x = torch.linspace(-3.0, 3.0, 400)
     err = (lut(x) - F.gelu(x, approximate="tanh")).abs()
@@ -111,7 +111,7 @@ def test_gelu_lut_approximates_float():
 def test_calibrate_gelu_luts_replaces_gelu():
     from torch import nn
 
-    from quantization.nonlinear import calibrate_gelu_luts
+    from quantization.convert import calibrate_gelu_luts
 
     model = _make("models.frame.FrameModel")
     before = sum(1 for m in model.modules() if isinstance(m, nn.GELU))
@@ -124,7 +124,7 @@ def test_calibrate_gelu_luts_replaces_gelu():
 def test_layernorm_lut_replaces_and_close():
     from torch import nn
 
-    from quantization.nonlinear import calibrate_layernorm_luts
+    from quantization.convert import calibrate_layernorm_luts
 
     torch.manual_seed(0)
     model = _make("models.frame.FrameModel")
@@ -144,7 +144,7 @@ def test_layernorm_lut_replaces_and_close():
 def test_softmax_lut_replaces_and_close():
     from torch import nn
 
-    from quantization.nonlinear import calibrate_softmax_luts
+    from quantization.convert import calibrate_softmax_luts
 
     torch.manual_seed(0)
     model = _make("models.frame.FrameModel")
@@ -162,7 +162,7 @@ def test_softmax_lut_replaces_and_close():
 
 
 def test_all_nonlinear_luts_together():
-    from quantization.nonlinear import calibrate_gelu_luts, calibrate_layernorm_luts, calibrate_softmax_luts
+    from quantization.convert import calibrate_gelu_luts, calibrate_layernorm_luts, calibrate_softmax_luts
 
     torch.manual_seed(0)
     model = _make("models.frame.FrameModel")

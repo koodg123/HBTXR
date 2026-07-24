@@ -2,7 +2,7 @@
 
 QAT reuses the existing training stack: after inserting fake quantizers and
 initializing their scales from calibration, the model is an ordinary ``nn.Module``
-whose ``QuantLinear`` weights train normally (gradients flow through the weight/act
+whose ``QLinear`` weights train normally (gradients flow through the weight/act
 fake-quant STE, verified in Q2). ``prepare_qat`` returns that QAT-ready model; the
 caller then fine-tunes it with ``engine.train.Trainer`` (or ``engine.distill``) and
 saves the result like any other checkpoint.
@@ -17,7 +17,8 @@ from typing import Any, Callable, Iterable
 from torch import nn
 
 from quantization.calibrate import calibrate, calibrate_weights
-from quantization.insert import QuantConfig, QuantLinear, insert_fake_quant
+from quantization.convert import insert_fake_quant
+from quantization.qlayers.linear import QLinear, QuantConfig
 
 ForwardFn = Callable[[nn.Module, Any], Any]
 
@@ -29,7 +30,7 @@ def prepare_qat(
     calib_batches: Iterable[Any] | None = None,
     forward_fn: ForwardFn | None = None,
     device: str = "cpu",
-) -> tuple[nn.Module, dict[str, QuantLinear]]:
+) -> tuple[nn.Module, dict[str, QLinear]]:
     """Insert fake quantizers and initialize their scales for QAT fine-tuning.
 
     If ``calib_batches`` is given, both weight and activation scales are calibrated;

@@ -1,18 +1,13 @@
-"""FakeQuantizer modules for HBTXR quantization (QAT + PTQ).
-
-Adapted from the HG-PIPE reference ``fake_quant/modules.py``:
+"""Q-tier quantization primitives: fake quantizers + STE.
 
 - ``AffineFakeQuantizer``: affine quantize->dequantize with a straight-through
-  estimator (STE) on the rounding so gradients flow during QAT (the HG-PIPE
-  original used plain ``round`` for inference-only verification). Used on Linear
+  estimator (STE) on the rounding so gradients flow during QAT. Used on Linear
   weights and activations.
-- ``LUTFakeQuantizer``: the HG-PIPE LUT (table) fake quantizer — cursor =
-  ``(round(x) + b) >> s``, clamp, table lookup — for the HW-friendly integer
-  nonlinear operators (LayerNorm rsqrt / Softmax / GeLU). Inference behaviour;
-  gradients pass straight through the table lookup (STE).
+- ``LUTFakeQuantizer``: the HG-PIPE LUT (table) fake quantizer for HW-friendly
+  integer nonlinear operators.
 
-Scale/zero-point are registered buffers set from calibration (a later phase);
-they default to identity so an inserted-but-uncalibrated model still runs.
+Scale/zero-point are registered buffers set from calibration; they default to
+identity so an inserted-but-uncalibrated model still runs.
 """
 from __future__ import annotations
 
@@ -55,12 +50,7 @@ class AffineFakeQuantizer(nn.Module):
 
 
 class LUTFakeQuantizer(nn.Module):
-    """HG-PIPE LUT fake quantizer: cursor = (round(x) + b) >> s, clamp, table[cursor].
-
-    Input is interpreted in the integer domain (rounded); output is float so it can
-    stay in a fake-quant graph. The table lookup is non-differentiable, so an STE
-    passes the upstream gradient through unchanged during QAT.
-    """
+    """HG-PIPE LUT fake quantizer: cursor = (round(x) + b) >> s, clamp, table[cursor]."""
 
     def __init__(self, *, scalars: Iterable[int], table: Iterable[int]) -> None:
         super().__init__()

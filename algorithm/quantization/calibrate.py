@@ -3,8 +3,8 @@
 After ``insert_fake_quant`` wraps the Linear layers, calibration sets each
 quantizer's scale from observed ranges:
 
-- weights: static max-abs of each ``QuantLinear.linear.weight``.
-- activations: max-abs of each ``QuantLinear`` input over a few calibration
+- weights: static max-abs of each ``QLinear.linear.weight``.
+- activations: max-abs of each ``QLinear`` input over a few calibration
   batches, captured with forward-pre-hooks.
 
 ``post_training_quantize`` is the end-to-end PTQ entry: insert -> calibrate on a
@@ -18,17 +18,18 @@ from typing import Any, Callable, Iterable
 import torch
 from torch import nn
 
-from quantization.insert import QuantConfig, QuantLinear, insert_fake_quant
+from quantization.convert import insert_fake_quant
 from quantization.observer import MinMaxObserver
+from quantization.qlayers.linear import QLinear, QuantConfig
 
 ForwardFn = Callable[[nn.Module, Any], Any]
 
 
-def _registry(model: nn.Module) -> dict[str, QuantLinear]:
-    return {name: m for name, m in model.named_modules() if isinstance(m, QuantLinear)}
+def _registry(model: nn.Module) -> dict[str, QLinear]:
+    return {name: m for name, m in model.named_modules() if isinstance(m, QLinear)}
 
 
-def calibrate_weights(model: nn.Module, registry: dict[str, QuantLinear] | None = None) -> None:
+def calibrate_weights(model: nn.Module, registry: dict[str, QLinear] | None = None) -> None:
     """Set each weight quantizer scale from the static weight max-abs."""
     registry = registry or _registry(model)
     for quant in registry.values():
@@ -42,7 +43,7 @@ def calibrate_activations(
     batches: Iterable[Any],
     *,
     forward_fn: ForwardFn | None = None,
-    registry: dict[str, QuantLinear] | None = None,
+    registry: dict[str, QLinear] | None = None,
     device: str = "cpu",
 ) -> None:
     """Set each activation quantizer scale from observed inputs over ``batches``."""
@@ -80,7 +81,7 @@ def calibrate(
     """Calibrate both weight and activation quantizers in ``model``."""
     registry = _registry(model)
     if not registry:
-        raise ValueError("no QuantLinear modules found; call insert_fake_quant first")
+        raise ValueError("no QLinear modules found; call insert_fake_quant first")
     calibrate_weights(model, registry)
     calibrate_activations(model, batches, forward_fn=forward_fn, registry=registry, device=device)
     return model
@@ -93,7 +94,7 @@ def post_training_quantize(
     config: QuantConfig | None = None,
     forward_fn: ForwardFn | None = None,
     device: str = "cpu",
-) -> tuple[nn.Module, dict[str, QuantLinear]]:
+) -> tuple[nn.Module, dict[str, QLinear]]:
     """Insert fake quantizers and calibrate them (PTQ). Returns (model, registry)."""
     model, registry = insert_fake_quant(model, config)
     calibrate(model, calib_batches, forward_fn=forward_fn, device=device)

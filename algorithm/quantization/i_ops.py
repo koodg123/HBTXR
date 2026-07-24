@@ -1,14 +1,16 @@
-"""Bit-exact integer reference kernels (HG-PIPE HLS equivalents).
+"""I-tier golden integer kernels (bit-exact HG-PIPE HLS equivalents).
 
-Ported verbatim (semantics) from the HG-PIPE reference ``src/ops.py`` for use as
-the integer-inference / verification reference of the HBTXR quantized ViT. These
-are pure-Python, list-based, and bit-exact with the HLS kernels — no torch. The
-torch fake-quant path (fake_quant.py) mirrors these for training; this module is
-the ground truth the integer deployment path is checked against.
+Ported from the HG-PIPE reference for use as the integer-inference / verification
+golden of the HBTXR quantized ViT. Pure-Python, list-based, arbitrary-precision int
+(no overflow) — the ground truth the torch int8/int32 deployment kernels (ilayers)
+are checked bit-exact against.
 
 - ``table_quantize``: ReQuant / GeLU — cursor = (x + b) >> s, clamp, table lookup.
 - ``layernorm_quantize``: integer LayerNorm (integer mean, rsqrt table, affine, clamp).
 - ``softmax_quantize``: integer Softmax (max-subtract, exp table, dual reciprocal tables).
+
+Requant / int-matmul / int-conv torch kernels for the deployment graph are added in
+Part C (ilayers); this module stays the pure-int golden.
 """
 from __future__ import annotations
 

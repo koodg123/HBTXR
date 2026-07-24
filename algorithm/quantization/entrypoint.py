@@ -30,8 +30,8 @@ from engine.tools.load_config import load_config
 from engine.train.trainer import Trainer, TrainConfig
 
 from quantization.calibrate import post_training_quantize
-from quantization.insert import QuantConfig
 from quantization.qat import prepare_qat
+from quantization.qlayers.linear import QuantConfig
 from quantization.scheme import QuantDtype
 
 
