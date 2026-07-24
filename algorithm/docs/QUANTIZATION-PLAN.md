@@ -14,6 +14,10 @@ verified pure-integer inference graph.
 - **This plan** adds: (A) a clean **q/i tier restructure**, (B) a **fully
   specifiable quant config** + observer/quantizer extensions, (C) the **HW-faithful
   integer graph (I tier)** covering **every** ViT module and functional op.
+- **Progress**: Part A ✅ (`665ae48`, 12/12 regression). Part B ✅ (`d65dbcf` core +
+  `1725ec8` overrides/entrypoint) — granularity / sym-asym / scale_type / calibration
+  (minmax·percentile·mse·kl) + per-layer overrides; **31/31 pytest**, matrix report in
+  `docs/QUANTIZATION-PARTB-REPORT.md`. Part C ⏳ next.
 
 ## 1. Integer representation policy (HW-faithful)
 
