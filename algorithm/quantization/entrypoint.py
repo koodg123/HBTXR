@@ -6,11 +6,19 @@
 
 Config block ``quantization``: ``mode`` (ptq|qat), ``weight_bits``, ``act_bits``,
 ``skip`` (module-name substrings left fp), ``num_calib_batches``, ``ckpt_path``,
-``output``. Uses the same experiment schema as training (see configs/experiment/*_quant.yaml).
+``output``, ``export_int``. Uses the same experiment schema as training
+(see configs/experiment/*_quant.yaml).
+
+With ``export_int`` (or ``--export-int DIR``) the run continues past the quantized
+checkpoint into the deployment tier: calibrate the nonlinear LUTs on the same
+calibration batches, ``convert_to_integer``, then dump integer weights + scales +
+LUTs and a ``manifest.json`` for the HW / bit-exact-simulator backend.
 
 Run from the ``algorithm/`` root::
 
     python -m quantization.entrypoint -c configs/experiment/frame_quant.yaml --ckpt runs/.../final.pt
+    python -m quantization.entrypoint -c configs/experiment/frame_quant.yaml \
+        --ckpt runs/.../final.pt --export-int runs/frame_hbtxr/int_export
 """
 from __future__ import annotations
 
@@ -30,6 +38,8 @@ from engine.tools.load_config import load_config
 from engine.train.trainer import Trainer, TrainConfig
 
 from quantization.calibrate import post_training_quantize
+from quantization.convert import convert_model_to_integer
+from quantization.export import export_integer_model
 from quantization.qat import prepare_qat
 from quantization.spec import QuantScheme
 
@@ -47,6 +57,43 @@ def _project_root(cfg: dict[str, Any], override: str | None) -> Path:
     return Path(root).expanduser().resolve() if root else Path.cwd()
 
 
+def _export_integer(model: Any, export_dir: str, calib_batches: list, forward_fn: Callable) -> dict[str, Any]:
+    """Q -> I deployment tier: whole-graph integer conversion, then dump artifacts.
+
+    Uses ``convert_model_to_integer`` (not the Linear-only ``convert_to_integer``), so
+    Conv2d, GeLU, LayerNorm and Softmax become I-tier modules whose *whole* datapath is
+    integer — integer mean/variance/rsqrt, integer row max/exp/row-sum/reciprocal —
+    rather than Q-tier LUTs that still reduce in float.
+
+    Runs after the quantized checkpoint is saved, so the export never perturbs what
+    existing callers get back on disk. Returns the manifest so a caller can inspect or
+    re-verify the dump without re-reading it from disk.
+
+    Both honesty knobs are load-bearing. ``ConversionReport.left_float`` /
+    ``float_composites`` are printed because the conversion is integer *per op*, not
+    end to end: tensors still move between modules as float, and the attention matmuls
+    and residual adds live inside module ``forward`` bodies that no swap can reach.
+    ``allow_unquantized=True`` is likewise not a way to silence the export — a real
+    HBTXR model keeps a padded float conv (the mask head), which is recorded in
+    ``manifest['unexported']`` and warned about instead of aborting the run. A
+    *quantized* module with no export branch still aborts unconditionally; this opt-in
+    does not reach it.
+    """
+    model, report = convert_model_to_integer(model, calib_batches, forward_fn=forward_fn)
+    manifest = export_integer_model(model, Path(export_dir), allow_unquantized=True)
+    print(f"[quantize] integer export -> {export_dir}: {len(report)} integer modules, "
+          f"{manifest['num_modules']} exported {manifest['counts']}")
+    if report.left_float or report.float_composites:
+        print(f"[quantize] still float: {len(report.left_float)} leaf module(s), "
+              f"{len(report.float_composites)} composite forward(s) "
+              f"(residual adds / attention matmuls are written inline, not as submodules)")
+    if manifest["unexported"]:
+        listing = ", ".join(f"{r['name']}({r['class']})" for r in manifest["unexported"])
+        print(f"[quantize] WARNING: {manifest['num_unexported']} module(s) left OUT of the "
+              f"integer dump (still float): {listing}")
+    return manifest
+
+
 def run_quantize(
     config_path: str,
     *,
@@ -54,8 +101,19 @@ def run_quantize(
     output: str | None = None,
     project_root: str | None = None,
     device: str | None = None,
+    export_int: str | None = None,
+    return_manifest: bool = False,
 ) -> Any:
-    """PTQ or QAT of an HBTXR model per the ``quantization`` config block."""
+    """PTQ or QAT of an HBTXR model per the ``quantization`` config block.
+
+    With ``export_int`` (or ``quantization.export_int``) the quantized model is also
+    converted to the integer tier and dumped as HW artifacts (see quantization.export).
+
+    Returns the quantized model. With ``return_manifest=True`` it returns
+    ``(model, manifest)`` instead, where ``manifest`` is the export manifest (``None``
+    when no export ran) — the export's own description of what it wrote, which is
+    otherwise only recoverable by re-reading ``manifest.json`` off disk.
+    """
     cfg = load_config(config_path)
     quant_cfg = cfg.get("quantization") or {}
     mode = str(quant_cfg.get("mode", "ptq")).lower()
@@ -97,7 +155,10 @@ def run_quantize(
     if out_path:
         save_checkpoint(model, Path(out_path), meta={"quantized": True, "mode": mode, "modality": modality,
                                                      "weight_bits": scheme.weight.bits, "act_bits": scheme.activation.bits})
-    return model
+
+    export_dir = export_int or quant_cfg.get("export_int")
+    manifest = _export_integer(model, str(export_dir), calib_batches, forward_fn) if export_dir else None
+    return (model, manifest) if return_manifest else model
 
 
 def main(argv: list[str] | None = None) -> None:
@@ -107,8 +168,11 @@ def main(argv: list[str] | None = None) -> None:
     parser.add_argument("-o", "--output", default=None, help="quantized checkpoint output path")
     parser.add_argument("--project-root", default=None, help="root for manifest resolution")
     parser.add_argument("--device", default=None, help="device")
+    parser.add_argument("--export-int", default=None, metavar="DIR",
+                        help="also convert to the integer tier and dump HW artifacts into DIR")
     args = parser.parse_args(argv)
-    run_quantize(args.config, ckpt=args.ckpt, output=args.output, project_root=args.project_root, device=args.device)
+    run_quantize(args.config, ckpt=args.ckpt, output=args.output, project_root=args.project_root,
+                 device=args.device, export_int=args.export_int)
 
 
 if __name__ == "__main__":

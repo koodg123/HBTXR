@@ -22,13 +22,17 @@ verified pure-integer inference graph.
     + torch int_functional, bit-exact.
   - C1 ✅ (`97a38d2`) ILinear (per-tensor/per-channel weight, asym-act zp fold) + IConv2d.
   - C2 ✅ (`8f614d6`) IMatMul (act×act, attention).
-  - C3 🔵 IGeLU ✅ (`3684414`, bit-exact vs table_quantize); **ILayerNorm / ISoftmax
-    pending** (fully-integer mean/var/rsqrt + exp/recip via i_ops layernorm_quantize/
-    softmax_quantize goldens — need HG-PIPE calibrate_rsqrt/softmax scalars, a distinct
-    calib path).
-  - C4 ✅ (`3684414`) IAdd / ICat / IPool (scale alignment).
-  - C5 ⏳ ilayers/vit.py integer ViT assembly + convert.py Q→I. C6 ⏳ export_int + whole-graph test.
-  - **pytest 56/56** (12 regression + 19 config-matrix + 25 int-graph).
+  - C3 ✅ IGeLU (`3684414`) + **fully-integer ILayerNorm / ISoftmax** — integer
+    mean/variance/rsqrt and integer row-max/exp/row-sum/segmented-reciprocal, bit-exact
+    against the `i_ops.layernorm_quantize` / `softmax_quantize` goldens, with their own
+    integer-scalar calibrators (`int_calibrate.py`, `int_calibrate_softmax.py`).
+  - C4 ✅ (`3684414`) IAdd / ICat / IPool (scale alignment) — **built and tested, but
+    still unreachable from the conversion pass** (see §9).
+  - C5 ✅ `convert_model_to_integer` + `ConversionReport` (honest `left_float` /
+    `float_composites`); `ilayers/vit.py` **not needed** for the swap-based path and
+    intentionally not written (see §9). C6 ✅ export + replay-based `verify_export`.
+  - **pytest 245** (12 regression + 19 config-matrix + 28 int-graph + 56 export +
+    57 int-layernorm + 50 int-softmax + 23 int-vit-graph).
 
 ## 1. Integer representation policy (HW-faithful)
 
@@ -189,3 +193,35 @@ true|false.
   deep stacks → caught early by module-level golden + C5 whole-graph checks.
 - **granularity × scale_type** combinatorial surface → B6 matrix verification.
 - Effort: A (light) → B (medium) → C (largest, HW-codegen level). Commit + pytest each step.
+
+## 9. What Part C does NOT do (honest scope of the integer graph)
+
+`convert_model_to_integer` makes every **op** integer. It does not make the **graph**
+integer, and the difference matters for anyone porting this to RTL:
+
+- **Tensors move between modules as float32.** Every I-tier module re-quantizes at its
+  own input port. This is inherited from the `ILinear` / `IConv2d` / `ILayerNorm` /
+  `ISoftmax` float-I/O drop-in design, which is what lets the converted model run
+  through the *unmodified* model `forward`.
+- **`IMatMul` / `IAdd` / `ICat` / `IPool` are built and tested but unreachable from the
+  conversion pass.** The attention matmuls (`Q@Kᵀ`, `attn@V`), the `1/√d` scaling and the
+  two residual adds per block are `torch` calls written directly inside
+  `MultiHeadAttention.forward` / `TransformerBlock.forward` — they are not submodules, so
+  no module swap can reach them. They are reported in `ConversionReport.float_composites`.
+- **`mask_head.proj` stays float**: `IConv2d` implements only the non-overlapping,
+  unpadded patch conv, so a padded 3×3 conv is explicitly refused rather than converted
+  into something that computes a different function. It appears in `left_float` and in
+  `manifest["unexported"]`.
+- **`ISoftmax.max_tokens` is a load-bearing assumption.** The reciprocal segments span a
+  *theoretical* accumulator envelope `[exp_table[0], max_tokens·max(exp_table)]`, so
+  saturation is unreachable by construction — but only for rows no longer than
+  `max_tokens`. Nothing checks the runtime token count against it.
+- **`ILayerNorm`'s rsqrt index is a mitigation, not a cure.** The golden's
+  `cursor = clamp((var_sum + b) >> s1, 0, bound)` is a *linear* index over a *log-domain*
+  function, so a variance dynamic range much wider than `entries`:1 cannot be served to a
+  few percent. The index is now fitted to the observed distribution (≈1.6× better RMS
+  than the [min,max] envelope) and the payload carries `metrics` so the error is visible.
+
+Closing the first two items means an `ilayers/vit.py` that re-implements the block
+forwards over `QTensor` instead of swapping modules in place — a genuine rewrite, not a
+conversion pass, and deliberately out of scope here.

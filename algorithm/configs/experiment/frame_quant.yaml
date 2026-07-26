@@ -10,6 +10,12 @@ quantization:
   output: runs/frame_hbtxr/quantized.pt
   skip: []                  # module-name substrings to leave in fp (e.g. ["head"])
 
+  # Integer-artifact export for the HW / bit-exact-simulator backend (or --export-int DIR).
+  # Runs after the quantized checkpoint is saved: LUT-calibrates GeLU/LayerNorm/Softmax,
+  # converts Q -> I, then writes integer weights (.npy) + scales + LUTs + manifest.json.
+  # Replay the dump with quantization.export.verify_export to prove it is faithful.
+  export_int: null          # e.g. runs/frame_hbtxr/int_export
+
   # Per-tensor-role quant spec. Each supports:
   #   bits, signed, symmetric,
   #   granularity: per-tensor | per-channel | per-group | per-block
