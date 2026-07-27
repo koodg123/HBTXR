@@ -33,7 +33,6 @@ from typing import Any, Callable
 from common.optim.registry import build_optimizer
 from common.schedulers import build_lr_scheduler
 from engine.data.adapter import resolve_modality
-from engine.data.factory import build_dataloader
 from engine.model_factory import make_model
 from engine.runspec.run_contract import resolve_training_entry
 from engine.tools.checkpoint import load_checkpoint, save_checkpoint
@@ -47,9 +46,55 @@ from quantization.qat import prepare_qat
 from quantization.spec import QuantScheme
 
 
+def _build_dataloader(*args: Any, **kwargs: Any) -> Any:
+    """Lazy proxy to ``engine.data.factory.build_dataloader``.
+
+    Importing that eagerly drags the whole dataset pipeline (``dataset.hbtxr`` ->
+    PIL / cv2 / h5py / tonic) into module-import time, which a quantization run does
+    not need until it actually builds calibration batches — and which makes
+    ``import quantization.entrypoint`` (hence ``hbtxr quantize``, even ``--help``)
+    fail outright wherever only torch is installed. Same shape as the proxy in
+    ``engine.train.__init__``.
+
+    Deliberately a module-scope function rather than an import inlined at the two
+    call sites: a test can then substitute ``entrypoint._build_dataloader``, whereas
+    patching ``engine.data.factory.build_dataloader`` would first have to import that
+    module to reach the attribute — pulling the pipeline back in and defeating the point.
+    """
+    from engine.data.factory import build_dataloader
+
+    return build_dataloader(*args, **kwargs)
+
+
+def _hybrid_forward(model: Any, batch: dict[str, Any]) -> dict[str, Any]:
+    """Drive BOTH hybrid branches, because calibration only sees what it runs.
+
+    ``search_step`` alone never touches ``event_stem``, ``track_head``,
+    ``track_reliability`` or ``backbone.forward_track``, so their quantizers were
+    left with no observations at all and PTQ died in
+    ``AffineObserver.qparams()``. Running both branches is what makes the hybrid
+    path quantizable, not merely better covered.
+
+    The anchor follows the batch when it carries one — ``anchor_state`` is the
+    adapter's GT anchor and ``state`` its teacher-forcing fallback, i.e. exactly
+    what ``Trainer._hybrid_losses`` feeds ``track_step``, so QAT calibrates on the
+    distribution its own fine-tuning will then produce. With neither key (a
+    hand-made batch of just frame+event) the anchor chains from the search output,
+    which is how ``HybridModel.run_step`` drives a track step at inference.
+    """
+    search = model.search_step(batch["frame"])
+    anchor = batch.get("anchor_state")
+    if anchor is None:
+        anchor = batch.get("state")
+    if anchor is None:
+        anchor = search["state"]
+    return {"search": search, "track": model.track_step(batch["event"], anchor)}
+
+
 def _make_forward_fn(modality: str) -> Callable[[Any, dict], Any]:
+    """Calibration/observation drive for ``modality`` (hybrid runs search *and* track)."""
     if modality.startswith("hybrid"):
-        return lambda model, batch: model.search_step(batch["frame"])
+        return _hybrid_forward
     return lambda model, batch: model(batch["image"])
 
 
@@ -134,7 +179,7 @@ def run_quantize(
     scheme = QuantScheme.from_config(quant_cfg)
     n_calib = int(quant_cfg.get("num_calib_batches", 8))
 
-    calib_loader = build_dataloader(entry["train_manifest"], cfg, shuffle=False, modality=modality)
+    calib_loader = _build_dataloader(entry["train_manifest"], cfg, shuffle=False, modality=modality)
     calib_batches = list(itertools.islice(calib_loader, n_calib))
 
     if mode == "qat":
@@ -150,7 +195,7 @@ def run_quantize(
             TrainConfig(modality=modality, epochs=epochs, device=dev, loss_weights=loss_weights if isinstance(loss_weights, dict) else None),
             scheduler=scheduler,
         )
-        trainer.fit(build_dataloader(entry["train_manifest"], cfg, shuffle=True, modality=modality))
+        trainer.fit(_build_dataloader(entry["train_manifest"], cfg, shuffle=True, modality=modality))
     else:
         model, _registry = post_training_quantize(model, calib_batches, scheme=scheme, forward_fn=forward_fn, device=dev)
 

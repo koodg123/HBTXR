@@ -12,17 +12,38 @@ from __future__ import annotations
 
 import argparse
 from pathlib import Path
-from typing import Any
+from typing import TYPE_CHECKING, Any
 
 from common.optim.registry import build_optimizer
 from common.schedulers import build_lr_scheduler
 from engine.data.adapter import resolve_modality
-from engine.data.factory import build_dataloader
 from engine.distill.distiller import DistillConfig, DistillTrainer
 from engine.model_factory import make_model
 from engine.runspec.run_contract import resolve_training_entry
 from engine.tools.checkpoint import load_checkpoint, save_checkpoint
 from engine.tools.load_config import load_config
+
+if TYPE_CHECKING:  # engine.data.factory is only imported at call time (see below)
+    from engine.data.factory import AdaptedLoader
+
+
+def _build_dataloader(
+    manifest_path: str,
+    cfg: dict[str, Any],
+    *,
+    shuffle: bool,
+    modality: str | None = None,
+) -> AdaptedLoader:
+    """Lazy proxy to ``engine.data.factory.build_dataloader``.
+
+    ``engine.data.factory`` pulls the full HBTXR data pipeline (PIL / cv2 / h5py), which
+    made merely *importing* this module — and therefore the ``hbtxr distill`` dispatch —
+    fail wherever those are absent. Kept at module scope rather than inlined into
+    ``run_distill`` so it stays patchable without importing the pipeline to reach it.
+    """
+    from engine.data.factory import build_dataloader
+
+    return build_dataloader(manifest_path, cfg, shuffle=shuffle, modality=modality)
 
 
 def _resolve_project_root(cfg: dict[str, Any], override: str | None) -> Path:
@@ -78,7 +99,7 @@ def run_distill(
     )
     trainer = DistillTrainer(student, teacher, optimizer, config, scheduler=scheduler)
 
-    train_loader = build_dataloader(entry["train_manifest"], cfg, shuffle=True, modality=modality)
+    train_loader = _build_dataloader(entry["train_manifest"], cfg, shuffle=True, modality=modality)
     trainer.fit(train_loader)
 
     output_dir = entry.get("output_dir")

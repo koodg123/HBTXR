@@ -17,20 +17,41 @@ from __future__ import annotations
 import argparse
 import csv
 from pathlib import Path
-from typing import Any
+from typing import TYPE_CHECKING, Any
 
 import numpy as np
 import torch
 
 from engine.data.adapter import resolve_modality
-from engine.data.factory import build_dataloader
 from engine.infer.inference import predict_batch
 from engine.model_factory import make_model
 from engine.runspec.run_contract import resolve_manifest_path
 from engine.tools.checkpoint import load_checkpoint
 from engine.tools.load_config import load_config
 
+if TYPE_CHECKING:  # engine.data.factory is only imported at call time (see below)
+    from engine.data.factory import AdaptedLoader
+
 _STATE_COLUMNS = ("x", "y", "a", "b", "theta")
+
+
+def _build_dataloader(
+    manifest_path: str,
+    cfg: dict[str, Any],
+    *,
+    shuffle: bool,
+    modality: str | None = None,
+) -> AdaptedLoader:
+    """Lazy proxy to ``engine.data.factory.build_dataloader``.
+
+    ``engine.data.factory`` pulls the full HBTXR data pipeline (PIL / cv2 / h5py), which
+    made merely *importing* this module — and therefore the ``hbtxr infer`` dispatch —
+    fail wherever those are absent. Kept at module scope rather than inlined into
+    ``run_infer`` so it stays patchable without importing the pipeline to reach it.
+    """
+    from engine.data.factory import build_dataloader
+
+    return build_dataloader(manifest_path, cfg, shuffle=shuffle, modality=modality)
 
 
 def _resolve_project_root(cfg: dict[str, Any], override: str | None) -> Path:
@@ -69,7 +90,7 @@ def run_infer(
     model.eval()
 
     manifest = str(resolve_manifest_path(cfg, project_root=root, split="test"))
-    loader = build_dataloader(manifest, cfg, shuffle=False, modality=modality)
+    loader = _build_dataloader(manifest, cfg, shuffle=False, modality=modality)
 
     ids: list[str] = []
     states: list[np.ndarray] = []
