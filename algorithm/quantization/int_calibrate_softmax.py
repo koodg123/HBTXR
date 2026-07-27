@@ -178,11 +178,16 @@ def build_softmax_int_payload(
     calibration row length; it sizes the reciprocal segments (see
     ``_theoretical_accumulator_range``) and is the *only* thing standing between an
     unusually flat runtime row and an un-normalised output, so raise it if inference can
-    run on longer sequences than calibration did.
+    run on longer sequences than calibration did. It travels in the payload and
+    ``ISoftmax`` *rejects* a longer row rather than returning one — but do not pad it for
+    safety, because widening the envelope spends reciprocal resolution on accumulators
+    that never occur: with a 32-entry reciprocal, 16-token rows through a
+    ``max_tokens=96`` payload measure a max abs error of 4.55e-02 against 1.81e-02 at
+    ``max_tokens=16``.
 
     Returns the payload ``ISoftmax`` / ``i_ops.softmax_quantize`` consume:
     ``{scalars(14), exp_table, recip_table_one, recip_table_two, input_scale,
-    output_scale, output_bits, metrics}``.
+    output_scale, output_bits, max_tokens, metrics}``.
     """
     if exp_scale < 2:
         raise ValueError("exp_scale must be at least 2")
@@ -252,6 +257,9 @@ def build_softmax_int_payload(
         "input_scale": input_scale,
         "output_scale": 1.0 / float(qmax),
         "output_bits": int(output_bits),
+        # top level, not just metrics: ISoftmax stores it and refuses a longer row at
+        # runtime, so it is part of the op's contract rather than a calibration report.
+        "max_tokens": max_tokens,
         "metrics": {
             "rows": int(rows.shape[0]),
             "tokens": int(rows.shape[1]),

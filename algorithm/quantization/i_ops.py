@@ -75,15 +75,52 @@ def int_matmul(a: list[list[int]], b: list[list[int]]) -> list[list[int]]:
     return out
 
 
-def int_conv2d(inp: list[list[list[int]]], weight: list[list[list[list[int]]]], *,
-               stride: int = 1) -> list[list[list[int]]]:
-    """Pure-int non-padded conv: ``inp[Cin,H,W]``, ``weight[Cout,Cin,kh,kw]`` -> ``[Cout,Ho,Wo]``.
+def _pad_pair(padding: int | tuple[int, int] | list[int]) -> tuple[int, int]:
+    """``padding`` as ``(ph, pw)`` — an int means the same amount on both axes."""
+    if isinstance(padding, (tuple, list)):
+        if len(padding) != 2:
+            raise ValueError(f"padding must be an int or a (ph, pw) pair, got {padding!r}")
+        ph, pw = int(padding[0]), int(padding[1])
+    else:
+        ph = pw = int(padding)
+    if ph < 0 or pw < 0:
+        raise ValueError(f"padding must be non-negative, got {padding!r}")
+    return ph, pw
 
-    Golden for a strided PatchEmbed conv (kernel == stride == patch_size gives the
-    non-overlapping ViT patch embedding).
+
+def int_conv2d(inp: list[list[list[int]]], weight: list[list[list[list[int]]]], *,
+               stride: int = 1, padding: int | tuple[int, int] = 0,
+               pad_value: int = 0) -> list[list[list[int]]]:
+    """Pure-int conv: ``inp[Cin,H,W]``, ``weight[Cout,Cin,kh,kw]`` -> ``[Cout,Ho,Wo]``.
+
+    A general single-group, dilation-1 conv: the kernel may be rectangular, and the
+    stride is free of the kernel size, so this is the golden for the non-overlapping
+    PatchEmbed conv (kernel == stride == patch_size), for an overlapping strided conv
+    (k=3/s=2), and for the 3x3/pad-1/stride-1 convs of the mask and heatmap heads alike.
+
+    ``pad_value`` is deliberately explicit and has no "obvious" default beyond the
+    unpadded case. In an asymmetrically quantized activation grid the integer that
+    represents a real zero is the *zero-point*, not 0, so a caller padding an int
+    activation must pass ``pad_value=zero_point``; padding with 0 would feed the real
+    value ``-zp * s_x`` into every border tap. Only the operand's owner knows which it
+    is, so this function does not guess.
+
+    Arbitrary-precision Python ints throughout: the accumulator cannot overflow, which
+    is what makes it usable as the reference the fixed-width kernels are checked against.
     """
+    ph, pw = _pad_pair(padding)
     cin = len(inp)
     height, width = len(inp[0]), len(inp[0][0])
+    if ph or pw:
+        row_pad = [pad_value] * pw
+        full_row = [pad_value] * (width + 2 * pw)
+        inp = [
+            [list(full_row) for _ in range(ph)]
+            + [row_pad + list(row) + row_pad for row in channel]
+            + [list(full_row) for _ in range(ph)]
+            for channel in inp
+        ]
+        height, width = height + 2 * ph, width + 2 * pw
     cout = len(weight)
     kh, kw = len(weight[0][0]), len(weight[0][0][0])
     ho = (height - kh) // stride + 1

@@ -61,7 +61,7 @@ from quantization.qlayers.nonlinear import QGeLU, QLayerNorm, QSoftmax
 from quantization.scheme import qrange
 
 FORMAT = "hbtxr-int-v1"
-FORMAT_VERSION = 3
+FORMAT_VERSION = 4
 MANIFEST_NAME = "manifest.json"
 
 # candidate .npy containers, narrowest first — the first one that holds the real
@@ -244,6 +244,7 @@ def _conv_entry(out: Path, order: int, name: str, m: IConv2d) -> dict[str, Any]:
         "act_bits": int(m.act_dtype.bits),
         "act_signed": bool(m.act_dtype.signed),
         "stride": int(m.stride),
+        "padding": [int(p) for p in m.padding],        # (ph, pw), symmetric per axis
         "bias": _float_list(m.bias),
     }
 
@@ -317,6 +318,10 @@ def _int_softmax_entry(m: ISoftmax) -> dict[str, Any]:
         "recip_table_one": _int_list(m.recip_table_one),
         "recip_table_two": _int_list(m.recip_table_two),
         "recip_table_entries": int(m.recip_table_one.numel()),
+        # The calibrated row-length bound. Without it a replayed module falls back to a
+        # DERIVED bound that is deliberately looser (it admits rows 25-60% longer), so
+        # omitting it here would quietly weaken a safety check across the round trip.
+        "max_tokens": int(m.max_tokens),
     }
     entry.update(_dtype_fields(m.in_dtype, "input"))
     entry.update(_dtype_fields(m.out_dtype, "output"))
@@ -533,13 +538,30 @@ def replay_linear(entry: dict[str, Any], x: np.ndarray) -> np.ndarray:
     return y
 
 
+def _conv_padding(entry: dict[str, Any]) -> tuple[int, int]:
+    """``(ph, pw)`` from a conv entry.
+
+    The key is absent only in a manifest written before ``IConv2d`` could pad at all —
+    and back then a padded conv was refused by ``_conv_is_convertible``, so every conv
+    such a manifest can describe was genuinely unpadded. ``(0, 0)`` is therefore the
+    one correct reading of the omission, not a guess that happens to be convenient.
+    """
+    padding = entry.get("padding", (0, 0))
+    return int(padding[0]), int(padding[1])
+
+
 def replay_conv(entry: dict[str, Any], x: np.ndarray) -> np.ndarray:
-    """``IConv2d`` forward rebuilt from manifest values only (non-padded, strided).
+    """``IConv2d`` forward rebuilt from manifest values only (strided and/or padded).
 
     The live module accumulates through ``F.conv2d`` on float32 operands because the
     products stay inside float32's exact integer range for ViT patch dims; the replay
     accumulates in int64 via strided slices, so agreement is also a check that the
     float accumulation has not silently left that range.
+
+    Padding is applied to the INTEGER activation with the activation zero-point as the
+    fill (``np.pad`` constant), exactly as ``IConv2d.forward`` does — a real zero is
+    ``zp`` on an asymmetric grid, and zero-filling here while still subtracting the
+    uniform ``zp·Σw`` would over-correct every border window.
     """
     s_x = np.float32(entry["act_scale"])
     zero_point = int(entry["act_zero_point"])
@@ -547,12 +569,18 @@ def replay_conv(entry: dict[str, Any], x: np.ndarray) -> np.ndarray:
     x_int = np.clip(np.round(x.astype(np.float32) / s_x + zero_point), qmin, qmax).astype(np.int64)
     weight = np.asarray(entry["weight_int"], dtype=np.int64)               # [Cout, Cin, kh, kw]
     stride = int(entry["stride"])
+    ph, pw = _conv_padding(entry)
+    if ph or pw:
+        x_int = np.pad(x_int, ((0, 0), (0, 0), (ph, ph), (pw, pw)),
+                       mode="constant", constant_values=zero_point)
     _cout, _cin, kh, kw = weight.shape
     n, _c, height, width = x_int.shape
     ho = (height - kh) // stride + 1
     wo = (width - kw) // stride + 1
     if ho <= 0 or wo <= 0:
-        raise ValueError(f"conv probe {x_int.shape} is smaller than the {kh}x{kw} kernel")
+        raise ValueError(
+            f"conv probe {x_int.shape} (after {(ph, pw)} padding) is smaller than the "
+            f"{kh}x{kw} kernel")
     acc = np.zeros((n, weight.shape[0], ho, wo), dtype=np.int64)
     for dy in range(kh):
         for dx in range(kw):
@@ -620,6 +648,14 @@ def replay_softmax(entry: dict[str, Any], x: np.ndarray) -> np.ndarray:
      b2_two, s2_two, bound2_two, b3_two, s3_two,
      clamp_bits) = (int(v) for v in entry["scalars"])
     dim = int(entry["dim"])
+    # Mirror ISoftmax's row-length guard. Without it the replay would happily return a
+    # silently un-normalised row for an input the live module refuses — and a replay
+    # that computes something the module never would is not a replay.
+    max_tokens = entry.get("max_tokens")
+    if max_tokens is not None and x.shape[dim] > int(max_tokens):
+        raise ValueError(
+            f"softmax replay got a {x.shape[dim]}-token row but the manifest declares "
+            f"max_tokens={int(max_tokens)}; the live module would refuse it")
     in_qmin, in_qmax = qrange(int(entry["input_bits"]), signed=bool(entry["input_signed"]))
     x_int = np.clip(np.round(x.astype(np.float32) / np.float32(entry["input_scale"])),
                     in_qmin, in_qmax).astype(np.int64)
@@ -716,6 +752,21 @@ def _pot_input_range(scalars: Sequence[int], scale: float) -> tuple[float, float
     return float(-b) * scale, float(((bound + 1) << shift) - 1 - b) * scale
 
 
+def _conv_probe_extent(kernel: int, stride: int, pad: int) -> int:
+    """Smallest unpadded extent along one axis that still yields ``_CONV_PROBE_OUT`` pixels.
+
+    Deliberately *minimal* rather than comfortable: with padding, a generously sized
+    probe would be almost entirely interior, so every border tap could be mis-handled
+    and the replay would still agree with the live module. At this size every output
+    pixel of a 3x3/pad-1 conv touches the padded ring, which is what makes the
+    comparison a test of the padding and not just of the interior MACs.
+    """
+    extent = max(1, kernel + stride * (_CONV_PROBE_OUT - 1) - 2 * pad)
+    while (extent + 2 * pad - kernel) // stride + 1 < _CONV_PROBE_OUT:
+        extent += 1
+    return extent
+
+
 def _act_span(entry: dict[str, Any], scale_key: str, bits_key: str, signed_key: str) -> float:
     return float(entry[scale_key]) * qrange(int(entry[bits_key]), signed=bool(entry[signed_key]))[1]
 
@@ -729,8 +780,9 @@ def _probe(entry: dict[str, Any], rng: np.random.Generator, batch: int) -> np.nd
     if op == "conv2d_int":
         _cout, cin, kh, kw = (int(d) for d in entry["weight_shape"])
         stride = int(entry["stride"])
-        height = kh + stride * (_CONV_PROBE_OUT - 1)
-        width = kw + stride * (_CONV_PROBE_OUT - 1)
+        ph, pw = _conv_padding(entry)
+        height = _conv_probe_extent(kh, stride, ph)
+        width = _conv_probe_extent(kw, stride, pw)
         span = _act_span(entry, "act_scale", "act_bits", "act_signed")
         return (rng.uniform(-1.0, 1.0, size=(batch, cin, height, width)) * span).astype(np.float32)
     if op == "gelu_lut":
@@ -753,7 +805,11 @@ def _probe(entry: dict[str, Any], rng: np.random.Generator, batch: int) -> np.nd
         return (rng.standard_normal((batch, channels)) * std).astype(np.float32)
     if op == "softmax_int":
         span = _act_span(entry, "input_scale", "input_bits", "input_signed")
-        return (rng.uniform(-1.0, 1.0, size=(batch, _SOFTMAX_PROBE_TOKENS)) * span).astype(np.float32)
+        # Never probe past the calibrated row-length bound: ISoftmax REFUSES a longer
+        # row, so a hard-coded probe width turns verification of a short-row softmax
+        # into a crash instead of a record.
+        tokens = min(_SOFTMAX_PROBE_TOKENS, int(entry.get("max_tokens") or _SOFTMAX_PROBE_TOKENS))
+        return (rng.uniform(-1.0, 1.0, size=(batch, max(tokens, 2))) * span).astype(np.float32)
     if op == "softmax_lut":
         _lo, delta_hi = _pot_input_range(entry["exp"]["scalars"], float(entry["exp"]["input_scale"]))
         return (rng.uniform(-1.0, 1.0, size=(batch, _SOFTMAX_PROBE_TOKENS))

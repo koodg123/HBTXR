@@ -19,7 +19,7 @@ Q -> I (deployment)
       above and returns a ``ConversionReport`` that names what became integer AND what
       is still float, so a partial conversion cannot be mistaken for a total one.
 
-Nothing here silently skips a module: anything the I tier cannot express (a padded or
+Nothing here silently skips a module: anything the I tier cannot express (a dilated or
 grouped conv, a LayerNorm the calibration batches never reached, a Linear that was never
 fake-quantized) stays float and is reported in ``ConversionReport.left_float``.
 """
@@ -33,7 +33,7 @@ import numpy as np
 import torch
 from torch import nn
 
-from quantization.ilayers.conv import IConv2d
+from quantization.ilayers.conv import IConv2d, conv_padding_pair
 from quantization.ilayers.layernorm import ILayerNorm
 from quantization.ilayers.linear import ILinear
 from quantization.ilayers.matmul import IMatMul
@@ -460,20 +460,38 @@ def calibrate_int_gelus(
 
 
 def _conv_is_convertible(conv: nn.Conv2d) -> bool:
-    """``IConv2d`` implements the non-overlapping strided patch conv and nothing else."""
-    if isinstance(conv.padding, str):                      # "same" / "valid"
-        padded = conv.padding != "valid"
-    else:
-        pad = conv.padding if isinstance(conv.padding, (tuple, list)) else (conv.padding,)
-        padded = any(int(p) != 0 for p in pad)
+    """Whether ``IConv2d`` can express this conv exactly.
+
+    ``IConv2d`` is a single-group, dilation-1 conv with one stride and a symmetric
+    ``(ph, pw)`` padding, so *padded* and *overlapping* convs are converted too — that
+    covers the 3x3/pad-1 projections of the mask and heatmap heads, not just the
+    patch-embed stem. What is still refused is what the kernel genuinely cannot
+    compute: a dilated conv, a grouped/depthwise conv, a conv whose two axes stride
+    differently, a non-``zeros`` ``padding_mode``, and the asymmetric ``padding="same"``
+    of an even kernel (see ``conv_padding_pair``). Those stay float and are reported
+    under ``left_float`` rather than converted into something that computes a
+    different function.
+
+    ``padding_mode`` is the subtle one and it is checked FIRST, because accepting a
+    padded conv is what made it reachable: ``IConv2d`` constant-pads with the
+    activation zero-point, which is the integer spelling of a real zero. A conv
+    declaring ``reflect`` / ``replicate`` / ``circular`` fills its border from the
+    image instead, so converting it would silently compute a different function —
+    the exact failure this predicate exists to prevent.
+    """
+    if getattr(conv, "padding_mode", "zeros") != "zeros":
+        return False
     stride = conv.stride if isinstance(conv.stride, (tuple, list)) else (conv.stride,)
     dilation = conv.dilation if isinstance(conv.dilation, (tuple, list)) else (conv.dilation,)
-    return (
-        len({int(s) for s in stride}) == 1
-        and not padded
-        and all(int(d) == 1 for d in dilation)
-        and int(conv.groups) == 1
-    )
+    if len({int(s) for s in stride}) != 1 or int(conv.groups) != 1:
+        return False
+    if not all(int(d) == 1 for d in dilation):
+        return False
+    try:
+        conv_padding_pair(conv)
+    except ValueError:
+        return False
+    return True
 
 
 def calibrate_int_convs(
@@ -486,8 +504,9 @@ def calibrate_int_convs(
 ) -> dict[str, IConv2d]:
     """Observe each convertible conv's input range and swap it for an ``IConv2d``.
 
-    Only the non-overlapping conv ``IConv2d`` actually implements is converted — the
-    patch-embed stem and any 1x1 projection. A padded / dilated / grouped conv is left
+    Only the convs ``IConv2d`` actually implements are converted — any single-group,
+    dilation-1, uniformly-strided conv, padded or not: the patch-embed stem, the 1x1
+    projections, and the 3x3/pad-1 head projections. A dilated / grouped conv is left
     float on purpose rather than converted into something that computes a different
     function; ``convert_model_to_integer`` then reports it under ``left_float``.
     """
@@ -611,7 +630,7 @@ def convert_model_to_integer(
         1. LayerNorm -> ``ILayerNorm``   (integer mean / variance / rsqrt)
         2. Softmax   -> ``ISoftmax``     (integer row max / exp / row sum / reciprocal)
         3. GeLU      -> ``IGeLU``        (integer table lookup)
-        4. Conv2d    -> ``IConv2d``      (integer patch embedding; ``include_conv``)
+        4. Conv2d    -> ``IConv2d``      (integer conv, strided and/or padded; ``include_conv``)
         5. QLinear   -> ``ILinear``      (integer matmul)
 
     ``batches`` is consumed several times (once per observing stage), so it is

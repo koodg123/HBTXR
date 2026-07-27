@@ -525,7 +525,17 @@ def test_max_tokens_extends_the_envelope_for_longer_sequences():
     wide = build_softmax_int_payload(rows, max_tokens=long_tokens)
     assert wide["metrics"]["acc_range_max"] == (long_tokens // tokens) * narrow["metrics"]["acc_range_max"]
 
-    assert float(_row_sums(narrow, long_flat).max()) > 1.5, "fixture no longer overflows the envelope"
+    # D2 added a runtime guard, so the narrow payload now REFUSES the long row rather
+    # than silently mis-normalising it. Assert the refusal, then deliberately override
+    # max_tokens to reach the kernel anyway — the damage is what justifies the guard,
+    # and a guard whose justification is untested is one nobody keeps.
+    with pytest.raises(ValueError, match="max_tokens"):
+        _row_sums(narrow, long_flat)
+    unguarded = ISoftmax.from_payload(narrow)
+    unguarded.max_tokens = long_tokens          # bypass, on purpose
+    unguarded_out = unguarded.forward_int(_to_int(long_flat, narrow["input_scale"]))
+    unguarded_sums = (unguarded_out.to(torch.float64) * narrow["output_scale"]).sum(dim=-1)
+    assert float(unguarded_sums.max()) > 1.5, "fixture no longer overflows the envelope"
     wide_sums = _row_sums(wide, long_flat)
     assert float(wide_sums.min()) > 0.90, f"min row sum {float(wide_sums.min()):.4f}"
     assert float(wide_sums.max()) < 1.10, f"max row sum {float(wide_sums.max()):.4f}"

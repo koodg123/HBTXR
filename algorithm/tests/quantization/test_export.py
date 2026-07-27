@@ -64,7 +64,8 @@ from quantization.spec import QuantScheme, TensorQuantSpec
 # mutated both and the suite stayed green. These literals are the actual promise made
 # to every backend that reads a dump, so changing them must break this test.
 EXPECTED_FORMAT = "hbtxr-int-v1"
-EXPECTED_FORMAT_VERSION = 3
+# v4 (D2): conv entries gained `padding`, softmax entries gained `max_tokens`.
+EXPECTED_FORMAT_VERSION = 4
 
 # Every module class the export knows how to write, and the replay kernel each maps to.
 EXPECTED_OPS = {

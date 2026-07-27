@@ -370,11 +370,11 @@ def test_run_quantize_export_int_writes_a_verifiable_integer_dump(
     for record in manifest["unexported"]:
         assert record["name"] in live
         assert not record["defined_in"].startswith("quantization.")
-    # The padded 3x3 mask conv is the single documented hole in a FrameModel dump
-    # (configs/experiment/frame_quant.yaml says so). Pinning the list is what makes a
-    # conversion stage that quietly did not run visible: everything it skipped shows
-    # up here instead. If D2 teaches IConv2d padding, this list should shrink to [].
-    assert [r["name"] for r in manifest["unexported"]] == ["mask_head.proj"]
+    # D2 taught IConv2d padding, so the padded 3x3 mask conv — previously the single
+    # documented hole in a FrameModel dump — now converts and the list is empty.
+    # Pinning it EXACTLY (rather than asserting "small") is what makes a conversion
+    # stage that quietly did not run visible: everything it skipped shows up here.
+    assert [r["name"] for r in manifest["unexported"]] == []
     assert any(entry["weight_file"] for entry in manifest["modules"].values()
                if "weight_file" in entry)
 

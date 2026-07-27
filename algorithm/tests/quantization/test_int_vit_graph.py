@@ -272,15 +272,22 @@ def test_left_float_is_exactly_what_is_still_float(include_nonlinear):
     assert not set(report.replaced) & set(report.left_float)
 
 
-def test_left_float_names_the_conv_the_i_tier_cannot_express():
-    """The 3x3 padded mask conv is genuinely unconvertible — so it must be visible."""
+def test_every_conv_including_the_padded_mask_conv_converts():
+    """D2 gave ``IConv2d`` padding, so the 3x3/pad-1 mask conv is no longer refused.
+
+    This test used to assert the opposite — that ``mask_head.proj`` stayed float and was
+    honestly reported. That was true and worth pinning while the I tier could not express
+    padding; now it can, and the thing worth pinning is that NO conv is left behind.
+    """
     model, report = _converted()
-    assert "mask_head.proj" in report.left_float
-    assert isinstance(report.left_float["mask_head.proj"], nn.Conv2d)
-    assert isinstance(model.mask_head.proj, nn.Conv2d) and model.mask_head.proj.padding == (1, 1)
-    # the unpadded 1x1 sibling in the same head IS converted, so the refusal is
-    # specific to what IConv2d implements and not a blanket skip of that head
+    convs = {name: m for name, m in model.named_modules() if isinstance(m, (nn.Conv2d, IConv2d))}
+    still_float = {name: type(m).__name__ for name, m in convs.items() if not isinstance(m, IConv2d)}
+    assert not still_float, f"conv left in float after conversion: {still_float}"
+    # the padded one specifically, since that is the geometry D2 unlocked
+    assert isinstance(model.mask_head.proj, IConv2d)
+    assert model.mask_head.proj.padding == (1, 1), "padding must survive the conversion"
     assert isinstance(model.mask_head.to_logits, IConv2d)
+    assert not any(isinstance(m, nn.Conv2d) for m in report.left_float.values())
 
 
 def test_skipping_the_nonlinear_stage_is_reported_not_hidden():

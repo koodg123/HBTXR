@@ -25,6 +25,31 @@ from quantization.ilayers.qtensor import QTensor, rescale_ratio
 from quantization.scheme import INT8, QuantDtype, qrange
 
 
+def _derived_max_tokens(b2_two: int, s2_two: int, bound2_two: int, exp_table: torch.Tensor) -> int:
+    """Longest row the *emitted scalars* can still normalise — a legacy-payload fallback.
+
+    ``cursor_two = clamp((acc + b2_two) >> s2_two, 0, bound2_two)`` stops tracking ``acc``
+    once it saturates, so the last accumulator segment two actually resolves is
+    ``covered = ((bound2_two + 1) << s2_two) - b2_two - 1``. A row of ``n`` tokens tops
+    out at ``n * max(exp_table)`` (every element at the row max), hence
+    ``n <= covered // max(exp_table)``.
+
+    This is **second-class on purpose**: it is a bound on the *emitted table*, not the
+    calibrated intent, and it is loose. ``make_pot_index_params`` rounds the segment bin
+    width up to a power of two, so the tables habitually reach past the envelope they were
+    sized for — measured 10 for an 8-token calibration, 20 for 16, 144 for 96, i.e. 25-50%
+    over. Rows in that slack are not rejected and not broken either (the extra coverage is
+    real), only under-resolved, and the degradation is gradual with no cliff at the
+    calibrated boundary to detect: worst flat row sum 1.0039 at the calibrated 16 tokens
+    against 1.0196 at the derived 20, and on realistic logits 1.0627 at 96 against 1.0667
+    at 144. A bound that admits rows nobody calibrated for, by a margin nothing measures,
+    is a fallback and not a contract — use the calibrated value whenever the payload
+    carries one.
+    """
+    covered = ((int(bound2_two) + 1) << int(s2_two)) - int(b2_two) - 1
+    return max(1, covered // max(int(exp_table.max()), 1))
+
+
 class ISoftmax(nn.Module):
     """Fully-integer softmax: QTensor -> QTensor, bit-exact vs ``softmax_quantize``.
 
@@ -33,6 +58,18 @@ class ISoftmax(nn.Module):
     transposed (``test_isoftmax_honours_a_non_default_dim``). Only the last axis has an
     ``i_ops.softmax_quantize`` counterpart to be bit-exact against, because the golden
     walks rows of a flat attention buffer.
+
+    ``max_tokens`` is the single load-bearing *assumption* of the calibration: the
+    reciprocal segments span ``[exp_table[0], max_tokens * max(exp_table)]``, which is
+    what makes ``cursor_two`` saturation unreachable — but only for rows no longer than
+    ``max_tokens``. ``forward_int`` therefore rejects a longer row instead of returning an
+    un-normalised one (see the guard for the measured damage). A *shorter* row is safe,
+    not merely tolerated: the envelope's lower bound ``exp_table[0]`` is attained by any
+    row of length >= 1, so a short row lands strictly inside the covered range. It costs
+    resolution rather than correctness, and the cost is on the calibration side — with a
+    32-entry reciprocal, running 16-token rows through a ``max_tokens=96`` payload moves
+    the max abs error from 1.81e-02 to 4.55e-02. So size ``max_tokens`` to the longest row
+    that will really occur, not to a comfortable round number.
     """
 
     def __init__(
@@ -47,6 +84,7 @@ class ISoftmax(nn.Module):
         dim: int = -1,
         in_dtype: QuantDtype = INT8,
         out_dtype: QuantDtype | None = None,
+        max_tokens: int | None = None,
     ) -> None:
         super().__init__()
         scalars = [int(v) for v in scalars]
@@ -66,10 +104,22 @@ class ISoftmax(nn.Module):
         self.register_buffer("exp_table", torch.as_tensor(list(exp_table), dtype=torch.int64))
         self.register_buffer("recip_table_one", torch.as_tensor(list(recip_table_one), dtype=torch.int64))
         self.register_buffer("recip_table_two", torch.as_tensor(list(recip_table_two), dtype=torch.int64))
+        # Optional, not required: a manifest written before the field existed — and any
+        # hand-built payload — still has to rebuild. Falling back keeps those working at
+        # a looser bound rather than refusing to load them; see _derived_max_tokens.
+        if max_tokens is None:
+            max_tokens = _derived_max_tokens(self.b2_two, self.s2_two, self.bound2_two, self.exp_table)
+        self.max_tokens = int(max_tokens)
+        if self.max_tokens < 1:
+            raise ValueError(f"max_tokens must be at least 1, got {self.max_tokens}")
 
     @classmethod
     def from_payload(cls, payload: dict, *, dim: int = -1, in_dtype: QuantDtype = INT8) -> "ISoftmax":
-        """Build from a ``int_calibrate_softmax.build_softmax_int_payload`` result."""
+        """Build from a ``int_calibrate_softmax.build_softmax_int_payload`` result.
+
+        ``max_tokens`` is read from the payload's top level, not from ``payload["metrics"]``
+        — metrics are a report, and nothing downstream (``export.py``) carries them.
+        """
         return cls(
             payload["scalars"],
             payload["exp_table"],
@@ -79,12 +129,35 @@ class ISoftmax(nn.Module):
             output_scale=payload["output_scale"],
             dim=dim,
             in_dtype=in_dtype,
+            max_tokens=payload.get("max_tokens"),
         )
 
     # --- integer kernel ------------------------------------------------------
 
     def forward_int(self, x_int: torch.Tensor) -> torch.Tensor:
-        """The golden ``softmax_quantize`` over ``dim``, vectorized (int64 in/out)."""
+        """The golden ``softmax_quantize`` over ``dim``, vectorized (int64 in/out).
+
+        Rejects a row longer than the calibration covered. Clamping or truncating is not
+        an alternative: the op's contract is a normalised row, and dropping tokens
+        computes a different function. Returning the row anyway is worse still — it is
+        silently un-normalised, because the accumulator saturates ``cursor_two`` and the
+        row is then divided by the calibration maximum instead of by its own sum. Measured
+        on a 16-token calibration replayed at 96 tokens: row sum 4.5176 on a flat row,
+        2.9059 on realistic logits, against the 1.0 the caller is entitled to.
+
+        The cost is one metadata read: ``dim`` is a real reduction axis, so the row length
+        is ``shape[dim]`` — O(1), no data-dependent scan. In an RTL port the token count is
+        a compile-time constant and the comparison folds away entirely.
+        """
+        tokens = int(x_int.shape[self.dim])
+        if tokens > self.max_tokens:
+            raise ValueError(
+                f"softmax row has {tokens} tokens along dim {self.dim} but this ISoftmax "
+                f"was calibrated for at most max_tokens={self.max_tokens}; the reciprocal "
+                f"segments do not cover the accumulator a longer row reaches, so the "
+                f"output row would be silently un-normalised. Recalibrate with "
+                f"build_softmax_int_payload(..., max_tokens={tokens})."
+            )
         x = x_int.to(torch.int64)
         delta = x.amax(dim=self.dim, keepdim=True) - x  # >= 0, inverse-exp argument
         cursor1 = torch.bitwise_right_shift(delta + self.b1, self.s1).clamp(0, self.bound1)
