@@ -479,7 +479,7 @@ def test_main_forwards_export_int_to_run_quantize(monkeypatch: pytest.MonkeyPatc
 
     assert recorded == [(("cfg.yaml",), {"ckpt": "fp.pt", "output": "q.pt",
                                          "project_root": "/root", "device": "cpu",
-                                         "export_int": "dump_dir"})]
+                                         "export_int": "dump_dir", "export_txt": False})]
 
 
 def test_main_defaults_export_int_to_none(monkeypatch: pytest.MonkeyPatch) -> None:
@@ -491,7 +491,7 @@ def test_main_defaults_export_int_to_none(monkeypatch: pytest.MonkeyPatch) -> No
     entrypoint.main(["-c", "cfg.yaml"])
 
     assert recorded == [{"ckpt": None, "output": None, "project_root": None,
-                         "device": None, "export_int": None}]
+                         "device": None, "export_int": None, "export_txt": False}]
 
 
 def test_main_requires_a_config(monkeypatch: pytest.MonkeyPatch) -> None:
@@ -618,3 +618,15 @@ def test_qat_branch_calls_prepare_qat_not_the_ptq_helper(tmp_path: Path,
                            training={"epochs": 1, "lr": 1e-3}, name="qat_wiring")
     entrypoint.run_quantize(config, project_root=str(tmp_path))
     assert calls == ["prepare_qat"], f"QAT branch must use prepare_qat, saw {calls}"
+
+
+def test_main_forwards_export_txt(monkeypatch: pytest.MonkeyPatch) -> None:
+    """The --export-txt flag has to reach run_quantize, not merely parse."""
+    seen: list[dict[str, Any]] = []
+    monkeypatch.setattr(entrypoint, "run_quantize",
+                        lambda *a, **kw: seen.append(kw))
+    entrypoint.main(["-c", "cfg.yaml", "--export-int", "d", "--export-txt"])
+    assert seen[0]["export_txt"] is True
+    seen.clear()
+    entrypoint.main(["-c", "cfg.yaml", "--export-int", "d"])
+    assert seen[0]["export_txt"] is False

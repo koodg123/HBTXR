@@ -42,6 +42,7 @@ from engine.train.trainer import Trainer, TrainConfig
 from quantization.calibrate import post_training_quantize
 from quantization.convert import convert_model_to_integer
 from quantization.export import export_integer_model
+from quantization.export_txt import write_hgpipe_txt
 from quantization.qat import prepare_qat
 from quantization.spec import QuantScheme
 
@@ -105,7 +106,8 @@ def _project_root(cfg: dict[str, Any], override: str | None) -> Path:
     return Path(root).expanduser().resolve() if root else Path.cwd()
 
 
-def _export_integer(model: Any, export_dir: str, calib_batches: list, forward_fn: Callable) -> dict[str, Any]:
+def _export_integer(model: Any, export_dir: str, calib_batches: list, forward_fn: Callable,
+                    *, export_txt: bool = False) -> dict[str, Any]:
     """Q -> I deployment tier: whole-graph integer conversion, then dump artifacts.
 
     Uses ``convert_model_to_integer`` (not the Linear-only ``convert_to_integer``), so
@@ -129,6 +131,10 @@ def _export_integer(model: Any, export_dir: str, calib_batches: list, forward_fn
     """
     model, report = convert_model_to_integer(model, calib_batches, forward_fn=forward_fn)
     manifest = export_integer_model(model, Path(export_dir), allow_unquantized=True)
+    if export_txt:
+        rendered = write_hgpipe_txt(Path(export_dir))
+        print(f"[quantize] HG-PIPE txt render -> {Path(export_dir) / 'txt'}: "
+              f"{len(rendered)} file(s)")
     print(f"[quantize] integer export -> {export_dir}: {len(report)} integer modules, "
           f"{manifest['num_modules']} exported {manifest['counts']}")
     if report.left_float or report.float_composites:
@@ -150,6 +156,7 @@ def run_quantize(
     project_root: str | None = None,
     device: str | None = None,
     export_int: str | None = None,
+    export_txt: bool = False,
     return_manifest: bool = False,
 ) -> Any:
     """PTQ or QAT of an HBTXR model per the ``quantization`` config block.
@@ -205,7 +212,10 @@ def run_quantize(
                                                      "weight_bits": scheme.weight.bits, "act_bits": scheme.activation.bits})
 
     export_dir = export_int or quant_cfg.get("export_int")
-    manifest = _export_integer(model, str(export_dir), calib_batches, forward_fn) if export_dir else None
+    manifest = _export_integer(
+        model, str(export_dir), calib_batches, forward_fn,
+        export_txt=bool(export_txt or quant_cfg.get("export_txt")),
+    ) if export_dir else None
     return (model, manifest) if return_manifest else model
 
 
@@ -216,11 +226,13 @@ def main(argv: list[str] | None = None) -> None:
     parser.add_argument("-o", "--output", default=None, help="quantized checkpoint output path")
     parser.add_argument("--project-root", default=None, help="root for manifest resolution")
     parser.add_argument("--device", default=None, help="device")
+    parser.add_argument("--export-txt", action="store_true",
+                        help="also render the integer dump as HG-PIPE .txt artifacts")
     parser.add_argument("--export-int", default=None, metavar="DIR",
                         help="also convert to the integer tier and dump HW artifacts into DIR")
     args = parser.parse_args(argv)
     run_quantize(args.config, ckpt=args.ckpt, output=args.output, project_root=args.project_root,
-                 device=args.device, export_int=args.export_int)
+                 device=args.device, export_int=args.export_int, export_txt=args.export_txt)
 
 
 if __name__ == "__main__":
