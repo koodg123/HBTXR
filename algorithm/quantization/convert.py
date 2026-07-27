@@ -318,6 +318,7 @@ def calibrate_int_layernorms(
     *,
     forward_fn: ForwardFn | None = None,
     entries: int = 256,
+    segments: int = 2,
     clamp_bits: int = 8,
     input_dtype: QuantDtype = INT8,
     max_rows: int = DEFAULT_MAX_ROWS,
@@ -337,6 +338,11 @@ def calibrate_int_layernorms(
     Modules the calibration batches never reached keep their float implementation and
     are simply absent from the returned mapping (``convert_model_to_integer`` then
     reports them under ``left_float``).
+
+    ``entries`` is the depth of EACH rsqrt table and ``segments`` (1 or 2, default 2)
+    how many there are, so the default costs ``2 * entries`` int16 words per LayerNorm —
+    the same convention ``recip_entries`` already uses for the softmax reciprocal. See
+    ``int_calibrate`` for why two segments is the default and what it measures.
     """
     norms = {name: m for name, m in model.named_modules() if isinstance(m, (nn.LayerNorm, QLayerNorm))}
     if not norms:
@@ -350,6 +356,7 @@ def calibrate_int_layernorms(
             norm,
             torch.cat(samples[name]),
             entries=entries,
+            segments=segments,
             clamp_bits=clamp_bits,
             input_dtype=input_dtype,
         )
@@ -617,6 +624,7 @@ def convert_model_to_integer(
     include_nonlinear: bool = True,
     include_conv: bool = True,
     layernorm_entries: int = 256,
+    layernorm_segments: int = 2,
     softmax_entries: int = 256,
     gelu_entries: int = 256,
     max_tokens: int | None = None,
@@ -659,7 +667,8 @@ def convert_model_to_integer(
 
     if include_nonlinear:
         run_stage("layernorm", calibrate_int_layernorms(
-            model, batches, forward_fn=forward_fn, entries=layernorm_entries, max_rows=max_rows))
+            model, batches, forward_fn=forward_fn, entries=layernorm_entries,
+            segments=layernorm_segments, max_rows=max_rows))
         run_stage("softmax", calibrate_int_softmaxes(
             model, batches, forward_fn=forward_fn, exp_entries=softmax_entries,
             recip_entries=softmax_entries, max_tokens=max_tokens, max_rows=max_rows))

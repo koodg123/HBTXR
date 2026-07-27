@@ -10,6 +10,19 @@ Two rules this file follows, because the previous version broke both:
   claim is removed (the folded round-half-up constant, the interior rsqrt sampling,
   the distribution-fitted variance index, the cursor's lower clamp, the input-port
   re-clamp).
+
+Since D3 the calibrator's DEFAULT index has two segments, so this file covers both
+shapes deliberately rather than by accident:
+
+* the helpers (``_golden``, ``_deployed_rsqrt_error``) dispatch on the scalar count, so
+  every test that used to run against the 7-scalar golden now runs against whichever
+  golden the payload names — a payload can no longer be checked against the wrong one.
+* the tests whose CLAIM is about the one-segment fit (the fitted-vs-envelope index and
+  the bin-interior sampling) pass ``segments=1`` explicitly. That is not a workaround:
+  the envelope baseline they compare against is a one-segment construction, so the
+  comparison is only meaningful there — and it keeps ``i_ops.layernorm_quantize``, the
+  golden every already-exported payload is checked against, exercised end to end.
+  ``test_int_layernorm_segmented.py`` owns the two-segment claims.
 """
 from __future__ import annotations
 
@@ -22,7 +35,7 @@ torch = pytest.importorskip("torch")
 
 from torch import nn
 
-from quantization.i_ops import dyadic_params, layernorm_quantize
+from quantization.i_ops import dyadic_params, layernorm_quantize, layernorm_quantize_segmented
 from quantization.ilayers.layernorm import ILayerNorm
 from quantization.ilayers.qtensor import QTensor
 from quantization.int_calibrate import calibrate_int_layernorm, integer_row_statistics
@@ -109,11 +122,26 @@ def _row_var_sum(x: torch.Tensor, payload: dict) -> np.ndarray:
 
 
 def _deployed_rsqrt_error(x: torch.Tensor, payload: dict) -> np.ndarray:
-    """Signed relative error of the rsqrt the kernel actually looks up, per row."""
-    _, _, b, s1, bound = payload["scalars"][:5]
+    """Signed relative error of the rsqrt the kernel actually looks up, per row.
+
+    Dispatches on the scalar count, so a segmented payload is judged by the segmented
+    lookup — branch on the UNCLAMPED segment-one cursor included. Scoring a 10-scalar
+    payload with the one-segment lookup would read the wrong table for exactly the rows
+    the second segment exists to serve, and the error it reported would be fiction.
+    """
     var_sum = _row_var_sum(x, payload)
-    cursor = np.clip((var_sum + b) >> s1, 0, bound)
-    used = np.asarray(payload["rsqrt_table"], dtype=np.float64)[cursor] * payload["rsqrt_scale"]
+    _, _, b, s1, bound = payload["scalars"][:5]
+    table = np.asarray(payload["rsqrt_table"], dtype=np.float64)
+    cursor = (var_sum + b) >> s1
+    if len(payload["scalars"]) == 7:
+        used = table[np.clip(cursor, 0, bound)]
+    else:
+        b_two, s1_two, bound_two = payload["scalars"][7:]
+        table_two = np.asarray(payload["rsqrt_table_two"], dtype=np.float64)
+        used = np.where(cursor > bound,
+                        table_two[np.clip((var_sum + b_two) >> s1_two, 0, bound_two)],
+                        table[np.clip(cursor, 0, bound)])
+    used = used * payload["rsqrt_scale"]
     var_real = var_sum.astype(np.float64) * payload["input_scale"] ** 2 / payload["channels"]
     return used / (1.0 / np.sqrt(var_real + payload["eps"])) - 1.0
 
@@ -149,9 +177,21 @@ def _synthetic(
 
 
 def _golden(x_int: torch.Tensor, scalars: list[int], lnw: list[int], lnb: list[int],
-            rsqrt_table: list[int]) -> torch.Tensor:
-    flat = layernorm_quantize(x_int.reshape(-1).tolist(), scalars, lnw, lnb, rsqrt_table)
-    return torch.tensor(flat, dtype=torch.int32).reshape(x_int.shape)
+            rsqrt_table: list[int], rsqrt_table_two: list[int] | None = None) -> torch.Tensor:
+    """The golden the SCALAR COUNT names — 7 -> ``layernorm_quantize``, 10 -> segmented."""
+    flat = x_int.reshape(-1).tolist()
+    if len(scalars) == 7:
+        assert rsqrt_table_two is None, "a 7-scalar payload has no second segment"
+        out = layernorm_quantize(flat, scalars, lnw, lnb, rsqrt_table)
+    else:
+        out = layernorm_quantize_segmented(flat, scalars, lnw, lnb, rsqrt_table, rsqrt_table_two)
+    return torch.tensor(out, dtype=torch.int32).reshape(x_int.shape)
+
+
+def _golden_for(x_int: torch.Tensor, payload: dict) -> torch.Tensor:
+    """``_golden`` driven straight from a calibrated payload, whichever shape it is."""
+    return _golden(x_int, payload["scalars"], payload["lnw"], payload["lnb"],
+                   payload["rsqrt_table"], payload.get("rsqrt_table_two"))
 
 
 def _raw_cursor(x_int: torch.Tensor, scalars: list[int]) -> torch.Tensor:
@@ -266,18 +306,33 @@ def test_ilayernorm_arithmetic_shift_floors_negatives():
     assert torch.equal(out.int_data, _golden(x_int, scalars, lnw, lnb, rsqrt_table))
 
 
-def test_ilayernorm_bit_exact_after_calibration():
-    """The calibrated (not hand-made) constants also drive the golden bit-exactly."""
+@pytest.mark.parametrize("segments", [1, 2])
+def test_ilayernorm_bit_exact_after_calibration(segments):
+    """The calibrated (not hand-made) constants also drive the golden bit-exactly.
+
+    Both index shapes, because the DEFAULT is now the segmented one and a payload must
+    be bit-exact against the golden its own scalar count names.
+    """
     ln = _layernorm(48, 3)
-    payload = calibrate_int_layernorm(ln, _homoscedastic(48, 1.5, 3, rows=200))
+    payload = calibrate_int_layernorm(ln, _homoscedastic(48, 1.5, 3, rows=200), segments=segments)
     iln = ILayerNorm.from_payload(payload)
     assert payload["scalars"][2] < 0, "a fitted index should carry a negative PoT offset"
+    assert len(payload["scalars"]) == (7 if segments == 1 else 10)
+    assert ("rsqrt_table_two" in payload) is (segments == 2)
 
     gen = torch.Generator().manual_seed(31)
     x_int = torch.randint(-128, 128, (3, 5, 48), generator=gen, dtype=torch.int32)
     out = iln(QTensor(x_int, scale=payload["input_scale"], zero_point=0.0, dtype=INT8))
-    golden = _golden(x_int, payload["scalars"], payload["lnw"], payload["lnb"], payload["rsqrt_table"])
-    assert torch.equal(out.int_data, golden)
+    assert torch.equal(out.int_data, _golden_for(x_int, payload))
+
+
+def test_calibration_defaults_to_the_two_segment_index():
+    """The default is the segmented index — stated as a test, not only in a docstring."""
+    payload = calibrate_int_layernorm(_layernorm(32, 3), _homoscedastic(32, 1.2, 3, rows=200))
+    assert payload["segments"] == 2
+    assert len(payload["scalars"]) == 10
+    assert payload["metrics"]["segments"] == 2
+    assert len(payload["rsqrt_table_two"]) == len(payload["rsqrt_table"]) == 256
 
 
 def test_rescale_reclamps_to_the_input_port_width():
@@ -297,10 +352,9 @@ def test_rescale_reclamps_to_the_input_port_width():
     assert int((scaled.abs() > INT8.qmax).sum()) > x_int.numel() // 2, "fixture does not overflow"
 
     out = iln(QTensor(x_int, scale=payload["input_scale"] * 4.0, zero_point=0.0, dtype=INT8))
-    args = (payload["scalars"], payload["lnw"], payload["lnb"], payload["rsqrt_table"])
-    clamped = _golden(scaled.clamp(INT8.qmin, INT8.qmax), *args)
+    clamped = _golden_for(scaled.clamp(INT8.qmin, INT8.qmax), payload)
     assert torch.equal(out.int_data, clamped)
-    assert not torch.equal(clamped, _golden(scaled, *args)), (
+    assert not torch.equal(clamped, _golden_for(scaled, payload)), (
         "the fixture cannot tell a clamped bridge from an unclamped one")
 
 
@@ -351,11 +405,17 @@ def test_heavy_tailed_variance_is_resolved_by_the_fitted_index(seed):
 
     The [min, max]-envelope index this module used to build misses the absolute bound
     below on all four seeds; the fitted index clears it with ~1.2x to spare.
+
+    ``segments=1`` is the point of the test, not a concession to it: the envelope
+    baseline is a ONE-segment construction, so the only honest comparison is against a
+    one-segment fit — and this keeps the 7-scalar ``layernorm_quantize`` golden driven by
+    real calibrated constants. The two-segment index beats BOTH by another ~9x
+    (``test_int_layernorm_segmented.py::test_two_segments_beat_one_on_the_same_data``).
     """
     channels = 48
     ln = _layernorm(channels, seed)
     x = _heteroscedastic(channels, seed)
-    payload = calibrate_int_layernorm(ln, x)
+    payload = calibrate_int_layernorm(ln, x, segments=1)
 
     # the fixture must really be wide-spread, else the assertions below are free
     assert payload["metrics"]["var_sum_dynamic_range"] > 500.0
@@ -383,11 +443,18 @@ def test_rsqrt_table_samples_the_bin_interior_not_its_lower_edge(seed):
     LARGEST rsqrt in the bin for every row in it, biasing the whole layer's output high.
     Measured mean signed relative rsqrt error over these fixtures: interior sampling
     -0.005..+0.003, lower-edge sampling +0.029..+0.037.
+
+    ``segments=1`` because the bias this detects scales with the bin width: the guard
+    below demands bins coarse enough for a lower-edge bias to be visible at all, and the
+    two-segment index (RMS ~0.01) is deliberately far too fine for that. The same claim
+    at two segments is pinned by
+    ``test_int_layernorm_segmented.py::test_segmented_tables_sample_the_bin_interior``,
+    which uses 16 entries per segment to coarsen the bins on purpose.
     """
     channels = 48
     ln = _layernorm(channels, seed)
     x = _heteroscedastic(channels, seed)
-    payload = calibrate_int_layernorm(ln, x)
+    payload = calibrate_int_layernorm(ln, x, segments=1)
 
     err = _deployed_rsqrt_error(x, payload)
     assert float(np.sqrt(np.mean(err ** 2))) > 0.05, "bins too fine here to detect any bias"
@@ -425,7 +492,8 @@ def test_ilayernorm_beats_a_mis_scaled_baseline():
     broken_scalars = list(payload["scalars"])
     broken_scalars[5] -= 1  # wrong requant shift, same declared output scale
     broken = ILayerNorm(broken_scalars, payload["rsqrt_table"], payload["lnw"], payload["lnb"],
-                        input_scale=payload["input_scale"], output_scale=payload["output_scale"])
+                        input_scale=payload["input_scale"], output_scale=payload["output_scale"],
+                        rsqrt_table_two=payload.get("rsqrt_table_two"))
     with torch.no_grad():
         ref = ln(x)
         rel_good = float((good(x) - ref).norm() / ref.norm())
@@ -519,12 +587,20 @@ def test_rsqrt_table_is_capped_by_the_eps_floor():
 
 
 @pytest.mark.parametrize("seed", HETERO_SEEDS)
-def test_reported_index_metrics_match_an_independent_measurement(seed):
-    """``metrics`` documents the PRECONDITION, so it has to be true, not decorative."""
+@pytest.mark.parametrize("segments", [1, 2])
+def test_reported_index_metrics_match_an_independent_measurement(seed, segments):
+    """``metrics`` documents the PRECONDITION, so it has to be true, not decorative.
+
+    ``index_lo`` / ``index_hi`` keep meaning "the first and last ``var_sum`` the index
+    resolves without clamping" for both shapes — for two segments that is segment ONE's
+    lower edge and segment TWO's upper edge, which is what makes ``rows_below_range`` /
+    ``rows_above_range`` still count rows pinned to an extreme table entry. Re-derived
+    here from the scalars rather than read back from the calibrator.
+    """
     channels = 48
     ln = _layernorm(channels, seed)
     x = _heteroscedastic(channels, seed)
-    payload = calibrate_int_layernorm(ln, x)
+    payload = calibrate_int_layernorm(ln, x, segments=segments)
     metrics = payload["metrics"]
 
     err = np.abs(_deployed_rsqrt_error(x, payload))
@@ -533,7 +609,20 @@ def test_reported_index_metrics_match_an_independent_measurement(seed):
 
     var_sum = _row_var_sum(x, payload)
     _, _, b, s1, bound = payload["scalars"][:5]
-    lo_edge, hi_edge = -b, -b + ((bound + 1) << s1) - 1
+    lo_edge = -b
+    if segments == 1:
+        hi_edge = -b + ((bound + 1) << s1) - 1
+        assert metrics["segment_threshold"] is None and metrics["rows_segment_two"] == 0
+    else:
+        b_two, s1_two, bound_two = payload["scalars"][7:]
+        hi_edge = -b_two + ((bound_two + 1) << s1_two) - 1
+        threshold = ((bound + 1) << s1) - b
+        assert metrics["segment_threshold"] == threshold
+        assert metrics["rows_segment_two"] == int(np.count_nonzero(var_sum >= threshold))
+        # segment two starts exactly where segment one overflows (the softmax precedent):
+        # no entry of it is wasted below, and no var_sum falls between the two.
+        assert -b_two == threshold
+    assert metrics["segments"] == segments
     assert metrics["index_lo"] == lo_edge and metrics["index_hi"] == hi_edge
     assert metrics["rows"] == var_sum.size
     assert metrics["rows_below_range"] == int(np.count_nonzero(var_sum < lo_edge))
@@ -680,6 +769,31 @@ def test_ilayernorm_rejects_bad_construction():
     iln = ILayerNorm([1, 1, 0, 0, 3, 2, 8], [1, 1, 1, 1], [1, 1], [0, 0], input_scale=1.0, output_scale=1.0)
     with pytest.raises(ValueError):  # channel-count mismatch
         iln(QTensor(torch.zeros(2, 5, dtype=torch.int32), scale=1.0, zero_point=0.0, dtype=INT8))
+
+
+def test_ilayernorm_rejects_a_half_specified_segmented_index():
+    """The 10 scalars and the second table must arrive together, in both directions.
+
+    Either half alone is worse than an error: 10 scalars without the table would index a
+    table that is not there, and 7 scalars *with* one would run the one-segment kernel on
+    a payload calibrated for two — reading segment one's table for every row the second
+    segment exists to serve, silently.
+    """
+    ten = [1, 1, 0, 0, 3, 2, 8, -16, 1, 3]
+    table = [1, 1, 1, 1]
+    with pytest.raises(ValueError):                      # 10 scalars, no second table
+        ILayerNorm(ten, table, [1, 1], [0, 0], input_scale=1.0, output_scale=1.0)
+    with pytest.raises(ValueError):                      # 7 scalars, a second table
+        ILayerNorm([1, 1, 0, 0, 3, 2, 8], table, [1, 1], [0, 0],
+                   input_scale=1.0, output_scale=1.0, rsqrt_table_two=table)
+    with pytest.raises(ValueError):                      # second table too short
+        ILayerNorm(ten, table, [1, 1], [0, 0], input_scale=1.0, output_scale=1.0,
+                   rsqrt_table_two=[1, 1])
+    with pytest.raises(ValueError):                      # neither 7 nor 10
+        ILayerNorm(ten + [0], table, [1, 1], [0, 0], input_scale=1.0, output_scale=1.0,
+                   rsqrt_table_two=table)
+    with pytest.raises(ValueError):                      # segments must be 1 or 2
+        calibrate_int_layernorm(_layernorm(8, 1), _homoscedastic(8, 1.0, 1, rows=40), segments=3)
 
 
 def test_calibrate_rejects_multi_dim_normalized_shape():

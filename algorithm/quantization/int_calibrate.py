@@ -6,7 +6,9 @@ and a handful of pre-computed constants. ``i_ops.layernorm_quantize`` is that
 datapath — integer mean by reciprocal-multiply-and-shift, integer variance
 accumulation, PoT-indexed rsqrt table, integer affine, arithmetic right shift,
 clamp — and it is driven by exactly seven scalars plus three integer vectors
-(``rsqrt_table``, ``lnw``, ``lnb``).
+(``rsqrt_table``, ``lnw``, ``lnb``). ``i_ops.layernorm_quantize_segmented`` is the
+same datapath with a two-segment rsqrt index: ten scalars and a second table, and
+the DEFAULT here (see "Which is why the DEFAULT index has TWO segments" below).
 
 This module derives those constants from a calibrated LayerNorm (``nn.LayerNorm``
 or ``QLayerNorm``) plus observed activations, so ``ilayers.layernorm.ILayerNorm``
@@ -41,16 +43,44 @@ or ``bound``) buys a much finer grid for the bulk, which is the right trade beca
 the per-row output error of a LayerNorm is exactly the per-row relative rsqrt error
 and every row carries about the same output energy.
 
-PRECONDITION (unavoidable, please read before trusting the block). One linear index
-of ``entries`` bins can only resolve a variance dynamic range of roughly ``entries``
-before either the low end quantizes coarsely or the high end clamps. Concretely, a
-bin ``[v, v + 2^s1)`` costs about ``2^s1 / (4 * v)`` of relative rsqrt error, so an
-observed ``var_sum`` spread wider than ~``entries``:1 *cannot* be served to a few
-percent no matter how ``(b, s1)`` are chosen. The returned ``metrics`` dict
+PRECONDITION (unavoidable for ONE segment, please read before trusting the block). One
+linear index of ``entries`` bins can only resolve a variance dynamic range of roughly
+``entries`` before either the low end quantizes coarsely or the high end clamps.
+Concretely, a bin ``[v, v + 2^s1)`` costs about ``2^s1 / (4 * v)`` of relative rsqrt
+error, so an observed ``var_sum`` spread wider than ~``entries``:1 *cannot* be served
+to a few percent no matter how ``(b, s1)`` are chosen. The returned ``metrics`` dict
 reports what was actually achieved (``rsqrt_rel_rms``, ``rsqrt_rel_p99``,
 ``rows_below_range``, ``rows_above_range``, ``var_sum_dynamic_range``); raise
-``entries`` (the table is ``entries`` int16 words) when ``rsqrt_rel_rms`` is too
+``entries`` (each table is ``entries`` int16 words) when ``rsqrt_rel_rms`` is too
 large for the accuracy budget.
+
+Which is why the DEFAULT index has TWO segments
+-----------------------------------------------
+``segments=2`` (the default) fits two independent ``(offset, shift)`` indices with a
+table each and lets the kernel branch between them —
+``i_ops.layernorm_quantize_segmented``, the direct analogue of the dual reciprocal
+``softmax_quantize`` has always had. The dynamic range each index must cover is then
+roughly the square root of the whole, which is what breaks the precondition above.
+Measured on the heteroscedastic fixtures (48 channels, 32:1 log-uniform row scale,
+var_sum dynamic range ~2.2e3), RMS relative rsqrt error over 4 seeds:
+
+    entries PER segment | 1 segment                         | 2 segments
+    256                 | 0.0935 / 0.0887 / 0.0903 / 0.0941 | 0.0104 / 0.0086 / 0.0089 / 0.0099
+    128                 | 0.1400 / 0.1525 / 0.1439 / 0.1371 | 0.0184 / 0.0167 / 0.0166 / 0.0166
+     64                 | 0.1868 / 0.2058 / 0.1966 / 0.1841 | 0.0280 / 0.0365 / 0.0354 / 0.0274
+
+Read that table across the diagonal, which is the part that matters for hardware: two
+64-entry segments are 128 int16 words — HALF the 256 words of the current default —
+and still beat the one 256-entry index by ~3x. The segmented index is therefore better
+on accuracy *and* on table cost at equal accuracy, and ``segments=1`` remains available
+(it keeps the 7-scalar ``i_ops.layernorm_quantize`` golden exercised, and every payload
+already exported stays loadable).
+
+``entries`` counts entries PER SEGMENT, matching ``recip_entries`` in
+``int_calibrate_softmax`` — so the default ``segments=2, entries=256`` costs 512 int16
+words per LayerNorm against 256 before. That is a real doubling and it is the one axis
+on which the default got more expensive; ``entries=128`` buys ~5x lower error at
+exactly the old 256-word budget if that matters more than the ~9x.
 """
 from __future__ import annotations
 
@@ -63,7 +93,7 @@ from torch import nn
 from torch.nn import functional as F
 
 from quantization.i_ops import dyadic_params
-from quantization.lut_calibrate import PotIndexParams, coordinates_for
+from quantization.lut_calibrate import PotIndexParams, coordinates_for, make_pot_index_params
 from quantization.scheme import INT8, QuantDtype, qrange
 
 # rsqrt table entries are int16: wide enough that a 2^-12-ish output scale keeps
@@ -171,42 +201,30 @@ def _index_error(params: PotIndexParams, var_sum: np.ndarray, unit: float, eps: 
     return table[cursor] / truth - 1.0
 
 
-def _fit_variance_index(
-    var_sum: np.ndarray,
-    unit: float,
-    eps: float,
-    entries: int,
-) -> tuple[PotIndexParams, dict[str, Any]]:
-    """Fit ``(offset, shift)`` to the observed ``var_sum`` distribution (see module doc).
-
-    Grid-searches the lower edge over quantiles of the observation and the shift over
-    every shift that can matter, scoring each candidate by the RMS relative rsqrt error
-    the golden kernel would make on the observed rows. Returns the winner plus the
-    metrics that document how well the (necessarily linear) index fits.
-    """
+def _search_grid(var_sum: np.ndarray, entries: int) -> tuple[np.ndarray, list[int], range]:
+    """``(probe rows, candidate lower edges, candidate shifts)`` shared by both fits."""
     if entries < 2:
         raise ValueError("entries must be at least 2")
-    bound = entries - 1
     probe = var_sum if var_sum.size <= _SEARCH_ROWS else var_sum[:: max(1, var_sum.size // _SEARCH_ROWS)]
     span = int(var_sum.max()) - int(var_sum.min())
     max_shift = max(1, int(math.ceil(math.log2(max(span, 2)))) + 1)
     lower_edges = sorted({max(int(math.floor(np.quantile(var_sum, q))), 0) for q in _LOWER_EDGE_QUANTILES})
+    return probe, lower_edges, range(0, max_shift + 1)
 
-    best: tuple[float, PotIndexParams] | None = None
-    for lower in lower_edges:
-        for shift in range(0, max_shift + 1):
-            candidate = PotIndexParams(offset=-lower, shift=shift, bound=bound)
-            rms = float(np.sqrt(np.mean(_index_error(candidate, probe, unit, eps) ** 2)))
-            if best is None or rms < best[0]:
-                best = (rms, candidate)
-    assert best is not None
-    params = best[1]
 
-    err = np.abs(_index_error(params, var_sum, unit, eps))
-    lo_edge = -params.offset
-    hi_edge = lo_edge + ((bound + 1) << params.shift) - 1
+def _index_metrics(var_sum: np.ndarray, err: np.ndarray, lo_edge: int, hi_edge: int) -> dict[str, Any]:
+    """The metrics both index shapes report, with identical meanings.
+
+    ``err`` is the signed per-row relative rsqrt error the DEPLOYED kernel makes (for a
+    segmented index, after the branch), ``lo_edge``/``hi_edge`` the first and last
+    ``var_sum`` the index resolves without clamping — segment one's lower edge and
+    segment two's upper edge when there are two. So ``rows_below_range`` /
+    ``rows_above_range`` keep meaning "rows pinned to the extreme table entry", which is
+    the only reading under which they are a warning about the fit.
+    """
+    err = np.abs(err)
     lo_obs, hi_obs = int(var_sum.min()), int(var_sum.max())
-    metrics: dict[str, Any] = {
+    return {
         "rsqrt_rel_rms": float(np.sqrt(np.mean(err ** 2))),
         "rsqrt_rel_p99": float(np.quantile(err, 0.99)),
         "rsqrt_rel_max": float(err.max()),
@@ -219,7 +237,155 @@ def _fit_variance_index(
         "index_lo": int(lo_edge),
         "index_hi": int(hi_edge),
     }
+
+
+def _index_hi(params: PotIndexParams) -> int:
+    """Largest ``var_sum`` this index resolves before it clamps at ``bound``."""
+    return -params.offset + ((params.bound + 1) << params.shift) - 1
+
+
+def _segment_threshold(params: PotIndexParams) -> int:
+    """Smallest ``var_sum`` whose segment-one cursor exceeds ``bound`` — the real pivot.
+
+    Identical in form and in purpose to ``int_calibrate_softmax._segment_threshold``: the
+    golden branches on the *unclamped* segment-one cursor, so the boundary the hardware
+    uses is set by segment one's PoT index and by nothing else. Starting segment two at
+    exactly this value is what guarantees no row ever lands on a clamped low entry of the
+    second table (and that no entry of it is wasted on variances segment one already
+    resolves).
+    """
+    return int(((params.bound + 1) << params.shift) - params.offset)
+
+
+def _fit_variance_index(
+    var_sum: np.ndarray,
+    unit: float,
+    eps: float,
+    entries: int,
+) -> tuple[PotIndexParams, dict[str, Any]]:
+    """Fit ONE ``(offset, shift)`` index to the observed ``var_sum`` (see module doc).
+
+    Grid-searches the lower edge over quantiles of the observation and the shift over
+    every shift that can matter, scoring each candidate by the RMS relative rsqrt error
+    the golden kernel would make on the observed rows. Returns the winner plus the
+    metrics that document how well the (necessarily linear) index fits.
+    """
+    probe, lower_edges, shifts = _search_grid(var_sum, entries)
+    bound = entries - 1
+
+    best: tuple[float, PotIndexParams] | None = None
+    for lower in lower_edges:
+        for shift in shifts:
+            candidate = PotIndexParams(offset=-lower, shift=shift, bound=bound)
+            rms = float(np.sqrt(np.mean(_index_error(candidate, probe, unit, eps) ** 2)))
+            if best is None or rms < best[0]:
+                best = (rms, candidate)
+    assert best is not None
+    params = best[1]
+
+    metrics = _index_metrics(var_sum, _index_error(params, var_sum, unit, eps),
+                             -params.offset, _index_hi(params))
+    metrics.update(segments=1, segment_threshold=None, rows_segment_two=0)
     return params, metrics
+
+
+def _segmented_index_error(
+    one: PotIndexParams,
+    two: PotIndexParams,
+    var_sum: np.ndarray,
+    unit: float,
+    eps: float,
+) -> tuple[np.ndarray, np.ndarray]:
+    """``(signed relative rsqrt error, segment-two mask)`` of the segmented kernel.
+
+    A transcription of ``i_ops.layernorm_quantize_segmented``'s lookup, branch included,
+    so the calibrator scores candidates on what the deployed kernel will actually do
+    rather than on an idealization of it.
+    """
+    table_one = rsqrt_table_values(one, unit, eps)
+    table_two = rsqrt_table_values(two, unit, eps)
+    cursor_one = (var_sum + one.offset) >> one.shift          # unclamped: it is the branch
+    use_two = cursor_one > one.bound
+    cursor_two = np.clip((var_sum + two.offset) >> two.shift, 0, two.bound)
+    value = np.where(use_two, table_two[cursor_two], table_one[np.clip(cursor_one, 0, one.bound)])
+    truth = 1.0 / np.sqrt(var_sum.astype(np.float64) * float(unit) + eps)
+    return value / truth - 1.0, use_two
+
+
+def _fit_segmented_variance_index(
+    var_sum: np.ndarray,
+    unit: float,
+    eps: float,
+    entries: int,
+    ceiling: int,
+) -> tuple[PotIndexParams, PotIndexParams, dict[str, Any]]:
+    """Fit TWO ``(offset, shift)`` indices, segment two starting at segment one's overflow.
+
+    The free parameters are only three — segment one's lower edge and shift, and segment
+    two's shift — because the split is NOT free: it is ``_segment_threshold(one)``, the
+    softmax precedent. Any other split would either strand entries of the second table
+    below values segment one already resolves, or leave a gap the kernel cannot address,
+    since the golden branches on segment one's own unclamped cursor.
+
+    Scoring is exact rather than heuristic: the two segments serve DISJOINT sets of rows,
+    so the total squared error decomposes, and segment two's shift can be optimized
+    against the rows above the threshold alone for each ``(lower, shift)`` of segment one.
+    That is what keeps a 3-parameter search at the cost of a 2-parameter one (~40 ms).
+
+    ``ceiling`` sizes segment two when NO observed row overflows segment one. There is no
+    data to fit in that case, so the table covers ``[threshold, ceiling]`` with ``ceiling``
+    the largest ``var_sum`` the input port can physically produce — a data-free envelope,
+    the same move ``int_calibrate_softmax._theoretical_accumulator_range`` makes. The
+    second table then costs nothing in accuracy and buys a real rsqrt for high-variance
+    rows that a one-segment index would simply pin to its last entry.
+    """
+    probe, lower_edges, shifts = _search_grid(var_sum, entries)
+    bound = entries - 1
+    rows = probe.size
+
+    best: tuple[float, PotIndexParams, PotIndexParams] | None = None
+    for lower in lower_edges:
+        for shift in shifts:
+            one = PotIndexParams(offset=-lower, shift=shift, bound=bound)
+            table_one = rsqrt_table_values(one, unit, eps)
+            cursor_one = (probe + one.offset) >> one.shift
+            use_two = cursor_one > bound
+            truth = 1.0 / np.sqrt(probe.astype(np.float64) * float(unit) + eps)
+            err_one = table_one[np.clip(cursor_one, 0, bound)] / truth - 1.0
+            sse_one = float(np.sum(err_one[~use_two] ** 2))
+
+            threshold = _segment_threshold(one)
+            above = probe[use_two]
+            if above.size == 0:
+                two = make_pot_index_params(threshold, max(int(ceiling), threshold + 1),
+                                            entries=entries)
+                if best is None or sse_one / rows < best[0]:
+                    best = (sse_one / rows, one, two)
+                continue
+            truth_two = 1.0 / np.sqrt(above.astype(np.float64) * float(unit) + eps)
+            for shift_two in shifts:
+                two = PotIndexParams(offset=-threshold, shift=shift_two, bound=bound)
+                table_two = rsqrt_table_values(two, unit, eps)
+                cursor_two = np.clip((above + two.offset) >> two.shift, 0, bound)
+                sse = sse_one + float(np.sum((table_two[cursor_two] / truth_two - 1.0) ** 2))
+                if best is None or sse / rows < best[0]:
+                    best = (sse / rows, one, two)
+    assert best is not None
+    _score, one, two = best
+
+    err, use_two = _segmented_index_error(one, two, var_sum, unit, eps)
+    metrics = _index_metrics(var_sum, err, -one.offset, _index_hi(two))
+    metrics.update(
+        segments=2,
+        segment_threshold=_segment_threshold(one),
+        rows_segment_two=int(np.count_nonzero(use_two)),
+        index_one_lo=int(-one.offset),
+        index_one_hi=int(_index_hi(one)),
+        index_two_lo=int(-two.offset),
+        index_two_hi=int(_index_hi(two)),
+        var_sum_ceiling=int(ceiling),
+    )
+    return one, two, metrics
 
 
 def _derive_shift(unit: float, target_output_scale: float, peak_output: float, clamp_bits: int) -> tuple[int, float]:
@@ -261,31 +427,54 @@ def _derive_shift(unit: float, target_output_scale: float, peak_output: float, c
     return s2, output_scale
 
 
+def _var_sum_ceiling(channels: int, dtype: QuantDtype) -> int:
+    """Largest ``var_sum`` a ``channels``-wide row of ``dtype`` codes can produce.
+
+    ``sum (x_i - mean)^2`` is maximized by the most bimodal row possible — half the
+    channels at ``qmin``, half at ``qmax`` — which puts the mean in the middle and every
+    deviation at ``(qmax - qmin) / 2``. Needs no data, and it is what sizes segment two
+    when the calibration sample never overflows segment one.
+    """
+    span = int(dtype.qmax) - int(dtype.qmin)
+    return max(1, channels * span * span // 4)
+
+
 def calibrate_int_layernorm(
     module: nn.Module,
     samples: Any,
     *,
     input_scale: float | None = None,
     entries: int = 256,
+    segments: int = 2,
     clamp_bits: int = 8,
     input_dtype: QuantDtype = INT8,
     lnw_dtype: QuantDtype = INT8,
     rsqrt_dtype: QuantDtype = RSQRT_DTYPE,
 ) -> dict[str, Any]:
-    """Derive the 7 ``layernorm_quantize`` scalars + rsqrt table + integer affine.
+    """Derive the ``layernorm_quantize[_segmented]`` scalars + rsqrt tables + int affine.
 
     ``module`` is an ``nn.LayerNorm`` or a ``QLayerNorm`` (anything exposing
     ``weight`` / ``bias`` / ``eps`` / ``normalized_shape``); ``samples`` are observed
     float activations whose last dim is the normalized channel dim.
 
-    Returns the payload ``ILayerNorm.from_payload`` consumes::
+    ``entries`` is the depth of EACH rsqrt table and ``segments`` how many there are
+    (1 or 2; 2 is the default — see the module docstring for the measured reason and
+    for the memory it costs). The payload ``ILayerNorm.from_payload`` consumes is::
 
-        scalars = [c_1_m, c_1_s, b, s1, bound, s2, clamp_bits]
-        rsqrt_table, lnw, lnb, input_scale, output_scale, rsqrt_scale, lnw_scale, ...
+        segments=1:  scalars = [c_1_m, c_1_s, b, s1, bound, s2, clamp_bits]
+                     rsqrt_table
+        segments=2:  scalars = [ ...the same seven... , b_two, s1_two, bound_two]
+                     rsqrt_table, rsqrt_table_two
 
-    plus a ``metrics`` dict describing how well the (linear, PoT) variance index fits
-    the observed variance distribution — see the module docstring's PRECONDITION.
+    plus ``lnw``, ``lnb``, the scales, and a ``metrics`` dict describing how well the
+    (piecewise-linear, PoT) variance index fits the observed variance distribution.
+
+    Both tables are quantized at ONE shared power-of-two ``rsqrt_scale``, which is what
+    lets the segmented kernel keep a single output shift ``s2`` — see
+    ``i_ops.layernorm_quantize_segmented``.
     """
+    if segments not in (1, 2):
+        raise ValueError(f"segments must be 1 or 2, got {segments}")
     weight, bias, eps, declared = _affine_of(module)
     x = _stack_samples(samples, declared)
     channels = int(x.shape[-1])
@@ -307,14 +496,29 @@ def calibrate_int_layernorm(
     # var_sum is an integer in units of input_scale^2 and equals C * var_real /
     # input_scale^2, so one var_sum step is `var_unit` of real variance.
     var_unit = (input_scale * input_scale) / float(channels)
-    params, index_metrics = _fit_variance_index(var_sum, var_unit, eps, entries)
-    rsqrt_real = rsqrt_table_values(params, var_unit, eps)
+    params_two: PotIndexParams | None = None
+    if segments == 1:
+        params, index_metrics = _fit_variance_index(var_sum, var_unit, eps, entries)
+        reals = [rsqrt_table_values(params, var_unit, eps)]
+    else:
+        params, params_two, index_metrics = _fit_segmented_variance_index(
+            var_sum, var_unit, eps, entries, _var_sum_ceiling(channels, input_dtype))
+        reals = [rsqrt_table_values(params, var_unit, eps),
+                 rsqrt_table_values(params_two, var_unit, eps)]
 
-    # --- (4) rsqrt table: power-of-two output scale, int16 entries ------------
-    exponent = int(math.floor(math.log2(float(rsqrt_dtype.qmax) / float(rsqrt_real.max()))))
+    # --- (4) rsqrt tables: ONE shared power-of-two scale, int16 entries -------
+    # Shared across segments on purpose: it is what keeps the kernel's single `>> s2`
+    # segment-independent (no per-segment (b3, s3) as the softmax reciprocal needs).
+    # Measured cost of sharing on the heteroscedastic fixtures: none to 4 decimal places.
+    peak = max(float(r.max()) for r in reals)
+    exponent = int(math.floor(math.log2(float(rsqrt_dtype.qmax) / peak)))
     rsqrt_scale = float(2.0 ** (-exponent))                # POT => HW just re-labels bits
-    rsqrt_table = np.clip(np.rint(rsqrt_real / rsqrt_scale),
-                          rsqrt_dtype.qmin, rsqrt_dtype.qmax).astype(np.int64)
+    tables = [np.clip(np.rint(r / rsqrt_scale), rsqrt_dtype.qmin, rsqrt_dtype.qmax).astype(np.int64)
+              for r in reals]
+    rsqrt_table = tables[0]
+    # the smallest entry any segment holds: the headroom the shared scale leaves. int16
+    # stops being free once this approaches single digits, so it travels in `metrics`.
+    index_metrics["rsqrt_min_entry"] = int(min(int(t.min()) for t in tables))
 
     # --- (5) integer LayerNorm affine weight ---------------------------------
     lnw_scale = _symmetric_scale(float(w_real.abs().max()), lnw_dtype)
@@ -335,9 +539,13 @@ def calibrate_int_layernorm(
     round_term = (1 << (s2 - 1)) if s2 > 0 else 0
     lnb = torch.round(b_real.double() / unit).to(torch.int64) + round_term
 
-    return {
-        "scalars": [int(c_1_m), int(c_1_s), int(params.offset), int(params.shift),
-                    int(params.bound), int(s2), int(clamp_bits)],
+    scalars = [int(c_1_m), int(c_1_s), int(params.offset), int(params.shift),
+               int(params.bound), int(s2), int(clamp_bits)]
+    if params_two is not None:
+        scalars += [int(params_two.offset), int(params_two.shift), int(params_two.bound)]
+
+    payload: dict[str, Any] = {
+        "scalars": scalars,
         "rsqrt_table": rsqrt_table.tolist(),
         "lnw": lnw.tolist(),
         "lnb": lnb.tolist(),
@@ -351,8 +559,12 @@ def calibrate_int_layernorm(
         "clamp_bits": int(clamp_bits),
         "input_dtype": input_dtype,
         "var_sum_range": (index_metrics["var_sum_min"], index_metrics["var_sum_max"]),
+        "segments": int(segments),
         "metrics": index_metrics,
     }
+    if params_two is not None:
+        payload["rsqrt_table_two"] = tables[1].tolist()
+    return payload
 
 
 __all__ = [

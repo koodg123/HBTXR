@@ -43,6 +43,7 @@ gets it wrong:
 from __future__ import annotations
 
 import json
+import math
 import re
 from pathlib import Path
 from typing import Any, Callable, Sequence
@@ -61,7 +62,12 @@ from quantization.qlayers.nonlinear import QGeLU, QLayerNorm, QSoftmax
 from quantization.scheme import qrange
 
 FORMAT = "hbtxr-int-v1"
-FORMAT_VERSION = 4
+# 5: ``layernorm_int`` gained ``segments`` and the optional ``scalars_two`` /
+# ``rsqrt_table_two`` of the two-segment rsqrt index. A v4 reader would parse a v5
+# segmented entry without error and silently run the one-segment kernel — every
+# high-variance row would then read the wrong table — so this is a breaking change even
+# though it only ADDS keys, and the version is what stops a reader from guessing.
+FORMAT_VERSION = 5
 MANIFEST_NAME = "manifest.json"
 
 # candidate .npy containers, narrowest first — the first one that holds the real
@@ -265,9 +271,19 @@ def _gelu_entry(m: QGeLU | IGeLU) -> dict[str, Any]:
 
 
 def _int_layernorm_entry(m: ILayerNorm) -> dict[str, Any]:
+    """I-tier LayerNorm; a segmented index adds ``scalars_two`` + ``rsqrt_table_two``.
+
+    ``scalars`` stays the seven-scalar core in its original positions and the segmented
+    index travels as a separate three-scalar extension, because that is what it is:
+    ``i_ops.layernorm_quantize_segmented`` takes ``core + extension`` concatenated, and
+    a one-segment entry is then a segmented entry with the extension absent rather than
+    a different shape of the same field. ``segments`` is emitted either way so a reader
+    never has to infer the kernel from which keys happen to be present.
+    """
     entry = {
         "type": type(m).__name__,
         "op": "layernorm_int",
+        "segments": int(m.segments),
         "scalars": [int(m.c_1_m), int(m.c_1_s), int(m.b), int(m.s1),
                     int(m.bound), int(m.s2), int(m.clamp_bits)],
         "channels": int(m.channels),
@@ -278,6 +294,10 @@ def _int_layernorm_entry(m: ILayerNorm) -> dict[str, Any]:
         "lnw": _int_list(m.lnw),
         "lnb": _int_list(m.lnb),
     }
+    if m.segments == 2:
+        entry["scalars_two"] = [int(m.b_two), int(m.s1_two), int(m.bound_two)]
+        entry["rsqrt_table_two"] = _int_list(m.rsqrt_table_two)
+        entry["table_entries_two"] = int(m.rsqrt_table_two.numel())
     entry.update(_dtype_fields(m.in_dtype, "input"))
     entry.update(_dtype_fields(m.out_dtype, "output"))
     return entry
@@ -617,6 +637,12 @@ def replay_layernorm(entry: dict[str, Any], x: np.ndarray) -> np.ndarray:
     integer affine, arithmetic right shift, clamp. numpy's ``>>`` sign-extends on
     signed integers exactly like Python's and ``torch.bitwise_right_shift``, so
     negative deviations floor identically and the replay is bit-exact, not close.
+
+    When the entry carries ``scalars_two`` the rsqrt lookup is the two-segment index of
+    ``i_ops.layernorm_quantize_segmented`` instead — the branch on the *unclamped*
+    segment-one cursor, same as ``replay_softmax`` does for the dual reciprocal. The
+    segment count is taken from the entry, never assumed: a one-segment manifest (every
+    manifest written before this index existed) replays through the same function.
     """
     c_1_m, c_1_s, b, s1, bound, s2, _clamp_bits = (int(v) for v in entry["scalars"])
     in_qmin, in_qmax = qrange(int(entry["input_bits"]), signed=bool(entry["input_signed"]))
@@ -626,8 +652,16 @@ def replay_layernorm(entry: dict[str, Any], x: np.ndarray) -> np.ndarray:
     mean = (acc * c_1_m + (1 << (c_1_s - 1))) >> c_1_s
     diff = x_int - mean
     var_sum = (diff * diff).sum(axis=-1, keepdims=True)
-    cursor = np.clip((var_sum + b) >> s1, 0, bound)
-    rsqrt = np.asarray(entry["rsqrt_table"], dtype=np.int64)[cursor]
+    table_one = np.asarray(entry["rsqrt_table"], dtype=np.int64)
+    cursor = (var_sum + b) >> s1
+    if entry.get("scalars_two") is None:
+        rsqrt = table_one[np.clip(cursor, 0, bound)]
+    else:
+        b_two, s1_two, bound_two = (int(v) for v in entry["scalars_two"])
+        cursor_two = np.clip((var_sum + b_two) >> s1_two, 0, bound_two)
+        rsqrt = np.where(cursor > bound,
+                         np.asarray(entry["rsqrt_table_two"], dtype=np.int64)[cursor_two],
+                         table_one[np.clip(cursor, 0, bound)])
     lnw = np.asarray(entry["lnw"], dtype=np.int64)
     lnb = np.asarray(entry["lnb"], dtype=np.int64)
     shifted = (diff * rsqrt * lnw + lnb) >> s2
@@ -771,6 +805,76 @@ def _act_span(entry: dict[str, Any], scale_key: str, bits_key: str, signed_key: 
     return float(entry[scale_key]) * qrange(int(entry[bits_key]), signed=bool(entry[signed_key]))[1]
 
 
+def _layernorm_probe(entry: dict[str, Any], rng: np.random.Generator, batch: int) -> np.ndarray:
+    """Rows whose *variances* sweep the whole declared rsqrt index, both segments included.
+
+    The old probe was ``uniform(-span, span)`` per element, which gives every row the same
+    variance: it addressed a single rsqrt entry no matter how deep the table was. That was
+    already weak, and with a segmented index it is unsound — a probe that only ever lands
+    in segment one leaves segment two entirely unverified, so corrupting it would replay
+    clean. A LayerNorm's table is indexed by ``var_sum``, so the probe has to be built in
+    that coordinate, not in the input's.
+
+    ``var_sum ~= channels * (std / input_scale)^2`` for a zero-mean row, so a target
+    ``var_sum`` is realized by drawing a row and rescaling it to the standard deviation
+    that inverts it. The draw is normalized to unit sample variance first: without that
+    the row's own chi-square wobble (~20% at 48 channels) swamps the placement.
+
+    The targets are ANCHORS first and a log-uniform sweep afterwards, so a small ``batch``
+    spends its rows on the positions that discriminate rather than on the middle of the
+    range. In priority order: the interior of segment one; the LOW END of segment two
+    (its most-used entries, and the ones a probe aimed at the segment's midpoint would
+    leave untouched); below segment one's lower edge, so the cursor's low clamp fires;
+    past segment two's upper edge, so the high clamp fires. With the default ``batch=4``
+    a segmented entry therefore reads both tables and hits both clamps; measured on the
+    FrameModel at 16/64/256/1024 entries per segment, that is 2 of the 4 rows in segment
+    two, landing on a low entry and on the saturated last one.
+
+    Targets are capped at the largest ``var_sum`` the input port can physically carry — a
+    row of int8 codes cannot exceed ``channels * (qmax - qmin)^2 / 4`` however it is
+    drawn, and pretending otherwise would only produce rows that all saturate identically.
+
+    ``var_sum ~= channels * (std / input_scale)^2`` is only an approximation — the kernel
+    reduces integer codes around an integer mean, and ``round(x / input_scale)`` perturbs
+    the sum of squares by about ``2 sqrt(var_sum / 12)``. That is why the segment-two
+    anchor carries a MARGIN above the threshold rather than sitting on it: aimed exactly at
+    the pivot it landed a few counts *below* on 3 of the FrameModel's 5 LayerNorms and
+    quietly probed segment one twice.
+    """
+    channels = int(entry["channels"])
+    scale = float(entry["input_scale"])
+    qmin, qmax = qrange(int(entry["input_bits"]), signed=bool(entry["input_signed"]))
+    ceiling = max(1.0, channels * (qmax - qmin) ** 2 / 4.0)
+
+    b, s1, bound = (int(v) for v in entry["scalars"][2:5])
+    lo = max(float(-b), 1.0)
+    hi = float(((bound + 1) << s1) - b - 1)
+    anchors = [math.sqrt(lo * max(hi, lo))]
+    if entry.get("scalars_two") is not None:
+        b_two, s1_two, bound_two = (int(v) for v in entry["scalars_two"])
+        threshold = float(((bound + 1) << s1) - b)
+        hi = float(((bound_two + 1) << s1_two) - b_two - 1)
+        # Half a bin above the threshold when the bins are wide — that IS segment two's
+        # first entry, its most-used one. When they are narrow, half a bin is smaller than
+        # the quantization noise on the realized var_sum, so the margin falls back to 1%
+        # of the threshold, which is ~17 sigma of that noise at any threshold above ~3600
+        # and still lands in a low bin of segment two.
+        margin = max((1 << s1_two) // 2, math.ceil(0.01 * threshold), 1)
+        anchors = [math.sqrt(lo * max(threshold - 1.0, lo)), threshold + margin]
+    floor_target, ceil_target = max(lo / 4.0, 1.0), max(hi * 4.0, lo * 8.0)
+    anchors += [floor_target, ceil_target]
+
+    rest = max(batch - len(anchors), 0)
+    sweep = list(np.geomspace(floor_target, ceil_target, rest)) if rest else []
+    targets = np.clip(np.asarray((anchors + sweep)[:max(batch, 1)], dtype=np.float64), 1.0, ceiling)
+
+    row = rng.standard_normal((len(targets), channels))
+    row -= row.mean(axis=-1, keepdims=True)
+    row /= np.maximum(row.std(axis=-1, keepdims=True), 1e-12)
+    std = scale * np.sqrt(targets / channels).reshape(-1, 1)
+    return np.clip(row * std, qmin * scale, qmax * scale).astype(np.float32)
+
+
 def _probe(entry: dict[str, Any], rng: np.random.Generator, batch: int) -> np.ndarray:
     """Random input that covers the op's real input range (per op family)."""
     op = entry["op"]
@@ -794,8 +898,7 @@ def _probe(entry: dict[str, Any], rng: np.random.Generator, batch: int) -> np.nd
         margin = _LUT_PROBE_OVERSHOOT * (hi - lo)
         return rng.uniform(lo - margin, hi + margin, size=(batch, 32)).astype(np.float32)
     if op == "layernorm_int":
-        span = _act_span(entry, "input_scale", "input_bits", "input_signed")
-        return (rng.uniform(-1.0, 1.0, size=(batch, int(entry["channels"]))) * span).astype(np.float32)
+        return _layernorm_probe(entry, rng, batch)
     if op == "layernorm_lut":
         # the Q-tier table is indexed by the *variance*, so the probe is sized by the
         # standard deviation that lands the row variance inside the table's range.

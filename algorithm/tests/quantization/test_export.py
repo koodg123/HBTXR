@@ -65,7 +65,10 @@ from quantization.spec import QuantScheme, TensorQuantSpec
 # to every backend that reads a dump, so changing them must break this test.
 EXPECTED_FORMAT = "hbtxr-int-v1"
 # v4 (D2): conv entries gained `padding`, softmax entries gained `max_tokens`.
-EXPECTED_FORMAT_VERSION = 4
+# v5 (D3): layernorm_int entries gained `segments` and the optional `scalars_two` /
+#          `rsqrt_table_two` of the two-segment rsqrt index. Additive, but a v4 reader
+#          would run the one-segment kernel on a segmented entry, so it is breaking.
+EXPECTED_FORMAT_VERSION = 5
 
 # Every module class the export knows how to write, and the replay kernel each maps to.
 EXPECTED_OPS = {

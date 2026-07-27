@@ -7,6 +7,7 @@ are checked bit-exact against.
 
 - ``table_quantize``: ReQuant / GeLU — cursor = (x + b) >> s, clamp, table lookup.
 - ``layernorm_quantize``: integer LayerNorm (integer mean, rsqrt table, affine, clamp).
+- ``layernorm_quantize_segmented``: the same op with a TWO-SEGMENT rsqrt index.
 - ``softmax_quantize``: integer Softmax (max-subtract, exp table, dual reciprocal tables).
 - ``requant``: dyadic requantization ``clamp((acc*mult + round) >> shift + zp)``.
 - ``int_matmul`` / ``int_conv2d``: pure-int accumulation (weight×act and act×act).
@@ -190,6 +191,83 @@ def layernorm_quantize(
     return outputs
 
 
+def layernorm_quantize_segmented(
+    inputs: list[int],
+    scalars: list[int],
+    lnw: list[int],
+    lnb: list[int],
+    rsqrt_table: list[int],
+    rsqrt_table_two: list[int],
+) -> list[int]:
+    """Integer LayerNorm whose rsqrt table is addressed by a TWO-SEGMENT PoT index.
+
+    Why a second golden exists rather than a wider ``layernorm_quantize``: the 7-scalar
+    tuple has one ``(b, s1, bound)`` triple, one table and no branch, so it *cannot*
+    express a second segment. ``layernorm_quantize`` stays exactly as it is — it is the
+    golden every already-exported 7-scalar payload is checked against — and this is the
+    kernel for the segmented ones.
+
+    Why two segments are worth a new kernel: ``cursor = (var_sum + b) >> s1`` is a
+    LINEAR index over ``1/sqrt(.)``, a log-domain function. A bin of width ``2^s1`` at
+    variance ``v`` costs about ``2^s1 / (4v)`` of relative rsqrt error, so one linear
+    index cannot serve a variance dynamic range much wider than ``bound + 1``:1 — which
+    is exactly what real (heteroscedastic) ViT token activations present. Splitting the
+    range at one point and giving each half its own index makes the resolution
+    piecewise-proportional to the variance instead of uniform.
+
+    The branch is copied VERBATIM from ``softmax_quantize``'s dual reciprocal, including
+    the detail that it tests the *unclamped* segment-one cursor: ``cursor_one > bound``
+    is precisely "this row overflowed segment one", and segment two is calibrated to
+    start at that same overflow point, so no row ever lands on a clamped low entry of
+    the second table.
+
+    What LayerNorm does NOT need, and softmax does: a second ``(b3, s3)`` requant pair.
+    Softmax needs one per segment because each reciprocal table carries its own
+    numerator ``qmax << s3``. Here both rsqrt tables are quantized at a single shared
+    ``rsqrt_scale`` and the only shift, ``>> s2``, is applied per element *after* the
+    affine — so it is segment-independent by construction. Measured on the
+    heteroscedastic fixtures: quantizing both segments at one power-of-two
+    ``rsqrt_scale`` (2^-10) reproduces the float-table RMS relative rsqrt error to 4
+    decimal places, with segment two's smallest int16 entry >= 512.
+
+    ``scalars`` is the 7-scalar tuple in its original positions plus the three-scalar
+    extension, i.e. ``[c_1_m, c_1_s, b, s1, bound, s2, clamp_bits, b_two, s1_two,
+    bound_two]``; ``scalars[:7]`` is therefore literally the 7-scalar layout.
+    """
+    if len(scalars) != 10:
+        raise ValueError(f"segmented layernorm expects 10 scalars, got {len(scalars)}")
+    if not lnw:
+        raise ValueError("layernorm requires lnw weights to infer channel count")
+
+    c = len(lnw)
+    if len(inputs) % c:
+        raise ValueError(f"input length {len(inputs)} is not divisible by channel count {c}")
+
+    (c_1_m, c_1_s, b, s1, bound, s2, clamp_bits,
+     b_two, s1_two, bound_two) = scalars
+    outputs: list[int] = []
+    for row_start in range(0, len(inputs), c):
+        row = inputs[row_start : row_start + c]
+        acc = sum(row)
+        mean_tmp = acc * c_1_m
+        mean_tmp += 1 << (c_1_s - 1)
+        mean = mean_tmp >> c_1_s
+
+        var_sum = sum((x - mean) * (x - mean) for x in row)
+        cursor = (var_sum + b) >> s1
+        if cursor > bound:
+            cursor_two = clamp((var_sum + b_two) >> s1_two, 0, bound_two)
+            rsqrt = rsqrt_table_two[cursor_two]
+        else:
+            rsqrt = rsqrt_table[clamp(cursor, 0, bound)]
+
+        for idx, value in enumerate(row):
+            affine = (value - mean) * rsqrt * lnw[idx] + lnb[idx]
+            shifted = affine >> s2
+            outputs.append(quantize_clamp(shifted, clamp_bits, signed=True))
+    return outputs
+
+
 def softmax_quantize(
     inputs: list[int],
     scalars: list[int],
@@ -263,6 +341,7 @@ def softmax_quantize(
 __all__ = [
     "table_quantize",
     "layernorm_quantize",
+    "layernorm_quantize_segmented",
     "softmax_quantize",
     "dyadic_params",
     "requant",
