@@ -109,9 +109,17 @@ class ISoftmax(nn.Module):
         # a looser bound rather than refusing to load them; see _derived_max_tokens.
         if max_tokens is None:
             max_tokens = _derived_max_tokens(self.b2_two, self.s2_two, self.bound2_two, self.exp_table)
-        self.max_tokens = int(max_tokens)
+        # A BUFFER: this is a SAFETY bound, and a state_dict round-trip that dropped it
+        # would silently fall back to the looser derived value — weakening a guard is a
+        # worse failure than losing a shape, because nothing downstream would complain.
+        self.register_buffer("max_tokens_buf", torch.tensor(int(max_tokens), dtype=torch.int64))
         if self.max_tokens < 1:
             raise ValueError(f"max_tokens must be at least 1, got {self.max_tokens}")
+
+    @property
+    def max_tokens(self) -> int:
+        """The calibrated row-length bound; stored as a buffer so it survives a reload."""
+        return int(self.max_tokens_buf)
 
     @classmethod
     def from_payload(cls, payload: dict, *, dim: int = -1, in_dtype: QuantDtype = INT8) -> "ISoftmax":

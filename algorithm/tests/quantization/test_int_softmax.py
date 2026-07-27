@@ -532,7 +532,9 @@ def test_max_tokens_extends_the_envelope_for_longer_sequences():
     with pytest.raises(ValueError, match="max_tokens"):
         _row_sums(narrow, long_flat)
     unguarded = ISoftmax.from_payload(narrow)
-    unguarded.max_tokens = long_tokens          # bypass, on purpose
+    # max_tokens is a buffer now (it must survive a state_dict round trip), so the
+    # deliberate bypass writes the buffer rather than the read-only view.
+    unguarded.max_tokens_buf.fill_(long_tokens)
     unguarded_out = unguarded.forward_int(_to_int(long_flat, narrow["input_scale"]))
     unguarded_sums = (unguarded_out.to(torch.float64) * narrow["output_scale"]).sum(dim=-1)
     assert float(unguarded_sums.max()) > 1.5, "fixture no longer overflows the envelope"

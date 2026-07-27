@@ -537,7 +537,12 @@ def export_integer_model(
         "model_class": type(model).__name__,
         "num_modules": len(modules),
         "total_int_weights": total_int_weights,
-        "total_params": int(sum(p.numel() for p in model.parameters())),
+        # Parameters AND buffers: an I-tier module holds its weights as buffers, so
+        # counting only parameters reports 0 for a fully converted model — correct,
+        # and useless to anyone sizing a deployment.
+        "total_params": int(sum(t.numel() for t in model.parameters())
+                            + sum(t.numel() for t in model.buffers())),
+        "total_parameters_only": int(sum(t.numel() for t in model.parameters())),
         "counts": counts,
         "num_unexported": len(unexported),
         "unexported": unexported,
@@ -549,7 +554,7 @@ def export_integer_model(
 
 # --- loading back -------------------------------------------------------------
 
-_INT_ARRAY_KEYS = ("table", "rsqrt_table", "lnw", "lnb",
+_INT_ARRAY_KEYS = ("table", "rsqrt_table", "rsqrt_table_two", "lnw", "lnb",
                    "exp_table", "recip_table_one", "recip_table_two")
 _FLOAT_ARRAY_KEYS = ("weight_scale", "bias", "weight")
 

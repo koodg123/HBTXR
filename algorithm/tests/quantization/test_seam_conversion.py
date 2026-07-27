@@ -129,3 +129,46 @@ def test_scale_stays_float_and_that_is_deliberate():
     x = torch.randn(2, 3, 4, 4)
     for module in scales.values():
         assert torch.equal(module(x), x * module.factor)     # exact, nothing to quantize
+
+
+# --- B3: shape and safety state must survive a state_dict round trip ---------
+#
+# padding changes the function computed; max_tokens is a safety bound. Both used to be
+# plain attributes, so reloading a converted model rebuilt them from the constructor
+# default and silently changed behaviour — the shape case is loud eventually, the guard
+# case never is.
+
+def test_conv_padding_survives_a_state_dict_round_trip():
+    from quantization.ilayers.conv import IConv2d
+
+    conv = nn.Conv2d(3, 4, kernel_size=3, stride=1, padding=1)
+    source = IConv2d.from_conv(conv, act_scale=0.01)
+    assert source.padding == (1, 1) and source.stride == 1
+
+    blank = IConv2d.from_conv(nn.Conv2d(3, 4, kernel_size=3, stride=1, padding=0),
+                              act_scale=0.01)
+    assert blank.padding == (0, 0), "fixture is degenerate"
+    blank.load_state_dict(source.state_dict())
+    assert blank.padding == (1, 1), "padding was lost on reload"
+    assert blank.stride == 1
+
+    x = torch.randn(1, 3, 6, 6)
+    with torch.no_grad():
+        assert torch.equal(blank(x), source(x))
+
+
+def test_softmax_max_tokens_survives_a_state_dict_round_trip():
+    from quantization.ilayers.softmax import ISoftmax
+    from quantization.int_calibrate_softmax import build_softmax_int_payload
+
+    torch.manual_seed(0)
+    rows = (torch.randn(8, 12) * 2.0).numpy()
+    source = ISoftmax.from_payload(build_softmax_int_payload(rows, max_tokens=12))
+    other = ISoftmax.from_payload(build_softmax_int_payload(rows, max_tokens=64))
+    assert source.max_tokens == 12 and other.max_tokens == 64, "fixture is degenerate"
+
+    other.load_state_dict(source.state_dict())
+    assert other.max_tokens == 12, "the safety bound was lost on reload"
+    # and the guard really follows the reloaded value
+    with pytest.raises(ValueError, match="max_tokens"):
+        other.forward_int(torch.zeros(2, 32, dtype=torch.int64))

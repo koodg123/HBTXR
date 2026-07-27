@@ -88,12 +88,25 @@ class IConv2d(nn.Module):
         self.act_scale = float(act_scale)
         self.act_zero_point = int(round(float(act_zero_point)))
         self.act_dtype = act_dtype
-        self.stride = int(stride)
-        self.padding = _pad_pair(padding)                                       # (ph, pw)
+        # A BUFFER, not a plain attribute: padding changes the output shape and the
+        # function computed, so a state_dict round-trip that dropped it would rebuild a
+        # conv that quietly computes something else. ``stride`` is a plain int for the
+        # same reason it always was — it is not restorable either, and is fixed next.
+        self.register_buffer("padding_hw", torch.tensor(_pad_pair(padding), dtype=torch.int64))
+        self.register_buffer("stride_hw", torch.tensor(int(stride), dtype=torch.int64))
         if bias is not None:
             self.register_buffer("bias", bias.detach().clone().float())
         else:
             self.bias = None
+
+    @property
+    def padding(self) -> tuple[int, int]:
+        """``(ph, pw)`` as python ints — the buffer is the storage, this is the reader."""
+        return tuple(int(v) for v in self.padding_hw)
+
+    @property
+    def stride(self) -> int:
+        return int(self.stride_hw)
 
     @classmethod
     def from_conv(cls, conv: nn.Conv2d, *, act_scale, act_dtype: QuantDtype = INT8,
@@ -110,7 +123,7 @@ class IConv2d(nn.Module):
     def forward(self, x: torch.Tensor) -> torch.Tensor:
         x_int = torch.round(x / self.act_scale + self.act_zero_point).clamp(
             self.act_dtype.qmin, self.act_dtype.qmax)
-        ph, pw = self.padding
+        ph, pw = (int(v) for v in self.padding_hw)
         if ph or pw:
             # Pad the INTEGER activation with the zero-point, not with 0, and only then
             # convolve with padding=0. Handing ``padding=`` to F.conv2d instead would
@@ -122,7 +135,7 @@ class IConv2d(nn.Module):
             # 1.8e-07 here. Padding with zp keeps the correction exactly right, since
             # a padded tap contributes (zp - zp)·w = 0.
             x_int = F.pad(x_int, (pw, pw, ph, ph), value=float(self.act_zero_point))
-        acc = F.conv2d(x_int.float(), self.weight_int.float(), stride=self.stride).round().to(torch.int64)
+        acc = F.conv2d(x_int.float(), self.weight_int.float(), stride=int(self.stride_hw)).round().to(torch.int64)
         if self.act_zero_point != 0:
             acc = acc - self.act_zero_point * self.wsum.view(1, -1, 1, 1)
         y = acc.to(torch.float32) * (self.act_scale * self.weight_scale.view(1, -1, 1, 1))

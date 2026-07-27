@@ -242,7 +242,12 @@ def test_manifest_exists_parses_and_carries_metadata(q_tier):
     assert on_disk["format_version"] == EXPECTED_FORMAT_VERSION
     assert on_disk["model_class"] == type(model).__name__
     assert on_disk["num_modules"] == len(on_disk["modules"]) > 0
-    assert on_disk["total_params"] == sum(p.numel() for p in model.parameters())
+    # total_params counts parameters AND buffers: an I-tier module holds its weights
+    # as buffers, so a parameters-only count reads 0 for a converted model.
+    assert on_disk["total_params"] == (sum(t.numel() for t in model.parameters())
+                                       + sum(t.numel() for t in model.buffers()))
+    assert on_disk["total_parameters_only"] == sum(t.numel() for t in model.parameters())
+    assert on_disk["total_params"] > 0, "a converted model must not report an empty size"
     assert on_disk["total_int_weights"] == sum(
         int(np.prod(e["weight_shape"])) for e in on_disk["modules"].values() if "weight_shape" in e)
 

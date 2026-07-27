@@ -769,3 +769,30 @@ def test_corrupting_the_segment_two_scalars_fails_verification(converted_export,
     assert ok is False and diff > 1e-4
     flagged = {r["name"] for r in verify_export_report(model, dst) if not r["ok"]}
     assert flagged == set(victims)
+
+
+def test_the_loader_returns_both_segment_tables_as_the_same_type(converted_export):
+    """A consumer must not have to know which table got materialized.
+
+    ``load_integer_manifest`` turns the fields in ``_INT_ARRAY_KEYS`` into numpy arrays
+    and leaves everything else a plain list. ``rsqrt_table_two`` was missing from that
+    list, so segment one came back as an ndarray and segment two as a list — indexing
+    works either way, which is exactly why nothing noticed, but ``.shape`` / ``.dtype``
+    on one and not the other is a broken contract for anyone reading a dump.
+    """
+    import numpy as np
+
+    from quantization.export import load_integer_manifest
+
+    _model, out, _manifest = converted_export
+    loaded = load_integer_manifest(out)
+    segmented = [e for e in loaded["modules"].values()
+                 if e.get("op") == "layernorm_int" and e.get("rsqrt_table_two") is not None]
+    assert segmented, "fixture has no segmented LayerNorm"
+    for entry in segmented:
+        one, two = entry["rsqrt_table"], entry["rsqrt_table_two"]
+        assert isinstance(one, np.ndarray), "segment one is no longer materialized"
+        assert type(two) is type(one), (
+            f"segment tables come back as different types: "
+            f"{type(one).__name__} vs {type(two).__name__}")
+        assert two.dtype == one.dtype
