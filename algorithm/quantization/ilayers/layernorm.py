@@ -34,32 +34,8 @@ from typing import Any, Sequence
 import torch
 from torch import nn
 
-from quantization.ilayers.qtensor import QTensor
+from quantization.ilayers.qtensor import QTensor, rescale_ratio
 from quantization.scheme import INT8, QuantDtype
-
-
-def _rescale_ratio(
-    scale: torch.Tensor | float,
-    input_scale: float,
-    channels: int,
-) -> torch.Tensor | float:
-    """``incoming_scale / input_scale`` as a scalar, or a ``[C]`` per-channel vector.
-
-    ``ILinear.forward_accumulator`` can legitimately hand on a per-channel scale, and
-    silently taking element 0 of it would misread every other channel. A per-channel
-    grid is bridged per channel; anything that is neither scalar nor ``[C]`` is a
-    contract violation and is rejected rather than broadcast by accident.
-    """
-    if not torch.is_tensor(scale):
-        return float(scale) / input_scale
-    flat = scale.reshape(-1)
-    if flat.numel() == 1:
-        return float(flat[0]) / input_scale
-    if flat.numel() != channels:
-        raise ValueError(
-            f"input scale must be per-tensor or per-channel ({channels} entries), "
-            f"got {flat.numel()}")
-    return flat.to(torch.float64) / input_scale
 
 
 class ILayerNorm(nn.Module):
@@ -135,7 +111,7 @@ class ILayerNorm(nn.Module):
         if qt.int_data.shape[-1] != self.channels:
             raise ValueError(f"expected {self.channels} channels, got {qt.int_data.shape[-1]}")
         x = qt.int_data.to(torch.int64)
-        ratio = _rescale_ratio(qt.scale, self.input_scale, self.channels)
+        ratio = rescale_ratio(qt.scale, self.input_scale, self.channels)
         if torch.is_tensor(ratio) or ratio != 1.0:
             # bridge an upstream scale mismatch; the result re-enters an in_dtype-wide
             # input port, so it must be clamped exactly like QTensor.quantize would.

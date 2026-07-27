@@ -11,8 +11,14 @@ quantization:
   skip: []                  # module-name substrings to leave in fp (e.g. ["head"])
 
   # Integer-artifact export for the HW / bit-exact-simulator backend (or --export-int DIR).
-  # Runs after the quantized checkpoint is saved: LUT-calibrates GeLU/LayerNorm/Softmax,
-  # converts Q -> I, then writes integer weights (.npy) + scales + LUTs + manifest.json.
+  # Runs after the quantized checkpoint is saved: convert_model_to_integer replaces
+  # Linear/Conv2d/GeLU/LayerNorm/Softmax with I-tier kernels whose WHOLE datapath is
+  # integer (integer mean/variance/rsqrt, integer row max/exp/row-sum/reciprocal — unlike
+  # the Q-tier LUTs, which still reduce in float), then writes integer weights (.npy) +
+  # scales + tables + manifest.json.
+  # Every op becomes integer; the GRAPH does not. Tensors still move between modules as
+  # float, and the attention matmuls / residual adds stay float (see QUANTIZATION-PLAN §9).
+  # The padded 3x3 mask_head.proj is left float and listed in manifest['unexported'].
   # Replay the dump with quantization.export.verify_export to prove it is faithful.
   export_int: null          # e.g. runs/frame_hbtxr/int_export
 

@@ -4,15 +4,18 @@
     calibration batches from the data pipeline -> PTQ (post_training_quantize) or
     QAT (prepare_qat + fine-tune via engine.train.Trainer) -> save quantized ckpt.
 
-Config block ``quantization``: ``mode`` (ptq|qat), ``weight_bits``, ``act_bits``,
-``skip`` (module-name substrings left fp), ``num_calib_batches``, ``ckpt_path``,
-``output``, ``export_int``. Uses the same experiment schema as training
+Config block ``quantization``: ``mode`` (ptq|qat), ``weight``/``activation`` specs
+(or legacy ``weight_bits``/``act_bits``), ``overrides``, ``skip`` (module-name
+substrings left fp), ``num_calib_batches``, ``ckpt_path``, ``output``,
+``export_int``. Uses the same experiment schema as training
 (see configs/experiment/*_quant.yaml).
 
 With ``export_int`` (or ``--export-int DIR``) the run continues past the quantized
-checkpoint into the deployment tier: calibrate the nonlinear LUTs on the same
-calibration batches, ``convert_to_integer``, then dump integer weights + scales +
-LUTs and a ``manifest.json`` for the HW / bit-exact-simulator backend.
+checkpoint into the deployment tier: ``convert_model_to_integer`` on the same
+calibration batches — which installs the I-tier kernels whose whole datapath is
+integer, not the Q-tier LUTs that still reduce in float — then dumps integer
+weights + scales + tables and a ``manifest.json`` for the HW / bit-exact-simulator
+backend. Every op becomes integer; the graph does not (see QUANTIZATION-PLAN §9).
 
 Run from the ``algorithm/`` root::
 

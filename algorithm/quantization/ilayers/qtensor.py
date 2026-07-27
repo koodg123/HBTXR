@@ -29,6 +29,40 @@ def _as_tensor(v: Any, ref: torch.Tensor) -> torch.Tensor:
     return t.to(ref.device)
 
 
+def rescale_ratio(
+    scale: torch.Tensor | float,
+    target_scale: float,
+    channels: int,
+) -> torch.Tensor | float:
+    """``incoming_scale / target_scale`` as a scalar, or a ``[C]`` per-channel vector.
+
+    Every I-tier op that re-expresses an incoming ``QTensor`` on its own grid needs
+    this, and getting it wrong is silent: ``ILinear.forward_accumulator`` legitimately
+    hands on a per-out-channel scale, so taking element 0 of it — which four modules
+    used to do — misreads every other channel with no error. This lives here because
+    ``QTensor`` is what defines the scale semantics in the first place; keeping one
+    copy is the point, four near-identical private copies is how they drift apart.
+
+    Accepted: a python float, a 1-element tensor, or a tensor with exactly ``channels``
+    elements *in any shape* — it is flattened and aligned against the trailing dim,
+    which is ``QTensor``'s per-channel broadcast axis. Any other length is a contract
+    violation and raises rather than silently broadcasting.
+
+    Returns float64 for the per-channel case so the caller's product stays exact for
+    int32-wide accumulators, whose magnitudes run past float32's 2^24 integer limit.
+    """
+    if not torch.is_tensor(scale):
+        return float(scale) / target_scale
+    flat = scale.reshape(-1)
+    if flat.numel() == 1:
+        return float(flat[0]) / target_scale
+    if flat.numel() != channels:
+        raise ValueError(
+            f"input scale must be per-tensor or per-channel ({channels} entries), "
+            f"got {flat.numel()}")
+    return flat.to(torch.float64) / target_scale
+
+
 @dataclass
 class QTensor:
     int_data: torch.Tensor          # integer-valued (int8/uint8/int32)

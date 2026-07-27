@@ -16,12 +16,8 @@ from __future__ import annotations
 import torch
 from torch import nn
 
-from quantization.ilayers.qtensor import QTensor
+from quantization.ilayers.qtensor import QTensor, rescale_ratio
 from quantization.scheme import INT8, QuantDtype
-
-
-def _scalar(v) -> float:
-    return float(v.reshape(-1)[0]) if torch.is_tensor(v) else float(v)
 
 
 class IGeLU(nn.Module):
@@ -41,9 +37,16 @@ class IGeLU(nn.Module):
                    input_scale=qgelu.input_scale, output_scale=qgelu.output_scale)
 
     def forward(self, qt: QTensor) -> QTensor:
-        # bring the input integer into the LUT's input scale (identity when equal)
-        ratio = _scalar(qt.scale) / self.input_scale
-        x_lut = torch.round(qt.int_data.to(torch.float32) * ratio).to(torch.int64)
+        # Bring the input integer onto the LUT's input scale (identity when equal).
+        # GeLU is elementwise, so a per-out-channel scale over the trailing dim bridges
+        # channel by channel with no reduction to worry about. float64 (not float32)
+        # keeps the product exact for int32-wide accumulator inputs, whose magnitudes
+        # run past float32's exact-integer limit of 2^24.
+        ratio = rescale_ratio(qt.scale, self.input_scale, qt.int_data.shape[-1])
+        x_lut = torch.round(qt.int_data.to(torch.float64) * ratio).to(torch.int64)
+        # No re-clamp here, unlike ILayerNorm/ISoftmax: IGeLU declares no input dtype,
+        # so there is no input port width to clamp to and inventing one would silently
+        # narrow int32 accumulators. The cursor clamp below is the only saturation.
         cursor = torch.bitwise_right_shift(x_lut + self.b, self.s).clamp(0, self.bound)
         out_int = self.table[cursor]
         return QTensor(out_int.to(torch.int32), scale=self.output_scale, zero_point=0.0, dtype=self.out_dtype)

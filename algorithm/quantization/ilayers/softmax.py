@@ -21,12 +21,8 @@ from __future__ import annotations
 import torch
 from torch import nn
 
-from quantization.ilayers.qtensor import QTensor
+from quantization.ilayers.qtensor import QTensor, rescale_ratio
 from quantization.scheme import INT8, QuantDtype, qrange
-
-
-def _scalar(v) -> float:
-    return float(v.reshape(-1)[0]) if torch.is_tensor(v) else float(v)
 
 
 class ISoftmax(nn.Module):
@@ -124,23 +120,48 @@ class ISoftmax(nn.Module):
     def forward_qtensor(self, qt: QTensor) -> QTensor:
         """Rebase an upstream QTensor onto the exp table's integer grid, then run.
 
-        Two things this path does *not* do, both deliberate and both bounded:
+        Three things this path does, each deliberate and each bounded:
 
-        * the rebase goes through float32, so it is exact only while
-          ``|int_data| * ratio`` stays under 2^24. That covers every activation dtype in
-          this codebase (int8/uint8, and int32 accumulators well below 2^24 after
-          requant) and it matches the precedent set by ``IGeLU``; it is *not* an exact
-          integer requant, and a genuinely int32-wide input would round. When the scales
-          already match, ``ratio`` is 1.0 and the conversion is exact for any input.
-        * ``qt.zero_point`` is not applied. It is cancelled, not dropped: ``forward_int``
-          subtracts the row max before anything else, so a uniform additive offset on the
-          integer data leaves every ``delta`` — and therefore the whole output —
-          unchanged. ``test_isoftmax_is_invariant_to_qtensor_zero_point`` pins that down.
-          A *per-element* zero point would not cancel, but ``QTensor`` carries a scalar or
-          per-channel one and softmax reduces along the last axis.
+        * the rebase goes through float64, so ``|int_data| * ratio`` is exact out to
+          2^53 — every activation dtype in this codebase including a full-width int32
+          accumulator. It is still *not* an exact integer requant (the rounding is a
+          real rounding), but it never loses magnitude. When the scales already match,
+          ``ratio`` is 1.0, the bridge is skipped entirely and the input passes through
+          untouched.
+        * a per-channel scale **along the reduction axis is bridged, not rejected**. The
+          worry is real: ``forward_int`` takes an integer row max and indexes one exp
+          table, and both assume the whole row sits on a single grid — which a raw
+          per-channel row does not. But the bridge is precisely what establishes that
+          grid. It runs before any reduction and re-expresses every element on
+          ``input_scale``, so ``forward_int`` still sees a uniform row; raising instead
+          would ban the one production path that generates these scales
+          (``ILinear.forward_accumulator`` feeding an attention softmax) over a
+          condition the bridge has already removed. The price is that the rounding is
+          now per element rather than uniform (still <= 0.5 LSB of ``input_scale``
+          each), and that a channel whose scale far exceeds ``input_scale`` saturates
+          the ``in_dtype`` port — visible clamping, not a silent misread.
+        * the bridged value re-enters an ``in_dtype``-wide input port, so it is clamped
+          there exactly as ``QTensor.quantize`` and ``ILayerNorm.forward_int`` do.
+          Without that a bridge could hand ``forward_int`` a value the block's input
+          port cannot physically carry.
+
+        One thing it does *not* do: ``qt.zero_point`` is not applied. It is cancelled,
+        not dropped — ``forward_int`` subtracts the row max before anything else, so a
+        uniform additive offset on the integer data leaves every ``delta`` — and
+        therefore the whole output — unchanged.
+        ``test_isoftmax_is_invariant_to_qtensor_zero_point`` pins that down. A
+        *per-element* zero point would not cancel, but ``QTensor`` carries a scalar or
+        per-channel one and softmax reduces along the last axis.
         """
-        ratio = _scalar(qt.scale) / self.input_scale
-        x_lut = torch.round(qt.int_data.to(torch.float32) * ratio).to(torch.int64)
+        ratio = rescale_ratio(qt.scale, self.input_scale, qt.int_data.shape[-1])
+        x_lut = qt.int_data.to(torch.int64)
+        if torch.is_tensor(ratio) or ratio != 1.0:
+            x_lut = torch.round(x_lut.to(torch.float64) * ratio).to(torch.int64)
+        # Clamp unconditionally, not only when a bridge ran: the input port is a
+        # physical width, so whether a value fits it cannot depend on how the caller
+        # happened to spell an equivalent scale. Skipping this when ratio == 1.0 made
+        # two spellings of the same grid produce different outputs.
+        x_lut = x_lut.clamp(self.in_dtype.qmin, self.in_dtype.qmax)
         out_int = self.forward_int(x_lut)
         return QTensor(out_int.to(torch.int32), scale=self.output_scale, zero_point=0.0, dtype=self.out_dtype)
 

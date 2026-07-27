@@ -7,9 +7,15 @@ exits early at cut point ``c < L`` (``B_{1:c}``), reusing the SAME early blocks:
     U^f_t = B_{1:L}(P_f(x^f_t))        # search / frame, full depth
     U^e_t = B_{1:c}(P_e(x^e_t)),  c<L  # track / event, early exit
 
-Fig 5 depicts ``L = 8, c = 4`` (validation-selected). Positional embedding is
-applied by the caller/stem — the frame and event grids have different token
-counts — so this module is a pure Transformer-Block stack with a final norm.
+Fig 5 depicts ``L = 8, c = 4`` (validation-selected). This module is a pure
+Transformer-Block stack with a final norm.
+
+**No positional embedding exists anywhere in this codebase** — not here, not in
+the stems (``models/backbones/patch_embed.py``), not in any caller. An earlier
+version of this docstring claimed the caller/stem applied one; it does not. The
+frame and event grids have different token counts, so adding one would need a
+per-modality table, and that is a modelling decision nobody has made yet rather
+than a step that is silently happening elsewhere.
 """
 from __future__ import annotations
 
