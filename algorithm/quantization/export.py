@@ -55,6 +55,8 @@ from torch import nn
 from quantization.ilayers.conv import IConv2d
 from quantization.ilayers.layernorm import ILayerNorm
 from quantization.ilayers.linear import ILinear
+from quantization.ilayers.matmul import IMatMul
+from quantization.ilayers.tensor_ops import IAdd
 from quantization.ilayers.nonlinear import IGeLU
 from quantization.ilayers.qtensor import QTensor
 from quantization.ilayers.softmax import ISoftmax
@@ -390,6 +392,54 @@ def _is_quant_tier(m: nn.Module) -> bool:
     return type(m).__module__.split(".")[0] == "quantization"
 
 
+def _is_int_add(m: Any) -> bool:
+    """An ``IAdd`` behind ``convert.IAddFloatIO``, recognised structurally.
+
+    Importing ``quantization.convert`` here would close an import cycle (convert imports
+    export's siblings and entrypoint imports both), so the wrapper is identified by the
+    kernel it holds rather than by its class.
+    """
+    kernel = getattr(m, "kernel", None)
+    return isinstance(kernel, IAdd) and hasattr(m, "scale_a") and hasattr(m, "scale_b")
+
+
+def _matmul_entry(m: IMatMul) -> dict[str, Any]:
+    """``IMatMul`` — an activation x activation product; both scales are observed.
+
+    There are no weights here, so the scales ARE the whole artifact: a backend cannot
+    reconstruct ``Q @ K^T`` without knowing the grid each operand was quantized on.
+    """
+    entry = {
+        "type": type(m).__name__,
+        "op": "matmul_int",
+        "scale_a": _scalar_float(m.scale_a),
+        "scale_b": _scalar_float(m.scale_b),
+        "output_scale": _scalar_float(m.scale_a) * _scalar_float(m.scale_b),
+    }
+    entry.update(_dtype_fields(m.dtype_a, "a"))
+    entry.update(_dtype_fields(m.dtype_b, "b"))
+    return entry
+
+
+def _add_entry(m: Any) -> dict[str, Any]:
+    """``IAdd`` behind its float port — a residual join needs THREE scales.
+
+    Two inputs on different grids plus the grid the sum lands on. The output scale is
+    observed rather than derived: two residual streams can reinforce, so it is not the
+    max of the inputs.
+    """
+    entry = {
+        "type": type(m).__name__,
+        "op": "add_int",
+        "scale_a": _scalar_float(m.scale_a),
+        "scale_b": _scalar_float(m.scale_b),
+        "output_scale": _scalar_float(m.scale_out),
+    }
+    entry.update(_dtype_fields(m.in_dtype, "input"))
+    entry.update(_dtype_fields(m.kernel.dtype, "output"))
+    return entry
+
+
 def export_integer_model(
     model: nn.Module,
     out_dir,
@@ -415,8 +465,16 @@ def export_integer_model(
     counts: dict[str, int] = {}
     unexported: list[dict[str, Any]] = []
     total_int_weights = 0
+    covered: list[str] = []          # names already written as part of an exported op
+
+    def inside_exported(name: str) -> bool:
+        """``IAddFloatIO.kernel`` is not an op of its own — its parent's entry holds it."""
+        return any(name.startswith(f"{parent}.") for parent in covered)
+
     for name, m in model.named_modules():
         order = len(modules)
+        if inside_exported(name):
+            continue
         if isinstance(m, ILinear):
             entry = _linear_entry(out, order, name, m)
         elif isinstance(m, IConv2d):
@@ -431,9 +489,22 @@ def export_integer_model(
             entry = _int_softmax_entry(m)
         elif isinstance(m, QSoftmax):
             entry = _q_softmax_entry(m)
+        elif isinstance(m, IMatMul):
+            entry = _matmul_entry(m)
+        elif _is_int_add(m):
+            entry = _add_entry(m)
         else:
             params, buffers = _own_state(m)
             if not params and not buffers:
+                if _is_quant_tier(m) and not list(m.children()):
+                    # A quantization-tier LEAF with no tensor state is still an op whose
+                    # scales a backend needs (IMatMul holds only python floats). Skipping
+                    # it here is the same silent hole the raise below exists to prevent —
+                    # statelessness is not a reason to be absent from the manifest.
+                    raise TypeError(
+                        f"module {name!r} is a {type(m).__name__} from {type(m).__module__} "
+                        f"with no tensor state and no export branch — its scales would "
+                        f"vanish from the manifest. Add a branch to export_integer_model.")
                 continue                                  # container / stateless op
             record = {"name": name, "class": type(m).__name__,
                       "defined_in": type(m).__module__,
@@ -445,6 +516,7 @@ def export_integer_model(
                     f"manifest. Add a branch to export_integer_model.")
             unexported.append(record)
             continue
+        covered.append(name)
         entry["order"] = order
         entry["name"] = name
         modules[name] = entry
@@ -762,6 +834,33 @@ def replay_q_softmax(entry: dict[str, Any], x: np.ndarray) -> np.ndarray:
     return numerator * reciprocal
 
 
+def replay_matmul(entry: dict[str, Any], probe) -> np.ndarray:
+    """``IMatMul`` rebuilt from manifest values only — both operands quantized, then int MAC."""
+    a, b = probe
+    a_qmin, a_qmax = qrange(int(entry["a_bits"]), signed=bool(entry["a_signed"]))
+    b_qmin, b_qmax = qrange(int(entry["b_bits"]), signed=bool(entry["b_signed"]))
+    s_a, s_b = float(entry["scale_a"]), float(entry["scale_b"])
+    a_int = np.clip(np.round(a.astype(np.float32) / np.float32(s_a)), a_qmin, a_qmax).astype(np.int64)
+    b_int = np.clip(np.round(b.astype(np.float32) / np.float32(s_b)), b_qmin, b_qmax).astype(np.int64)
+    return (a_int @ b_int).astype(np.float32) * np.float32(s_a * s_b)
+
+
+def replay_add(entry: dict[str, Any], probe) -> np.ndarray:
+    """``IAdd`` behind its float port: quantize both operands, align onto s_out, add, clamp."""
+    a, b = probe
+    in_qmin, in_qmax = qrange(int(entry["input_bits"]), signed=bool(entry["input_signed"]))
+    out_qmin, out_qmax = qrange(int(entry["output_bits"]), signed=bool(entry["output_signed"]))
+    s_a, s_b, s_out = float(entry["scale_a"]), float(entry["scale_b"]), float(entry["output_scale"])
+    a_int = np.clip(np.round(a.astype(np.float32) / np.float32(s_a)), in_qmin, in_qmax)
+    b_int = np.clip(np.round(b.astype(np.float32) / np.float32(s_b)), in_qmin, in_qmax)
+    acc = (np.round(a_int.astype(np.float64) * (s_a / s_out))
+           + np.round(b_int.astype(np.float64) * (s_b / s_out)))
+    # The final multiply mirrors QTensor.dequantize, which casts the scale to float32
+    # first. Doing it in float64 and rounding afterwards lands one ULP away — small, but
+    # this replay is compared element-wise, so "close" is not the contract.
+    return np.clip(acc, out_qmin, out_qmax).astype(np.float32) * np.float32(s_out)
+
+
 _REPLAY: dict[str, Callable[[dict[str, Any], np.ndarray], np.ndarray]] = {
     "linear_int": replay_linear,
     "conv2d_int": replay_conv,
@@ -770,6 +869,8 @@ _REPLAY: dict[str, Callable[[dict[str, Any], np.ndarray], np.ndarray]] = {
     "layernorm_lut": replay_q_layernorm,
     "softmax_int": replay_softmax,
     "softmax_lut": replay_q_softmax,
+    "matmul_int": replay_matmul,
+    "add_int": replay_add,
 }
 
 
@@ -917,6 +1018,20 @@ def _probe(entry: dict[str, Any], rng: np.random.Generator, batch: int) -> np.nd
         _lo, delta_hi = _pot_input_range(entry["exp"]["scalars"], float(entry["exp"]["input_scale"]))
         return (rng.uniform(-1.0, 1.0, size=(batch, _SOFTMAX_PROBE_TOKENS))
                 * (delta_hi / 2.0)).astype(np.float32)
+    if op == "matmul_int":
+        # a [batch, m, k] x [batch, k, n] product, sized so the MAC actually accumulates
+        span_a = float(entry["scale_a"]) * qrange(int(entry["a_bits"]), signed=bool(entry["a_signed"]))[1]
+        span_b = float(entry["scale_b"]) * qrange(int(entry["b_bits"]), signed=bool(entry["b_signed"]))[1]
+        a = (rng.uniform(-1.0, 1.0, size=(batch, 4, 6)) * span_a).astype(np.float32)
+        b = (rng.uniform(-1.0, 1.0, size=(batch, 6, 4)) * span_b).astype(np.float32)
+        return (a, b)
+    if op == "add_int":
+        # deliberately spans past each input port so the output clamp is exercised
+        span_a = float(entry["scale_a"]) * qrange(int(entry["input_bits"]), signed=bool(entry["input_signed"]))[1]
+        span_b = float(entry["scale_b"]) * qrange(int(entry["input_bits"]), signed=bool(entry["input_signed"]))[1]
+        a = (rng.uniform(-1.0, 1.0, size=(batch, 8)) * span_a).astype(np.float32)
+        b = (rng.uniform(-1.0, 1.0, size=(batch, 8)) * span_b).astype(np.float32)
+        return (a, b)
     raise KeyError(f"no probe for op {op!r}")
 
 
@@ -927,6 +1042,11 @@ def _reference(module: nn.Module, entry: dict[str, Any], probe: np.ndarray) -> n
     float drop-in, so the probe is quantized on its own input grid and the result
     dequantized — which is exactly what ``replay_gelu`` reproduces.
     """
+    if isinstance(probe, tuple):
+        # a two-operand op (matmul / residual add); the float port takes both directly
+        with torch.no_grad():
+            out = module(*(torch.from_numpy(p) for p in probe))
+        return (out.dequantize() if isinstance(out, QTensor) else out).cpu().numpy()
     x = torch.from_numpy(probe)
     with torch.no_grad():
         if isinstance(module, IGeLU):

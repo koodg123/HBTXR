@@ -202,12 +202,18 @@ integer, and the difference matters for anyone porting this to RTL:
 - **Tensors move between modules as float32.** Every I-tier module re-quantizes at its
   own input port. This is inherited from the `ILinear` / `IConv2d` / `ILayerNorm` /
   `ISoftmax` float-I/O drop-in design, which is what lets the converted model run
-  through the *unmodified* model `forward`.
-- **`IMatMul` / `IAdd` / `ICat` / `IPool` are built and tested but unreachable from the
-  conversion pass.** The attention matmuls (`Q@Kᵀ`, `attn@V`), the `1/√d` scaling and the
-  two residual adds per block are `torch` calls written directly inside
-  `MultiHeadAttention.forward` / `TransformerBlock.forward` — they are not submodules, so
-  no module swap can reach them. They are reported in `ConversionReport.float_composites`.
+  through the *unmodified* model `forward`. **This is the one item still open.**
+- ~~`IMatMul` / `IAdd` are unreachable from the conversion pass~~ — **closed in D4.** The
+  attention matmuls (`Q@Kᵀ`, `attn@V`), the `1/√d` factor and the two residual adds per
+  block are now parameter-free seam modules (`models/blocks/seams.py`), so the swap
+  reaches them: a converted FrameModel installs 4 `IMatMul` and 4 `IAdd`, and
+  `left_float` is down to the 6 inference-no-op `Dropout`s plus the 2 `Scale`s. The seam
+  refactor is free — `state_dict` keys and float output are bit-identical, verified
+  against the pre-refactor revision — and `Scale` stays float deliberately: it is an
+  exact constant multiply (`0.125 = 2⁻³` for the shipped `head_dim=64`) that folds into
+  the following requant, so quantizing it would only add error.
+  `ICat` / `IPool` remain unused: `pool_tokens` and the ellipse head's `torch.cat` are
+  still written inline in head bodies that D4 did not touch.
 - **`mask_head.proj` stays float**: `IConv2d` implements only the non-overlapping,
   unpadded patch conv, so a padded 3×3 conv is explicitly refused rather than converted
   into something that computes a different function. It appears in `left_float` and in
@@ -222,6 +228,9 @@ integer, and the difference matters for anyone porting this to RTL:
   few percent. The index is now fitted to the observed distribution (≈1.6× better RMS
   than the [min,max] envelope) and the payload carries `metrics` so the error is visible.
 
-Closing the first two items means an `ilayers/vit.py` that re-implements the block
-forwards over `QTensor` instead of swapping modules in place — a genuine rewrite, not a
-conversion pass, and deliberately out of scope here.
+Closing the remaining transport item means an `ilayers/vit.py` that threads `QTensor`
+between ops instead of dequantizing at every port — a genuine rewrite of the block
+forwards, not a conversion pass. D4 deliberately stopped short of it: promoting the
+inline operators to seams was the prerequisite and is verifiably free, whereas the
+transport change alters the arithmetic at every edge and needs its own pure-integer
+oracle before it can be trusted (see the Part D plan, D4 section 6.4).

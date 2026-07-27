@@ -64,7 +64,10 @@ _HYBRID_MODEL = {**_FRAME_MODEL, "target": "models.hybrid.HybridModel"}
 # I-tier module classes an integer export may contain. Spelled out here rather than
 # imported from quantization.export so that renaming a class in the exporter breaks
 # this test instead of silently redefining what "integer dump" means.
-_INT_TIER_TYPES = {"ILinear", "IConv2d", "IGeLU", "ILayerNorm", "ISoftmax"}
+_INT_TIER_TYPES = {"ILinear", "IConv2d", "IGeLU", "ILayerNorm", "ISoftmax",
+                   # D4: the attention matmuls and residual joins became modules and
+                   # are now converted too, so they appear in a dump.
+                   "IMatMul", "IAddFloatIO"}
 
 
 # --- helpers -----------------------------------------------------------------

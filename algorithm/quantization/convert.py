@@ -41,6 +41,7 @@ from quantization.ilayers.nonlinear import IGeLU
 from quantization.ilayers.qtensor import QTensor
 from quantization.ilayers.softmax import ISoftmax
 from quantization.ilayers.tensor_ops import IAdd, ICat, IPool
+from models.blocks.seams import Add, MatMul
 from quantization.int_calibrate import calibrate_int_layernorm
 from quantization.int_calibrate_softmax import (
     build_softmax_int_payload,
@@ -104,6 +105,38 @@ def insert_fake_quant(
 def collect_quantizers(model: nn.Module) -> dict[str, AffineFakeQuantizer]:
     """All AffineFakeQuantizer modules keyed by path (weight and activation)."""
     return {name: m for name, m in model.named_modules() if isinstance(m, AffineFakeQuantizer)}
+
+
+class IAddFloatIO(nn.Module):
+    """``IAdd`` wearing the float input/output port the swapped-in graph runs on.
+
+    ``IAdd`` aligns two ``QTensor`` operands onto a common output scale — that scale
+    alignment is the whole point of it, and it is what a residual join needs. But the
+    converted model still moves float tensors between modules, so a drop-in replacement
+    for ``models.blocks.seams.Add`` has to quantize at its two input ports and dequantize
+    at its output port, exactly as ``IGeLUFloatIO`` does for ``IGeLU``.
+
+    The two operands genuinely have different scales — one is the residual stream, the
+    other a sublayer output — which is why each carries its own observed scale rather
+    than sharing one.
+    """
+
+    def __init__(self, kernel: IAdd, scale_a: float, scale_b: float, *,
+                 in_dtype: QuantDtype = INT8) -> None:
+        super().__init__()
+        self.kernel = kernel
+        self.scale_a = float(scale_a)
+        self.scale_b = float(scale_b)
+        self.in_dtype = in_dtype
+
+    @property
+    def scale_out(self) -> float:
+        return float(self.kernel.scale_out)
+
+    def forward(self, a: torch.Tensor, b: torch.Tensor) -> torch.Tensor:
+        qa = QTensor.quantize(a, self.scale_a, 0.0, self.in_dtype)
+        qb = QTensor.quantize(b, self.scale_b, 0.0, self.in_dtype)
+        return self.kernel(qa, qb).dequantize()
 
 
 def convert_to_integer(model: nn.Module) -> tuple[nn.Module, dict[str, Any]]:
@@ -466,6 +499,110 @@ def calibrate_int_gelus(
     return inserted
 
 
+def _observe_io(
+    model: nn.Module,
+    modules: dict[str, nn.Module],
+    batches: Iterable[Any],
+    forward_fn: ForwardFn | None,
+) -> tuple[dict[str, list[float]], dict[str, float]]:
+    """Per-module max-abs of EACH positional input, and of the output.
+
+    ``_observe`` only captures ``inputs[0]``, which is enough for a one-argument op. The
+    seam modules take two operands with genuinely different ranges — a residual stream
+    and a sublayer output, or Q and Kᵀ — so each needs its own scale, and ``IAdd`` also
+    needs a scale for the sum it produces. Returns ``(per-input max-abs, output max-abs)``.
+    """
+    inputs_max: dict[str, list[float]] = {name: [] for name in modules}
+    output_max: dict[str, float] = {name: 0.0 for name in modules}
+
+    def make_hook(name: str):
+        def hook(_module, args, output):
+            observed = [float(a.detach().abs().max()) for a in args if torch.is_tensor(a)]
+            if not inputs_max[name]:
+                inputs_max[name] = observed
+            else:
+                inputs_max[name] = [max(o, n) for o, n in zip(inputs_max[name], observed)]
+            if torch.is_tensor(output):
+                output_max[name] = max(output_max[name], float(output.detach().abs().max()))
+        return hook
+
+    handles = [modules[name].register_forward_hook(make_hook(name)) for name in modules]
+    run = forward_fn or (lambda m, b: m(b))
+    model.eval()
+    try:
+        with torch.no_grad():
+            for batch in batches:
+                run(model, batch)
+    finally:
+        for handle in handles:
+            handle.remove()
+    return inputs_max, output_max
+
+
+def _symmetric(max_abs: float, dtype: QuantDtype) -> float:
+    return max(float(max_abs), 1e-8) / float(dtype.qmax)
+
+
+def calibrate_int_matmuls(
+    model: nn.Module,
+    batches: Iterable[Any],
+    *,
+    forward_fn: ForwardFn | None = None,
+    dtype: QuantDtype = INT8,
+) -> dict[str, IMatMul]:
+    """Swap every ``seams.MatMul`` for an ``IMatMul`` calibrated on its two operands.
+
+    These are the activation×activation products of attention — ``Q @ Kᵀ`` and
+    ``attn @ V`` — which have no weights, so neither operand's scale can come from a
+    parameter: both must be observed. They were unreachable until the operators became
+    modules, which is why ``IMatMul`` existed with no production caller.
+    """
+    targets = {n: m for n, m in model.named_modules() if isinstance(m, MatMul)}
+    if not targets:
+        return {}
+    inputs_max, _out = _observe_io(model, targets, batches, forward_fn)
+    inserted: dict[str, IMatMul] = {}
+    for name in targets:
+        observed = inputs_max[name]
+        if len(observed) != 2:
+            continue  # never driven by the calibration batches; stays float and is reported
+        integer = IMatMul(_symmetric(observed[0], dtype), _symmetric(observed[1], dtype),
+                          dtype_a=dtype, dtype_b=dtype)
+        _set_submodule(model, name, integer)
+        inserted[name] = integer
+    return inserted
+
+
+def calibrate_int_adds(
+    model: nn.Module,
+    batches: Iterable[Any],
+    *,
+    forward_fn: ForwardFn | None = None,
+    dtype: QuantDtype = INT8,
+) -> dict[str, IAddFloatIO]:
+    """Swap every ``seams.Add`` for an ``IAdd`` behind a float port.
+
+    A residual join is where two tensors on DIFFERENT scales meet, so it needs three
+    observed scales: one per operand, and one for the sum — the output range is not the
+    max of the inputs (they can reinforce), so it is observed rather than inferred.
+    """
+    targets = {n: m for n, m in model.named_modules() if isinstance(m, Add)}
+    if not targets:
+        return {}
+    inputs_max, output_max = _observe_io(model, targets, batches, forward_fn)
+    inserted: dict[str, IAddFloatIO] = {}
+    for name in targets:
+        observed = inputs_max[name]
+        if len(observed) != 2 or output_max[name] <= 0.0:
+            continue
+        kernel = IAdd(_symmetric(output_max[name], dtype), dtype=dtype)
+        wrapper = IAddFloatIO(kernel, _symmetric(observed[0], dtype),
+                              _symmetric(observed[1], dtype), in_dtype=dtype)
+        _set_submodule(model, name, wrapper)
+        inserted[name] = wrapper
+    return inserted
+
+
 def _conv_is_convertible(conv: nn.Conv2d) -> bool:
     """Whether ``IConv2d`` can express this conv exactly.
 
@@ -623,6 +760,7 @@ def convert_model_to_integer(
     forward_fn: ForwardFn | None = None,
     include_nonlinear: bool = True,
     include_conv: bool = True,
+    include_seams: bool = True,
     layernorm_entries: int = 256,
     layernorm_segments: int = 2,
     softmax_entries: int = 256,
@@ -676,6 +814,9 @@ def convert_model_to_integer(
             model, batches, forward_fn=forward_fn, entries=gelu_entries))
     if include_conv:
         run_stage("conv", calibrate_int_convs(model, batches, forward_fn=forward_fn))
+    if include_seams:
+        run_stage("matmul", calibrate_int_matmuls(model, batches, forward_fn=forward_fn))
+        run_stage("add", calibrate_int_adds(model, batches, forward_fn=forward_fn))
     _, linears = convert_to_integer(model)
     run_stage("linear", linears)
 

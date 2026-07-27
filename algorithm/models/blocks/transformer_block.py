@@ -15,6 +15,7 @@ from torch import nn
 
 from models.blocks.attention import MultiHeadAttention
 from models.blocks.mlp import Mlp
+from models.blocks.seams import Add
 
 
 class TransformerBlock(nn.Module):
@@ -36,8 +37,13 @@ class TransformerBlock(nn.Module):
         )
         self.norm2 = nn.LayerNorm(dim, eps=norm_eps)
         self.mlp = Mlp(dim, int(dim * mlp_ratio), drop=drop)
+        # The two residual joins as modules: this is where two differently-scaled
+        # tensors meet, so it is exactly what an integer graph has to align — and an
+        # inline `+` is invisible to a converter that swaps children. Parameter-free.
+        self.attn_residual = Add()
+        self.mlp_residual = Add()
 
     def forward(self, x: torch.Tensor) -> torch.Tensor:
-        x = x + self.attn(self.norm1(x))
-        x = x + self.mlp(self.norm2(x))
+        x = self.attn_residual(x, self.attn(self.norm1(x)))
+        x = self.mlp_residual(x, self.mlp(self.norm2(x)))
         return x

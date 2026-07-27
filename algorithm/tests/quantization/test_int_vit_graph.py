@@ -21,6 +21,7 @@ from torch import nn
 from quantization.calibrate import post_training_quantize
 from quantization.convert import (
     ConversionReport,
+    IAddFloatIO,
     IGeLUFloatIO,
     calibrate_gelu_luts,
     calibrate_int_layernorms,
@@ -31,7 +32,7 @@ from quantization.convert import (
     convert_to_integer,
     float_modules,
 )
-from quantization.ilayers import IConv2d, IGeLU, ILayerNorm, ILinear, ISoftmax
+from quantization.ilayers import IAdd, IConv2d, IGeLU, ILayerNorm, ILinear, IMatMul, ISoftmax
 from quantization.qlayers.linear import QLinear
 from quantization.qlayers.nonlinear import QGeLU, QLayerNorm, QSoftmax
 
@@ -39,7 +40,8 @@ FLOAT_OPS = (nn.Linear, nn.GELU, nn.LayerNorm, nn.Softmax)
 Q_TIER_OPS = (QLinear, QGeLU, QLayerNorm, QSoftmax)
 # Modules whose arithmetic is integer. Kept here, written out by hand, so the test does
 # not inherit the production ``INTEGER_MODULE_TYPES`` it is supposed to be checking.
-INTEGER_OPS = (IConv2d, IGeLU, IGeLUFloatIO, ILayerNorm, ILinear, ISoftmax)
+INTEGER_OPS = (IConv2d, IGeLU, IGeLUFloatIO, ILayerNorm, ILinear, ISoftmax,
+               IMatMul, IAdd, IAddFloatIO)
 
 
 def _frame_model(seed: int = 0):
@@ -95,8 +97,12 @@ def test_converted_graph_has_no_float_or_q_tier_ops(qtier_first):
     assert _count(model, IGeLU) == expected["GELU"]
     assert _count(model, ILayerNorm) == expected["LayerNorm"]
     assert _count(model, ISoftmax) == expected["Softmax"]
-    assert set(report.stages) == {"layernorm", "softmax", "gelu", "conv", "linear"}
-    assert len(report) == 14 + 6 + 5 + 2 + len(report.stages["conv"])
+    assert set(report.stages) == {"layernorm", "softmax", "gelu", "conv",
+                                  "matmul", "add", "linear"}
+    assert len(report) == (14 + 6 + 5 + 2 + len(report.stages["conv"])
+                           + len(report.stages["matmul"]) + len(report.stages["add"]))
+    # the attention matmuls and both residual joins are integer now, not just reported
+    assert _count(model, IMatMul) == 4 and _count(model, IAddFloatIO) == 4
 
 
 def test_integer_modules_hold_integer_tables_and_weights():
@@ -217,7 +223,7 @@ def test_each_conversion_stage_stays_within_budget():
     linear_only, report = _converted(include_nonlinear=False, include_conv=False)
     with torch.no_grad():
         rel_linear = _relative_error(linear_only(evaluation)["box"], expected)
-    assert set(report.stages) == {"linear"}
+    assert set(report.stages) == {"matmul", "add", "linear"}
     assert rel_linear < 0.07, f"linear-only rel-err {rel_linear:.4f}"
 
     full, _ = _converted()
@@ -299,7 +305,7 @@ def test_skipping_the_nonlinear_stage_is_reported_not_hidden():
     ]
     assert sum(1 for t in left.values() if t == "GELU") == 6
     assert sum(1 for t in left.values() if t == "Softmax") == 2
-    assert set(report.stages) == {"linear"}
+    assert set(report.stages) == {"matmul", "add", "linear"}
 
 
 def test_report_names_the_float_composites_the_swap_cannot_reach():
