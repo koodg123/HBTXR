@@ -47,4 +47,44 @@ def requant(
     return out.to(torch.int32)
 
 
-__all__ = ["int_matmul", "requant"]
+def _dyadic_params(scale: float, *, shift_min: int = 1, shift_max: int = 31) -> tuple[int, int]:
+    """Best ``(multiplier, shift)`` with ``multiplier / 2^shift`` closest to ``scale``.
+
+    Deliberately a copy of ``i_ops.dyadic_params`` rather than an import: no module under
+    ``ilayers`` imports ``i_ops``, because ``i_ops`` is the golden these kernels are
+    checked against and a reference that shares code with the thing it validates proves
+    less. Same trade the hand-copied ``_pad_pair`` in ``ilayers/conv.py`` makes.
+    """
+    if scale <= 0:
+        raise ValueError("scale must be positive")
+    best: tuple[float, int, int] | None = None
+    for shift in range(shift_min, shift_max + 1):
+        multiplier = max(1, round(scale * (1 << shift)))
+        error = abs(multiplier / float(1 << shift) - scale)
+        if best is None or error < best[0]:
+            best = (error, multiplier, shift)
+    assert best is not None
+    return int(best[1]), int(best[2])
+
+
+def rescale_to(int_data: torch.Tensor, scale_in: float, scale_out: float, *,
+               dtype: QuantDtype = INT8, extra: float = 1.0) -> torch.Tensor:
+    """Move integers from grid ``scale_in`` to grid ``scale_out`` — one requant unit.
+
+    The ratio becomes a dyadic ``multiplier / 2^shift``: an integer multiply and an
+    arithmetic right shift, which is what the hardware does and what keeps the datapath
+    integer. ``extra`` folds a constant factor into the same operation — the attention
+    ``1/√d`` is applied this way because in hardware it is not a separate multiply.
+
+    The identity ratio is short-circuited: a dyadic approximation of exactly 1.0 would
+    still round-trip through ``multiplier/2^shift`` and could move a value by an LSB for
+    no reason.
+    """
+    ratio = (scale_in / scale_out) * extra
+    if ratio == 1.0:
+        return int_data.clamp(dtype.qmin, dtype.qmax).to(torch.int64)
+    multiplier, shift = _dyadic_params(ratio)
+    return requant(int_data, multiplier, shift, dtype=dtype).to(torch.int64)
+
+
+__all__ = ["int_matmul", "requant", "rescale_to"]

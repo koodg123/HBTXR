@@ -199,10 +199,17 @@ true|false.
 `convert_model_to_integer` makes every **op** integer. It does not make the **graph**
 integer, and the difference matters for anyone porting this to RTL:
 
-- **Tensors move between modules as float32.** Every I-tier module re-quantizes at its
-  own input port. This is inherited from the `ILinear` / `IConv2d` / `ILayerNorm` /
-  `ISoftmax` float-I/O drop-in design, which is what lets the converted model run
-  through the *unmodified* model `forward`. **This is the one item still open.**
+- ~~Tensors move between modules as float32~~ — **closed for the transformer block.**
+  `ilayers/vit.py` (`ITransformerBlock` / `IMultiHeadAttention` / `IMlp`) threads
+  `QTensor` with no dequantize between ops: every scale constant — the integer bias, the
+  per-out-channel dyadic multiplier/shift, the `1/√d` fold — is resolved at build time,
+  so the forward touches no float tensor at all. A `__torch_function__` probe asserts
+  that mechanically, against the per-op block as a control. It is checked ELEMENT-WISE
+  against `i_block.replay_block_int` (768/768 integers identical on 6 seeds) and tracks
+  the per-op block within **2 LSB** — the float edges were never buying precision,
+  because the next consumer immediately re-quantized to int8 anyway.
+  **Still float-I/O**: the patch-embed conv and the heads, which `models/frame.py`
+  composes outside the block. Threading those is the same exercise, one level up.
 - ~~`IMatMul` / `IAdd` are unreachable from the conversion pass~~ — **closed in D4.** The
   attention matmuls (`Q@Kᵀ`, `attn@V`), the `1/√d` factor and the two residual adds per
   block are now parameter-free seam modules (`models/blocks/seams.py`), so the swap

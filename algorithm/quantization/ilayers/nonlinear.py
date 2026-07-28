@@ -43,7 +43,16 @@ class IGeLU(nn.Module):
         # keeps the product exact for int32-wide accumulator inputs, whose magnitudes
         # run past float32's exact-integer limit of 2^24.
         ratio = rescale_ratio(qt.scale, self.input_scale, qt.int_data.shape[-1])
-        x_lut = torch.round(qt.int_data.to(torch.float64) * ratio).to(torch.int64)
+        if not torch.is_tensor(ratio) and ratio == 1.0:
+            # The producer already delivered on this table's grid, which is the normal
+            # case inside the QTensor-threaded graph (ilayers/vit.py requantizes on the
+            # way out of the producer). Skipping the bridge is not just an optimisation:
+            # the float64 round-trip is the only float TENSOR left on that datapath, and
+            # a graph whose edges are integer except for a multiply by 1.0 is not an
+            # integer graph. ISoftmax takes the same shortcut for the same reason.
+            x_lut = qt.int_data.to(torch.int64)
+        else:
+            x_lut = torch.round(qt.int_data.to(torch.float64) * ratio).to(torch.int64)
         # No re-clamp here, unlike ILayerNorm/ISoftmax: IGeLU declares no input dtype,
         # so there is no input port width to clamp to and inventing one would silently
         # narrow int32 accumulators. The cursor clamp below is the only saturation.
