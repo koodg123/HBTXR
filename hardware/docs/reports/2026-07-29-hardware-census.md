@@ -74,7 +74,8 @@ tests/{fixtures,hls,integration,pynq,unit}
 
 ## 3. `hls/` — 연구 산출물
 
-가속기 본체. **두 구현 계열이 공존합니다.**
+가속기 본체. **같은 가속기의 구현이 셋 있습니다.** (초판은 "두 계열"이라 적었으나 빌드
+스크립트·include 그래프·호출부를 추적한 결과 셋이고 서로 겹칩니다 — §3.5)
 
 ### (a) 모듈별 `src/*.cpp` 19개 — 논문 구조를 그대로 반영
 
@@ -120,6 +121,92 @@ global_buffer  weight_prefetcher
 
 `e2e_axis_vector_*_golden.hpp` — **생성된 데이터**이지 테스트 코드가 아닙니다.
 소스와 같은 디렉토리에 섞여 있어 "테스트벤치 29개"라는 인상을 주지만 실제 tb는 12개입니다.
+
+---
+
+## 3.5 세 구현의 정체 — 빌드·include·호출부 추적 결과
+
+### A. `hgtxr_top` — 모듈 조립형
+
+```tcl
+# vivado/scripts/create_hls_project.tcl
+set_top hgtxr_top
+foreach src [list hgtxr_top.cpp frame_patch_embed.cpp event_patch_embed.cpp matmul.cpp
+                  attention.cpp mlp.cpp fusion.cpp search_head.cpp track_head.cpp
+                  runtime_fsm.cpp rmu_smu.cpp nonlinear.cpp weight_prefetcher.cpp
+                  controller.cpp noc.cpp global_buffer.cpp] { add_files $src }
+```
+
+`hgtxr_top.cpp`(955줄)가 `common.h`의 선언을 **실제로 호출합니다** — 모듈 `.cpp`는 죽은
+코드가 아닙니다:
+
+```
+frame_patch_embed 1 · event_patch_embed 1 · pool_tokens 2 · attention_stage 2 · mlp_stage 2
+fusion 1 · search_head 1 · track_head 1 · global_buffer_write_search 1 · noc_route_tokens 2
+weight_prefetcher 1        ← 호출됨
+matmul 0 · layernorm_stage 0 · softmax_stage 0   ← common.h에 선언만 있고 미사용
+```
+
+단, `hgtxr_top.cpp`는 `hgtxr_cyclic_transformer_block.hpp`와 `s2_projection.hpp`도
+include합니다 — **A와 C가 섞인 하이브리드**입니다.
+산출물: `hgtxr.bit` **1개**.
+
+### B. `hgtxr_e2e_axis_top` / `hgtxr_e2e_m_axi_top` — 단일 헤더 monolith
+
+```tcl
+# vivado/scripts/run_e2e_q4w8a_csim.tcl  (master)
+set_top hgtxr_e2e_axis_top
+add_files hls/src/hgtxr_e2e_axis_top.cpp      ← .cpp 단 하나
+```
+```cpp
+// hgtxr_e2e_axis_top.cpp — 전문이 사실상 한 줄
+#include "../include/hgtxr_e2e_vit.hpp"
+```
+
+설계 전체가 **`hgtxr_e2e_vit.hpp` 4,503줄**에 들어 있습니다
+(`hgtxr_e2e_structured_attn_unit`, `hgtxr_e2e_mlp_unit`, `hgtxr_e2e_project_qkv`, …).
+
+**그리고 이 헤더는 `cyclic_transformer_block`을 0회 사용합니다** — 같은 일을 하는
+106줄짜리 조립본이 옆에 있는데 4,503줄로 재구현했습니다.
+
+m_axi 변형은 이 스크립트를 `regsub`으로 top 이름만 바꿔 파생시킵니다. 즉 **axis가 master**.
+산출물: AXIS-DMA **5개** + M-AXI 1개.
+
+### C. `hgtxr_cyclic_*.hpp` — 템플릿 라이브러리 (10 헤더)
+
+의존 그래프에 순환이 없고 **모델 구조와 1:1 대응**합니다:
+
+```
+transformer_params (leaf)
+  ├─ mac ──┐
+  ├─ math ─┼─ attention ─┐
+  │        ├─ mlp        ├─ transformer_block   (106줄)
+  │        └─ norm       ┘
+  ├─ scheduler
+  └─ weight_layout ─ s2_projection
+```
+
+`hgtxr_top`(A)과 `tb_cyclic_*` 테스트벤치가 씁니다.
+
+### 정본은 B입니다 — 근거
+
+| 근거 | A `hgtxr_top` | **B `e2e_axis_top`** | mode_profile |
+|---|---:|---:|---:|
+| 비트스트림 | 1 | **6** (진화: `c3b_mem16` → `par32_runtime_*` → `vref_p0_*`) | 2 |
+| 빌드 스크립트 | 독립 | **master** (m_axi가 regsub 파생) | 파생 |
+| `configs/*.h` | 0 | **9** (`zcu104_cyclic_*`, `zcu104_e2e_q4w8a`) | 0 |
+| track/status 문서 | 2 | **15** (`e2e_axis_dma`) / 16 (`cyclic`) | 3 |
+| 정적 참조 | 17 | **54** | 3 |
+| PYNQ 스모크 러너 | — | **`run_e2e_axis_dma_{,hybrid_}smoke.py`** | — |
+
+### 그런데 이게 재작성의 핵심 긴장입니다
+
+**정본(B)이 가장 읽기 어렵습니다.** 4,503줄 단일 헤더입니다.
+**정본이 아닌 쪽(A+C)이 좋은 구조를 갖고 있습니다** — 논문 이름 그대로의 모듈 조립,
+순환 없는 템플릿 트리, 모델과 1:1 대응하는 106줄 `transformer_block`.
+
+"연구용으로 이해하기 쉬운 코드베이스"라는 목표에서 보면, **살아 있는 것을 버리거나 죽은
+것을 살리는 문제가 아니라, 살아 있는 것을 이미 존재하는 좋은 구조 위로 옮기는 문제**입니다.
 
 ---
 
@@ -267,13 +354,28 @@ completed,templates}`는 우리가 원하는 구조 그 자체입니다. **재�
 
 ---
 
-## 10. 이 census가 답하지 못하는 것
+## 10. 미해결 — 그리고 초판에서 잘못 분류했던 것
 
-- **HLS 두 계열 중 무엇이 정본인가** — 정적 참조 수만으로는 판정 불가. 빌드 스크립트와
-  최근 실험 이력을 함께 봐야 합니다.
-- **`hgtxr_mode_profile_top`을 버려도 되는가** — 참조 3곳이지만 실험 목적일 수 있습니다.
-- **감사 도구 49건이 "고쳐야 할 것"인가 "환경만 갖추면 되는 것"인가** — 보드/Xilinx 접근
-  가능한 환경에서 한 번 돌려봐야 압니다.
-- **`refs/weights/*.json`(17,542줄 ×2)이 현재 설계와 일치하는가** — 내용 검증 미실시.
+**초판은 아래 네 가지를 "사용자 결정이 필요하다"고 적었습니다. 셋은 그렇지 않았습니다** —
+코드베이스에 관한 사실이고 추적하면 답이 나옵니다. §3.5와 §6이 그 결과입니다.
 
-이 넷은 **사용자 결정 또는 환경**이 필요하며, census로는 결론 낼 수 없습니다.
+| 질문 | 초판 분류 | 실제 |
+|---|---|---|
+| HLS 정본이 무엇인가 | 사용자 결정 | **해결** — `hgtxr_e2e_axis_top` (§3.5, 근거 6종) |
+| `mode_profile_top`을 버려도 되는가 | 사용자 결정 | **해결 — 버리면 안 됨.** `hgtxr_mode_search_par32.bit` / `hgtxr_mode_track_par32.bit` 2개를 산출하는 모드별 자원 프로파일링 빌드 |
+| 49건이 결함인가 환경인가 | 환경 필요 | **해결 — 환경.** Xilinx 설치 경로·형제 저장소·절대 경로 단언 (§6) |
+| `refs/weights/*.json` 유효성 | 검증 미실시 | **여전히 미해결** — 아래 |
+
+### 정말로 남은 것 하나
+
+**`refs/weights/cyclic_weights_s2_block_software_initial{,_q4,_q4_head64}_manifest.json`
+(17,542줄 ×2 + 4,420줄)이 현재 설계와 일치하는가.** 정적 census로는 알 수 없고, 매니페스트가
+기술하는 레이아웃을 `hgtxr_cyclic_weight_layout.hpp`와 대조해야 압니다. **조사 가능하며,
+사용자 결정이 아닙니다.**
+
+### 실제로 사용자 결정이 필요한 것
+
+- **보드/Xilinx 환경 접근** — §6의 49건을 "환경만 갖추면 통과"인지 최종 확인하려면 필요.
+  단, 실패 원인이 경로 단언임은 이미 확정입니다.
+- **재작성 범위** — A+C 구조로 B를 옮길 것인가, B를 그 자리에서 분해할 것인가.
+  §3.5가 재료를 제시하지만 어디까지 갈지는 비용/일정 판단입니다.
