@@ -10,7 +10,7 @@
 python scripts/build_docs_index.py
 ```
 
-총 **489개** 문서. 날짜·상태·소유는 각 문서의 3줄 헤더에서 읽고, 헤더가 없으면 git 이력으로 대체합니다 — 그 경우 *(헤더 없음 — git 기준)*으로 표시되므로 상태 칸이 추정임을 알 수 있습니다.
+총 **507개** 문서. 날짜·상태·소유는 각 문서의 3줄 헤더에서 읽고, 헤더가 없으면 git 이력으로 대체합니다 — 그 경우 *(헤더 없음 — git 기준)*으로 표시되므로 상태 칸이 추정임을 알 수 있습니다.
 
 규약: [governance/DOC-CONVENTIONS.md](governance/DOC-CONVENTIONS.md)
 
@@ -20,7 +20,7 @@ python scripts/build_docs_index.py
 |---|---|---:|---|---|
 | **repo** | `docs/` | 175 | 2026-07-29 | 횡단·거버넌스·외부 조사 |
 | **algorithm** | `algorithm/docs/` | 17 | 2026-07-29 | 학습·평가·양자화·정수 그래프 |
-| **hardware** | `hardware/docs/` | 141 | ? | HLS·RTL·Vivado·PYNQ 가속기 (재구성 중) |
+| **hardware** | `hardware/docs/` | 159 | ? | HLS·RTL·Vivado·PYNQ 가속기 (재구성 중) |
 | **archive** | `archive/hardware/docs/` | 156 | 2026-07-29 | 구 hardware 트리 — 읽기 전용 기준 |
 
 ## 먼저 볼 것
@@ -119,11 +119,16 @@ python scripts/build_docs_index.py
 
 | 문서 | 작성 | 갱신 | 상태 | 소유 |
 |---|---|---|---|---|
-| [reports/2026-06-17-cleanup.md](../hardware/docs/reports/2026-06-17-cleanup.md) | ? | ? | *(헤더 없음 — git 기준)* | ? |
-| [experiments/2026-06-16-third-goal-audit/THIRD_GOAL_REQUIREMENTS_2026_06_16.md](../hardware/docs/experiments/2026-06-16-third-goal-audit/THIRD_GOAL_REQUIREMENTS_2026_06_16.md) | ? | ? | *(헤더 없음 — git 기준)* | ? |
-| [experiments/2026-06-16-third-goal-audit/THIRD_GOAL_ACHIEVEMENT_CHECKLIST_2026_06_16.md](../hardware/docs/experiments/2026-06-16-third-goal-audit/THIRD_GOAL_ACHIEVEMENT_CHECKLIST_2026_06_16.md) | ? | ? | *(헤더 없음 — git 기준)* | ? |
+| [experiments/2026-06-27-mode-profile/summary-p0-report-collection.md](../hardware/docs/experiments/2026-06-27-mode-profile/summary-p0-report-collection.md) | ? | ? | *(헤더 없음 — git 기준)* | ? |
+| [experiments/2026-06-27-mode-profile/summary-p0-mode-profile.md](../hardware/docs/experiments/2026-06-27-mode-profile/summary-p0-mode-profile.md) | ? | ? | *(헤더 없음 — git 기준)* | ? |
+| [experiments/2026-06-26-no-board-p0/summary-p0-report-collection.md](../hardware/docs/experiments/2026-06-26-no-board-p0/summary-p0-report-collection.md) | ? | ? | *(헤더 없음 — git 기준)* | ? |
 | [track/CHANGELOG.md](../hardware/docs/track/CHANGELOG.md) | 2026-07-29 | 2026-07-29 | active | hardware |
+| [snapshots/2026-07-xr-accel-merge-status.md](../hardware/docs/snapshots/2026-07-xr-accel-merge-status.md) | 2026-07-15 | 2026-07-29 | frozen — 스냅샷, 갱신하지 않음 | hardware |
+| [snapshots/2026-07-hardware-import-manifest.md](../hardware/docs/snapshots/2026-07-hardware-import-manifest.md) | 2026-07-05 | 2026-07-29 | frozen — 스냅샷, 갱신하지 않음 | hardware |
 | [reports/2026-07-29-hardware-census.md](../hardware/docs/reports/2026-07-29-hardware-census.md) | 2026-07-29 | 2026-07-29 | active — 재작성 착수 전 기준선 | hardware |
+| [reports/2026-06-multi-board-validation.md](../hardware/docs/reports/2026-06-multi-board-validation.md) | 2026-06-16 | 2026-07-29 | frozen — 검증 결과 | hardware |
+| [reports/2026-06-deit-cyclic-verification.md](../hardware/docs/reports/2026-06-deit-cyclic-verification.md) | 2026-06-16 | 2026-07-29 | frozen — 검증 결과 | hardware |
+| [reports/2026-06-17-cleanup.md](../hardware/docs/reports/2026-06-17-cleanup.md) | 2026-06-17 | 2026-07-29 | frozen | hardware |
 | [references/vit_accel/experiments/zu15eg/deit_tiny_baseline/full_deit_tiny_fit/step2_hls_resource_summary.md](../hardware/docs/references/vit_accel/experiments/zu15eg/deit_tiny_baseline/full_deit_tiny_fit/step2_hls_resource_summary.md) | 2026-07-15 | 2026-07-29 | *(헤더 없음 — git 기준)* | ? |
 | [references/vit_accel/experiments/vck190/deit_tiny_baseline/full_deit_tiny_fit/step5_vck190_pnr_summary.md](../hardware/docs/references/vit_accel/experiments/vck190/deit_tiny_baseline/full_deit_tiny_fit/step5_vck190_pnr_summary.md) | 2026-07-15 | 2026-07-29 | *(헤더 없음 — git 기준)* | ? |
 | [references/vit_accel/experiments/pnr/zu15eg_deit_tiny_full_status_20260410.md](../hardware/docs/references/vit_accel/experiments/pnr/zu15eg_deit_tiny_full_status_20260410.md) | 2026-07-15 | 2026-07-29 | *(헤더 없음 — git 기준)* | ? |
@@ -158,8 +163,16 @@ python scripts/build_docs_index.py
 | [references/vit_accel/CHECKLIST.md](../hardware/docs/references/vit_accel/CHECKLIST.md) | 2026-07-15 | 2026-07-29 | *(헤더 없음 — git 기준)* | ? |
 | [references/vit_accel/BOARD_RUNBOOKS.md](../hardware/docs/references/vit_accel/BOARD_RUNBOOKS.md) | 2026-07-15 | 2026-07-29 | *(헤더 없음 — git 기준)* | ? |
 | [references/README.md](../hardware/docs/references/README.md) | 2026-07-29 | 2026-07-29 | active | hardware |
+| [plans/done/2026-07-xr-accel-execution-plan.md](../hardware/docs/plans/done/2026-07-xr-accel-execution-plan.md) | 2026-07-15 | 2026-07-29 | frozen — 완료 | hardware |
+| [plans/done/2026-06-17-directory-layout.md](../hardware/docs/plans/done/2026-06-17-directory-layout.md) | 2026-06-17 | 2026-07-29 | superseded-by:../../../README.md | hardware |
+| [plans/done/2026-06-16-third-goal/Validation.md](../hardware/docs/plans/done/2026-06-16-third-goal/Validation.md) | 2026-06-16 | 2026-07-29 | frozen — 완료된 계획. 결과는 experiments/2026-06-16-third-goal-audit/ | hardware |
+| [plans/done/2026-06-16-third-goal/Sub-Plan.md](../hardware/docs/plans/done/2026-06-16-third-goal/Sub-Plan.md) | 2026-06-16 | 2026-07-29 | frozen — 완료된 계획. 결과는 experiments/2026-06-16-third-goal-audit/ | hardware |
+| [plans/done/2026-06-16-third-goal/Master-Plan.md](../hardware/docs/plans/done/2026-06-16-third-goal/Master-Plan.md) | 2026-06-16 | 2026-07-29 | frozen — 완료된 계획. 결과는 experiments/2026-06-16-third-goal-audit/ | hardware |
+| [plans/done/2026-06-16-third-goal/Execution.md](../hardware/docs/plans/done/2026-06-16-third-goal/Execution.md) | 2026-06-16 | 2026-07-29 | frozen — 완료된 계획. 결과는 experiments/2026-06-16-third-goal-audit/ | hardware |
+| [plans/done/2026-06-16-third-goal/CHOICE.md](../hardware/docs/plans/done/2026-06-16-third-goal/CHOICE.md) | 2026-06-16 | 2026-07-29 | frozen — 완료된 계획. 결과는 experiments/2026-06-16-third-goal-audit/ | hardware |
 | [plans/active/2026-07-29-hardware-reconstruction.md](../hardware/docs/plans/active/2026-07-29-hardware-reconstruction.md) | 2026-07-29 | 2026-07-29 | active — 승인 대기 | hardware |
 | [plans/active/2026-07-29-docs-migration-map.md](../hardware/docs/plans/active/2026-07-29-docs-migration-map.md) | 2026-07-29 | 2026-07-29 | active — 분석 완료, 이관 대기 | hardware |
+| [handoff/ZCU104_CYCLIC_MAXPERF_HANDOVER.md](../hardware/docs/handoff/ZCU104_CYCLIC_MAXPERF_HANDOVER.md) | 2026-07-15 | 2026-07-29 | consumed | hardware |
 | [handoff/SESSION_PROGRESS_AND_CONVERSATION_2026_07_05.md](../hardware/docs/handoff/SESSION_PROGRESS_AND_CONVERSATION_2026_07_05.md) | 2026-07-05 | 2026-07-29 | consumed — 실행 지침으로 따르지 마십시오 | hardware |
 | [handoff/README.md](../hardware/docs/handoff/README.md) | 2026-07-29 | 2026-07-29 | active — 안내 | hardware |
 | [handoff/IMPL_REPOS_HANDOVER_IMPORT_2026_07_08.md](../hardware/docs/handoff/IMPL_REPOS_HANDOVER_IMPORT_2026_07_08.md) | 2026-07-08 | 2026-07-29 | consumed — 실행 지침으로 따르지 마십시오 | hardware |
@@ -177,13 +190,11 @@ python scripts/build_docs_index.py
 | [experiments/2026-06-28-eight-question/README.md](../hardware/docs/experiments/2026-06-28-eight-question/README.md) | 2026-07-29 | 2026-07-29 | frozen — 실험 결과, 갱신하지 않음 | hardware |
 | [experiments/2026-06-28-eight-question/EIGHT_QUESTION_HYBRID_RUNTIME_REPORT_2026_06_28.md](../hardware/docs/experiments/2026-06-28-eight-question/EIGHT_QUESTION_HYBRID_RUNTIME_REPORT_2026_06_28.md) | 2026-07-29 | 2026-07-29 | *(헤더 없음 — git 기준)* | ? |
 | [experiments/2026-06-28-eight-question/EIGHT_QUESTION_FULL_LEARNED_VIVADO_EXPERIMENT_2026_06_28.md](../hardware/docs/experiments/2026-06-28-eight-question/EIGHT_QUESTION_FULL_LEARNED_VIVADO_EXPERIMENT_2026_06_28.md) | 2026-07-29 | 2026-07-29 | *(헤더 없음 — git 기준)* | ? |
-| [experiments/2026-06-27-mode-profile/summary.md](../hardware/docs/experiments/2026-06-27-mode-profile/summary.md) | 2026-07-29 | 2026-07-29 | *(헤더 없음 — git 기준)* | ? |
 | [experiments/2026-06-27-mode-profile/WORK_PROGRESS_EXPERIMENT_SUMMARY_2026_06_27.md](../hardware/docs/experiments/2026-06-27-mode-profile/WORK_PROGRESS_EXPERIMENT_SUMMARY_2026_06_27.md) | 2026-07-29 | 2026-07-29 | *(헤더 없음 — git 기준)* | ? |
 | [experiments/2026-06-27-mode-profile/VIVADO_PROGRESS_2026_06_27.md](../hardware/docs/experiments/2026-06-27-mode-profile/VIVADO_PROGRESS_2026_06_27.md) | 2026-07-29 | 2026-07-29 | *(헤더 없음 — git 기준)* | ? |
 | [experiments/2026-06-27-mode-profile/RUNTIME_MODE_E2E_SHARED_TOP_2026_06_27.md](../hardware/docs/experiments/2026-06-27-mode-profile/RUNTIME_MODE_E2E_SHARED_TOP_2026_06_27.md) | 2026-07-29 | 2026-07-29 | *(헤더 없음 — git 기준)* | ? |
 | [experiments/2026-06-27-mode-profile/README.md](../hardware/docs/experiments/2026-06-27-mode-profile/README.md) | 2026-07-29 | 2026-07-29 | frozen — 실험 결과, 갱신하지 않음 | hardware |
 | [experiments/2026-06-27-mode-profile/MODE_PROFILE_RESULTS_2026_06_27.md](../hardware/docs/experiments/2026-06-27-mode-profile/MODE_PROFILE_RESULTS_2026_06_27.md) | 2026-07-29 | 2026-07-29 | *(헤더 없음 — git 기준)* | ? |
-| [experiments/2026-06-26-no-board-p0/summary.md](../hardware/docs/experiments/2026-06-26-no-board-p0/summary.md) | 2026-07-29 | 2026-07-29 | *(헤더 없음 — git 기준)* | ? |
 | [experiments/2026-06-26-no-board-p0/README.md](../hardware/docs/experiments/2026-06-26-no-board-p0/README.md) | 2026-07-29 | 2026-07-29 | frozen — 실험 결과, 갱신하지 않음 | hardware |
 | [experiments/2026-06-26-no-board-p0/P0_PROGRESS_2026_06_26.md](../hardware/docs/experiments/2026-06-26-no-board-p0/P0_PROGRESS_2026_06_26.md) | 2026-07-29 | 2026-07-29 | *(헤더 없음 — git 기준)* | ? |
 | [experiments/2026-06-26-no-board-p0/NO_BOARD_PERFORMANCE_EXPERIMENT_PLAN_2026_06_26.md](../hardware/docs/experiments/2026-06-26-no-board-p0/NO_BOARD_PERFORMANCE_EXPERIMENT_PLAN_2026_06_26.md) | 2026-07-29 | 2026-07-29 | *(헤더 없음 — git 기준)* | ? |
@@ -209,8 +220,10 @@ python scripts/build_docs_index.py
 | [experiments/2026-06-16-third-goal-audit/p2_vit_scale_calibration_report_2026_06_16.md](../hardware/docs/experiments/2026-06-16-third-goal-audit/p2_vit_scale_calibration_report_2026_06_16.md) | 2026-07-29 | 2026-07-29 | *(헤더 없음 — git 기준)* | ? |
 | [experiments/2026-06-16-third-goal-audit/hgpipe_operator_audit_2026_06_16.md](../hardware/docs/experiments/2026-06-16-third-goal-audit/hgpipe_operator_audit_2026_06_16.md) | 2026-07-29 | 2026-07-29 | *(헤더 없음 — git 기준)* | ? |
 | [experiments/2026-06-16-third-goal-audit/c3b_physical_smoke_gate_audit_2026_06_16.md](../hardware/docs/experiments/2026-06-16-third-goal-audit/c3b_physical_smoke_gate_audit_2026_06_16.md) | 2026-07-29 | 2026-07-29 | *(헤더 없음 — git 기준)* | ? |
+| [experiments/2026-06-16-third-goal-audit/THIRD_GOAL_REQUIREMENTS_2026_06_16.md](../hardware/docs/experiments/2026-06-16-third-goal-audit/THIRD_GOAL_REQUIREMENTS_2026_06_16.md) | 2026-07-29 | 2026-07-29 | *(헤더 없음 — git 기준)* | ? |
 | [experiments/2026-06-16-third-goal-audit/THIRD_GOAL_PROGRESS_EXPERIMENT_REPORT_2026_06_16.md](../hardware/docs/experiments/2026-06-16-third-goal-audit/THIRD_GOAL_PROGRESS_EXPERIMENT_REPORT_2026_06_16.md) | 2026-07-29 | 2026-07-29 | *(헤더 없음 — git 기준)* | ? |
 | [experiments/2026-06-16-third-goal-audit/THIRD_GOAL_FUTURE_EXPERIMENTS_2026_06_16.md](../hardware/docs/experiments/2026-06-16-third-goal-audit/THIRD_GOAL_FUTURE_EXPERIMENTS_2026_06_16.md) | 2026-07-29 | 2026-07-29 | *(헤더 없음 — git 기준)* | ? |
+| [experiments/2026-06-16-third-goal-audit/THIRD_GOAL_ACHIEVEMENT_CHECKLIST_2026_06_16.md](../hardware/docs/experiments/2026-06-16-third-goal-audit/THIRD_GOAL_ACHIEVEMENT_CHECKLIST_2026_06_16.md) | 2026-07-29 | 2026-07-29 | *(헤더 없음 — git 기준)* | ? |
 | [experiments/2026-06-16-third-goal-audit/README.md](../hardware/docs/experiments/2026-06-16-third-goal-audit/README.md) | 2026-07-29 | 2026-07-29 | frozen — 실험 결과, 갱신하지 않음 | hardware |
 | [experiments/2026-06-12-legacy-experiment/legacy_experiment_analysis_2026_06_12.md](../hardware/docs/experiments/2026-06-12-legacy-experiment/legacy_experiment_analysis_2026_06_12.md) | 2026-07-29 | 2026-07-29 | *(헤더 없음 — git 기준)* | ? |
 | [experiments/2026-06-12-legacy-experiment/README.md](../hardware/docs/experiments/2026-06-12-legacy-experiment/README.md) | 2026-07-29 | 2026-07-29 | frozen — 실험 결과, 갱신하지 않음 | hardware |
@@ -254,7 +267,12 @@ python scripts/build_docs_index.py
 | [experiments/2026-06-06-cyclic-weight-layout/cyclic_weight_packing_2026_06_06.md](../hardware/docs/experiments/2026-06-06-cyclic-weight-layout/cyclic_weight_packing_2026_06_06.md) | 2026-07-29 | 2026-07-29 | *(헤더 없음 — git 기준)* | ? |
 | [experiments/2026-06-06-cyclic-weight-layout/cyclic_weight_layout_2026_06_06.md](../hardware/docs/experiments/2026-06-06-cyclic-weight-layout/cyclic_weight_layout_2026_06_06.md) | 2026-07-29 | 2026-07-29 | *(헤더 없음 — git 기준)* | ? |
 | [experiments/2026-06-06-cyclic-weight-layout/README.md](../hardware/docs/experiments/2026-06-06-cyclic-weight-layout/README.md) | 2026-07-29 | 2026-07-29 | frozen — 실험 결과, 갱신하지 않음 | hardware |
+| [architecture/2026-06-cyclic-streaming-accelerator.md](../hardware/docs/architecture/2026-06-cyclic-streaming-accelerator.md) | 2026-06-16 | 2026-07-29 | frozen | hardware |
+| [architecture/2026-06-HBTXR-arch-freeze.md](../hardware/docs/architecture/2026-06-HBTXR-arch-freeze.md) | 2026-06-16 | 2026-07-29 | frozen | hardware |
 | [STATUS.md](../hardware/docs/STATUS.md) | 2026-07-29 | 2026-07-29 | active | hardware |
+| [SPEC.md](../hardware/docs/SPEC.md) | 2026-06-16 | 2026-07-29 | active — 구 트리에서 이어받음 | hardware |
+| [MODULE-GUIDE.md](../hardware/docs/MODULE-GUIDE.md) | 2026-06-17 | 2026-07-29 | active | hardware |
+| [ARCHITECTURE.md](../hardware/docs/ARCHITECTURE.md) | 2026-07-29 | 2026-07-29 | active — 색인. 본문 설계는 아래 문서들이 담습니다 | hardware |
 | [track/PROGRESS.md](../hardware/docs/track/PROGRESS.md) | 2026-07-05 | 2026-07-15 | active — 내용은 2026-07-15 구 트리에서 이어받음, 재구성 진행분을 여기에 이어 씁니다 | hardware |
 | [track/CONVERSATION.md](../hardware/docs/track/CONVERSATION.md) | 2026-07-05 | 2026-07-15 | active — 내용은 2026-07-15 구 트리에서 이어받음, 재구성 진행분을 여기에 이어 씁니다 | hardware |
 | [track/log.md](../hardware/docs/track/log.md) | 2026-07-05 | 2026-07-05 | active — 내용은 2026-07-15 구 트리에서 이어받음, 재구성 진행분을 여기에 이어 씁니다 | hardware |
