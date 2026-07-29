@@ -16,9 +16,15 @@ quantization:
   # integer (integer mean/variance/rsqrt, integer row max/exp/row-sum/reciprocal — unlike
   # the Q-tier LUTs, which still reduce in float), then writes integer weights (.npy) +
   # scales + tables + manifest.json.
-  # Every op becomes integer; the GRAPH does not. Tensors still move between modules as
-  # float, and the attention matmuls / residual adds stay float (see QUANTIZATION-PLAN §9).
-  # The padded 3x3 mask_head.proj is left float and listed in manifest['unexported'].
+  # The attention matmuls (Q@K^T, attn@V) and both residual adds convert too (D4 made them
+  # reachable), so a converted FrameModel leaves only the inference-no-op Dropouts and the
+  # two exact-constant Scales in float. Padded convs convert as well (D2), so
+  # manifest['unexported'] is empty for this model.
+  # This export is the PER-OP integer tier, whose modules keep a float I/O port so the
+  # converted model still runs through the unmodified forward. The fully integer GRAPH —
+  # QTensor threaded end to end, no float tensor anywhere on the datapath — is a separate
+  # assembly, quantization.ilayers.model.IDirectPupilDetector, built on top of the same
+  # kernels. See QUANTIZATION-PLAN §9.
   # Replay the dump with quantization.export.verify_export to prove it is faithful.
   export_int: null          # e.g. runs/frame_hbtxr/int_export
 

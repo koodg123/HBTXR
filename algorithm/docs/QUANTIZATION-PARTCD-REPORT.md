@@ -34,9 +34,10 @@ subsystem has already had twice.
   end to end: `IPatchEmbed` → `IViTBackbone` → `IPooledMlpHead`/`IEllipseHead`, assembled
   by `IDirectPupilDetector`. Checked element-wise against `i_block.replay_model_int`, with
   a `__torch_function__` mode proving no float tensor crosses the forward.
-  **Still float I/O:** the mask head, which ends in `F.interpolate(bilinear)` — an integer
-  bilinear resample is an unmade design decision, and the graph names the gap in
-  `float_io_heads` rather than leaving it to be inferred.
+  **Not carried:** the mask head — because it does not run at inference. It is stage-1
+  auxiliary supervision (Sec III-D.1, "Mask Head (Aux)"), and `HybridModel`, the paper's
+  full deployed system, does not instantiate one. `float_io_heads` records this so the
+  omission reads as scope rather than as an oversight.
 - **`Scale` stays float, deliberately.** The `1/√d` factor is an exact constant multiply
   — `0.125 = 2⁻³` for the shipped `head_dim=64`, a pure shift in hardware — so
   quantizing it could only add error. It is left in `left_float` rather than filtered out
@@ -192,11 +193,6 @@ Run on the torch 2.13.0 CPU venv. Numerics are `float32`/`int64` on CPU.
   there is no shortcut through the archive. Until then every accuracy figure here is on a
   randomly-initialised model. This is now the *only* thing blocking the remaining
   questions, including whether the hybrid shared-stack result above survives training.
-- **`manifest["total_params"]` reads 0** on a converted model: every parameter has become
-  a buffer, so the field is technically correct and practically useless. Worth either
-  removing or redefining when the format next changes.
-- **The mask head is not integer-threaded** — see "What it does NOT do". Its conv stack
-  would lower like any other; what is missing is a decision about the bilinear upsample.
 - **Conv activations are calibrated symmetrically**, so no converted model has an
   asymmetric conv input grid, and `IConv2d`'s zero-point correction and zero-point padding
   — both built and measured in D2 — are never exercised by conversion. They are what makes

@@ -21,11 +21,12 @@ Between those there is one boundary in each direction and no other float:
   multiply. Anything the model applies *after* that (``box_to_state``'s geometry, the
   reliability sigmoid) is host arithmetic on a real-valued answer and is left where it is.
 
-What is NOT threaded, and why: the mask head. Its conv stack would lower the same way,
-but it ends in ``F.interpolate(mode="bilinear")``, and an integer bilinear resample is an
-unmade design decision (nearest? fixed-point weights at what fractional width?). It stays
-on the float-I/O path, and ``float_io_heads`` names it so nobody has to infer it from the
-absence of a class.
+What is NOT carried, and why: the mask head — because it does not run at inference. It is
+stage-1 auxiliary supervision (paper Sec III-D.1, "Mask Head (Aux)"), and ``HybridModel``,
+the paper's full deployed system, has no mask head at all. Threading it would mean
+deciding how to resample bilinearly in integers, and that decision is not owed: the head
+is not on the accelerator. ``float_io_heads`` records this so the omission reads as scope
+rather than as an oversight.
 """
 from __future__ import annotations
 
@@ -37,10 +38,18 @@ from quantization.ilayers.qtensor import QTensor
 from quantization.ilayers.vit import IPatchEmbed, IViTBackbone
 from quantization.scheme import INT8, QuantDtype
 
-# Heads whose bodies are not integer-threaded, with the reason, so the gap is stated
-# rather than implied. Read by ``IDirectPupilDetector.float_io_heads``.
+# Heads of the source model this graph does not carry, with the reason, so the gap is
+# stated rather than implied. Read by ``IDirectPupilDetector.float_io_heads``.
+#
+# The mask head is NOT a missing feature. It is stage-1 auxiliary supervision — the
+# paper's Sec III-D.1 "Mask Head (Aux)", and its own docstring says it is not the runtime
+# localization output — so it does not run on the accelerator at all. ``HybridModel``, the
+# paper's full deployed system, does not even instantiate one. Its ``F.interpolate``
+# upsample would need an integer resample to be threaded, but that question never has to
+# be answered, because the head is not on the inference path.
 FLOAT_IO_HEADS = {
-    "mask_head": "ends in F.interpolate(bilinear); the integer resample is undecided",
+    "mask_head": "not on the inference path: stage-1 auxiliary supervision, absent from "
+                 "HybridModel entirely",
 }
 
 

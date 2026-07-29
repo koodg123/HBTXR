@@ -135,6 +135,11 @@ All three D4 design proposals independently flagged this; it must land before D4
   runs `convert_model_to_integer`. Replace with text that says the I-tier kernels are
   installed, that the graph is integer per op but not end to end (§9), and that
   `mask_head.proj` is left float and listed in `manifest['unexported']`.
+  > **Superseded.** The last two clauses were true when this plan was written and are not
+  > now: D2 made padded convs convertible (`unexported` is empty for FrameModel) and A1
+  > closed the end-to-end graph. The replacement text landed in R1, measured rather than
+  > restated. Left here unedited because a plan is a record of what was decided, not a
+  > description of the current tree.
 - `quantization/entrypoint.py:12-15` — same error in the module docstring
   (`convert_to_integer`, the Linear-only converter, instead of `convert_model_to_integer`).
 - `models/backbones/vit.py:10-12` — claims a positional embedding is applied by the

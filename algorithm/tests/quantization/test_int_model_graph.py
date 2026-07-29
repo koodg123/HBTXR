@@ -340,11 +340,17 @@ def test_the_assembly_mirrors_the_float_model(converted):
     assert graph.roi_head is not None and graph.reliability_head is not None
 
 
-def test_the_untouched_head_is_named_rather_than_silently_missing(converted):
-    """A gap stated in the API beats a gap the reader has to infer from an absence."""
+def test_the_omitted_head_is_named_rather_than_silently_missing(converted):
+    """A gap stated in the API beats a gap the reader has to infer from an absence.
+
+    And the reason has to be the real one. This head is omitted because it does not run at
+    inference — stage-1 auxiliary supervision, absent from ``HybridModel`` entirely — not
+    because its bilinear upsample is hard to quantize. The wrong reason would have put a
+    piece of work on the backlog that nobody owes.
+    """
     model, spec, graph = converted
     assert "mask_head" in graph.float_io_heads
-    assert "interpolate" in graph.float_io_heads["mask_head"]
+    assert "inference path" in graph.float_io_heads["mask_head"]
     assert model.mask_head is not None, "the float model does have the head this omits"
 
 

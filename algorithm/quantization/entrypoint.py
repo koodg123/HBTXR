@@ -15,7 +15,12 @@ checkpoint into the deployment tier: ``convert_model_to_integer`` on the same
 calibration batches — which installs the I-tier kernels whose whole datapath is
 integer, not the Q-tier LUTs that still reduce in float — then dumps integer
 weights + scales + tables and a ``manifest.json`` for the HW / bit-exact-simulator
-backend. Every op becomes integer; the graph does not (see QUANTIZATION-PLAN §9).
+backend. What is exported is the **per-op** tier: every op is integer, and each module
+keeps a float I/O port so the converted model still runs through the unmodified forward.
+The fully integer **graph** — ``QTensor`` threaded end to end with no float tensor on the
+datapath — is a separate assembly over the same kernels
+(``quantization.ilayers.model.IDirectPupilDetector``); it is not what this dump contains.
+See QUANTIZATION-PLAN §9.
 
 Run from the ``algorithm/`` root::
 
