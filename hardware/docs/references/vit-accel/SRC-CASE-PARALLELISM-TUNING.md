@@ -1,6 +1,6 @@
 # HG-PIPE `src/` + `case/` 병렬도 튜닝 치트시트
 
-이 문서는 [SRC_CASE_MODULE_GUIDE.md](./SRC_CASE_MODULE_GUIDE.md) 를 읽은 뒤, 실제 resource fit / latency trade-off 관점에서 어떤 병렬도 knob를 먼저 만져야 하는지 빠르게 판단하기 위한 운영 문서다.
+이 문서는 [SRC-CASE-MODULE-GUIDE.md](./SRC-CASE-MODULE-GUIDE.md) 를 읽은 뒤, 실제 resource fit / latency trade-off 관점에서 어떤 병렬도 knob를 먼저 만져야 하는지 빠르게 판단하기 위한 운영 문서다.
 
 중요한 전제:
 
@@ -482,7 +482,7 @@
 
 병렬도 변경이 실제 board fit에 어떤 영향을 주는지는 아래 문서와 함께 봐야 한다.
 
-- [SRC_CASE_MODULE_GUIDE.md](./SRC_CASE_MODULE_GUIDE.md)
-- [MULTI_BOARD_VALIDATION.md](./MULTI_BOARD_VALIDATION.md)
+- [SRC-CASE-MODULE-GUIDE.md](./SRC-CASE-MODULE-GUIDE.md)
+- [MULTI-BOARD-VALIDATION.md](./MULTI-BOARD-VALIDATION.md)
 
 `SRC_CASE_MODULE_GUIDE.md`는 구조를 설명하고, 이 문서는 “어디를 먼저 건드릴지”를 설명한다.

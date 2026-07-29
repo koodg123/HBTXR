@@ -177,7 +177,7 @@ progress:    docs/track/PROGRESS.md
 | `analysis/no-board-results/` `reports/` | `reports/` 통합 |
 | `analysis/integrated-2026-06-26/` | **이미 `docs/reference/external/`로 이동 완료** |
 | `resources/hgtxr_{final_evidence,handover_additional}/` 68개 | `snapshots/` (불변) |
-| `references/vit_accel/experiments/` | `experiments/` (날짜 규약) |
+| `references/vit_accel/experiments/` | ~~`experiments/`~~ → **`references/vit-accel/experiments/` 유지**. 남의 실험을 우리 `experiments/`에 섞으면 우리가 돌린 것처럼 보입니다. 이름만 규약 적용 |
 | `status/xr_accel/` `validation/xr_accel/` `architecture/xr_accel/` | `STATUS.md` · `reports/` · `ARCHITECTURE.md`로 흡수 |
 | `decisions/` `experiments/` (빈) | `track/ADR.md` · `experiments/`로 |
 
