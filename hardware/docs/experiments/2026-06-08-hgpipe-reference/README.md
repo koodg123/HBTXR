@@ -6,9 +6,9 @@
 
 HG-PIPE 참조 구현 분석 · Q4W8A S2 블록 양자화
 
-## 문서 1개
+## 문서
 
-- [hgpipe_reference_analysis_2026_06_08.md](hgpipe-reference-analysis.md)
+- [hgpipe-reference-analysis.md](hgpipe-reference-analysis.md)
 
 ## 데이터 2개 — `data/`
 

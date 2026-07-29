@@ -6,12 +6,14 @@
 
 cyclic transformer의 가중치 레이아웃과 패킹 형식 확정
 
-## 문서 2개
+## 문서
 
-- [cyclic_weight_layout_2026_06_06.md](cyclic-weight-layout.md)
-- [cyclic_weight_packing_2026_06_06.md](cyclic-weight-packing.md)
+- [cyclic-weight-layout.md](cyclic-weight-layout.md)
+- [cyclic-weight-packing.md](cyclic-weight-packing.md)
+- [resource-extraction-log.md](resource-extraction-log.md) — 본문이 `## 2026-06-06 Continuation`이라
+  이 캠페인 소속입니다. 2026-07-29에 06-10 캠페인에서 옮겨 왔습니다.
 
-## 데이터 6개 — `data/`
+## 데이터 — `data/`
 
 원본 도구 출력(.json 등). 문서와 쌍입니다.
 

@@ -6,12 +6,12 @@
 
 모드별(search/track) 자원 프로파일 · Vivado 진행
 
-## 문서 6개
+## 문서
 
-- [MODE_PROFILE_RESULTS_2026_06_27.md](mode-profile-results.md)
-- [RUNTIME_MODE_E2E_SHARED_TOP_2026_06_27.md](runtime-mode-e2e-shared-top.md)
-- [VIVADO_PROGRESS_2026_06_27.md](vivado-progress.md)
-- [WORK_PROGRESS_EXPERIMENT_SUMMARY_2026_06_27.md](work-progress-experiment-summary.md)
+- [mode-profile-results.md](mode-profile-results.md)
+- [runtime-mode-e2e-shared-top.md](runtime-mode-e2e-shared-top.md)
+- [vivado-progress.md](vivado-progress.md)
+- [work-progress-experiment-summary.md](work-progress-experiment-summary.md)
 - [summary-p0-mode-profile.md](summary-p0-mode-profile.md)
 - P0 리포트 수집 결과는 **06-26 캠페인과 바이트 단위로 동일**했습니다 (재수집했고 아무것도
   바뀌지 않았다는 뜻). 사본을 두지 않고 원본을 가리킵니다 →

@@ -6,9 +6,9 @@
 
 AXIS 경로 end-to-end 베이스라인 수립
 
-## 문서 1개
+## 문서
 
-- [e2e_axis_baseline_2026_06_09.md](e2e-axis-baseline.md)
+- [e2e-axis-baseline.md](e2e-axis-baseline.md)
 
 ## 데이터 1개 — `data/`
 

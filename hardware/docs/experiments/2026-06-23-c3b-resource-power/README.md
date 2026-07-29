@@ -6,11 +6,11 @@
 
 C3b 구성의 자원·전력·지연 측정
 
-## 문서 3개
+## 문서
 
-- [c3b_attention_qkv_mlp_block_resource_report_2026_06_23.md](c3b-attention-qkv-mlp-block-resource-report.md)
-- [c3b_board_measurement_attempt_2026_06_23.md](c3b-board-measurement-attempt.md)
-- [c3b_resource_power_latency_tables_2026_06_23.md](c3b-resource-power-latency-tables.md)
+- [c3b-attention-qkv-mlp-block-resource-report.md](c3b-attention-qkv-mlp-block-resource-report.md)
+- [c3b-board-measurement-attempt.md](c3b-board-measurement-attempt.md)
+- [c3b-resource-power-latency-tables.md](c3b-resource-power-latency-tables.md)
 
 ## 출처와 주의
 

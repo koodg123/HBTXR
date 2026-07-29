@@ -6,10 +6,10 @@
 
 ZCU104 물리 실험 계획 (보드 필요)
 
-## 문서 2개
+## 문서
 
-- [ZCU104_CYCLIC_MAXPERF_PROGRESS.md](zcu104-cyclic-maxperf-progress.md)
-- [ZCU104_FULL_LEARNED_PHYSICAL_EXPERIMENT_PLAN_2026_07_01.md](zcu104-full-learned-physical-experiment-plan.md)
+- [zcu104-cyclic-maxperf-progress.md](zcu104-cyclic-maxperf-progress.md)
+- [zcu104-full-learned-physical-experiment-plan.md](zcu104-full-learned-physical-experiment-plan.md)
 
 ## 출처와 주의
 

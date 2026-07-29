@@ -6,9 +6,9 @@
 
 레거시 실험 결과 분석
 
-## 문서 1개
+## 문서
 
-- [legacy_experiment_analysis_2026_06_12.md](legacy-experiment-analysis.md)
+- [legacy-experiment-analysis.md](legacy-experiment-analysis.md)
 
 ## 출처와 주의
 

@@ -4,6 +4,22 @@
 
 # HGTXR Hardware TODO
 
+> ### ⚠️ 아래 항목의 경로는 **구 트리 기준**입니다 (2026-07-29 확인)
+>
+> 이 항목들은 2026-07-05에 쓰였고, 그 뒤 구 트리가 `archive/hardware/`로 옮겨졌습니다.
+> **지시대로 실행하면 실패합니다.** 지금의 대응은:
+>
+> | 항목에 적힌 것 | 지금 어디 |
+> |---|---|
+> | `tools/run_zcu104_c3b_smoke_remote.py` | `archive/hardware/tools/run_zcu104_c3b_smoke_remote.py` |
+> | `pynq/hgtxr/` | 없음. 런타임 코드는 `deploy/`로 갑니다 (**아직 이관 전**) |
+> | `generated/` | **이관되지 않았습니다.** `archive/`에도 없습니다 — 생성물이라 커밋되지 않았습니다 |
+>
+> 본문을 고치지 않는 이유: 항목의 내용(무엇을 해야 하나)은 여전히 유효하고, 경로는
+> 코드 이관(계획 §6 P0~P8)이 끝나면 새 위치로 한 번에 갱신됩니다. 그 전에 개별로 고치면
+> 두 번 고치게 됩니다. **어차피 전부 보드 접근 대기이므로 지금 실행할 수 없습니다**
+> ([../STATUS.md](../STATUS.md) Blocked).
+
 ## P0
 - Capture/import C3b AXIS/DMA physical smoke JSON.
 - Resolve exact XR-VITs sibling or approved replacement policy.

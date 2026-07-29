@@ -6,10 +6,10 @@
 
 보드 없이 수행하는 P0 성능 실험 계획과 1차 수집
 
-## 문서 3개
+## 문서
 
-- [NO_BOARD_PERFORMANCE_EXPERIMENT_PLAN_2026_06_26.md](no-board-performance-experiment-plan.md)
-- [P0_PROGRESS_2026_06_26.md](p0-progress.md)
+- [no-board-performance-experiment-plan.md](no-board-performance-experiment-plan.md)
+- [p0-progress.md](p0-progress.md)
 - [summary-p0-report-collection.md](summary-p0-report-collection.md)
 
 ## 출처와 주의

@@ -6,11 +6,11 @@
 
 8문항 실험 — full-learned Vivado · 하이브리드 런타임 · full-AXI 가중치 경로
 
-## 문서 3개
+## 문서
 
-- [EIGHT_QUESTION_FULL_LEARNED_VIVADO_EXPERIMENT_2026_06_28.md](eight-question-full-learned-vivado-experiment.md)
-- [EIGHT_QUESTION_HYBRID_RUNTIME_REPORT_2026_06_28.md](eight-question-hybrid-runtime-report.md)
-- [RUNTIME_MODE_FULL_AXI_WEIGHT_PATH_2026_06_28.md](runtime-mode-full-axi-weight-path.md)
+- [eight-question-full-learned-vivado-experiment.md](eight-question-full-learned-vivado-experiment.md)
+- [eight-question-hybrid-runtime-report.md](eight-question-hybrid-runtime-report.md)
+- [runtime-mode-full-axi-weight-path.md](runtime-mode-full-axi-weight-path.md)
 
 ## 출처와 주의
 

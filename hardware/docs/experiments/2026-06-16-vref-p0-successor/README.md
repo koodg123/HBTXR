@@ -11,14 +11,14 @@ VREF-P0 후속안 — PoT 스케일 스윕 · 버퍼 수명 · QKV URAM 캐시
 - `pass` × 4
 - `missing` × 2
 
-## 문서 6개
+## 문서
 
-- [pynq_smoke_candidate_discovery_vref_p0_2026_06_16.md](pynq-smoke-candidate-discovery-vref-p0.md)
-- [qkv_uram_smoke_candidate_discovery_2026_06_16.md](qkv-uram-smoke-candidate-discovery.md)
-- [vref_p0_buffer_lifetime_audit_2026_06_16.md](vref-p0-buffer-lifetime-audit.md)
-- [vref_p0_pot_scale_audit_2026_06_16.md](vref-p0-pot-scale-audit.md)
-- [vref_p0_pot_scale_sweep_2026_06_16.md](vref-p0-pot-scale-sweep.md)
-- [vref_p0_qkv_uram_cache_successor_2026_06_16.md](vref-p0-qkv-uram-cache-successor.md)
+- [pynq-smoke-candidate-discovery-vref-p0.md](pynq-smoke-candidate-discovery-vref-p0.md)
+- [qkv-uram-smoke-candidate-discovery.md](qkv-uram-smoke-candidate-discovery.md)
+- [vref-p0-buffer-lifetime-audit.md](vref-p0-buffer-lifetime-audit.md)
+- [vref-p0-pot-scale-audit.md](vref-p0-pot-scale-audit.md)
+- [vref-p0-pot-scale-sweep.md](vref-p0-pot-scale-sweep.md)
+- [vref-p0-qkv-uram-cache-successor.md](vref-p0-qkv-uram-cache-successor.md)
 
 ## 데이터 6개 — `data/`
 

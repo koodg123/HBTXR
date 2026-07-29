@@ -4,6 +4,33 @@
 
 # HGTXR Hardware Progress
 
+> **최신이 아래가 아니라 여기 위에 있습니다.** 2026-07-15 이전 기록은 구 트리에서
+> 이어받은 것이고 시간순(오름차순)입니다.
+
+## 2026-07-29 — 재구성 (문서 단계 완료, 코드 단계 미착수)
+
+계획: [../plans/active/2026-07-29-hardware-reconstruction.md](../plans/active/2026-07-29-hardware-reconstruction.md)
+현재 상태의 단일 출처는 [../STATUS.md](../STATUS.md)입니다. 여기는 **무엇을 했나**입니다.
+
+- [x] 전수 semantic census — 642 파일 · 285,261줄 →
+      [../reports/2026-07-29-hardware-census.md](../reports/2026-07-29-hardware-census.md)
+- [x] 구 트리 → `archive/hardware/` 이동. **테스트 49 failed / 426 passed 불변**
+- [x] 새 골격 7개 디렉토리 생성 (`config module build deploy tools docs workspace`)
+- [x] 문서 이관 D1~D5 — archive md 159개 해시 대조, 미이관 0건 →
+      [../plans/done/2026-07-29-docs-migration-map.md](../plans/done/2026-07-29-docs-migration-map.md)
+- [x] 큰 캠페인 디렉토리 분할 (최대 34 → 12항목)
+- [x] 이름 규약 적용 — 87개 개명 · 링크 126개 재작성 · 표시명 39개 정정 · 비준수 0
+- [x] 색인 정합 — 캠페인 카운트를 `scripts/check_docs_counts.py`로 검증 가능하게
+- [ ] **P0** 죽은 것 확정 후 이관 제외 (`=318.empty` `=332.empty`, `common.h` 미호출 선언 3)
+- [ ] **P1** `tools/_lib/` 공용화 (`load_json` 22곳 등)
+- [ ] **P2~P8** 계획 §6
+
+**미착수 이유**: 코드 이관은 문서 이관과 달리 `archive/hardware/tests`의 426 passed가
+회귀 기준선이고, 옮기는 중에 이 숫자가 줄면 멈춰야 합니다. 문서부터 끝낸 것은 그
+기준선을 건드리지 않기 때문입니다.
+
+---
+
 Date: 2026-06-16
 
 Latest Continuation: Selected Path Execution Audit.

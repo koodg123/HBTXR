@@ -1,11 +1,11 @@
 > **작성** 2026-07-29 · **갱신** 2026-07-29
-> **상태** active — 분석 완료, 이관 대기
+> **상태** frozen — D1~D5 실행 완료 (§6). 결과: [../../STATUS.md](../../STATUS.md) 문서 이관 결과
 > **소유** hardware
 
 # archive/hardware 문서 → 새 `hardware/docs/` 이관 지도
 
 대상: `archive/hardware/**` 의 **md 159개 전수** (`docs/` 밖 3개 포함).
-상위 계획: [2026-07-29-hardware-reconstruction.md](2026-07-29-hardware-reconstruction.md)
+상위 계획: [../active/2026-07-29-hardware-reconstruction.md](../active/2026-07-29-hardware-reconstruction.md)
 
 ---
 
