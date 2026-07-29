@@ -7,9 +7,13 @@ the mask and heatmap heads. ``IConv2d`` quantizes weight per output channel
 domain, folds the activation zero-point as a ``- zp·Σw`` correction, and dequantizes
 by ``s_x · s_w``.
 
-Integer accumulation is done through ``F.conv2d`` on the integer operands cast to
-float: for ViT patch dims the products stay exact within float32's 2^24 integer
-range, and the result is checked bit-exact against the ``i_ops.int_conv2d`` golden.
+Accumulation is im2col + an **int64 matmul**, not ``F.conv2d`` on operands cast to
+float. Casting is exact only while the accumulator stays inside float32's 2^24 integer
+range, and the shipped mask head is already outside it: ``Conv2d(192, 96, k=3)`` has
+1728 taps and a worst-case accumulator of 27,870,912. It is also the wrong shape of
+claim — an int8xint8 MAC array is integer hardware, so a kernel that reaches the right
+answer *via* a float unit can be exact and still not be a model of the thing. The int64
+path is both, at a measured cost of single-digit milliseconds per image.
 """
 from __future__ import annotations
 
@@ -18,6 +22,27 @@ from torch import nn
 from torch.nn import functional as F
 
 from quantization.scheme import INT8, QuantDtype
+
+# Largest integer float32 represents exactly. 2^24 itself is fine; 2^24 + 1 is not, so a
+# float accumulator is safe only while its worst-case magnitude stays at or below this.
+# Named because it is the bound the old float path violated, and the tests use it to show
+# the violation is reachable rather than theoretical.
+FLOAT32_EXACT_INT = 1 << 24
+
+
+def worst_case_accumulator(weight_int: torch.Tensor, act_dtype: QuantDtype) -> int:
+    """Largest magnitude this conv's accumulator can reach: ``taps · max|w| · max|x|``.
+
+    Reported rather than merely asserted, because the gap between this and what random
+    data produces is the reason a float accumulator can be wrong without any test
+    noticing: a random accumulator grows like sqrt(taps), landing orders of magnitude
+    below the worst case, so a saturated real input is off by an LSB while every
+    random-input test measures exactly zero error.
+    """
+    max_w = int(weight_int.abs().amax()) if weight_int.numel() else 0
+    max_x = max(abs(int(act_dtype.qmin)), abs(int(act_dtype.qmax)))
+    taps = int(weight_int.shape[1]) * int(weight_int.shape[-2]) * int(weight_int.shape[-1])
+    return taps * max_w * max_x
 
 
 def _quantize_conv_weight(weight: torch.Tensor, dtype: QuantDtype):
@@ -120,9 +145,34 @@ class IConv2d(nn.Module):
                    stride=strides.pop(), padding=conv_padding_pair(conv),
                    act_zero_point=act_zero_point)
 
-    def forward(self, x: torch.Tensor) -> torch.Tensor:
-        x_int = torch.round(x / self.act_scale + self.act_zero_point).clamp(
-            self.act_dtype.qmin, self.act_dtype.qmax)
+    def accumulate(self, x_int: torch.Tensor) -> torch.Tensor:
+        """Padded integer activation -> the raw int64 accumulator on grid ``s_x·s_w``.
+
+        im2col then one int64 matmul: each output position gathers its ``Cin·kh·kw`` taps
+        into a row, and the reduction is the same integer MAC the linear layers use. No
+        float appears, so the result is exact at any tap count and the datapath check
+        (``test_no_float_tensor_crosses_the_model_datapath``) can be a real check rather
+        than one with a hole cut in it for this kernel.
+
+        The gather materializes ``B·Ho·Wo·taps`` int64 values — 2.7 MB for the mask head
+        at a 14x14 token grid, and single-digit milliseconds. That is the whole price.
+        """
+        weight = self.weight_int.to(torch.int64)
+        kh, kw = int(weight.shape[-2]), int(weight.shape[-1])
+        stride = int(self.stride_hw)
+        patches = x_int.to(torch.int64).unfold(2, kh, stride).unfold(3, kw, stride)
+        batch, _, ho, wo = patches.shape[:4]
+        rows = patches.permute(0, 2, 3, 1, 4, 5).reshape(batch, ho * wo, -1)
+        acc = rows @ weight.reshape(weight.shape[0], -1).transpose(0, 1)
+        return acc.transpose(1, 2).reshape(batch, weight.shape[0], ho, wo)
+
+    def integer_accumulator(self, x_int: torch.Tensor) -> torch.Tensor:
+        """Activation ALREADY on this conv's grid -> the int64 accumulator on ``s_x·s_w``.
+
+        The integer entry point, used by the QTensor-threaded graph. ``forward`` is the
+        float-I/O port built on top of it, so both go through the same padding and the
+        same zero-point correction rather than keeping two copies that can drift.
+        """
         ph, pw = (int(v) for v in self.padding_hw)
         if ph or pw:
             # Pad the INTEGER activation with the zero-point, not with 0, and only then
@@ -135,9 +185,15 @@ class IConv2d(nn.Module):
             # 1.8e-07 here. Padding with zp keeps the correction exactly right, since
             # a padded tap contributes (zp - zp)·w = 0.
             x_int = F.pad(x_int, (pw, pw, ph, ph), value=float(self.act_zero_point))
-        acc = F.conv2d(x_int.float(), self.weight_int.float(), stride=int(self.stride_hw)).round().to(torch.int64)
+        acc = self.accumulate(x_int)
         if self.act_zero_point != 0:
             acc = acc - self.act_zero_point * self.wsum.view(1, -1, 1, 1)
+        return acc
+
+    def forward(self, x: torch.Tensor) -> torch.Tensor:
+        x_int = torch.round(x / self.act_scale + self.act_zero_point).clamp(
+            self.act_dtype.qmin, self.act_dtype.qmax)
+        acc = self.integer_accumulator(x_int)
         y = acc.to(torch.float32) * (self.act_scale * self.weight_scale.view(1, -1, 1, 1))
         if self.bias is not None:
             y = y + self.bias.view(1, -1, 1, 1)
