@@ -10,7 +10,7 @@
 
 - [NO_BOARD_PERFORMANCE_EXPERIMENT_PLAN_2026_06_26.md](NO_BOARD_PERFORMANCE_EXPERIMENT_PLAN_2026_06_26.md)
 - [P0_PROGRESS_2026_06_26.md](P0_PROGRESS_2026_06_26.md)
-- [summary.md](summary.md)
+- [summary-p0-report-collection.md](summary-p0-report-collection.md)
 
 ## 출처와 주의
 

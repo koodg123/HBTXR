@@ -23,10 +23,26 @@
 | `config/` | ⬜ 비어 있음 | `archive/hardware/configs/` 33개 이관 |
 | `module/` | ⬜ 비어 있음 | `archive/hardware/hls/` 67 + `refs/` 29 |
 | `build/` | ⬜ 비어 있음 | `archive/hardware/vivado/scripts/` 31 + `scripts/run/` |
-| `deploy/` | ⬜ 비어 있음 | `archive/hardware/pynq/*.py` 9 (비트스트림 제외) |
+| `deploy/` | 🟨 런타임 가이드만 | `archive/hardware/pynq/*.py` 9 (비트스트림 제외) |
 | `tools/` | ⬜ 비어 있음 | `archive/hardware/tools/` 87 + `tests/` 60 — `_lib/` 공용화 포함 |
-| `docs/` | 🟨 계획·census만 | 나머지는 이관 순서에 따라 |
+| `docs/` | ✅ **완료 (D1~D5)** | 159개 전수 대조 완료 |
 | `workspace/` | ⬜ 골격만 | gitignore 정책 적용됨 |
+
+### 문서 이관 결과 (D1~D5, 2026-07-29)
+
+| | |
+|---|---|
+| `references/vit_accel/` | 33 — 선행 프로젝트, 무변경 |
+| `experiments/` | **13캠페인 · 문서 78 · 데이터 73** |
+| `track/` | 6종 (구 21개에서 실험 12·핸드오프 4 분리) |
+| `handoff/` | 5 — 전부 만료 고지 부착 |
+| `plans/{active,done}/` | 8 |
+| `reports/` · `architecture/` · `snapshots/` | 4 · 2 · 2 |
+| `SPEC.md` `ARCHITECTURE.md` `MODULE-GUIDE.md` | 승격 |
+
+**검증**: archive md 159개를 내용 해시로 대조해 미이관 0건.
+`ARCHITECTURE.md`는 유일하게 새로 쓴 문서입니다 — 이관 대상이던
+`DIRECTORY_LAYOUT.md`가 **구 레이아웃**을 정의하고 있어 그대로 두면 즉시 거짓이 됩니다.
 
 ## Blocked
 

@@ -6,13 +6,14 @@
 
 모드별(search/track) 자원 프로파일 · Vivado 진행
 
-## 문서 5개
+## 문서 6개
 
 - [MODE_PROFILE_RESULTS_2026_06_27.md](MODE_PROFILE_RESULTS_2026_06_27.md)
 - [RUNTIME_MODE_E2E_SHARED_TOP_2026_06_27.md](RUNTIME_MODE_E2E_SHARED_TOP_2026_06_27.md)
-- [summary.md](summary.md)
 - [VIVADO_PROGRESS_2026_06_27.md](VIVADO_PROGRESS_2026_06_27.md)
 - [WORK_PROGRESS_EXPERIMENT_SUMMARY_2026_06_27.md](WORK_PROGRESS_EXPERIMENT_SUMMARY_2026_06_27.md)
+- [summary-p0-mode-profile.md](summary-p0-mode-profile.md)
+- [summary-p0-report-collection.md](summary-p0-report-collection.md)
 
 ## 출처와 주의
 
