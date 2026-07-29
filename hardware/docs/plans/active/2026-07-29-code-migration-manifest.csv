@@ -1,9 +1,9 @@
 archive_path,ext,decision,dest,reason
 archive/migration-logs/=318.empty,.empty,skip,-,0바이트 셸 리다이렉트 잔해 (생사 대장 ❌)
 archive/migration-logs/=332.empty,.empty,skip,-,0바이트 셸 리다이렉트 잔해 (생사 대장 ❌)
-configs/quant_int8.yaml,.yaml,migrate,hardware/config/,보드·설계 파라미터
+configs/quant_int8.yaml,.yaml,migrate,hardware/config/,보드·설계 파라미터 · **참조 0건** (2026-07-30 조사) — 미사용 후보. 판정은 M3(vivado tcl 이관) 이후
 configs/sweeps/zcu104_cyclic_transformer_sweep.yaml,.yaml,migrate,hardware/config/,보드·설계 파라미터
-configs/vck190.yaml,.yaml,migrate,hardware/config/,보드·설계 파라미터
+configs/vck190.yaml,.yaml,migrate,hardware/config/,보드·설계 파라미터 · **참조 0건** (2026-07-30 조사) — 미사용 후보. 판정은 M3(vivado tcl 이관) 이후
 configs/vitis_hls.yaml,.yaml,migrate,hardware/config/,보드·설계 파라미터
 configs/xr_accel/designs/deit_tiny_cyclic_zcu104.json,.json,migrate,hardware/config/,보드·설계 파라미터
 configs/xr_accel/designs/full_deit_tiny_fit.json,.json,migrate,hardware/config/,보드·설계 파라미터
@@ -24,7 +24,7 @@ configs/xr_accel/models/hbtxr_option_b.json,.json,migrate,hardware/config/,보�
 configs/xr_accel/models/hbtxr_option_c.json,.json,migrate,hardware/config/,보드·설계 파라미터
 configs/xr_accel/schema.json,.json,migrate,hardware/config/,보드·설계 파라미터
 configs/xr_accel/targets/zcu104.json,.json,migrate,hardware/config/,보드·설계 파라미터
-configs/zcu104.yaml,.yaml,migrate,hardware/config/,보드·설계 파라미터
+configs/zcu104.yaml,.yaml,migrate,hardware/config/,보드·설계 파라미터 · **참조 0건** (2026-07-30 조사) — 미사용 후보. 판정은 M3(vivado tcl 이관) 이후
 configs/zcu104_cyclic_s0_defines.h,.h,migrate,hardware/config/,보드·설계 파라미터
 configs/zcu104_cyclic_s1_weight_defines.h,.h,migrate,hardware/config/,보드·설계 파라미터
 configs/zcu104_cyclic_s2_attn_first_step_defines.h,.h,migrate,hardware/config/,보드·설계 파라미터
