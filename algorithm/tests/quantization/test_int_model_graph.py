@@ -327,6 +327,44 @@ def test_the_token_mean_is_exact_integer_arithmetic(converted):
     assert int(negative.int_data.reshape(-1)[0]) == -2                     # away from zero
 
 
+def test_a_larger_input_is_refused_by_the_softmax_envelope(converted):
+    """R3: the ``max_tokens`` guard is reachable from the assembled model, not just the op.
+
+    This is not a hypothetical input. The backbone has **no positional embedding** — the
+    repo checked and documented that — so a ViT here accepts any resolution, and the float
+    model happily runs a 128px image through a stack calibrated at 64px. The token count
+    quadruples, and ``ISoftmax``'s reciprocal segments span only
+    ``[exp_table[0], max_tokens·max(exp_table)]``. Past that the accumulator saturates
+    ``cursor_two``, the row is divided by the calibration maximum instead of by its own
+    sum, and what comes back is a silently UN-NORMALISED softmax — measured elsewhere at a
+    row sum of 2.9 to 4.5 against the 1.0 the caller is entitled to.
+
+    The guard lives in ``ISoftmax.forward_int`` and the graph calls ``forward_int``, so it
+    is wired by construction. "By construction" is exactly the kind of claim that stops
+    being true when someone adds a fast path, which is why it is asserted here through the
+    whole assembled model rather than read off the source.
+    """
+    model, spec, graph = converted
+    softmax = model.backbone.blocks[0].attn.attn_softmax
+    assert softmax.max_tokens == GRID * GRID, "fixture calibrated for the 64px token count"
+
+    from engine.model_factory import make_model
+
+    big = torch.rand(1, 1, SIDE * 2, SIDE * 2, generator=torch.Generator().manual_seed(1))
+    # The UNCONVERTED architecture accepts it, which is what makes the refusal meaningful:
+    # what rejects the input is the calibration envelope, not a shape constraint.
+    plain = make_model({"target": "models.frame.FrameModel", "embed_dim": EMBED,
+                        "patch_size": PATCH,
+                        "backbone": {"depth": 2, "num_heads": 2, "mlp_ratio": 2.0,
+                                     "cut_point": 1}}).eval()
+    with torch.no_grad():
+        assert torch.isfinite(plain(big)["head"]).all(), (
+            "the architecture must accept this resolution, or the guard is not what refuses it")
+    with pytest.raises(ValueError, match="calibrated for at most max_tokens"):
+        with torch.no_grad():
+            graph(graph.quantize_input(big))
+
+
 # --- structure ---------------------------------------------------------------
 
 def test_the_assembly_mirrors_the_float_model(converted):
