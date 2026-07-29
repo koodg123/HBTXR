@@ -28,18 +28,25 @@ the tier's trustworthiness rests on.
 Stated first, because a partial conversion that reads as total is the failure mode this
 subsystem has already had twice.
 
-- **Transport between modules is float32.** Each I-tier module quantizes at its input
-  port and dequantizes at its output port, so every *op* is integer while the *graph* is
-  not. This is what lets the converted model run through the unmodified model `forward`.
-  Closing it needs an `ilayers/vit.py` that threads `QTensor` between ops — a rewrite of
-  the block forwards that changes the arithmetic at every edge, so it needs its own
-  pure-integer whole-block oracle first (see `QUANTIZATION-PARTD-PLAN.md` §6.4).
+- ~~**Transport between modules is float32.**~~ **Closed (A1).** Each I-tier module still
+  has a float I/O port — that is what lets a converted model run through the unmodified
+  `forward`, and it stays — but `ilayers/` now also carries a graph that threads `QTensor`
+  end to end: `IPatchEmbed` → `IViTBackbone` → `IPooledMlpHead`/`IEllipseHead`, assembled
+  by `IDirectPupilDetector`. Checked element-wise against `i_block.replay_model_int`, with
+  a `__torch_function__` mode proving no float tensor crosses the forward.
+  **Still float I/O:** the mask head, which ends in `F.interpolate(bilinear)` — an integer
+  bilinear resample is an unmade design decision, and the graph names the gap in
+  `float_io_heads` rather than leaving it to be inferred.
 - **`Scale` stays float, deliberately.** The `1/√d` factor is an exact constant multiply
   — `0.125 = 2⁻³` for the shipped `head_dim=64`, a pure shift in hardware — so
   quantizing it could only add error. It is left in `left_float` rather than filtered out
-  of the report: hiding an inert entry is how a report starts lying.
-- **`ICat` / `IPool` are still unused.** Token pooling and the ellipse head's `torch.cat`
-  are written inline in head bodies that Part D did not touch.
+  of the report: hiding an inert entry is how a report starts lying. In the QTensor graph
+  it is folded into the requant that follows the score matmul, which is where hardware
+  puts it.
+- ~~**`ICat` / `IPool` are still unused.**~~ **Closed (B1).** `IPool` is the token mean of
+  every pooled head; `ICat` joins the ellipse head's pooled features to the host-supplied
+  anchor state, which is the case it was written for — two operands genuinely not on a
+  common grid.
 - **Every accuracy number below is on a randomly-initialised model.** No trained
   checkpoint exists (the legacy HGTXR checkpoints share not one state-dict key, and no
   manifest `.jsonl` exists), so these numbers characterise the *quantization*, not the
@@ -91,6 +98,27 @@ Across seeds 0–7 the full conversion measures 0.0112 · 0.0701 · 0.0112 · 0.
   reference while a naive zero-pad gives 0.24 — and the damage is *exactly the padded
   ring*, so a verification probe that never touches the border cannot see it. One
   geometry (3×3, pad 1, stride 1) was blocking all 21 refused conv sites in the repo.
+- **The float transport was never buying precision.** Removing it costs at most **2 LSB**
+  against the per-op block, because the next consumer immediately re-quantized to int8
+  anyway. The value of the QTensor graph is deployability, not accuracy — and saying that
+  requires having measured it rather than assuming either direction.
+- **An exact float kernel is still the wrong kernel.** `IConv2d` accumulated int8×int8
+  products through `F.conv2d` on floats, exact only below 2^24; the shipped mask
+  projection's worst case is 27,870,912. Chunking the float conv into exactly-representable
+  pieces would have fixed the arithmetic and left the claim wrong: an int8×int8 MAC array
+  is integer hardware, and a float kernel also punches a hole in the datapath check
+  exactly where the arithmetic is hardest. The int64 im2col matmul costs single-digit
+  milliseconds. **Recommendation:** on this subsystem, prefer the kernel that models the
+  hardware over the kernel that merely gets the same number.
+- **Two bridges in the graph are invisible by deletion, for different reasons.** The
+  block-to-block requant has a ratio of exactly 1 — block *k*'s output tensor and block
+  *k+1*'s input tensor are the same activation observed once. The final-norm requant has a
+  ratio of 1.0042 (the same tensor, measured by two different calibrators) and is *still*
+  invisible, because a LayerNorm divides by its input's own standard deviation and
+  normalizes a uniform rescale away; it survives only through the PoT LUT cursor, which
+  0.4% does not move. At 1.05× it moves the output by 865 LSB. **Recommendation:** test
+  that a bridge is *routed through*, not that removing it changes something — two
+  mutations survived here before the tests were rewritten that way.
 - **Verification finds what review does not.** Every defect list in Parts C/D came from
   adversarially re-running claims, not from reading: a `verify_export` that returned
   `True` after every LUT was zeroed; a fabricated `max_abs_diff=0.0` for comparisons that
@@ -99,13 +127,59 @@ Across seeds 0–7 the full conversion measures 0.0112 · 0.0701 · 0.0112 · 0.
   could not fail. **Recommendation:** keep the mutation requirement — every new test is
   shown RED under the mutation it guards before it is trusted.
 
+## The hybrid shared stack — what one set of scalars for two modalities costs (B2)
+
+With `cut_point < depth` the first `c` blocks are on **both** paths, and one activation
+observer sees frames and event voxels together. Measured on `depth=4, cut_point=2,
+embed_dim=48`, calibration and probes drawn separately:
+
+| Shared-block linear | frame range | event range | shared | narrower modality loses |
+|---|---|---|---|---|
+| `blocks.0.attn.proj` | 1.4713 | 0.6657 | 1.4713 | **2.21×** (1.14 bits, event) |
+| `blocks.0.attn.qkv` | 3.4421 | 3.7168 | 3.7168 | 1.08× (frame) |
+| `blocks.0.mlp.fc1` | 3.6949 | 3.2923 | 3.6949 | 1.12× (event) |
+| `blocks.0.mlp.fc2` | 1.9067 | 2.5359 | 2.5359 | 1.33× (frame) |
+| `blocks.1.attn.proj` | 1.4550 | 0.7835 | 1.4550 | 1.86× (event) |
+| `blocks.1.attn.qkv` | 3.2367 | 3.4503 | 3.4503 | 1.07× (frame) |
+| `blocks.1.mlp.fc1` | 2.8844 | 3.6125 | 3.6125 | 1.25× (frame) |
+| `blocks.1.mlp.fc2` | 1.9873 | 2.5329 | 2.5329 | 1.27× (frame) |
+
+A max-abs observer resolves the conflict by taking the **union** of the two ranges, so
+the narrower modality gives up up to **1.14 bits** of resolution — and gains a range
+margin, because the wider grid clips a *subset* of what either narrow grid clips. Both
+effects are real, and the second is why "give each modality its own scalars" is not
+automatically better.
+
+**Net effect, RMS relative error against the float model** (12 probes × 3 weight draws,
+the shared-stack linear grids overwritten with per-modality ones as the control):
+
+| Calibration batches | search: clipped shared / own | track: clipped shared / own | cost of sharing (search / track) |
+|---|---|---|---|
+| 3 | 0.0336% / 0.0543% | 0.0054% / 0.0640% | +0.00447 / −0.00929 |
+| 12 | 0.0163% / 0.0228% | 0.0011% / 0.0098% | −0.00466 / +0.00574 |
+| 40 | 0.0033% / 0.0043% | 0.0000% / 0.0000% | −0.00165 / −0.00239 |
+
+The clipping column is consistent in every row: the shared grid clips less. **The cost of
+sharing is not.** Its sign flips with the calibration budget and its magnitude (≈0.002–
+0.009) sits inside run-to-run variation on a ≈0.03 baseline. The honest reading is that
+on this fixture the resolution given up and the clipping avoided cancel, and no
+per-modality split is justified by measurement.
+
+**The caveat is load-bearing.** The model is randomly initialised, and a random ViT's two
+input branches produce far more similar activations than a trained one's would — the
+1.5–2.2× range spread seen here is plausibly the *floor*. This measurement therefore
+characterises the mechanism (union-of-ranges, and the two effects that oppose each other)
+and bounds nothing about a trained network. That is the same A2 dependency as everywhere
+else in this report.
+
 ## Verification
 
 ```bash
 cd algorithm && python -m pytest tests -q
 ```
 
-**507 passed.** Breakdown: 19 config-matrix · 18 entrypoint · 56 export · 6 export-txt ·
+**574 passed.** (507 at the close of Part D; A1, B1, B2 and B6 added the rest.)
+Historical breakdown at the Part D close: Breakdown: 19 config-matrix · 18 entrypoint · 56 export · 6 export-txt ·
 76 conv-padding · 28 int-graph · 64 int-layernorm · 35 int-layernorm-segmented ·
 50 int-softmax · 23 int-vit-graph · 29 per-channel-scales · 3 qat-to-integer ·
 12 quantization · 8 seam-conversion · 33 softmax-max-tokens · 17 entrypoints-importable.
@@ -114,15 +188,17 @@ Run on the torch 2.13.0 CPU venv. Numerics are `float32`/`int64` on CPU.
 
 ## Open
 
-- **B2 — no trained checkpoint.** Requires running the manifest build and a training run;
+- **A2 — no trained checkpoint.** Requires running the manifest build and a training run;
   there is no shortcut through the archive. Until then every accuracy figure here is on a
-  randomly-initialised model.
-- **Float transport between modules** (above) — the single remaining item of
-  `QUANTIZATION-PLAN.md` §9.
+  randomly-initialised model. This is now the *only* thing blocking the remaining
+  questions, including whether the hybrid shared-stack result above survives training.
 - **`manifest["total_params"]` reads 0** on a converted model: every parameter has become
   a buffer, so the field is technically correct and practically useless. Worth either
   removing or redefining when the format next changes.
-- **Hybrid conversion is exercised but not measured.** `test_entrypoint` proves the hybrid
-  path calibrates and converts after the D1 fix; no accuracy number is recorded for it,
-  and with `cut_point < depth` the shared early blocks carry one set of scalars for two
-  modalities — a real question that only a hybrid measurement can answer.
+- **The mask head is not integer-threaded** — see "What it does NOT do". Its conv stack
+  would lower like any other; what is missing is a decision about the bilinear upsample.
+- **Conv activations are calibrated symmetrically**, so no converted model has an
+  asymmetric conv input grid, and `IConv2d`'s zero-point correction and zero-point padding
+  — both built and measured in D2 — are never exercised by conversion. They are what makes
+  an asymmetric grid legal if one is ever calibrated; the path is tested directly since
+  conversion will not reach it.

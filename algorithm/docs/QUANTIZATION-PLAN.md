@@ -208,8 +208,15 @@ integer, and the difference matters for anyone porting this to RTL:
   against `i_block.replay_block_int` (768/768 integers identical on 6 seeds) and tracks
   the per-op block within **2 LSB** — the float edges were never buying precision,
   because the next consumer immediately re-quantized to int8 anyway.
-  **Still float-I/O**: the patch-embed conv and the heads, which `models/frame.py`
-  composes outside the block. Threading those is the same exercise, one level up.
+  **Closed one level up too:** `IPatchEmbed` / `IViTBackbone` / `IPooledMlpHead` /
+  `IEllipseHead`, assembled by `IDirectPupilDetector` (`ilayers/model.py`), take the graph
+  from the input port to a single dequantization at the output. Checked element-wise
+  against a whole-model oracle (`i_block.replay_model_int`) on four seeds. The head ends
+  on its **accumulator**, not on an invented output grid: its consumer is the host, and
+  requantizing would round the answer onto a grid nobody calibrated.
+  **Still float-I/O**: the mask head, which ends in `F.interpolate(bilinear)`. An integer
+  bilinear resample is an unmade design decision, so the graph names the gap
+  (`IDirectPupilDetector.float_io_heads`) instead of guessing one silently.
 - ~~`IMatMul` / `IAdd` are unreachable from the conversion pass~~ — **closed in D4.** The
   attention matmuls (`Q@Kᵀ`, `attn@V`), the `1/√d` factor and the two residual adds per
   block are now parameter-free seam modules (`models/blocks/seams.py`), so the swap
@@ -219,12 +226,18 @@ integer, and the difference matters for anyone porting this to RTL:
   against the pre-refactor revision — and `Scale` stays float deliberately: it is an
   exact constant multiply (`0.125 = 2⁻³` for the shipped `head_dim=64`) that folds into
   the following requant, so quantizing it would only add error.
-  `ICat` / `IPool` remain unused: `pool_tokens` and the ellipse head's `torch.cat` are
-  still written inline in head bodies that D4 did not touch.
-- **`mask_head.proj` stays float**: `IConv2d` implements only the non-overlapping,
-  unpadded patch conv, so a padded 3×3 conv is explicitly refused rather than converted
-  into something that computes a different function. It appears in `left_float` and in
-  `manifest["unexported"]`.
+  ~~`ICat` / `IPool` remain unused~~ — **closed in B1**: `IPool` is the token mean of every
+  pooled head in the integer graph, and `ICat` joins the ellipse head's pooled features to
+  the host-supplied anchor state, aligning two operands that genuinely are not on a common
+  grid onto the scale the following linear declares.
+- ~~**`mask_head.proj` stays float**~~ — the *conv* converts (D2 added padded convs); the
+  **mask head as a whole** stays on the float-I/O path because of its bilinear upsample,
+  not because of its convolutions.
+- **The conv accumulator is an int64 matmul, not a float one** (B6). Casting int8 operands
+  to float is exact only below 2^24, and `Conv2d(192, 96, k=3)` — the shipped mask
+  projection — has a worst case of 27,870,912. Random data never reaches that corner
+  (a random accumulator grows like √taps), so the defect was invisible to every
+  random-input test. Cost of going integer: single-digit milliseconds per image.
 - **`ISoftmax.max_tokens` is a load-bearing assumption.** The reciprocal segments span a
   *theoretical* accumulator envelope `[exp_table[0], max_tokens·max(exp_table)]`, so
   saturation is unreachable by construction — but only for rows no longer than
@@ -235,9 +248,10 @@ integer, and the difference matters for anyone porting this to RTL:
   few percent. The index is now fitted to the observed distribution (≈1.6× better RMS
   than the [min,max] envelope) and the payload carries `metrics` so the error is visible.
 
-Closing the remaining transport item means an `ilayers/vit.py` that threads `QTensor`
-between ops instead of dequantizing at every port — a genuine rewrite of the block
-forwards, not a conversion pass. D4 deliberately stopped short of it: promoting the
-inline operators to seams was the prerequisite and is verifiably free, whereas the
-transport change alters the arithmetic at every edge and needs its own pure-integer
-oracle before it can be trusted (see the Part D plan, D4 section 6.4).
+The transport item is closed. The route it took is worth recording because it is the
+pattern the next such change should follow: D4 promoted the inline operators to seams
+(verifiably free — identical `state_dict` keys and bit-identical float output), then A1
+wrote the pure-Python whole-block oracle **before** the lowering, and only then rewrote
+the forwards. The oracle earned its cost immediately, catching two composition bugs in
+its own first draft (a missing accumulator bias, and Q/K/V squeezed through one shared
+grid at 3.2% error) that no tolerance anyone would have written by hand could have seen.
