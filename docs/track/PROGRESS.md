@@ -80,4 +80,14 @@
 - [x] Selected staged `eveye.*` packaging and explicit compatibility retirement gates.
 - [x] Passed independent T-727 review after closing environment,
   reverse-import, and extraction-order blockers.
-- [ ] Implementation not started.
+- [x] **Implementation ran to AM-900 on 2026-07-21** and was then superseded by the
+  flat-functional rewrite on 2026-07-22. This line previously read "Implementation not
+  started", which was false; see the correction and evidence in
+  [TODO.md](TODO.md#algorithm-modular-ownership--superseded-2026-07-22).
+
+---
+
+> **2026-07-29 정정.** 이 파일은 2026-07-23 이후 갱신되지 않았고, 그 사이 33개의 커밋이
+> `algorithm/`에 들어갔습니다. 그 기록은 [algorithm/docs/track/](../../algorithm/docs/track/)에
+> 있습니다 — 서브시스템 작업은 이제 서브시스템 트리가 추적합니다. 이 파일은 저장소
+> 수준(거버넌스·구조·다중 서브시스템) 진행만 담습니다.

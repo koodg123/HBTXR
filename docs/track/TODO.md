@@ -79,14 +79,28 @@
 - Gate: no destructive non-reference cleanup, external archive mutation, commit, push, or merge without separate authorization.
 - Gate: RC-120/RC-130 planning is complete but implementation requires a new selected batch; required external old-name consumer stops retirement for a separate compatibility decision.
 
-## Algorithm Modular Ownership
+## Algorithm Modular Ownership — SUPERSEDED (2026-07-22)
+
+> **정정 2026-07-29.** 이 섹션의 모든 항목이 `[ ]`(미착수)로 표기되어 있었으나 **사실이
+> 아니었습니다.** AM-000부터 AM-900까지 2026-07-21에 실행되었고, 그 다음 날
+> flat-functional 재작성이 목표 트리 자체를 대체했습니다. 세 문서(이 파일,
+> `PROGRESS.md`, `HANDOVER.md`)가 서로 다른 상태를 말하고 있었고 전부 틀렸습니다.
+>
+> **근거 (전부 현재 브랜치 계보 위):**
+> - `c7d6bfe` AM-000 baseline freeze · `5d94dc5` AM-010 package origins
+> - `41f5456` EvEye 호환 계층 은퇴 · `5070c87` src.pools 해체 · `2a451be` frame/event 실행 가능
+> - `6b52483` AM-090 documented no-op · `7944b47` AM-900 integration/preservation gate 통과
+> - **`6c1cc54` (07-22) eveye 네임스페이스 제거 — AM-010이 세운 `eveye.*` 패키징을 되돌림**
+>
+> **현재 실제 상태**: `algorithm/`에 `eveye`도 `pyproject.toml`도 없습니다. bare package
+> (`common` `dataset` `engine` `models` `quantization` `utils` …) 구조이고, 이것이
+> flat-functional 재작성의 결과입니다. 브랜치 이름 `rewrite/flat-functional`이 그것입니다.
 
 - [x] AM planning: define target roots, meanings, source mapping and preservation.
-- [ ] AM-000: record preserved-zone and import-consumer baselines.
-- [ ] AM-010: validate `eveye.*` package discovery and isolated wheel imports.
-- [ ] AM-020/030/040: migrate dataset, utils, common/engine/event in order.
-- [ ] AM-050/060: move configs/tests/scripts, then retire EvEye after zero use.
-- [ ] AM-070: remove pools and retain four domain APIs plus `optim/pool.py`.
-- [ ] AM-080: add frame/event config contract tests and runnable documentation.
-- [ ] AM-090: extract Hybrid shared leaves only with a second consumer; otherwise NO-OP.
-- [ ] AM-900: run full regression, package, import and preservation gates.
+- [x] AM-000 ~ AM-900: 실행 완료 (`c7d6bfe` … `7944b47`).
+- [~] `eveye.*` 패키징: **대체됨** — `6c1cc54`가 네임스페이스를 제거하고 bare package로
+      전환. 재도입하려면 새 결정이 필요합니다.
+- [ ] **RC-/CL-/SI-/T- 섹션도 같은 감사가 필요합니다.** 이 섹션이 6일간 틀린 상태로
+      있었으므로 다른 섹션도 실제 상태와 대조되지 않았을 가능성이 높습니다. 특히
+      RC-100B(`hgpipe_quantization` 이관)는 Q7이 `references/hardware/`로 옮긴 것과
+      충돌할 수 있습니다.

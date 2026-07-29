@@ -1,7 +1,34 @@
 # HBTXR Algorithm Modular Refactor HANDOVER
 
+> **작성** 2026-07-21 (Asia/Seoul) · **갱신** 2026-07-29
+> **상태** **CONSUMED / SUPERSEDED — 실행 지침으로 따르지 마십시오**
+> **소유** repo
+
+> ## ⚠️ 2026-07-29 만료 고지
+>
+> **이 핸드오프는 소비되었습니다.** 아래 본문은 2026-07-21 시점의 상태를 기록한 것이며,
+> 그 이후 두 번 무효화되었습니다:
+>
+> 1. **AM 작업이 계속 진행됨.** 본문의 "AM-030 완료, AM-040 착수 전"은 그날 안에
+>    낡았습니다. AM-900까지 실행되었습니다 (`6b52483` AM-090 no-op, `7944b47` AM-900 gate).
+> 2. **목표 트리가 대체됨.** 2026-07-22 `6c1cc54`가 `eveye` 네임스페이스를 제거하고 bare
+>    package로 전환했습니다 — 이 문서가 전제하는 `eveye.*` 패키징이 더 이상 목표가
+>    아닙니다. 현재 브랜치 `rewrite/flat-functional`이 그 결과입니다.
+>
+> 또한 본문이 전제하는 **"의도적인 미커밋 상태"는 존재하지 않습니다.** 당시의 dirty
+> 상태는 이후 전부 커밋·푸시되었습니다.
+>
+> **현재 상태를 알고 싶다면**: [track/PROGRESS.md](track/PROGRESS.md) ·
+> [track/TODO.md](track/TODO.md) · [../algorithm/docs/track/log.md](../algorithm/docs/track/log.md)
+>
+> 아래 본문은 **역사 기록으로만** 보존합니다. 편집하지 않습니다.
+> 핸드오프는 소비되면 만료되어야 한다는 규칙은
+> [governance/DOC-CONVENTIONS.md](governance/DOC-CONVENTIONS.md)에 있습니다.
+
+---
+
 > 작성일: 2026-07-21 (Asia/Seoul)
-> 상태: AM-030 완료 및 승인, AM-040 착수 전
+> 상태: AM-030 완료 및 승인, AM-040 착수 전 *(당시 기록 — 위 만료 고지 참조)*
 > 목적: 다른 Codex 세션이 현재의 의도적인 미커밋 상태를 손상하지 않고 순차 리팩토링을 계속하기 위한 단일 권위 문서
 
 ## 1. 즉시 읽을 것과 첫 행동
