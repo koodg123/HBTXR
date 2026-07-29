@@ -55,6 +55,14 @@ subsystem has already had twice.
 
 ## Conversion coverage — FrameModel (`embed_dim=48`, depth 2)
 
+**Converted ≠ deployed.** Conversion is a general pass and quantizes the auxiliary mask
+head like anything else, so 3 of the 38 integer modules (two convs and a GeLU) belong to a
+head no accelerator runs — stage-1 supervision, absent from `HybridModel`. `ConversionReport`
+reports the split, because a single total reads as a statement about the accelerator. Which
+heads are auxiliary is declared by the model (`DirectPupilDetector.AUXILIARY_HEADS`), not by
+the quantizer: it is a modelling fact, and a copy of it here would be free to drift.
+
+
 ```
 stages   {layernorm 5, softmax 2, gelu 6, conv 3, matmul 4, add 4, linear 14} = 38 integer modules
 left_float  6 × nn.Dropout (inference no-ops) + 2 × Scale

@@ -106,6 +106,54 @@ def test_total_params_counts_buffers_and_says_which_is_which(converted, tmp_path
     assert manifest["total_parameters_only"] == 0
 
 
+def test_the_report_separates_deployment_coverage_from_conversion_coverage(converted):
+    """R2: conversion converts the aux head too, and the count must not read as coverage.
+
+    Nothing is wrong with converting it — the pass is general and should stay general.
+    What would be wrong is "38 integer modules" standing as a statement about the
+    accelerator, when 3 of them belong to a head no accelerator runs.
+    """
+    model, report = converted
+    assert set(report.auxiliary) == {"mask_head.act", "mask_head.proj",
+                                     "mask_head.to_logits"}
+    assert len(report.deployed) == len(report.replaced) - len(report.auxiliary)
+    assert not any(name.startswith("mask_head") for name in report.deployed)
+    summary = report.summary()
+    assert "on the inference path: 35" in summary
+    assert "training-only (aux heads): 3" in summary
+
+
+def test_which_heads_are_auxiliary_is_the_models_statement_not_the_quantizers(converted):
+    """The rule has to live where the fact lives, or it becomes a second copy that drifts.
+
+    The ROI and reliability heads are deliberately NOT auxiliary: the hybrid runtime
+    scheduler reads reliability every step and the ROI box is a live cue for the search
+    branch, so both are in ``HybridModel`` and both deploy. Only the mask head is not.
+    """
+    from engine.model_factory import make_model
+    from models.frame.model import DirectPupilDetector
+
+    assert DirectPupilDetector.AUXILIARY_HEADS == ("mask_head",)
+    plain = make_model({"target": "models.frame.FrameModel"})
+    names = set(plain.auxiliary_module_names())
+    assert "mask_head.proj" in names
+    assert not any(n.startswith(("roi_head", "reliability_head", "head.")) for n in names)
+
+    hybrid = make_model({"target": "models.hybrid.HybridModel"})
+    for deployed in ("roi_head", "search_reliability", "track_reliability"):
+        assert getattr(hybrid, deployed, None) is not None, (
+            f"{deployed} must be in the deployed system for it to count as non-auxiliary")
+
+
+def test_a_model_that_declares_nothing_still_converts(converted):
+    """A model with no auxiliary declaration must not gain an empty extra section."""
+    from quantization.convert import ConversionReport
+
+    report = ConversionReport(replaced={"a": None, "b": None})
+    assert report.auxiliary == () and len(report.deployed) == 2
+    assert "inference path" not in report.summary()
+
+
 def test_the_deployed_model_has_no_mask_head_at_all():
     """The fact that makes ``FLOAT_IO_HEADS``'s reason true rather than an excuse.
 

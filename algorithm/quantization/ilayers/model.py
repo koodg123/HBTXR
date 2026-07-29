@@ -81,6 +81,7 @@ class IDirectPupilDetector(nn.Module):
             None if getattr(model, "reliability_head", None) is None
             else _build_head(model.reliability_head, input_scale=feature_scale, dtype=dtype))
         self.dtype = dtype
+        self._auxiliary_heads = tuple(getattr(model, "AUXILIARY_HEADS", ()))
 
     # --- the two boundaries ---------------------------------------------------
 
@@ -98,8 +99,14 @@ class IDirectPupilDetector(nn.Module):
 
     @property
     def float_io_heads(self) -> dict[str, str]:
-        """Heads of the source model this graph does not carry, and why."""
-        return dict(FLOAT_IO_HEADS)
+        """Heads of the source model this graph does not carry, and why.
+
+        Keyed off the source model's own ``AUXILIARY_HEADS`` declaration, so this cannot
+        claim to omit something the model does not have — or quietly keep omitting a head
+        that has since become part of the inference graph.
+        """
+        return {name: reason for name, reason in FLOAT_IO_HEADS.items()
+                if name in self._auxiliary_heads}
 
     # --- the graph ------------------------------------------------------------
 

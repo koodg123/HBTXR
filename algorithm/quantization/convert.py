@@ -724,6 +724,12 @@ class ConversionReport(Mapping):
     * ``float_composites`` — parent modules whose own forward body still composes their
       children in float (residual adds, attention matmuls, the attention scaling).
     * ``stages`` — what each conversion stage replaced, so a partial run is traceable.
+    * ``auxiliary`` — of the replaced modules, those under a head the model declares as
+      training-only. Conversion is a general pass and converts them like anything else;
+      counting them in with the rest is what would turn conversion coverage into an
+      overstatement of *deployment* coverage. On a FrameModel that is 3 of 38 modules —
+      two convs and a GeLU belonging to the auxiliary mask head, which no accelerator
+      ever runs.
 
     ``left_float`` and ``float_composites`` are recomputed from the converted module
     tree by ``float_modules``; they are an observation of the result, not a log of the
@@ -734,6 +740,7 @@ class ConversionReport(Mapping):
     left_float: dict[str, nn.Module] = field(default_factory=dict)
     float_composites: dict[str, nn.Module] = field(default_factory=dict)
     stages: dict[str, tuple[str, ...]] = field(default_factory=dict)
+    auxiliary: tuple[str, ...] = ()
 
     def __getitem__(self, name: str) -> nn.Module:
         return self.replaced[name]
@@ -744,10 +751,19 @@ class ConversionReport(Mapping):
     def __len__(self) -> int:
         return len(self.replaced)
 
+    @property
+    def deployed(self) -> dict[str, nn.Module]:
+        """The replaced modules that are actually on the inference path."""
+        aux = set(self.auxiliary)
+        return {name: module for name, module in self.replaced.items() if name not in aux}
+
     def summary(self) -> str:
         """One line per stage plus the float remainder — for logs and PTQ reports."""
         lines = [f"{stage}: {len(names)}" for stage, names in self.stages.items()]
         lines.append(f"integer modules: {len(self.replaced)}")
+        if self.auxiliary:
+            lines.append(f"  on the inference path: {len(self.deployed)}")
+            lines.append(f"  training-only (aux heads): {len(self.auxiliary)}")
         lines.append(f"left float (leaf): {len(self.left_float)}")
         lines.append(f"float composites: {len(self.float_composites)}")
         return "\n".join(lines)
@@ -821,8 +837,14 @@ def convert_model_to_integer(
     run_stage("linear", linears)
 
     leaves, composites = float_modules(model)
+    # The model, not the quantizer, decides which of its heads are training-only: that is
+    # a modelling fact (the mask head is Sec III-D.1 auxiliary supervision), and a name
+    # hardcoded here would be a second copy of it, free to drift.
+    declared = getattr(model, "auxiliary_module_names", None)
+    aux = set(declared()) if callable(declared) else set()
     return model, ConversionReport(replaced=replaced, left_float=leaves,
-                                   float_composites=composites, stages=stages)
+                                   float_composites=composites, stages=stages,
+                                   auxiliary=tuple(n for n in replaced if n in aux))
 
 
 __all__ = [

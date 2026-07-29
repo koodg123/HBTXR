@@ -43,6 +43,28 @@ class DirectPupilDetector(nn.Module):
     hybrid track-path optimization, not used by the standalone detectors).
     """
 
+    #: Heads that exist only to supervise training and are not part of the inference
+    #: graph. Declared as data rather than left in prose because downstream tooling has
+    #: to act on it: a quantizer reporting conversion coverage over these reads as
+    #: deployment coverage, and the integer graph omits them by design, not by oversight.
+    #:
+    #: ``mask_head`` is the paper's Sec III-D.1 "Mask Head (Aux)" — stage-1 segmentation
+    #: supervision, explicitly not the runtime localization output. ``HybridModel``, the
+    #: paper's full deployed system, does not instantiate one at all. The ROI and
+    #: reliability heads are NOT auxiliary in this sense: the hybrid runtime scheduler
+    #: consumes reliability every step, and the ROI box is a live cue for the search
+    #: branch, so both are present in ``HybridModel`` and both deploy.
+    AUXILIARY_HEADS: tuple[str, ...] = ("mask_head",)
+
+    def auxiliary_module_names(self) -> tuple[str, ...]:
+        """Dotted names of every submodule under an auxiliary head this model has."""
+        prefixes = tuple(f"{name}." for name in self.AUXILIARY_HEADS
+                         if getattr(self, name, None) is not None)
+        if not prefixes:
+            return ()
+        return tuple(name for name, _ in self.named_modules()
+                     if name.startswith(prefixes) or name in self.AUXILIARY_HEADS)
+
     def __init__(self, config: DirectDetectorConfig | None = None) -> None:
         super().__init__()
         cfg = config or DirectDetectorConfig()
