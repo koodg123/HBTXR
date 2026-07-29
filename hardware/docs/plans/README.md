@@ -23,4 +23,4 @@
 |---|---|
 | [2026-06-16-third-goal/](done/2026-06-16-third-goal/) | [experiments/2026-06-16-third-goal-audit/](../experiments/2026-06-16-third-goal-audit/) |
 | [2026-06-17-directory-layout.md](done/2026-06-17-directory-layout.md) | **대체됨** — 정의한 24개 디렉토리가 비어 있었음 |
-| [2026-07-xr-accel-execution-plan.md](done/2026-07-xr-accel-execution-plan.md) | |
+| [2026-07-xr-accel-execution-plan.md](done/2026-07-15-xr-accel-execution-plan.md) | |

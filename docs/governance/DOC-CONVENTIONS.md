@@ -71,7 +71,53 @@ git 기준)*으로 표시합니다. 헤더는 **git 날짜가 논리적 날짜�
 
 ---
 
-## 3. 색인은 생성합니다
+## 3. 파일 이름
+
+**두 종류뿐입니다.**
+
+| 종류 | 형식 | 예 |
+|---|---|---|
+| **역할 이름** — 고정 어휘. 트리마다 하나씩이고 날짜가 없다 | `UPPER-KEBAB.md` | `STATUS.md` `ARCHITECTURE.md` `MODULE-GUIDE.md` |
+| **기록** — 어느 시점의 산출물 | `YYYY-MM-DD-lower-kebab.md` | `2026-07-29-hardware-census.md` |
+
+디렉토리는 항상 `lower-kebab`, 실험 캠페인은 `YYYY-MM-DD-<slug>/`.
+
+### 날짜는 접두사로, 하이픈으로, 한 번만
+
+`_2026_06_10` (언더바·접미사) · `20260410` (붙여쓰기) · `2026-06-` (달까지만) — 안 씁니다.
+날짜는 헤더의 `작성`에서 가져옵니다.
+
+**캠페인 디렉토리가 이미 날짜를 말하면 안의 파일은 반복하지 않습니다.**
+
+```
+experiments/2026-06-10-final-signoff/signoff/final-signoff-audit.md      ← 날짜 없음
+experiments/2026-06-30-aq2-search-track/
+└── 2026-07-01-aq2-search-track-metric-checklist.md   ← 캠페인과 다른 날이라 접두사를 단다
+```
+
+### `data/`의 산출물은 이름을 바꾸지 않습니다
+
+`.json`·`.csv`는 **도구가 그 이름으로 쓴 것**이고 manifest와 sha256이 그 이름을 참조합니다.
+규약은 문서에만 적용합니다. 그래서 `final-signoff-audit.md` 옆에
+`data/final_signoff_audit_2026_06_10.json`이 있는 것이 **정상**입니다.
+
+### 예외 둘
+
+- **spec-kit 계획 세트** — `Master-Plan.md` `Sub-Plan.md` `Execution.md` `Validation.md`
+  `CHOICE.md`는 고정 어휘이고 루트 `docs/`가 같은 이름을 씁니다.
+  `write_spec_plan_conformance_audit.py`가 루트 사본 경로를 하드코딩하고 있습니다.
+- **`references/`** — 남의 프로젝트 문서 세트는 그쪽 이름 그대로 둡니다. 우리 규약을
+  적용하면 원본과 대조할 수 없게 됩니다.
+
+> **왜 이 절이 생겼나**: `hardware/docs/`만 규약 밖에 있었습니다. 한 트리 안에
+> `THIRD_GOAL_REQUIREMENTS_2026_06_16.md` · `req1_environment_audit_2026_06_16.md` ·
+> `summary-p0-mode-profile.md` · `2026-06-HBTXR-arch-freeze.md`가 공존했고, 어느 것이
+> 규칙인지 알 수 없으니 새 문서마다 네 번째 방식이 생겼습니다. 2026-07-29에 87개를
+> 개명해 맞췄습니다 (`archive/`의 원본 이름은 그대로입니다).
+
+---
+
+## 4. 색인은 생성합니다
 
 ```bash
 python scripts/build_docs_index.py          # docs/INDEX.md 생성
@@ -84,7 +130,7 @@ python scripts/build_docs_index.py --check  # 최신이 아니면 exit 1
 
 ---
 
-## 4. `track/` — 트리마다 하나씩
+## 5. `track/` — 트리마다 하나씩
 
 각 트리는 `track/` 아래 여섯 파일을 가집니다. 역할이 겹치지 않습니다.
 
@@ -118,7 +164,7 @@ python scripts/build_docs_index.py --check  # 최신이 아니면 exit 1
 
 ---
 
-## 5. `STATUS.md` — 트리마다 하나, "지금"의 단일 출처
+## 6. `STATUS.md` — 트리마다 하나, "지금"의 단일 출처
 
 네 섹션만 가집니다: **Active · Blocked · Next · Done(최근)**.
 
@@ -136,7 +182,7 @@ python scripts/build_docs_index.py --check  # 최신이 아니면 exit 1
 
 ---
 
-## 6. 실험 — 분석과 결과를 분리합니다
+## 7. 실험 — 분석과 결과를 분리합니다
 
 수명이 다르기 때문입니다.
 
@@ -164,7 +210,7 @@ python scripts/build_docs_index.py --check  # 최신이 아니면 exit 1
 
 ---
 
-## 7. 계획 — 디렉토리가 상태를 말합니다
+## 8. 계획 — 디렉토리가 상태를 말합니다
 
 ```
 <tree>/plans/active/2026-07-25-quantization-part-b-to-d.md
@@ -181,7 +227,7 @@ python scripts/build_docs_index.py --check  # 최신이 아니면 exit 1
 
 ---
 
-## 8. Spec · Scope · HANDOVER · NEXT
+## 9. Spec · Scope · HANDOVER · NEXT
 
 | | 무엇 | 위치 | 수명 |
 |---|---|---|---|
@@ -206,7 +252,7 @@ python scripts/build_docs_index.py --check  # 최신이 아니면 exit 1
 
 ---
 
-## 9. Snapshot — 불변, 날짜, 커밋 SHA
+## 10. Snapshot — 불변, 날짜, 커밋 SHA
 
 ```
 <tree>/snapshots/2026-07-15-follow-up-baseline/
@@ -220,7 +266,7 @@ python scripts/build_docs_index.py --check  # 최신이 아니면 exit 1
 
 ---
 
-## 10. 외부 조사는 `docs/reference/`
+## 11. 외부 조사는 `docs/reference/`
 
 남의 코드베이스·논문·저장소를 조사한 것은 **우리 코드로 틀려지지 않으므로** 서브시스템
 트리에 두지 않습니다.
@@ -232,7 +278,7 @@ docs/reference/COMPARISON-*.md    외부 프로젝트와의 비교 분석
 
 ---
 
-## 11. 적용 현황 (2026-07-29, 5단계 완료)
+## 12. 적용 현황 (2026-07-29, 5단계 완료)
 
 파일 188개를 `git mv`로 이동했습니다 (이력 보존). `.agents/` 트리는 해소되어 **문서 트리가
 넷에서 셋으로** 줄었습니다.

@@ -21,10 +21,10 @@
 
 | 문서 | 시점 | 내용 |
 |---|---|---|
-| [HANDOVER.md](HANDOVER.md) | 2026-06-10 | 3차 목표 최종 서명 인계 |
-| [HANDOVER_2026_06_27.md](HANDOVER_2026_06_27.md) | 2026-06-27 | 보드 없는 실험 단계 인계 |
-| [SESSION_PROGRESS_AND_CONVERSATION_2026_07_05.md](SESSION_PROGRESS_AND_CONVERSATION_2026_07_05.md) | 2026-07-05 | 세션 진행·대화 기록 |
-| [IMPL_REPOS_HANDOVER_IMPORT_2026_07_08.md](IMPL_REPOS_HANDOVER_IMPORT_2026_07_08.md) | 2026-07-08 | 구현 저장소 인계 반입 |
+| [HANDOVER.md](2026-06-10-handover.md) | 2026-06-10 | 3차 목표 최종 서명 인계 |
+| [HANDOVER_2026_06_27.md](2026-06-27-handover.md) | 2026-06-27 | 보드 없는 실험 단계 인계 |
+| [SESSION_PROGRESS_AND_CONVERSATION_2026_07_05.md](2026-07-05-session-progress-and-conversation.md) | 2026-07-05 | 세션 진행·대화 기록 |
+| [IMPL_REPOS_HANDOVER_IMPORT_2026_07_08.md](2026-07-08-impl-repos-handover-import.md) | 2026-07-08 | 구현 저장소 인계 반입 |
 
 **넷 다 만료 고지가 붙어 있습니다.** 본문의 경로는 구 트리(`archive/hardware/`) 기준이고,
 `/home/kjm26/...` 절대 경로는 당시 실행 환경 기록입니다.

@@ -8,7 +8,7 @@
 
 ## 문서 1개
 
-- [legacy_experiment_analysis_2026_06_12.md](legacy_experiment_analysis_2026_06_12.md)
+- [legacy_experiment_analysis_2026_06_12.md](legacy-experiment-analysis.md)
 
 ## 출처와 주의
 

@@ -8,12 +8,14 @@
 
 ## 문서 6개
 
-- [MODE_PROFILE_RESULTS_2026_06_27.md](MODE_PROFILE_RESULTS_2026_06_27.md)
-- [RUNTIME_MODE_E2E_SHARED_TOP_2026_06_27.md](RUNTIME_MODE_E2E_SHARED_TOP_2026_06_27.md)
-- [VIVADO_PROGRESS_2026_06_27.md](VIVADO_PROGRESS_2026_06_27.md)
-- [WORK_PROGRESS_EXPERIMENT_SUMMARY_2026_06_27.md](WORK_PROGRESS_EXPERIMENT_SUMMARY_2026_06_27.md)
+- [MODE_PROFILE_RESULTS_2026_06_27.md](mode-profile-results.md)
+- [RUNTIME_MODE_E2E_SHARED_TOP_2026_06_27.md](runtime-mode-e2e-shared-top.md)
+- [VIVADO_PROGRESS_2026_06_27.md](vivado-progress.md)
+- [WORK_PROGRESS_EXPERIMENT_SUMMARY_2026_06_27.md](work-progress-experiment-summary.md)
 - [summary-p0-mode-profile.md](summary-p0-mode-profile.md)
-- [summary-p0-report-collection.md](summary-p0-report-collection.md)
+- P0 리포트 수집 결과는 **06-26 캠페인과 바이트 단위로 동일**했습니다 (재수집했고 아무것도
+  바뀌지 않았다는 뜻). 사본을 두지 않고 원본을 가리킵니다 →
+  [2026-06-26-no-board-p0/summary-p0-report-collection.md](../2026-06-26-no-board-p0/summary-p0-report-collection.md)
 
 ## 출처와 주의
 

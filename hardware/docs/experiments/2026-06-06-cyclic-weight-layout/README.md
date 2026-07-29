@@ -8,8 +8,8 @@ cyclic transformer의 가중치 레이아웃과 패킹 형식 확정
 
 ## 문서 2개
 
-- [cyclic_weight_layout_2026_06_06.md](cyclic_weight_layout_2026_06_06.md)
-- [cyclic_weight_packing_2026_06_06.md](cyclic_weight_packing_2026_06_06.md)
+- [cyclic_weight_layout_2026_06_06.md](cyclic-weight-layout.md)
+- [cyclic_weight_packing_2026_06_06.md](cyclic-weight-packing.md)
 
 ## 데이터 6개 — `data/`
 
