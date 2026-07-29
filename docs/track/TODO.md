@@ -108,3 +108,19 @@
       있었으므로 다른 섹션도 실제 상태와 대조되지 않았을 가능성이 높습니다. 특히
       RC-100B(`hgpipe_quantization` 이관)는 Q7이 `references/hardware/`로 옮긴 것과
       충돌할 수 있습니다.
+
+---
+
+## DOC — `docs/` 트리 정리 (2026-07-29 이월)
+
+`hardware/docs/`는 규약을 적용했고 (`4c98a26`), `docs/`는 다음 차례입니다.
+전수 검사 기준 **비준수 2개**입니다.
+
+- [ ] **`docs/reference/` → `docs/references/`** — 복수로 통일하기로 결정
+      ([규약 §11](../governance/DOC-CONVENTIONS.md)). 126개 문서가 들어 있고
+      `scripts/build_docs_index.py`의 TREES·COLLAPSE 목록과 `docs/INDEX.md`를 함께 고쳐야
+      합니다. `hardware/docs/references/`는 이미 복수라 대상이 아닙니다.
+- [ ] **`docs/reference/handover-audit-2026-07-15/` → `2026-07-15-handover-audit/`** —
+      날짜가 접미사입니다. 규약 §3은 접두사입니다.
+- [ ] `docs/archive/2026-07/aegis-INDEX.md` — 대소문자 혼용. `archive/`는 소진된 기록이라
+      **고치지 않는 쪽이 맞을 수 있습니다.** 규약 적용 대상인지부터 정해야 합니다.

@@ -266,15 +266,26 @@ python scripts/build_docs_index.py --check  # 최신이 아니면 exit 1
 
 ---
 
-## 11. 외부 조사는 `docs/reference/`
+## 11. 남의 것은 `references/`
 
 남의 코드베이스·논문·저장소를 조사한 것은 **우리 코드로 틀려지지 않으므로** 서브시스템
 트리에 두지 않습니다.
 
-```
-docs/reference/external/          외부 코드베이스·논문 서베이
-docs/reference/COMPARISON-*.md    외부 프로젝트와의 비교 분석
-```
+**디렉토리 이름은 복수 `references/`로 통일합니다.** 두 종류를 담지만 이름은 하나입니다 —
+단수/복수는 그 차이를 알리기엔 나쁜 신호였습니다.
+
+| 어디 | 무엇 | 편집 |
+|---|---|---|
+| `docs/references/external/` | 외부 코드베이스·논문 **서베이** — 읽고 요약한 것 | 우리가 씀 |
+| `docs/references/COMPARISON-*.md` | 외부 프로젝트와의 비교 분석 | 우리가 씀 |
+| `<tree>/docs/references/<project>/` | **선행·자매 프로젝트의 문서 세트 통째로** | **무편집** |
+
+마지막 줄이 무편집인 이유: 원본과 대조할 수 있어야 참조 자료입니다. 우리 규약(이름·헤더)도
+적용하지 않습니다. 안의 링크가 우리 트리에서 깨져 보여도 그대로 둡니다.
+
+> **미적용**: `docs/reference/`(단수)가 아직 남아 있습니다. `docs/` 정리 때
+> `docs/references/`로 개명합니다 — [track/TODO.md](../track/TODO.md).
+> `hardware/docs/references/`는 이미 복수입니다.
 
 ---
 
