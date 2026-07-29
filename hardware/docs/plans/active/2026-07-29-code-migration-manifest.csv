@@ -428,11 +428,11 @@ refs/inputs/prev_state.npy,.npy,migrate,hardware/module/golden/,골든·참조 �
 refs/manifest.json,.json,migrate,hardware/module/golden/,골든·참조 데이터
 refs/outputs/target_state.npy,.npy,migrate,hardware/module/golden/,골든·참조 데이터
 refs/vref_p0/e2e_axis_vector_hgpipe_math_lnq_active16_softmax_input_x2_spec.json,.json,migrate,hardware/module/golden/,골든·참조 데이터
-refs/weights/cyclic_weights_s2_block_software_initial_manifest.json,.json,undecided,hardware/module/golden/?,레이아웃 대조 필요 (생사 대장 ⚠️)
-refs/weights/cyclic_weights_s2_block_software_initial_q4_head64_manifest.json,.json,undecided,hardware/module/golden/?,레이아웃 대조 필요 (생사 대장 ⚠️)
-refs/weights/cyclic_weights_s2_block_software_initial_q4_manifest.json,.json,undecided,hardware/module/golden/?,레이아웃 대조 필요 (생사 대장 ⚠️)
-refs/weights/e2e_m_axi_active196_b6_ff768_q4_u32.bin,.bin,undecided,hardware/module/golden/?,레이아웃 대조 필요 (생사 대장 ⚠️)
-refs/weights/e2e_m_axi_active196_b6_ff768_q4_u32_manifest.json,.json,undecided,hardware/module/golden/?,레이아웃 대조 필요 (생사 대장 ⚠️)
+refs/weights/cyclic_weights_s2_block_software_initial_manifest.json,.json,migrate,hardware/module/golden/weights/,짝 .bin이 저장소에 없음 — tb_cyclic_s2_block_vector.cpp가 읽지만 csim 불가. 레이아웃 기록으로 보존
+refs/weights/cyclic_weights_s2_block_software_initial_q4_head64_manifest.json,.json,migrate,hardware/module/golden/weights/,짝 .bin이 저장소에 없음 — tb_cyclic_s2_block_vector.cpp가 읽지만 csim 불가. 레이아웃 기록으로 보존
+refs/weights/cyclic_weights_s2_block_software_initial_q4_manifest.json,.json,migrate,hardware/module/golden/weights/,짝 .bin이 저장소에 없음 — tb_cyclic_s2_block_vector.cpp가 읽지만 csim 불가. 레이아웃 기록으로 보존
+refs/weights/e2e_m_axi_active196_b6_ff768_q4_u32.bin,.bin,migrate,hardware/module/golden/weights/,재생성 불가한 산출물 = 실질 골든. 체크포인트 software_initial_weights.pt 부재. workspace/는 gitignore라 유일본 소실
+refs/weights/e2e_m_axi_active196_b6_ff768_q4_u32_manifest.json,.json,migrate,hardware/module/golden/weights/,위 .bin의 매니페스트. 짝으로 유지
 reports/csim/hw_sw_compare.json,.json,skip,hardware/workspace/,생성물
 rtl/README.md,.md,skip,-,새 트리의 README는 이관 체크리스트로 새로 작성했습니다
 scripts/_common.sh,.sh,migrate,hardware/build/,빌드 진입점

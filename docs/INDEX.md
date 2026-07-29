@@ -1,4 +1,4 @@
-> **작성** 2026-07-29 · **갱신** 2026-07-29
+> **작성** 2026-07-29 · **갱신** 2026-07-30
 > **상태** active — 자동 생성
 > **소유** repo
 
@@ -20,7 +20,7 @@ python scripts/build_docs_index.py
 |---|---|---:|---|---|
 | **repo** | `docs/` | 175 | 2026-07-29 | 횡단·거버넌스·외부 조사 |
 | **algorithm** | `algorithm/docs/` | 17 | 2026-07-29 | 학습·평가·양자화·정수 그래프 |
-| **hardware** | `hardware/docs/` | 157 | 2026-07-29 | HLS·RTL·Vivado·PYNQ 가속기 (재구성 중) |
+| **hardware** | `hardware/docs/` | 157 | 2026-07-30 | HLS·RTL·Vivado·PYNQ 가속기 (재구성 중) |
 | **archive** | `archive/hardware/docs/` | 156 | 2026-07-29 | 구 hardware 트리 — 읽기 전용 기준 |
 
 ## 먼저 볼 것
@@ -119,6 +119,7 @@ python scripts/build_docs_index.py
 
 | 문서 | 작성 | 갱신 | 상태 | 소유 |
 |---|---|---|---|---|
+| [plans/active/2026-07-29-code-migration-manifest.md](../hardware/docs/plans/active/2026-07-29-code-migration-manifest.md) | 2026-07-29 | 2026-07-30 | active — M1~M5 진행에 따라 갱신 | hardware |
 | [track/CHANGELOG.md](../hardware/docs/track/CHANGELOG.md) | 2026-07-29 | 2026-07-29 | active | hardware |
 | [snapshots/README.md](../hardware/docs/snapshots/README.md) | 2026-07-29 | 2026-07-29 | active — 안내 | hardware |
 | [snapshots/2026-07-15-xr-accel-merge-status.md](../hardware/docs/snapshots/2026-07-15-xr-accel-merge-status.md) | 2026-07-15 | 2026-07-29 | frozen — 스냅샷, 갱신하지 않음 | hardware |
@@ -166,7 +167,6 @@ python scripts/build_docs_index.py
 | [plans/done/2026-06-16-third-goal/Execution.md](../hardware/docs/plans/done/2026-06-16-third-goal/Execution.md) | 2026-06-16 | 2026-07-29 | frozen — 완료된 계획. 결과는 experiments/2026-06-16-third-goal-audit/ | hardware |
 | [plans/done/2026-06-16-third-goal/CHOICE.md](../hardware/docs/plans/done/2026-06-16-third-goal/CHOICE.md) | 2026-06-16 | 2026-07-29 | frozen — 완료된 계획. 결과는 experiments/2026-06-16-third-goal-audit/ | hardware |
 | [plans/active/2026-07-29-hardware-reconstruction.md](../hardware/docs/plans/active/2026-07-29-hardware-reconstruction.md) | 2026-07-29 | 2026-07-29 | active — 승인됨. **문서(§4) 완료 · 코드(§6 P0~P8) 미착수** | hardware |
-| [plans/active/2026-07-29-code-migration-manifest.md](../hardware/docs/plans/active/2026-07-29-code-migration-manifest.md) | 2026-07-29 | 2026-07-29 | active — M1~M5 진행에 따라 갱신 | hardware |
 | [plans/README.md](../hardware/docs/plans/README.md) | 2026-07-29 | 2026-07-29 | active — 안내 | hardware |
 | [handoff/README.md](../hardware/docs/handoff/README.md) | 2026-07-29 | 2026-07-29 | active — 안내 | hardware |
 | [handoff/2026-07-15-zcu104-cyclic-maxperf-handover.md](../hardware/docs/handoff/2026-07-15-zcu104-cyclic-maxperf-handover.md) | 2026-07-15 | 2026-07-29 | consumed | hardware |

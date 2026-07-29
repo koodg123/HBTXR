@@ -1,4 +1,4 @@
-> **작성** 2026-07-29 · **갱신** 2026-07-29
+> **작성** 2026-07-29 · **갱신** 2026-07-30
 > **상태** active — M1~M5 진행에 따라 갱신
 > **소유** hardware
 
@@ -24,20 +24,20 @@
 
 | 판정 | 수 | 뜻 |
 |---|---:|---|
-| `migrate` | **322** | 새 트리로 옮깁니다 |
+| `migrate` | **327** | 새 트리로 옮깁니다 |
 | `done` | 234 | 이미 옮겼습니다 (문서 + 그 데이터) |
 | `skip` | 64 | 판단해서 **안 옮깁니다** — 근거는 각 행에 |
-| `undecided` | **5** | 조사 후 결정 |
+| `undecided` | **0** | 2026-07-30 전건 판정 |
 
 `.pyc` 210개와 `.gitkeep` 29개는 결정 대상이 아니라 대장에서 제외했습니다 (864 − 239 = 625).
 
-## `migrate` 322건의 목적지
+## `migrate` 327건의 목적지
 
 | 목적지 | 수 | 단계 |
 |---|---:|---|
 | `hardware/tools/` | 87 | **M5** |
 | `hardware/tools/tests/` | 60 | **M5** |
-| `hardware/module/golden/` | 41 | **M2** |
+| `hardware/module/golden/` | 46 | **M2** (미결 5건 판정 포함) |
 | `hardware/config/` | 33 | **M1** |
 | `hardware/build/vivado/` | 31 | **M3** |
 | `hardware/module/include/` | 19 | **M2** |
@@ -58,24 +58,19 @@
 | `docs/**` 의 `.npz` `.f32bin` 4개 | 문서가 아닌 바이너리. `archive/`에 남깁니다 |
 | `README.md` (루트·`pynq/`·`rtl/`) | 새 트리의 README는 이관 체크리스트로 새로 썼습니다 |
 
-## `undecided` 5건 — M2 전에 조사
+## 미결 5건 — 2026-07-30 판정 완료
 
-전부 `refs/weights/`이고, **M2(`module/`)의 대상**이라 그 전에 결론이 필요합니다.
+전부 `refs/weights/`였고, **둘 다 재생성 불가**로 밝혀져 `module/golden/weights/`로 갔습니다.
+판정 기준이 "재생성 가능하면 산출물"이었는데, 조사 결과 이유가 서로 다릅니다.
 
-| 파일 | 확인할 것 |
+| 파일 | 판정 근거 |
 |---|---|
-| `cyclic_weights_s2_block_software_initial_manifest.json` (17,542줄) | `hgtxr_cyclic_weight_layout.hpp`와 레이아웃이 일치하는가 |
-| `..._q4_manifest.json` (17,542줄) | 위와 무엇이 다른가 — 이름만으로는 q4 변형 |
-| `..._q4_head64_manifest.json` (4,420줄) | head64 변형 |
-| `e2e_m_axi_active196_b6_ff768_q4_u32_manifest.json` | m_axi 경로용. 정본(`axis`)과의 관계 |
-| `e2e_m_axi_active196_b6_ff768_q4_u32.bin` | 위 매니페스트의 바이너리. 골든인가 산출물인가 |
+| `e2e_m_axi_…_q4_u32.bin` (12MB) + `_manifest.json` | `export_e2e_m_axi_weights.py`가 만드는 산출물이지만 **필요한 체크포인트 `software_initial_weights.pt`가 저장소에 없어 재생성 불가**. `workspace/`는 gitignore라 옮기면 유일본 소실 → **실질 골든** |
+| `cyclic_weights_s2_block_*_manifest.json` ×3 | **미결이 아니라 깨진 상태.** 매니페스트가 선언한 `.bin`이 저장소에 없고 `.gitignore`도 없습니다 — 커밋되지 않았습니다. `tb/tb_cyclic_s2_block_vector.cpp:19`가 그 파일을 읽으므로 **csim이 불가능**합니다. 지우지 않고 레이아웃 기록으로 보존 |
 
-**판정 기준**: 골든(=검증 기준)이면 `module/golden/`, 빌드 산출물이면 `workspace/`.
-둘을 가르는 것은 **재생성 가능성**입니다 — 스크립트로 다시 만들 수 있으면 산출물입니다.
-
-> 생사 대장(계획 §3)의 나머지 보류 3건 — `rtl/` · `docs/legacy/` · 테스트 없는 도구 28개 —
-> 는 대장에서 처리됐습니다: `rtl/`은 README뿐이라 `skip`, `docs/legacy/`의 데이터는
-> 이관 완료, 도구 28개는 나머지 87개와 함께 `migrate`(M5에서 사용 여부를 별도로 봅니다).
+> **테스트가 이걸 못 잡습니다.** 관련 테스트 0건입니다. 426 passed는 전부 Python 도구
+> 테스트이고 **HLS 빌드 입력을 검증하는 테스트는 없습니다.** 이관 검증이 증명하는 것은
+> "archive와 바이트 동일"까지이고 "컴파일된다"는 아닙니다.
 
 ## 사용 여부 조사 — 이관과 별개입니다
 
@@ -119,7 +114,7 @@ python scripts/check_migration_manifest.py --check
 | | 디렉토리 | 대상 | 상태 |
 |---|---|---:|---|
 | **M1** | `config/` | 33 | ✅ 완료 |
-| **M2** | `module/` | 91 (+ undecided 5) | ⬜ |
+| **M2** | `module/` | 96 | ✅ 완료 |
 | **M3** | `build/` | 42 | ⬜ |
 | **M4** | `deploy/` | 9 | ⬜ |
 | **M5** | `tools/` | 147 | ⬜ |
