@@ -1,0 +1,626 @@
+archive_path,ext,decision,dest,reason
+archive/migration-logs/=318.empty,.empty,skip,-,0바이트 셸 리다이렉트 잔해 (생사 대장 ❌)
+archive/migration-logs/=332.empty,.empty,skip,-,0바이트 셸 리다이렉트 잔해 (생사 대장 ❌)
+configs/quant_int8.yaml,.yaml,migrate,hardware/config/,보드·설계 파라미터
+configs/sweeps/zcu104_cyclic_transformer_sweep.yaml,.yaml,migrate,hardware/config/,보드·설계 파라미터
+configs/vck190.yaml,.yaml,migrate,hardware/config/,보드·설계 파라미터
+configs/vitis_hls.yaml,.yaml,migrate,hardware/config/,보드·설계 파라미터
+configs/xr_accel/designs/deit_tiny_cyclic_zcu104.json,.json,migrate,hardware/config/,보드·설계 파라미터
+configs/xr_accel/designs/full_deit_tiny_fit.json,.json,migrate,hardware/config/,보드·설계 파라미터
+configs/xr_accel/designs/hbtxr_cyclic_zcu104.json,.json,migrate,hardware/config/,보드·설계 파라미터
+configs/xr_accel/designs/hbtxr_streaming_zcu104.json,.json,migrate,hardware/config/,보드·설계 파라미터
+configs/xr_accel/experiments/zcu104_deit_tiny_baseline_cyclic.json,.json,migrate,hardware/config/,보드·설계 파라미터
+configs/xr_accel/experiments/zcu104_full_deit_tiny_fit.json,.json,migrate,hardware/config/,보드·설계 파라미터
+configs/xr_accel/experiments/zcu104_hbtxr_option_a_cyclic.json,.json,migrate,hardware/config/,보드·설계 파라미터
+configs/xr_accel/experiments/zcu104_hbtxr_option_a_streaming.json,.json,migrate,hardware/config/,보드·설계 파라미터
+configs/xr_accel/experiments/zcu104_hbtxr_option_b_cyclic.json,.json,migrate,hardware/config/,보드·설계 파라미터
+configs/xr_accel/experiments/zcu104_hbtxr_option_b_streaming.json,.json,migrate,hardware/config/,보드·설계 파라미터
+configs/xr_accel/experiments/zcu104_hbtxr_option_c_cyclic.json,.json,migrate,hardware/config/,보드·설계 파라미터
+configs/xr_accel/experiments/zcu104_hbtxr_option_c_streaming.json,.json,migrate,hardware/config/,보드·설계 파라미터
+configs/xr_accel/models/deit_tiny_baseline.json,.json,migrate,hardware/config/,보드·설계 파라미터
+configs/xr_accel/models/deit_tiny_baseline_cyclic.json,.json,migrate,hardware/config/,보드·설계 파라미터
+configs/xr_accel/models/hbtxr_option_a.json,.json,migrate,hardware/config/,보드·설계 파라미터
+configs/xr_accel/models/hbtxr_option_b.json,.json,migrate,hardware/config/,보드·설계 파라미터
+configs/xr_accel/models/hbtxr_option_c.json,.json,migrate,hardware/config/,보드·설계 파라미터
+configs/xr_accel/schema.json,.json,migrate,hardware/config/,보드·설계 파라미터
+configs/xr_accel/targets/zcu104.json,.json,migrate,hardware/config/,보드·설계 파라미터
+configs/zcu104.yaml,.yaml,migrate,hardware/config/,보드·설계 파라미터
+configs/zcu104_cyclic_s0_defines.h,.h,migrate,hardware/config/,보드·설계 파라미터
+configs/zcu104_cyclic_s1_weight_defines.h,.h,migrate,hardware/config/,보드·설계 파라미터
+configs/zcu104_cyclic_s2_attn_first_step_defines.h,.h,migrate,hardware/config/,보드·설계 파라미터
+configs/zcu104_cyclic_s2_block_first_step_defines.h,.h,migrate,hardware/config/,보드·설계 파라미터
+configs/zcu104_cyclic_s2_block_q4w8a_defines.h,.h,migrate,hardware/config/,보드·설계 파라미터
+configs/zcu104_cyclic_s2_first_step_defines.h,.h,migrate,hardware/config/,보드·설계 파라미터
+configs/zcu104_cyclic_s2_mlp_first_step_defines.h,.h,migrate,hardware/config/,보드·설계 파라미터
+configs/zcu104_cyclic_s2_qkv_first_step_defines.h,.h,migrate,hardware/config/,보드·설계 파라미터
+configs/zcu104_e2e_q4w8a_defines.h,.h,migrate,hardware/config/,보드·설계 파라미터
+docs/analysis/no-board-results/MODE_PROFILE_RESULTS_2026_06_27.md,.md,done,hardware/docs/,이관 완료 (P0에서 데이터 11개 보완)
+docs/analysis/no-board-results/p0_mode_profile_2026_06_27/hls_modules.csv,.csv,done,hardware/docs/,이관 완료 (P0에서 데이터 11개 보완)
+docs/analysis/no-board-results/p0_mode_profile_2026_06_27/hls_modules.json,.json,done,hardware/docs/,이관 완료 (P0에서 데이터 11개 보완)
+docs/analysis/no-board-results/p0_mode_profile_2026_06_27/hls_top_variants.csv,.csv,done,hardware/docs/,이관 완료 (P0에서 데이터 11개 보완)
+docs/analysis/no-board-results/p0_mode_profile_2026_06_27/summary.md,.md,done,hardware/docs/,이관 완료 (P0에서 데이터 11개 보완)
+docs/analysis/no-board-results/P0_PROGRESS_2026_06_26.md,.md,done,hardware/docs/,이관 완료 (P0에서 데이터 11개 보완)
+docs/analysis/no-board-results/p0_report_collection_2026_06_26/hls_modules.csv,.csv,done,hardware/docs/,이관 완료 (P0에서 데이터 11개 보완)
+docs/analysis/no-board-results/p0_report_collection_2026_06_26/hls_modules.json,.json,done,hardware/docs/,이관 완료 (P0에서 데이터 11개 보완)
+docs/analysis/no-board-results/p0_report_collection_2026_06_26/hls_top_variants.csv,.csv,done,hardware/docs/,이관 완료 (P0에서 데이터 11개 보완)
+docs/analysis/no-board-results/p0_report_collection_2026_06_26/summary.md,.md,done,hardware/docs/,이관 완료 (P0에서 데이터 11개 보완)
+docs/analysis/no-board-results/p0_report_collection_2026_06_27/hls_modules.csv,.csv,done,hardware/docs/,이관 완료 (P0에서 데이터 11개 보완)
+docs/analysis/no-board-results/p0_report_collection_2026_06_27/hls_modules.json,.json,done,hardware/docs/,이관 완료 (P0에서 데이터 11개 보완)
+docs/analysis/no-board-results/p0_report_collection_2026_06_27/hls_top_variants.csv,.csv,done,hardware/docs/,이관 완료 (P0에서 데이터 11개 보완)
+docs/analysis/no-board-results/p0_report_collection_2026_06_27/summary.md,.md,done,hardware/docs/,이관 완료 (P0에서 데이터 11개 보완)
+docs/analysis/no-board-results/VIVADO_PROGRESS_2026_06_27.md,.md,done,hardware/docs/,이관 완료 (P0에서 데이터 11개 보완)
+docs/analysis/NO_BOARD_PERFORMANCE_EXPERIMENT_PLAN_2026_06_26.md,.md,done,hardware/docs/,이관 완료 (P0에서 데이터 11개 보완)
+docs/architecture/DIRECTORY_LAYOUT.md,.md,skip,-,의도적 보류 — .npz/.f32bin 바이너리는 문서가 아님
+docs/architecture/xr_accel/HBTXR_ARCH_FREEZE.md,.md,skip,-,의도적 보류 — .npz/.f32bin 바이너리는 문서가 아님
+docs/architecture/xr_accel/HBTXR_CYCLIC_IMPLEMENTATION.md,.md,skip,-,의도적 보류 — .npz/.f32bin 바이너리는 문서가 아님
+docs/CHOICE.md,.md,skip,-,의도적 보류 — .npz/.f32bin 바이너리는 문서가 아님
+docs/DeiT-Tiny C-Syn Results.png,.png,done,hardware/docs/,이관 완료 (P0에서 데이터 11개 보완)
+docs/Execution.md,.md,skip,-,의도적 보류 — .npz/.f32bin 바이너리는 문서가 아님
+docs/HARDWARE_IMPORT_MANIFEST.md,.md,skip,-,의도적 보류 — .npz/.f32bin 바이너리는 문서가 아님
+docs/legacy/legacy_artifact_index_2026_06_12.json,.json,done,hardware/docs/,이관 완료 (P0에서 데이터 11개 보완)
+docs/legacy/legacy_experiment_analysis_2026_06_12.md,.md,done,hardware/docs/,이관 완료 (P0에서 데이터 11개 보완)
+docs/Master-Plan.md,.md,skip,-,의도적 보류 — .npz/.f32bin 바이너리는 문서가 아님
+docs/plans/active/2026-07-29-hardware-reconstruction.md,.md,skip,-,의도적 보류 — .npz/.f32bin 바이너리는 문서가 아님
+docs/references/vit_accel/BOARD_RUNBOOKS.md,.md,done,hardware/docs/,이관 완료 (P0에서 데이터 11개 보완)
+docs/references/vit_accel/CHECKLIST.md,.md,done,hardware/docs/,이관 완료 (P0에서 데이터 11개 보완)
+docs/references/vit_accel/DEPLOYMENT_RUN_SCRIPTS.md,.md,done,hardware/docs/,이관 완료 (P0에서 데이터 11개 보완)
+docs/references/vit_accel/experiments/deit_tiny_baseline/full_deit_tiny_fit/step2_hls_resource_summary.md,.md,done,hardware/docs/,이관 완료 (P0에서 데이터 11개 보완)
+docs/references/vit_accel/experiments/deit_tiny_baseline_ooc_rerun/full_deit_tiny_fit/step2_hls_resource_summary.md,.md,done,hardware/docs/,이관 완료 (P0에서 데이터 11개 보완)
+docs/references/vit_accel/experiments/pnr/deit_tiny_full_multi_board_status_20260410.md,.md,done,hardware/docs/,이관 완료 (P0에서 데이터 11개 보완)
+docs/references/vit_accel/experiments/pnr/vck190_deit_tiny_full_status_20260410.md,.md,done,hardware/docs/,이관 완료 (P0에서 데이터 11개 보완)
+docs/references/vit_accel/experiments/pnr/vck190_step4_ooc_status_20260408.md,.md,done,hardware/docs/,이관 완료 (P0에서 데이터 11개 보완)
+docs/references/vit_accel/experiments/pnr/zcu102_deit_tiny_full_status_20260410.md,.md,done,hardware/docs/,이관 완료 (P0에서 데이터 11개 보완)
+docs/references/vit_accel/experiments/pnr/zcu102_step4_bitstream_status_20260408.md,.md,done,hardware/docs/,이관 완료 (P0에서 데이터 11개 보완)
+docs/references/vit_accel/experiments/pnr/zu15eg_deit_tiny_full_status_20260410.md,.md,done,hardware/docs/,이관 완료 (P0에서 데이터 11개 보완)
+docs/references/vit_accel/experiments/README.md,.md,skip,-,의도적 보류 — .npz/.f32bin 바이너리는 문서가 아님
+docs/references/vit_accel/experiments/vck190/deit_tiny_baseline/full_deit_tiny_fit/step5_vck190_pnr_summary.md,.md,done,hardware/docs/,이관 완료 (P0에서 데이터 11개 보완)
+docs/references/vit_accel/experiments/zu15eg/deit_tiny_baseline/full_deit_tiny_fit/step2_hls_resource_summary.md,.md,done,hardware/docs/,이관 완료 (P0에서 데이터 11개 보완)
+docs/references/vit_accel/FUNCTION_CALL_STACK.md,.md,done,hardware/docs/,이관 완료 (P0에서 데이터 11개 보완)
+docs/references/vit_accel/HISTORY.md,.md,done,hardware/docs/,이관 완료 (P0에서 데이터 11개 보완)
+docs/references/vit_accel/LOCAL_SETUP.md,.md,done,hardware/docs/,이관 완료 (P0에서 데이터 11개 보완)
+docs/references/vit_accel/MERGE_STATUS.md,.md,done,hardware/docs/,이관 완료 (P0에서 데이터 11개 보완)
+docs/references/vit_accel/MULTI_BOARD_VALIDATION.md,.md,done,hardware/docs/,이관 완료 (P0에서 데이터 11개 보완)
+docs/references/vit_accel/PIPELINE_OVERVIEW.md,.md,done,hardware/docs/,이관 완료 (P0에서 데이터 11개 보완)
+docs/references/vit_accel/PLAN.md,.md,done,hardware/docs/,이관 완료 (P0에서 데이터 11개 보완)
+docs/references/vit_accel/PROGRESS_2026_04_15.md,.md,done,hardware/docs/,이관 완료 (P0에서 데이터 11개 보완)
+docs/references/vit_accel/PROJECT_STRUCTURE.md,.md,done,hardware/docs/,이관 완료 (P0에서 데이터 11개 보완)
+docs/references/vit_accel/README.md,.md,skip,-,의도적 보류 — .npz/.f32bin 바이너리는 문서가 아님
+docs/references/vit_accel/SRC_CASE_ANALYSIS.md,.md,skip,-,의도적 보류 — .npz/.f32bin 바이너리는 문서가 아님
+docs/references/vit_accel/SRC_CASE_DIAGRAMS.md,.md,skip,-,의도적 보류 — .npz/.f32bin 바이너리는 문서가 아님
+docs/references/vit_accel/SRC_CASE_MICROARCH.md,.md,skip,-,의도적 보류 — .npz/.f32bin 바이너리는 문서가 아님
+docs/references/vit_accel/SRC_CASE_MODULE_GUIDE.md,.md,done,hardware/docs/,이관 완료 (P0에서 데이터 11개 보완)
+docs/references/vit_accel/SRC_CASE_PARALLELISM_TUNING.md,.md,skip,-,의도적 보류 — .npz/.f32bin 바이너리는 문서가 아님
+docs/references/vit_accel/TRAINING_EVALUATION_AND_METRICS.md,.md,done,hardware/docs/,이관 완료 (P0에서 데이터 11개 보완)
+docs/references/vit_accel/VCK190_DOCKER_BASELINE.md,.md,done,hardware/docs/,이관 완료 (P0에서 데이터 11개 보완)
+docs/references/vit_accel/VCK190_ZU15EG_PARAMETER_COMPARISON.md,.md,done,hardware/docs/,이관 완료 (P0에서 데이터 11개 보완)
+docs/references/vit_accel/VIVADO_ONLY_FLOW.md,.md,done,hardware/docs/,이관 완료 (P0에서 데이터 11개 보완)
+docs/reports/2026-07-29-hardware-census.md,.md,skip,-,의도적 보류 — .npz/.f32bin 바이너리는 문서가 아님
+docs/reports/c3b_attention_qkv_mlp_block_resource_report_2026_06_23.md,.md,done,hardware/docs/,이관 완료 (P0에서 데이터 11개 보완)
+docs/reports/c3b_board_measurement_attempt_2026_06_23.md,.md,done,hardware/docs/,이관 완료 (P0에서 데이터 11개 보완)
+docs/reports/c3b_resource_power_latency_tables_2026_06_23.md,.md,done,hardware/docs/,이관 완료 (P0에서 데이터 11개 보완)
+docs/resources/hgtxr_final_evidence/e2e_resource_matrix_2026_06_10.json,.json,done,hardware/docs/,이관 완료 (P0에서 데이터 11개 보완)
+docs/resources/hgtxr_final_evidence/e2e_resource_matrix_2026_06_10.md,.md,done,hardware/docs/,이관 완료 (P0에서 데이터 11개 보완)
+docs/resources/hgtxr_final_evidence/final_blocker_closure_readiness_2026_06_10.json,.json,done,hardware/docs/,이관 완료 (P0에서 데이터 11개 보완)
+docs/resources/hgtxr_final_evidence/final_blocker_closure_readiness_2026_06_10.md,.md,done,hardware/docs/,이관 완료 (P0에서 데이터 11개 보완)
+docs/resources/hgtxr_final_evidence/final_evidence_manifest_2026_06_10.json,.json,done,hardware/docs/,이관 완료 (P0에서 데이터 11개 보완)
+docs/resources/hgtxr_final_evidence/final_evidence_manifest_2026_06_10.md,.md,done,hardware/docs/,이관 완료 (P0에서 데이터 11개 보완)
+docs/resources/hgtxr_final_evidence/final_operator_handoff_2026_06_10.json,.json,done,hardware/docs/,이관 완료 (P0에서 데이터 11개 보완)
+docs/resources/hgtxr_final_evidence/final_operator_handoff_2026_06_10.md,.md,done,hardware/docs/,이관 완료 (P0에서 데이터 11개 보완)
+docs/resources/hgtxr_final_evidence/final_operator_handoff_validation_2026_06_10.json,.json,done,hardware/docs/,이관 완료 (P0에서 데이터 11개 보완)
+docs/resources/hgtxr_final_evidence/final_operator_handoff_validation_2026_06_10.md,.md,done,hardware/docs/,이관 완료 (P0에서 데이터 11개 보완)
+docs/resources/hgtxr_final_evidence/final_signoff_audit_2026_06_10.json,.json,done,hardware/docs/,이관 완료 (P0에서 데이터 11개 보완)
+docs/resources/hgtxr_final_evidence/final_signoff_audit_2026_06_10.md,.md,done,hardware/docs/,이관 완료 (P0에서 데이터 11개 보완)
+docs/resources/hgtxr_final_evidence/final_signoff_bundle_validation_2026_06_10.json,.json,done,hardware/docs/,이관 완료 (P0에서 데이터 11개 보완)
+docs/resources/hgtxr_final_evidence/final_signoff_bundle_validation_2026_06_10.md,.md,done,hardware/docs/,이관 완료 (P0에서 데이터 11개 보완)
+docs/resources/hgtxr_final_evidence/final_unblock_candidate_audit_2026_06_10.json,.json,done,hardware/docs/,이관 완료 (P0에서 데이터 11개 보완)
+docs/resources/hgtxr_final_evidence/final_unblock_candidate_audit_2026_06_10.md,.md,done,hardware/docs/,이관 완료 (P0에서 데이터 11개 보완)
+docs/resources/hgtxr_final_evidence/final_unblock_closeout_packet_2026_06_10.json,.json,done,hardware/docs/,이관 완료 (P0에서 데이터 11개 보완)
+docs/resources/hgtxr_final_evidence/final_unblock_closeout_packet_2026_06_10.md,.md,done,hardware/docs/,이관 완료 (P0에서 데이터 11개 보완)
+docs/resources/hgtxr_final_evidence/final_unblock_closeout_packet_validation_2026_06_10.json,.json,done,hardware/docs/,이관 완료 (P0에서 데이터 11개 보완)
+docs/resources/hgtxr_final_evidence/final_unblock_closeout_packet_validation_2026_06_10.md,.md,done,hardware/docs/,이관 완료 (P0에서 데이터 11개 보완)
+docs/resources/hgtxr_final_evidence/final_unblock_commands_2026_06_10.json,.json,done,hardware/docs/,이관 완료 (P0에서 데이터 11개 보완)
+docs/resources/hgtxr_final_evidence/final_unblock_commands_2026_06_10.md,.md,done,hardware/docs/,이관 완료 (P0에서 데이터 11개 보완)
+docs/resources/hgtxr_final_evidence/final_unblock_intake_2026_06_10.json,.json,done,hardware/docs/,이관 완료 (P0에서 데이터 11개 보완)
+docs/resources/hgtxr_final_evidence/final_unblock_intake_2026_06_10.md,.md,done,hardware/docs/,이관 완료 (P0에서 데이터 11개 보완)
+docs/resources/hgtxr_final_evidence/hgpipe_lut_math_contract_validation_2026_06_10.json,.json,done,hardware/docs/,이관 완료 (P0에서 데이터 11개 보완)
+docs/resources/hgtxr_final_evidence/hgpipe_lut_math_validation_2026_06_09.json,.json,done,hardware/docs/,이관 완료 (P0에서 데이터 11개 보완)
+docs/resources/hgtxr_final_evidence/hgpipe_operator_audit_2026_06_16.json,.json,done,hardware/docs/,이관 완료 (P0에서 데이터 11개 보완)
+docs/resources/hgtxr_final_evidence/hgpipe_operator_audit_2026_06_16.md,.md,done,hardware/docs/,이관 완료 (P0에서 데이터 11개 보완)
+docs/resources/hgtxr_final_evidence/q4w8a_s2_block_quantization_2026_06_08.json,.json,done,hardware/docs/,이관 완료 (P0에서 데이터 11개 보완)
+docs/resources/hgtxr_final_evidence/s2_block_full_q4w8a_head64_outputs_2026_06_10.f32bin,.f32bin,skip,-,의도적 보류 — .npz/.f32bin 바이너리는 문서가 아님
+docs/resources/hgtxr_final_evidence/s2_block_full_q4w8a_head64_outputs_2026_06_10.npz,.npz,skip,-,의도적 보류 — .npz/.f32bin 바이너리는 문서가 아님
+docs/resources/hgtxr_final_evidence/s2_block_full_q4w8a_head64_outputs_hls_q8_2026_06_10.f32bin,.f32bin,skip,-,의도적 보류 — .npz/.f32bin 바이너리는 문서가 아님
+docs/resources/hgtxr_final_evidence/s2_block_full_q4w8a_head64_outputs_hls_q8_2026_06_10.json,.json,done,hardware/docs/,이관 완료 (P0에서 데이터 11개 보완)
+docs/resources/hgtxr_final_evidence/s2_block_full_q4w8a_head64_validation_2026_06_10.json,.json,done,hardware/docs/,이관 완료 (P0에서 데이터 11개 보완)
+docs/resources/hgtxr_final_evidence/s2_pytorch_golden_software_initial_q4w8a_head64_2026_06_10.json,.json,done,hardware/docs/,이관 완료 (P0에서 데이터 11개 보완)
+docs/resources/hgtxr_final_evidence/s2_pytorch_golden_software_initial_q4w8a_head64_2026_06_10.npz,.npz,skip,-,의도적 보류 — .npz/.f32bin 바이너리는 문서가 아님
+docs/resources/hgtxr_final_evidence/third_goal_requirements_trace_2026_06_10.json,.json,done,hardware/docs/,이관 완료 (P0에서 데이터 11개 보완)
+docs/resources/hgtxr_final_evidence/third_goal_requirements_trace_2026_06_10.md,.md,done,hardware/docs/,이관 완료 (P0에서 데이터 11개 보완)
+docs/resources/hgtxr_final_evidence/third_goal_source_audit_2026_06_16.json,.json,done,hardware/docs/,이관 완료 (P0에서 데이터 11개 보완)
+docs/resources/hgtxr_final_evidence/third_goal_source_audit_2026_06_16.md,.md,done,hardware/docs/,이관 완료 (P0에서 데이터 11개 보완)
+docs/resources/hgtxr_handover_additional/c3_par16_mem16_fastpath_csynth_2026_06_10.json,.json,done,hardware/docs/,이관 완료 (P0에서 데이터 11개 보완)
+docs/resources/hgtxr_handover_additional/c3_par16_mem8_csynth_2026_06_10.json,.json,done,hardware/docs/,이관 완료 (P0에서 데이터 11개 보완)
+docs/resources/hgtxr_handover_additional/c3b_axis_dma_board_candidate_2026_06_10.json,.json,done,hardware/docs/,이관 완료 (P0에서 데이터 11개 보완)
+docs/resources/hgtxr_handover_additional/c3b_axis_dma_smoke_bundle_2026_06_10.json,.json,done,hardware/docs/,이관 완료 (P0에서 데이터 11개 보완)
+docs/resources/hgtxr_handover_additional/c3b_board_smoke_readiness_2026_06_10.json,.json,done,hardware/docs/,이관 완료 (P0에서 데이터 11개 보완)
+docs/resources/hgtxr_handover_additional/c3b_board_smoke_readiness_2026_06_10.md,.md,done,hardware/docs/,이관 완료 (P0에서 데이터 11개 보완)
+docs/resources/hgtxr_handover_additional/c3b_physical_smoke_gate_audit_2026_06_16.json,.json,done,hardware/docs/,이관 완료 (P0에서 데이터 11개 보완)
+docs/resources/hgtxr_handover_additional/c3b_physical_smoke_gate_audit_2026_06_16.md,.md,done,hardware/docs/,이관 완료 (P0에서 데이터 11개 보완)
+docs/resources/hgtxr_handover_additional/c3b_smoke_candidate_discovery_2026_06_10.json,.json,done,hardware/docs/,이관 완료 (P0에서 데이터 11개 보완)
+docs/resources/hgtxr_handover_additional/c3b_smoke_candidate_discovery_2026_06_10.md,.md,done,hardware/docs/,이관 완료 (P0에서 데이터 11개 보완)
+docs/resources/hgtxr_handover_additional/c3b_smoke_result_contract_2026_06_10.json,.json,done,hardware/docs/,이관 완료 (P0에서 데이터 11개 보완)
+docs/resources/hgtxr_handover_additional/c3b_smoke_result_contract_2026_06_10.md,.md,done,hardware/docs/,이관 완료 (P0에서 데이터 11개 보완)
+docs/resources/hgtxr_handover_additional/c3b_smoke_transfer_manifest_2026_06_10.json,.json,done,hardware/docs/,이관 완료 (P0에서 데이터 11개 보완)
+docs/resources/hgtxr_handover_additional/c3b_smoke_transfer_manifest_2026_06_10.md,.md,done,hardware/docs/,이관 완료 (P0에서 데이터 11개 보완)
+docs/resources/hgtxr_handover_additional/cyclic_weight_layout_2026_06_06.md,.md,done,hardware/docs/,이관 완료 (P0에서 데이터 11개 보완)
+docs/resources/hgtxr_handover_additional/cyclic_weight_packing_2026_06_06.md,.md,done,hardware/docs/,이관 완료 (P0에서 데이터 11개 보완)
+docs/resources/hgtxr_handover_additional/deit_tiny_csyn_exceptions.csv,.csv,done,hardware/docs/,이관 완료 (P0에서 데이터 11개 보완)
+docs/resources/hgtxr_handover_additional/e2e_active16_resource_policy_matrix_2026_06_10.md,.md,done,hardware/docs/,이관 완료 (P0에서 데이터 11개 보완)
+docs/resources/hgtxr_handover_additional/e2e_axis_baseline_2026_06_09.md,.md,done,hardware/docs/,이관 완료 (P0에서 데이터 11개 보완)
+docs/resources/hgtxr_handover_additional/e2e_axis_dma_c3b_mem16_smoke_bundle.tar.gz.sha256,.sha256,done,hardware/docs/,이관 완료 (P0에서 데이터 11개 보완)
+docs/resources/hgtxr_handover_additional/e2e_resource_matrix_2026_06_10.json,.json,done,hardware/docs/,이관 완료 (P0에서 데이터 11개 보완)
+docs/resources/hgtxr_handover_additional/e2e_resource_matrix_2026_06_10.md,.md,done,hardware/docs/,이관 완료 (P0에서 데이터 11개 보완)
+docs/resources/hgtxr_handover_additional/e2e_resource_policy_audit_2026_06_10.json,.json,done,hardware/docs/,이관 완료 (P0에서 데이터 11개 보완)
+docs/resources/hgtxr_handover_additional/e2e_resource_policy_audit_2026_06_10.md,.md,done,hardware/docs/,이관 완료 (P0에서 데이터 11개 보완)
+docs/resources/hgtxr_handover_additional/final_blocker_closure_readiness_2026_06_10.json,.json,done,hardware/docs/,이관 완료 (P0에서 데이터 11개 보완)
+docs/resources/hgtxr_handover_additional/final_blocker_closure_readiness_2026_06_10.md,.md,done,hardware/docs/,이관 완료 (P0에서 데이터 11개 보완)
+docs/resources/hgtxr_handover_additional/final_evidence_manifest_2026_06_10.json,.json,done,hardware/docs/,이관 완료 (P0에서 데이터 11개 보완)
+docs/resources/hgtxr_handover_additional/final_evidence_manifest_2026_06_10.md,.md,done,hardware/docs/,이관 완료 (P0에서 데이터 11개 보완)
+docs/resources/hgtxr_handover_additional/final_operator_handoff_2026_06_10.json,.json,done,hardware/docs/,이관 완료 (P0에서 데이터 11개 보완)
+docs/resources/hgtxr_handover_additional/final_operator_handoff_2026_06_10.md,.md,done,hardware/docs/,이관 완료 (P0에서 데이터 11개 보완)
+docs/resources/hgtxr_handover_additional/final_operator_handoff_validation_2026_06_10.json,.json,done,hardware/docs/,이관 완료 (P0에서 데이터 11개 보완)
+docs/resources/hgtxr_handover_additional/final_operator_handoff_validation_2026_06_10.md,.md,done,hardware/docs/,이관 완료 (P0에서 데이터 11개 보완)
+docs/resources/hgtxr_handover_additional/final_signoff_audit_2026_06_10.json,.json,done,hardware/docs/,이관 완료 (P0에서 데이터 11개 보완)
+docs/resources/hgtxr_handover_additional/final_signoff_audit_2026_06_10.md,.md,done,hardware/docs/,이관 완료 (P0에서 데이터 11개 보완)
+docs/resources/hgtxr_handover_additional/final_signoff_bundle_validation_2026_06_10.json,.json,done,hardware/docs/,이관 완료 (P0에서 데이터 11개 보완)
+docs/resources/hgtxr_handover_additional/final_signoff_bundle_validation_2026_06_10.md,.md,done,hardware/docs/,이관 완료 (P0에서 데이터 11개 보완)
+docs/resources/hgtxr_handover_additional/final_unblock_candidate_audit_2026_06_10.json,.json,done,hardware/docs/,이관 완료 (P0에서 데이터 11개 보완)
+docs/resources/hgtxr_handover_additional/final_unblock_candidate_audit_2026_06_10.md,.md,done,hardware/docs/,이관 완료 (P0에서 데이터 11개 보완)
+docs/resources/hgtxr_handover_additional/final_unblock_closeout_packet_2026_06_10.json,.json,done,hardware/docs/,이관 완료 (P0에서 데이터 11개 보완)
+docs/resources/hgtxr_handover_additional/final_unblock_closeout_packet_2026_06_10.md,.md,done,hardware/docs/,이관 완료 (P0에서 데이터 11개 보완)
+docs/resources/hgtxr_handover_additional/final_unblock_closeout_packet_validation_2026_06_10.json,.json,done,hardware/docs/,이관 완료 (P0에서 데이터 11개 보완)
+docs/resources/hgtxr_handover_additional/final_unblock_closeout_packet_validation_2026_06_10.md,.md,done,hardware/docs/,이관 완료 (P0에서 데이터 11개 보완)
+docs/resources/hgtxr_handover_additional/final_unblock_commands_2026_06_10.json,.json,done,hardware/docs/,이관 완료 (P0에서 데이터 11개 보완)
+docs/resources/hgtxr_handover_additional/final_unblock_commands_2026_06_10.md,.md,done,hardware/docs/,이관 완료 (P0에서 데이터 11개 보완)
+docs/resources/hgtxr_handover_additional/final_unblock_intake_2026_06_10.json,.json,done,hardware/docs/,이관 완료 (P0에서 데이터 11개 보완)
+docs/resources/hgtxr_handover_additional/final_unblock_intake_2026_06_10.md,.md,done,hardware/docs/,이관 완료 (P0에서 데이터 11개 보완)
+docs/resources/hgtxr_handover_additional/hgpipe_lut_math_contract_validation_2026_06_10.json,.json,done,hardware/docs/,이관 완료 (P0에서 데이터 11개 보완)
+docs/resources/hgtxr_handover_additional/hgpipe_lut_math_validation_2026_06_09.json,.json,done,hardware/docs/,이관 완료 (P0에서 데이터 11개 보완)
+docs/resources/hgtxr_handover_additional/hgpipe_operator_audit_2026_06_16.json,.json,done,hardware/docs/,이관 완료 (P0에서 데이터 11개 보완)
+docs/resources/hgtxr_handover_additional/hgpipe_operator_audit_2026_06_16.md,.md,done,hardware/docs/,이관 완료 (P0에서 데이터 11개 보완)
+docs/resources/hgtxr_handover_additional/hgpipe_reference_analysis_2026_06_08.md,.md,done,hardware/docs/,이관 완료 (P0에서 데이터 11개 보완)
+docs/resources/hgtxr_handover_additional/hls_csynth_summary_2026_06_06.csv,.csv,done,hardware/docs/,이관 완료 (P0에서 데이터 11개 보완)
+docs/resources/hgtxr_handover_additional/p2_vit_scale_calibration_report_2026_06_16.json,.json,done,hardware/docs/,이관 완료 (P0에서 데이터 11개 보완)
+docs/resources/hgtxr_handover_additional/p2_vit_scale_calibration_report_2026_06_16.md,.md,done,hardware/docs/,이관 완료 (P0에서 데이터 11개 보완)
+docs/resources/hgtxr_handover_additional/pynq_smoke_candidate_discovery_c3b_2026_06_16.json,.json,done,hardware/docs/,이관 완료 (P0에서 데이터 11개 보완)
+docs/resources/hgtxr_handover_additional/pynq_smoke_candidate_discovery_c3b_2026_06_16.md,.md,done,hardware/docs/,이관 완료 (P0에서 데이터 11개 보완)
+docs/resources/hgtxr_handover_additional/pynq_smoke_candidate_discovery_vref_p0_2026_06_16.json,.json,done,hardware/docs/,이관 완료 (P0에서 데이터 11개 보완)
+docs/resources/hgtxr_handover_additional/pynq_smoke_candidate_discovery_vref_p0_2026_06_16.md,.md,done,hardware/docs/,이관 완료 (P0에서 데이터 11개 보완)
+docs/resources/hgtxr_handover_additional/q4w8a_s2_block_quantization_2026_06_08.json,.json,done,hardware/docs/,이관 완료 (P0에서 데이터 11개 보완)
+docs/resources/hgtxr_handover_additional/qkv_uram_smoke_candidate_discovery_2026_06_16.json,.json,done,hardware/docs/,이관 완료 (P0에서 데이터 11개 보완)
+docs/resources/hgtxr_handover_additional/qkv_uram_smoke_candidate_discovery_2026_06_16.md,.md,done,hardware/docs/,이관 완료 (P0에서 데이터 11개 보완)
+docs/resources/hgtxr_handover_additional/reference_input_audit_2026_06_10.json,.json,done,hardware/docs/,이관 완료 (P0에서 데이터 11개 보완)
+docs/resources/hgtxr_handover_additional/reference_input_audit_2026_06_10.md,.md,done,hardware/docs/,이관 완료 (P0에서 데이터 11개 보완)
+docs/resources/hgtxr_handover_additional/req1_environment_audit_2026_06_16.json,.json,done,hardware/docs/,이관 완료 (P0에서 데이터 11개 보완)
+docs/resources/hgtxr_handover_additional/req1_environment_audit_2026_06_16.md,.md,done,hardware/docs/,이관 완료 (P0에서 데이터 11개 보완)
+docs/resources/hgtxr_handover_additional/req5_q4q8_swhw_match_audit_2026_06_16.json,.json,done,hardware/docs/,이관 완료 (P0에서 데이터 11개 보완)
+docs/resources/hgtxr_handover_additional/req5_q4q8_swhw_match_audit_2026_06_16.md,.md,done,hardware/docs/,이관 완료 (P0에서 데이터 11개 보완)
+docs/resources/hgtxr_handover_additional/req6_parameterization_audit_2026_06_16.json,.json,done,hardware/docs/,이관 완료 (P0에서 데이터 11개 보완)
+docs/resources/hgtxr_handover_additional/req6_parameterization_audit_2026_06_16.md,.md,done,hardware/docs/,이관 완료 (P0에서 데이터 11개 보완)
+docs/resources/hgtxr_handover_additional/req9_deit_image_reference_audit_2026_06_16.json,.json,done,hardware/docs/,이관 완료 (P0에서 데이터 11개 보완)
+docs/resources/hgtxr_handover_additional/req9_deit_image_reference_audit_2026_06_16.md,.md,done,hardware/docs/,이관 완료 (P0에서 데이터 11개 보완)
+docs/resources/hgtxr_handover_additional/resource_extraction_log.md,.md,done,hardware/docs/,이관 완료 (P0에서 데이터 11개 보완)
+docs/resources/hgtxr_handover_additional/s2_block_full_q4w8a_head64_outputs_hls_q8_2026_06_10.json,.json,done,hardware/docs/,이관 완료 (P0에서 데이터 11개 보완)
+docs/resources/hgtxr_handover_additional/s2_block_full_q4w8a_head64_validation_2026_06_10.json,.json,done,hardware/docs/,이관 완료 (P0에서 데이터 11개 보완)
+docs/resources/hgtxr_handover_additional/s2_block_full_validation_2026_06_06.json,.json,done,hardware/docs/,이관 완료 (P0에서 데이터 11개 보완)
+docs/resources/hgtxr_handover_additional/s2_block_full_validation_software_initial_2026_06_06.json,.json,done,hardware/docs/,이관 완료 (P0에서 데이터 11개 보완)
+docs/resources/hgtxr_handover_additional/s2_block_full_validation_software_initial_expected_2026_06_06.json,.json,done,hardware/docs/,이관 완료 (P0에서 데이터 11개 보완)
+docs/resources/hgtxr_handover_additional/s2_block_preln_validation_2026_06_06.json,.json,done,hardware/docs/,이관 완료 (P0에서 데이터 11개 보완)
+docs/resources/hgtxr_handover_additional/s2_pytorch_golden_software_initial_2026_06_06.json,.json,done,hardware/docs/,이관 완료 (P0에서 데이터 11개 보완)
+docs/resources/hgtxr_handover_additional/s2_pytorch_golden_software_initial_2026_06_08.json,.json,done,hardware/docs/,이관 완료 (P0에서 데이터 11개 보완)
+docs/resources/hgtxr_handover_additional/s2_pytorch_golden_software_initial_q4w8a_head64_2026_06_10.json,.json,done,hardware/docs/,이관 완료 (P0에서 데이터 11개 보완)
+docs/resources/hgtxr_handover_additional/selected_path_execution_audit_2026_06_10.json,.json,done,hardware/docs/,이관 완료 (P0에서 데이터 11개 보완)
+docs/resources/hgtxr_handover_additional/selected_path_execution_audit_2026_06_10.md,.md,done,hardware/docs/,이관 완료 (P0에서 데이터 11개 보완)
+docs/resources/hgtxr_handover_additional/spec_plan_conformance_audit_2026_06_10.json,.json,done,hardware/docs/,이관 완료 (P0에서 데이터 11개 보완)
+docs/resources/hgtxr_handover_additional/spec_plan_conformance_audit_2026_06_10.md,.md,done,hardware/docs/,이관 완료 (P0에서 데이터 11개 보완)
+docs/resources/hgtxr_handover_additional/third_goal_completion_audit_2026_06_10.json,.json,done,hardware/docs/,이관 완료 (P0에서 데이터 11개 보완)
+docs/resources/hgtxr_handover_additional/third_goal_completion_audit_2026_06_10.md,.md,done,hardware/docs/,이관 완료 (P0에서 데이터 11개 보완)
+docs/resources/hgtxr_handover_additional/third_goal_current_audit_2026_06_16.json,.json,done,hardware/docs/,이관 완료 (P0에서 데이터 11개 보완)
+docs/resources/hgtxr_handover_additional/third_goal_current_audit_2026_06_16.md,.md,done,hardware/docs/,이관 완료 (P0에서 데이터 11개 보완)
+docs/resources/hgtxr_handover_additional/third_goal_final_signoff_2026_06_10.json,.json,done,hardware/docs/,이관 완료 (P0에서 데이터 11개 보완)
+docs/resources/hgtxr_handover_additional/third_goal_final_signoff_run_2026_06_10.json,.json,done,hardware/docs/,이관 완료 (P0에서 데이터 11개 보완)
+docs/resources/hgtxr_handover_additional/third_goal_final_signoff_run_2026_06_10.md,.md,done,hardware/docs/,이관 완료 (P0에서 데이터 11개 보완)
+docs/resources/hgtxr_handover_additional/third_goal_preflight_2026_06_10.json,.json,done,hardware/docs/,이관 완료 (P0에서 데이터 11개 보완)
+docs/resources/hgtxr_handover_additional/third_goal_preflight_board_2026_06_10.json,.json,done,hardware/docs/,이관 완료 (P0에서 데이터 11개 보완)
+docs/resources/hgtxr_handover_additional/third_goal_preflight_board_c1_par16_2026_06_10.json,.json,done,hardware/docs/,이관 완료 (P0에서 데이터 11개 보완)
+docs/resources/hgtxr_handover_additional/third_goal_preflight_board_c3b_bundle_2026_06_10.json,.json,done,hardware/docs/,이관 완료 (P0에서 데이터 11개 보완)
+docs/resources/hgtxr_handover_additional/third_goal_preflight_board_c3b_result_gate_2026_06_10.json,.json,done,hardware/docs/,이관 완료 (P0에서 데이터 11개 보완)
+docs/resources/hgtxr_handover_additional/third_goal_requirements_trace_2026_06_10.json,.json,done,hardware/docs/,이관 완료 (P0에서 데이터 11개 보완)
+docs/resources/hgtxr_handover_additional/third_goal_requirements_trace_2026_06_10.md,.md,done,hardware/docs/,이관 완료 (P0에서 데이터 11개 보완)
+docs/resources/hgtxr_handover_additional/third_goal_source_audit_2026_06_16.json,.json,done,hardware/docs/,이관 완료 (P0에서 데이터 11개 보완)
+docs/resources/hgtxr_handover_additional/third_goal_source_audit_2026_06_16.md,.md,done,hardware/docs/,이관 완료 (P0에서 데이터 11개 보완)
+docs/resources/hgtxr_handover_additional/third_goal_unblock_checklist_2026_06_10.json,.json,done,hardware/docs/,이관 완료 (P0에서 데이터 11개 보완)
+docs/resources/hgtxr_handover_additional/third_goal_unblock_checklist_2026_06_10.md,.md,done,hardware/docs/,이관 완료 (P0에서 데이터 11개 보완)
+docs/resources/hgtxr_handover_additional/vref_p0_buffer_lifetime_audit_2026_06_16.json,.json,done,hardware/docs/,이관 완료 (P0에서 데이터 11개 보완)
+docs/resources/hgtxr_handover_additional/vref_p0_buffer_lifetime_audit_2026_06_16.md,.md,done,hardware/docs/,이관 완료 (P0에서 데이터 11개 보완)
+docs/resources/hgtxr_handover_additional/vref_p0_pot_scale_audit_2026_06_16.json,.json,done,hardware/docs/,이관 완료 (P0에서 데이터 11개 보완)
+docs/resources/hgtxr_handover_additional/vref_p0_pot_scale_audit_2026_06_16.md,.md,done,hardware/docs/,이관 완료 (P0에서 데이터 11개 보완)
+docs/resources/hgtxr_handover_additional/vref_p0_pot_scale_sweep_2026_06_16.json,.json,done,hardware/docs/,이관 완료 (P0에서 데이터 11개 보완)
+docs/resources/hgtxr_handover_additional/vref_p0_pot_scale_sweep_2026_06_16.md,.md,done,hardware/docs/,이관 완료 (P0에서 데이터 11개 보완)
+docs/resources/hgtxr_handover_additional/vref_p0_qkv_uram_cache_successor_2026_06_16.json,.json,done,hardware/docs/,이관 완료 (P0에서 데이터 11개 보완)
+docs/resources/hgtxr_handover_additional/vref_p0_qkv_uram_cache_successor_2026_06_16.md,.md,done,hardware/docs/,이관 완료 (P0에서 데이터 11개 보완)
+docs/resources/hgtxr_handover_additional/vref_successor_smoke_candidate_discovery_2026_06_10.json,.json,done,hardware/docs/,이관 완료 (P0에서 데이터 11개 보완)
+docs/resources/hgtxr_handover_additional/vref_successor_smoke_candidate_discovery_2026_06_10.md,.md,done,hardware/docs/,이관 완료 (P0에서 데이터 11개 보완)
+docs/resources/hgtxr_handover_additional/xr_vits_candidate_audit_2026_06_10.json,.json,done,hardware/docs/,이관 완료 (P0에서 데이터 11개 보완)
+docs/resources/hgtxr_handover_additional/xr_vits_candidate_audit_2026_06_10.md,.md,done,hardware/docs/,이관 완료 (P0에서 데이터 11개 보완)
+docs/resources/hgtxr_handover_additional/xr_vits_gate_audit_2026_06_16.json,.json,done,hardware/docs/,이관 완료 (P0에서 데이터 11개 보완)
+docs/resources/hgtxr_handover_additional/xr_vits_gate_audit_2026_06_16.md,.md,done,hardware/docs/,이관 완료 (P0에서 데이터 11개 보완)
+docs/resources/hgtxr_handover_additional/xr_vits_reference_resolution_2026_06_10.json,.json,done,hardware/docs/,이관 완료 (P0에서 데이터 11개 보완)
+docs/resources/hgtxr_handover_additional/xr_vits_reference_resolution_2026_06_10.md,.md,done,hardware/docs/,이관 완료 (P0에서 데이터 11개 보완)
+docs/resources/hgtxr_handover_additional/xr_vits_replacement_policy.template.json,.json,done,hardware/docs/,이관 완료 (P0에서 데이터 11개 보완)
+docs/resources/hgtxr_handover_additional/xr_vits_replacement_policy_preview_2026_06_10.json,.json,done,hardware/docs/,이관 완료 (P0에서 데이터 11개 보완)
+docs/resources/hgtxr_handover_additional/xr_vits_replacement_policy_preview_2026_06_10.md,.md,done,hardware/docs/,이관 완료 (P0에서 데이터 11개 보완)
+docs/resources/hgtxr_handover_additional/xr_vits_unblock_packet_2026_06_10.json,.json,done,hardware/docs/,이관 완료 (P0에서 데이터 11개 보완)
+docs/resources/hgtxr_handover_additional/xr_vits_unblock_packet_2026_06_10.md,.md,done,hardware/docs/,이관 완료 (P0에서 데이터 11개 보완)
+docs/resources/hgtxr_handover_additional/zcu104_c3b_smoke_remote_run_2026_06_10.json,.json,done,hardware/docs/,이관 완료 (P0에서 데이터 11개 보완)
+docs/resources/hgtxr_handover_additional/zcu104_c3b_smoke_remote_run_2026_06_10.md,.md,done,hardware/docs/,이관 완료 (P0에서 데이터 11개 보완)
+docs/snapshots/2026-07-29-semantic-census/inventory/dead-code-candidates.csv,.csv,done,hardware/docs/,이관 완료 (P0에서 데이터 11개 보완)
+docs/snapshots/2026-07-29-semantic-census/inventory/duplicate-blobs.csv,.csv,done,hardware/docs/,이관 완료 (P0에서 데이터 11개 보완)
+docs/snapshots/2026-07-29-semantic-census/inventory/duplicate-functions.csv,.csv,done,hardware/docs/,이관 완료 (P0에서 데이터 11개 보완)
+docs/snapshots/2026-07-29-semantic-census/inventory/file-inventory.csv,.csv,done,hardware/docs/,이관 완료 (P0에서 데이터 11개 보완)
+docs/snapshots/2026-07-29-semantic-census/inventory/import-edges.csv,.csv,done,hardware/docs/,이관 완료 (P0에서 데이터 11개 보완)
+docs/snapshots/2026-07-29-semantic-census/inventory/line-findings.csv,.csv,done,hardware/docs/,이관 완료 (P0에서 데이터 11개 보완)
+docs/snapshots/2026-07-29-semantic-census/inventory/nonpython-symbols.csv,.csv,done,hardware/docs/,이관 완료 (P0에서 데이터 11개 보완)
+docs/snapshots/2026-07-29-semantic-census/inventory/python-symbols.csv,.csv,done,hardware/docs/,이관 완료 (P0에서 데이터 11개 보완)
+docs/snapshots/2026-07-29-semantic-census/inventory/semantic-summary.json,.json,done,hardware/docs/,이관 완료 (P0에서 데이터 11개 보완)
+docs/snapshots/2026-07-29-semantic-census/README.md,.md,skip,-,의도적 보류 — .npz/.f32bin 바이너리는 문서가 아님
+docs/Spec.md,.md,skip,-,의도적 보류 — .npz/.f32bin 바이너리는 문서가 아님
+docs/SRC_CASE_MODULE_GUIDE.md,.md,skip,-,의도적 보류 — .npz/.f32bin 바이너리는 문서가 아님
+docs/status/xr_accel/MERGE_STATUS.md,.md,skip,-,의도적 보류 — .npz/.f32bin 바이너리는 문서가 아님
+docs/status/xr_accel/PLAN.md,.md,skip,-,의도적 보류 — .npz/.f32bin 바이너리는 문서가 아님
+docs/status/xr_accel/ZCU104_CYCLIC_MAXPERF_HANDOVER.md,.md,skip,-,의도적 보류 — .npz/.f32bin 바이너리는 문서가 아님
+docs/status/xr_accel/ZCU104_CYCLIC_MAXPERF_PROGRESS.md,.md,done,hardware/docs/,이관 완료 (P0에서 데이터 11개 보완)
+docs/STATUS.md,.md,skip,-,의도적 보류 — .npz/.f32bin 바이너리는 문서가 아님
+docs/Sub-Plan.md,.md,skip,-,의도적 보류 — .npz/.f32bin 바이너리는 문서가 아님
+docs/THIRD_GOAL_FUTURE_EXPERIMENTS_2026_06_16.md,.md,done,hardware/docs/,이관 완료 (P0에서 데이터 11개 보완)
+docs/THIRD_GOAL_PROGRESS_EXPERIMENT_REPORT_2026_06_16.md,.md,done,hardware/docs/,이관 완료 (P0에서 데이터 11개 보완)
+docs/track/ADR.md,.md,skip,-,의도적 보류 — .npz/.f32bin 바이너리는 문서가 아님
+docs/track/AQ2_REQUESTED_SEARCH_TRACK_METRICS_2026_07_01.md,.md,done,hardware/docs/,이관 완료 (P0에서 데이터 11개 보완)
+docs/track/AQ2_SEARCH_TRACK_MEASUREMENT_2026_06_30.md,.md,done,hardware/docs/,이관 완료 (P0에서 데이터 11개 보완)
+docs/track/AQ2_SEARCH_TRACK_METRIC_CHECKLIST_2026_07_01.md,.md,done,hardware/docs/,이관 완료 (P0에서 데이터 11개 보완)
+docs/track/CLEANUP_2026_06_17.md,.md,skip,-,의도적 보류 — .npz/.f32bin 바이너리는 문서가 아님
+docs/track/CONVERSATION.md,.md,skip,-,의도적 보류 — .npz/.f32bin 바이너리는 문서가 아님
+docs/track/EIGHT_QUESTION_FULL_LEARNED_VIVADO_EXPERIMENT_2026_06_28.md,.md,done,hardware/docs/,이관 완료 (P0에서 데이터 11개 보완)
+docs/track/EIGHT_QUESTION_HYBRID_RUNTIME_REPORT_2026_06_28.md,.md,done,hardware/docs/,이관 완료 (P0에서 데이터 11개 보완)
+docs/track/HANDOVER.md,.md,skip,-,의도적 보류 — .npz/.f32bin 바이너리는 문서가 아님
+docs/track/HANDOVER_2026_06_27.md,.md,skip,-,의도적 보류 — .npz/.f32bin 바이너리는 문서가 아님
+docs/track/IMPL_REPOS_HANDOVER_IMPORT_2026_07_08.md,.md,skip,-,의도적 보류 — .npz/.f32bin 바이너리는 문서가 아님
+docs/track/log.md,.md,skip,-,의도적 보류 — .npz/.f32bin 바이너리는 문서가 아님
+docs/track/PROGRESS.md,.md,skip,-,의도적 보류 — .npz/.f32bin 바이너리는 문서가 아님
+docs/track/RUNTIME_MODE_E2E_SHARED_TOP_2026_06_27.md,.md,done,hardware/docs/,이관 완료 (P0에서 데이터 11개 보완)
+docs/track/RUNTIME_MODE_FULL_AXI_WEIGHT_PATH_2026_06_28.md,.md,done,hardware/docs/,이관 완료 (P0에서 데이터 11개 보완)
+docs/track/SESSION_PROGRESS_AND_CONVERSATION_2026_07_05.md,.md,skip,-,의도적 보류 — .npz/.f32bin 바이너리는 문서가 아님
+docs/track/THIRD_GOAL_ACHIEVEMENT_CHECKLIST_2026_06_16.md,.md,done,hardware/docs/,이관 완료 (P0에서 데이터 11개 보완)
+docs/track/THIRD_GOAL_REQUIREMENTS_2026_06_16.md,.md,done,hardware/docs/,이관 완료 (P0에서 데이터 11개 보완)
+docs/track/TODO.md,.md,skip,-,의도적 보류 — .npz/.f32bin 바이너리는 문서가 아님
+docs/track/WORK_PROGRESS_EXPERIMENT_SUMMARY_2026_06_27.md,.md,done,hardware/docs/,이관 완료 (P0에서 데이터 11개 보완)
+docs/track/ZCU104_FULL_LEARNED_PHYSICAL_EXPERIMENT_PLAN_2026_07_01.md,.md,done,hardware/docs/,이관 완료 (P0에서 데이터 11개 보완)
+docs/validation/xr_accel/DEIT_CYCLIC_VERIFICATION.md,.md,skip,-,의도적 보류 — .npz/.f32bin 바이너리는 문서가 아님
+docs/validation/xr_accel/MULTI_BOARD_VALIDATION.md,.md,skip,-,의도적 보류 — .npz/.f32bin 바이너리는 문서가 아님
+docs/Validation.md,.md,skip,-,의도적 보류 — .npz/.f32bin 바이너리는 문서가 아님
+hls/include/common.h,.h,migrate,hardware/module/include/,헤더·템플릿 라이브러리
+hls/include/config.h,.h,migrate,hardware/module/include/,헤더·템플릿 라이브러리
+hls/include/cyclic_config.h,.h,migrate,hardware/module/include/,헤더·템플릿 라이브러리
+hls/include/fixed_types.h,.h,migrate,hardware/module/include/,헤더·템플릿 라이브러리
+hls/include/hgtxr_cyclic_attention.hpp,.hpp,migrate,hardware/module/include/,헤더·템플릿 라이브러리
+hls/include/hgtxr_cyclic_mac.hpp,.hpp,migrate,hardware/module/include/,헤더·템플릿 라이브러리
+hls/include/hgtxr_cyclic_math.hpp,.hpp,migrate,hardware/module/include/,헤더·템플릿 라이브러리
+hls/include/hgtxr_cyclic_mlp.hpp,.hpp,migrate,hardware/module/include/,헤더·템플릿 라이브러리
+hls/include/hgtxr_cyclic_norm.hpp,.hpp,migrate,hardware/module/include/,헤더·템플릿 라이브러리
+hls/include/hgtxr_cyclic_s2_projection.hpp,.hpp,migrate,hardware/module/include/,헤더·템플릿 라이브러리
+hls/include/hgtxr_cyclic_scheduler.hpp,.hpp,migrate,hardware/module/include/,헤더·템플릿 라이브러리
+hls/include/hgtxr_cyclic_transformer_block.hpp,.hpp,migrate,hardware/module/include/,헤더·템플릿 라이브러리
+hls/include/hgtxr_cyclic_transformer_params.hpp,.hpp,migrate,hardware/module/include/,헤더·템플릿 라이브러리
+hls/include/hgtxr_cyclic_weight_layout.hpp,.hpp,migrate,hardware/module/include/,헤더·템플릿 라이브러리
+hls/include/hgtxr_e2e_vit.hpp,.hpp,migrate,hardware/module/include/,헤더·템플릿 라이브러리
+hls/include/quant.h,.h,migrate,hardware/module/include/,헤더·템플릿 라이브러리
+hls/include/register_map.h,.h,migrate,hardware/module/include/,헤더·템플릿 라이브러리
+hls/include/stream_types.h,.h,migrate,hardware/module/include/,헤더·템플릿 라이브러리
+hls/include/tensor_buffer.h,.h,migrate,hardware/module/include/,헤더·템플릿 라이브러리
+hls/src/attention.cpp,.cpp,migrate,hardware/module/src/,HLS 구현
+hls/src/controller.cpp,.cpp,migrate,hardware/module/src/,HLS 구현
+hls/src/event_patch_embed.cpp,.cpp,migrate,hardware/module/src/,HLS 구현
+hls/src/frame_patch_embed.cpp,.cpp,migrate,hardware/module/src/,HLS 구현
+hls/src/fusion.cpp,.cpp,migrate,hardware/module/src/,HLS 구현
+hls/src/global_buffer.cpp,.cpp,migrate,hardware/module/src/,HLS 구현
+hls/src/hgtxr_e2e_axis_top.cpp,.cpp,migrate,hardware/module/src/,HLS 구현
+hls/src/hgtxr_e2e_m_axi_top.cpp,.cpp,migrate,hardware/module/src/,HLS 구현
+hls/src/hgtxr_mode_profile_top.cpp,.cpp,migrate,hardware/module/src/,HLS 구현
+hls/src/hgtxr_top.cpp,.cpp,migrate,hardware/module/src/,HLS 구현
+hls/src/matmul.cpp,.cpp,migrate,hardware/module/src/,HLS 구현
+hls/src/mlp.cpp,.cpp,migrate,hardware/module/src/,HLS 구현
+hls/src/noc.cpp,.cpp,migrate,hardware/module/src/,HLS 구현
+hls/src/nonlinear.cpp,.cpp,migrate,hardware/module/src/,HLS 구현
+hls/src/rmu_smu.cpp,.cpp,migrate,hardware/module/src/,HLS 구현
+hls/src/runtime_fsm.cpp,.cpp,migrate,hardware/module/src/,HLS 구현
+hls/src/search_head.cpp,.cpp,migrate,hardware/module/src/,HLS 구현
+hls/src/track_head.cpp,.cpp,migrate,hardware/module/src/,HLS 구현
+hls/src/weight_prefetcher.cpp,.cpp,migrate,hardware/module/src/,HLS 구현
+hls/tb/e2e_axis_vector_active128_ff768_golden.hpp,.hpp,migrate,hardware/module/golden/,골든 벡터 (P5에서 분리)
+hls/tb/e2e_axis_vector_active16_ff128_golden.hpp,.hpp,migrate,hardware/module/golden/,골든 벡터 (P5에서 분리)
+hls/tb/e2e_axis_vector_active16_ff256_golden.hpp,.hpp,migrate,hardware/module/golden/,골든 벡터 (P5에서 분리)
+hls/tb/e2e_axis_vector_active16_ff64_golden.hpp,.hpp,migrate,hardware/module/golden/,골든 벡터 (P5에서 분리)
+hls/tb/e2e_axis_vector_active16_ff768_golden.hpp,.hpp,migrate,hardware/module/golden/,골든 벡터 (P5에서 분리)
+hls/tb/e2e_axis_vector_active16_golden.hpp,.hpp,migrate,hardware/module/golden/,골든 벡터 (P5에서 분리)
+hls/tb/e2e_axis_vector_active196_b6_ff768_golden.hpp,.hpp,migrate,hardware/module/golden/,골든 벡터 (P5에서 분리)
+hls/tb/e2e_axis_vector_active196_ff768_golden.hpp,.hpp,migrate,hardware/module/golden/,골든 벡터 (P5에서 분리)
+hls/tb/e2e_axis_vector_active32_ff768_golden.hpp,.hpp,migrate,hardware/module/golden/,골든 벡터 (P5에서 분리)
+hls/tb/e2e_axis_vector_active64_ff768_golden.hpp,.hpp,migrate,hardware/module/golden/,골든 벡터 (P5에서 분리)
+hls/tb/e2e_axis_vector_active8_golden.hpp,.hpp,migrate,hardware/module/golden/,골든 벡터 (P5에서 분리)
+hls/tb/e2e_axis_vector_golden.hpp,.hpp,migrate,hardware/module/golden/,골든 벡터 (P5에서 분리)
+hls/tb/e2e_axis_vector_hgpipe_math_golden.hpp,.hpp,migrate,hardware/module/golden/,골든 벡터 (P5에서 분리)
+hls/tb/e2e_axis_vector_hgpipe_math_lnq_active16_golden.hpp,.hpp,migrate,hardware/module/golden/,골든 벡터 (P5에서 분리)
+hls/tb/e2e_axis_vector_hgpipe_math_lnq_active8_golden.hpp,.hpp,migrate,hardware/module/golden/,골든 벡터 (P5에서 분리)
+hls/tb/e2e_axis_vector_hgpipe_math_lnq_golden.hpp,.hpp,migrate,hardware/module/golden/,골든 벡터 (P5에서 분리)
+hls/tb/e2e_axis_vector_vref_p0_hgpipe_lnq_active16_softmax_input_x2_golden.hpp,.hpp,migrate,hardware/module/golden/,골든 벡터 (P5에서 분리)
+hls/tb/tb_attention.cpp,.cpp,migrate,hardware/module/tb/,테스트벤치
+hls/tb/tb_cyclic_head_attention.cpp,.cpp,migrate,hardware/module/tb/,테스트벤치
+hls/tb/tb_cyclic_primitives.cpp,.cpp,migrate,hardware/module/tb/,테스트벤치
+hls/tb/tb_cyclic_s2_block_vector.cpp,.cpp,migrate,hardware/module/tb/,테스트벤치
+hls/tb/tb_cyclic_s2_block_vector_hls_main.cpp,.cpp,migrate,hardware/module/tb/,테스트벤치
+hls/tb/tb_cyclic_s2_projection.cpp,.cpp,migrate,hardware/module/tb/,테스트벤치
+hls/tb/tb_hgtxr_e2e_axis_top.cpp,.cpp,migrate,hardware/module/tb/,테스트벤치
+hls/tb/tb_hgtxr_e2e_m_axi_top.cpp,.cpp,migrate,hardware/module/tb/,테스트벤치
+hls/tb/tb_hgtxr_mode_profile_top.cpp,.cpp,migrate,hardware/module/tb/,테스트벤치
+hls/tb/tb_hgtxr_top.cpp,.cpp,migrate,hardware/module/tb/,테스트벤치
+hls/tb/tb_mlp.cpp,.cpp,migrate,hardware/module/tb/,테스트벤치
+hls/tb/tb_runtime_fsm.cpp,.cpp,migrate,hardware/module/tb/,테스트벤치
+pynq/hgtxr/__init__.py,.py,migrate,hardware/deploy/,PYNQ 오버레이·스모크 러너
+pynq/hgtxr/e2e_axis_dma_overlay.py,.py,migrate,hardware/deploy/,PYNQ 오버레이·스모크 러너
+pynq/hgtxr/e2e_m_axi_overlay.py,.py,migrate,hardware/deploy/,PYNQ 오버레이·스모크 러너
+pynq/hgtxr/e2e_m_axi_weights.py,.py,migrate,hardware/deploy/,PYNQ 오버레이·스모크 러너
+pynq/hgtxr/hgtxr.bit,.bit,skip,hardware/workspace/,비트스트림은 산출물 (P5)
+pynq/hgtxr/hgtxr.hwh,.hwh,skip,hardware/workspace/,비트스트림은 산출물 (P5)
+pynq/hgtxr/hgtxr_e2e_axis_dma.bit,.bit,skip,hardware/workspace/,비트스트림은 산출물 (P5)
+pynq/hgtxr/hgtxr_e2e_axis_dma.hwh,.hwh,skip,hardware/workspace/,비트스트림은 산출물 (P5)
+pynq/hgtxr/hgtxr_e2e_axis_dma_c3b_mem16.bit,.bit,skip,hardware/workspace/,비트스트림은 산출물 (P5)
+pynq/hgtxr/hgtxr_e2e_axis_dma_c3b_mem16.hwh,.hwh,skip,hardware/workspace/,비트스트림은 산출물 (P5)
+pynq/hgtxr/hgtxr_e2e_axis_dma_par32_runtime_full_axi_mem16.bit,.bit,skip,hardware/workspace/,비트스트림은 산출물 (P5)
+pynq/hgtxr/hgtxr_e2e_axis_dma_par32_runtime_full_axi_mem16.hwh,.hwh,skip,hardware/workspace/,비트스트림은 산출물 (P5)
+pynq/hgtxr/hgtxr_e2e_axis_dma_par32_runtime_mode_mem16.bit,.bit,skip,hardware/workspace/,비트스트림은 산출물 (P5)
+pynq/hgtxr/hgtxr_e2e_axis_dma_par32_runtime_mode_mem16.hwh,.hwh,skip,hardware/workspace/,비트스트림은 산출물 (P5)
+pynq/hgtxr/hgtxr_e2e_axis_dma_vref_p0_softmax_input_x2_dsp_mixed_stream.bit,.bit,skip,hardware/workspace/,비트스트림은 산출물 (P5)
+pynq/hgtxr/hgtxr_e2e_axis_dma_vref_p0_softmax_input_x2_dsp_mixed_stream.hwh,.hwh,skip,hardware/workspace/,비트스트림은 산출물 (P5)
+pynq/hgtxr/hgtxr_e2e_m_axi.bit,.bit,skip,hardware/workspace/,비트스트림은 산출물 (P5)
+pynq/hgtxr/hgtxr_e2e_m_axi.hwh,.hwh,skip,hardware/workspace/,비트스트림은 산출물 (P5)
+pynq/hgtxr/hgtxr_mode_search_par32.bit,.bit,skip,hardware/workspace/,비트스트림은 산출물 (P5)
+pynq/hgtxr/hgtxr_mode_search_par32.hwh,.hwh,skip,hardware/workspace/,비트스트림은 산출물 (P5)
+pynq/hgtxr/hgtxr_mode_track_par32.bit,.bit,skip,hardware/workspace/,비트스트림은 산출물 (P5)
+pynq/hgtxr/hgtxr_mode_track_par32.hwh,.hwh,skip,hardware/workspace/,비트스트림은 산출물 (P5)
+pynq/hgtxr/hgtxr_overlay.py,.py,migrate,hardware/deploy/,PYNQ 오버레이·스모크 러너
+pynq/hgtxr/README.md,.md,skip,-,새 트리의 README는 이관 체크리스트로 새로 작성했습니다
+pynq/hgtxr/run_e2e_axis_dma_hybrid_smoke.py,.py,migrate,hardware/deploy/,PYNQ 오버레이·스모크 러너
+pynq/hgtxr/run_e2e_axis_dma_smoke.py,.py,migrate,hardware/deploy/,PYNQ 오버레이·스모크 러너
+pynq/hgtxr/run_e2e_m_axi_smoke.py,.py,migrate,hardware/deploy/,PYNQ 오버레이·스모크 러너
+pynq/hgtxr/test_hgtxr_overlay.py,.py,migrate,hardware/deploy/,PYNQ 오버레이·스모크 러너
+README.md,.md,skip,-,새 트리의 README는 이관 체크리스트로 새로 작성했습니다
+refs/e2e_axis_vector_active128_ff768_spec.json,.json,migrate,hardware/module/golden/,골든·참조 데이터
+refs/e2e_axis_vector_active16_ff128_spec.json,.json,migrate,hardware/module/golden/,골든·참조 데이터
+refs/e2e_axis_vector_active16_ff256_spec.json,.json,migrate,hardware/module/golden/,골든·참조 데이터
+refs/e2e_axis_vector_active16_ff64_spec.json,.json,migrate,hardware/module/golden/,골든·참조 데이터
+refs/e2e_axis_vector_active16_ff768_spec.json,.json,migrate,hardware/module/golden/,골든·참조 데이터
+refs/e2e_axis_vector_active16_spec.json,.json,migrate,hardware/module/golden/,골든·참조 데이터
+refs/e2e_axis_vector_active196_b6_ff768_spec.json,.json,migrate,hardware/module/golden/,골든·참조 데이터
+refs/e2e_axis_vector_active196_ff768_spec.json,.json,migrate,hardware/module/golden/,골든·참조 데이터
+refs/e2e_axis_vector_active32_ff768_spec.json,.json,migrate,hardware/module/golden/,골든·참조 데이터
+refs/e2e_axis_vector_active64_ff768_spec.json,.json,migrate,hardware/module/golden/,골든·참조 데이터
+refs/e2e_axis_vector_active8_spec.json,.json,migrate,hardware/module/golden/,골든·참조 데이터
+refs/e2e_axis_vector_blocks2_spec.json,.json,migrate,hardware/module/golden/,골든·참조 데이터
+refs/e2e_axis_vector_hgpipe_math_lnq_active16_spec.json,.json,migrate,hardware/module/golden/,골든·참조 데이터
+refs/e2e_axis_vector_hgpipe_math_lnq_active8_spec.json,.json,migrate,hardware/module/golden/,골든·참조 데이터
+refs/e2e_axis_vector_hgpipe_math_lnq_spec.json,.json,migrate,hardware/module/golden/,골든·참조 데이터
+refs/e2e_axis_vector_hgpipe_math_spec.json,.json,migrate,hardware/module/golden/,골든·참조 데이터
+refs/e2e_axis_vector_spec.json,.json,migrate,hardware/module/golden/,골든·참조 데이터
+refs/hgpipe_lut_math_contract.json,.json,migrate,hardware/module/golden/,골든·참조 데이터
+refs/inputs/event.npy,.npy,migrate,hardware/module/golden/,골든·참조 데이터
+refs/inputs/frame.npy,.npy,migrate,hardware/module/golden/,골든·참조 데이터
+refs/inputs/prev_state.npy,.npy,migrate,hardware/module/golden/,골든·참조 데이터
+refs/manifest.json,.json,migrate,hardware/module/golden/,골든·참조 데이터
+refs/outputs/target_state.npy,.npy,migrate,hardware/module/golden/,골든·참조 데이터
+refs/vref_p0/e2e_axis_vector_hgpipe_math_lnq_active16_softmax_input_x2_spec.json,.json,migrate,hardware/module/golden/,골든·참조 데이터
+refs/weights/cyclic_weights_s2_block_software_initial_manifest.json,.json,undecided,hardware/module/golden/?,레이아웃 대조 필요 (생사 대장 ⚠️)
+refs/weights/cyclic_weights_s2_block_software_initial_q4_head64_manifest.json,.json,undecided,hardware/module/golden/?,레이아웃 대조 필요 (생사 대장 ⚠️)
+refs/weights/cyclic_weights_s2_block_software_initial_q4_manifest.json,.json,undecided,hardware/module/golden/?,레이아웃 대조 필요 (생사 대장 ⚠️)
+refs/weights/e2e_m_axi_active196_b6_ff768_q4_u32.bin,.bin,undecided,hardware/module/golden/?,레이아웃 대조 필요 (생사 대장 ⚠️)
+refs/weights/e2e_m_axi_active196_b6_ff768_q4_u32_manifest.json,.json,undecided,hardware/module/golden/?,레이아웃 대조 필요 (생사 대장 ⚠️)
+reports/csim/hw_sw_compare.json,.json,skip,hardware/workspace/,생성물
+rtl/README.md,.md,skip,-,새 트리의 README는 이관 체크리스트로 새로 작성했습니다
+scripts/_common.sh,.sh,migrate,hardware/build/,빌드 진입점
+scripts/export_hw_refs.sh,.sh,migrate,hardware/build/,빌드 진입점
+scripts/overlay_preview.sh,.sh,migrate,hardware/build/,빌드 진입점
+scripts/report/collect_no_board_reports.py,.py,migrate,hardware/build/,빌드 진입점
+scripts/run/run_e2e_axis_dma_vivado_no_board.sh,.sh,migrate,hardware/build/,빌드 진입점
+scripts/run/run_e2e_q4w8a_no_board.sh,.sh,migrate,hardware/build/,빌드 진입점
+scripts/run/run_mode_profile_no_board.sh,.sh,migrate,hardware/build/,빌드 진입점
+scripts/run/run_mode_profile_vivado_no_board.sh,.sh,migrate,hardware/build/,빌드 진입점
+scripts/run_hls_csim.sh,.sh,migrate,hardware/build/,빌드 진입점
+scripts/run_hls_csynth.sh,.sh,migrate,hardware/build/,빌드 진입점
+scripts/run_hw_sw_compare.sh,.sh,migrate,hardware/build/,빌드 진입점
+tests/test_audit_final_unblock_candidates.py,.py,migrate,hardware/tools/tests/,회귀 기준선 426
+tests/test_audit_reference_inputs.py,.py,migrate,hardware/tools/tests/,회귀 기준선 426
+tests/test_audit_xr_vits_candidates.py,.py,migrate,hardware/tools/tests/,회귀 기준선 426
+tests/test_check_c3b_board_smoke_readiness.py,.py,migrate,hardware/tools/tests/,회귀 기준선 426
+tests/test_check_final_blocker_closure_readiness.py,.py,migrate,hardware/tools/tests/,회귀 기준선 426
+tests/test_check_runtime_mode_board_latency_gate.py,.py,migrate,hardware/tools/tests/,회귀 기준선 426
+tests/test_check_third_goal_preflight.py,.py,migrate,hardware/tools/tests/,회귀 기준선 426
+tests/test_check_xr_vits_reference_resolution.py,.py,migrate,hardware/tools/tests/,회귀 기준선 426
+tests/test_create_xr_vits_replacement_policy.py,.py,migrate,hardware/tools/tests/,회귀 기준선 426
+tests/test_discover_c3b_smoke_candidates.py,.py,migrate,hardware/tools/tests/,회귀 기준선 426
+tests/test_discover_pynq_smoke_candidates.py,.py,migrate,hardware/tools/tests/,회귀 기준선 426
+tests/test_import_pynq_smoke_result.py,.py,migrate,hardware/tools/tests/,회귀 기준선 426
+tests/test_package_e2e_axis_dma_pynq_bundle.py,.py,migrate,hardware/tools/tests/,회귀 기준선 426
+tests/test_package_e2e_m_axi_pynq_bundle.py,.py,migrate,hardware/tools/tests/,회귀 기준선 426
+tests/test_prepare_zcu104_smoke_session.py,.py,migrate,hardware/tools/tests/,회귀 기준선 426
+tests/test_run_runtime_mode_board_latency.py,.py,migrate,hardware/tools/tests/,회귀 기준선 426
+tests/test_run_third_goal_final_signoff.py,.py,migrate,hardware/tools/tests/,회귀 기준선 426
+tests/test_run_zcu104_c3b_smoke_remote.py,.py,migrate,hardware/tools/tests/,회귀 기준선 426
+tests/test_validate_final_operator_handoff.py,.py,migrate,hardware/tools/tests/,회귀 기준선 426
+tests/test_validate_final_signoff_bundle.py,.py,migrate,hardware/tools/tests/,회귀 기준선 426
+tests/test_validate_final_unblock_closeout_packet.py,.py,migrate,hardware/tools/tests/,회귀 기준선 426
+tests/test_validate_pynq_bundle_package.py,.py,migrate,hardware/tools/tests/,회귀 기준선 426
+tests/test_validate_pynq_smoke_result.py,.py,migrate,hardware/tools/tests/,회귀 기준선 426
+tests/test_write_c3b_physical_smoke_gate_audit.py,.py,migrate,hardware/tools/tests/,회귀 기준선 426
+tests/test_write_c3b_protection_checklist.py,.py,migrate,hardware/tools/tests/,회귀 기준선 426
+tests/test_write_c3b_smoke_result_contract.py,.py,migrate,hardware/tools/tests/,회귀 기준선 426
+tests/test_write_c3b_smoke_transfer_manifest.py,.py,migrate,hardware/tools/tests/,회귀 기준선 426
+tests/test_write_e2e_resource_matrix.py,.py,migrate,hardware/tools/tests/,회귀 기준선 426
+tests/test_write_e2e_resource_policy_audit.py,.py,migrate,hardware/tools/tests/,회귀 기준선 426
+tests/test_write_final_evidence_manifest.py,.py,migrate,hardware/tools/tests/,회귀 기준선 426
+tests/test_write_final_operator_handoff.py,.py,migrate,hardware/tools/tests/,회귀 기준선 426
+tests/test_write_final_signoff_audit.py,.py,migrate,hardware/tools/tests/,회귀 기준선 426
+tests/test_write_final_unblock_closeout_packet.py,.py,migrate,hardware/tools/tests/,회귀 기준선 426
+tests/test_write_final_unblock_commands.py,.py,migrate,hardware/tools/tests/,회귀 기준선 426
+tests/test_write_final_unblock_intake.py,.py,migrate,hardware/tools/tests/,회귀 기준선 426
+tests/test_write_hgpipe_operator_audit.py,.py,migrate,hardware/tools/tests/,회귀 기준선 426
+tests/test_write_p2_vit_scale_calibration_report.py,.py,migrate,hardware/tools/tests/,회귀 기준선 426
+tests/test_write_prefetchall4_300_contract_audit.py,.py,migrate,hardware/tools/tests/,회귀 기준선 426
+tests/test_write_prefetchall4_300_goal_status.py,.py,migrate,hardware/tools/tests/,회귀 기준선 426
+tests/test_write_prefetchall4_300_resource_breakdown.py,.py,migrate,hardware/tools/tests/,회귀 기준선 426
+tests/test_write_req1_environment_audit.py,.py,migrate,hardware/tools/tests/,회귀 기준선 426
+tests/test_write_req2_spec_subagent_gate_audit.py,.py,migrate,hardware/tools/tests/,회귀 기준선 426
+tests/test_write_req5_q4q8_swhw_match_audit.py,.py,migrate,hardware/tools/tests/,회귀 기준선 426
+tests/test_write_req6_parameterization_audit.py,.py,migrate,hardware/tools/tests/,회귀 기준선 426
+tests/test_write_req9_deit_image_reference_audit.py,.py,migrate,hardware/tools/tests/,회귀 기준선 426
+tests/test_write_selected_path_execution_audit.py,.py,migrate,hardware/tools/tests/,회귀 기준선 426
+tests/test_write_spec_plan_conformance_audit.py,.py,migrate,hardware/tools/tests/,회귀 기준선 426
+tests/test_write_third_goal_completion_audit.py,.py,migrate,hardware/tools/tests/,회귀 기준선 426
+tests/test_write_third_goal_current_audit.py,.py,migrate,hardware/tools/tests/,회귀 기준선 426
+tests/test_write_third_goal_requirements_trace.py,.py,migrate,hardware/tools/tests/,회귀 기준선 426
+tests/test_write_third_goal_source_audit.py,.py,migrate,hardware/tools/tests/,회귀 기준선 426
+tests/test_write_third_goal_unblock_checklist.py,.py,migrate,hardware/tools/tests/,회귀 기준선 426
+tests/test_write_vref_p0_buffer_lifetime_audit.py,.py,migrate,hardware/tools/tests/,회귀 기준선 426
+tests/test_write_vref_p0_pot_scale_audit.py,.py,migrate,hardware/tools/tests/,회귀 기준선 426
+tests/test_write_vref_p0_pot_scale_successor.py,.py,migrate,hardware/tools/tests/,회귀 기준선 426
+tests/test_write_vref_p0_pot_scale_sweep.py,.py,migrate,hardware/tools/tests/,회귀 기준선 426
+tests/test_write_vref_p0_qkv_uram_cache_successor.py,.py,migrate,hardware/tools/tests/,회귀 기준선 426
+tests/test_write_xr_vits_gate_audit.py,.py,migrate,hardware/tools/tests/,회귀 기준선 426
+tests/test_write_xr_vits_unblock_packet.py,.py,migrate,hardware/tools/tests/,회귀 기준선 426
+tests/test_xr_accel_config_schema.py,.py,migrate,hardware/tools/tests/,회귀 기준선 426
+tools/_bootstrap.py,.py,migrate,hardware/tools/,argparse 진입점. 역할별 재배치는 P2
+tools/audit_final_unblock_candidates.py,.py,migrate,hardware/tools/,argparse 진입점. 역할별 재배치는 P2
+tools/audit_reference_inputs.py,.py,migrate,hardware/tools/,argparse 진입점. 역할별 재배치는 P2
+tools/audit_xr_vits_candidates.py,.py,migrate,hardware/tools/,argparse 진입점. 역할별 재배치는 P2
+tools/check_c3b_board_smoke_readiness.py,.py,migrate,hardware/tools/,argparse 진입점. 역할별 재배치는 P2
+tools/check_final_blocker_closure_readiness.py,.py,migrate,hardware/tools/,argparse 진입점. 역할별 재배치는 P2
+tools/check_hls_axis_payload_contract.py,.py,migrate,hardware/tools/,argparse 진입점. 역할별 재배치는 P2
+tools/check_hls_xsimk_direct_probe.py,.py,migrate,hardware/tools/,argparse 진입점. 역할별 재배치는 P2
+tools/check_hls_xsimk_progress_probe.py,.py,migrate,hardware/tools/,argparse 진입점. 역할별 재배치는 P2
+tools/check_runtime_mode_board_latency_gate.py,.py,migrate,hardware/tools/,argparse 진입점. 역할별 재배치는 P2
+tools/check_third_goal_preflight.py,.py,migrate,hardware/tools/,argparse 진입점. 역할별 재배치는 P2
+tools/check_xr_vits_reference_resolution.py,.py,migrate,hardware/tools/,argparse 진입점. 역할별 재배치는 P2
+tools/check_xsim_snapshot_smoke.py,.py,migrate,hardware/tools/,argparse 진입점. 역할별 재배치는 P2
+tools/compare_hw_sw.py,.py,migrate,hardware/tools/,argparse 진입점. 역할별 재배치는 P2
+tools/create_xr_vits_replacement_policy.py,.py,migrate,hardware/tools/,argparse 진입점. 역할별 재배치는 P2
+tools/diagnose_hls_cosim_xsim.py,.py,migrate,hardware/tools/,argparse 진입점. 역할별 재배치는 P2
+tools/discover_c3b_smoke_candidates.py,.py,migrate,hardware/tools/,argparse 진입점. 역할별 재배치는 P2
+tools/discover_pynq_smoke_candidates.py,.py,migrate,hardware/tools/,argparse 진입점. 역할별 재배치는 P2
+tools/export_e2e_m_axi_weights.py,.py,migrate,hardware/tools/,argparse 진입점. 역할별 재배치는 P2
+tools/export_s2_pytorch_golden.py,.py,migrate,hardware/tools/,argparse 진입점. 역할별 재배치는 P2
+tools/export_test_vectors.py,.py,migrate,hardware/tools/,argparse 진입점. 역할별 재배치는 P2
+tools/export_weights.py,.py,migrate,hardware/tools/,argparse 진입점. 역할별 재배치는 P2
+tools/extract_resource_metrics.py,.py,migrate,hardware/tools/,argparse 진입점. 역할별 재배치는 P2
+tools/gen_cleanup_dry_run_2026_06_09.py,.py,migrate,hardware/tools/,argparse 진입점. 역할별 재배치는 P2
+tools/generate_hls_config.py,.py,migrate,hardware/tools/,argparse 진입점. 역할별 재배치는 P2
+tools/hgtxr_sweep_expand.py,.py,migrate,hardware/tools/,argparse 진입점. 역할별 재배치는 P2
+tools/import_pynq_smoke_result.py,.py,migrate,hardware/tools/,argparse 진입점. 역할별 재배치는 P2
+tools/overlay_preview.py,.py,migrate,hardware/tools/,argparse 진입점. 역할별 재배치는 P2
+tools/pack_cyclic_weights.py,.py,migrate,hardware/tools/,argparse 진입점. 역할별 재배치는 P2
+tools/package_e2e_axis_dma_pynq_bundle.py,.py,migrate,hardware/tools/,argparse 진입점. 역할별 재배치는 P2
+tools/package_e2e_m_axi_pynq_bundle.py,.py,migrate,hardware/tools/,argparse 진입점. 역할별 재배치는 P2
+tools/prepare_zcu104_smoke_session.py,.py,migrate,hardware/tools/,argparse 진입점. 역할별 재배치는 P2
+tools/repair_hls_to_pynq.py,.py,migrate,hardware/tools/,argparse 진입점. 역할별 재배치는 P2
+tools/run_runtime_mode_board_latency.py,.py,migrate,hardware/tools/,argparse 진입점. 역할별 재배치는 P2
+tools/run_third_goal_final_signoff.py,.py,migrate,hardware/tools/,argparse 진입점. 역할별 재배치는 P2
+tools/run_zcu104_c3b_smoke_remote.py,.py,migrate,hardware/tools/,argparse 진입점. 역할별 재배치는 P2
+tools/static_validate_hgtxr.py,.py,migrate,hardware/tools/,argparse 진입점. 역할별 재배치는 P2
+tools/update_e2e_docs_2026_06_09.py,.py,migrate,hardware/tools/,argparse 진입점. 역할별 재배치는 P2
+tools/update_e2e_full_docs_2026_06_09.py,.py,migrate,hardware/tools/,argparse 진입점. 역할별 재배치는 P2
+tools/update_e2e_full_vit_2026_06_09.py,.py,migrate,hardware/tools/,argparse 진입점. 역할별 재배치는 P2
+tools/validate_e2e_axis_vector.py,.py,migrate,hardware/tools/,argparse 진입점. 역할별 재배치는 P2
+tools/validate_final_operator_handoff.py,.py,migrate,hardware/tools/,argparse 진입점. 역할별 재배치는 P2
+tools/validate_final_signoff_bundle.py,.py,migrate,hardware/tools/,argparse 진입점. 역할별 재배치는 P2
+tools/validate_final_unblock_closeout_packet.py,.py,migrate,hardware/tools/,argparse 진입점. 역할별 재배치는 P2
+tools/validate_hgpipe_lut_math.py,.py,migrate,hardware/tools/,argparse 진입점. 역할별 재배치는 P2
+tools/validate_pynq_bundle_package.py,.py,migrate,hardware/tools/,argparse 진입점. 역할별 재배치는 P2
+tools/validate_pynq_smoke_result.py,.py,migrate,hardware/tools/,argparse 진입점. 역할별 재배치는 P2
+tools/validate_s2_block_full.py,.py,migrate,hardware/tools/,argparse 진입점. 역할별 재배치는 P2
+tools/validate_s2_block_preln.py,.py,migrate,hardware/tools/,argparse 진입점. 역할별 재배치는 P2
+tools/write_c3b_physical_smoke_gate_audit.py,.py,migrate,hardware/tools/,argparse 진입점. 역할별 재배치는 P2
+tools/write_c3b_protection_checklist.py,.py,migrate,hardware/tools/,argparse 진입점. 역할별 재배치는 P2
+tools/write_c3b_smoke_result_contract.py,.py,migrate,hardware/tools/,argparse 진입점. 역할별 재배치는 P2
+tools/write_c3b_smoke_transfer_manifest.py,.py,migrate,hardware/tools/,argparse 진입점. 역할별 재배치는 P2
+tools/write_e2e_resource_matrix.py,.py,migrate,hardware/tools/,argparse 진입점. 역할별 재배치는 P2
+tools/write_e2e_resource_policy_audit.py,.py,migrate,hardware/tools/,argparse 진입점. 역할별 재배치는 P2
+tools/write_final_evidence_manifest.py,.py,migrate,hardware/tools/,argparse 진입점. 역할별 재배치는 P2
+tools/write_final_operator_handoff.py,.py,migrate,hardware/tools/,argparse 진입점. 역할별 재배치는 P2
+tools/write_final_signoff_audit.py,.py,migrate,hardware/tools/,argparse 진입점. 역할별 재배치는 P2
+tools/write_final_unblock_closeout_packet.py,.py,migrate,hardware/tools/,argparse 진입점. 역할별 재배치는 P2
+tools/write_final_unblock_commands.py,.py,migrate,hardware/tools/,argparse 진입점. 역할별 재배치는 P2
+tools/write_final_unblock_intake.py,.py,migrate,hardware/tools/,argparse 진입점. 역할별 재배치는 P2
+tools/write_hgpipe_operator_audit.py,.py,migrate,hardware/tools/,argparse 진입점. 역할별 재배치는 P2
+tools/write_p2_vit_scale_calibration_report.py,.py,migrate,hardware/tools/,argparse 진입점. 역할별 재배치는 P2
+tools/write_patch32_dtok4_300_goal_status.py,.py,migrate,hardware/tools/,argparse 진입점. 역할별 재배치는 P2
+tools/write_prefetchall4_300_contract_audit.py,.py,migrate,hardware/tools/,argparse 진입점. 역할별 재배치는 P2
+tools/write_prefetchall4_300_goal_status.py,.py,migrate,hardware/tools/,argparse 진입점. 역할별 재배치는 P2
+tools/write_prefetchall4_300_resource_breakdown.py,.py,migrate,hardware/tools/,argparse 진입점. 역할별 재배치는 P2
+tools/write_req1_environment_audit.py,.py,migrate,hardware/tools/,argparse 진입점. 역할별 재배치는 P2
+tools/write_req2_spec_subagent_gate_audit.py,.py,migrate,hardware/tools/,argparse 진입점. 역할별 재배치는 P2
+tools/write_req5_q4q8_swhw_match_audit.py,.py,migrate,hardware/tools/,argparse 진입점. 역할별 재배치는 P2
+tools/write_req6_parameterization_audit.py,.py,migrate,hardware/tools/,argparse 진입점. 역할별 재배치는 P2
+tools/write_req9_deit_image_reference_audit.py,.py,migrate,hardware/tools/,argparse 진입점. 역할별 재배치는 P2
+tools/write_selected_path_execution_audit.py,.py,migrate,hardware/tools/,argparse 진입점. 역할별 재배치는 P2
+tools/write_spec_plan_conformance_audit.py,.py,migrate,hardware/tools/,argparse 진입점. 역할별 재배치는 P2
+tools/write_third_goal_completion_audit.py,.py,migrate,hardware/tools/,argparse 진입점. 역할별 재배치는 P2
+tools/write_third_goal_current_audit.py,.py,migrate,hardware/tools/,argparse 진입점. 역할별 재배치는 P2
+tools/write_third_goal_requirements_trace.py,.py,migrate,hardware/tools/,argparse 진입점. 역할별 재배치는 P2
+tools/write_third_goal_source_audit.py,.py,migrate,hardware/tools/,argparse 진입점. 역할별 재배치는 P2
+tools/write_third_goal_unblock_checklist.py,.py,migrate,hardware/tools/,argparse 진입점. 역할별 재배치는 P2
+tools/write_vref_p0_buffer_lifetime_audit.py,.py,migrate,hardware/tools/,argparse 진입점. 역할별 재배치는 P2
+tools/write_vref_p0_pot_scale_audit.py,.py,migrate,hardware/tools/,argparse 진입점. 역할별 재배치는 P2
+tools/write_vref_p0_pot_scale_successor.py,.py,migrate,hardware/tools/,argparse 진입점. 역할별 재배치는 P2
+tools/write_vref_p0_pot_scale_sweep.py,.py,migrate,hardware/tools/,argparse 진입점. 역할별 재배치는 P2
+tools/write_vref_p0_qkv_uram_cache_successor.py,.py,migrate,hardware/tools/,argparse 진입점. 역할별 재배치는 P2
+tools/write_xr_vits_gate_audit.py,.py,migrate,hardware/tools/,argparse 진입점. 역할별 재배치는 P2
+tools/write_xr_vits_unblock_packet.py,.py,migrate,hardware/tools/,argparse 진입점. 역할별 재배치는 P2
+tools/xr_accel_config.py,.py,migrate,hardware/tools/,argparse 진입점. 역할별 재배치는 P2
+vivado/boards/vck190.tcl,.tcl,migrate,hardware/build/vivado/,합성·P&R·비트스트림 스크립트
+vivado/boards/zcu104.tcl,.tcl,migrate,hardware/build/vivado/,합성·P&R·비트스트림 스크립트
+vivado/scripts/build_bitstream.tcl,.tcl,migrate,hardware/build/vivado/,합성·P&R·비트스트림 스크립트
+vivado/scripts/build_e2e_axis_dma_bitstream.tcl,.tcl,migrate,hardware/build/vivado/,합성·P&R·비트스트림 스크립트
+vivado/scripts/build_e2e_m_axi_bitstream.tcl,.tcl,migrate,hardware/build/vivado/,합성·P&R·비트스트림 스크립트
+vivado/scripts/build_mode_profile_bitstream.tcl,.tcl,migrate,hardware/build/vivado/,합성·P&R·비트스트림 스크립트
+vivado/scripts/create_hls_project.tcl,.tcl,migrate,hardware/build/vivado/,합성·P&R·비트스트림 스크립트
+vivado/scripts/package_e2e_axis_ip.tcl,.tcl,migrate,hardware/build/vivado/,합성·P&R·비트스트림 스크립트
+vivado/scripts/package_e2e_m_axi_ip.tcl,.tcl,migrate,hardware/build/vivado/,합성·P&R·비트스트림 스크립트
+vivado/scripts/package_ip.tcl,.tcl,migrate,hardware/build/vivado/,합성·P&R·비트스트림 스크립트
+vivado/scripts/package_mode_profile_ip.tcl,.tcl,migrate,hardware/build/vivado/,합성·P&R·비트스트림 스크립트
+vivado/scripts/report_e2e_axis_dma_impl_utilization.tcl,.tcl,migrate,hardware/build/vivado/,합성·P&R·비트스트림 스크립트
+vivado/scripts/run_csim.tcl,.tcl,migrate,hardware/build/vivado/,합성·P&R·비트스트림 스크립트
+vivado/scripts/run_csynth.tcl,.tcl,migrate,hardware/build/vivado/,합성·P&R·비트스트림 스크립트
+vivado/scripts/run_cyclic_s0_csynth.tcl,.tcl,migrate,hardware/build/vivado/,합성·P&R·비트스트림 스크립트
+vivado/scripts/run_cyclic_s1_weight_csynth.tcl,.tcl,migrate,hardware/build/vivado/,합성·P&R·비트스트림 스크립트
+vivado/scripts/run_cyclic_s2_attn_first_step_csynth.tcl,.tcl,migrate,hardware/build/vivado/,합성·P&R·비트스트림 스크립트
+vivado/scripts/run_cyclic_s2_block_first_step_csynth.tcl,.tcl,migrate,hardware/build/vivado/,합성·P&R·비트스트림 스크립트
+vivado/scripts/run_cyclic_s2_block_q4w8a_csim.tcl,.tcl,migrate,hardware/build/vivado/,합성·P&R·비트스트림 스크립트
+vivado/scripts/run_cyclic_s2_block_q4w8a_csynth.tcl,.tcl,migrate,hardware/build/vivado/,합성·P&R·비트스트림 스크립트
+vivado/scripts/run_cyclic_s2_block_vector_csim.tcl,.tcl,migrate,hardware/build/vivado/,합성·P&R·비트스트림 스크립트
+vivado/scripts/run_cyclic_s2_first_step_csynth.tcl,.tcl,migrate,hardware/build/vivado/,합성·P&R·비트스트림 스크립트
+vivado/scripts/run_cyclic_s2_mlp_first_step_csynth.tcl,.tcl,migrate,hardware/build/vivado/,합성·P&R·비트스트림 스크립트
+vivado/scripts/run_cyclic_s2_qkv_first_step_csynth.tcl,.tcl,migrate,hardware/build/vivado/,합성·P&R·비트스트림 스크립트
+vivado/scripts/run_e2e_m_axi_q4w8a_csim.tcl,.tcl,migrate,hardware/build/vivado/,합성·P&R·비트스트림 스크립트
+vivado/scripts/run_e2e_m_axi_q4w8a_csynth.tcl,.tcl,migrate,hardware/build/vivado/,합성·P&R·비트스트림 스크립트
+vivado/scripts/run_e2e_q4w8a_cosim.tcl,.tcl,migrate,hardware/build/vivado/,합성·P&R·비트스트림 스크립트
+vivado/scripts/run_e2e_q4w8a_csim.tcl,.tcl,migrate,hardware/build/vivado/,합성·P&R·비트스트림 스크립트
+vivado/scripts/run_e2e_q4w8a_csynth.tcl,.tcl,migrate,hardware/build/vivado/,합성·P&R·비트스트림 스크립트
+vivado/scripts/run_mode_profile_q4w8a_csim.tcl,.tcl,migrate,hardware/build/vivado/,합성·P&R·비트스트림 스크립트
+vivado/scripts/run_mode_profile_q4w8a_csynth.tcl,.tcl,migrate,hardware/build/vivado/,합성·P&R·비트스트림 스크립트

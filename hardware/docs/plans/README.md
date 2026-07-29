@@ -14,7 +14,8 @@
 
 | 계획 | 내용 |
 |---|---|
-| [2026-07-29-hardware-reconstruction.md](active/2026-07-29-hardware-reconstruction.md) | 재구성 전체 — 생사 대장·P0~P8. **문서 완료, 코드 미착수.** §2 목표 구조는 채택되지 않았습니다 (정정 고지 부착) |
+| [2026-07-29-hardware-reconstruction.md](active/2026-07-29-hardware-reconstruction.md) | 재구성 전체 — 생사 대장·M1~M5·P1~P8. **문서 완료, 코드 이관 진행 중.** §2 목표 구조는 채택되지 않았습니다 (정정 고지 부착) |
+| [2026-07-29-code-migration-manifest.md](active/2026-07-29-code-migration-manifest.md) | **P0 이관 대장** — 625행 전수 판정. `.csv`가 데이터, `scripts/check_migration_manifest.py`가 검증 |
 
 ## done
 

@@ -4,7 +4,7 @@
 
 # hardware/ 전수 semantic 검사 — 분석
 
-원자료: [snapshots/2026-07-29-semantic-census/](../../../archive/hardware/docs/snapshots/2026-07-29-semantic-census/)
+원자료: [snapshots/2026-07-29-semantic-census/](../snapshots/2026-07-29-semantic-census/)
 (커밋 `8a9093e`, committed blobs 기준)
 
 목적: **Refactoring / Rewrite / Cleanup / Reconstruction 착수 전 기준선.**

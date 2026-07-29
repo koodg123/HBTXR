@@ -33,18 +33,22 @@
 | | |
 |---|---|
 | `references/vit-accel/` | 30 — 선행 프로젝트. 이름·계층 정리, **내용 무편집**(27/30 바이트 동일) |
-| `experiments/` | **13캠페인 · 문서 77 · 데이터 73** |
+| `experiments/` | **13캠페인 · 문서 77 · 데이터 84** |
 | `track/` | 6종 (구 21개에서 실험 12·핸드오프 4 분리) |
 | `handoff/` | 5 — 전부 만료 고지 부착 |
 | `plans/{active,done}/` | 9 (README 포함) — active 1 · done 7 |
-| `reports/` · `architecture/` · `snapshots/` | 4 · 2 · 3 (README 포함) |
+| `reports/` · `architecture/` · `snapshots/` | 4 · 2 · 12 (census 원자료 9 포함) |
+| `SPEC.md` `ARCHITECTURE.md` `MODULE-GUIDE.md` | 승격 |
 
 > `reports/2026-06-16-multi-board-validation.md`와 `plans/done/2026-07-15-xr-accel-execution-plan.md`는
 > **2026-07-29 삭제**했습니다. 우리 문서가 아니라 ViT_Accel 문서에 프로젝트명만 치환한
 > 사본이었습니다 ([references/README.md](references/README.md)).
-| `SPEC.md` `ARCHITECTURE.md` `MODULE-GUIDE.md` | 승격 |
 
 **검증**: archive md 159개를 내용 해시로 대조해 미이관 0건.
+
+> **D1~D5는 `.md`만 대상으로 했습니다.** P0의 전수 대장이 **데이터 11개 미이관**을
+> 찾아냈습니다 — 3개 캠페인이 `data/` 없이 문서만 있었고, census 원자료 9개는
+> `archive/`에 남아 있었습니다. 2026-07-29 보완 완료.
 `ARCHITECTURE.md`는 유일하게 새로 쓴 문서입니다 — 이관 대상이던
 `DIRECTORY_LAYOUT.md`가 **구 레이아웃**을 정의하고 있어 그대로 두면 즉시 거짓이 됩니다.
 
@@ -58,10 +62,21 @@
 
 ## Next
 
-1. **P0** — 구 트리에서 죽은 것 확정 후 이관 대상에서 제외
-   (`=318.empty` `=332.empty`, `common.h`의 미호출 선언 3개)
-2. **P1** — `tools/_lib/` 공용화 (`load_json` 22곳 등)
-3. 이후 계획 §6의 P2~P8
+**P0 완료** — 이관 대장 625행 전수 판정
+([대장](plans/active/2026-07-29-code-migration-manifest.md) · `migrate` 322 · `done` 234 ·
+`skip` 64 · `undecided` 5). 검증: `python scripts/check_migration_manifest.py --check`
+
+디렉토리별 순차 이관:
+
+| | 디렉토리 | 대상 | 상태 |
+|---|---|---:|---|
+| **M1** | `config/` | 33 | ⬜ **다음** |
+| **M2** | `module/` | 91 (+ 미결 5 선결) | ⬜ |
+| **M3** | `build/` | 42 | ⬜ |
+| **M4** | `deploy/` | 9 | ⬜ |
+| **M5** | `tools/` | 147 | ⬜ |
+
+이관이 끝나면 계획 §6의 P1~P8.
 
 ## Done
 

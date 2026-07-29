@@ -17,25 +17,25 @@
 | 06-06 | [cyclic-weight-layout](2026-06-06-cyclic-weight-layout/) | 3 | 6 | cyclic 가중치 레이아웃·패킹 확정 |
 | 06-08 | [hgpipe-reference](2026-06-08-hgpipe-reference/) | 1 | 2 | HG-PIPE 참조 분석 · Q4W8A S2 양자화 |
 | 06-09 | [e2e-axis-baseline](2026-06-09-e2e-axis-baseline/) | 1 | 1 | AXIS end-to-end 베이스라인 |
-| **06-10** | [**final-signoff**](2026-06-10-final-signoff/) | **31** | **47** | 3차 목표 최종 서명 — 하루에 78개 산출 |
-| 06-12 | [legacy-experiment](2026-06-12-legacy-experiment/) | 1 | — | 레거시 실험 분석 |
+| **06-10** | [**final-signoff**](2026-06-10-final-signoff/) | **31** | **48** | 3차 목표 최종 서명 — 하루에 79개 산출 |
+| 06-12 | [legacy-experiment](2026-06-12-legacy-experiment/) | 1 | 1 | 레거시 실험 분석 |
 | **06-16** | [**third-goal-audit**](2026-06-16-third-goal-audit/) | **15** | 11 | req1/5/6/9 · 소스·게이트 감사 |
 | 06-16 | [vref-p0-successor](2026-06-16-vref-p0-successor/) | 6 | 6 | PoT 스케일 스윕 · 버퍼 수명 · QKV URAM |
 | 06-23 | [c3b-resource-power](2026-06-23-c3b-resource-power/) | 3 | — | C3b 자원·전력·지연 |
-| 06-26 | [no-board-p0](2026-06-26-no-board-p0/) | 3 | — | 보드 없는 P0 계획·1차 수집 |
-| 06-27 | [mode-profile](2026-06-27-mode-profile/) | 5 | — | search/track 모드별 프로파일 |
+| 06-26 | [no-board-p0](2026-06-26-no-board-p0/) | 3 | 3 | 보드 없는 P0 계획·1차 수집 |
+| 06-27 | [mode-profile](2026-06-27-mode-profile/) | 5 | 6 | search/track 모드별 프로파일 |
 | 06-28 | [eight-question](2026-06-28-eight-question/) | 3 | — | 8문항 — Vivado·하이브리드 런타임·full-AXI |
 | 06-30 | [aq2-search-track](2026-06-30-aq2-search-track/) | 3 | — | AQ2 지연·대역폭·자원·전력 측정 |
 | 07-01 | [zcu104-physical-plan](2026-07-01-zcu104-physical-plan/) | 2 | — | ZCU104 물리 실험 계획 (**보드 필요**) |
 
-**총 13캠페인 · 문서 77 · 데이터 73.**
+**총 13캠페인 · 문서 77 · 데이터 84.**
 
 > 이 표의 숫자는 `python scripts/check_docs_counts.py`가 검증합니다. 손으로 세지 마십시오 —
 > 이 표는 이미 두 번 틀렸습니다 (75·78 둘 다 실제와 달랐습니다).
 
 ## 이 기록이 말해주는 것
 
-- **2026-06-10 하루에 78개**가 나왔습니다. 최종 서명 파이프라인
+- **2026-06-10 하루에 79개**가 나왔습니다. 최종 서명 파이프라인
   (`run_third_goal_final_signoff.py`)이 한 번 돌면서 감사·검증·패키징 산출물을 한꺼번에
   만든 결과입니다. 사람이 하루에 쓴 문서가 아닙니다.
 - **대부분은 통과했습니다.** 전 캠페인 status 83건 집계: `pass` **36** · `blocked` **13** ·
