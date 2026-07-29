@@ -29,44 +29,20 @@
 - `candidate-found` × 1
 - `dry-run` × 1
 
-## 문서 32개
+## 주제별
 
-- [c3b_board_smoke_readiness_2026_06_10.md](c3b_board_smoke_readiness_2026_06_10.md)
-- [c3b_smoke_candidate_discovery_2026_06_10.md](c3b_smoke_candidate_discovery_2026_06_10.md)
-- [c3b_smoke_result_contract_2026_06_10.md](c3b_smoke_result_contract_2026_06_10.md)
-- [c3b_smoke_transfer_manifest_2026_06_10.md](c3b_smoke_transfer_manifest_2026_06_10.md)
-- [e2e_active16_resource_policy_matrix_2026_06_10.md](e2e_active16_resource_policy_matrix_2026_06_10.md)
-- [e2e_resource_matrix_2026_06_10.md](e2e_resource_matrix_2026_06_10.md)
-- [e2e_resource_policy_audit_2026_06_10.md](e2e_resource_policy_audit_2026_06_10.md)
-- [final_blocker_closure_readiness_2026_06_10.md](final_blocker_closure_readiness_2026_06_10.md)
-- [final_evidence_manifest_2026_06_10.md](final_evidence_manifest_2026_06_10.md)
-- [final_operator_handoff_2026_06_10.md](final_operator_handoff_2026_06_10.md)
-- [final_operator_handoff_validation_2026_06_10.md](final_operator_handoff_validation_2026_06_10.md)
-- [final_signoff_audit_2026_06_10.md](final_signoff_audit_2026_06_10.md)
-- [final_signoff_bundle_validation_2026_06_10.md](final_signoff_bundle_validation_2026_06_10.md)
-- [final_unblock_candidate_audit_2026_06_10.md](final_unblock_candidate_audit_2026_06_10.md)
-- [final_unblock_closeout_packet_2026_06_10.md](final_unblock_closeout_packet_2026_06_10.md)
-- [final_unblock_closeout_packet_validation_2026_06_10.md](final_unblock_closeout_packet_validation_2026_06_10.md)
-- [final_unblock_commands_2026_06_10.md](final_unblock_commands_2026_06_10.md)
-- [final_unblock_intake_2026_06_10.md](final_unblock_intake_2026_06_10.md)
-- [reference_input_audit_2026_06_10.md](reference_input_audit_2026_06_10.md)
-- [resource_extraction_log.md](resource_extraction_log.md)
-- [selected_path_execution_audit_2026_06_10.md](selected_path_execution_audit_2026_06_10.md)
-- [spec_plan_conformance_audit_2026_06_10.md](spec_plan_conformance_audit_2026_06_10.md)
-- [third_goal_completion_audit_2026_06_10.md](third_goal_completion_audit_2026_06_10.md)
-- [third_goal_final_signoff_run_2026_06_10.md](third_goal_final_signoff_run_2026_06_10.md)
-- [third_goal_requirements_trace_2026_06_10.md](third_goal_requirements_trace_2026_06_10.md)
-- [third_goal_unblock_checklist_2026_06_10.md](third_goal_unblock_checklist_2026_06_10.md)
-- [vref_successor_smoke_candidate_discovery_2026_06_10.md](vref_successor_smoke_candidate_discovery_2026_06_10.md)
-- [xr_vits_candidate_audit_2026_06_10.md](xr_vits_candidate_audit_2026_06_10.md)
-- [xr_vits_reference_resolution_2026_06_10.md](xr_vits_reference_resolution_2026_06_10.md)
-- [xr_vits_replacement_policy_preview_2026_06_10.md](xr_vits_replacement_policy_preview_2026_06_10.md)
-- [xr_vits_unblock_packet_2026_06_10.md](xr_vits_unblock_packet_2026_06_10.md)
-- [zcu104_c3b_smoke_remote_run_2026_06_10.md](zcu104_c3b_smoke_remote_run_2026_06_10.md)
+하루에 돌아간 **한 번의 파이프라인 실행**이라 캠페인은 하나로 유지하고,
+그 안을 주제로 나눴습니다.
 
-## 데이터 47개 — `data/`
-
-원본 도구 출력(.json 등). 문서와 쌍입니다.
+| 주제 | 문서 | 데이터 | 내용 |
+|---|---:|---:|---|
+| [`c3b-smoke/`](c3b-smoke/) | 5 | 7 | C3b AXIS/DMA 스모크 준비·전송 계약 |
+| [`inputs/`](inputs/) | 4 | 5 | 참조 입력·경로 선택·spec 준수 |
+| [`resource/`](resource/) | 3 | 6 | 자원 정책 행렬·csynth 결과 |
+| [`s2-block/`](s2-block/) | 0 | 3 | S2 블록 Q4W8A 검증 데이터 (문서 없이 데이터만) |
+| [`signoff/`](signoff/) | 11 | 11 | 최종 서명 감사·검증·차단 요인 정리 |
+| [`third-goal/`](third-goal/) | 4 | 10 | 3차 목표 추적·완료 감사 |
+| [`xr-vits/`](xr-vits/) | 4 | 5 | 형제 저장소 XR-VITs 부재와 대체 후보 검토 |
 
 ## 출처와 주의
 

@@ -14,25 +14,18 @@
 - `blocked-external` × 1
 - `blocked` × 1
 
-## 문서 13개
+## 주제별
 
-- [c3b_physical_smoke_gate_audit_2026_06_16.md](c3b_physical_smoke_gate_audit_2026_06_16.md)
-- [hgpipe_operator_audit_2026_06_16.md](hgpipe_operator_audit_2026_06_16.md)
-- [p2_vit_scale_calibration_report_2026_06_16.md](p2_vit_scale_calibration_report_2026_06_16.md)
-- [pynq_smoke_candidate_discovery_c3b_2026_06_16.md](pynq_smoke_candidate_discovery_c3b_2026_06_16.md)
-- [req1_environment_audit_2026_06_16.md](req1_environment_audit_2026_06_16.md)
-- [req5_q4q8_swhw_match_audit_2026_06_16.md](req5_q4q8_swhw_match_audit_2026_06_16.md)
-- [req6_parameterization_audit_2026_06_16.md](req6_parameterization_audit_2026_06_16.md)
-- [req9_deit_image_reference_audit_2026_06_16.md](req9_deit_image_reference_audit_2026_06_16.md)
-- [third_goal_current_audit_2026_06_16.md](third_goal_current_audit_2026_06_16.md)
-- [THIRD_GOAL_FUTURE_EXPERIMENTS_2026_06_16.md](THIRD_GOAL_FUTURE_EXPERIMENTS_2026_06_16.md)
-- [THIRD_GOAL_PROGRESS_EXPERIMENT_REPORT_2026_06_16.md](THIRD_GOAL_PROGRESS_EXPERIMENT_REPORT_2026_06_16.md)
-- [third_goal_source_audit_2026_06_16.md](third_goal_source_audit_2026_06_16.md)
-- [xr_vits_gate_audit_2026_06_16.md](xr_vits_gate_audit_2026_06_16.md)
+하루에 돌아간 **한 번의 파이프라인 실행**이라 캠페인은 하나로 유지하고,
+그 안을 주제로 나눴습니다.
 
-## 데이터 11개 — `data/`
-
-원본 도구 출력(.json 등). 문서와 쌍입니다.
+| 주제 | 문서 | 데이터 | 내용 |
+|---|---:|---:|---|
+| [`data/`](data/) | 0 | 0 |  |
+| [`gates/`](gates/) | 3 | 3 | 게이트 감사 — XR-VITs·C3b 물리 스모크 |
+| [`operator/`](operator/) | 2 | 2 | HG-PIPE 연산자 감사 · P2 ViT 스케일 캘리브레이션 |
+| [`requirements/`](requirements/) | 8 | 4 | 요구사항 감사 req1/5/6/9 + 3차 목표 체크리스트 |
+| [`third-goal/`](third-goal/) | 2 | 2 | 3차 목표 추적·완료 감사 |
 
 ## 출처와 주의
 
