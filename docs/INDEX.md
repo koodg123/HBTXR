@@ -10,7 +10,7 @@
 python scripts/build_docs_index.py
 ```
 
-총 **352개** 문서. 날짜·상태·소유는 각 문서의 3줄 헤더에서 읽고, 헤더가 없으면 git 이력으로 대체합니다 — 그 경우 *(헤더 없음 — git 기준)*으로 표시되므로 상태 칸이 추정임을 알 수 있습니다.
+총 **386개** 문서. 날짜·상태·소유는 각 문서의 3줄 헤더에서 읽고, 헤더가 없으면 git 이력으로 대체합니다 — 그 경우 *(헤더 없음 — git 기준)*으로 표시되므로 상태 칸이 추정임을 알 수 있습니다.
 
 규약: [governance/DOC-CONVENTIONS.md](governance/DOC-CONVENTIONS.md)
 
@@ -20,7 +20,7 @@ python scripts/build_docs_index.py
 |---|---|---:|---|---|
 | **repo** | `docs/` | 175 | 2026-07-29 | 횡단·거버넌스·외부 조사 |
 | **algorithm** | `algorithm/docs/` | 17 | 2026-07-29 | 학습·평가·양자화·정수 그래프 |
-| **hardware** | `hardware/docs/` | 4 | 2026-07-29 | HLS·RTL·Vivado·PYNQ 가속기 (재구성 중) |
+| **hardware** | `hardware/docs/` | 38 | 2026-07-29 | HLS·RTL·Vivado·PYNQ 가속기 (재구성 중) |
 | **archive** | `archive/hardware/docs/` | 156 | 2026-07-29 | 구 hardware 트리 — 읽기 전용 기준 |
 
 ## 먼저 볼 것
@@ -120,6 +120,40 @@ python scripts/build_docs_index.py
 | 문서 | 작성 | 갱신 | 상태 | 소유 |
 |---|---|---|---|---|
 | [reports/2026-07-29-hardware-census.md](../hardware/docs/reports/2026-07-29-hardware-census.md) | 2026-07-29 | 2026-07-29 | active — 재작성 착수 전 기준선 | hardware |
+| [references/vit_accel/experiments/zu15eg/deit_tiny_baseline/full_deit_tiny_fit/step2_hls_resource_summary.md](../hardware/docs/references/vit_accel/experiments/zu15eg/deit_tiny_baseline/full_deit_tiny_fit/step2_hls_resource_summary.md) | 2026-07-15 | 2026-07-29 | *(헤더 없음 — git 기준)* | ? |
+| [references/vit_accel/experiments/vck190/deit_tiny_baseline/full_deit_tiny_fit/step5_vck190_pnr_summary.md](../hardware/docs/references/vit_accel/experiments/vck190/deit_tiny_baseline/full_deit_tiny_fit/step5_vck190_pnr_summary.md) | 2026-07-15 | 2026-07-29 | *(헤더 없음 — git 기준)* | ? |
+| [references/vit_accel/experiments/pnr/zu15eg_deit_tiny_full_status_20260410.md](../hardware/docs/references/vit_accel/experiments/pnr/zu15eg_deit_tiny_full_status_20260410.md) | 2026-07-15 | 2026-07-29 | *(헤더 없음 — git 기준)* | ? |
+| [references/vit_accel/experiments/pnr/zcu102_step4_bitstream_status_20260408.md](../hardware/docs/references/vit_accel/experiments/pnr/zcu102_step4_bitstream_status_20260408.md) | 2026-07-15 | 2026-07-29 | *(헤더 없음 — git 기준)* | ? |
+| [references/vit_accel/experiments/pnr/zcu102_deit_tiny_full_status_20260410.md](../hardware/docs/references/vit_accel/experiments/pnr/zcu102_deit_tiny_full_status_20260410.md) | 2026-07-15 | 2026-07-29 | *(헤더 없음 — git 기준)* | ? |
+| [references/vit_accel/experiments/pnr/vck190_step4_ooc_status_20260408.md](../hardware/docs/references/vit_accel/experiments/pnr/vck190_step4_ooc_status_20260408.md) | 2026-07-15 | 2026-07-29 | *(헤더 없음 — git 기준)* | ? |
+| [references/vit_accel/experiments/pnr/vck190_deit_tiny_full_status_20260410.md](../hardware/docs/references/vit_accel/experiments/pnr/vck190_deit_tiny_full_status_20260410.md) | 2026-07-15 | 2026-07-29 | *(헤더 없음 — git 기준)* | ? |
+| [references/vit_accel/experiments/pnr/deit_tiny_full_multi_board_status_20260410.md](../hardware/docs/references/vit_accel/experiments/pnr/deit_tiny_full_multi_board_status_20260410.md) | 2026-07-15 | 2026-07-29 | *(헤더 없음 — git 기준)* | ? |
+| [references/vit_accel/experiments/deit_tiny_baseline_ooc_rerun/full_deit_tiny_fit/step2_hls_resource_summary.md](../hardware/docs/references/vit_accel/experiments/deit_tiny_baseline_ooc_rerun/full_deit_tiny_fit/step2_hls_resource_summary.md) | 2026-07-15 | 2026-07-29 | *(헤더 없음 — git 기준)* | ? |
+| [references/vit_accel/experiments/deit_tiny_baseline/full_deit_tiny_fit/step2_hls_resource_summary.md](../hardware/docs/references/vit_accel/experiments/deit_tiny_baseline/full_deit_tiny_fit/step2_hls_resource_summary.md) | 2026-07-15 | 2026-07-29 | *(헤더 없음 — git 기준)* | ? |
+| [references/vit_accel/experiments/README.md](../hardware/docs/references/vit_accel/experiments/README.md) | 2026-07-15 | 2026-07-29 | *(헤더 없음 — git 기준)* | ? |
+| [references/vit_accel/VIVADO_ONLY_FLOW.md](../hardware/docs/references/vit_accel/VIVADO_ONLY_FLOW.md) | 2026-07-15 | 2026-07-29 | *(헤더 없음 — git 기준)* | ? |
+| [references/vit_accel/VCK190_ZU15EG_PARAMETER_COMPARISON.md](../hardware/docs/references/vit_accel/VCK190_ZU15EG_PARAMETER_COMPARISON.md) | 2026-07-15 | 2026-07-29 | *(헤더 없음 — git 기준)* | ? |
+| [references/vit_accel/VCK190_DOCKER_BASELINE.md](../hardware/docs/references/vit_accel/VCK190_DOCKER_BASELINE.md) | 2026-07-15 | 2026-07-29 | *(헤더 없음 — git 기준)* | ? |
+| [references/vit_accel/TRAINING_EVALUATION_AND_METRICS.md](../hardware/docs/references/vit_accel/TRAINING_EVALUATION_AND_METRICS.md) | 2026-07-15 | 2026-07-29 | *(헤더 없음 — git 기준)* | ? |
+| [references/vit_accel/SRC_CASE_PARALLELISM_TUNING.md](../hardware/docs/references/vit_accel/SRC_CASE_PARALLELISM_TUNING.md) | 2026-07-15 | 2026-07-29 | *(헤더 없음 — git 기준)* | ? |
+| [references/vit_accel/SRC_CASE_MODULE_GUIDE.md](../hardware/docs/references/vit_accel/SRC_CASE_MODULE_GUIDE.md) | 2026-07-15 | 2026-07-29 | *(헤더 없음 — git 기준)* | ? |
+| [references/vit_accel/SRC_CASE_MICROARCH.md](../hardware/docs/references/vit_accel/SRC_CASE_MICROARCH.md) | 2026-07-15 | 2026-07-29 | *(헤더 없음 — git 기준)* | ? |
+| [references/vit_accel/SRC_CASE_DIAGRAMS.md](../hardware/docs/references/vit_accel/SRC_CASE_DIAGRAMS.md) | 2026-07-15 | 2026-07-29 | *(헤더 없음 — git 기준)* | ? |
+| [references/vit_accel/SRC_CASE_ANALYSIS.md](../hardware/docs/references/vit_accel/SRC_CASE_ANALYSIS.md) | 2026-07-15 | 2026-07-29 | *(헤더 없음 — git 기준)* | ? |
+| [references/vit_accel/README.md](../hardware/docs/references/vit_accel/README.md) | 2026-07-15 | 2026-07-29 | *(헤더 없음 — git 기준)* | ? |
+| [references/vit_accel/PROJECT_STRUCTURE.md](../hardware/docs/references/vit_accel/PROJECT_STRUCTURE.md) | 2026-07-15 | 2026-07-29 | *(헤더 없음 — git 기준)* | ? |
+| [references/vit_accel/PROGRESS_2026_04_15.md](../hardware/docs/references/vit_accel/PROGRESS_2026_04_15.md) | 2026-07-15 | 2026-07-29 | *(헤더 없음 — git 기준)* | ? |
+| [references/vit_accel/PLAN.md](../hardware/docs/references/vit_accel/PLAN.md) | 2026-07-15 | 2026-07-29 | *(헤더 없음 — git 기준)* | ? |
+| [references/vit_accel/PIPELINE_OVERVIEW.md](../hardware/docs/references/vit_accel/PIPELINE_OVERVIEW.md) | 2026-07-15 | 2026-07-29 | *(헤더 없음 — git 기준)* | ? |
+| [references/vit_accel/MULTI_BOARD_VALIDATION.md](../hardware/docs/references/vit_accel/MULTI_BOARD_VALIDATION.md) | 2026-07-15 | 2026-07-29 | *(헤더 없음 — git 기준)* | ? |
+| [references/vit_accel/MERGE_STATUS.md](../hardware/docs/references/vit_accel/MERGE_STATUS.md) | 2026-07-15 | 2026-07-29 | *(헤더 없음 — git 기준)* | ? |
+| [references/vit_accel/LOCAL_SETUP.md](../hardware/docs/references/vit_accel/LOCAL_SETUP.md) | 2026-07-15 | 2026-07-29 | *(헤더 없음 — git 기준)* | ? |
+| [references/vit_accel/HISTORY.md](../hardware/docs/references/vit_accel/HISTORY.md) | 2026-07-15 | 2026-07-29 | *(헤더 없음 — git 기준)* | ? |
+| [references/vit_accel/FUNCTION_CALL_STACK.md](../hardware/docs/references/vit_accel/FUNCTION_CALL_STACK.md) | 2026-07-15 | 2026-07-29 | *(헤더 없음 — git 기준)* | ? |
+| [references/vit_accel/DEPLOYMENT_RUN_SCRIPTS.md](../hardware/docs/references/vit_accel/DEPLOYMENT_RUN_SCRIPTS.md) | 2026-07-15 | 2026-07-29 | *(헤더 없음 — git 기준)* | ? |
+| [references/vit_accel/CHECKLIST.md](../hardware/docs/references/vit_accel/CHECKLIST.md) | 2026-07-15 | 2026-07-29 | *(헤더 없음 — git 기준)* | ? |
+| [references/vit_accel/BOARD_RUNBOOKS.md](../hardware/docs/references/vit_accel/BOARD_RUNBOOKS.md) | 2026-07-15 | 2026-07-29 | *(헤더 없음 — git 기준)* | ? |
+| [references/README.md](../hardware/docs/references/README.md) | 2026-07-29 | 2026-07-29 | active | hardware |
 | [plans/active/2026-07-29-hardware-reconstruction.md](../hardware/docs/plans/active/2026-07-29-hardware-reconstruction.md) | 2026-07-29 | 2026-07-29 | active — 승인 대기 | hardware |
 | [plans/active/2026-07-29-docs-migration-map.md](../hardware/docs/plans/active/2026-07-29-docs-migration-map.md) | 2026-07-29 | 2026-07-29 | active — 분석 완료, 이관 대기 | hardware |
 | [STATUS.md](../hardware/docs/STATUS.md) | 2026-07-29 | 2026-07-29 | active | hardware |
