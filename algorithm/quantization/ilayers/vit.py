@@ -65,23 +65,32 @@ class _IntLinear(nn.Module):
 
     One instance per (linear, destination scale) pair, because the multiplier depends on
     where the accumulator is going. The qkv projection therefore gets three.
+
+    ``out_scale=None`` means the consumer is the HOST, not another op in the graph: the
+    accumulator is the result, no requant constants exist, and ``acc_scale`` carries the
+    per-out-channel grid ``s_x·s_w`` the host multiplies out. Only the last layer of a
+    regression head is in that position, and requantizing it onto an invented output grid
+    would round the answer for nothing.
     """
 
-    def __init__(self, linear: ILinear, out_scale: float, *, dtype: QuantDtype = INT8,
-                 columns: slice | None = None) -> None:
+    def __init__(self, linear: ILinear, out_scale: float | None, *,
+                 dtype: QuantDtype = INT8, columns: slice | None = None) -> None:
         super().__init__()
         self.linear = linear
         self.dtype = dtype
         self.columns = columns
-        self.out_scale = float(out_scale)
+        self.out_scale = None if out_scale is None else float(out_scale)
         self.act_scale = float(linear.act_scale)
 
         scales = _weight_scales(linear)
         span = range(*columns.indices(len(scales))) if columns is not None else range(len(scales))
         acc_scales = [self.act_scale * scales[oc] for oc in span]
+        self.register_buffer("acc_scale", torch.tensor(acc_scales, dtype=torch.float32))
 
         mults, shifts = [], []
         for acc_scale in acc_scales:
+            if self.out_scale is None:
+                continue
             multiplier, shift = _dyadic_params(acc_scale / self.out_scale)
             mults.append(multiplier)
             shifts.append(shift)
@@ -103,11 +112,14 @@ class _IntLinear(nn.Module):
 
     def requant(self, acc: torch.Tensor) -> torch.Tensor:
         """Accumulator -> ``out_scale``, one dyadic multiply+shift PER out-channel."""
+        if self.out_scale is None:
+            raise ValueError("this linear ends the graph; its accumulator is the output")
         sliced = acc if self.columns is None else acc[..., self.columns]
         return requant(sliced, self.multiplier, self.shift, dtype=self.dtype).to(torch.int64)
 
     def forward(self, x_int: torch.Tensor) -> torch.Tensor:
-        return self.requant(self.accumulate(x_int))
+        acc = self.accumulate(x_int)
+        return acc if self.out_scale is None else self.requant(acc)
 
 
 class _Requant(nn.Module):
@@ -252,7 +264,133 @@ class ITransformerBlock(nn.Module):
                        zero_point=0.0, dtype=self.dtype)
 
 
-def _as_int(qt: QTensor, expected_scale: float, dtype: QuantDtype) -> torch.Tensor:
+class _IntConv(nn.Module):
+    """An ``IConv2d`` with its integer bias and per-out-channel requant built once.
+
+    The stem's counterpart to ``_IntLinear``, and it makes the same two calls: the bias
+    is quantized onto the accumulator grid ``s_x·s_w`` and added there rather than after
+    the requant, and the requant runs per out-channel because a per-out-channel weight
+    scale puts every output plane on its own grid.
+    """
+
+    def __init__(self, conv, out_scale: float, *, dtype: QuantDtype = INT8) -> None:
+        super().__init__()
+        self.conv = conv
+        self.dtype = dtype
+        self.out_scale = float(out_scale)
+        self.act_scale = float(conv.act_scale)
+        self.act_zero_point = int(conv.act_zero_point)
+
+        flat = conv.weight_scale.reshape(-1).tolist()
+        out_channels = int(conv.weight_int.shape[0])
+        scales = [float(v) for v in flat] * (out_channels if len(flat) == 1 else 1)
+        mults, shifts = [], []
+        for weight_scale in scales:
+            multiplier, shift = _dyadic_params(self.act_scale * weight_scale / self.out_scale)
+            mults.append(multiplier)
+            shifts.append(shift)
+        self.register_buffer("multiplier", torch.tensor(mults, dtype=torch.int64).view(1, -1, 1, 1))
+        self.register_buffer("shift", torch.tensor(shifts, dtype=torch.int64).view(1, -1, 1, 1))
+
+        if conv.bias is None:
+            self.bias_int = None
+        else:
+            bias = conv.bias.reshape(-1).to(torch.float64)
+            self.register_buffer("bias_int", torch.tensor(
+                [round(float(bias[oc]) / (self.act_scale * scales[oc]))
+                 for oc in range(out_channels)], dtype=torch.int64).view(1, -1, 1, 1))
+
+    def forward(self, x_int: torch.Tensor) -> torch.Tensor:
+        acc = self.conv.integer_accumulator(x_int)
+        if self.bias_int is not None:
+            acc = acc + self.bias_int
+        return requant(acc, self.multiplier, self.shift, dtype=self.dtype).to(torch.int64)
+
+
+class IPatchEmbed(nn.Module):
+    """``FramePatchEmbed`` / ``EventPatchEmbed`` with a QTensor datapath.
+
+    Stem conv, then the flatten to token-major order — which is pure data movement, so it
+    is pure data movement here too, on ``int_data``. The input port is the model's edge
+    with the outside world: the host quantizes the image once, on this conv's calibrated
+    activation grid, and hands over integers.
+    """
+
+    def __init__(self, patch_embed: nn.Module, out_scale: float, *,
+                 dtype: QuantDtype = INT8) -> None:
+        super().__init__()
+        self.proj = _IntConv(patch_embed.proj, out_scale, dtype=dtype)
+        self.dtype = dtype
+        self.output_scale = float(out_scale)
+
+    @property
+    def input_scale(self) -> float:
+        return self.proj.act_scale
+
+    @property
+    def input_zero_point(self) -> int:
+        return self.proj.act_zero_point
+
+    def forward(self, qt: QTensor) -> tuple[QTensor, tuple[int, int]]:
+        x_int = _as_int(qt, self.input_scale, self.dtype, zero_point=self.input_zero_point)
+        feat = self.proj(x_int)                                   # [B, D, H, W]
+        grid_hw = (int(feat.shape[-2]), int(feat.shape[-1]))
+        tokens = feat.flatten(2).transpose(1, 2).contiguous()      # [B, N, D]
+        return QTensor(tokens.to(torch.int32), scale=self.output_scale, zero_point=0.0,
+                       dtype=self.dtype), grid_hw
+
+
+class IViTBackbone(nn.Module):
+    """``ViTBackbone`` with a QTensor datapath: the block stack plus the final norm.
+
+    Each block declares the grid its residual stream arrives on and leaves on its own, and
+    the two are not the same number, so every block-to-block edge carries a requant. It is
+    placed HERE, at the producer, because ``ITransformerBlock`` rejects a wrong input grid
+    rather than bridging it — the bridge is the graph's job, not the consumer's.
+
+    ``depth_limit`` is the paper's early exit: the event/track path leaves after the cut
+    point, over the SAME block objects the full-depth search path traverses.
+    """
+
+    def __init__(self, backbone: nn.Module, *, depth_limit: int | None = None,
+                 dtype: QuantDtype = INT8) -> None:
+        super().__init__()
+        blocks = list(backbone.blocks)
+        if depth_limit is not None:
+            blocks = blocks[:max(0, min(len(blocks), int(depth_limit)))]
+        if not blocks:
+            raise ValueError("an integer backbone needs at least one block")
+        self.blocks = nn.ModuleList([ITransformerBlock(b, dtype=dtype) for b in blocks])
+        self.bridges = nn.ModuleList(
+            [_Requant(prev.output_scale, nxt.input_scale, dtype=dtype)
+             for prev, nxt in zip(self.blocks[:-1], self.blocks[1:])])
+        self.norm: ILayerNorm = backbone.norm
+        self.to_norm = _Requant(self.blocks[-1].output_scale, self.norm.input_scale,
+                                dtype=dtype)
+        self.dtype = dtype
+
+    @property
+    def input_scale(self) -> float:
+        return self.blocks[0].input_scale
+
+    @property
+    def output_scale(self) -> float:
+        return float(self.norm.output_scale)
+
+    def forward(self, qt: QTensor) -> QTensor:
+        for index, block in enumerate(self.blocks):
+            if index:
+                bridged = self.bridges[index - 1](qt.int_data)
+                qt = QTensor(bridged.to(torch.int32), scale=block.input_scale,
+                             zero_point=0.0, dtype=self.dtype)
+            qt = block(qt)
+        return self.norm.forward_int(
+            QTensor(self.to_norm(qt.int_data).to(torch.int32), scale=self.norm.input_scale,
+                    zero_point=0.0, dtype=self.norm.in_dtype))
+
+
+def _as_int(qt: QTensor, expected_scale: float, dtype: QuantDtype,
+            *, zero_point: int = 0) -> torch.Tensor:
     """The block's input port. The caller must already be on the declared grid.
 
     A rescale here would be a float ratio computed per call — the one thing this module
@@ -264,7 +402,16 @@ def _as_int(qt: QTensor, expected_scale: float, dtype: QuantDtype) -> torch.Tens
         raise ValueError(
             f"block input is on scale {scale!r} but this block declares {expected_scale!r}; "
             "requantize at the producer, not here")
+    # Read as a python number, never through torch.as_tensor: a float zero-point would
+    # materialise a float32 tensor inside the forward and the datapath check would
+    # (correctly) call it out.
+    zp = qt.zero_point
+    incoming = int(zp.reshape(-1)[0]) if torch.is_tensor(zp) else int(zp)
+    if incoming != zero_point:
+        raise ValueError(
+            f"input carries zero-point {incoming} but this port declares {zero_point}; "
+            "an offset applied on the wrong side of the weights is a silent bias error")
     return qt.int_data.to(torch.int64)
 
 
-__all__ = ["IMultiHeadAttention", "IMlp", "ITransformerBlock"]
+__all__ = ["IMultiHeadAttention", "IMlp", "IPatchEmbed", "ITransformerBlock", "IViTBackbone"]

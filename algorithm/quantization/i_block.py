@@ -51,6 +51,7 @@ from typing import Sequence
 
 from quantization.i_ops import (
     dyadic_params,
+    int_conv2d,
     int_matmul,
     layernorm_quantize,
     layernorm_quantize_segmented,
@@ -335,6 +336,146 @@ def replay_block_int(spec: BlockSpec, x_int: Sequence[int], *, tokens: int,
     return _add(spec.mlp_residual, residual, mlp_out, dtype)
 
 
+# --- the rest of the model: stem, block stack, final norm, pooled head --------
+#
+# The block is where the interesting composition is, but it is not the whole network,
+# and the parts around it have their own scale-contract decisions: a conv's zero-point
+# correction and its per-out-channel bias, the block-to-block bridge, and the head's
+# final accumulator, which has no consumer inside the graph at all.
+
+
+@dataclass
+class ConvSpec:
+    """A strided/padded integer conv: int weight ``[Cout, Cin, kh, kw]`` + its grids."""
+
+    weight: list[list[list[list[int]]]]
+    weight_scale: list[float]       # per out-channel; length 1 means per-tensor
+    input_scale: float
+    zero_point: int
+    stride: int
+    padding: tuple[int, int]
+    bias: list[float] | None = None
+
+    def out_scale(self, out_channel: int) -> float:
+        scales = self.weight_scale
+        return self.input_scale * float(scales[out_channel if len(scales) > 1 else 0])
+
+
+@dataclass
+class HeadSpec:
+    """A pooled two-layer regression head: mean over tokens, Linear, GeLU, Linear."""
+
+    fc1: LinearSpec
+    gelu: TableSpec
+    fc2: LinearSpec
+
+
+@dataclass
+class ModelSpec:
+    """Stem -> blocks -> final norm -> pooled head, in the order the forward runs."""
+
+    stem: ConvSpec
+    blocks: list[BlockSpec]
+    final_norm: LayerNormSpec
+    head: HeadSpec
+    dtype: QuantDtype = field(default=INT8)
+
+
+def _conv_tokens(spec: ConvSpec, image_int: Sequence[int], out_scale: float,
+                 dtype: QuantDtype, *, channels: int, height: int,
+                 width: int) -> list[list[int]]:
+    """Patch-embed conv -> token rows ``[N, Cout]`` on ``out_scale``.
+
+    Two things the block replay never had to deal with.
+
+    The activation grid is ASYMMETRIC, so the integer that represents a real zero is the
+    zero-point, not 0. Padding is therefore filled with ``zero_point`` and the uniform
+    ``- zp·Σw`` correction below stays exactly right, because a padded tap contributes
+    ``(zp - zp)·w = 0``. Padding with 0 instead measured 0.24 max abs error against 1.8e-07.
+
+    Tokens come out in ``flatten_tokens`` order — ``[Cout, Ho, Wo]`` read as token
+    ``h*Wo + w``, channel ``c`` — because that transpose is pure data movement in the
+    graph and must be pure data movement here too.
+    """
+    inp = [[[int(image_int[(c * height + y) * width + x]) for x in range(width)]
+            for y in range(height)] for c in range(channels)]
+    acc = int_conv2d(inp, spec.weight, stride=spec.stride, padding=spec.padding,
+                     pad_value=spec.zero_point)
+    cout = len(spec.weight)
+    ho, wo = len(acc[0]), len(acc[0][0])
+    tokens: list[list[int]] = [[0] * cout for _ in range(ho * wo)]
+    for oc in range(cout):
+        acc_scale = spec.out_scale(oc)
+        wsum = sum(v for plane in spec.weight[oc] for row in plane for v in row)
+        column = [acc[oc][y][x] - spec.zero_point * wsum
+                  for y in range(ho) for x in range(wo)]
+        if spec.bias is not None:
+            bias_int = round(float(spec.bias[oc]) / acc_scale)
+            column = [v + bias_int for v in column]
+        moved = rescale(column, acc_scale, out_scale, dtype=dtype)
+        for t, v in enumerate(moved):
+            tokens[t][oc] = v
+    return tokens
+
+
+def _pool_tokens(rows: Sequence[Sequence[int]], dtype: QuantDtype) -> list[int]:
+    """Mean over the token axis, in integers, keeping the input scale.
+
+    Round-half-away-from-zero in exact integer arithmetic. A float divide here would be
+    a float on the datapath, and the sum over a token axis is the easiest place in this
+    graph to run past float32's 2^24 exact-integer limit.
+    """
+    n = len(rows)
+    half = n // 2
+    out: list[int] = []
+    for c in range(len(rows[0])):
+        total = sum(int(row[c]) for row in rows)
+        mean = (total + half) // n if total >= 0 else -((-total + half) // n)
+        out.append(max(dtype.qmin, min(dtype.qmax, mean)))
+    return out
+
+
+def replay_model_int(spec: ModelSpec, image_int: Sequence[int], *, channels: int,
+                     height: int, width: int) -> list[int]:
+    """The whole network in integers: image on the stem's grid -> the head's ACCUMULATOR.
+
+    The return is deliberately un-requantized. Every other edge in this graph has a
+    consumer that declares the scale it wants, but the last linear's consumer is the
+    host: there is no calibrated output grid, and inventing one would round the answer
+    onto a coarser grid for nothing. What leaves the accelerator is the int32 accumulator
+    plus its per-out-channel scale ``s_x·s_w``, which the host multiplies out — so that
+    is what this returns, and what the torch graph is compared against.
+    """
+    dtype = spec.dtype
+    first = spec.blocks[0]
+    rows = _conv_tokens(spec.stem, image_int, first.attn_residual.scale_a, dtype,
+                        channels=channels, height=height, width=width)
+    tokens, embed_dim = len(rows), len(rows[0])
+
+    stream = _flat(rows)
+    for index, block in enumerate(spec.blocks):
+        if index:      # bridge the previous block's output onto this one's declared grid
+            stream = rescale(stream, spec.blocks[index - 1].mlp_residual.scale_out,
+                             block.attn_residual.scale_a, dtype=dtype)
+        stream = replay_block_int(block, stream, tokens=tokens, channels=embed_dim)
+
+    normed = spec.final_norm.apply(
+        rescale(stream, spec.blocks[-1].mlp_residual.scale_out,
+                spec.final_norm.input_scale, dtype=dtype))
+
+    pooled = _pool_tokens(_rows(normed, embed_dim), dtype)
+    head = spec.head
+    hidden = _linear(head.fc1,
+                     [rescale(pooled, spec.final_norm.output_scale, head.fc1.input_scale,
+                              dtype=dtype)],
+                     head.gelu.input_scale, dtype)
+    activated = head.gelu.apply(_flat(hidden))
+    final = _linear_acc(head.fc2,
+                        [rescale(activated, head.gelu.output_scale, head.fc2.input_scale,
+                                 dtype=dtype)])
+    return final[0]
+
+
 __all__ = [
     "rescale",
     "LayerNormSpec",
@@ -344,5 +485,9 @@ __all__ = [
     "MatMulSpec",
     "AddSpec",
     "BlockSpec",
+    "ConvSpec",
+    "HeadSpec",
+    "ModelSpec",
     "replay_block_int",
+    "replay_model_int",
 ]
