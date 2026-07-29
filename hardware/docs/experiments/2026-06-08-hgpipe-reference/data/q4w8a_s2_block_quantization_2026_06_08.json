@@ -1,0 +1,27 @@
+{
+  "binary": "hardware/refs/weights/cyclic_weights_s2_block_software_initial_q4.bin",
+  "block_count": 1944,
+  "block_word_stride": 196,
+  "contract": "Q4 packed weight round-trip for Q8 activation baseline; activation quantization is represented by HLS HGTXR_BIT_WIDTH=8 and will be closed by csim/vector tests",
+  "element_count": 12192768,
+  "fallback_count": 0,
+  "layout": {
+    "bit_width": 4,
+    "blocks": 6,
+    "bus_width": 128,
+    "embed_dim": 192,
+    "int_width": 2,
+    "mlp_ratio": 4,
+    "tile_channels": 32,
+    "tile_ff": 32
+  },
+  "layout_mode": "s2_block_first_step",
+  "manifest": "hardware/refs/weights/cyclic_weights_s2_block_software_initial_q4_manifest.json",
+  "max_abs_quant_error": 0.072168730199337,
+  "mean_abs_quant_error": 0.00752250015964587,
+  "rmse_quant_error": 0.017959918925266365,
+  "status": "pass",
+  "theoretical_half_lsb": 0.125,
+  "weights": "hardware/refs/weights/cyclic_weights_s2_block_software_initial_q4.npz",
+  "word_count": 381024
+}

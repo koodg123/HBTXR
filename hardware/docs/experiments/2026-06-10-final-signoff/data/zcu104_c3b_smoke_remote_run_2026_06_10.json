@@ -1,0 +1,48 @@
+{
+  "bundle_root": "e2e_axis_dma_c3b_mem16_smoke_bundle",
+  "canonical_result": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/pynq/hgtxr/e2e_axis_dma_c3b_mem16_file_smoke.json",
+  "command_results": [],
+  "commands": {
+    "copy_tar": [
+      "scp",
+      "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/pynq/e2e_axis_dma_c3b_mem16_smoke_bundle.tar.gz",
+      "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/e2e_axis_dma_c3b_mem16_smoke_bundle.tar.gz.sha256",
+      "xilinx@zcu104.local:/home/xilinx/hgtxr_c3b_smoke/"
+    ],
+    "fetch_result": [
+      "scp",
+      "xilinx@zcu104.local:/home/xilinx/hgtxr_c3b_smoke/e2e_axis_dma_c3b_mem16_smoke_bundle/e2e_axis_dma_c3b_mem16_file_smoke.json",
+      "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/pynq/e2e_axis_dma_c3b_mem16_file_smoke.remote.json"
+    ],
+    "fetch_validation": [
+      "scp",
+      "xilinx@zcu104.local:/home/xilinx/hgtxr_c3b_smoke/e2e_axis_dma_c3b_mem16_smoke_bundle/e2e_axis_dma_c3b_mem16_file_smoke_validation.json",
+      "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/pynq/e2e_axis_dma_c3b_mem16_file_smoke_validation.json"
+    ],
+    "mkdir": [
+      "ssh",
+      "xilinx@zcu104.local",
+      "mkdir -p /home/xilinx/hgtxr_c3b_smoke"
+    ],
+    "run": [
+      "ssh",
+      "xilinx@zcu104.local",
+      "cd /home/xilinx/hgtxr_c3b_smoke && sha256sum -c e2e_axis_dma_c3b_mem16_smoke_bundle.tar.gz.sha256 && tar -xzf e2e_axis_dma_c3b_mem16_smoke_bundle.tar.gz && cd e2e_axis_dma_c3b_mem16_smoke_bundle && ./run_e2e_axis_dma_c3b_mem16_file_smoke.sh && ./validate_e2e_axis_dma_c3b_mem16_file_smoke.sh"
+    ]
+  },
+  "errors": [],
+  "execute": false,
+  "host": "zcu104.local",
+  "import_result": null,
+  "local_result": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/pynq/e2e_axis_dma_c3b_mem16_file_smoke.remote.json",
+  "preset": "axis-c3b-mem16",
+  "profile": "c3b-mem16",
+  "remote_dir": "/home/xilinx/hgtxr_c3b_smoke",
+  "result_json": "e2e_axis_dma_c3b_mem16_file_smoke.json",
+  "sha256_file": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/e2e_axis_dma_c3b_mem16_smoke_bundle.tar.gz.sha256",
+  "status": "dry-run",
+  "tar": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/pynq/e2e_axis_dma_c3b_mem16_smoke_bundle.tar.gz",
+  "target": "ZCU104 PYNQ",
+  "user": "xilinx",
+  "validation_json": "e2e_axis_dma_c3b_mem16_file_smoke_validation.json"
+}

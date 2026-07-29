@@ -1,0 +1,107 @@
+{
+  "check_count": 11,
+  "checks": [
+    {
+      "detail": {
+        "normalized": "/home/kjm26/project/PRJXR/XR-VIT/PAPER_PRJXR/05_RESOURCES/DeiT-Tiny C-Syn Results.png",
+        "requested_user_suffix": "PAPER_PRJXR\\05_RESOURCES\\DeiT-Tiny C-Syn Results.png"
+      },
+      "name": "requested_path_normalizes_to_paper_prjxr",
+      "status": "pass"
+    },
+    {
+      "detail": "/home/kjm26/project/PRJXR/XR-VIT/PAPER_PRJXR/05_RESOURCES/DeiT-Tiny C-Syn Results.png",
+      "name": "requested_image_exists",
+      "status": "pass"
+    },
+    {
+      "detail": 69712,
+      "name": "requested_image_nonempty",
+      "status": "pass"
+    },
+    {
+      "detail": "89504e470d0a1a0a",
+      "name": "requested_image_png_magic",
+      "status": "pass"
+    },
+    {
+      "detail": "90495791e6103be30268320d3b17dce2eaa52d003dd6f341393262745c1c3b79",
+      "name": "requested_image_sha256_valid",
+      "status": "pass"
+    },
+    {
+      "detail": "/home/kjm26/project/PRJXR/XR-VIT/HGPIPE/DeiT-Tiny C-Syn Results.png",
+      "name": "hgpipe_substitute_exists",
+      "status": "pass"
+    },
+    {
+      "detail": "89504e470d0a1a0a",
+      "name": "hgpipe_substitute_png_magic",
+      "status": "pass"
+    },
+    {
+      "detail": {
+        "hgpipe": "90495791e6103be30268320d3b17dce2eaa52d003dd6f341393262745c1c3b79",
+        "requested": "90495791e6103be30268320d3b17dce2eaa52d003dd6f341393262745c1c3b79"
+      },
+      "name": "hgpipe_substitute_matches_requested_sha256",
+      "status": "pass"
+    },
+    {
+      "detail": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/docs/DeiT-Tiny C-Syn Results.png",
+      "name": "hardware_docs_copy_exists",
+      "status": "pass"
+    },
+    {
+      "detail": "89504e470d0a1a0a",
+      "name": "hardware_docs_copy_png_magic",
+      "status": "pass"
+    },
+    {
+      "detail": {
+        "docs_copy": "90495791e6103be30268320d3b17dce2eaa52d003dd6f341393262745c1c3b79",
+        "requested": "90495791e6103be30268320d3b17dce2eaa52d003dd6f341393262745c1c3b79"
+      },
+      "name": "hardware_docs_copy_matches_requested_sha256",
+      "status": "pass"
+    }
+  ],
+  "date_tag": "2026_06_16",
+  "fail_count": 0,
+  "hardware_docs_copy": {
+    "exists": true,
+    "path": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/docs/DeiT-Tiny C-Syn Results.png",
+    "png_magic": "89504e470d0a1a0a",
+    "sha256": "90495791e6103be30268320d3b17dce2eaa52d003dd6f341393262745c1c3b79",
+    "size_bytes": 69712
+  },
+  "hardware_root": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware",
+  "hgpipe_substitute": {
+    "exists": true,
+    "path": "/home/kjm26/project/PRJXR/XR-VIT/HGPIPE/DeiT-Tiny C-Syn Results.png",
+    "png_magic": "89504e470d0a1a0a",
+    "sha256": "90495791e6103be30268320d3b17dce2eaa52d003dd6f341393262745c1c3b79",
+    "size_bytes": 69712
+  },
+  "normalized_requested_path": "/home/kjm26/project/PRJXR/XR-VIT/PAPER_PRJXR/05_RESOURCES/DeiT-Tiny C-Syn Results.png",
+  "pass_count": 11,
+  "requested_image": {
+    "exists": true,
+    "path": "/home/kjm26/project/PRJXR/XR-VIT/PAPER_PRJXR/05_RESOURCES/DeiT-Tiny C-Syn Results.png",
+    "png_magic": "89504e470d0a1a0a",
+    "sha256": "90495791e6103be30268320d3b17dce2eaa52d003dd6f341393262745c1c3b79",
+    "size_bytes": 69712
+  },
+  "requested_user_path": "/home/kjm26/project/PRJXR/XR-VIT\\PAPER_PRJXR\\05_RESOURCES\\DeiT-Tiny C-Syn Results.png",
+  "requirement": "Req9 requested PAPER_PRJXR DeiT-Tiny C-Syn image reference",
+  "root": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR",
+  "safety": {
+    "creates_board_result": false,
+    "creates_xr_vits_policy": false,
+    "executes_commands": false,
+    "executes_network": false,
+    "writes_canonical_inputs": false
+  },
+  "status": "pass",
+  "xr_vit_root": "/home/kjm26/project/PRJXR/XR-VIT"
+}

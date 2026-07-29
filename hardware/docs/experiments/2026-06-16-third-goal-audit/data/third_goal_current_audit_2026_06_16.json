@@ -1,0 +1,1565 @@
+{
+  "blocked_external_input_paths_by_blocker": {
+    "C3b AXIS/DMA physical smoke result": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/pynq/hgtxr/e2e_axis_dma_c3b_mem16_file_smoke.json",
+    "requested XR-VITs sibling": "/home/kjm26/project/PRJXR/XR-VITs"
+  },
+  "blocked_external_inputs": [
+    "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/pynq/hgtxr/e2e_axis_dma_c3b_mem16_file_smoke.json",
+    "/home/kjm26/project/PRJXR/XR-VITs"
+  ],
+  "blocker_schema": {
+    "external_blocker_names_source": "gate_modes.default.remaining_blockers",
+    "remaining_external_input_details_kind": "path records mapped to blocker_name and default signoff requirement",
+    "remaining_external_inputs_kind": "absolute paths for missing or optional external inputs"
+  },
+  "c3b_physical_smoke_gate_audit": {
+    "bundle": {
+      "bundle_dir": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/pynq/e2e_axis_dma_c3b_mem16_smoke_bundle",
+      "errors": [],
+      "expected_out_raw": [
+        32,
+        -13,
+        26,
+        -6,
+        14,
+        -11
+      ],
+      "expected_runtime_state": 2,
+      "status": "pass",
+      "tar": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/pynq/e2e_axis_dma_c3b_mem16_smoke_bundle.tar.gz",
+      "validation_command": "python3 tools/validate_pynq_smoke_result.py e2e_axis_dma_c3b_mem16_file_smoke.json --preset axis-c3b-mem16 --json-out e2e_axis_dma_c3b_mem16_file_smoke_validation.json"
+    },
+    "canonical_result": {
+      "errors": [
+        "C3b smoke JSON missing: /home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/pynq/hgtxr/e2e_axis_dma_c3b_mem16_file_smoke.json"
+      ],
+      "exists": false,
+      "path": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/pynq/hgtxr/e2e_axis_dma_c3b_mem16_file_smoke.json",
+      "payload_status": null,
+      "status": "missing"
+    },
+    "path": "generated/signoff/c3b_physical_smoke_gate_audit_2026_06_16.json",
+    "remaining_blockers": [
+      "C3b AXIS/DMA physical smoke result"
+    ],
+    "session": {
+      "board_steps": [
+        "tar -xzf e2e_axis_dma_c3b_mem16_smoke_bundle.tar.gz",
+        "cd e2e_axis_dma_c3b_mem16_smoke_bundle",
+        "./run_e2e_axis_dma_c3b_mem16_file_smoke.sh",
+        "./validate_e2e_axis_dma_c3b_mem16_file_smoke.sh"
+      ],
+      "errors": [],
+      "exists": true,
+      "host_steps": [
+        "python3 tools/run_third_goal_final_signoff.py --root /home/kjm26/project/PRJXR/XR-VIT/HGTXR --import-c3b-smoke-json /path/to/e2e_axis_dma_c3b_mem16_file_smoke.json --dry-run-import-c3b-smoke --allow-blocked",
+        "python3 tools/run_third_goal_final_signoff.py --root /home/kjm26/project/PRJXR/XR-VIT/HGTXR --import-c3b-smoke-json /path/to/e2e_axis_dma_c3b_mem16_file_smoke.json --allow-blocked",
+        "python3 tools/validate_pynq_smoke_result.py hardware/pynq/hgtxr/e2e_axis_dma_c3b_mem16_file_smoke.json --preset axis-c3b-mem16",
+        "python3 tools/check_third_goal_preflight.py --root /home/kjm26/project/PRJXR/XR-VIT/HGTXR --mode final-signoff"
+      ],
+      "path": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/pynq/e2e_axis_dma_c3b_mem16_smoke_session.json",
+      "status": "pass"
+    },
+    "status": "blocked_missing_canonical_physical_smoke_result"
+  },
+  "date_tag": "2026_06_16",
+  "external_blocker_names": [
+    "C3b AXIS/DMA physical smoke result",
+    "requested XR-VITs sibling"
+  ],
+  "final_blocker_closure_readiness": {
+    "candidate_ready": false,
+    "current_ready": false,
+    "dry_run_final_runner_command": "",
+    "final_runner_command": "",
+    "missing_current_blockers": [
+      "C3b AXIS/DMA physical smoke result",
+      "requested XR-VITs sibling"
+    ],
+    "path": "generated/signoff/final_blocker_closure_readiness_2026_06_10.json",
+    "status": "blocked"
+  },
+  "final_operator_handoff": {
+    "board_smoke_ready": true,
+    "board_smoke_status": "ready-for-board",
+    "evidence_manifest_present_required_count": 86,
+    "evidence_manifest_required_count": 86,
+    "evidence_manifest_status": "pass",
+    "path": "generated/signoff/final_operator_handoff_2026_06_10.json",
+    "remaining_blockers": [
+      "requested XR-VITs sibling",
+      "C3b AXIS/DMA physical smoke result"
+    ],
+    "requires_operator_action": true,
+    "status": "pending-operator-actions",
+    "xr_vits_candidate_status": "fail",
+    "xr_vits_policy_integrity": {
+      "candidate_audit": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/xr_vits_candidate_audit_2026_06_10.json",
+      "candidate_audit_fingerprint_present": false,
+      "generator": "tools/create_xr_vits_replacement_policy.py",
+      "legacy_policy_clears_final_signoff": false,
+      "policy_exists": false,
+      "policy_fingerprint_present": false,
+      "policy_path": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/xr_vits_replacement_policy.json",
+      "required": true,
+      "required_policy_fields": [
+        "candidate_audit_fingerprint",
+        "candidate_audit_recommendation_snapshot",
+        "candidate_audit_meta",
+        "approval_event",
+        "policy_fingerprint"
+      ],
+      "required_policy_fields_complete": true,
+      "validation_status": "pending-policy-creation",
+      "validator": "tools/check_final_blocker_closure_readiness.py"
+    },
+    "xr_vits_would_clear": false
+  },
+  "final_operator_handoff_validation": {
+    "check_count": 131,
+    "fail_count": 3,
+    "pass_count": 128,
+    "path": "generated/signoff/final_operator_handoff_validation_2026_06_10.json",
+    "policy_check_count": 9,
+    "policy_checks": [
+      "xr_policy_integrity_required",
+      "xr_policy_integrity_fields",
+      "xr_policy_integrity_generator",
+      "xr_legacy_policy_not_accepted",
+      "xr_policy_validation_status",
+      "xr_policy_validation_not_legacy",
+      "xr_policy_validation_embedded_matches_live",
+      "live_current_audit_xr_policy_integrity",
+      "live_closeout_packet_xr_policy_integrity"
+    ],
+    "safety": {
+      "creates_board_result": false,
+      "creates_xr_vits_policy": false,
+      "executes_commands": false,
+      "writes_canonical_inputs": false
+    },
+    "status": "fail"
+  },
+  "final_unblock_candidate_audit": {
+    "c3b_status": "missing",
+    "c3b_would_clear": false,
+    "path": "generated/signoff/final_unblock_candidate_audit_2026_06_10.json",
+    "remaining_blockers": [
+      "C3b AXIS/DMA physical smoke result",
+      "requested XR-VITs sibling"
+    ],
+    "status": "blocked",
+    "would_clear_all": false,
+    "xr_vits_mode": "exact",
+    "xr_vits_status": "fail",
+    "xr_vits_would_clear": false
+  },
+  "final_unblock_commands": {
+    "c3b_smoke_contract": {
+      "active_import_command": "python3 tools/import_pynq_smoke_result.py /path/to/e2e_axis_dma_c3b_mem16_file_smoke.json --preset axis-c3b-mem16 --root /home/kjm26/project/PRJXR/XR-VIT/HGTXR --json-out /tmp/c3b_smoke_import_2026_06_10.json --validation-out /tmp/c3b_smoke_import_validation_2026_06_10.json",
+      "canonical_result_path": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/pynq/hgtxr/e2e_axis_dma_c3b_mem16_file_smoke.json",
+      "dry_run_import_command": "python3 tools/import_pynq_smoke_result.py /path/to/e2e_axis_dma_c3b_mem16_file_smoke.json --preset axis-c3b-mem16 --root /home/kjm26/project/PRJXR/XR-VIT/HGTXR --dry-run --json-out /tmp/c3b_smoke_import_2026_06_10.json --validation-out /tmp/c3b_smoke_import_validation_2026_06_10.json",
+      "preset": "axis-c3b-mem16",
+      "status": "pass",
+      "validate_command": "python3 tools/validate_pynq_smoke_result.py /path/to/e2e_axis_dma_c3b_mem16_file_smoke.json --preset axis-c3b-mem16"
+    },
+    "has_qkv_uram_u5": true,
+    "path": "generated/signoff/final_unblock_commands_2026_06_10.json",
+    "readiness_status": "ready-for-board",
+    "remaining_blockers": [
+      "C3b AXIS/DMA physical smoke result",
+      "requested XR-VITs sibling"
+    ],
+    "section_count": 6,
+    "section_ids": [
+      "U0",
+      "U1",
+      "U2",
+      "U4",
+      "U5",
+      "U3"
+    ],
+    "status": "pending-unblock",
+    "xr_vits_packet_status": "pending-user-choice",
+    "xr_vits_policy_integrity": {
+      "candidate_audit": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/xr_vits_candidate_audit_2026_06_10.json",
+      "candidate_audit_fingerprint_present": false,
+      "generator": "tools/create_xr_vits_replacement_policy.py",
+      "legacy_policy_clears_final_signoff": false,
+      "policy_exists": false,
+      "policy_fingerprint_present": false,
+      "policy_path": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/xr_vits_replacement_policy.json",
+      "required": true,
+      "required_policy_fields": [
+        "candidate_audit_fingerprint",
+        "candidate_audit_recommendation_snapshot",
+        "candidate_audit_meta",
+        "approval_event",
+        "policy_fingerprint"
+      ],
+      "required_policy_fields_complete": true,
+      "validation_status": "not-embedded",
+      "validator": "tools/check_final_blocker_closure_readiness.py"
+    }
+  },
+  "final_unblock_intake": {
+    "active_final_runner_command": "",
+    "candidate_ready": false,
+    "dry_run_final_runner_command": "",
+    "next_action": "Supply inputs for: C3b AXIS/DMA physical smoke result, requested XR-VITs sibling",
+    "path": "generated/signoff/final_unblock_intake_2026_06_10.json",
+    "remaining_blockers": [
+      "C3b AXIS/DMA physical smoke result",
+      "requested XR-VITs sibling"
+    ],
+    "status": "blocked",
+    "would_clear_all": false
+  },
+  "gate_modes": {
+    "default": {
+      "blocker_count": 2,
+      "path": "generated/signoff/final_unblock_closeout_packet_2026_06_16.json",
+      "qkv_uram_command_count": 5,
+      "qkv_uram_successor_gate": {
+        "artifact": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/signoff/vref_p0_qkv_uram_cache_successor_2026_06_16.json",
+        "candidate": "VREF-P0-02-qkv-weight-cache-uram",
+        "csynth_status": "pass",
+        "expected_result_json": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/pynq/hgtxr/e2e_axis_dma_vref_p0_softmax_input_x2_qkv_uram_file_smoke.json",
+        "latency_cycles": 498485,
+        "macro": "HGTXR_E2E_URAM_QKV_WEIGHT_CACHE=1",
+        "physical_smoke_preset": "axis-vref-p0-softmax-input-x2-qkv-uram",
+        "physical_smoke_result_json": null,
+        "physical_smoke_status": "not_captured",
+        "required_for_final_signoff": false,
+        "resources": {
+          "bram_18k": 114,
+          "dsp": 128,
+          "ff": 19664,
+          "lut": 43236,
+          "uram": 40
+        },
+        "route_errors": 0,
+        "routed_wns_ns": 4.517,
+        "status": "ready-for-physical-smoke"
+      },
+      "remaining_blockers": [
+        "requested XR-VITs sibling",
+        "C3b AXIS/DMA physical smoke result"
+      ],
+      "status": "ready-for-operator-unblock",
+      "vref_required": false,
+      "vref_successor_gate": {
+        "artifact": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/signoff/vref_p0_pot_scale_successor_softmax_input_x2_2026_06_16.json",
+        "candidate": "softmax_input_x2",
+        "expected_result_json": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/pynq/hgtxr/e2e_axis_dma_vref_p0_softmax_input_x2_dsp_mixed_stream_file_smoke.json",
+        "physical_smoke_preset": "axis-vref-p0-softmax-input-x2-dsp-mixed-stream",
+        "physical_smoke_result_json": "",
+        "physical_smoke_status": "not_captured",
+        "projection_failures": [],
+        "projection_pending": [
+          "physical_smoke_available"
+        ],
+        "projection_status": "not_promotable",
+        "recommended_resource_variant": "dsp_mixed_stream",
+        "required_for_final_signoff": false,
+        "status": "ready-for-physical-smoke"
+      }
+    },
+    "final_blocker_closure": {
+      "candidate_ready": false,
+      "current_ready": false,
+      "dry_run_final_runner_command": "",
+      "final_runner_command": "",
+      "missing_current_blockers": [
+        "C3b AXIS/DMA physical smoke result",
+        "requested XR-VITs sibling"
+      ],
+      "path": "generated/signoff/final_blocker_closure_readiness_2026_06_10.json",
+      "status": "blocked"
+    },
+    "final_operator_handoff": {
+      "board_smoke_ready": true,
+      "board_smoke_status": "ready-for-board",
+      "evidence_manifest_present_required_count": 86,
+      "evidence_manifest_required_count": 86,
+      "evidence_manifest_status": "pass",
+      "path": "generated/signoff/final_operator_handoff_2026_06_10.json",
+      "remaining_blockers": [
+        "requested XR-VITs sibling",
+        "C3b AXIS/DMA physical smoke result"
+      ],
+      "requires_operator_action": true,
+      "status": "pending-operator-actions",
+      "xr_vits_candidate_status": "fail",
+      "xr_vits_policy_integrity": {
+        "candidate_audit": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/xr_vits_candidate_audit_2026_06_10.json",
+        "candidate_audit_fingerprint_present": false,
+        "generator": "tools/create_xr_vits_replacement_policy.py",
+        "legacy_policy_clears_final_signoff": false,
+        "policy_exists": false,
+        "policy_fingerprint_present": false,
+        "policy_path": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/xr_vits_replacement_policy.json",
+        "required": true,
+        "required_policy_fields": [
+          "candidate_audit_fingerprint",
+          "candidate_audit_recommendation_snapshot",
+          "candidate_audit_meta",
+          "approval_event",
+          "policy_fingerprint"
+        ],
+        "required_policy_fields_complete": true,
+        "validation_status": "pending-policy-creation",
+        "validator": "tools/check_final_blocker_closure_readiness.py"
+      },
+      "xr_vits_would_clear": false
+    },
+    "final_operator_handoff_validation": {
+      "check_count": 131,
+      "fail_count": 3,
+      "pass_count": 128,
+      "path": "generated/signoff/final_operator_handoff_validation_2026_06_10.json",
+      "policy_check_count": 9,
+      "policy_checks": [
+        "xr_policy_integrity_required",
+        "xr_policy_integrity_fields",
+        "xr_policy_integrity_generator",
+        "xr_legacy_policy_not_accepted",
+        "xr_policy_validation_status",
+        "xr_policy_validation_not_legacy",
+        "xr_policy_validation_embedded_matches_live",
+        "live_current_audit_xr_policy_integrity",
+        "live_closeout_packet_xr_policy_integrity"
+      ],
+      "safety": {
+        "creates_board_result": false,
+        "creates_xr_vits_policy": false,
+        "executes_commands": false,
+        "writes_canonical_inputs": false
+      },
+      "status": "fail"
+    },
+    "final_unblock_candidate_audit": {
+      "c3b_status": "missing",
+      "c3b_would_clear": false,
+      "path": "generated/signoff/final_unblock_candidate_audit_2026_06_10.json",
+      "remaining_blockers": [
+        "C3b AXIS/DMA physical smoke result",
+        "requested XR-VITs sibling"
+      ],
+      "status": "blocked",
+      "would_clear_all": false,
+      "xr_vits_mode": "exact",
+      "xr_vits_status": "fail",
+      "xr_vits_would_clear": false
+    },
+    "final_unblock_commands": {
+      "c3b_smoke_contract": {
+        "active_import_command": "python3 tools/import_pynq_smoke_result.py /path/to/e2e_axis_dma_c3b_mem16_file_smoke.json --preset axis-c3b-mem16 --root /home/kjm26/project/PRJXR/XR-VIT/HGTXR --json-out /tmp/c3b_smoke_import_2026_06_10.json --validation-out /tmp/c3b_smoke_import_validation_2026_06_10.json",
+        "canonical_result_path": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/pynq/hgtxr/e2e_axis_dma_c3b_mem16_file_smoke.json",
+        "dry_run_import_command": "python3 tools/import_pynq_smoke_result.py /path/to/e2e_axis_dma_c3b_mem16_file_smoke.json --preset axis-c3b-mem16 --root /home/kjm26/project/PRJXR/XR-VIT/HGTXR --dry-run --json-out /tmp/c3b_smoke_import_2026_06_10.json --validation-out /tmp/c3b_smoke_import_validation_2026_06_10.json",
+        "preset": "axis-c3b-mem16",
+        "status": "pass",
+        "validate_command": "python3 tools/validate_pynq_smoke_result.py /path/to/e2e_axis_dma_c3b_mem16_file_smoke.json --preset axis-c3b-mem16"
+      },
+      "has_qkv_uram_u5": true,
+      "path": "generated/signoff/final_unblock_commands_2026_06_10.json",
+      "readiness_status": "ready-for-board",
+      "remaining_blockers": [
+        "C3b AXIS/DMA physical smoke result",
+        "requested XR-VITs sibling"
+      ],
+      "section_count": 6,
+      "section_ids": [
+        "U0",
+        "U1",
+        "U2",
+        "U4",
+        "U5",
+        "U3"
+      ],
+      "status": "pending-unblock",
+      "xr_vits_packet_status": "pending-user-choice",
+      "xr_vits_policy_integrity": {
+        "candidate_audit": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/xr_vits_candidate_audit_2026_06_10.json",
+        "candidate_audit_fingerprint_present": false,
+        "generator": "tools/create_xr_vits_replacement_policy.py",
+        "legacy_policy_clears_final_signoff": false,
+        "policy_exists": false,
+        "policy_fingerprint_present": false,
+        "policy_path": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/xr_vits_replacement_policy.json",
+        "required": true,
+        "required_policy_fields": [
+          "candidate_audit_fingerprint",
+          "candidate_audit_recommendation_snapshot",
+          "candidate_audit_meta",
+          "approval_event",
+          "policy_fingerprint"
+        ],
+        "required_policy_fields_complete": true,
+        "validation_status": "not-embedded",
+        "validator": "tools/check_final_blocker_closure_readiness.py"
+      }
+    },
+    "final_unblock_intake": {
+      "active_final_runner_command": "",
+      "candidate_ready": false,
+      "dry_run_final_runner_command": "",
+      "next_action": "Supply inputs for: C3b AXIS/DMA physical smoke result, requested XR-VITs sibling",
+      "path": "generated/signoff/final_unblock_intake_2026_06_10.json",
+      "remaining_blockers": [
+        "C3b AXIS/DMA physical smoke result",
+        "requested XR-VITs sibling"
+      ],
+      "status": "blocked",
+      "would_clear_all": false
+    },
+    "qkv_uram_runner": {
+      "path": "generated/signoff/third_goal_final_signoff_run_2026_06_10.json",
+      "pynq_c3b_smoke_discovery_status": "missing",
+      "pynq_vref_smoke_discovery_status": "missing",
+      "qkv_uram_import_status": "skipped",
+      "qkv_uram_remote_execute": false,
+      "qkv_uram_remote_status": "skipped",
+      "qkv_uram_required_for_final_signoff": false,
+      "qkv_uram_smoke_discovery_status": "missing",
+      "status": "blocked"
+    },
+    "qkv_uram_successor": {
+      "candidate": "VREF-P0-02-qkv-weight-cache-uram",
+      "check_count": 10,
+      "dry_run_import_command": "python3 tools/import_pynq_smoke_result.py /path/to/e2e_axis_dma_vref_p0_softmax_input_x2_qkv_uram_file_smoke.json --preset axis-vref-p0-softmax-input-x2-qkv-uram --dry-run",
+      "estimated_clock_ns": 4.069,
+      "expected_result_json": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/pynq/hgtxr/e2e_axis_dma_vref_p0_softmax_input_x2_qkv_uram_file_smoke.json",
+      "fail_count": 0,
+      "latency_cycles": 498485,
+      "macro": "HGTXR_E2E_URAM_QKV_WEIGHT_CACHE=1",
+      "pass_count": 10,
+      "path": "generated/signoff/vref_p0_qkv_uram_cache_successor_2026_06_16.json",
+      "physical_smoke_result_json": "",
+      "physical_smoke_status": "missing",
+      "promotion_status": "hls-resource-pass-routed-pending",
+      "pynq_plumbing_status": "ready-for-artifacts",
+      "remaining": [
+        "physical_smoke_json"
+      ],
+      "remote_dry_run_command": "python3 tools/run_zcu104_c3b_smoke_remote.py --profile vref-p0-softmax-input-x2-qkv-uram --host <zcu104-ip-or-host> --user xilinx",
+      "resource_policy": "dsp_mixed_stream",
+      "resources": {
+        "bram_18k": 114,
+        "dsp": 128,
+        "ff": 19664,
+        "lut": 43236,
+        "uram": 40
+      },
+      "status": "pass"
+    },
+    "smoke_candidate_discovery": {
+      "c3b_generic": {
+        "candidate_count": 0,
+        "dry_run_import_command": "",
+        "import_command": "",
+        "pass_count": 0,
+        "path": "generated/signoff/pynq_smoke_candidate_discovery_c3b_2026_06_16.json",
+        "preset": "axis-c3b-mem16",
+        "recommended_candidate": null,
+        "status": "missing"
+      },
+      "qkv_runner": {
+        "candidate_count": 0,
+        "dry_run_import_command": "",
+        "import_command": "",
+        "pass_count": 0,
+        "path": "generated/signoff/qkv_uram_smoke_candidate_discovery_2026_06_16.json",
+        "preset": "axis-vref-p0-softmax-input-x2-qkv-uram",
+        "recommended_candidate": null,
+        "status": "missing"
+      },
+      "vref_generic": {
+        "candidate_count": 0,
+        "dry_run_import_command": "",
+        "import_command": "",
+        "pass_count": 0,
+        "path": "generated/signoff/pynq_smoke_candidate_discovery_vref_p0_2026_06_16.json",
+        "preset": "axis-vref-p0-softmax-input-x2-dsp-mixed-stream",
+        "recommended_candidate": null,
+        "status": "missing"
+      },
+      "vref_runner": {
+        "candidate_count": 0,
+        "dry_run_import_command": "",
+        "import_command": "",
+        "pass_count": 0,
+        "path": "generated/signoff/vref_successor_smoke_candidate_discovery_2026_06_10.json",
+        "preset": "axis-vref-p0-softmax-input-x2-dsp-mixed-stream",
+        "recommended_candidate": null,
+        "status": "missing"
+      }
+    },
+    "vref_required": {
+      "blocker_count": 3,
+      "path": "generated/signoff/final_unblock_closeout_packet_vref_required_2026_06_16.json",
+      "qkv_uram_command_count": 5,
+      "qkv_uram_successor_gate": {
+        "artifact": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/signoff/vref_p0_qkv_uram_cache_successor_2026_06_16.json",
+        "candidate": "VREF-P0-02-qkv-weight-cache-uram",
+        "csynth_status": "pass",
+        "expected_result_json": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/pynq/hgtxr/e2e_axis_dma_vref_p0_softmax_input_x2_qkv_uram_file_smoke.json",
+        "latency_cycles": 498485,
+        "macro": "HGTXR_E2E_URAM_QKV_WEIGHT_CACHE=1",
+        "physical_smoke_preset": "axis-vref-p0-softmax-input-x2-qkv-uram",
+        "physical_smoke_result_json": null,
+        "physical_smoke_status": "not_captured",
+        "required_for_final_signoff": false,
+        "resources": {
+          "bram_18k": 114,
+          "dsp": 128,
+          "ff": 19664,
+          "lut": 43236,
+          "uram": 40
+        },
+        "route_errors": 0,
+        "routed_wns_ns": 4.517,
+        "status": "ready-for-physical-smoke"
+      },
+      "remaining_blockers": [
+        "requested XR-VITs sibling",
+        "C3b AXIS/DMA physical smoke result",
+        "VREF-P0 successor physical smoke result"
+      ],
+      "status": "ready-for-operator-unblock",
+      "vref_required": true,
+      "vref_successor_gate": {
+        "artifact": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/signoff/vref_p0_pot_scale_successor_softmax_input_x2_2026_06_16.json",
+        "candidate": "softmax_input_x2",
+        "expected_result_json": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/pynq/hgtxr/e2e_axis_dma_vref_p0_softmax_input_x2_dsp_mixed_stream_file_smoke.json",
+        "physical_smoke_preset": "axis-vref-p0-softmax-input-x2-dsp-mixed-stream",
+        "physical_smoke_result_json": "",
+        "physical_smoke_status": "not_captured",
+        "projection_failures": [],
+        "projection_pending": [
+          "physical_smoke_available"
+        ],
+        "projection_status": "not_promotable",
+        "recommended_resource_variant": "dsp_mixed_stream",
+        "required_for_final_signoff": true,
+        "status": "blocked"
+      }
+    },
+    "vref_smoke_discovery": {
+      "candidate_count": 0,
+      "dry_run_import_command": "",
+      "import_command": "",
+      "pass_count": 0,
+      "path": "generated/signoff/vref_successor_smoke_candidate_discovery_2026_06_10.json",
+      "preset": "axis-vref-p0-softmax-input-x2-dsp-mixed-stream",
+      "recommended_candidate": null,
+      "status": "missing"
+    },
+    "vref_successor": {
+      "candidate": "softmax_input_x2",
+      "expected_out_raw": [
+        58,
+        -51,
+        42,
+        -28,
+        36,
+        -41
+      ],
+      "path": "generated/signoff/vref_p0_pot_scale_successor_softmax_input_x2_2026_06_16.json",
+      "physical_smoke_preset": "axis-vref-p0-softmax-input-x2-dsp-mixed-stream",
+      "physical_smoke_result_json": "",
+      "physical_smoke_status": "not_captured",
+      "projection_pending": [
+        "physical_smoke_available"
+      ],
+      "projection_status": "not_promotable",
+      "recommended_resource_variant": "dsp_mixed_stream",
+      "status": "pass"
+    },
+    "vref_successor_status": "pending-physical-smoke",
+    "xr_vits_policy_integrity": {
+      "command_card": {
+        "candidate_audit": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/xr_vits_candidate_audit_2026_06_10.json",
+        "candidate_audit_fingerprint_present": false,
+        "generator": "tools/create_xr_vits_replacement_policy.py",
+        "legacy_policy_clears_final_signoff": false,
+        "policy_exists": false,
+        "policy_fingerprint_present": false,
+        "policy_path": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/xr_vits_replacement_policy.json",
+        "required": true,
+        "required_policy_fields": [
+          "candidate_audit_fingerprint",
+          "candidate_audit_recommendation_snapshot",
+          "candidate_audit_meta",
+          "approval_event",
+          "policy_fingerprint"
+        ],
+        "required_policy_fields_complete": true,
+        "validation_status": "not-embedded",
+        "validator": "tools/check_final_blocker_closure_readiness.py"
+      },
+      "consistent": true,
+      "operator_handoff": {
+        "candidate_audit": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/xr_vits_candidate_audit_2026_06_10.json",
+        "candidate_audit_fingerprint_present": false,
+        "generator": "tools/create_xr_vits_replacement_policy.py",
+        "legacy_policy_clears_final_signoff": false,
+        "policy_exists": false,
+        "policy_fingerprint_present": false,
+        "policy_path": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/xr_vits_replacement_policy.json",
+        "required": true,
+        "required_policy_fields": [
+          "candidate_audit_fingerprint",
+          "candidate_audit_recommendation_snapshot",
+          "candidate_audit_meta",
+          "approval_event",
+          "policy_fingerprint"
+        ],
+        "required_policy_fields_complete": true,
+        "validation_status": "pending-policy-creation",
+        "validator": "tools/check_final_blocker_closure_readiness.py"
+      },
+      "operator_handoff_policy_check_count": 9
+    },
+    "xr_vits_unblock_packet": {
+      "active_policy_approved": false,
+      "next_required_action": "Restore exact XR-VITs or explicitly approve XR_Accel replacement.",
+      "option_count": 2,
+      "path": "generated/signoff/xr_vits_unblock_packet_2026_06_10.json",
+      "recommendation": {
+        "path": "/home/kjm26/project/PRJXR/XR-VIT/XR_Accel",
+        "reason": "highest score for ZCU104/cyclic/DeiT/HLS evidence",
+        "role": "candidate-xr-accel",
+        "score": 99
+      },
+      "requested_path": "/home/kjm26/project/PRJXR/XR-VITs",
+      "requested_path_exists": false,
+      "status": "pending-user-choice"
+    }
+  },
+  "hardware_root": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware",
+  "hgpipe_operator_audit": {
+    "contract_summary": {
+      "passed_ref_checks": 97,
+      "total_checked_samples": 5899008,
+      "total_ref_checks": 97
+    },
+    "operators": [
+      {
+        "checked_samples": 903360,
+        "contract_count": 25,
+        "guide_markers": {
+          "do_layernorm": true,
+          "layernorm.h": true,
+          "requant": true
+        },
+        "implementation_markers": {
+          "HGTXR_E2E_USE_HGPIPE_INT_LAYERNORMQ": true,
+          "hgtxr_e2e_hgpipe_lnq_requant_raw": true,
+          "hgtxr_e2e_layernorm": true
+        },
+        "missing": [],
+        "operator": "LayerNorm",
+        "property_check_count": 2,
+        "property_fail_count": 0,
+        "status": "pass",
+        "vref_markers": {
+          "-DHGTXR_E2E_HGPIPE_LAYERNORM_INPUT_SCALE=": true,
+          "-DHGTXR_E2E_HGPIPE_LAYERNORM_OUTPUT_SCALE=": true,
+          "-DHGTXR_E2E_USE_HGPIPE_INT_LAYERNORMQ=1": true,
+          "-DHGTXR_E2E_USE_HGPIPE_LNQ_GAMMA_RAW=1": true
+        }
+      },
+      {
+        "checked_samples": 1806336,
+        "contract_count": 12,
+        "guide_markers": {
+          "GeLU": true,
+          "do_gelu": true,
+          "gelu.h": true
+        },
+        "implementation_markers": {
+          "HGTXR_E2E_USE_HGPIPE_INT_GELUQ": true,
+          "hgtxr_e2e_gelu": true,
+          "hgtxr_hgpipe_geluq64_int": true
+        },
+        "missing": [],
+        "operator": "GeLU",
+        "property_check_count": 37,
+        "property_fail_count": 0,
+        "status": "pass",
+        "vref_markers": {
+          "-DHGTXR_E2E_HGPIPE_GELUQ_INPUT_SCALE=": true,
+          "-DHGTXR_E2E_HGPIPE_GELUQ_OUTPUT_SCALE=": true,
+          "-DHGTXR_E2E_USE_HGPIPE_INT_GELUQ=1": true
+        }
+      },
+      {
+        "checked_samples": 1382976,
+        "contract_count": 12,
+        "guide_markers": {
+          "Softmax": true,
+          "do_softmax": true,
+          "softmax.h": true
+        },
+        "implementation_markers": {
+          "HGTXR_E2E_USE_HGPIPE_INT_SOFTMAXQ": true,
+          "hgtxr_e2e_hgpipe_softmax_exp_raw": true,
+          "hgtxr_e2e_hgpipe_softmax_requant_raw": true
+        },
+        "missing": [],
+        "operator": "Softmax",
+        "property_check_count": 26,
+        "property_fail_count": 0,
+        "status": "pass",
+        "vref_markers": {
+          "-DHGTXR_E2E_HGPIPE_SOFTMAX_INPUT_SCALE=": true,
+          "-DHGTXR_E2E_HGPIPE_SOFTMAX_PROB_SCALE=": true,
+          "-DHGTXR_E2E_USE_HGPIPE_INT_SOFTMAXQ=1": true
+        }
+      },
+      {
+        "checked_samples": 1806336,
+        "contract_count": 48,
+        "guide_markers": {
+          "do_quant": true,
+          "quant.h": true,
+          "quantize_clamp": true
+        },
+        "implementation_markers": {
+          "HGTXR_BIT_WIDTH": true,
+          "HGTXR_WEIGHT_BIT_WIDTH": true,
+          "hgtxr_clamp_int": true,
+          "hgtxr_hgpipe_int_table_lookup": true
+        },
+        "missing": [],
+        "operator": "Quantization",
+        "property_check_count": 146,
+        "property_fail_count": 0,
+        "status": "pass",
+        "vref_markers": {
+          "-DHGTXR_E2E_USE_HGPIPE_INT_GELUQ=1": true,
+          "-DHGTXR_E2E_USE_HGPIPE_INT_LAYERNORMQ=1": true,
+          "-DHGTXR_E2E_USE_HGPIPE_INT_SOFTMAXQ=1": true
+        }
+      }
+    ],
+    "path": "generated/signoff/hgpipe_operator_audit_2026_06_16.json",
+    "residual_risk": [
+      "This is local sampled/reference-vector equivalence plus deterministic contract property checks, not a formal proof over every possible input.",
+      "Final E2E hardware signoff still depends on C3b physical smoke and XR-VITs source/replacement policy."
+    ],
+    "status": "pass"
+  },
+  "items": [
+    {
+      "evidence": [
+        "docs/Master-Plan.md",
+        "docs/Sub-Plan.md",
+        "docs/Spec.md",
+        "docs/Execution.md",
+        "docs/Validation.md",
+        "docs/track/PROGRESS.md",
+        "docs/track/THIRD_GOAL_REQUIREMENTS_2026_06_16.md",
+        "generated/signoff/third_goal_source_audit_2026_06_16.json"
+      ],
+      "evidence_items": [
+        {
+          "kind": "file-exists",
+          "note": "",
+          "path": "docs/Master-Plan.md"
+        },
+        {
+          "kind": "file-exists",
+          "note": "",
+          "path": "docs/Sub-Plan.md"
+        },
+        {
+          "kind": "file-exists",
+          "note": "",
+          "path": "docs/Spec.md"
+        },
+        {
+          "kind": "file-exists",
+          "note": "",
+          "path": "docs/Execution.md"
+        },
+        {
+          "kind": "file-exists",
+          "note": "",
+          "path": "docs/Validation.md"
+        },
+        {
+          "kind": "file-exists",
+          "note": "",
+          "path": "docs/track/PROGRESS.md"
+        },
+        {
+          "kind": "file-exists",
+          "note": "",
+          "path": "docs/track/THIRD_GOAL_REQUIREMENTS_2026_06_16.md"
+        },
+        {
+          "kind": "validated-by-tool",
+          "note": "",
+          "path": "generated/signoff/third_goal_source_audit_2026_06_16.json"
+        }
+      ],
+      "id": "0",
+      "missing": [],
+      "note": "Source audit status=pass, required=86, sources=224.",
+      "status": "reflected",
+      "title": "Analyze plan/progress/HANDOVER/docs and continue work"
+    },
+    {
+      "evidence": [
+        "generated/signoff/req1_environment_audit_2026_06_16.json",
+        "tools/check_third_goal_preflight.py",
+        "docs/Validation.md"
+      ],
+      "evidence_items": [
+        {
+          "kind": "validated-by-tool",
+          "note": "",
+          "path": "generated/signoff/req1_environment_audit_2026_06_16.json"
+        },
+        {
+          "kind": "validated-by-tool",
+          "note": "",
+          "path": "tools/check_third_goal_preflight.py"
+        },
+        {
+          "kind": "doc-reported",
+          "note": "",
+          "path": "docs/Validation.md"
+        }
+      ],
+      "id": "1",
+      "missing": [],
+      "note": "Req1 environment audit status=pass; checks=13/13; os=Ubuntu 22.04.5 LTS; vitis=/tools/Xilinx/Vitis_HLS/2023.2/bin/vitis_hls; vivado=/tools/Xilinx/Vivado/2023.2/bin/vivado.",
+      "status": "reflected",
+      "title": "Ubuntu Linux and /tools/Xilinx path changes"
+    },
+    {
+      "evidence": [
+        "docs/Master-Plan.md",
+        "docs/Sub-Plan.md",
+        "docs/Spec.md",
+        "docs/Execution.md",
+        "generated/signoff/req2_spec_subagent_gate_audit_2026_06_16.json"
+      ],
+      "evidence_items": [
+        {
+          "kind": "file-exists",
+          "note": "",
+          "path": "docs/Master-Plan.md"
+        },
+        {
+          "kind": "file-exists",
+          "note": "",
+          "path": "docs/Sub-Plan.md"
+        },
+        {
+          "kind": "file-exists",
+          "note": "",
+          "path": "docs/Spec.md"
+        },
+        {
+          "kind": "doc-reported",
+          "note": "",
+          "path": "docs/Execution.md"
+        },
+        {
+          "kind": "validated-by-tool",
+          "note": "",
+          "path": "generated/signoff/req2_spec_subagent_gate_audit_2026_06_16.json"
+        }
+      ],
+      "id": "2",
+      "missing": [],
+      "note": "Req2 gate status=pass-manual-spec-and-model-fallback; spec_kit_available=False; manual_fallback=True; spark_first=True; gpt55_fallback=True.",
+      "status": "reflected",
+      "title": "Plan/spec first and use GPT5.3-Codex-Spark where possible"
+    },
+    {
+      "evidence": [
+        "configs/sweeps/zcu104_cyclic_transformer_sweep.yaml",
+        "generated/signoff/c3b_protection_checklist_2026_06_16.md",
+        "generated/signoff/final_unblock_closeout_packet_2026_06_16.json"
+      ],
+      "evidence_items": [
+        {
+          "kind": "file-exists",
+          "note": "",
+          "path": "configs/sweeps/zcu104_cyclic_transformer_sweep.yaml"
+        },
+        {
+          "kind": "validated-by-tool",
+          "note": "",
+          "path": "generated/signoff/c3b_protection_checklist_2026_06_16.md"
+        },
+        {
+          "kind": "validated-by-tool",
+          "note": "",
+          "path": "generated/signoff/final_unblock_closeout_packet_2026_06_16.json"
+        }
+      ],
+      "id": "3",
+      "missing": [
+        "pynq/hgtxr/e2e_axis_dma_c3b_mem16_file_smoke.json"
+      ],
+      "note": "C3b prioritization is reflected; physical board result is a separate final hardware-signoff gate.",
+      "status": "reflected",
+      "title": "Prioritize ZCU104 cyclic hardware accelerator baseline"
+    },
+    {
+      "evidence": [
+        "hls/tb/tb_hgtxr_e2e_axis_top.cpp",
+        "hls/tb/tb_hgtxr_e2e_m_axi_top.cpp",
+        "pynq/hgtxr/run_e2e_axis_dma_smoke.py",
+        "generated/signoff/c3b_physical_smoke_gate_audit_2026_06_16.json",
+        "generated/signoff/final_unblock_closeout_packet_2026_06_16.json",
+        "pynq/hgtxr/e2e_axis_dma_c3b_mem16_file_smoke.json"
+      ],
+      "evidence_items": [
+        {
+          "kind": "file-exists",
+          "note": "",
+          "path": "hls/tb/tb_hgtxr_e2e_axis_top.cpp"
+        },
+        {
+          "kind": "file-exists",
+          "note": "",
+          "path": "hls/tb/tb_hgtxr_e2e_m_axi_top.cpp"
+        },
+        {
+          "kind": "file-exists",
+          "note": "",
+          "path": "pynq/hgtxr/run_e2e_axis_dma_smoke.py"
+        },
+        {
+          "kind": "validated-by-tool",
+          "note": "",
+          "path": "generated/signoff/c3b_physical_smoke_gate_audit_2026_06_16.json"
+        },
+        {
+          "kind": "validated-by-tool",
+          "note": "",
+          "path": "generated/signoff/final_unblock_closeout_packet_2026_06_16.json"
+        },
+        {
+          "kind": "external-blocker",
+          "note": "",
+          "path": "pynq/hgtxr/e2e_axis_dma_c3b_mem16_file_smoke.json"
+        }
+      ],
+      "id": "4",
+      "missing": [
+        "C3b ZCU104 physical smoke result"
+      ],
+      "note": "C3b smoke gate status=blocked_missing_canonical_physical_smoke_result; canonical_result=missing; bundle=pass; session=pass.",
+      "status": "partial",
+      "title": "Run paper ViT model E2E"
+    },
+    {
+      "evidence": [
+        "configs/zcu104_e2e_q4w8a_defines.h",
+        "generated/signoff/req5_q4q8_swhw_match_audit_2026_06_16.json",
+        "generated/signoff/vref_p0_pot_scale_successor_softmax_input_x2_2026_06_16.md"
+      ],
+      "evidence_items": [
+        {
+          "kind": "file-exists",
+          "note": "",
+          "path": "configs/zcu104_e2e_q4w8a_defines.h"
+        },
+        {
+          "kind": "validated-by-tool",
+          "note": "",
+          "path": "generated/signoff/req5_q4q8_swhw_match_audit_2026_06_16.json"
+        },
+        {
+          "kind": "validated-by-tool",
+          "note": "",
+          "path": "generated/signoff/vref_p0_pot_scale_successor_softmax_input_x2_2026_06_16.md"
+        }
+      ],
+      "id": "5",
+      "missing": [],
+      "note": "Req5 audit status=pass; precision={'activation_bits': 8, 'activation_format': 'q8/hgtxr_data_t boundary per config', 'weight_bits': 4, 'weight_format': 'signed-q4-packed-in-uint32/AXI-256'}; VREF successor expected raw=[58, -51, 42, -28, 36, -41]. Physical smoke remains Req4/final gate.",
+      "status": "reflected",
+      "title": "Q4 weights and Q8 activations with SW/HW match"
+    },
+    {
+      "evidence": [
+        "configs/zcu104_e2e_q4w8a_defines.h",
+        "generated/signoff/req6_parameterization_audit_2026_06_16.json",
+        "tools/run_third_goal_final_signoff.py",
+        "generated/signoff/vref_p0_qkv_uram_cache_successor_2026_06_16.json"
+      ],
+      "evidence_items": [
+        {
+          "kind": "file-exists",
+          "note": "",
+          "path": "configs/zcu104_e2e_q4w8a_defines.h"
+        },
+        {
+          "kind": "validated-by-tool",
+          "note": "",
+          "path": "generated/signoff/req6_parameterization_audit_2026_06_16.json"
+        },
+        {
+          "kind": "validated-by-tool",
+          "note": "",
+          "path": "tools/run_third_goal_final_signoff.py"
+        },
+        {
+          "kind": "validated-by-tool",
+          "note": "",
+          "path": "generated/signoff/vref_p0_qkv_uram_cache_successor_2026_06_16.json"
+        }
+      ],
+      "id": "6",
+      "missing": [],
+      "note": "Req6 parameterization audit status=pass, checks=71/71; QKV URAM successor status=pass; resources={'bram_18k': 114, 'dsp': 128, 'ff': 19664, 'lut': 43236, 'uram': 40}; remaining=['physical_smoke_json'].",
+      "status": "reflected",
+      "title": "Parameterize tiling, parallelism, bus width, bit width, buffer size, FIFO depth"
+    },
+    {
+      "evidence": [
+        "docs/SRC_CASE_MODULE_GUIDE.md",
+        "analysis/vit-accel/codebases/HG-PIPE/analysis.md"
+      ],
+      "evidence_items": [
+        {
+          "kind": "file-exists",
+          "note": "",
+          "path": "docs/SRC_CASE_MODULE_GUIDE.md"
+        },
+        {
+          "kind": "file-exists",
+          "note": "",
+          "path": "analysis/vit-accel/codebases/HG-PIPE/analysis.md"
+        }
+      ],
+      "id": "7",
+      "missing": [],
+      "note": "",
+      "status": "reflected",
+      "title": "Analyze HG-PIPE and reflect it for ZCU104 cyclic accelerator"
+    },
+    {
+      "evidence": [
+        "hls/include/hgtxr_cyclic_math.hpp",
+        "hls/include/hgtxr_e2e_vit.hpp",
+        "tools/validate_hgpipe_lut_math.py",
+        "generated/signoff/hgpipe_operator_audit_2026_06_16.json"
+      ],
+      "evidence_items": [
+        {
+          "kind": "file-exists",
+          "note": "",
+          "path": "hls/include/hgtxr_cyclic_math.hpp"
+        },
+        {
+          "kind": "file-exists",
+          "note": "",
+          "path": "hls/include/hgtxr_e2e_vit.hpp"
+        },
+        {
+          "kind": "validated-by-tool",
+          "note": "",
+          "path": "tools/validate_hgpipe_lut_math.py"
+        },
+        {
+          "kind": "validated-by-tool",
+          "note": "",
+          "path": "generated/signoff/hgpipe_operator_audit_2026_06_16.json"
+        }
+      ],
+      "id": "8",
+      "missing": [],
+      "note": "Operator audit status=pass, checked_samples=5899008, ref_checks=97. Residual risk remains local sampled/reference-vector equivalence, not formal exhaustive proof.",
+      "status": "reflected",
+      "title": "Implement LayerNorm, GeLU, Softmax, Quantization from HG-PIPE paper/code"
+    },
+    {
+      "evidence": [
+        "generated/signoff/req9_deit_image_reference_audit_2026_06_16.json",
+        "/home/kjm26/project/PRJXR/XR-VIT/PAPER_PRJXR/05_RESOURCES/DeiT-Tiny C-Syn Results.png",
+        "docs/DeiT-Tiny C-Syn Results.png",
+        "tools/check_third_goal_preflight.py"
+      ],
+      "evidence_items": [
+        {
+          "kind": "validated-by-tool",
+          "note": "",
+          "path": "generated/signoff/req9_deit_image_reference_audit_2026_06_16.json"
+        },
+        {
+          "kind": "file-exists",
+          "note": "",
+          "path": "/home/kjm26/project/PRJXR/XR-VIT/PAPER_PRJXR/05_RESOURCES/DeiT-Tiny C-Syn Results.png"
+        },
+        {
+          "kind": "file-exists",
+          "note": "",
+          "path": "docs/DeiT-Tiny C-Syn Results.png"
+        },
+        {
+          "kind": "validated-by-tool",
+          "note": "",
+          "path": "tools/check_third_goal_preflight.py"
+        }
+      ],
+      "id": "9",
+      "missing": [],
+      "note": "Req9 audit status=pass; checks=11/11; requested_sha=90495791e6103be30268320d3b17dce2eaa52d003dd6f341393262745c1c3b79.",
+      "status": "reflected",
+      "title": "Refer to DeiT-Tiny C-Syn image"
+    },
+    {
+      "evidence": [
+        "docs/legacy/legacy_experiment_analysis_2026_06_12.md",
+        "analysis/vit-accel",
+        "generated/signoff/xr_vits_gate_audit_2026_06_16.json"
+      ],
+      "evidence_items": [
+        {
+          "kind": "doc-reported",
+          "note": "",
+          "path": "docs/legacy/legacy_experiment_analysis_2026_06_12.md"
+        },
+        {
+          "kind": "file-exists",
+          "note": "",
+          "path": "analysis/vit-accel"
+        },
+        {
+          "kind": "validated-by-tool",
+          "note": "",
+          "path": "generated/signoff/xr_vits_gate_audit_2026_06_16.json"
+        }
+      ],
+      "id": "10",
+      "missing": [],
+      "note": "Past XR-VIT evidence is organized; XR-VITs gate audit status=blocked / candidate-ready-needs-approval. Exact XR-VITs source/replacement approval remains tracked by Req11.",
+      "status": "reflected",
+      "title": "Refer to XR-VIT experiment results/code"
+    },
+    {
+      "evidence": [
+        "generated/signoff/xr_vits_reference_resolution_2026_06_10.md",
+        "generated/signoff/xr_vits_gate_audit_2026_06_16.json",
+        "generated/signoff/final_unblock_closeout_packet_2026_06_16.json",
+        "generated/signoff/final_unblock_commands_2026_06_10.json",
+        "generated/signoff/final_operator_handoff_2026_06_10.json",
+        "generated/signoff/final_operator_handoff_validation_2026_06_10.json",
+        "/home/kjm26/project/PRJXR/XR-VITs"
+      ],
+      "evidence_items": [
+        {
+          "kind": "validated-by-tool",
+          "note": "",
+          "path": "generated/signoff/xr_vits_reference_resolution_2026_06_10.md"
+        },
+        {
+          "kind": "validated-by-tool",
+          "note": "",
+          "path": "generated/signoff/xr_vits_gate_audit_2026_06_16.json"
+        },
+        {
+          "kind": "validated-by-tool",
+          "note": "",
+          "path": "generated/signoff/final_unblock_closeout_packet_2026_06_16.json"
+        },
+        {
+          "kind": "validated-by-tool",
+          "note": "",
+          "path": "generated/signoff/final_unblock_commands_2026_06_10.json"
+        },
+        {
+          "kind": "validated-by-tool",
+          "note": "",
+          "path": "generated/signoff/final_operator_handoff_2026_06_10.json"
+        },
+        {
+          "kind": "validated-by-tool",
+          "note": "",
+          "path": "generated/signoff/final_operator_handoff_validation_2026_06_10.json"
+        },
+        {
+          "kind": "external-blocker",
+          "note": "",
+          "path": "/home/kjm26/project/PRJXR/XR-VITs"
+        }
+      ],
+      "id": "11",
+      "missing": [
+        "/home/kjm26/project/PRJXR/XR-VITs or approved replacement policy"
+      ],
+      "note": "XR-VITs gate audit status=blocked; mode=candidate-ready-needs-approval; requested_path=/home/kjm26/project/PRJXR/XR-VITs; operator_policy_integrity_consistent=True; policy_validation=pending-policy-creation.",
+      "status": "blocked",
+      "title": "Use /home/kjm26/project/PRJXR/XR-VITs HLS code for ZCU104 fit/low latency"
+    }
+  ],
+  "pending_optional_or_internal_evidence": [
+    "generated/signoff/vref_successor_smoke_candidate_discovery_2026_06_10.json",
+    "generated/signoff/pynq_smoke_candidate_discovery_c3b_2026_06_16.json",
+    "generated/signoff/pynq_smoke_candidate_discovery_vref_p0_2026_06_16.json",
+    "generated/signoff/qkv_uram_smoke_candidate_discovery_2026_06_16.json",
+    "generated/signoff/final_blocker_closure_readiness_2026_06_10.json",
+    "generated/signoff/final_unblock_intake_2026_06_10.json",
+    "generated/signoff/final_unblock_commands_2026_06_10.json",
+    "generated/signoff/final_unblock_candidate_audit_2026_06_10.json",
+    "generated/signoff/final_operator_handoff_2026_06_10.json",
+    "generated/signoff/final_operator_handoff_validation_2026_06_10.json",
+    "generated/signoff/xr_vits_unblock_packet_2026_06_10.json"
+  ],
+  "qkv_uram_runner": {
+    "path": "generated/signoff/third_goal_final_signoff_run_2026_06_10.json",
+    "pynq_c3b_smoke_discovery_status": "missing",
+    "pynq_vref_smoke_discovery_status": "missing",
+    "qkv_uram_import_status": "skipped",
+    "qkv_uram_remote_execute": false,
+    "qkv_uram_remote_status": "skipped",
+    "qkv_uram_required_for_final_signoff": false,
+    "qkv_uram_smoke_discovery_status": "missing",
+    "status": "blocked"
+  },
+  "qkv_uram_successor": {
+    "candidate": "VREF-P0-02-qkv-weight-cache-uram",
+    "check_count": 10,
+    "dry_run_import_command": "python3 tools/import_pynq_smoke_result.py /path/to/e2e_axis_dma_vref_p0_softmax_input_x2_qkv_uram_file_smoke.json --preset axis-vref-p0-softmax-input-x2-qkv-uram --dry-run",
+    "estimated_clock_ns": 4.069,
+    "expected_result_json": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/pynq/hgtxr/e2e_axis_dma_vref_p0_softmax_input_x2_qkv_uram_file_smoke.json",
+    "fail_count": 0,
+    "latency_cycles": 498485,
+    "macro": "HGTXR_E2E_URAM_QKV_WEIGHT_CACHE=1",
+    "pass_count": 10,
+    "path": "generated/signoff/vref_p0_qkv_uram_cache_successor_2026_06_16.json",
+    "physical_smoke_result_json": "",
+    "physical_smoke_status": "missing",
+    "promotion_status": "hls-resource-pass-routed-pending",
+    "pynq_plumbing_status": "ready-for-artifacts",
+    "remaining": [
+      "physical_smoke_json"
+    ],
+    "remote_dry_run_command": "python3 tools/run_zcu104_c3b_smoke_remote.py --profile vref-p0-softmax-input-x2-qkv-uram --host <zcu104-ip-or-host> --user xilinx",
+    "resource_policy": "dsp_mixed_stream",
+    "resources": {
+      "bram_18k": 114,
+      "dsp": 128,
+      "ff": 19664,
+      "lut": 43236,
+      "uram": 40
+    },
+    "status": "pass"
+  },
+  "remaining_external_input_details": [
+    {
+      "blocker_name": "C3b AXIS/DMA physical smoke result",
+      "kind": "canonical-board-smoke-json",
+      "path": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/pynq/hgtxr/e2e_axis_dma_c3b_mem16_file_smoke.json",
+      "required_for_default_final_signoff": true,
+      "status": "missing"
+    },
+    {
+      "blocker_name": "requested XR-VITs sibling",
+      "kind": "requested-xr-vits-source-tree",
+      "path": "/home/kjm26/project/PRJXR/XR-VITs",
+      "required_for_default_final_signoff": true,
+      "status": "missing"
+    },
+    {
+      "blocker_name": "VREF-P0 successor physical smoke result",
+      "kind": "successor-board-smoke-json",
+      "path": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/pynq/hgtxr/e2e_axis_dma_vref_p0_softmax_input_x2_dsp_mixed_stream_file_smoke.json",
+      "required_for_default_final_signoff": false,
+      "status": "missing"
+    }
+  ],
+  "remaining_external_inputs": [
+    "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/pynq/hgtxr/e2e_axis_dma_c3b_mem16_file_smoke.json",
+    "/home/kjm26/project/PRJXR/XR-VITs",
+    "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/pynq/hgtxr/e2e_axis_dma_vref_p0_softmax_input_x2_dsp_mixed_stream_file_smoke.json"
+  ],
+  "req1_environment_audit": {
+    "check_count": 13,
+    "environment": {
+      "os_release": {
+        "BUG_REPORT_URL": "https://bugs.launchpad.net/ubuntu/",
+        "HOME_URL": "https://www.ubuntu.com/",
+        "ID": "ubuntu",
+        "ID_LIKE": "debian",
+        "NAME": "Ubuntu",
+        "PRETTY_NAME": "Ubuntu 22.04.5 LTS",
+        "PRIVACY_POLICY_URL": "https://www.ubuntu.com/legal/terms-and-policies/privacy-policy",
+        "SUPPORT_URL": "https://help.ubuntu.com/",
+        "UBUNTU_CODENAME": "jammy",
+        "VERSION": "22.04.5 LTS (Jammy Jellyfish)",
+        "VERSION_CODENAME": "jammy",
+        "VERSION_ID": "22.04"
+      },
+      "platform_release": "6.8.0-124-generic",
+      "platform_system": "Linux",
+      "proc_version": "Linux version 6.8.0-124-generic (buildd@lcy02-amd64-109) (x86_64-linux-gnu-gcc-12 (Ubuntu 12.3.0-1ubuntu1~22.04.3) 12.3.0, GNU ld (GNU Binutils for Ubuntu) 2.38) #124~22.04.1-Ubuntu SMP PREEMPT_DYNAMIC Tue May 26 21:05:19 UTC ",
+      "vitis_hls": "/tools/Xilinx/Vitis_HLS/2023.2/bin/vitis_hls",
+      "vivado": "/tools/Xilinx/Vivado/2023.2/bin/vivado"
+    },
+    "fail_count": 0,
+    "pass_count": 13,
+    "path": "generated/signoff/req1_environment_audit_2026_06_16.json",
+    "status": "pass"
+  },
+  "req2_spec_subagent_gate_audit": {
+    "path": "generated/signoff/req2_spec_subagent_gate_audit_2026_06_16.json",
+    "plan_spec": {
+      "documents": {
+        "hardware_execution": "docs/Execution.md",
+        "hardware_master_plan": "docs/Master-Plan.md",
+        "hardware_progress": "docs/track/PROGRESS.md",
+        "hardware_requirements": "docs/track/THIRD_GOAL_REQUIREMENTS_2026_06_16.md",
+        "hardware_spec": "docs/Spec.md",
+        "hardware_sub_plan": "docs/Sub-Plan.md",
+        "hardware_validation": "docs/Validation.md",
+        "parent_execution": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/Execution.md",
+        "parent_log": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/track/log.md",
+        "parent_master_plan": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/Master-Plan.md",
+        "parent_progress": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/track/PROGRESS.md",
+        "parent_spec": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/Spec.md",
+        "parent_sub_plan": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/Sub-Plan.md",
+        "parent_validation": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/Validation.md"
+      },
+      "markers": {
+        "C3b": true,
+        "HGTXR_BUS_WIDTH": true,
+        "HGTXR_FIFO_DEPTH": true,
+        "HGTXR_PARALLELISM_FACTOR": true,
+        "Q4": true,
+        "Q8": true,
+        "VREF": true,
+        "ZCU104": true
+      },
+      "plan_spec_covered": true,
+      "required_docs_present": true
+    },
+    "spec_kit": {
+      "available": false,
+      "manual_fallback_recorded": true,
+      "markers": {
+        "manual": true,
+        "manual spec": true,
+        "not available": true,
+        "not found": true,
+        "spec-kit": true,
+        "specify": true
+      },
+      "spec_kit_path": null,
+      "specify_path": null
+    },
+    "status": "pass-manual-spec-and-model-fallback",
+    "subagents": {
+      "gpt55_fallback_recorded": true,
+      "markers": {
+        "GPT5.3-Codex-Spark": true,
+        "GPT5.5": true,
+        "Spark": true,
+        "Task Cards": true,
+        "fallback": true,
+        "quota": true,
+        "sub-agent": true
+      },
+      "quota_or_limit_recorded": true,
+      "spark_first_recorded": true,
+      "task_cards_recorded": true
+    }
+  },
+  "req5_q4q8_swhw_match_audit": {
+    "claim_supported": "Local strict CSim proves deterministic synthetic Q4 weight vectors and Q8 activation path match golden SW references for available E2E AXIS variants.",
+    "fail_count": 0,
+    "manifest_status": "pass",
+    "pass_count": 11,
+    "path": "generated/signoff/req5_q4q8_swhw_match_audit_2026_06_16.json",
+    "precision": {
+      "activation_bits": 8,
+      "activation_format": "q8/hgtxr_data_t boundary per config",
+      "weight_bits": 4,
+      "weight_format": "signed-q4-packed-in-uint32/AXI-256"
+    },
+    "remaining_scope": [
+      "ZCU104 physical board smoke remains separate Req4/final gate.",
+      "This is not exhaustive over every possible arbitrary weight tensor."
+    ],
+    "status": "pass"
+  },
+  "req6_parameterization_audit": {
+    "check_count": 71,
+    "config_macros": {
+      "HGTXR_BIT_WIDTH": 8,
+      "HGTXR_BUFFER_SIZE": 256,
+      "HGTXR_BUS_WIDTH": 256,
+      "HGTXR_FIFO_DEPTH": 128,
+      "HGTXR_PARALLELISM_FACTOR": 8,
+      "HGTXR_TILING_FACTOR": 1,
+      "HGTXR_WEIGHT_BIT_WIDTH": 4
+    },
+    "coverage": {
+      "config": "top-level ZCU104 Q4/W8A defaults are override-safe #ifndef macros",
+      "derived_params": "core tile, parallel, bus, bit, local-buffer, and FIFO constants derive from Req6 macros",
+      "hls_pragmas": "AXIS FIFO depth and E2E memory partition factors consume derived macros",
+      "legality": "bus/bit widths, head dimensions, dense parallelism, packed weight lanes, buffer size, and FIFO depth are checked for HLS-legal relationships",
+      "parallelism_extensions": "C3b PAR16 is the validated resource-matrix path and PAR32 remains exploratory until fresh csynth, routing, resource-fit, and no-overwrite evidence exist",
+      "static_asserts": "E2E header has compile-time guards for active tokens, heads, dimensions, dense parallelism, packed weight lanes, and AXIS width",
+      "sweep": "machine-readable sweep matrix covers all requested knobs",
+      "tool_overrides": "CSim/CSynth Tcl can override E2E parallelism for PAR16/C3b-style builds and PAR32 exploration"
+    },
+    "fail_count": 0,
+    "pass_count": 71,
+    "path": "generated/signoff/req6_parameterization_audit_2026_06_16.json",
+    "status": "pass"
+  },
+  "req9_deit_image_reference_audit": {
+    "check_count": 11,
+    "fail_count": 0,
+    "hardware_docs_copy": {
+      "exists": true,
+      "path": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/docs/DeiT-Tiny C-Syn Results.png",
+      "png_magic": "89504e470d0a1a0a",
+      "sha256": "90495791e6103be30268320d3b17dce2eaa52d003dd6f341393262745c1c3b79",
+      "size_bytes": 69712
+    },
+    "normalized_requested_path": "/home/kjm26/project/PRJXR/XR-VIT/PAPER_PRJXR/05_RESOURCES/DeiT-Tiny C-Syn Results.png",
+    "pass_count": 11,
+    "path": "generated/signoff/req9_deit_image_reference_audit_2026_06_16.json",
+    "requested_image": {
+      "exists": true,
+      "path": "/home/kjm26/project/PRJXR/XR-VIT/PAPER_PRJXR/05_RESOURCES/DeiT-Tiny C-Syn Results.png",
+      "png_magic": "89504e470d0a1a0a",
+      "sha256": "90495791e6103be30268320d3b17dce2eaa52d003dd6f341393262745c1c3b79",
+      "size_bytes": 69712
+    },
+    "requested_user_path": "/home/kjm26/project/PRJXR/XR-VIT\\PAPER_PRJXR\\05_RESOURCES\\DeiT-Tiny C-Syn Results.png",
+    "status": "pass"
+  },
+  "root": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR",
+  "safety": {
+    "creates_board_result": false,
+    "creates_xr_vits_policy": false,
+    "executes_network": false,
+    "writes_canonical_inputs": false
+  },
+  "source_audit": {
+    "missing_required": [],
+    "path": "generated/signoff/third_goal_source_audit_2026_06_16.json",
+    "required_count": 86,
+    "source_count": 224,
+    "status": "pass"
+  },
+  "status": "blocked-external",
+  "summary": {
+    "blocked": 1,
+    "default_closeout_blockers": 2,
+    "evidence_classes": [
+      "doc-reported",
+      "external-blocker",
+      "file-exists",
+      "validated-by-tool"
+    ],
+    "partial": 1,
+    "reflected": 10,
+    "requirements": 12,
+    "vref_required_closeout_blockers": 3
+  },
+  "xr_vits_gate_audit": {
+    "active_policy": {
+      "errors": [
+        "active replacement policy missing: /home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/xr_vits_replacement_policy.json"
+      ],
+      "path": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/xr_vits_replacement_policy.json",
+      "status": "missing",
+      "would_clear": false
+    },
+    "candidate_audit": {
+      "approved_replacement": false,
+      "candidate_count": 3,
+      "errors": [],
+      "path": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/xr_vits_candidate_audit_2026_06_10.json",
+      "policy_note": "Do not treat any candidate as XR-VITs until the user approves the replacement or the exact requested path is restored.",
+      "recommendation": {
+        "path": "/home/kjm26/project/PRJXR/XR-VIT/XR_Accel",
+        "reason": "highest score for ZCU104/cyclic/DeiT/HLS evidence",
+        "role": "candidate-xr-accel",
+        "score": 99
+      },
+      "recommendation_matches": true,
+      "status": "candidate-found"
+    },
+    "path": "generated/signoff/xr_vits_gate_audit_2026_06_16.json",
+    "remaining_blockers": [
+      "requested XR-VITs sibling"
+    ],
+    "requested_path": "/home/kjm26/project/PRJXR/XR-VITs",
+    "resolution_mode": "candidate-ready-needs-approval",
+    "status": "blocked"
+  },
+  "xr_vits_policy_integrity": {
+    "command_card": {
+      "candidate_audit": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/xr_vits_candidate_audit_2026_06_10.json",
+      "candidate_audit_fingerprint_present": false,
+      "generator": "tools/create_xr_vits_replacement_policy.py",
+      "legacy_policy_clears_final_signoff": false,
+      "policy_exists": false,
+      "policy_fingerprint_present": false,
+      "policy_path": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/xr_vits_replacement_policy.json",
+      "required": true,
+      "required_policy_fields": [
+        "candidate_audit_fingerprint",
+        "candidate_audit_recommendation_snapshot",
+        "candidate_audit_meta",
+        "approval_event",
+        "policy_fingerprint"
+      ],
+      "required_policy_fields_complete": true,
+      "validation_status": "not-embedded",
+      "validator": "tools/check_final_blocker_closure_readiness.py"
+    },
+    "consistent": true,
+    "operator_handoff": {
+      "candidate_audit": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/xr_vits_candidate_audit_2026_06_10.json",
+      "candidate_audit_fingerprint_present": false,
+      "generator": "tools/create_xr_vits_replacement_policy.py",
+      "legacy_policy_clears_final_signoff": false,
+      "policy_exists": false,
+      "policy_fingerprint_present": false,
+      "policy_path": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/xr_vits_replacement_policy.json",
+      "required": true,
+      "required_policy_fields": [
+        "candidate_audit_fingerprint",
+        "candidate_audit_recommendation_snapshot",
+        "candidate_audit_meta",
+        "approval_event",
+        "policy_fingerprint"
+      ],
+      "required_policy_fields_complete": true,
+      "validation_status": "pending-policy-creation",
+      "validator": "tools/check_final_blocker_closure_readiness.py"
+    },
+    "operator_handoff_policy_check_count": 9
+  },
+  "xr_vits_unblock_packet": {
+    "active_policy_approved": false,
+    "next_required_action": "Restore exact XR-VITs or explicitly approve XR_Accel replacement.",
+    "option_count": 2,
+    "path": "generated/signoff/xr_vits_unblock_packet_2026_06_10.json",
+    "recommendation": {
+      "path": "/home/kjm26/project/PRJXR/XR-VIT/XR_Accel",
+      "reason": "highest score for ZCU104/cyclic/DeiT/HLS evidence",
+      "role": "candidate-xr-accel",
+      "score": 99
+    },
+    "requested_path": "/home/kjm26/project/PRJXR/XR-VITs",
+    "requested_path_exists": false,
+    "status": "pending-user-choice"
+  }
+}

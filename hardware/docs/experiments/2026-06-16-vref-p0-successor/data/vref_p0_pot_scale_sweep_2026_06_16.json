@@ -1,0 +1,2746 @@
+{
+  "date_tag": "2026_06_16",
+  "hardware": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware",
+  "policy": {
+    "c3b_protection": "no HLS/Vivado run and no C3b artifact overwrite",
+    "promotion_gate": "candidate must regenerate golden header and pass CSim before HLS macro promotion",
+    "scope": "SW-only power-of-two scale candidate sweep for reduced E2E vector references",
+    "source": "P2-ViT",
+    "vref": "VREF-P0-01"
+  },
+  "root": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR",
+  "safety": {
+    "executes_hls": false,
+    "executes_vivado": false,
+    "overwrites_c3b_artifacts": false,
+    "writes_hls_source": false
+  },
+  "spec_count": 3,
+  "specs": [
+    {
+      "baseline_expected_raw": [
+        28,
+        -15,
+        12,
+        -8,
+        10,
+        -12
+      ],
+      "baseline_math": {
+        "attention_softmax": "hgpipe_softmaxq",
+        "geluq_input_scale": 16,
+        "geluq_output_scale": 4,
+        "hgpipe_contract": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/refs/hgpipe_lut_math_contract.json",
+        "layernorm": "compact_lut",
+        "layernorm_bias_shift": 33,
+        "layernorm_input_scale": 16,
+        "layernorm_output_scale": 4,
+        "mlp_gelu": "hgpipe_geluq",
+        "softmax_input_scale": 16,
+        "softmax_prob_scale": 4
+      },
+      "baseline_runtime_state": 2,
+      "candidate_count": 15,
+      "candidates": [
+        {
+          "all_scales_power_of_two": true,
+          "candidate": "all_input_x2",
+          "exact_raw_match": true,
+          "expected_raw": [
+            28,
+            -15,
+            12,
+            -8,
+            10,
+            -12
+          ],
+          "head_l1_delta": 0.00146484375,
+          "math": {
+            "attention_softmax": "hgpipe_softmaxq",
+            "geluq_input_scale": 32,
+            "geluq_output_scale": 4,
+            "hgpipe_contract": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/refs/hgpipe_lut_math_contract.json",
+            "layernorm": "compact_lut",
+            "layernorm_bias_shift": 33,
+            "layernorm_input_scale": 32,
+            "layernorm_output_scale": 4,
+            "mlp_gelu": "hgpipe_geluq",
+            "softmax_input_scale": 32,
+            "softmax_prob_scale": 4
+          },
+          "max_raw_abs_delta": 0,
+          "nonzero_counts": {
+            "head": 12,
+            "k": 198,
+            "patch": 12,
+            "q": 198,
+            "v": 198,
+            "w1": 198,
+            "w2": 12,
+            "wo": 198
+          },
+          "raw_delta": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "raw_l1_delta": 0,
+          "runtime_state": 2,
+          "scales": {
+            "geluq_input_scale": 32,
+            "geluq_output_scale": 4,
+            "layernorm_input_scale": 32,
+            "layernorm_output_scale": 4,
+            "softmax_input_scale": 32,
+            "softmax_prob_scale": 4
+          },
+          "status": "pass"
+        },
+        {
+          "all_scales_power_of_two": true,
+          "candidate": "current",
+          "exact_raw_match": true,
+          "expected_raw": [
+            28,
+            -15,
+            12,
+            -8,
+            10,
+            -12
+          ],
+          "head_l1_delta": 0.0,
+          "math": {
+            "attention_softmax": "hgpipe_softmaxq",
+            "geluq_input_scale": 16,
+            "geluq_output_scale": 4,
+            "hgpipe_contract": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/refs/hgpipe_lut_math_contract.json",
+            "layernorm": "compact_lut",
+            "layernorm_bias_shift": 33,
+            "layernorm_input_scale": 16,
+            "layernorm_output_scale": 4,
+            "mlp_gelu": "hgpipe_geluq",
+            "softmax_input_scale": 16,
+            "softmax_prob_scale": 4
+          },
+          "max_raw_abs_delta": 0,
+          "nonzero_counts": {
+            "head": 12,
+            "k": 198,
+            "patch": 12,
+            "q": 198,
+            "v": 198,
+            "w1": 198,
+            "w2": 12,
+            "wo": 198
+          },
+          "raw_delta": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "raw_l1_delta": 0,
+          "runtime_state": 2,
+          "scales": {
+            "geluq_input_scale": 16,
+            "geluq_output_scale": 4,
+            "layernorm_input_scale": 16,
+            "layernorm_output_scale": 4,
+            "softmax_input_scale": 16,
+            "softmax_prob_scale": 4
+          },
+          "status": "pass"
+        },
+        {
+          "all_scales_power_of_two": true,
+          "candidate": "gelu_input_x0p5",
+          "exact_raw_match": true,
+          "expected_raw": [
+            28,
+            -15,
+            12,
+            -8,
+            10,
+            -12
+          ],
+          "head_l1_delta": 0.0,
+          "math": {
+            "attention_softmax": "hgpipe_softmaxq",
+            "geluq_input_scale": 8,
+            "geluq_output_scale": 4,
+            "hgpipe_contract": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/refs/hgpipe_lut_math_contract.json",
+            "layernorm": "compact_lut",
+            "layernorm_bias_shift": 33,
+            "layernorm_input_scale": 16,
+            "layernorm_output_scale": 4,
+            "mlp_gelu": "hgpipe_geluq",
+            "softmax_input_scale": 16,
+            "softmax_prob_scale": 4
+          },
+          "max_raw_abs_delta": 0,
+          "nonzero_counts": {
+            "head": 12,
+            "k": 198,
+            "patch": 12,
+            "q": 198,
+            "v": 198,
+            "w1": 198,
+            "w2": 12,
+            "wo": 198
+          },
+          "raw_delta": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "raw_l1_delta": 0,
+          "runtime_state": 2,
+          "scales": {
+            "geluq_input_scale": 8,
+            "geluq_output_scale": 4,
+            "layernorm_input_scale": 16,
+            "layernorm_output_scale": 4,
+            "softmax_input_scale": 16,
+            "softmax_prob_scale": 4
+          },
+          "status": "pass"
+        },
+        {
+          "all_scales_power_of_two": true,
+          "candidate": "gelu_input_x2",
+          "exact_raw_match": true,
+          "expected_raw": [
+            28,
+            -15,
+            12,
+            -8,
+            10,
+            -12
+          ],
+          "head_l1_delta": 0.00146484375,
+          "math": {
+            "attention_softmax": "hgpipe_softmaxq",
+            "geluq_input_scale": 32,
+            "geluq_output_scale": 4,
+            "hgpipe_contract": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/refs/hgpipe_lut_math_contract.json",
+            "layernorm": "compact_lut",
+            "layernorm_bias_shift": 33,
+            "layernorm_input_scale": 16,
+            "layernorm_output_scale": 4,
+            "mlp_gelu": "hgpipe_geluq",
+            "softmax_input_scale": 16,
+            "softmax_prob_scale": 4
+          },
+          "max_raw_abs_delta": 0,
+          "nonzero_counts": {
+            "head": 12,
+            "k": 198,
+            "patch": 12,
+            "q": 198,
+            "v": 198,
+            "w1": 198,
+            "w2": 12,
+            "wo": 198
+          },
+          "raw_delta": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "raw_l1_delta": 0,
+          "runtime_state": 2,
+          "scales": {
+            "geluq_input_scale": 32,
+            "geluq_output_scale": 4,
+            "layernorm_input_scale": 16,
+            "layernorm_output_scale": 4,
+            "softmax_input_scale": 16,
+            "softmax_prob_scale": 4
+          },
+          "status": "pass"
+        },
+        {
+          "all_scales_power_of_two": true,
+          "candidate": "layernorm_input_x0p5",
+          "exact_raw_match": true,
+          "expected_raw": [
+            28,
+            -15,
+            12,
+            -8,
+            10,
+            -12
+          ],
+          "head_l1_delta": 0.0,
+          "math": {
+            "attention_softmax": "hgpipe_softmaxq",
+            "geluq_input_scale": 16,
+            "geluq_output_scale": 4,
+            "hgpipe_contract": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/refs/hgpipe_lut_math_contract.json",
+            "layernorm": "compact_lut",
+            "layernorm_bias_shift": 33,
+            "layernorm_input_scale": 8,
+            "layernorm_output_scale": 4,
+            "mlp_gelu": "hgpipe_geluq",
+            "softmax_input_scale": 16,
+            "softmax_prob_scale": 4
+          },
+          "max_raw_abs_delta": 0,
+          "nonzero_counts": {
+            "head": 12,
+            "k": 198,
+            "patch": 12,
+            "q": 198,
+            "v": 198,
+            "w1": 198,
+            "w2": 12,
+            "wo": 198
+          },
+          "raw_delta": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "raw_l1_delta": 0,
+          "runtime_state": 2,
+          "scales": {
+            "geluq_input_scale": 16,
+            "geluq_output_scale": 4,
+            "layernorm_input_scale": 8,
+            "layernorm_output_scale": 4,
+            "softmax_input_scale": 16,
+            "softmax_prob_scale": 4
+          },
+          "status": "pass"
+        },
+        {
+          "all_scales_power_of_two": true,
+          "candidate": "layernorm_input_x2",
+          "exact_raw_match": true,
+          "expected_raw": [
+            28,
+            -15,
+            12,
+            -8,
+            10,
+            -12
+          ],
+          "head_l1_delta": 0.0,
+          "math": {
+            "attention_softmax": "hgpipe_softmaxq",
+            "geluq_input_scale": 16,
+            "geluq_output_scale": 4,
+            "hgpipe_contract": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/refs/hgpipe_lut_math_contract.json",
+            "layernorm": "compact_lut",
+            "layernorm_bias_shift": 33,
+            "layernorm_input_scale": 32,
+            "layernorm_output_scale": 4,
+            "mlp_gelu": "hgpipe_geluq",
+            "softmax_input_scale": 16,
+            "softmax_prob_scale": 4
+          },
+          "max_raw_abs_delta": 0,
+          "nonzero_counts": {
+            "head": 12,
+            "k": 198,
+            "patch": 12,
+            "q": 198,
+            "v": 198,
+            "w1": 198,
+            "w2": 12,
+            "wo": 198
+          },
+          "raw_delta": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "raw_l1_delta": 0,
+          "runtime_state": 2,
+          "scales": {
+            "geluq_input_scale": 16,
+            "geluq_output_scale": 4,
+            "layernorm_input_scale": 32,
+            "layernorm_output_scale": 4,
+            "softmax_input_scale": 16,
+            "softmax_prob_scale": 4
+          },
+          "status": "pass"
+        },
+        {
+          "all_scales_power_of_two": true,
+          "candidate": "layernorm_output_x0p5",
+          "exact_raw_match": true,
+          "expected_raw": [
+            28,
+            -15,
+            12,
+            -8,
+            10,
+            -12
+          ],
+          "head_l1_delta": 0.0,
+          "math": {
+            "attention_softmax": "hgpipe_softmaxq",
+            "geluq_input_scale": 16,
+            "geluq_output_scale": 4,
+            "hgpipe_contract": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/refs/hgpipe_lut_math_contract.json",
+            "layernorm": "compact_lut",
+            "layernorm_bias_shift": 33,
+            "layernorm_input_scale": 16,
+            "layernorm_output_scale": 2,
+            "mlp_gelu": "hgpipe_geluq",
+            "softmax_input_scale": 16,
+            "softmax_prob_scale": 4
+          },
+          "max_raw_abs_delta": 0,
+          "nonzero_counts": {
+            "head": 12,
+            "k": 198,
+            "patch": 12,
+            "q": 198,
+            "v": 198,
+            "w1": 198,
+            "w2": 12,
+            "wo": 198
+          },
+          "raw_delta": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "raw_l1_delta": 0,
+          "runtime_state": 2,
+          "scales": {
+            "geluq_input_scale": 16,
+            "geluq_output_scale": 4,
+            "layernorm_input_scale": 16,
+            "layernorm_output_scale": 2,
+            "softmax_input_scale": 16,
+            "softmax_prob_scale": 4
+          },
+          "status": "pass"
+        },
+        {
+          "all_scales_power_of_two": true,
+          "candidate": "layernorm_output_x2",
+          "exact_raw_match": true,
+          "expected_raw": [
+            28,
+            -15,
+            12,
+            -8,
+            10,
+            -12
+          ],
+          "head_l1_delta": 0.0,
+          "math": {
+            "attention_softmax": "hgpipe_softmaxq",
+            "geluq_input_scale": 16,
+            "geluq_output_scale": 4,
+            "hgpipe_contract": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/refs/hgpipe_lut_math_contract.json",
+            "layernorm": "compact_lut",
+            "layernorm_bias_shift": 33,
+            "layernorm_input_scale": 16,
+            "layernorm_output_scale": 8,
+            "mlp_gelu": "hgpipe_geluq",
+            "softmax_input_scale": 16,
+            "softmax_prob_scale": 4
+          },
+          "max_raw_abs_delta": 0,
+          "nonzero_counts": {
+            "head": 12,
+            "k": 198,
+            "patch": 12,
+            "q": 198,
+            "v": 198,
+            "w1": 198,
+            "w2": 12,
+            "wo": 198
+          },
+          "raw_delta": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "raw_l1_delta": 0,
+          "runtime_state": 2,
+          "scales": {
+            "geluq_input_scale": 16,
+            "geluq_output_scale": 4,
+            "layernorm_input_scale": 16,
+            "layernorm_output_scale": 8,
+            "softmax_input_scale": 16,
+            "softmax_prob_scale": 4
+          },
+          "status": "pass"
+        },
+        {
+          "all_scales_power_of_two": true,
+          "candidate": "softmax_input_x0p5",
+          "exact_raw_match": true,
+          "expected_raw": [
+            28,
+            -15,
+            12,
+            -8,
+            10,
+            -12
+          ],
+          "head_l1_delta": 0.0,
+          "math": {
+            "attention_softmax": "hgpipe_softmaxq",
+            "geluq_input_scale": 16,
+            "geluq_output_scale": 4,
+            "hgpipe_contract": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/refs/hgpipe_lut_math_contract.json",
+            "layernorm": "compact_lut",
+            "layernorm_bias_shift": 33,
+            "layernorm_input_scale": 16,
+            "layernorm_output_scale": 4,
+            "mlp_gelu": "hgpipe_geluq",
+            "softmax_input_scale": 8,
+            "softmax_prob_scale": 4
+          },
+          "max_raw_abs_delta": 0,
+          "nonzero_counts": {
+            "head": 12,
+            "k": 198,
+            "patch": 12,
+            "q": 198,
+            "v": 198,
+            "w1": 198,
+            "w2": 12,
+            "wo": 198
+          },
+          "raw_delta": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "raw_l1_delta": 0,
+          "runtime_state": 2,
+          "scales": {
+            "geluq_input_scale": 16,
+            "geluq_output_scale": 4,
+            "layernorm_input_scale": 16,
+            "layernorm_output_scale": 4,
+            "softmax_input_scale": 8,
+            "softmax_prob_scale": 4
+          },
+          "status": "pass"
+        },
+        {
+          "all_scales_power_of_two": true,
+          "candidate": "softmax_input_x2",
+          "exact_raw_match": true,
+          "expected_raw": [
+            28,
+            -15,
+            12,
+            -8,
+            10,
+            -12
+          ],
+          "head_l1_delta": 0.0,
+          "math": {
+            "attention_softmax": "hgpipe_softmaxq",
+            "geluq_input_scale": 16,
+            "geluq_output_scale": 4,
+            "hgpipe_contract": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/refs/hgpipe_lut_math_contract.json",
+            "layernorm": "compact_lut",
+            "layernorm_bias_shift": 33,
+            "layernorm_input_scale": 16,
+            "layernorm_output_scale": 4,
+            "mlp_gelu": "hgpipe_geluq",
+            "softmax_input_scale": 32,
+            "softmax_prob_scale": 4
+          },
+          "max_raw_abs_delta": 0,
+          "nonzero_counts": {
+            "head": 12,
+            "k": 198,
+            "patch": 12,
+            "q": 198,
+            "v": 198,
+            "w1": 198,
+            "w2": 12,
+            "wo": 198
+          },
+          "raw_delta": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "raw_l1_delta": 0,
+          "runtime_state": 2,
+          "scales": {
+            "geluq_input_scale": 16,
+            "geluq_output_scale": 4,
+            "layernorm_input_scale": 16,
+            "layernorm_output_scale": 4,
+            "softmax_input_scale": 32,
+            "softmax_prob_scale": 4
+          },
+          "status": "pass"
+        },
+        {
+          "all_scales_power_of_two": true,
+          "candidate": "gelu_output_x2",
+          "exact_raw_match": false,
+          "expected_raw": [
+            28,
+            -14,
+            12,
+            -8,
+            10,
+            -12
+          ],
+          "head_l1_delta": 0.075531005859375,
+          "math": {
+            "attention_softmax": "hgpipe_softmaxq",
+            "geluq_input_scale": 16,
+            "geluq_output_scale": 8,
+            "hgpipe_contract": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/refs/hgpipe_lut_math_contract.json",
+            "layernorm": "compact_lut",
+            "layernorm_bias_shift": 33,
+            "layernorm_input_scale": 16,
+            "layernorm_output_scale": 4,
+            "mlp_gelu": "hgpipe_geluq",
+            "softmax_input_scale": 16,
+            "softmax_prob_scale": 4
+          },
+          "max_raw_abs_delta": 1,
+          "nonzero_counts": {
+            "head": 12,
+            "k": 198,
+            "patch": 12,
+            "q": 198,
+            "v": 198,
+            "w1": 198,
+            "w2": 12,
+            "wo": 198
+          },
+          "raw_delta": [
+            0,
+            1,
+            0,
+            0,
+            0,
+            0
+          ],
+          "raw_l1_delta": 1,
+          "runtime_state": 2,
+          "scales": {
+            "geluq_input_scale": 16,
+            "geluq_output_scale": 8,
+            "layernorm_input_scale": 16,
+            "layernorm_output_scale": 4,
+            "softmax_input_scale": 16,
+            "softmax_prob_scale": 4
+          },
+          "status": "pass"
+        },
+        {
+          "all_scales_power_of_two": true,
+          "candidate": "gelu_output_x0p5",
+          "exact_raw_match": false,
+          "expected_raw": [
+            28,
+            -15,
+            13,
+            -8,
+            11,
+            -12
+          ],
+          "head_l1_delta": 0.15106201171875,
+          "math": {
+            "attention_softmax": "hgpipe_softmaxq",
+            "geluq_input_scale": 16,
+            "geluq_output_scale": 2,
+            "hgpipe_contract": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/refs/hgpipe_lut_math_contract.json",
+            "layernorm": "compact_lut",
+            "layernorm_bias_shift": 33,
+            "layernorm_input_scale": 16,
+            "layernorm_output_scale": 4,
+            "mlp_gelu": "hgpipe_geluq",
+            "softmax_input_scale": 16,
+            "softmax_prob_scale": 4
+          },
+          "max_raw_abs_delta": 1,
+          "nonzero_counts": {
+            "head": 12,
+            "k": 198,
+            "patch": 12,
+            "q": 198,
+            "v": 198,
+            "w1": 198,
+            "w2": 12,
+            "wo": 198
+          },
+          "raw_delta": [
+            0,
+            0,
+            1,
+            0,
+            1,
+            0
+          ],
+          "raw_l1_delta": 2,
+          "runtime_state": 2,
+          "scales": {
+            "geluq_input_scale": 16,
+            "geluq_output_scale": 2,
+            "layernorm_input_scale": 16,
+            "layernorm_output_scale": 4,
+            "softmax_input_scale": 16,
+            "softmax_prob_scale": 4
+          },
+          "status": "pass"
+        },
+        {
+          "all_scales_power_of_two": true,
+          "candidate": "softmax_prob_x2",
+          "exact_raw_match": false,
+          "expected_raw": [
+            23,
+            -8,
+            7,
+            -4,
+            5,
+            -8
+          ],
+          "head_l1_delta": 1.8829870223999023,
+          "math": {
+            "attention_softmax": "hgpipe_softmaxq",
+            "geluq_input_scale": 16,
+            "geluq_output_scale": 4,
+            "hgpipe_contract": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/refs/hgpipe_lut_math_contract.json",
+            "layernorm": "compact_lut",
+            "layernorm_bias_shift": 33,
+            "layernorm_input_scale": 16,
+            "layernorm_output_scale": 4,
+            "mlp_gelu": "hgpipe_geluq",
+            "softmax_input_scale": 16,
+            "softmax_prob_scale": 8
+          },
+          "max_raw_abs_delta": 7,
+          "nonzero_counts": {
+            "head": 12,
+            "k": 198,
+            "patch": 12,
+            "q": 198,
+            "v": 198,
+            "w1": 198,
+            "w2": 12,
+            "wo": 198
+          },
+          "raw_delta": [
+            -5,
+            7,
+            -5,
+            4,
+            -5,
+            4
+          ],
+          "raw_l1_delta": 30,
+          "runtime_state": 2,
+          "scales": {
+            "geluq_input_scale": 16,
+            "geluq_output_scale": 4,
+            "layernorm_input_scale": 16,
+            "layernorm_output_scale": 4,
+            "softmax_input_scale": 16,
+            "softmax_prob_scale": 8
+          },
+          "status": "pass"
+        },
+        {
+          "all_scales_power_of_two": true,
+          "candidate": "all_output_x2",
+          "exact_raw_match": false,
+          "expected_raw": [
+            22,
+            -8,
+            7,
+            -4,
+            5,
+            -8
+          ],
+          "head_l1_delta": 1.9585180282592773,
+          "math": {
+            "attention_softmax": "hgpipe_softmaxq",
+            "geluq_input_scale": 16,
+            "geluq_output_scale": 8,
+            "hgpipe_contract": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/refs/hgpipe_lut_math_contract.json",
+            "layernorm": "compact_lut",
+            "layernorm_bias_shift": 33,
+            "layernorm_input_scale": 16,
+            "layernorm_output_scale": 8,
+            "mlp_gelu": "hgpipe_geluq",
+            "softmax_input_scale": 16,
+            "softmax_prob_scale": 8
+          },
+          "max_raw_abs_delta": 7,
+          "nonzero_counts": {
+            "head": 12,
+            "k": 198,
+            "patch": 12,
+            "q": 198,
+            "v": 198,
+            "w1": 198,
+            "w2": 12,
+            "wo": 198
+          },
+          "raw_delta": [
+            -6,
+            7,
+            -5,
+            4,
+            -5,
+            4
+          ],
+          "raw_l1_delta": 31,
+          "runtime_state": 2,
+          "scales": {
+            "geluq_input_scale": 16,
+            "geluq_output_scale": 8,
+            "layernorm_input_scale": 16,
+            "layernorm_output_scale": 8,
+            "softmax_input_scale": 16,
+            "softmax_prob_scale": 8
+          },
+          "status": "pass"
+        },
+        {
+          "all_scales_power_of_two": true,
+          "candidate": "softmax_prob_x0p5",
+          "exact_raw_match": false,
+          "expected_raw": [
+            39,
+            -28,
+            23,
+            -15,
+            21,
+            -20
+          ],
+          "head_l1_delta": 3.7659740447998047,
+          "math": {
+            "attention_softmax": "hgpipe_softmaxq",
+            "geluq_input_scale": 16,
+            "geluq_output_scale": 4,
+            "hgpipe_contract": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/refs/hgpipe_lut_math_contract.json",
+            "layernorm": "compact_lut",
+            "layernorm_bias_shift": 33,
+            "layernorm_input_scale": 16,
+            "layernorm_output_scale": 4,
+            "mlp_gelu": "hgpipe_geluq",
+            "softmax_input_scale": 16,
+            "softmax_prob_scale": 2
+          },
+          "max_raw_abs_delta": 13,
+          "nonzero_counts": {
+            "head": 12,
+            "k": 198,
+            "patch": 12,
+            "q": 198,
+            "v": 198,
+            "w1": 198,
+            "w2": 12,
+            "wo": 198
+          },
+          "raw_delta": [
+            11,
+            -13,
+            11,
+            -7,
+            11,
+            -8
+          ],
+          "raw_l1_delta": 61,
+          "runtime_state": 2,
+          "scales": {
+            "geluq_input_scale": 16,
+            "geluq_output_scale": 4,
+            "layernorm_input_scale": 16,
+            "layernorm_output_scale": 4,
+            "softmax_input_scale": 16,
+            "softmax_prob_scale": 2
+          },
+          "status": "pass"
+        }
+      ],
+      "config": {
+        "acc_scale": 16,
+        "active_tokens": 4,
+        "blocks": 1,
+        "embed": 192,
+        "ff_dim": 32,
+        "group_channels": 6,
+        "head_dim": 64,
+        "heads": 3,
+        "height": 256,
+        "patch": 16,
+        "patch_grid_h": 1,
+        "patch_grid_w": 4,
+        "state": 6,
+        "weight_bits": 4,
+        "weight_int": 2,
+        "width": 256
+      },
+      "exact_match_count": 10,
+      "fail_count": 0,
+      "pass_count": 15,
+      "recommendation": "keep_current_scales",
+      "recommended_candidate": "current",
+      "spec": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/refs/e2e_axis_vector_hgpipe_math_spec.json"
+    },
+    {
+      "baseline_expected_raw": [
+        22,
+        -7,
+        6,
+        -4,
+        4,
+        -7
+      ],
+      "baseline_math": {
+        "attention_softmax": "hgpipe_softmaxq",
+        "geluq_input_scale": 16,
+        "geluq_output_scale": 4,
+        "hgpipe_contract": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/refs/hgpipe_lut_math_contract.json",
+        "layernorm": "hgpipe_lnq",
+        "layernorm_bias_shift": 33,
+        "layernorm_input_scale": 16,
+        "layernorm_output_scale": 4,
+        "mlp_gelu": "hgpipe_geluq",
+        "softmax_input_scale": 16,
+        "softmax_prob_scale": 4
+      },
+      "baseline_runtime_state": 2,
+      "candidate_count": 15,
+      "candidates": [
+        {
+          "all_scales_power_of_two": true,
+          "candidate": "all_input_x2",
+          "exact_raw_match": true,
+          "expected_raw": [
+            22,
+            -7,
+            6,
+            -4,
+            4,
+            -7
+          ],
+          "head_l1_delta": 0.02178955078125,
+          "math": {
+            "attention_softmax": "hgpipe_softmaxq",
+            "geluq_input_scale": 32,
+            "geluq_output_scale": 4,
+            "hgpipe_contract": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/refs/hgpipe_lut_math_contract.json",
+            "layernorm": "hgpipe_lnq",
+            "layernorm_bias_shift": 33,
+            "layernorm_input_scale": 32,
+            "layernorm_output_scale": 4,
+            "mlp_gelu": "hgpipe_geluq",
+            "softmax_input_scale": 32,
+            "softmax_prob_scale": 4
+          },
+          "max_raw_abs_delta": 0,
+          "nonzero_counts": {
+            "head": 12,
+            "k": 198,
+            "patch": 12,
+            "q": 198,
+            "v": 198,
+            "w1": 198,
+            "w2": 12,
+            "wo": 198
+          },
+          "raw_delta": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "raw_l1_delta": 0,
+          "runtime_state": 2,
+          "scales": {
+            "geluq_input_scale": 32,
+            "geluq_output_scale": 4,
+            "layernorm_input_scale": 32,
+            "layernorm_output_scale": 4,
+            "softmax_input_scale": 32,
+            "softmax_prob_scale": 4
+          },
+          "status": "pass"
+        },
+        {
+          "all_scales_power_of_two": true,
+          "candidate": "current",
+          "exact_raw_match": true,
+          "expected_raw": [
+            22,
+            -7,
+            6,
+            -4,
+            4,
+            -7
+          ],
+          "head_l1_delta": 0.0,
+          "math": {
+            "attention_softmax": "hgpipe_softmaxq",
+            "geluq_input_scale": 16,
+            "geluq_output_scale": 4,
+            "hgpipe_contract": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/refs/hgpipe_lut_math_contract.json",
+            "layernorm": "hgpipe_lnq",
+            "layernorm_bias_shift": 33,
+            "layernorm_input_scale": 16,
+            "layernorm_output_scale": 4,
+            "mlp_gelu": "hgpipe_geluq",
+            "softmax_input_scale": 16,
+            "softmax_prob_scale": 4
+          },
+          "max_raw_abs_delta": 0,
+          "nonzero_counts": {
+            "head": 12,
+            "k": 198,
+            "patch": 12,
+            "q": 198,
+            "v": 198,
+            "w1": 198,
+            "w2": 12,
+            "wo": 198
+          },
+          "raw_delta": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "raw_l1_delta": 0,
+          "runtime_state": 2,
+          "scales": {
+            "geluq_input_scale": 16,
+            "geluq_output_scale": 4,
+            "layernorm_input_scale": 16,
+            "layernorm_output_scale": 4,
+            "softmax_input_scale": 16,
+            "softmax_prob_scale": 4
+          },
+          "status": "pass"
+        },
+        {
+          "all_scales_power_of_two": true,
+          "candidate": "gelu_input_x0p5",
+          "exact_raw_match": true,
+          "expected_raw": [
+            22,
+            -7,
+            6,
+            -4,
+            4,
+            -7
+          ],
+          "head_l1_delta": 0.06536865234375,
+          "math": {
+            "attention_softmax": "hgpipe_softmaxq",
+            "geluq_input_scale": 8,
+            "geluq_output_scale": 4,
+            "hgpipe_contract": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/refs/hgpipe_lut_math_contract.json",
+            "layernorm": "hgpipe_lnq",
+            "layernorm_bias_shift": 33,
+            "layernorm_input_scale": 16,
+            "layernorm_output_scale": 4,
+            "mlp_gelu": "hgpipe_geluq",
+            "softmax_input_scale": 16,
+            "softmax_prob_scale": 4
+          },
+          "max_raw_abs_delta": 0,
+          "nonzero_counts": {
+            "head": 12,
+            "k": 198,
+            "patch": 12,
+            "q": 198,
+            "v": 198,
+            "w1": 198,
+            "w2": 12,
+            "wo": 198
+          },
+          "raw_delta": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "raw_l1_delta": 0,
+          "runtime_state": 2,
+          "scales": {
+            "geluq_input_scale": 8,
+            "geluq_output_scale": 4,
+            "layernorm_input_scale": 16,
+            "layernorm_output_scale": 4,
+            "softmax_input_scale": 16,
+            "softmax_prob_scale": 4
+          },
+          "status": "pass"
+        },
+        {
+          "all_scales_power_of_two": true,
+          "candidate": "gelu_input_x2",
+          "exact_raw_match": true,
+          "expected_raw": [
+            22,
+            -7,
+            6,
+            -4,
+            4,
+            -7
+          ],
+          "head_l1_delta": 0.02178955078125,
+          "math": {
+            "attention_softmax": "hgpipe_softmaxq",
+            "geluq_input_scale": 32,
+            "geluq_output_scale": 4,
+            "hgpipe_contract": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/refs/hgpipe_lut_math_contract.json",
+            "layernorm": "hgpipe_lnq",
+            "layernorm_bias_shift": 33,
+            "layernorm_input_scale": 16,
+            "layernorm_output_scale": 4,
+            "mlp_gelu": "hgpipe_geluq",
+            "softmax_input_scale": 16,
+            "softmax_prob_scale": 4
+          },
+          "max_raw_abs_delta": 0,
+          "nonzero_counts": {
+            "head": 12,
+            "k": 198,
+            "patch": 12,
+            "q": 198,
+            "v": 198,
+            "w1": 198,
+            "w2": 12,
+            "wo": 198
+          },
+          "raw_delta": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "raw_l1_delta": 0,
+          "runtime_state": 2,
+          "scales": {
+            "geluq_input_scale": 32,
+            "geluq_output_scale": 4,
+            "layernorm_input_scale": 16,
+            "layernorm_output_scale": 4,
+            "softmax_input_scale": 16,
+            "softmax_prob_scale": 4
+          },
+          "status": "pass"
+        },
+        {
+          "all_scales_power_of_two": true,
+          "candidate": "gelu_output_x2",
+          "exact_raw_match": true,
+          "expected_raw": [
+            22,
+            -7,
+            6,
+            -4,
+            4,
+            -7
+          ],
+          "head_l1_delta": 0.06463623046875,
+          "math": {
+            "attention_softmax": "hgpipe_softmaxq",
+            "geluq_input_scale": 16,
+            "geluq_output_scale": 8,
+            "hgpipe_contract": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/refs/hgpipe_lut_math_contract.json",
+            "layernorm": "hgpipe_lnq",
+            "layernorm_bias_shift": 33,
+            "layernorm_input_scale": 16,
+            "layernorm_output_scale": 4,
+            "mlp_gelu": "hgpipe_geluq",
+            "softmax_input_scale": 16,
+            "softmax_prob_scale": 4
+          },
+          "max_raw_abs_delta": 0,
+          "nonzero_counts": {
+            "head": 12,
+            "k": 198,
+            "patch": 12,
+            "q": 198,
+            "v": 198,
+            "w1": 198,
+            "w2": 12,
+            "wo": 198
+          },
+          "raw_delta": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "raw_l1_delta": 0,
+          "runtime_state": 2,
+          "scales": {
+            "geluq_input_scale": 16,
+            "geluq_output_scale": 8,
+            "layernorm_input_scale": 16,
+            "layernorm_output_scale": 4,
+            "softmax_input_scale": 16,
+            "softmax_prob_scale": 4
+          },
+          "status": "pass"
+        },
+        {
+          "all_scales_power_of_two": true,
+          "candidate": "layernorm_input_x0p5",
+          "exact_raw_match": true,
+          "expected_raw": [
+            22,
+            -7,
+            6,
+            -4,
+            4,
+            -7
+          ],
+          "head_l1_delta": 0.0,
+          "math": {
+            "attention_softmax": "hgpipe_softmaxq",
+            "geluq_input_scale": 16,
+            "geluq_output_scale": 4,
+            "hgpipe_contract": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/refs/hgpipe_lut_math_contract.json",
+            "layernorm": "hgpipe_lnq",
+            "layernorm_bias_shift": 33,
+            "layernorm_input_scale": 8,
+            "layernorm_output_scale": 4,
+            "mlp_gelu": "hgpipe_geluq",
+            "softmax_input_scale": 16,
+            "softmax_prob_scale": 4
+          },
+          "max_raw_abs_delta": 0,
+          "nonzero_counts": {
+            "head": 12,
+            "k": 198,
+            "patch": 12,
+            "q": 198,
+            "v": 198,
+            "w1": 198,
+            "w2": 12,
+            "wo": 198
+          },
+          "raw_delta": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "raw_l1_delta": 0,
+          "runtime_state": 2,
+          "scales": {
+            "geluq_input_scale": 16,
+            "geluq_output_scale": 4,
+            "layernorm_input_scale": 8,
+            "layernorm_output_scale": 4,
+            "softmax_input_scale": 16,
+            "softmax_prob_scale": 4
+          },
+          "status": "pass"
+        },
+        {
+          "all_scales_power_of_two": true,
+          "candidate": "layernorm_input_x2",
+          "exact_raw_match": true,
+          "expected_raw": [
+            22,
+            -7,
+            6,
+            -4,
+            4,
+            -7
+          ],
+          "head_l1_delta": 0.0,
+          "math": {
+            "attention_softmax": "hgpipe_softmaxq",
+            "geluq_input_scale": 16,
+            "geluq_output_scale": 4,
+            "hgpipe_contract": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/refs/hgpipe_lut_math_contract.json",
+            "layernorm": "hgpipe_lnq",
+            "layernorm_bias_shift": 33,
+            "layernorm_input_scale": 32,
+            "layernorm_output_scale": 4,
+            "mlp_gelu": "hgpipe_geluq",
+            "softmax_input_scale": 16,
+            "softmax_prob_scale": 4
+          },
+          "max_raw_abs_delta": 0,
+          "nonzero_counts": {
+            "head": 12,
+            "k": 198,
+            "patch": 12,
+            "q": 198,
+            "v": 198,
+            "w1": 198,
+            "w2": 12,
+            "wo": 198
+          },
+          "raw_delta": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "raw_l1_delta": 0,
+          "runtime_state": 2,
+          "scales": {
+            "geluq_input_scale": 16,
+            "geluq_output_scale": 4,
+            "layernorm_input_scale": 32,
+            "layernorm_output_scale": 4,
+            "softmax_input_scale": 16,
+            "softmax_prob_scale": 4
+          },
+          "status": "pass"
+        },
+        {
+          "all_scales_power_of_two": true,
+          "candidate": "softmax_input_x0p5",
+          "exact_raw_match": true,
+          "expected_raw": [
+            22,
+            -7,
+            6,
+            -4,
+            4,
+            -7
+          ],
+          "head_l1_delta": 0.0,
+          "math": {
+            "attention_softmax": "hgpipe_softmaxq",
+            "geluq_input_scale": 16,
+            "geluq_output_scale": 4,
+            "hgpipe_contract": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/refs/hgpipe_lut_math_contract.json",
+            "layernorm": "hgpipe_lnq",
+            "layernorm_bias_shift": 33,
+            "layernorm_input_scale": 16,
+            "layernorm_output_scale": 4,
+            "mlp_gelu": "hgpipe_geluq",
+            "softmax_input_scale": 8,
+            "softmax_prob_scale": 4
+          },
+          "max_raw_abs_delta": 0,
+          "nonzero_counts": {
+            "head": 12,
+            "k": 198,
+            "patch": 12,
+            "q": 198,
+            "v": 198,
+            "w1": 198,
+            "w2": 12,
+            "wo": 198
+          },
+          "raw_delta": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "raw_l1_delta": 0,
+          "runtime_state": 2,
+          "scales": {
+            "geluq_input_scale": 16,
+            "geluq_output_scale": 4,
+            "layernorm_input_scale": 16,
+            "layernorm_output_scale": 4,
+            "softmax_input_scale": 8,
+            "softmax_prob_scale": 4
+          },
+          "status": "pass"
+        },
+        {
+          "all_scales_power_of_two": true,
+          "candidate": "softmax_input_x2",
+          "exact_raw_match": true,
+          "expected_raw": [
+            22,
+            -7,
+            6,
+            -4,
+            4,
+            -7
+          ],
+          "head_l1_delta": 0.0,
+          "math": {
+            "attention_softmax": "hgpipe_softmaxq",
+            "geluq_input_scale": 16,
+            "geluq_output_scale": 4,
+            "hgpipe_contract": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/refs/hgpipe_lut_math_contract.json",
+            "layernorm": "hgpipe_lnq",
+            "layernorm_bias_shift": 33,
+            "layernorm_input_scale": 16,
+            "layernorm_output_scale": 4,
+            "mlp_gelu": "hgpipe_geluq",
+            "softmax_input_scale": 32,
+            "softmax_prob_scale": 4
+          },
+          "max_raw_abs_delta": 0,
+          "nonzero_counts": {
+            "head": 12,
+            "k": 198,
+            "patch": 12,
+            "q": 198,
+            "v": 198,
+            "w1": 198,
+            "w2": 12,
+            "wo": 198
+          },
+          "raw_delta": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "raw_l1_delta": 0,
+          "runtime_state": 2,
+          "scales": {
+            "geluq_input_scale": 16,
+            "geluq_output_scale": 4,
+            "layernorm_input_scale": 16,
+            "layernorm_output_scale": 4,
+            "softmax_input_scale": 32,
+            "softmax_prob_scale": 4
+          },
+          "status": "pass"
+        },
+        {
+          "all_scales_power_of_two": true,
+          "candidate": "gelu_output_x0p5",
+          "exact_raw_match": false,
+          "expected_raw": [
+            22,
+            -8,
+            6,
+            -4,
+            5,
+            -7
+          ],
+          "head_l1_delta": 0.1292724609375,
+          "math": {
+            "attention_softmax": "hgpipe_softmaxq",
+            "geluq_input_scale": 16,
+            "geluq_output_scale": 2,
+            "hgpipe_contract": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/refs/hgpipe_lut_math_contract.json",
+            "layernorm": "hgpipe_lnq",
+            "layernorm_bias_shift": 33,
+            "layernorm_input_scale": 16,
+            "layernorm_output_scale": 4,
+            "mlp_gelu": "hgpipe_geluq",
+            "softmax_input_scale": 16,
+            "softmax_prob_scale": 4
+          },
+          "max_raw_abs_delta": 1,
+          "nonzero_counts": {
+            "head": 12,
+            "k": 198,
+            "patch": 12,
+            "q": 198,
+            "v": 198,
+            "w1": 198,
+            "w2": 12,
+            "wo": 198
+          },
+          "raw_delta": [
+            0,
+            -1,
+            0,
+            0,
+            1,
+            0
+          ],
+          "raw_l1_delta": 2,
+          "runtime_state": 2,
+          "scales": {
+            "geluq_input_scale": 16,
+            "geluq_output_scale": 2,
+            "layernorm_input_scale": 16,
+            "layernorm_output_scale": 4,
+            "softmax_input_scale": 16,
+            "softmax_prob_scale": 4
+          },
+          "status": "pass"
+        },
+        {
+          "all_scales_power_of_two": true,
+          "candidate": "softmax_prob_x2",
+          "exact_raw_match": false,
+          "expected_raw": [
+            20,
+            -4,
+            4,
+            -2,
+            2,
+            -5
+          ],
+          "head_l1_delta": 0.8069944381713867,
+          "math": {
+            "attention_softmax": "hgpipe_softmaxq",
+            "geluq_input_scale": 16,
+            "geluq_output_scale": 4,
+            "hgpipe_contract": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/refs/hgpipe_lut_math_contract.json",
+            "layernorm": "hgpipe_lnq",
+            "layernorm_bias_shift": 33,
+            "layernorm_input_scale": 16,
+            "layernorm_output_scale": 4,
+            "mlp_gelu": "hgpipe_geluq",
+            "softmax_input_scale": 16,
+            "softmax_prob_scale": 8
+          },
+          "max_raw_abs_delta": 3,
+          "nonzero_counts": {
+            "head": 12,
+            "k": 198,
+            "patch": 12,
+            "q": 198,
+            "v": 198,
+            "w1": 198,
+            "w2": 12,
+            "wo": 198
+          },
+          "raw_delta": [
+            -2,
+            3,
+            -2,
+            2,
+            -2,
+            2
+          ],
+          "raw_l1_delta": 13,
+          "runtime_state": 2,
+          "scales": {
+            "geluq_input_scale": 16,
+            "geluq_output_scale": 4,
+            "layernorm_input_scale": 16,
+            "layernorm_output_scale": 4,
+            "softmax_input_scale": 16,
+            "softmax_prob_scale": 8
+          },
+          "status": "pass"
+        },
+        {
+          "all_scales_power_of_two": true,
+          "candidate": "layernorm_output_x2",
+          "exact_raw_match": false,
+          "expected_raw": [
+            19,
+            -4,
+            3,
+            -2,
+            2,
+            -5
+          ],
+          "head_l1_delta": 0.8723630905151367,
+          "math": {
+            "attention_softmax": "hgpipe_softmaxq",
+            "geluq_input_scale": 16,
+            "geluq_output_scale": 4,
+            "hgpipe_contract": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/refs/hgpipe_lut_math_contract.json",
+            "layernorm": "hgpipe_lnq",
+            "layernorm_bias_shift": 33,
+            "layernorm_input_scale": 16,
+            "layernorm_output_scale": 8,
+            "mlp_gelu": "hgpipe_geluq",
+            "softmax_input_scale": 16,
+            "softmax_prob_scale": 4
+          },
+          "max_raw_abs_delta": 3,
+          "nonzero_counts": {
+            "head": 12,
+            "k": 198,
+            "patch": 12,
+            "q": 198,
+            "v": 198,
+            "w1": 198,
+            "w2": 12,
+            "wo": 198
+          },
+          "raw_delta": [
+            -3,
+            3,
+            -3,
+            2,
+            -2,
+            2
+          ],
+          "raw_l1_delta": 15,
+          "runtime_state": 2,
+          "scales": {
+            "geluq_input_scale": 16,
+            "geluq_output_scale": 4,
+            "layernorm_input_scale": 16,
+            "layernorm_output_scale": 8,
+            "softmax_input_scale": 16,
+            "softmax_prob_scale": 4
+          },
+          "status": "pass"
+        },
+        {
+          "all_scales_power_of_two": true,
+          "candidate": "all_output_x2",
+          "exact_raw_match": false,
+          "expected_raw": [
+            18,
+            -3,
+            2,
+            -1,
+            1,
+            -4
+          ],
+          "head_l1_delta": 1.307812213897705,
+          "math": {
+            "attention_softmax": "hgpipe_softmaxq",
+            "geluq_input_scale": 16,
+            "geluq_output_scale": 8,
+            "hgpipe_contract": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/refs/hgpipe_lut_math_contract.json",
+            "layernorm": "hgpipe_lnq",
+            "layernorm_bias_shift": 33,
+            "layernorm_input_scale": 16,
+            "layernorm_output_scale": 8,
+            "mlp_gelu": "hgpipe_geluq",
+            "softmax_input_scale": 16,
+            "softmax_prob_scale": 8
+          },
+          "max_raw_abs_delta": 4,
+          "nonzero_counts": {
+            "head": 12,
+            "k": 198,
+            "patch": 12,
+            "q": 198,
+            "v": 198,
+            "w1": 198,
+            "w2": 12,
+            "wo": 198
+          },
+          "raw_delta": [
+            -4,
+            4,
+            -4,
+            3,
+            -3,
+            3
+          ],
+          "raw_l1_delta": 21,
+          "runtime_state": 2,
+          "scales": {
+            "geluq_input_scale": 16,
+            "geluq_output_scale": 8,
+            "layernorm_input_scale": 16,
+            "layernorm_output_scale": 8,
+            "softmax_input_scale": 16,
+            "softmax_prob_scale": 8
+          },
+          "status": "pass"
+        },
+        {
+          "all_scales_power_of_two": true,
+          "candidate": "layernorm_output_x0p5",
+          "exact_raw_match": false,
+          "expected_raw": [
+            26,
+            -13,
+            11,
+            -7,
+            9,
+            -11
+          ],
+          "head_l1_delta": 1.6357784271240234,
+          "math": {
+            "attention_softmax": "hgpipe_softmaxq",
+            "geluq_input_scale": 16,
+            "geluq_output_scale": 4,
+            "hgpipe_contract": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/refs/hgpipe_lut_math_contract.json",
+            "layernorm": "hgpipe_lnq",
+            "layernorm_bias_shift": 33,
+            "layernorm_input_scale": 16,
+            "layernorm_output_scale": 2,
+            "mlp_gelu": "hgpipe_geluq",
+            "softmax_input_scale": 16,
+            "softmax_prob_scale": 4
+          },
+          "max_raw_abs_delta": 6,
+          "nonzero_counts": {
+            "head": 12,
+            "k": 198,
+            "patch": 12,
+            "q": 198,
+            "v": 198,
+            "w1": 198,
+            "w2": 12,
+            "wo": 198
+          },
+          "raw_delta": [
+            4,
+            -6,
+            5,
+            -3,
+            5,
+            -4
+          ],
+          "raw_l1_delta": 27,
+          "runtime_state": 2,
+          "scales": {
+            "geluq_input_scale": 16,
+            "geluq_output_scale": 4,
+            "layernorm_input_scale": 16,
+            "layernorm_output_scale": 2,
+            "softmax_input_scale": 16,
+            "softmax_prob_scale": 4
+          },
+          "status": "pass"
+        },
+        {
+          "all_scales_power_of_two": true,
+          "candidate": "softmax_prob_x0p5",
+          "exact_raw_match": false,
+          "expected_raw": [
+            26,
+            -13,
+            11,
+            -7,
+            9,
+            -11
+          ],
+          "head_l1_delta": 1.6139888763427734,
+          "math": {
+            "attention_softmax": "hgpipe_softmaxq",
+            "geluq_input_scale": 16,
+            "geluq_output_scale": 4,
+            "hgpipe_contract": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/refs/hgpipe_lut_math_contract.json",
+            "layernorm": "hgpipe_lnq",
+            "layernorm_bias_shift": 33,
+            "layernorm_input_scale": 16,
+            "layernorm_output_scale": 4,
+            "mlp_gelu": "hgpipe_geluq",
+            "softmax_input_scale": 16,
+            "softmax_prob_scale": 2
+          },
+          "max_raw_abs_delta": 6,
+          "nonzero_counts": {
+            "head": 12,
+            "k": 198,
+            "patch": 12,
+            "q": 198,
+            "v": 198,
+            "w1": 198,
+            "w2": 12,
+            "wo": 198
+          },
+          "raw_delta": [
+            4,
+            -6,
+            5,
+            -3,
+            5,
+            -4
+          ],
+          "raw_l1_delta": 27,
+          "runtime_state": 2,
+          "scales": {
+            "geluq_input_scale": 16,
+            "geluq_output_scale": 4,
+            "layernorm_input_scale": 16,
+            "layernorm_output_scale": 4,
+            "softmax_input_scale": 16,
+            "softmax_prob_scale": 2
+          },
+          "status": "pass"
+        }
+      ],
+      "config": {
+        "acc_scale": 16,
+        "active_tokens": 4,
+        "blocks": 1,
+        "embed": 192,
+        "ff_dim": 32,
+        "group_channels": 6,
+        "head_dim": 64,
+        "heads": 3,
+        "height": 256,
+        "patch": 16,
+        "patch_grid_h": 1,
+        "patch_grid_w": 4,
+        "state": 6,
+        "weight_bits": 4,
+        "weight_int": 2,
+        "width": 256
+      },
+      "exact_match_count": 9,
+      "fail_count": 0,
+      "pass_count": 15,
+      "recommendation": "keep_current_scales",
+      "recommended_candidate": "current",
+      "spec": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/refs/e2e_axis_vector_hgpipe_math_lnq_spec.json"
+    },
+    {
+      "baseline_expected_raw": [
+        58,
+        -51,
+        42,
+        -28,
+        36,
+        -41
+      ],
+      "baseline_math": {
+        "attention_softmax": "hgpipe_softmaxq",
+        "geluq_input_scale": 16,
+        "geluq_output_scale": 4,
+        "hgpipe_contract": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/refs/hgpipe_lut_math_contract.json",
+        "layernorm": "hgpipe_lnq",
+        "layernorm_bias_shift": 33,
+        "layernorm_input_scale": 16,
+        "layernorm_output_scale": 4,
+        "mlp_gelu": "hgpipe_geluq",
+        "softmax_input_scale": 16,
+        "softmax_prob_scale": 4
+      },
+      "baseline_runtime_state": 2,
+      "candidate_count": 15,
+      "candidates": [
+        {
+          "all_scales_power_of_two": true,
+          "candidate": "current",
+          "exact_raw_match": true,
+          "expected_raw": [
+            58,
+            -51,
+            42,
+            -28,
+            36,
+            -41
+          ],
+          "head_l1_delta": 0.0,
+          "math": {
+            "attention_softmax": "hgpipe_softmaxq",
+            "geluq_input_scale": 16,
+            "geluq_output_scale": 4,
+            "hgpipe_contract": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/refs/hgpipe_lut_math_contract.json",
+            "layernorm": "hgpipe_lnq",
+            "layernorm_bias_shift": 33,
+            "layernorm_input_scale": 16,
+            "layernorm_output_scale": 4,
+            "mlp_gelu": "hgpipe_geluq",
+            "softmax_input_scale": 16,
+            "softmax_prob_scale": 4
+          },
+          "max_raw_abs_delta": 0,
+          "nonzero_counts": {
+            "head": 12,
+            "k": 198,
+            "patch": 12,
+            "q": 198,
+            "v": 198,
+            "w1": 198,
+            "w2": 12,
+            "wo": 198
+          },
+          "raw_delta": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "raw_l1_delta": 0,
+          "runtime_state": 2,
+          "scales": {
+            "geluq_input_scale": 16,
+            "geluq_output_scale": 4,
+            "layernorm_input_scale": 16,
+            "layernorm_output_scale": 4,
+            "softmax_input_scale": 16,
+            "softmax_prob_scale": 4
+          },
+          "status": "pass"
+        },
+        {
+          "all_scales_power_of_two": true,
+          "candidate": "layernorm_input_x0p5",
+          "exact_raw_match": true,
+          "expected_raw": [
+            58,
+            -51,
+            42,
+            -28,
+            36,
+            -41
+          ],
+          "head_l1_delta": 0.0,
+          "math": {
+            "attention_softmax": "hgpipe_softmaxq",
+            "geluq_input_scale": 16,
+            "geluq_output_scale": 4,
+            "hgpipe_contract": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/refs/hgpipe_lut_math_contract.json",
+            "layernorm": "hgpipe_lnq",
+            "layernorm_bias_shift": 33,
+            "layernorm_input_scale": 8,
+            "layernorm_output_scale": 4,
+            "mlp_gelu": "hgpipe_geluq",
+            "softmax_input_scale": 16,
+            "softmax_prob_scale": 4
+          },
+          "max_raw_abs_delta": 0,
+          "nonzero_counts": {
+            "head": 12,
+            "k": 198,
+            "patch": 12,
+            "q": 198,
+            "v": 198,
+            "w1": 198,
+            "w2": 12,
+            "wo": 198
+          },
+          "raw_delta": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "raw_l1_delta": 0,
+          "runtime_state": 2,
+          "scales": {
+            "geluq_input_scale": 16,
+            "geluq_output_scale": 4,
+            "layernorm_input_scale": 8,
+            "layernorm_output_scale": 4,
+            "softmax_input_scale": 16,
+            "softmax_prob_scale": 4
+          },
+          "status": "pass"
+        },
+        {
+          "all_scales_power_of_two": true,
+          "candidate": "layernorm_input_x2",
+          "exact_raw_match": true,
+          "expected_raw": [
+            58,
+            -51,
+            42,
+            -28,
+            36,
+            -41
+          ],
+          "head_l1_delta": 0.0,
+          "math": {
+            "attention_softmax": "hgpipe_softmaxq",
+            "geluq_input_scale": 16,
+            "geluq_output_scale": 4,
+            "hgpipe_contract": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/refs/hgpipe_lut_math_contract.json",
+            "layernorm": "hgpipe_lnq",
+            "layernorm_bias_shift": 33,
+            "layernorm_input_scale": 32,
+            "layernorm_output_scale": 4,
+            "mlp_gelu": "hgpipe_geluq",
+            "softmax_input_scale": 16,
+            "softmax_prob_scale": 4
+          },
+          "max_raw_abs_delta": 0,
+          "nonzero_counts": {
+            "head": 12,
+            "k": 198,
+            "patch": 12,
+            "q": 198,
+            "v": 198,
+            "w1": 198,
+            "w2": 12,
+            "wo": 198
+          },
+          "raw_delta": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "raw_l1_delta": 0,
+          "runtime_state": 2,
+          "scales": {
+            "geluq_input_scale": 16,
+            "geluq_output_scale": 4,
+            "layernorm_input_scale": 32,
+            "layernorm_output_scale": 4,
+            "softmax_input_scale": 16,
+            "softmax_prob_scale": 4
+          },
+          "status": "pass"
+        },
+        {
+          "all_scales_power_of_two": true,
+          "candidate": "softmax_input_x0p5",
+          "exact_raw_match": true,
+          "expected_raw": [
+            58,
+            -51,
+            42,
+            -28,
+            36,
+            -41
+          ],
+          "head_l1_delta": 0.0,
+          "math": {
+            "attention_softmax": "hgpipe_softmaxq",
+            "geluq_input_scale": 16,
+            "geluq_output_scale": 4,
+            "hgpipe_contract": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/refs/hgpipe_lut_math_contract.json",
+            "layernorm": "hgpipe_lnq",
+            "layernorm_bias_shift": 33,
+            "layernorm_input_scale": 16,
+            "layernorm_output_scale": 4,
+            "mlp_gelu": "hgpipe_geluq",
+            "softmax_input_scale": 8,
+            "softmax_prob_scale": 4
+          },
+          "max_raw_abs_delta": 0,
+          "nonzero_counts": {
+            "head": 12,
+            "k": 198,
+            "patch": 12,
+            "q": 198,
+            "v": 198,
+            "w1": 198,
+            "w2": 12,
+            "wo": 198
+          },
+          "raw_delta": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "raw_l1_delta": 0,
+          "runtime_state": 2,
+          "scales": {
+            "geluq_input_scale": 16,
+            "geluq_output_scale": 4,
+            "layernorm_input_scale": 16,
+            "layernorm_output_scale": 4,
+            "softmax_input_scale": 8,
+            "softmax_prob_scale": 4
+          },
+          "status": "pass"
+        },
+        {
+          "all_scales_power_of_two": true,
+          "candidate": "softmax_input_x2",
+          "exact_raw_match": true,
+          "expected_raw": [
+            58,
+            -51,
+            42,
+            -28,
+            36,
+            -41
+          ],
+          "head_l1_delta": 0.0,
+          "math": {
+            "attention_softmax": "hgpipe_softmaxq",
+            "geluq_input_scale": 16,
+            "geluq_output_scale": 4,
+            "hgpipe_contract": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/refs/hgpipe_lut_math_contract.json",
+            "layernorm": "hgpipe_lnq",
+            "layernorm_bias_shift": 33,
+            "layernorm_input_scale": 16,
+            "layernorm_output_scale": 4,
+            "mlp_gelu": "hgpipe_geluq",
+            "softmax_input_scale": 32,
+            "softmax_prob_scale": 4
+          },
+          "max_raw_abs_delta": 0,
+          "nonzero_counts": {
+            "head": 12,
+            "k": 198,
+            "patch": 12,
+            "q": 198,
+            "v": 198,
+            "w1": 198,
+            "w2": 12,
+            "wo": 198
+          },
+          "raw_delta": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "raw_l1_delta": 0,
+          "runtime_state": 2,
+          "scales": {
+            "geluq_input_scale": 16,
+            "geluq_output_scale": 4,
+            "layernorm_input_scale": 16,
+            "layernorm_output_scale": 4,
+            "softmax_input_scale": 32,
+            "softmax_prob_scale": 4
+          },
+          "status": "pass"
+        },
+        {
+          "all_scales_power_of_two": true,
+          "candidate": "all_input_x2",
+          "exact_raw_match": false,
+          "expected_raw": [
+            58,
+            -51,
+            43,
+            -28,
+            36,
+            -41
+          ],
+          "head_l1_delta": 0.06536865234375,
+          "math": {
+            "attention_softmax": "hgpipe_softmaxq",
+            "geluq_input_scale": 32,
+            "geluq_output_scale": 4,
+            "hgpipe_contract": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/refs/hgpipe_lut_math_contract.json",
+            "layernorm": "hgpipe_lnq",
+            "layernorm_bias_shift": 33,
+            "layernorm_input_scale": 32,
+            "layernorm_output_scale": 4,
+            "mlp_gelu": "hgpipe_geluq",
+            "softmax_input_scale": 32,
+            "softmax_prob_scale": 4
+          },
+          "max_raw_abs_delta": 1,
+          "nonzero_counts": {
+            "head": 12,
+            "k": 198,
+            "patch": 12,
+            "q": 198,
+            "v": 198,
+            "w1": 198,
+            "w2": 12,
+            "wo": 198
+          },
+          "raw_delta": [
+            0,
+            0,
+            1,
+            0,
+            0,
+            0
+          ],
+          "raw_l1_delta": 1,
+          "runtime_state": 2,
+          "scales": {
+            "geluq_input_scale": 32,
+            "geluq_output_scale": 4,
+            "layernorm_input_scale": 32,
+            "layernorm_output_scale": 4,
+            "softmax_input_scale": 32,
+            "softmax_prob_scale": 4
+          },
+          "status": "pass"
+        },
+        {
+          "all_scales_power_of_two": true,
+          "candidate": "gelu_input_x2",
+          "exact_raw_match": false,
+          "expected_raw": [
+            58,
+            -51,
+            43,
+            -28,
+            36,
+            -41
+          ],
+          "head_l1_delta": 0.06536865234375,
+          "math": {
+            "attention_softmax": "hgpipe_softmaxq",
+            "geluq_input_scale": 32,
+            "geluq_output_scale": 4,
+            "hgpipe_contract": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/refs/hgpipe_lut_math_contract.json",
+            "layernorm": "hgpipe_lnq",
+            "layernorm_bias_shift": 33,
+            "layernorm_input_scale": 16,
+            "layernorm_output_scale": 4,
+            "mlp_gelu": "hgpipe_geluq",
+            "softmax_input_scale": 16,
+            "softmax_prob_scale": 4
+          },
+          "max_raw_abs_delta": 1,
+          "nonzero_counts": {
+            "head": 12,
+            "k": 198,
+            "patch": 12,
+            "q": 198,
+            "v": 198,
+            "w1": 198,
+            "w2": 12,
+            "wo": 198
+          },
+          "raw_delta": [
+            0,
+            0,
+            1,
+            0,
+            0,
+            0
+          ],
+          "raw_l1_delta": 1,
+          "runtime_state": 2,
+          "scales": {
+            "geluq_input_scale": 32,
+            "geluq_output_scale": 4,
+            "layernorm_input_scale": 16,
+            "layernorm_output_scale": 4,
+            "softmax_input_scale": 16,
+            "softmax_prob_scale": 4
+          },
+          "status": "pass"
+        },
+        {
+          "all_scales_power_of_two": true,
+          "candidate": "gelu_input_x0p5",
+          "exact_raw_match": false,
+          "expected_raw": [
+            57,
+            -51,
+            42,
+            -28,
+            35,
+            -41
+          ],
+          "head_l1_delta": 0.1307373046875,
+          "math": {
+            "attention_softmax": "hgpipe_softmaxq",
+            "geluq_input_scale": 8,
+            "geluq_output_scale": 4,
+            "hgpipe_contract": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/refs/hgpipe_lut_math_contract.json",
+            "layernorm": "hgpipe_lnq",
+            "layernorm_bias_shift": 33,
+            "layernorm_input_scale": 16,
+            "layernorm_output_scale": 4,
+            "mlp_gelu": "hgpipe_geluq",
+            "softmax_input_scale": 16,
+            "softmax_prob_scale": 4
+          },
+          "max_raw_abs_delta": 1,
+          "nonzero_counts": {
+            "head": 12,
+            "k": 198,
+            "patch": 12,
+            "q": 198,
+            "v": 198,
+            "w1": 198,
+            "w2": 12,
+            "wo": 198
+          },
+          "raw_delta": [
+            -1,
+            0,
+            0,
+            0,
+            -1,
+            0
+          ],
+          "raw_l1_delta": 2,
+          "runtime_state": 2,
+          "scales": {
+            "geluq_input_scale": 8,
+            "geluq_output_scale": 4,
+            "layernorm_input_scale": 16,
+            "layernorm_output_scale": 4,
+            "softmax_input_scale": 16,
+            "softmax_prob_scale": 4
+          },
+          "status": "pass"
+        },
+        {
+          "all_scales_power_of_two": true,
+          "candidate": "gelu_output_x2",
+          "exact_raw_match": false,
+          "expected_raw": [
+            57,
+            -51,
+            42,
+            -28,
+            35,
+            -41
+          ],
+          "head_l1_delta": 0.118377685546875,
+          "math": {
+            "attention_softmax": "hgpipe_softmaxq",
+            "geluq_input_scale": 16,
+            "geluq_output_scale": 8,
+            "hgpipe_contract": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/refs/hgpipe_lut_math_contract.json",
+            "layernorm": "hgpipe_lnq",
+            "layernorm_bias_shift": 33,
+            "layernorm_input_scale": 16,
+            "layernorm_output_scale": 4,
+            "mlp_gelu": "hgpipe_geluq",
+            "softmax_input_scale": 16,
+            "softmax_prob_scale": 4
+          },
+          "max_raw_abs_delta": 1,
+          "nonzero_counts": {
+            "head": 12,
+            "k": 198,
+            "patch": 12,
+            "q": 198,
+            "v": 198,
+            "w1": 198,
+            "w2": 12,
+            "wo": 198
+          },
+          "raw_delta": [
+            -1,
+            0,
+            0,
+            0,
+            -1,
+            0
+          ],
+          "raw_l1_delta": 2,
+          "runtime_state": 2,
+          "scales": {
+            "geluq_input_scale": 16,
+            "geluq_output_scale": 8,
+            "layernorm_input_scale": 16,
+            "layernorm_output_scale": 4,
+            "softmax_input_scale": 16,
+            "softmax_prob_scale": 4
+          },
+          "status": "pass"
+        },
+        {
+          "all_scales_power_of_two": true,
+          "candidate": "gelu_output_x0p5",
+          "exact_raw_match": false,
+          "expected_raw": [
+            58,
+            -52,
+            43,
+            -29,
+            36,
+            -41
+          ],
+          "head_l1_delta": 0.23675537109375,
+          "math": {
+            "attention_softmax": "hgpipe_softmaxq",
+            "geluq_input_scale": 16,
+            "geluq_output_scale": 2,
+            "hgpipe_contract": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/refs/hgpipe_lut_math_contract.json",
+            "layernorm": "hgpipe_lnq",
+            "layernorm_bias_shift": 33,
+            "layernorm_input_scale": 16,
+            "layernorm_output_scale": 4,
+            "mlp_gelu": "hgpipe_geluq",
+            "softmax_input_scale": 16,
+            "softmax_prob_scale": 4
+          },
+          "max_raw_abs_delta": 1,
+          "nonzero_counts": {
+            "head": 12,
+            "k": 198,
+            "patch": 12,
+            "q": 198,
+            "v": 198,
+            "w1": 198,
+            "w2": 12,
+            "wo": 198
+          },
+          "raw_delta": [
+            0,
+            -1,
+            1,
+            -1,
+            0,
+            0
+          ],
+          "raw_l1_delta": 3,
+          "runtime_state": 2,
+          "scales": {
+            "geluq_input_scale": 16,
+            "geluq_output_scale": 2,
+            "layernorm_input_scale": 16,
+            "layernorm_output_scale": 4,
+            "softmax_input_scale": 16,
+            "softmax_prob_scale": 4
+          },
+          "status": "pass"
+        },
+        {
+          "all_scales_power_of_two": true,
+          "candidate": "softmax_prob_x2",
+          "exact_raw_match": false,
+          "expected_raw": [
+            40,
+            -29,
+            24,
+            -16,
+            18,
+            -27
+          ],
+          "head_l1_delta": 6.455955505371094,
+          "math": {
+            "attention_softmax": "hgpipe_softmaxq",
+            "geluq_input_scale": 16,
+            "geluq_output_scale": 4,
+            "hgpipe_contract": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/refs/hgpipe_lut_math_contract.json",
+            "layernorm": "hgpipe_lnq",
+            "layernorm_bias_shift": 33,
+            "layernorm_input_scale": 16,
+            "layernorm_output_scale": 4,
+            "mlp_gelu": "hgpipe_geluq",
+            "softmax_input_scale": 16,
+            "softmax_prob_scale": 8
+          },
+          "max_raw_abs_delta": 22,
+          "nonzero_counts": {
+            "head": 12,
+            "k": 198,
+            "patch": 12,
+            "q": 198,
+            "v": 198,
+            "w1": 198,
+            "w2": 12,
+            "wo": 198
+          },
+          "raw_delta": [
+            -18,
+            22,
+            -18,
+            12,
+            -18,
+            14
+          ],
+          "raw_l1_delta": 102,
+          "runtime_state": 2,
+          "scales": {
+            "geluq_input_scale": 16,
+            "geluq_output_scale": 4,
+            "layernorm_input_scale": 16,
+            "layernorm_output_scale": 4,
+            "softmax_input_scale": 16,
+            "softmax_prob_scale": 8
+          },
+          "status": "pass"
+        },
+        {
+          "all_scales_power_of_two": true,
+          "candidate": "layernorm_output_x2",
+          "exact_raw_match": false,
+          "expected_raw": [
+            39,
+            -28,
+            24,
+            -16,
+            18,
+            -26
+          ],
+          "head_l1_delta": 6.586692810058594,
+          "math": {
+            "attention_softmax": "hgpipe_softmaxq",
+            "geluq_input_scale": 16,
+            "geluq_output_scale": 4,
+            "hgpipe_contract": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/refs/hgpipe_lut_math_contract.json",
+            "layernorm": "hgpipe_lnq",
+            "layernorm_bias_shift": 33,
+            "layernorm_input_scale": 16,
+            "layernorm_output_scale": 8,
+            "mlp_gelu": "hgpipe_geluq",
+            "softmax_input_scale": 16,
+            "softmax_prob_scale": 4
+          },
+          "max_raw_abs_delta": 23,
+          "nonzero_counts": {
+            "head": 12,
+            "k": 198,
+            "patch": 12,
+            "q": 198,
+            "v": 198,
+            "w1": 198,
+            "w2": 12,
+            "wo": 198
+          },
+          "raw_delta": [
+            -19,
+            23,
+            -18,
+            12,
+            -18,
+            15
+          ],
+          "raw_l1_delta": 105,
+          "runtime_state": 2,
+          "scales": {
+            "geluq_input_scale": 16,
+            "geluq_output_scale": 4,
+            "layernorm_input_scale": 16,
+            "layernorm_output_scale": 8,
+            "softmax_input_scale": 16,
+            "softmax_prob_scale": 4
+          },
+          "status": "pass"
+        },
+        {
+          "all_scales_power_of_two": true,
+          "candidate": "all_output_x2",
+          "exact_raw_match": false,
+          "expected_raw": [
+            30,
+            -17,
+            14,
+            -10,
+            8,
+            -19
+          ],
+          "head_l1_delta": 9.867679595947266,
+          "math": {
+            "attention_softmax": "hgpipe_softmaxq",
+            "geluq_input_scale": 16,
+            "geluq_output_scale": 8,
+            "hgpipe_contract": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/refs/hgpipe_lut_math_contract.json",
+            "layernorm": "hgpipe_lnq",
+            "layernorm_bias_shift": 33,
+            "layernorm_input_scale": 16,
+            "layernorm_output_scale": 8,
+            "mlp_gelu": "hgpipe_geluq",
+            "softmax_input_scale": 16,
+            "softmax_prob_scale": 8
+          },
+          "max_raw_abs_delta": 34,
+          "nonzero_counts": {
+            "head": 12,
+            "k": 198,
+            "patch": 12,
+            "q": 198,
+            "v": 198,
+            "w1": 198,
+            "w2": 12,
+            "wo": 198
+          },
+          "raw_delta": [
+            -28,
+            34,
+            -28,
+            18,
+            -28,
+            22
+          ],
+          "raw_l1_delta": 158,
+          "runtime_state": 2,
+          "scales": {
+            "geluq_input_scale": 16,
+            "geluq_output_scale": 8,
+            "layernorm_input_scale": 16,
+            "layernorm_output_scale": 8,
+            "softmax_input_scale": 16,
+            "softmax_prob_scale": 8
+          },
+          "status": "pass"
+        },
+        {
+          "all_scales_power_of_two": true,
+          "candidate": "softmax_prob_x0p5",
+          "exact_raw_match": false,
+          "expected_raw": [
+            94,
+            -96,
+            79,
+            -53,
+            71,
+            -69
+          ],
+          "head_l1_delta": 12.911911010742188,
+          "math": {
+            "attention_softmax": "hgpipe_softmaxq",
+            "geluq_input_scale": 16,
+            "geluq_output_scale": 4,
+            "hgpipe_contract": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/refs/hgpipe_lut_math_contract.json",
+            "layernorm": "hgpipe_lnq",
+            "layernorm_bias_shift": 33,
+            "layernorm_input_scale": 16,
+            "layernorm_output_scale": 4,
+            "mlp_gelu": "hgpipe_geluq",
+            "softmax_input_scale": 16,
+            "softmax_prob_scale": 2
+          },
+          "max_raw_abs_delta": 45,
+          "nonzero_counts": {
+            "head": 12,
+            "k": 198,
+            "patch": 12,
+            "q": 198,
+            "v": 198,
+            "w1": 198,
+            "w2": 12,
+            "wo": 198
+          },
+          "raw_delta": [
+            36,
+            -45,
+            37,
+            -25,
+            35,
+            -28
+          ],
+          "raw_l1_delta": 206,
+          "runtime_state": 2,
+          "scales": {
+            "geluq_input_scale": 16,
+            "geluq_output_scale": 4,
+            "layernorm_input_scale": 16,
+            "layernorm_output_scale": 4,
+            "softmax_input_scale": 16,
+            "softmax_prob_scale": 2
+          },
+          "status": "pass"
+        },
+        {
+          "all_scales_power_of_two": true,
+          "candidate": "layernorm_output_x0p5",
+          "exact_raw_match": false,
+          "expected_raw": [
+            94,
+            -96,
+            80,
+            -53,
+            72,
+            -69
+          ],
+          "head_l1_delta": 12.977279663085938,
+          "math": {
+            "attention_softmax": "hgpipe_softmaxq",
+            "geluq_input_scale": 16,
+            "geluq_output_scale": 4,
+            "hgpipe_contract": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/refs/hgpipe_lut_math_contract.json",
+            "layernorm": "hgpipe_lnq",
+            "layernorm_bias_shift": 33,
+            "layernorm_input_scale": 16,
+            "layernorm_output_scale": 2,
+            "mlp_gelu": "hgpipe_geluq",
+            "softmax_input_scale": 16,
+            "softmax_prob_scale": 4
+          },
+          "max_raw_abs_delta": 45,
+          "nonzero_counts": {
+            "head": 12,
+            "k": 198,
+            "patch": 12,
+            "q": 198,
+            "v": 198,
+            "w1": 198,
+            "w2": 12,
+            "wo": 198
+          },
+          "raw_delta": [
+            36,
+            -45,
+            38,
+            -25,
+            36,
+            -28
+          ],
+          "raw_l1_delta": 208,
+          "runtime_state": 2,
+          "scales": {
+            "geluq_input_scale": 16,
+            "geluq_output_scale": 4,
+            "layernorm_input_scale": 16,
+            "layernorm_output_scale": 2,
+            "softmax_input_scale": 16,
+            "softmax_prob_scale": 4
+          },
+          "status": "pass"
+        }
+      ],
+      "config": {
+        "acc_scale": 16,
+        "active_tokens": 16,
+        "blocks": 2,
+        "embed": 192,
+        "ff_dim": 32,
+        "group_channels": 6,
+        "head_dim": 64,
+        "heads": 3,
+        "height": 256,
+        "patch": 16,
+        "patch_grid_h": 1,
+        "patch_grid_w": 16,
+        "state": 6,
+        "weight_bits": 4,
+        "weight_int": 2,
+        "width": 256
+      },
+      "exact_match_count": 5,
+      "fail_count": 0,
+      "pass_count": 15,
+      "recommendation": "keep_current_scales",
+      "recommended_candidate": "current",
+      "spec": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/refs/e2e_axis_vector_hgpipe_math_lnq_active16_spec.json"
+    }
+  ],
+  "status": "pass",
+  "summary": {
+    "next_action": "keep current PoT scales for C3b; use non-current rows only as explicit successor experiments",
+    "specs_recommending_current": 3,
+    "total_candidate_count": 45,
+    "total_fail_count": 0
+  }
+}

@@ -1,0 +1,458 @@
+{
+  "check_count": 51,
+  "checks": [
+    {
+      "detail": "1",
+      "name": "force_uram_buffers_enabled",
+      "status": "pass"
+    },
+    {
+      "detail": "1",
+      "name": "small_mem_lutram_enabled",
+      "status": "pass"
+    },
+    {
+      "detail": "1",
+      "name": "qkv_weight_cache_enabled",
+      "status": "pass"
+    },
+    {
+      "detail": "0",
+      "name": "qkv_weight_cache_not_forced_to_uram",
+      "status": "pass"
+    },
+    {
+      "detail": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/hls/src/hgtxr_e2e_axis_top.cpp:31",
+      "name": "axis_large_tokens_uram",
+      "status": "pass"
+    },
+    {
+      "detail": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/hls/src/hgtxr_e2e_m_axi_top.cpp:29",
+      "name": "maxis_large_tokens_uram",
+      "status": "pass"
+    },
+    {
+      "detail": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/hls/src/hgtxr_e2e_axis_top.cpp:36",
+      "name": "axis_large_gb.tokens_uram",
+      "status": "pass"
+    },
+    {
+      "detail": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/hls/src/hgtxr_e2e_m_axi_top.cpp:34",
+      "name": "maxis_large_gb.tokens_uram",
+      "status": "pass"
+    },
+    {
+      "detail": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/hls/src/hgtxr_e2e_axis_top.cpp:41",
+      "name": "axis_large_gb.norm_uram",
+      "status": "pass"
+    },
+    {
+      "detail": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/hls/src/hgtxr_e2e_m_axi_top.cpp:39",
+      "name": "maxis_large_gb.norm_uram",
+      "status": "pass"
+    },
+    {
+      "detail": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/hls/src/hgtxr_e2e_axis_top.cpp:46",
+      "name": "axis_large_gb.q_uram",
+      "status": "pass"
+    },
+    {
+      "detail": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/hls/src/hgtxr_e2e_m_axi_top.cpp:44",
+      "name": "maxis_large_gb.q_uram",
+      "status": "pass"
+    },
+    {
+      "detail": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/hls/src/hgtxr_e2e_axis_top.cpp:51",
+      "name": "axis_large_gb.k_uram",
+      "status": "pass"
+    },
+    {
+      "detail": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/hls/src/hgtxr_e2e_m_axi_top.cpp:49",
+      "name": "maxis_large_gb.k_uram",
+      "status": "pass"
+    },
+    {
+      "detail": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/hls/src/hgtxr_e2e_axis_top.cpp:56",
+      "name": "axis_large_gb.v_uram",
+      "status": "pass"
+    },
+    {
+      "detail": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/hls/src/hgtxr_e2e_m_axi_top.cpp:54",
+      "name": "maxis_large_gb.v_uram",
+      "status": "pass"
+    },
+    {
+      "detail": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/hls/src/hgtxr_e2e_axis_top.cpp:61",
+      "name": "axis_large_gb.attn_uram",
+      "status": "pass"
+    },
+    {
+      "detail": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/hls/src/hgtxr_e2e_m_axi_top.cpp:59",
+      "name": "maxis_large_gb.attn_uram",
+      "status": "pass"
+    },
+    {
+      "detail": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/hls/src/hgtxr_e2e_axis_top.cpp:66",
+      "name": "axis_large_gb.hidden_uram",
+      "status": "pass"
+    },
+    {
+      "detail": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/hls/src/hgtxr_e2e_m_axi_top.cpp:64",
+      "name": "maxis_large_gb.hidden_uram",
+      "status": "pass"
+    },
+    {
+      "detail": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/hls/src/hgtxr_e2e_axis_top.cpp:26",
+      "name": "axis_pooled_lutram",
+      "status": "pass"
+    },
+    {
+      "detail": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/hls/src/hgtxr_e2e_m_axi_top.cpp:24",
+      "name": "maxis_pooled_lutram",
+      "status": "pass"
+    },
+    {
+      "detail": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/hls/include/hgtxr_e2e_vit.hpp:950",
+      "name": "attention_small_score_lutram",
+      "status": "pass"
+    },
+    {
+      "detail": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/hls/include/hgtxr_e2e_vit.hpp:951",
+      "name": "attention_small_prob_lutram",
+      "status": "pass"
+    },
+    {
+      "detail": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/hls/include/hgtxr_e2e_vit.hpp:952",
+      "name": "attention_small_exp_raw_lutram",
+      "status": "pass"
+    },
+    {
+      "detail": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/hls/src/rmu_smu.cpp:61",
+      "name": "rmu_smu_small_score_lutram",
+      "status": "pass"
+    },
+    {
+      "detail": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/hls/src/rmu_smu.cpp:62",
+      "name": "rmu_smu_small_prob_lutram",
+      "status": "pass"
+    },
+    {
+      "detail": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/hls/include/hgtxr_e2e_vit.hpp:856",
+      "name": "qkv_cache_q_weight_cache_bram_default",
+      "status": "pass"
+    },
+    {
+      "detail": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/hls/include/hgtxr_e2e_vit.hpp:857",
+      "name": "qkv_cache_k_weight_cache_bram_default",
+      "status": "pass"
+    },
+    {
+      "detail": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/hls/include/hgtxr_e2e_vit.hpp:858",
+      "name": "qkv_cache_v_weight_cache_bram_default",
+      "status": "pass"
+    },
+    {
+      "detail": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/hls/include/hgtxr_e2e_vit.hpp:852",
+      "name": "qkv_cache_q_weight_cache_uram_successor_branch",
+      "status": "pass"
+    },
+    {
+      "detail": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/hls/include/hgtxr_e2e_vit.hpp:853",
+      "name": "qkv_cache_k_weight_cache_uram_successor_branch",
+      "status": "pass"
+    },
+    {
+      "detail": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/hls/include/hgtxr_e2e_vit.hpp:854",
+      "name": "qkv_cache_v_weight_cache_uram_successor_branch",
+      "status": "pass"
+    },
+    {
+      "detail": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/signoff/vref_p0_qkv_uram_cache_successor_2026_06_16.json",
+      "name": "qkv_successor_file_present",
+      "status": "pass"
+    },
+    {
+      "detail": "pass",
+      "name": "qkv_successor_status_pass",
+      "status": "pass"
+    },
+    {
+      "detail": "HGTXR_E2E_URAM_QKV_WEIGHT_CACHE=1",
+      "name": "qkv_successor_macro_uram_enabled",
+      "status": "pass"
+    },
+    {
+      "detail": "pass",
+      "name": "qkv_successor_csim_pass",
+      "status": "pass"
+    },
+    {
+      "detail": "pass",
+      "name": "qkv_successor_csynth_pass",
+      "status": "pass"
+    },
+    {
+      "detail": "pass",
+      "name": "qkv_successor_overlay_routed",
+      "status": "pass"
+    },
+    {
+      "detail": "8",
+      "name": "qkv_successor_uram_increased_vs_dsp_mixed_stream",
+      "status": "pass"
+    },
+    {
+      "detail": "-30",
+      "name": "qkv_successor_bram_reduced_vs_dsp_mixed_stream",
+      "status": "pass"
+    },
+    {
+      "detail": "40",
+      "name": "qkv_successor_uram_positive",
+      "status": "pass"
+    },
+    {
+      "detail": "{'note': 'Successor-only evidence; C3b remains protected baseline.', 'remaining': ['physical_smoke_json'], 'status': 'hls-resource-pass-routed-pending'}",
+      "name": "qkv_successor_physical_smoke_pending_only",
+      "status": "pass"
+    },
+    {
+      "detail": "7",
+      "name": "axis_mem_bank_partition_present",
+      "status": "pass"
+    },
+    {
+      "detail": "7",
+      "name": "maxis_dense_partition_present",
+      "status": "pass"
+    },
+    {
+      "detail": "16",
+      "name": "c3b_parallelism_16",
+      "status": "pass"
+    },
+    {
+      "detail": "16",
+      "name": "c3b_memory_banks_16",
+      "status": "pass"
+    },
+    {
+      "detail": "64",
+      "name": "c3b_uram_positive",
+      "status": "pass"
+    },
+    {
+      "detail": "C3b=604 A1=332",
+      "name": "c3b_dsp_increased_vs_a1",
+      "status": "pass"
+    },
+    {
+      "detail": "C3b=126506 C1=127916",
+      "name": "c3b_lut_lower_than_c1",
+      "status": "pass"
+    },
+    {
+      "detail": "C3b=37508072 C1=37508072",
+      "name": "c3b_latency_not_worse_than_c1",
+      "status": "pass"
+    }
+  ],
+  "date_tag": "2026_06_16",
+  "fail_count": 0,
+  "observed": {
+    "c3b": {
+      "dsp": 604,
+      "latency_cycles": 37508072,
+      "lut": 126506,
+      "memory_banks": 16,
+      "parallelism": 16,
+      "uram": 64
+    },
+    "large_axis_refs": {
+      "gb.attn": [
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/hls/src/hgtxr_e2e_axis_top.cpp:61"
+      ],
+      "gb.hidden": [
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/hls/src/hgtxr_e2e_axis_top.cpp:66"
+      ],
+      "gb.k": [
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/hls/src/hgtxr_e2e_axis_top.cpp:51"
+      ],
+      "gb.norm": [
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/hls/src/hgtxr_e2e_axis_top.cpp:41"
+      ],
+      "gb.q": [
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/hls/src/hgtxr_e2e_axis_top.cpp:46"
+      ],
+      "gb.tokens": [
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/hls/src/hgtxr_e2e_axis_top.cpp:36"
+      ],
+      "gb.v": [
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/hls/src/hgtxr_e2e_axis_top.cpp:56"
+      ],
+      "tokens": [
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/hls/src/hgtxr_e2e_axis_top.cpp:31"
+      ]
+    },
+    "large_maxis_refs": {
+      "gb.attn": [
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/hls/src/hgtxr_e2e_m_axi_top.cpp:59"
+      ],
+      "gb.hidden": [
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/hls/src/hgtxr_e2e_m_axi_top.cpp:64"
+      ],
+      "gb.k": [
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/hls/src/hgtxr_e2e_m_axi_top.cpp:49"
+      ],
+      "gb.norm": [
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/hls/src/hgtxr_e2e_m_axi_top.cpp:39"
+      ],
+      "gb.q": [
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/hls/src/hgtxr_e2e_m_axi_top.cpp:44"
+      ],
+      "gb.tokens": [
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/hls/src/hgtxr_e2e_m_axi_top.cpp:34"
+      ],
+      "gb.v": [
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/hls/src/hgtxr_e2e_m_axi_top.cpp:54"
+      ],
+      "tokens": [
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/hls/src/hgtxr_e2e_m_axi_top.cpp:29"
+      ]
+    },
+    "macros": {
+      "HGTXR_BUFFER_SIZE": 256,
+      "HGTXR_E2E_DENSE_PAR": 8,
+      "HGTXR_E2E_FORCE_URAM_BUFFERS": 1,
+      "HGTXR_E2E_QKV_WEIGHT_CACHE": 1,
+      "HGTXR_E2E_SMALL_MEM_LUTRAM": 1,
+      "HGTXR_E2E_URAM_QKV_WEIGHT_CACHE": 0,
+      "HGTXR_FIFO_DEPTH": 128,
+      "HGTXR_PARALLELISM_FACTOR": 8
+    },
+    "partition_refs": {
+      "axis": [
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/hls/src/hgtxr_e2e_axis_top.cpp:70",
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/hls/src/hgtxr_e2e_axis_top.cpp:71",
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/hls/src/hgtxr_e2e_axis_top.cpp:72",
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/hls/src/hgtxr_e2e_axis_top.cpp:73",
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/hls/src/hgtxr_e2e_axis_top.cpp:74",
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/hls/src/hgtxr_e2e_axis_top.cpp:75",
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/hls/src/hgtxr_e2e_axis_top.cpp:76"
+      ],
+      "m_axi": [
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/hls/src/hgtxr_e2e_m_axi_top.cpp:68",
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/hls/src/hgtxr_e2e_m_axi_top.cpp:69",
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/hls/src/hgtxr_e2e_m_axi_top.cpp:70",
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/hls/src/hgtxr_e2e_m_axi_top.cpp:71",
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/hls/src/hgtxr_e2e_m_axi_top.cpp:72",
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/hls/src/hgtxr_e2e_m_axi_top.cpp:73",
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/hls/src/hgtxr_e2e_m_axi_top.cpp:74"
+      ]
+    },
+    "qkv_bram_refs": {
+      "k_weight_cache": [
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/hls/include/hgtxr_e2e_vit.hpp:857"
+      ],
+      "q_weight_cache": [
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/hls/include/hgtxr_e2e_vit.hpp:856"
+      ],
+      "v_weight_cache": [
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/hls/include/hgtxr_e2e_vit.hpp:858"
+      ]
+    },
+    "qkv_uram_refs": {
+      "k_weight_cache": [
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/hls/include/hgtxr_e2e_vit.hpp:853"
+      ],
+      "q_weight_cache": [
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/hls/include/hgtxr_e2e_vit.hpp:852"
+      ],
+      "v_weight_cache": [
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/hls/include/hgtxr_e2e_vit.hpp:854"
+      ]
+    },
+    "qkv_uram_successor": {
+      "csim_status": "pass",
+      "csynth_status": "pass",
+      "delta_vs_dsp_mixed_stream": {
+        "bram_18k": -30,
+        "dsp": 0,
+        "lut": 0,
+        "uram": 8
+      },
+      "macro": "HGTXR_E2E_URAM_QKV_WEIGHT_CACHE=1",
+      "overlay_status": "pass",
+      "promotion": {
+        "note": "Successor-only evidence; C3b remains protected baseline.",
+        "remaining": [
+          "physical_smoke_json"
+        ],
+        "status": "hls-resource-pass-routed-pending"
+      },
+      "resources": {
+        "bram_18k": 114,
+        "dsp": 128,
+        "ff": 19664,
+        "lut": 43236,
+        "uram": 40
+      },
+      "status": "pass"
+    },
+    "rmu_smu_small_refs": {
+      "prob": [
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/hls/src/rmu_smu.cpp:62"
+      ],
+      "score": [
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/hls/src/rmu_smu.cpp:61"
+      ]
+    },
+    "small_attention_refs": {
+      "exp_raw": [
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/hls/include/hgtxr_e2e_vit.hpp:952"
+      ],
+      "prob": [
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/hls/include/hgtxr_e2e_vit.hpp:951"
+      ],
+      "score": [
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/hls/include/hgtxr_e2e_vit.hpp:950"
+      ]
+    },
+    "small_axis_refs": {
+      "gb.pooled": [
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/hls/src/hgtxr_e2e_axis_top.cpp:26"
+      ]
+    },
+    "small_maxis_refs": {
+      "gb.pooled": [
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/hls/src/hgtxr_e2e_m_axi_top.cpp:24"
+      ]
+    }
+  },
+  "pass_count": 51,
+  "policy": {
+    "large_buffers": "tokens, norm, Q/K/V, attention, hidden stay URAM candidates",
+    "promotion_gate": "C3b path unchanged; csynth/routed evidence required for any successor variant",
+    "scope": "single-load/on-chip retention and resource placement audit; no HLS source mutation",
+    "small_buffers": "pooled and attention-row scratch stay LUTRAM/BRAM candidates",
+    "source": "ME-ViT",
+    "vref": "VREF-P0-02"
+  },
+  "root": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR",
+  "safety": {
+    "executes_hls": false,
+    "executes_vivado": false,
+    "overwrites_c3b_artifacts": false,
+    "writes_hls_source": false
+  },
+  "source_files": {
+    "hgtxr_e2e_axis_top": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/hls/src/hgtxr_e2e_axis_top.cpp",
+    "hgtxr_e2e_m_axi_top": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/hls/src/hgtxr_e2e_m_axi_top.cpp",
+    "hgtxr_e2e_vit": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/hls/include/hgtxr_e2e_vit.hpp",
+    "qkv_uram_successor": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/signoff/vref_p0_qkv_uram_cache_successor_2026_06_16.json",
+    "resource_matrix": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/signoff/e2e_resource_matrix_2026_06_10.json",
+    "rmu_smu": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/hls/src/rmu_smu.cpp",
+    "zcu104_e2e_q4w8a_defines": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/configs/zcu104_e2e_q4w8a_defines.h"
+  },
+  "status": "pass"
+}

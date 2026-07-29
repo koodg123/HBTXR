@@ -1,0 +1,609 @@
+{
+  "check_count": 71,
+  "checks": [
+    {
+      "detail": 1,
+      "name": "config_defines_HGTXR_TILING_FACTOR",
+      "status": "pass"
+    },
+    {
+      "detail": 8,
+      "name": "config_defines_HGTXR_PARALLELISM_FACTOR",
+      "status": "pass"
+    },
+    {
+      "detail": 256,
+      "name": "config_defines_HGTXR_BUS_WIDTH",
+      "status": "pass"
+    },
+    {
+      "detail": 8,
+      "name": "config_defines_HGTXR_BIT_WIDTH",
+      "status": "pass"
+    },
+    {
+      "detail": 4,
+      "name": "config_defines_HGTXR_WEIGHT_BIT_WIDTH",
+      "status": "pass"
+    },
+    {
+      "detail": 256,
+      "name": "config_defines_HGTXR_BUFFER_SIZE",
+      "status": "pass"
+    },
+    {
+      "detail": 128,
+      "name": "config_defines_HGTXR_FIFO_DEPTH",
+      "status": "pass"
+    },
+    {
+      "detail": 1,
+      "name": "zcu104_q4w8a_default_HGTXR_TILING_FACTOR",
+      "status": "pass"
+    },
+    {
+      "detail": 8,
+      "name": "zcu104_q4w8a_default_HGTXR_PARALLELISM_FACTOR",
+      "status": "pass"
+    },
+    {
+      "detail": 256,
+      "name": "zcu104_q4w8a_default_HGTXR_BUS_WIDTH",
+      "status": "pass"
+    },
+    {
+      "detail": 8,
+      "name": "zcu104_q4w8a_default_HGTXR_BIT_WIDTH",
+      "status": "pass"
+    },
+    {
+      "detail": 4,
+      "name": "zcu104_q4w8a_default_HGTXR_WEIGHT_BIT_WIDTH",
+      "status": "pass"
+    },
+    {
+      "detail": 256,
+      "name": "zcu104_q4w8a_default_HGTXR_BUFFER_SIZE",
+      "status": "pass"
+    },
+    {
+      "detail": 128,
+      "name": "zcu104_q4w8a_default_HGTXR_FIFO_DEPTH",
+      "status": "pass"
+    },
+    {
+      "detail": [
+        "hls/include/hgtxr_cyclic_transformer_params.hpp:68"
+      ],
+      "name": "tiling_to_tile_tokens",
+      "status": "pass"
+    },
+    {
+      "detail": [
+        "hls/include/hgtxr_cyclic_transformer_params.hpp:71"
+      ],
+      "name": "tiling_to_tile_channels",
+      "status": "pass"
+    },
+    {
+      "detail": [
+        "hls/include/hgtxr_cyclic_transformer_params.hpp:84"
+      ],
+      "name": "parallelism_to_head_par",
+      "status": "pass"
+    },
+    {
+      "detail": [
+        "hls/include/hgtxr_cyclic_transformer_params.hpp:87"
+      ],
+      "name": "parallelism_to_pe_par",
+      "status": "pass"
+    },
+    {
+      "detail": [
+        "hls/include/hgtxr_cyclic_transformer_params.hpp:96"
+      ],
+      "name": "bus_width_to_bus_bits",
+      "status": "pass"
+    },
+    {
+      "detail": [
+        "hls/include/hgtxr_cyclic_transformer_params.hpp:99"
+      ],
+      "name": "bit_width_to_data_w",
+      "status": "pass"
+    },
+    {
+      "detail": [
+        "hls/include/hgtxr_cyclic_transformer_params.hpp:122"
+      ],
+      "name": "buffer_size_to_local_depth",
+      "status": "pass"
+    },
+    {
+      "detail": [
+        "hls/include/hgtxr_cyclic_transformer_params.hpp:125"
+      ],
+      "name": "fifo_depth_to_stream_fifo",
+      "status": "pass"
+    },
+    {
+      "detail": [
+        "hls/include/hgtxr_e2e_vit.hpp:129"
+      ],
+      "name": "axis_word_uses_bus_width",
+      "status": "pass"
+    },
+    {
+      "detail": [
+        "hls/include/hgtxr_e2e_vit.hpp:33"
+      ],
+      "name": "dense_par_defaults_to_parallelism",
+      "status": "pass"
+    },
+    {
+      "detail": [
+        "hls/include/hgtxr_e2e_vit.hpp:36"
+      ],
+      "name": "mem_bank_par_defaults_to_dense",
+      "status": "pass"
+    },
+    {
+      "detail": [
+        "hls/include/hgtxr_e2e_vit.hpp:219"
+      ],
+      "name": "q4_extract_specialized_for_bus",
+      "status": "pass"
+    },
+    {
+      "detail": [
+        "hls/include/hgtxr_e2e_vit.hpp:140"
+      ],
+      "name": "e2e_static_assert_active_tokens_fit",
+      "status": "pass"
+    },
+    {
+      "detail": [
+        "hls/include/hgtxr_e2e_vit.hpp:142"
+      ],
+      "name": "e2e_static_assert_heads_positive",
+      "status": "pass"
+    },
+    {
+      "detail": [
+        "hls/include/hgtxr_e2e_vit.hpp:143"
+      ],
+      "name": "e2e_static_assert_head_dim_covers_embed",
+      "status": "pass"
+    },
+    {
+      "detail": [
+        "hls/include/hgtxr_e2e_vit.hpp:145"
+      ],
+      "name": "e2e_static_assert_dense_par_positive",
+      "status": "pass"
+    },
+    {
+      "detail": [
+        "hls/include/hgtxr_e2e_vit.hpp:146"
+      ],
+      "name": "e2e_static_assert_dense_par_divides_embed",
+      "status": "pass"
+    },
+    {
+      "detail": [
+        "hls/include/hgtxr_e2e_vit.hpp:148"
+      ],
+      "name": "e2e_static_assert_dense_par_divides_ff_dim",
+      "status": "pass"
+    },
+    {
+      "detail": [
+        "hls/include/hgtxr_e2e_vit.hpp:150"
+      ],
+      "name": "e2e_static_assert_weight_lanes_positive",
+      "status": "pass"
+    },
+    {
+      "detail": [
+        "hls/include/hgtxr_e2e_vit.hpp:151"
+      ],
+      "name": "e2e_static_assert_dense_par_divides_weight_lanes",
+      "status": "pass"
+    },
+    {
+      "detail": [
+        "hls/include/hgtxr_e2e_vit.hpp:153"
+      ],
+      "name": "e2e_static_assert_axis_width_matches_cyclic_axi",
+      "status": "pass"
+    },
+    {
+      "detail": [
+        "hls/src/hgtxr_e2e_axis_top.cpp:9",
+        "hls/src/hgtxr_e2e_axis_top.cpp:10"
+      ],
+      "name": "axis_ports_use_fifo_depth",
+      "status": "pass"
+    },
+    {
+      "detail": [
+        "hls/src/hgtxr_e2e_axis_top.cpp:70",
+        "hls/src/hgtxr_e2e_axis_top.cpp:71",
+        "hls/src/hgtxr_e2e_axis_top.cpp:72",
+        "hls/src/hgtxr_e2e_axis_top.cpp:73",
+        "hls/src/hgtxr_e2e_axis_top.cpp:74",
+        "hls/src/hgtxr_e2e_axis_top.cpp:75",
+        "hls/src/hgtxr_e2e_axis_top.cpp:76",
+        "hls/src/hgtxr_e2e_axis_top.cpp:77"
+      ],
+      "name": "axis_partitions_use_mem_bank_par",
+      "status": "pass"
+    },
+    {
+      "detail": [
+        "hls/src/hgtxr_e2e_m_axi_top.cpp:68",
+        "hls/src/hgtxr_e2e_m_axi_top.cpp:69",
+        "hls/src/hgtxr_e2e_m_axi_top.cpp:70",
+        "hls/src/hgtxr_e2e_m_axi_top.cpp:71",
+        "hls/src/hgtxr_e2e_m_axi_top.cpp:72",
+        "hls/src/hgtxr_e2e_m_axi_top.cpp:73",
+        "hls/src/hgtxr_e2e_m_axi_top.cpp:74",
+        "hls/src/hgtxr_e2e_m_axi_top.cpp:75"
+      ],
+      "name": "m_axi_partitions_use_dense_par",
+      "status": "pass"
+    },
+    {
+      "detail": "vivado/scripts/run_e2e_q4w8a_csim.tcl",
+      "name": "csim_tcl_includes_q4w8a_config",
+      "status": "pass"
+    },
+    {
+      "detail": "vivado/scripts/run_e2e_q4w8a_csim.tcl",
+      "name": "csim_tcl_has_parallelism_override",
+      "status": "pass"
+    },
+    {
+      "detail": "vivado/scripts/run_e2e_q4w8a_csim.tcl",
+      "name": "csim_tcl_supports_par16_par32",
+      "status": "pass"
+    },
+    {
+      "detail": "vivado/scripts/run_e2e_q4w8a_csynth.tcl",
+      "name": "csynth_tcl_includes_q4w8a_config",
+      "status": "pass"
+    },
+    {
+      "detail": "vivado/scripts/run_e2e_q4w8a_csynth.tcl",
+      "name": "csynth_tcl_has_parallelism_override",
+      "status": "pass"
+    },
+    {
+      "detail": "vivado/scripts/run_e2e_q4w8a_csynth.tcl",
+      "name": "csynth_tcl_supports_par16_par32",
+      "status": "pass"
+    },
+    {
+      "detail": {
+        "bus_width": 256
+      },
+      "name": "legal_bus_width_byte_aligned",
+      "status": "pass"
+    },
+    {
+      "detail": {
+        "bit_width": 8,
+        "bus_width": 256
+      },
+      "name": "legal_bus_width_data_divisible",
+      "status": "pass"
+    },
+    {
+      "detail": {
+        "bus_width": 256,
+        "weight_bit_width": 4
+      },
+      "name": "legal_bus_width_weight_divisible",
+      "status": "pass"
+    },
+    {
+      "detail": {
+        "bit_width": 8,
+        "weight_bit_width": 4
+      },
+      "name": "legal_weight_width_lte_data_width",
+      "status": "pass"
+    },
+    {
+      "detail": {
+        "acc_width": 32,
+        "bit_width": 8
+      },
+      "name": "legal_data_width_lt_acc_width",
+      "status": "pass"
+    },
+    {
+      "detail": {
+        "heads": 3,
+        "model_dim": 192
+      },
+      "name": "legal_model_dim_divides_heads",
+      "status": "pass"
+    },
+    {
+      "detail": {
+        "expected": 64,
+        "head_dim": 64
+      },
+      "name": "legal_head_dim_matches_model_heads",
+      "status": "pass"
+    },
+    {
+      "detail": {
+        "expected": 768,
+        "ff_dim": 768
+      },
+      "name": "legal_ff_dim_matches_mlp_ratio",
+      "status": "pass"
+    },
+    {
+      "detail": {
+        "dense_par": 8,
+        "parallelism": 8
+      },
+      "name": "legal_dense_parallelism_matches_req6_parallelism",
+      "status": "pass"
+    },
+    {
+      "detail": {
+        "dense_par": 8,
+        "model_dim": 192
+      },
+      "name": "legal_dense_parallelism_divides_embed",
+      "status": "pass"
+    },
+    {
+      "detail": {
+        "dense_par": 8,
+        "ff_dim": 768
+      },
+      "name": "legal_dense_parallelism_divides_ff_dim",
+      "status": "pass"
+    },
+    {
+      "detail": {
+        "dense_par": 8,
+        "weight_lanes": 64
+      },
+      "name": "legal_weight_lanes_divide_dense_parallelism",
+      "status": "pass"
+    },
+    {
+      "detail": {
+        "buffer_size": 256
+      },
+      "name": "legal_buffer_size_positive",
+      "status": "pass"
+    },
+    {
+      "detail": {
+        "fifo_depth": 128
+      },
+      "name": "legal_fifo_depth_positive",
+      "status": "pass"
+    },
+    {
+      "detail": [
+        1,
+        2,
+        4,
+        8
+      ],
+      "name": "sweep_covers_tiling_factor",
+      "status": "pass"
+    },
+    {
+      "detail": [
+        1,
+        2,
+        4,
+        8,
+        16,
+        32
+      ],
+      "name": "sweep_covers_parallelism_factor",
+      "status": "pass"
+    },
+    {
+      "detail": [
+        64,
+        128,
+        256,
+        512
+      ],
+      "name": "sweep_covers_bus_width",
+      "status": "pass"
+    },
+    {
+      "detail": [
+        8,
+        16
+      ],
+      "name": "sweep_covers_bit_width",
+      "status": "pass"
+    },
+    {
+      "detail": [
+        64,
+        128,
+        256,
+        512
+      ],
+      "name": "sweep_covers_buffer_size",
+      "status": "pass"
+    },
+    {
+      "detail": [
+        16,
+        32,
+        64,
+        128
+      ],
+      "name": "sweep_covers_fifo_depth",
+      "status": "pass"
+    },
+    {
+      "detail": "configs/sweeps/zcu104_cyclic_transformer_sweep.yaml",
+      "name": "sweep_yaml_parsed",
+      "status": "pass"
+    },
+    {
+      "detail": "validated_resource_matrix",
+      "name": "parallelism_extension_c3b_par16_validated",
+      "status": "pass"
+    },
+    {
+      "detail": "docs/resources/e2e_resource_matrix_2026_06_10.json:C3b",
+      "name": "parallelism_extension_c3b_par16_evidence_resource_matrix",
+      "status": "pass"
+    },
+    {
+      "detail": "DSP 604, LUT 126506, URAM 64, latency 37508072 cycles, routed WNS positive.",
+      "name": "parallelism_extension_c3b_par16_expected_result",
+      "status": "pass"
+    },
+    {
+      "detail": "exploratory_not_default",
+      "name": "parallelism_extension_par32_exploratory_not_default",
+      "status": "pass"
+    },
+    {
+      "detail": "Requires fresh csynth, routed timing, resource-fit audit, and no C3b artifact overwrite.",
+      "name": "parallelism_extension_par32_requires_fresh_reports",
+      "status": "pass"
+    },
+    {
+      "detail": "Potential latency reduction with higher DSP/partition pressure and timing risk.",
+      "name": "parallelism_extension_par32_records_risk",
+      "status": "pass"
+    }
+  ],
+  "coverage": {
+    "config": "top-level ZCU104 Q4/W8A defaults are override-safe #ifndef macros",
+    "derived_params": "core tile, parallel, bus, bit, local-buffer, and FIFO constants derive from Req6 macros",
+    "hls_pragmas": "AXIS FIFO depth and E2E memory partition factors consume derived macros",
+    "legality": "bus/bit widths, head dimensions, dense parallelism, packed weight lanes, buffer size, and FIFO depth are checked for HLS-legal relationships",
+    "parallelism_extensions": "C3b PAR16 is the validated resource-matrix path and PAR32 remains exploratory until fresh csynth, routing, resource-fit, and no-overwrite evidence exist",
+    "static_asserts": "E2E header has compile-time guards for active tokens, heads, dimensions, dense parallelism, packed weight lanes, and AXIS width",
+    "sweep": "machine-readable sweep matrix covers all requested knobs",
+    "tool_overrides": "CSim/CSynth Tcl can override E2E parallelism for PAR16/C3b-style builds and PAR32 exploration"
+  },
+  "date_tag": "2026_06_16",
+  "fail_count": 0,
+  "hardware_root": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware",
+  "knobs": {
+    "config_macros": {
+      "HGTXR_BIT_WIDTH": 8,
+      "HGTXR_BUFFER_SIZE": 256,
+      "HGTXR_BUS_WIDTH": 256,
+      "HGTXR_FIFO_DEPTH": 128,
+      "HGTXR_PARALLELISM_FACTOR": 8,
+      "HGTXR_TILING_FACTOR": 1,
+      "HGTXR_WEIGHT_BIT_WIDTH": 4
+    },
+    "expected_defaults": {
+      "HGTXR_BIT_WIDTH": 8,
+      "HGTXR_BUFFER_SIZE": 256,
+      "HGTXR_BUS_WIDTH": 256,
+      "HGTXR_FIFO_DEPTH": 128,
+      "HGTXR_PARALLELISM_FACTOR": 8,
+      "HGTXR_TILING_FACTOR": 1,
+      "HGTXR_WEIGHT_BIT_WIDTH": 4
+    },
+    "legality_macros": {
+      "HGTXR_ACC_W": 32,
+      "HGTXR_CYCLIC_MLP_RATIO": 4,
+      "HGTXR_CYCLIC_MODEL_DIM": 192,
+      "HGTXR_E2E_DENSE_PAR": 8,
+      "HGTXR_E2E_FF_DIM": 768,
+      "HGTXR_E2E_HEADS": 3,
+      "HGTXR_E2E_HEAD_DIM": 64,
+      "HGTXR_WEIGHT_LANES": 64
+    },
+    "parallelism_extensions": {
+      "C3b_PAR16": {
+        "evidence": "docs/resources/e2e_resource_matrix_2026_06_10.json:C3b",
+        "expected_result": "DSP 604, LUT 126506, URAM 64, latency 37508072 cycles, routed WNS positive.",
+        "objective": "Default board-smoke candidate uses PAR16/MEM_BANK_PAR16 for higher DSP utilization and lower latency.",
+        "promotion_rule": "Keep as selected candidate until physical C3b board smoke is captured.",
+        "status": "validated_resource_matrix"
+      },
+      "PAR32": {
+        "expected_result": "Potential latency reduction with higher DSP/partition pressure and timing risk.",
+        "objective": "Evaluate next parallelism step only after C3b board-smoke or explicit user selection.",
+        "promotion_rule": "Requires fresh csynth, routed timing, resource-fit audit, and no C3b artifact overwrite.",
+        "status": "exploratory_not_default"
+      }
+    },
+    "sweep_values": {
+      "bit_width": [
+        8,
+        16
+      ],
+      "buffer_size": [
+        64,
+        128,
+        256,
+        512
+      ],
+      "bus_width": [
+        64,
+        128,
+        256,
+        512
+      ],
+      "fifo_depth": [
+        16,
+        32,
+        64,
+        128
+      ],
+      "parallelism_factor": [
+        1,
+        2,
+        4,
+        8,
+        16,
+        32
+      ],
+      "tiling_factor": [
+        1,
+        2,
+        4,
+        8
+      ]
+    }
+  },
+  "pass_count": 71,
+  "requirement": "Req6 parameterize tiling, parallelism, bus width, bit width, buffer size, FIFO depth",
+  "root": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR",
+  "safety": {
+    "creates_board_result": false,
+    "creates_xr_vits_policy": false,
+    "executes_hls": false,
+    "executes_vivado": false,
+    "writes_hls_source": false
+  },
+  "source_files": {
+    "axis": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/hls/src/hgtxr_e2e_axis_top.cpp",
+    "config": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/configs/zcu104_e2e_q4w8a_defines.h",
+    "csim_tcl": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/vivado/scripts/run_e2e_q4w8a_csim.tcl",
+    "csynth_tcl": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/vivado/scripts/run_e2e_q4w8a_csynth.tcl",
+    "e2e": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/hls/include/hgtxr_e2e_vit.hpp",
+    "maxis": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/hls/src/hgtxr_e2e_m_axi_top.cpp",
+    "params": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/hls/include/hgtxr_cyclic_transformer_params.hpp",
+    "sweep": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/configs/sweeps/zcu104_cyclic_transformer_sweep.yaml"
+  },
+  "status": "pass"
+}

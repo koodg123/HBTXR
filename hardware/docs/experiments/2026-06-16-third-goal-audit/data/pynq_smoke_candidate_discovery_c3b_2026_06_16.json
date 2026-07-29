@@ -1,0 +1,26 @@
+{
+  "candidate_count": 0,
+  "candidates": [],
+  "dry_run_import_command": "",
+  "import_command": "",
+  "pass_count": 0,
+  "patterns": [
+    "*c3b*smoke*.json",
+    "*e2e_axis_dma_c3b_mem16*.json"
+  ],
+  "preset": "axis-c3b-mem16",
+  "recommended_candidate": null,
+  "root": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR",
+  "safety": {
+    "creates_board_result": false,
+    "creates_xr_vits_policy": false,
+    "executes_commands": false,
+    "writes_canonical_inputs": false
+  },
+  "scan_roots": [
+    "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/pynq/hgtxr",
+    "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/pynq",
+    "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources"
+  ],
+  "status": "missing"
+}

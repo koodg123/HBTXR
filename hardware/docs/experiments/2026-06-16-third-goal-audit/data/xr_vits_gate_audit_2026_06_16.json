@@ -1,0 +1,144 @@
+{
+  "active_policy": {
+    "errors": [
+      "active replacement policy missing: /home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/xr_vits_replacement_policy.json"
+    ],
+    "path": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/xr_vits_replacement_policy.json",
+    "status": "missing",
+    "would_clear": false
+  },
+  "active_policy_integrity": {
+    "candidate_audit_path": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/xr_vits_candidate_audit_2026_06_10.json",
+    "errors": [
+      "active replacement policy missing: /home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/xr_vits_replacement_policy.json"
+    ],
+    "has_integrity_fields": false,
+    "status": "missing",
+    "warnings": []
+  },
+  "active_policy_summary": {
+    "approved_replacement": false,
+    "errors": [
+      "active replacement policy missing: /home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/xr_vits_replacement_policy.json"
+    ],
+    "path": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/xr_vits_replacement_policy.json",
+    "status": "missing",
+    "would_clear": false
+  },
+  "candidate_audit": {
+    "approved_replacement": false,
+    "candidate_count": 3,
+    "errors": [],
+    "path": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/xr_vits_candidate_audit_2026_06_10.json",
+    "policy_note": "Do not treat any candidate as XR-VITs until the user approves the replacement or the exact requested path is restored.",
+    "recommendation": {
+      "path": "/home/kjm26/project/PRJXR/XR-VIT/XR_Accel",
+      "reason": "highest score for ZCU104/cyclic/DeiT/HLS evidence",
+      "role": "candidate-xr-accel",
+      "score": 99
+    },
+    "recommendation_matches": true,
+    "status": "candidate-found"
+  },
+  "current_gate": {
+    "errors": [
+      "requested XR-VITs path missing: /home/kjm26/project/PRJXR/XR-VITs",
+      "active replacement policy missing: /home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/xr_vits_replacement_policy.json"
+    ],
+    "exact": {
+      "errors": [
+        "requested XR-VITs path missing: /home/kjm26/project/PRJXR/XR-VITs"
+      ],
+      "path": "/home/kjm26/project/PRJXR/XR-VITs",
+      "status": "missing",
+      "would_clear": false
+    },
+    "mode": "missing",
+    "replacement_policy": {
+      "errors": [
+        "active replacement policy missing: /home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/xr_vits_replacement_policy.json"
+      ],
+      "path": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/xr_vits_replacement_policy.json",
+      "status": "missing",
+      "would_clear": false
+    },
+    "status": "missing",
+    "would_clear": false
+  },
+  "date_tag": "2026_06_16",
+  "decision_options": [
+    {
+      "action": "Make /home/kjm26/project/PRJXR/XR-VITs available as a real directory.",
+      "clears_final_signoff_when_done": true,
+      "expected_result": "Req11 clears as exact-source evidence; no replacement policy needed.",
+      "id": "X1",
+      "risk": "Requires locating/restoring the missing repository or checkout.",
+      "title": "Restore exact XR-VITs checkout",
+      "writes_policy": false
+    },
+    {
+      "action": "Create an explicit replacement policy after user approval.",
+      "active_command": "python3 tools/create_xr_vits_replacement_policy.py --root /home/kjm26/project/PRJXR/XR-VIT/HGTXR --approve --approved-by USER --reason \"User approved XR_Accel as XR-VITs replacement for HGTXR third-goal continuation\"",
+      "clears_final_signoff_when_done": true,
+      "dry_run_command": "python3 tools/create_xr_vits_replacement_policy.py --root /home/kjm26/project/PRJXR/XR-VIT/HGTXR --approve --approved-by USER --reason \"User approved XR_Accel as XR-VITs replacement for HGTXR third-goal continuation\" --dry-run",
+      "expected_result": "Req11 clears through approved replacement-policy evidence while preserving provenance.",
+      "id": "X2",
+      "policy_path": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/xr_vits_replacement_policy.json",
+      "replacement_path": "/home/kjm26/project/PRJXR/XR-VIT/XR_Accel",
+      "risk": "Scientifically weaker than exact XR-VITs source; approval metadata must be explicit.",
+      "title": "Approve XR_Accel as replacement source",
+      "writes_policy": true
+    },
+    {
+      "action": "Do not restore XR-VITs and do not approve replacement yet.",
+      "clears_final_signoff_when_done": false,
+      "expected_result": "Final signoff remains blocked; implementation can continue only on non-Req11 work.",
+      "id": "X3",
+      "risk": "Third-goal completion cannot be claimed.",
+      "title": "Keep Req11 blocked",
+      "writes_policy": false
+    }
+  ],
+  "exact": {
+    "exists": false,
+    "path": "/home/kjm26/project/PRJXR/XR-VITs",
+    "would_clear": false
+  },
+  "hardware_root": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware",
+  "next_actions": [
+    "Restore exact /home/kjm26/project/PRJXR/XR-VITs checkout.",
+    "Or explicitly approve XR_Accel as replacement with approved_by and reason metadata."
+  ],
+  "reference_artifacts": [
+    {
+      "exists": true,
+      "path": "generated/signoff/xr_vits_reference_resolution_2026_06_10.json"
+    },
+    {
+      "exists": true,
+      "path": "generated/signoff/xr_vits_unblock_packet_2026_06_10.json"
+    }
+  ],
+  "remaining_blockers": [
+    "requested XR-VITs sibling"
+  ],
+  "replacement_candidate": {
+    "exists": true,
+    "path": "/home/kjm26/project/PRJXR/XR-VIT/XR_Accel",
+    "role": "candidate-xr-accel"
+  },
+  "requested_path": "/home/kjm26/project/PRJXR/XR-VITs",
+  "resolution_mode": "candidate-ready-needs-approval",
+  "root": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR",
+  "safety": {
+    "creates_xr_vits_policy": false,
+    "executes_commands": false,
+    "executes_network": false,
+    "writes_canonical_inputs": false
+  },
+  "status": "blocked",
+  "template": {
+    "exists": true,
+    "path": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/xr_vits_replacement_policy.template.json"
+  }
+}

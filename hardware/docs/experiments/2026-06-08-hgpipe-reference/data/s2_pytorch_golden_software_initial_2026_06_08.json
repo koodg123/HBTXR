@@ -1,0 +1,79 @@
+{
+  "approx_meta": {
+    "block_count": 1944,
+    "fallback_count": 0,
+    "per_layer_approx": [
+      {
+        "approx_abs_max": 2.5912728309631348,
+        "layer": 0
+      },
+      {
+        "approx_abs_max": 2.4733846187591553,
+        "layer": 1
+      },
+      {
+        "approx_abs_max": 2.8929100036621094,
+        "layer": 2
+      },
+      {
+        "approx_abs_max": 2.448885917663574,
+        "layer": 3
+      },
+      {
+        "approx_abs_max": 2.4261534214019775,
+        "layer": 4
+      },
+      {
+        "approx_abs_max": 2.887935161590576,
+        "layer": 5
+      }
+    ],
+    "record_count": 1944
+  },
+  "approximation_limitations": [
+    "S2 approximation omits Linear biases",
+    "S2 approximation uses full-vector attention instead of PyTorch multi-head split",
+    "S2 approximation omits 1/sqrt(head_dim) scale",
+    "S2 approximation uses piecewise softmax exponential and hard-sigmoid GELU"
+  ],
+  "checkpoint": "hardware/refs/weights/software_initial_weights.pt",
+  "compare": [
+    {
+      "max_abs_error": 0.34955108165740967,
+      "mean_abs_error": 0.07002865476210395,
+      "name": "approx_independent_vs_exact_independent",
+      "rmse": 0.08767540019826493,
+      "shape": [
+        6,
+        2,
+        192
+      ]
+    },
+    {
+      "max_abs_error": 2.4335280656814575,
+      "mean_abs_error": 0.4658622802158384,
+      "name": "exact_independent_vs_exact_sequential",
+      "rmse": 0.6427221804461279,
+      "shape": [
+        6,
+        2,
+        192
+      ]
+    }
+  ],
+  "config": "software/configs/base.yaml",
+  "contract": "exact PyTorch per-layer block outputs plus current S2 approximation outputs; exact_independent applies one attention+MLP pair independently to the same token input per layer",
+  "layout": {
+    "bit_width": 8,
+    "blocks": 6,
+    "bus_width": 128,
+    "embed_dim": 192,
+    "int_width": 4,
+    "mlp_ratio": 4,
+    "tile_channels": 32,
+    "tile_ff": 32
+  },
+  "out_npz": "docs/resources/s2_pytorch_golden_software_initial_2026_06_08.npz",
+  "status": "pass",
+  "tokens": 2
+}

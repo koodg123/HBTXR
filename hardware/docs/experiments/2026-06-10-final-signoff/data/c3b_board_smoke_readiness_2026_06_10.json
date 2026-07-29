@@ -1,0 +1,39 @@
+{
+  "bundle_dir": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/pynq/e2e_axis_dma_c3b_mem16_smoke_bundle",
+  "errors": [],
+  "expected_out_raw": [
+    32,
+    -13,
+    26,
+    -6,
+    14,
+    -11
+  ],
+  "expected_runtime_state": 2,
+  "next_steps": [
+    "Run C3b smoke on ZCU104 and copy back e2e_axis_dma_c3b_mem16_file_smoke.json.",
+    "Import result with tools/import_pynq_smoke_result.py --preset axis-c3b-mem16."
+  ],
+  "physical_result": {
+    "path": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/pynq/hgtxr/e2e_axis_dma_c3b_mem16_file_smoke.json",
+    "status": "missing",
+    "validation_errors": []
+  },
+  "preset": "axis-c3b-mem16",
+  "ready": true,
+  "session_json": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/pynq/e2e_axis_dma_c3b_mem16_smoke_session.json",
+  "status": "ready-for-board",
+  "tar": {
+    "name": "e2e_axis_dma_c3b_mem16_smoke_bundle.tar.gz",
+    "path": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/generated/pynq/e2e_axis_dma_c3b_mem16_smoke_bundle.tar.gz",
+    "sha256": "3de505a6627409b4717ea95e5e76d74f0667c61b601fd96db1e495319adda712",
+    "sha256_file": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/e2e_axis_dma_c3b_mem16_smoke_bundle.tar.gz.sha256",
+    "sha256_line": "3de505a6627409b4717ea95e5e76d74f0667c61b601fd96db1e495319adda712  e2e_axis_dma_c3b_mem16_smoke_bundle.tar.gz"
+  },
+  "target": "ZCU104 PYNQ",
+  "transfer_manifest": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/c3b_smoke_transfer_manifest_2026_06_10.json",
+  "variant": "c3b-mem16",
+  "warnings": [
+    "Physical C3b board smoke result is not present yet."
+  ]
+}

@@ -1,0 +1,30 @@
+{
+  "block_count": 40,
+  "layout": {
+    "bit_width": 16,
+    "blocks": 2,
+    "bus_width": 64,
+    "embed_dim": 8,
+    "int_width": 6,
+    "mlp_ratio": 2,
+    "tile_channels": 4,
+    "tile_ff": 4
+  },
+  "max_norm_param_error": 0.0,
+  "max_preln_piecewise_abs_error": 0.0039751529693603516,
+  "per_layer": [
+    {
+      "layer": 0,
+      "norm_param_max_abs_error": 0.0,
+      "preln_piecewise_max_abs_error": 0.003790616989135742
+    },
+    {
+      "layer": 1,
+      "norm_param_max_abs_error": 0.0,
+      "preln_piecewise_max_abs_error": 0.0039751529693603516
+    }
+  ],
+  "record_count": 40,
+  "status": "pass",
+  "tokens": 4
+}

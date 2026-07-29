@@ -1,0 +1,46 @@
+{
+  "active_policy": {
+    "errors": [
+      "active replacement policy missing: /home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/xr_vits_replacement_policy.json"
+    ],
+    "path": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/xr_vits_replacement_policy.json",
+    "status": "missing",
+    "would_clear": false
+  },
+  "approval_required": true,
+  "candidate": {
+    "errors": [],
+    "path": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/xr_vits_candidate_audit_2026_06_10.json",
+    "replacement_path": "/home/kjm26/project/PRJXR/XR-VIT/XR_Accel",
+    "replacement_role": "candidate-xr-accel",
+    "score": 99,
+    "status": "pass",
+    "would_clear_after_approval": true
+  },
+  "commands": {
+    "exact_restore": [
+      "restore or mount requested tree at /home/kjm26/project/PRJXR/XR-VITs",
+      "python3 tools/run_third_goal_final_signoff.py --root /home/kjm26/project/PRJXR/XR-VIT/HGTXR --allow-blocked"
+    ],
+    "replacement_approve": "python3 tools/run_third_goal_final_signoff.py --root /home/kjm26/project/PRJXR/XR-VIT/HGTXR --allow-blocked --approve-xr-vits-replacement --xr-vits-approved-by <approved-by> --xr-vits-replacement-reason \"Approve XR_Accel as XR-VITs replacement\" --xr-vits-replacement-path /home/kjm26/project/PRJXR/XR-VIT/XR_Accel",
+    "replacement_dry_run": "python3 tools/run_third_goal_final_signoff.py --root /home/kjm26/project/PRJXR/XR-VIT/HGTXR --allow-blocked --approve-xr-vits-replacement --dry-run-xr-vits-replacement --xr-vits-approved-by <approved-by> --xr-vits-replacement-reason \"Approve XR_Accel as XR-VITs replacement\" --xr-vits-replacement-path /home/kjm26/project/PRJXR/XR-VIT/XR_Accel"
+  },
+  "exact": {
+    "errors": [
+      "requested XR-VITs path missing: /home/kjm26/project/PRJXR/XR-VITs"
+    ],
+    "path": "/home/kjm26/project/PRJXR/XR-VITs",
+    "status": "missing",
+    "would_clear": false
+  },
+  "requested_path": "/home/kjm26/project/PRJXR/XR-VITs",
+  "resolution_ready": false,
+  "root": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR",
+  "safety": {
+    "creates_board_result": false,
+    "creates_xr_vits_policy": false,
+    "executes_commands": false,
+    "writes_canonical_inputs": false
+  },
+  "status": "candidate-ready-needs-approval"
+}

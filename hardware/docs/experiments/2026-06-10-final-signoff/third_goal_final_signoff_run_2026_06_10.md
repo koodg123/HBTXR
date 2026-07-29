@@ -1,0 +1,237 @@
+# HGTXR Third Goal Final Signoff Run
+
+- status: `blocked`
+- root: `/home/kjm26/project/PRJXR/XR-VIT/HGTXR`
+- allow_blocked: `True`
+- final_preflight_failures: `2`
+- final_audit_status: `blocked`
+- completion_status: `blocked`
+- unblock_status: `pending-unblock`
+- readiness_status: `ready-for-board`
+- c3b_import_status: `skipped`
+- zcu104_remote_status: `dry-run`
+- zcu104_remote_execute: `False`
+- vref_successor_required_for_final_signoff: `False`
+- vref_successor_import_status: `skipped`
+- vref_successor_remote_status: `skipped`
+- vref_successor_remote_execute: `False`
+- qkv_uram_required_for_final_signoff: `False`
+- qkv_uram_import_status: `skipped`
+- qkv_uram_remote_status: `skipped`
+- qkv_uram_remote_execute: `False`
+- c3b_transfer_manifest_status: `pass`
+- c3b_smoke_contract_status: `pass`
+- xr_vits_policy_status: `skipped`
+- xr_vits_policy_preview_status: `pass`
+- xr_vits_packet_status: `pending-user-choice`
+- xr_vits_reference_resolution_status: `candidate-ready-needs-approval`
+- resource_matrix_status: `pass`
+- selected_path_status: `pass`
+- resource_policy_status: `pass`
+- requirements_trace_status: `blocked`
+- spec_plan_status: `pass`
+- candidate_audit_status: `blocked`
+- operator_handoff_status: `pending-operator-actions`
+- operator_handoff_validation_status: `pass`
+- final_bundle_validation_status: `pass`
+- c3b_smoke_discovery_status: `missing`
+- pynq_c3b_smoke_discovery_status: `missing`
+- vref_smoke_discovery_status: `missing`
+- pynq_vref_smoke_discovery_status: `missing`
+- qkv_uram_smoke_discovery_status: `missing`
+- p2_vit_scale_calibration_status: `pass`
+- final_blocker_closure_status: `blocked`
+- final_unblock_intake_status: `blocked`
+- final_unblock_closeout_packet_status: `ready-for-operator-unblock`
+- final_unblock_closeout_validation_status: `pass`
+- third_goal_source_audit_status: `pass`
+- third_goal_current_audit_status: `blocked-external`
+- final_evidence_manifest_status: `pass`
+- blocker_count: `2`
+- remaining_blocker_detail_count: `2`
+- mirrored_artifact_count: `92`
+- mirrored_artifact_unique_count: `92`
+- mirrored_artifact_duplicate_count: `0`
+- mirrored_artifact_integrity_status: `pass`
+- mirrored_artifact_integrity_checked_count: `90`
+- mirrored_artifact_integrity_fail_count: `0`
+
+## Steps
+
+- `zcu104-remote-dry-run` exit `0`
+- `c3b-smoke-transfer-manifest` exit `0`
+- `c3b-smoke-result-contract` exit `0`
+- `xr-vits-replacement-policy-preview` exit `0`
+- `xr-vits-unblock-packet` exit `1`
+- `xr-vits-reference-resolution` exit `0`
+- `c3b-readiness` exit `0`
+- `final-preflight` exit `1`
+- `final-audit` exit `1`
+- `completion-audit` exit `1`
+- `unblock-checklist` exit `1`
+- `final-unblock-command-card` exit `1`
+- `resource-matrix` exit `0`
+- `resource-policy-audit` exit `0`
+- `selected-path-execution-audit` exit `0`
+- `final-unblock-candidate-audit` exit `1`
+- `requirements-trace` exit `1`
+- `spec-plan-conformance-audit` exit `1`
+- `final-operator-handoff` exit `1`
+- `final-operator-handoff-validation` exit `1`
+- `final-signoff-bundle-validation` exit `1`
+- `c3b-smoke-candidate-discovery` exit `1`
+- `pynq-c3b-smoke-candidate-discovery` exit `1`
+- `vref-successor-smoke-candidate-discovery` exit `1`
+- `pynq-vref-smoke-candidate-discovery` exit `1`
+- `qkv-uram-smoke-candidate-discovery` exit `1`
+- `vref-p0-qkv-uram-cache-successor` exit `0`
+- `vref-p0-pot-scale-audit` exit `0`
+- `vref-p0-pot-scale-sweep` exit `0`
+- `req5-q4q8-swhw-match-audit` exit `0`
+- `p2-vit-scale-calibration-report` exit `0`
+- `req1-environment-audit` exit `0`
+- `req6-parameterization-audit` exit `0`
+- `req9-deit-image-reference-audit` exit `0`
+- `xr-vits-gate-audit` exit `0`
+- `c3b-physical-smoke-gate-audit` exit `0`
+- `vref-p0-buffer-lifetime-audit` exit `0`
+- `hgpipe-operator-audit` exit `0`
+- `final-blocker-closure-readiness` exit `1`
+- `final-unblock-intake` exit `1`
+- `final-unblock-closeout-packet` exit `0`
+- `final-unblock-closeout-validation` exit `0`
+- `third-goal-source-audit` exit `0`
+- `third-goal-current-audit` exit `0`
+- `third-goal-source-audit-refresh` exit `0`
+- `final-evidence-manifest` exit `1`
+- `requirements-trace-final-refresh` exit `1`
+- `final-operator-handoff-final-refresh` exit `1`
+- `final-operator-handoff-validation-final-refresh` exit `1`
+- `final-signoff-bundle-validation-final-refresh` exit `1`
+- `final-evidence-manifest-final-refresh` exit `1`
+- `spec-plan-conformance-final-refresh` exit `0`
+- `final-evidence-manifest-post-spec-refresh` exit `0`
+- `completion-audit-final-refresh` exit `1`
+- `requirements-trace-post-completion-refresh` exit `1`
+- `final-operator-handoff-post-completion-refresh` exit `1`
+- `final-operator-handoff-validation-post-completion-refresh` exit `0`
+- `final-signoff-bundle-validation-post-completion-refresh` exit `0`
+- `final-evidence-manifest-post-completion-refresh` exit `0`
+- `spec-plan-conformance-post-completion-refresh` exit `0`
+- `final-evidence-manifest-post-spec-completion-refresh` exit `0`
+- `requirements-trace-final-contract-refresh` exit `1`
+- `final-operator-handoff-final-contract-refresh` exit `1`
+- `final-operator-handoff-validation-final-contract-refresh` exit `0`
+- `final-signoff-bundle-validation-final-contract-refresh` exit `0`
+- `final-evidence-manifest-final-contract-refresh` exit `0`
+- `spec-plan-conformance-final-contract-refresh` exit `0`
+- `final-evidence-manifest-post-final-contract-refresh` exit `0`
+
+## Mirrored Artifacts
+
+- `/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/c3b_board_smoke_readiness_2026_06_10.json`
+- `/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/c3b_board_smoke_readiness_2026_06_10.md`
+- `/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/third_goal_final_signoff_2026_06_10.json`
+- `/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/final_signoff_audit_2026_06_10.json`
+- `/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/final_signoff_audit_2026_06_10.md`
+- `/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/third_goal_completion_audit_2026_06_10.json`
+- `/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/third_goal_completion_audit_2026_06_10.md`
+- `/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/third_goal_unblock_checklist_2026_06_10.json`
+- `/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/third_goal_unblock_checklist_2026_06_10.md`
+- `/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/zcu104_c3b_smoke_remote_run_2026_06_10.json`
+- `/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/zcu104_c3b_smoke_remote_run_2026_06_10.md`
+- `/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/c3b_smoke_transfer_manifest_2026_06_10.json`
+- `/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/c3b_smoke_transfer_manifest_2026_06_10.md`
+- `/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/e2e_axis_dma_c3b_mem16_smoke_bundle.tar.gz.sha256`
+- `/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/c3b_smoke_result_contract_2026_06_10.json`
+- `/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/c3b_smoke_result_contract_2026_06_10.md`
+- `/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/xr_vits_unblock_packet_2026_06_10.json`
+- `/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/xr_vits_unblock_packet_2026_06_10.md`
+- `/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/xr_vits_replacement_policy_preview_2026_06_10.json`
+- `/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/xr_vits_replacement_policy_preview_2026_06_10.md`
+- `/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/xr_vits_reference_resolution_2026_06_10.json`
+- `/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/xr_vits_reference_resolution_2026_06_10.md`
+- `/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/final_unblock_commands_2026_06_10.json`
+- `/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/final_unblock_commands_2026_06_10.md`
+- `/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/final_unblock_intake_2026_06_10.json`
+- `/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/final_unblock_intake_2026_06_10.md`
+- `/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/final_unblock_closeout_packet_2026_06_10.json`
+- `/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/final_unblock_closeout_packet_2026_06_10.md`
+- `/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/final_unblock_closeout_packet_validation_2026_06_10.json`
+- `/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/final_unblock_closeout_packet_validation_2026_06_10.md`
+- `/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/e2e_resource_matrix_2026_06_10.json`
+- `/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/e2e_resource_matrix_2026_06_10.md`
+- `/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/selected_path_execution_audit_2026_06_10.json`
+- `/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/selected_path_execution_audit_2026_06_10.md`
+- `/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/e2e_resource_policy_audit_2026_06_10.json`
+- `/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/e2e_resource_policy_audit_2026_06_10.md`
+- `/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/final_unblock_candidate_audit_2026_06_10.json`
+- `/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/final_unblock_candidate_audit_2026_06_10.md`
+- `/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/third_goal_requirements_trace_2026_06_10.json`
+- `/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/third_goal_requirements_trace_2026_06_10.md`
+- `/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/spec_plan_conformance_audit_2026_06_10.json`
+- `/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/spec_plan_conformance_audit_2026_06_10.md`
+- `/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/final_operator_handoff_2026_06_10.json`
+- `/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/final_operator_handoff_2026_06_10.md`
+- `/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/final_operator_handoff_validation_2026_06_10.json`
+- `/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/final_operator_handoff_validation_2026_06_10.md`
+- `/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/final_signoff_bundle_validation_2026_06_10.json`
+- `/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/final_signoff_bundle_validation_2026_06_10.md`
+- `/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/c3b_smoke_candidate_discovery_2026_06_10.json`
+- `/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/c3b_smoke_candidate_discovery_2026_06_10.md`
+- `/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/pynq_smoke_candidate_discovery_c3b_2026_06_16.json`
+- `/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/pynq_smoke_candidate_discovery_c3b_2026_06_16.md`
+- `/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/vref_successor_smoke_candidate_discovery_2026_06_10.json`
+- `/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/vref_successor_smoke_candidate_discovery_2026_06_10.md`
+- `/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/pynq_smoke_candidate_discovery_vref_p0_2026_06_16.json`
+- `/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/pynq_smoke_candidate_discovery_vref_p0_2026_06_16.md`
+- `/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/qkv_uram_smoke_candidate_discovery_2026_06_16.json`
+- `/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/qkv_uram_smoke_candidate_discovery_2026_06_16.md`
+- `/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/vref_p0_qkv_uram_cache_successor_2026_06_16.json`
+- `/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/vref_p0_qkv_uram_cache_successor_2026_06_16.md`
+- `/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/vref_p0_pot_scale_audit_2026_06_16.json`
+- `/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/vref_p0_pot_scale_audit_2026_06_16.md`
+- `/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/vref_p0_pot_scale_sweep_2026_06_16.json`
+- `/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/vref_p0_pot_scale_sweep_2026_06_16.md`
+- `/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/req5_q4q8_swhw_match_audit_2026_06_16.json`
+- `/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/req5_q4q8_swhw_match_audit_2026_06_16.md`
+- `/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/p2_vit_scale_calibration_report_2026_06_16.json`
+- `/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/p2_vit_scale_calibration_report_2026_06_16.md`
+- `/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/req1_environment_audit_2026_06_16.json`
+- `/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/req1_environment_audit_2026_06_16.md`
+- `/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/req6_parameterization_audit_2026_06_16.json`
+- `/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/req6_parameterization_audit_2026_06_16.md`
+- `/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/req9_deit_image_reference_audit_2026_06_16.json`
+- `/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/req9_deit_image_reference_audit_2026_06_16.md`
+- `/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/xr_vits_gate_audit_2026_06_16.json`
+- `/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/xr_vits_gate_audit_2026_06_16.md`
+- `/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/c3b_physical_smoke_gate_audit_2026_06_16.json`
+- `/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/c3b_physical_smoke_gate_audit_2026_06_16.md`
+- `/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/vref_p0_buffer_lifetime_audit_2026_06_16.json`
+- `/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/vref_p0_buffer_lifetime_audit_2026_06_16.md`
+- `/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/hgpipe_operator_audit_2026_06_16.json`
+- `/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/hgpipe_operator_audit_2026_06_16.md`
+- `/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/final_blocker_closure_readiness_2026_06_10.json`
+- `/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/final_blocker_closure_readiness_2026_06_10.md`
+- `/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/third_goal_source_audit_2026_06_16.json`
+- `/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/third_goal_source_audit_2026_06_16.md`
+- `/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/third_goal_current_audit_2026_06_16.json`
+- `/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/third_goal_current_audit_2026_06_16.md`
+- `/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/final_evidence_manifest_2026_06_10.json`
+- `/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/final_evidence_manifest_2026_06_10.md`
+- `/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/third_goal_final_signoff_run_2026_06_10.json`
+- `/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/third_goal_final_signoff_run_2026_06_10.md`
+
+## Mirrored Artifact Integrity Failures
+
+- None.
+
+## Remaining Blockers
+
+- `requested XR-VITs sibling`
+- `C3b AXIS/DMA physical smoke result`
+
+## Remaining Blocker Input Paths
+
+- `requested XR-VITs sibling`: `/home/kjm26/project/PRJXR/XR-VITs`, `/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/xr_vits_replacement_policy.json`
+- `C3b AXIS/DMA physical smoke result`: `/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/pynq/hgtxr/e2e_axis_dma_c3b_mem16_file_smoke.json`

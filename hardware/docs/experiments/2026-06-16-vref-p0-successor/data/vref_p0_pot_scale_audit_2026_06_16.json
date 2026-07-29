@@ -1,0 +1,163 @@
+{
+  "check_count": 14,
+  "checks": [
+    {
+      "detail": "4",
+      "name": "q4_weight_contract",
+      "status": "pass"
+    },
+    {
+      "detail": "8",
+      "name": "q8_activation_contract",
+      "status": "pass"
+    },
+    {
+      "detail": "8",
+      "name": "dense_parallelism_positive",
+      "status": "pass"
+    },
+    {
+      "detail": "16",
+      "name": "pot_scale_HGTXR_E2E_ACC_SCALE",
+      "status": "pass"
+    },
+    {
+      "detail": "16",
+      "name": "pot_scale_HGTXR_E2E_HGPIPE_GELUQ_INPUT_SCALE",
+      "status": "pass"
+    },
+    {
+      "detail": "4",
+      "name": "pot_scale_HGTXR_E2E_HGPIPE_GELUQ_OUTPUT_SCALE",
+      "status": "pass"
+    },
+    {
+      "detail": "16",
+      "name": "pot_scale_HGTXR_E2E_HGPIPE_SOFTMAX_INPUT_SCALE",
+      "status": "pass"
+    },
+    {
+      "detail": "4",
+      "name": "pot_scale_HGTXR_E2E_HGPIPE_SOFTMAX_PROB_SCALE",
+      "status": "pass"
+    },
+    {
+      "detail": "16",
+      "name": "pot_scale_HGTXR_E2E_HGPIPE_LAYERNORM_INPUT_SCALE",
+      "status": "pass"
+    },
+    {
+      "detail": "4",
+      "name": "pot_scale_HGTXR_E2E_HGPIPE_LAYERNORM_OUTPUT_SCALE",
+      "status": "pass"
+    },
+    {
+      "detail": "2",
+      "name": "dsp_bind_op_present",
+      "status": "pass"
+    },
+    {
+      "detail": "15",
+      "name": "dsp_helper_used",
+      "status": "pass"
+    },
+    {
+      "detail": "1",
+      "name": "small_mem_lutram_enabled",
+      "status": "pass"
+    },
+    {
+      "detail": "1",
+      "name": "uram_buffer_policy_enabled",
+      "status": "pass"
+    }
+  ],
+  "date_tag": "2026_06_16",
+  "fail_count": 0,
+  "observed": {
+    "dsp_bind_refs": [
+      "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/hls/include/hgtxr_e2e_vit.hpp:422",
+      "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/hls/include/hgtxr_e2e_vit.hpp:433"
+    ],
+    "dsp_helper_ref_count": 15,
+    "macros": {
+      "HGTXR_BIT_WIDTH": 8,
+      "HGTXR_E2E_ACC_SCALE": 16,
+      "HGTXR_E2E_DENSE_PAR": 8,
+      "HGTXR_E2E_HGPIPE_GELUQ_INPUT_SCALE": 16,
+      "HGTXR_E2E_HGPIPE_GELUQ_OUTPUT_SCALE": 4,
+      "HGTXR_E2E_HGPIPE_LAYERNORM_INPUT_SCALE": 16,
+      "HGTXR_E2E_HGPIPE_LAYERNORM_OUTPUT_SCALE": 4,
+      "HGTXR_E2E_HGPIPE_SOFTMAX_INPUT_SCALE": 16,
+      "HGTXR_E2E_HGPIPE_SOFTMAX_PROB_SCALE": 4,
+      "HGTXR_PARALLELISM_FACTOR": 8,
+      "HGTXR_WEIGHT_BIT_WIDTH": 4
+    },
+    "scale_refs": {
+      "HGTXR_E2E_ACC_SCALE": [
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/hls/include/hgtxr_e2e_vit.hpp:38",
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/hls/include/hgtxr_e2e_vit.hpp:39",
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/hls/include/hgtxr_e2e_vit.hpp:935",
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/hls/include/hgtxr_e2e_vit.hpp:936",
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/hls/include/hgtxr_e2e_vit.hpp:937",
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/hls/include/hgtxr_e2e_vit.hpp:1111",
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/hls/include/hgtxr_e2e_vit.hpp:1177",
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/hls/include/hgtxr_e2e_vit.hpp:1212",
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/hls/include/hgtxr_e2e_vit.hpp:1281",
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/configs/zcu104_e2e_q4w8a_defines.h:76",
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/configs/zcu104_e2e_q4w8a_defines.h:77"
+      ],
+      "HGTXR_E2E_HGPIPE_GELUQ_INPUT_SCALE": [
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/hls/include/hgtxr_e2e_vit.hpp:44",
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/hls/include/hgtxr_e2e_vit.hpp:45",
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/hls/include/hgtxr_e2e_vit.hpp:473"
+      ],
+      "HGTXR_E2E_HGPIPE_GELUQ_OUTPUT_SCALE": [
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/hls/include/hgtxr_e2e_vit.hpp:47",
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/hls/include/hgtxr_e2e_vit.hpp:48",
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/hls/include/hgtxr_e2e_vit.hpp:476"
+      ],
+      "HGTXR_E2E_HGPIPE_LAYERNORM_INPUT_SCALE": [
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/hls/include/hgtxr_e2e_vit.hpp:62",
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/hls/include/hgtxr_e2e_vit.hpp:63",
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/hls/include/hgtxr_e2e_vit.hpp:743",
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/hls/include/hgtxr_e2e_vit.hpp:755",
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/hls/include/hgtxr_e2e_vit.hpp:767"
+      ],
+      "HGTXR_E2E_HGPIPE_LAYERNORM_OUTPUT_SCALE": [
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/hls/include/hgtxr_e2e_vit.hpp:65",
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/hls/include/hgtxr_e2e_vit.hpp:66",
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/hls/include/hgtxr_e2e_vit.hpp:780"
+      ],
+      "HGTXR_E2E_HGPIPE_SOFTMAX_INPUT_SCALE": [
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/hls/include/hgtxr_e2e_vit.hpp:53",
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/hls/include/hgtxr_e2e_vit.hpp:54",
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/hls/include/hgtxr_e2e_vit.hpp:1004"
+      ],
+      "HGTXR_E2E_HGPIPE_SOFTMAX_PROB_SCALE": [
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/hls/include/hgtxr_e2e_vit.hpp:56",
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/hls/include/hgtxr_e2e_vit.hpp:57",
+        "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/hls/include/hgtxr_e2e_vit.hpp:1023"
+      ]
+    }
+  },
+  "pass_count": 14,
+  "policy": {
+    "promotion_gate": "SW/HW exact-match, bounded LUT delta, DSP mapping preserved, C3b not overwritten",
+    "scope": "SW-first PoT scale calibration readiness; no HLS source mutation",
+    "source": "P2-ViT",
+    "vref": "VREF-P0-01"
+  },
+  "root": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR",
+  "safety": {
+    "executes_hls": false,
+    "executes_vivado": false,
+    "overwrites_c3b_artifacts": false,
+    "writes_hls_source": false
+  },
+  "source_files": {
+    "hgtxr_e2e_vit": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/hls/include/hgtxr_e2e_vit.hpp",
+    "zcu104_e2e_q4w8a_defines": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/configs/zcu104_e2e_q4w8a_defines.h"
+  },
+  "status": "pass"
+}

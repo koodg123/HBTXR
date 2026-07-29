@@ -1,0 +1,489 @@
+{
+  "check_count": 86,
+  "checks": [
+    {
+      "detail": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/Master-Plan.md",
+      "name": "master_plan_exists",
+      "status": "pass"
+    },
+    {
+      "detail": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/Sub-Plan.md",
+      "name": "sub_plan_exists",
+      "status": "pass"
+    },
+    {
+      "detail": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/Spec.md",
+      "name": "spec_exists",
+      "status": "pass"
+    },
+    {
+      "detail": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/Execution.md",
+      "name": "execution_exists",
+      "status": "pass"
+    },
+    {
+      "detail": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/Validation.md",
+      "name": "validation_exists",
+      "status": "pass"
+    },
+    {
+      "detail": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/track/PROGRESS.md",
+      "name": "progress_exists",
+      "status": "pass"
+    },
+    {
+      "detail": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/track/HANDOVER.md",
+      "name": "current_handover_exists",
+      "status": "pass"
+    },
+    {
+      "detail": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/track/HANDOVER-2026-06-10-E2E.md",
+      "name": "handover_exists",
+      "status": "pass"
+    },
+    {
+      "detail": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/CHOICE.md",
+      "name": "choice_exists",
+      "status": "pass"
+    },
+    {
+      "detail": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/track/log.md",
+      "name": "log_exists",
+      "status": "pass"
+    },
+    {
+      "detail": "spec-kit/manual",
+      "name": "spec_records_spec_kit_unavailable",
+      "status": "pass"
+    },
+    {
+      "detail": "ZCU104",
+      "name": "spec_records_zcu104",
+      "status": "pass"
+    },
+    {
+      "detail": "Q4W/Q8A",
+      "name": "spec_records_q4w_q8a",
+      "status": "pass"
+    },
+    {
+      "detail": "parallelism/bus/fifo",
+      "name": "spec_records_param_knobs",
+      "status": "pass"
+    },
+    {
+      "detail": "A2/A1/PAR16",
+      "name": "spec_records_a2_a1_c",
+      "status": "pass"
+    },
+    {
+      "detail": "selected paths",
+      "name": "master_records_selected_paths",
+      "status": "pass"
+    },
+    {
+      "detail": "T-033",
+      "name": "sub_plan_records_latest_task",
+      "status": "pass"
+    },
+    {
+      "detail": "/tools/Xilinx",
+      "name": "execution_records_xilinx_root",
+      "status": "pass"
+    },
+    {
+      "detail": "Selected Path Execution Audit",
+      "name": "validation_records_selected_path_audit",
+      "status": "pass"
+    },
+    {
+      "detail": "progress T-033",
+      "name": "progress_records_selected_path_audit",
+      "status": "pass"
+    },
+    {
+      "detail": "handover E2E",
+      "name": "handover_records_e2e_context",
+      "status": "pass"
+    },
+    {
+      "detail": "choice E pending",
+      "name": "choice_records_e_pending",
+      "status": "pass"
+    },
+    {
+      "detail": "log T-033",
+      "name": "log_records_latest_task",
+      "status": "pass"
+    },
+    {
+      "detail": "blocked",
+      "name": "requirements_trace_status_known",
+      "status": "pass"
+    },
+    {
+      "detail": "12",
+      "name": "requirements_trace_has_12_requirements",
+      "status": "pass"
+    },
+    {
+      "detail": "0,1,10,11,2,3,4,5,6,7,8,9",
+      "name": "requirements_trace_ids_0_to_11",
+      "status": "pass"
+    },
+    {
+      "detail": "dict",
+      "name": "requirements_trace_has_manifest_contract",
+      "status": "pass"
+    },
+    {
+      "detail": "blocked",
+      "name": "completion_audit_status_known",
+      "status": "pass"
+    },
+    {
+      "detail": "14",
+      "name": "completion_audit_has_14_items",
+      "status": "pass"
+    },
+    {
+      "detail": "status=pass external_failed=[]",
+      "name": "evidence_manifest_pass",
+      "status": "pass"
+    },
+    {
+      "detail": "86/86",
+      "name": "evidence_manifest_required_complete",
+      "status": "pass"
+    },
+    {
+      "detail": "pass",
+      "name": "selected_path_audit_pass",
+      "status": "pass"
+    },
+    {
+      "detail": "pass",
+      "name": "resource_policy_audit_pass",
+      "status": "pass"
+    },
+    {
+      "detail": "86/86",
+      "name": "master_plan_records_live_manifest_required",
+      "status": "pass"
+    },
+    {
+      "detail": "347",
+      "name": "master_plan_records_live_manifest_consistency",
+      "status": "pass"
+    },
+    {
+      "detail": "required=86 sources=224",
+      "name": "master_plan_records_live_source_count",
+      "status": "pass"
+    },
+    {
+      "detail": "reflected `10`, partial `1`, blocked `1`",
+      "name": "master_plan_records_live_current_summary",
+      "status": "pass"
+    },
+    {
+      "detail": "131/131",
+      "name": "master_plan_records_live_operator_handoff_validation",
+      "status": "pass"
+    },
+    {
+      "detail": "152/152",
+      "name": "master_plan_records_live_bundle_validation",
+      "status": "pass"
+    },
+    {
+      "detail": "86/86",
+      "name": "sub_plan_records_live_manifest_required",
+      "status": "pass"
+    },
+    {
+      "detail": "347",
+      "name": "sub_plan_records_live_manifest_consistency",
+      "status": "pass"
+    },
+    {
+      "detail": "required=86 sources=224",
+      "name": "sub_plan_records_live_source_count",
+      "status": "pass"
+    },
+    {
+      "detail": "reflected `10`, partial `1`, blocked `1`",
+      "name": "sub_plan_records_live_current_summary",
+      "status": "pass"
+    },
+    {
+      "detail": "131/131",
+      "name": "sub_plan_records_live_operator_handoff_validation",
+      "status": "pass"
+    },
+    {
+      "detail": "152/152",
+      "name": "sub_plan_records_live_bundle_validation",
+      "status": "pass"
+    },
+    {
+      "detail": "86/86",
+      "name": "spec_records_live_manifest_required",
+      "status": "pass"
+    },
+    {
+      "detail": "347",
+      "name": "spec_records_live_manifest_consistency",
+      "status": "pass"
+    },
+    {
+      "detail": "required=86 sources=224",
+      "name": "spec_records_live_source_count",
+      "status": "pass"
+    },
+    {
+      "detail": "reflected `10`, partial `1`, blocked `1`",
+      "name": "spec_records_live_current_summary",
+      "status": "pass"
+    },
+    {
+      "detail": "131/131",
+      "name": "spec_records_live_operator_handoff_validation",
+      "status": "pass"
+    },
+    {
+      "detail": "152/152",
+      "name": "spec_records_live_bundle_validation",
+      "status": "pass"
+    },
+    {
+      "detail": "86/86",
+      "name": "validation_records_live_manifest_required",
+      "status": "pass"
+    },
+    {
+      "detail": "347",
+      "name": "validation_records_live_manifest_consistency",
+      "status": "pass"
+    },
+    {
+      "detail": "required=86 sources=224",
+      "name": "validation_records_live_source_count",
+      "status": "pass"
+    },
+    {
+      "detail": "reflected `10`, partial `1`, blocked `1`",
+      "name": "validation_records_live_current_summary",
+      "status": "pass"
+    },
+    {
+      "detail": "131/131",
+      "name": "validation_records_live_operator_handoff_validation",
+      "status": "pass"
+    },
+    {
+      "detail": "152/152",
+      "name": "validation_records_live_bundle_validation",
+      "status": "pass"
+    },
+    {
+      "detail": "86/86",
+      "name": "progress_records_live_manifest_required",
+      "status": "pass"
+    },
+    {
+      "detail": "347",
+      "name": "progress_records_live_manifest_consistency",
+      "status": "pass"
+    },
+    {
+      "detail": "required=86 sources=224",
+      "name": "progress_records_live_source_count",
+      "status": "pass"
+    },
+    {
+      "detail": "reflected `10`, partial `1`, blocked `1`",
+      "name": "progress_records_live_current_summary",
+      "status": "pass"
+    },
+    {
+      "detail": "131/131",
+      "name": "progress_records_live_operator_handoff_validation",
+      "status": "pass"
+    },
+    {
+      "detail": "152/152",
+      "name": "progress_records_live_bundle_validation",
+      "status": "pass"
+    },
+    {
+      "detail": "86/86",
+      "name": "current_handover_records_live_manifest_required",
+      "status": "pass"
+    },
+    {
+      "detail": "347",
+      "name": "current_handover_records_live_manifest_consistency",
+      "status": "pass"
+    },
+    {
+      "detail": "required=86 sources=224",
+      "name": "current_handover_records_live_source_count",
+      "status": "pass"
+    },
+    {
+      "detail": "reflected `10`, partial `1`, blocked `1`",
+      "name": "current_handover_records_live_current_summary",
+      "status": "pass"
+    },
+    {
+      "detail": "131/131",
+      "name": "current_handover_records_live_operator_handoff_validation",
+      "status": "pass"
+    },
+    {
+      "detail": "152/152",
+      "name": "current_handover_records_live_bundle_validation",
+      "status": "pass"
+    },
+    {
+      "detail": "86/86",
+      "name": "choice_records_live_manifest_required",
+      "status": "pass"
+    },
+    {
+      "detail": "347",
+      "name": "choice_records_live_manifest_consistency",
+      "status": "pass"
+    },
+    {
+      "detail": "required=86 sources=224",
+      "name": "choice_records_live_source_count",
+      "status": "pass"
+    },
+    {
+      "detail": "reflected `10`, partial `1`, blocked `1`",
+      "name": "choice_records_live_current_summary",
+      "status": "pass"
+    },
+    {
+      "detail": "131/131",
+      "name": "choice_records_live_operator_handoff_validation",
+      "status": "pass"
+    },
+    {
+      "detail": "152/152",
+      "name": "choice_records_live_bundle_validation",
+      "status": "pass"
+    },
+    {
+      "detail": "86/86",
+      "name": "log_records_live_manifest_required",
+      "status": "pass"
+    },
+    {
+      "detail": "347",
+      "name": "log_records_live_manifest_consistency",
+      "status": "pass"
+    },
+    {
+      "detail": "required=86 sources=224",
+      "name": "log_records_live_source_count",
+      "status": "pass"
+    },
+    {
+      "detail": "reflected `10`, partial `1`, blocked `1`",
+      "name": "log_records_live_current_summary",
+      "status": "pass"
+    },
+    {
+      "detail": "131/131",
+      "name": "log_records_live_operator_handoff_validation",
+      "status": "pass"
+    },
+    {
+      "detail": "152/152",
+      "name": "log_records_live_bundle_validation",
+      "status": "pass"
+    },
+    {
+      "detail": "checks=131 pass=131",
+      "name": "current_handover_records_live_operator_handoff_validation_artifact_summary",
+      "status": "pass"
+    },
+    {
+      "detail": "checks=152 pass=152",
+      "name": "current_handover_records_live_bundle_validation_artifact_summary",
+      "status": "pass"
+    },
+    {
+      "detail": "[]",
+      "name": "current_docs_have_no_stale_final_evidence_counts",
+      "status": "pass"
+    },
+    {
+      "detail": "[]",
+      "name": "current_docs_have_no_stale_validator_counts",
+      "status": "pass"
+    },
+    {
+      "detail": "[]",
+      "name": "current_docs_have_no_stale_xr_policy_check_count",
+      "status": "pass"
+    }
+  ],
+  "date_tag": "2026_06_10",
+  "documents": {
+    "choice": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/CHOICE.md",
+    "current_handover": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/track/HANDOVER.md",
+    "execution": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/Execution.md",
+    "handover": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/track/HANDOVER-2026-06-10-E2E.md",
+    "log": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/track/log.md",
+    "master_plan": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/Master-Plan.md",
+    "progress": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/track/PROGRESS.md",
+    "spec": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/Spec.md",
+    "sub_plan": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/Sub-Plan.md",
+    "validation": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/Validation.md"
+  },
+  "fail_count": 0,
+  "observed": {
+    "completion_status": "blocked",
+    "current_audit_summary": {
+      "blocked": 1,
+      "default_closeout_blockers": 2,
+      "evidence_classes": [
+        "doc-reported",
+        "external-blocker",
+        "file-exists",
+        "validated-by-tool"
+      ],
+      "partial": 1,
+      "reflected": 10,
+      "requirements": 12,
+      "vref_required_closeout_blockers": 3
+    },
+    "current_doc_base": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware",
+    "evidence_consistency_count": 347,
+    "evidence_manifest_status": "pass",
+    "evidence_required": 86,
+    "final_signoff_bundle_validation_check_count": 152,
+    "operator_handoff_validation_check_count": 131,
+    "requirements_count": 12,
+    "requirements_trace_status": "blocked",
+    "resource_policy_status": "pass",
+    "selected_path_status": "pass",
+    "source_count": 224,
+    "source_required_count": 86
+  },
+  "pass_count": 86,
+  "root": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR",
+  "safety": {
+    "creates_board_result": false,
+    "creates_xr_vits_policy": false,
+    "executes_board_smoke": false,
+    "executes_hls_or_vivado": false,
+    "writes_canonical_inputs": false
+  },
+  "scope": "third-goal planning, spec, execution, validation, and trace conformance",
+  "status": "pass"
+}

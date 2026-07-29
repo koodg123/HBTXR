@@ -1,0 +1,94 @@
+{
+  "active_policy_path": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/xr_vits_replacement_policy.json",
+  "active_policy_written": false,
+  "dry_run": true,
+  "integrity": {
+    "approval_event": {
+      "approved_at": "1970-01-01T00:00:00Z",
+      "approver_id": "<approved-by>",
+      "candidate_audit": "docs/resources/xr_vits_candidate_audit_2026_06_10.json",
+      "candidate_audit_fingerprint": "69436e707b1654ee1f725580291feec7634854ba65711aff35093a11ea035152",
+      "event_id": "c084f3dc58add659484908487b1966c75e3d1e0a8a0d7e9b667c8a097a1896c1",
+      "event_type": "xr_vits_replacement_approval",
+      "generator": "tools/create_xr_vits_replacement_policy.py",
+      "protocol_version": "hgtxr-xr-vits-replacement-v1",
+      "reason": "Approve XR_Accel as XR-VITs replacement for HGTXR third-goal signoff",
+      "reason_code": "xr_vits_replacement",
+      "replacement_path": "/home/kjm26/project/PRJXR/XR-VIT/XR_Accel",
+      "replacement_role": "candidate-xr-accel",
+      "requested_path": "/home/kjm26/project/PRJXR/XR-VITs"
+    },
+    "approval_protocol_version": "hgtxr-xr-vits-replacement-v1",
+    "candidate_audit_fingerprint": "69436e707b1654ee1f725580291feec7634854ba65711aff35093a11ea035152",
+    "candidate_audit_path": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/xr_vits_candidate_audit_2026_06_10.json",
+    "candidate_audit_recommendation_snapshot": {
+      "path": "/home/kjm26/project/PRJXR/XR-VIT/XR_Accel",
+      "reason": "highest score for ZCU104/cyclic/DeiT/HLS evidence",
+      "requested_path": "/home/kjm26/project/PRJXR/XR-VITs",
+      "role": "candidate-xr-accel",
+      "score": 99
+    },
+    "errors": [],
+    "expected_candidate_audit_fingerprint": "69436e707b1654ee1f725580291feec7634854ba65711aff35093a11ea035152",
+    "expected_candidate_audit_recommendation_snapshot": {
+      "path": "/home/kjm26/project/PRJXR/XR-VIT/XR_Accel",
+      "reason": "highest score for ZCU104/cyclic/DeiT/HLS evidence",
+      "requested_path": "/home/kjm26/project/PRJXR/XR-VITs",
+      "role": "candidate-xr-accel",
+      "score": 99
+    },
+    "expected_policy_fingerprint": "c1cbced7db4080c64cbc3ef60e38f98d50c9defd171a3735818d790eb25d799b",
+    "has_integrity_fields": true,
+    "policy_fingerprint": "c1cbced7db4080c64cbc3ef60e38f98d50c9defd171a3735818d790eb25d799b",
+    "status": "pass",
+    "warnings": []
+  },
+  "policy": {
+    "approval_event": {
+      "approved_at": "1970-01-01T00:00:00Z",
+      "approver_id": "<approved-by>",
+      "candidate_audit": "docs/resources/xr_vits_candidate_audit_2026_06_10.json",
+      "candidate_audit_fingerprint": "69436e707b1654ee1f725580291feec7634854ba65711aff35093a11ea035152",
+      "event_id": "c084f3dc58add659484908487b1966c75e3d1e0a8a0d7e9b667c8a097a1896c1",
+      "event_type": "xr_vits_replacement_approval",
+      "generator": "tools/create_xr_vits_replacement_policy.py",
+      "protocol_version": "hgtxr-xr-vits-replacement-v1",
+      "reason": "Approve XR_Accel as XR-VITs replacement for HGTXR third-goal signoff",
+      "reason_code": "xr_vits_replacement",
+      "replacement_path": "/home/kjm26/project/PRJXR/XR-VIT/XR_Accel",
+      "replacement_role": "candidate-xr-accel",
+      "requested_path": "/home/kjm26/project/PRJXR/XR-VITs"
+    },
+    "approved_at": "1970-01-01T00:00:00Z",
+    "approved_by": "<approved-by>",
+    "approved_replacement": true,
+    "candidate_audit": "docs/resources/xr_vits_candidate_audit_2026_06_10.json",
+    "candidate_audit_fingerprint": "69436e707b1654ee1f725580291feec7634854ba65711aff35093a11ea035152",
+    "candidate_audit_meta": {
+      "bytes": 13239,
+      "exists": true,
+      "path": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/docs/resources/xr_vits_candidate_audit_2026_06_10.json",
+      "sha256": "69436e707b1654ee1f725580291feec7634854ba65711aff35093a11ea035152"
+    },
+    "candidate_audit_recommendation_snapshot": {
+      "path": "/home/kjm26/project/PRJXR/XR-VIT/XR_Accel",
+      "reason": "highest score for ZCU104/cyclic/DeiT/HLS evidence",
+      "requested_path": "/home/kjm26/project/PRJXR/XR-VITs",
+      "role": "candidate-xr-accel",
+      "score": 99
+    },
+    "policy_fingerprint": "c1cbced7db4080c64cbc3ef60e38f98d50c9defd171a3735818d790eb25d799b",
+    "reason": "Approve XR_Accel as XR-VITs replacement for HGTXR third-goal signoff",
+    "replacement_path": "/home/kjm26/project/PRJXR/XR-VIT/XR_Accel",
+    "replacement_role": "candidate-xr-accel",
+    "requested_path": "/home/kjm26/project/PRJXR/XR-VITs"
+  },
+  "preview_only": true,
+  "safety": {
+    "creates_board_result": false,
+    "creates_xr_vits_policy": false,
+    "executes_commands": false,
+    "writes_canonical_inputs": false
+  },
+  "status": "pass"
+}

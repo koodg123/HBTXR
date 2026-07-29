@@ -1,0 +1,57 @@
+{
+  "board_result_filename": "e2e_axis_dma_c3b_mem16_file_smoke.json",
+  "canonical_result_path": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR/hardware/pynq/hgtxr/e2e_axis_dma_c3b_mem16_file_smoke.json",
+  "canonical_result_relative_path": "hardware/pynq/hgtxr/e2e_axis_dma_c3b_mem16_file_smoke.json",
+  "expected_unblock_effect": {
+    "active": "copies valid board JSON to canonical_result_path",
+    "dry_run": "validates without writing canonical smoke result",
+    "final_gate": "clears C3b AXIS/DMA physical smoke result after active import"
+  },
+  "preset": "axis-c3b-mem16",
+  "required_fields": {
+    "bitfile": "non-empty",
+    "dma_in_name": "non-empty",
+    "dma_out_name": "non-empty",
+    "expected_out_raw": [
+      32,
+      -13,
+      26,
+      -6,
+      14,
+      -11
+    ],
+    "expected_runtime_state": 2,
+    "hwhfile": "non-empty",
+    "out_raw": [
+      32,
+      -13,
+      26,
+      -6,
+      14,
+      -11
+    ],
+    "out_state": "list length 6",
+    "output_match": true,
+    "runtime_match": true,
+    "runtime_state": 2,
+    "status": "pass",
+    "variant": "c3b-mem16",
+    "weights_mode": "file"
+  },
+  "root": "/home/kjm26/project/PRJXR/XR-VIT/HGTXR",
+  "safety": {
+    "creates_board_result": false,
+    "creates_xr_vits_policy": false,
+    "executes_commands": false,
+    "writes_canonical_inputs": false
+  },
+  "status": "pass",
+  "validation": {
+    "active_import_command": "python3 tools/import_pynq_smoke_result.py /path/to/e2e_axis_dma_c3b_mem16_file_smoke.json --preset axis-c3b-mem16 --root /home/kjm26/project/PRJXR/XR-VIT/HGTXR --json-out /tmp/c3b_smoke_import_2026_06_10.json --validation-out /tmp/c3b_smoke_import_validation_2026_06_10.json",
+    "dry_run_import_command": "python3 tools/import_pynq_smoke_result.py /path/to/e2e_axis_dma_c3b_mem16_file_smoke.json --preset axis-c3b-mem16 --root /home/kjm26/project/PRJXR/XR-VIT/HGTXR --dry-run --json-out /tmp/c3b_smoke_import_2026_06_10.json --validation-out /tmp/c3b_smoke_import_validation_2026_06_10.json",
+    "require_paths": true,
+    "validate_command": "python3 tools/validate_pynq_smoke_result.py /path/to/e2e_axis_dma_c3b_mem16_file_smoke.json --preset axis-c3b-mem16",
+    "validator": "hardware/tools/validate_pynq_smoke_result.py"
+  },
+  "variant": "c3b-mem16"
+}
