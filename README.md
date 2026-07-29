@@ -22,7 +22,8 @@ accelerator, assembled from the three source branches in `HBTXR-Pool`.
 | 디렉토리 | 내용 | 문서 |
 |---|---|---|
 | `algorithm/` | 학습·평가·양자화·정수 그래프 (Python) | `algorithm/docs/` |
-| `hardware/` | HLS·RTL·Vivado·PYNQ 가속기 | `hardware/docs/` |
+| `hardware/` | HLS·Vivado·PYNQ 가속기 — **2026-07-29 재구성 중, 대부분 비어 있음** | `hardware/docs/` |
+| `archive/hardware/` | **구 hardware 트리 — 동작하는 유일한 구현, 읽기 전용 기준** | `archive/hardware/docs/` |
 | `docs/` | 횡단·거버넌스·외부 조사 | — |
 | `references/` | 논문 참조와 보존된 레거시 코드베이스 | — |
 | `third/` | 벤더링된 서드파티 (중첩 저장소 메타데이터 제외) | — |

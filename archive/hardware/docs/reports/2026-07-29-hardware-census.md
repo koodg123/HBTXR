@@ -4,7 +4,7 @@
 
 # hardware/ 전수 semantic 검사 — 분석
 
-원자료: [snapshots/2026-07-29-semantic-census/](../../../archive/hardware/docs/snapshots/2026-07-29-semantic-census/)
+원자료: [snapshots/2026-07-29-semantic-census/](../snapshots/2026-07-29-semantic-census/)
 (커밋 `8a9093e`, committed blobs 기준)
 
 목적: **Refactoring / Rewrite / Cleanup / Reconstruction 착수 전 기준선.**
@@ -302,9 +302,9 @@ tools 87개 중 테스트 있음 59 / 없음 28
 
 ## 7. 문서 트리가 자기 툴체인에 고정돼 있습니다
 
-`archive/hardware/tools/write_spec_plan_conformance_audit.py`가 `archive/hardware/docs/{Master-Plan,
+`hardware/tools/write_spec_plan_conformance_audit.py`가 `hardware/docs/{Master-Plan,
 Sub-Plan,Spec,Execution,Validation}.md`와 `docs/track/**`, `docs/resources/**`를 **경로로**
-읽고, 테스트 10개 이상이 의존합니다. 그래서 2026-07-29 문서 재배치에서 `archive/hardware/docs/`만
+읽고, 테스트 10개 이상이 의존합니다. 그래서 2026-07-29 문서 재배치에서 `hardware/docs/`만
 손대지 못했습니다 — 자세히는
 [DOC-CONVENTIONS §11](../../../docs/governance/DOC-CONVENTIONS.md).
 

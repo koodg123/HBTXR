@@ -21,6 +21,11 @@
 | `algorithm/docs/` | `algorithm/**` 코드가 설명 대상인 것 |
 | `hardware/docs/` | `hardware/**` 코드가 설명 대상인 것 |
 
+> **아카이브는 트리로 세지 않습니다.** 2026-07-29에 구 hardware 트리가
+> `archive/hardware/`로 이동했고 그 안의 `docs/`도 함께 갔습니다. 아카이브는 **읽기 전용
+> 기준**이므로 이 규약을 소급 적용하지 않습니다 — 스냅샷·핸드오프와 같은 취급입니다
+> (규칙 G·H). 색인에는 별도 트리로 나오지만 규약의 대상은 아닙니다.
+
 ### 배치 규칙 — 한 문장
 
 > **문서는 그것을 거짓으로 만들 수 있는 코드가 있는 트리에 산다.**
@@ -254,7 +259,7 @@ docs/reference/COMPARISON-*.md    외부 프로젝트와의 비교 분석
 때문입니다:
 
 ```python
-# hardware/tools/write_spec_plan_conformance_audit.py
+# archive/hardware/tools/write_spec_plan_conformance_audit.py
 DOCS = {"master_plan": "docs/Master-Plan.md", "spec": "docs/Spec.md", ...}
 docs = {name: root / rel for name, rel in DOCS.items()}     # root = HBTXR/  → 루트 docs/
 current_doc_base = root/"hardware" if (root/"hardware"/"docs"/"Spec.md").exists() else root

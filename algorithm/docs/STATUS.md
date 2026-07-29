@@ -29,7 +29,7 @@ forgotten이 구분되지 않습니다.
 
 ## Next (승인 대기)
 
-- `i_ops` ↔ `hardware/hls/include/hgtxr_cyclic_math.hpp` 대조 → `docs/contracts/NUMERICS-CONTRACT.md`
+- `i_ops` ↔ `archive/hardware/hls/include/hgtxr_cyclic_math.hpp` 대조 → `docs/contracts/NUMERICS-CONTRACT.md`
   (둘 다 HG-PIPE 커널인데 교차 참조 0건, 수치 규약 상이)
 - 입력 활성 그리드 `2⁻⁸` 고정 (A2 무관, 즉시 가능)
 - 첫/마지막 레이어 8비트를 기본 정책으로 (A2 무관)

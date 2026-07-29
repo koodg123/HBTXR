@@ -5,7 +5,7 @@
 # hardware/ 재구성 계획
 
 근거: [2026-07-29-hardware-census.md](../../reports/2026-07-29-hardware-census.md) ·
-원자료 [snapshots/2026-07-29-semantic-census/](../../../../archive/hardware/docs/snapshots/2026-07-29-semantic-census/)
+원자료 [snapshots/2026-07-29-semantic-census/](../../snapshots/2026-07-29-semantic-census/)
 
 목표: **실험·확장·분석이 쉽고 사람이 이해할 수 있는** 연구용 코드베이스.
 
@@ -114,7 +114,7 @@ hardware/
 
 ---
 
-## 4. `archive/hardware/docs/` — **툴 결합을 먼저 끊어야 합니다**
+## 4. `hardware/docs/` — **툴 결합을 먼저 끊어야 합니다**
 
 지저분한 건 맞지만 **먼저 옮기면 깨집니다.**
 
@@ -125,7 +125,7 @@ current_doc_base = root/"hardware" if (root/"hardware"/"docs"/"Spec.md").exists(
 ```
 
 도구가 문서를 **경로로 읽고 내용을 grep 해서 spec 준수를 판정**합니다. 테스트 10개 이상이
-의존합니다. 그래서 2026-07-29 저장소 문서 재배치에서 `archive/hardware/docs/`만 손대지 못했습니다.
+의존합니다. 그래서 2026-07-29 저장소 문서 재배치에서 `hardware/docs/`만 손대지 못했습니다.
 
 ### 순서
 
@@ -185,7 +185,7 @@ progress:    docs/track/PROGRESS.md
 | **P1** | `tools/_lib/` 공용화 — `load_json`(22) `sha256_file`(11) `normalize_roots`(10) `write_outputs`(7) | 중간 | 테스트 통과 수 **증가하지 않아야 함**(동작 불변) |
 | **P2** | `tools/` 역할별 재배치 + `sys.path` 조작 66곳 제거 (패키지화) | 중간 | 동일 |
 | **P3** | **문서-도구 결합을 `configs/doc_contract.yaml`로** | 중간 | 감사 도구가 같은 판정 |
-| **P4** | `archive/hardware/docs/` 재배치 (P3 이후에만) | 중간 | 링크 검사 + INDEX |
+| **P4** | `hardware/docs/` 재배치 (P3 이후에만) | 중간 | 링크 검사 + INDEX |
 | **P5** | 소스/생성물 분리 — `hls/` 단일화, `artifacts/`로 비트스트림, `golden/` 분리 | 중간 | 빌드 스크립트 경로 갱신 |
 | **P6** | `tests/` 하위 구조 채우기 (unit/integration/hls/runtime) | 쉬움 | 동일 |
 | **P7** | 거대 함수 분해 — 1,954 / 1,719 / 1,176줄 | **큼** | 테스트 |
@@ -196,7 +196,7 @@ progress:    docs/track/PROGRESS.md
 
 ### 각 단계의 성공 기준
 
-- **P1~P2**: `archive/hardware/tests` 통과 수가 **426에서 변하지 않을 것**. 늘어나면 동작을 바꾼
+- **P1~P2**: `hardware/tests` 통과 수가 **426에서 변하지 않을 것**. 늘어나면 동작을 바꾼
   것이고, 줄면 깨뜨린 것입니다.
 - **P3~P4**: 감사 도구가 재배치 전후로 **같은 판정**을 낼 것.
 - **P8**: 49건 중 몇 건이 환경 설정만으로 통과하는지 **수치로** 보고.
@@ -209,4 +209,4 @@ progress:    docs/track/PROGRESS.md
   없고 뒤로 미룹니다.
 - **census는 삭제 근거가 아닙니다.** §3의 "확실히 죽었음"도 P0에서 컴파일/테스트로
   재확인한 뒤 지웁니다.
-- **`archive/hardware/tests` 49건 실패는 기준선입니다.** 재구성 중 이 숫자가 늘면 즉시 멈춥니다.
+- **`hardware/tests` 49건 실패는 기준선입니다.** 재구성 중 이 숫자가 늘면 즉시 멈춥니다.

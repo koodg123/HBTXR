@@ -10,7 +10,7 @@
 python scripts/build_docs_index.py
 ```
 
-총 **348개** 문서. 날짜·상태·소유는 각 문서의 3줄 헤더에서 읽고, 헤더가 없으면 git 이력으로 대체합니다 — 그 경우 *(헤더 없음 — git 기준)*으로 표시되므로 상태 칸이 추정임을 알 수 있습니다.
+총 **351개** 문서. 날짜·상태·소유는 각 문서의 3줄 헤더에서 읽고, 헤더가 없으면 git 이력으로 대체합니다 — 그 경우 *(헤더 없음 — git 기준)*으로 표시되므로 상태 칸이 추정임을 알 수 있습니다.
 
 규약: [governance/DOC-CONVENTIONS.md](governance/DOC-CONVENTIONS.md)
 
@@ -20,7 +20,8 @@ python scripts/build_docs_index.py
 |---|---|---:|---|---|
 | **repo** | `docs/` | 175 | 2026-07-29 | 횡단·거버넌스·외부 조사 |
 | **algorithm** | `algorithm/docs/` | 17 | 2026-07-29 | 학습·평가·양자화·정수 그래프 |
-| **hardware** | `hardware/docs/` | 156 | 2026-07-29 | HLS·RTL·Vivado·PYNQ 가속기 |
+| **hardware** | `hardware/docs/` | 3 | 2026-07-29 | HLS·RTL·Vivado·PYNQ 가속기 (재구성 중) |
+| **archive** | `archive/hardware/docs/` | 156 | ? | 구 hardware 트리 — 읽기 전용 기준 |
 
 ## 먼저 볼 것
 
@@ -118,94 +119,102 @@ python scripts/build_docs_index.py
 
 | 문서 | 작성 | 갱신 | 상태 | 소유 |
 |---|---|---|---|---|
-| [snapshots/2026-07-29-semantic-census/README.md](../hardware/docs/snapshots/2026-07-29-semantic-census/README.md) | 2026-07-29 | 2026-07-29 | frozen — 스냅샷, 갱신하지 않음 | hardware |
 | [reports/2026-07-29-hardware-census.md](../hardware/docs/reports/2026-07-29-hardware-census.md) | 2026-07-29 | 2026-07-29 | active — 재작성 착수 전 기준선 | hardware |
 | [plans/active/2026-07-29-hardware-reconstruction.md](../hardware/docs/plans/active/2026-07-29-hardware-reconstruction.md) | 2026-07-29 | 2026-07-29 | active — 승인 대기 | hardware |
 | [STATUS.md](../hardware/docs/STATUS.md) | 2026-07-29 | 2026-07-29 | active | hardware |
-| [validation/xr_accel/MULTI_BOARD_VALIDATION.md](../hardware/docs/validation/xr_accel/MULTI_BOARD_VALIDATION.md) | 2026-07-15 | 2026-07-15 | *(헤더 없음 — git 기준)* | ? |
-| [validation/xr_accel/DEIT_CYCLIC_VERIFICATION.md](../hardware/docs/validation/xr_accel/DEIT_CYCLIC_VERIFICATION.md) | 2026-07-15 | 2026-07-15 | *(헤더 없음 — git 기준)* | ? |
-| [track/PROGRESS.md](../hardware/docs/track/PROGRESS.md) | 2026-07-05 | 2026-07-15 | frozen — 2026-07-15 이후 활동 없음 | hardware |
-| [track/IMPL_REPOS_HANDOVER_IMPORT_2026_07_08.md](../hardware/docs/track/IMPL_REPOS_HANDOVER_IMPORT_2026_07_08.md) | 2026-07-15 | 2026-07-15 | *(헤더 없음 — git 기준)* | ? |
-| [status/xr_accel/ZCU104_CYCLIC_MAXPERF_PROGRESS.md](../hardware/docs/status/xr_accel/ZCU104_CYCLIC_MAXPERF_PROGRESS.md) | 2026-07-15 | 2026-07-15 | *(헤더 없음 — git 기준)* | ? |
-| [status/xr_accel/ZCU104_CYCLIC_MAXPERF_HANDOVER.md](../hardware/docs/status/xr_accel/ZCU104_CYCLIC_MAXPERF_HANDOVER.md) | 2026-07-15 | 2026-07-15 | *(헤더 없음 — git 기준)* | ? |
-| [status/xr_accel/PLAN.md](../hardware/docs/status/xr_accel/PLAN.md) | 2026-07-15 | 2026-07-15 | *(헤더 없음 — git 기준)* | ? |
-| [status/xr_accel/MERGE_STATUS.md](../hardware/docs/status/xr_accel/MERGE_STATUS.md) | 2026-07-15 | 2026-07-15 | *(헤더 없음 — git 기준)* | ? |
-| [references/vit_accel/experiments/zu15eg/deit_tiny_baseline/full_deit_tiny_fit/step2_hls_resource_summary.md](../hardware/docs/references/vit_accel/experiments/zu15eg/deit_tiny_baseline/full_deit_tiny_fit/step2_hls_resource_summary.md) | 2026-07-15 | 2026-07-15 | *(헤더 없음 — git 기준)* | ? |
-| [references/vit_accel/experiments/vck190/deit_tiny_baseline/full_deit_tiny_fit/step5_vck190_pnr_summary.md](../hardware/docs/references/vit_accel/experiments/vck190/deit_tiny_baseline/full_deit_tiny_fit/step5_vck190_pnr_summary.md) | 2026-07-15 | 2026-07-15 | *(헤더 없음 — git 기준)* | ? |
-| [references/vit_accel/experiments/pnr/zu15eg_deit_tiny_full_status_20260410.md](../hardware/docs/references/vit_accel/experiments/pnr/zu15eg_deit_tiny_full_status_20260410.md) | 2026-07-15 | 2026-07-15 | *(헤더 없음 — git 기준)* | ? |
-| [references/vit_accel/experiments/pnr/zcu102_step4_bitstream_status_20260408.md](../hardware/docs/references/vit_accel/experiments/pnr/zcu102_step4_bitstream_status_20260408.md) | 2026-07-15 | 2026-07-15 | *(헤더 없음 — git 기준)* | ? |
-| [references/vit_accel/experiments/pnr/zcu102_deit_tiny_full_status_20260410.md](../hardware/docs/references/vit_accel/experiments/pnr/zcu102_deit_tiny_full_status_20260410.md) | 2026-07-15 | 2026-07-15 | *(헤더 없음 — git 기준)* | ? |
-| [references/vit_accel/experiments/pnr/vck190_step4_ooc_status_20260408.md](../hardware/docs/references/vit_accel/experiments/pnr/vck190_step4_ooc_status_20260408.md) | 2026-07-15 | 2026-07-15 | *(헤더 없음 — git 기준)* | ? |
-| [references/vit_accel/experiments/pnr/vck190_deit_tiny_full_status_20260410.md](../hardware/docs/references/vit_accel/experiments/pnr/vck190_deit_tiny_full_status_20260410.md) | 2026-07-15 | 2026-07-15 | *(헤더 없음 — git 기준)* | ? |
-| [references/vit_accel/experiments/pnr/deit_tiny_full_multi_board_status_20260410.md](../hardware/docs/references/vit_accel/experiments/pnr/deit_tiny_full_multi_board_status_20260410.md) | 2026-07-15 | 2026-07-15 | *(헤더 없음 — git 기준)* | ? |
-| [references/vit_accel/experiments/deit_tiny_baseline_ooc_rerun/full_deit_tiny_fit/step2_hls_resource_summary.md](../hardware/docs/references/vit_accel/experiments/deit_tiny_baseline_ooc_rerun/full_deit_tiny_fit/step2_hls_resource_summary.md) | 2026-07-15 | 2026-07-15 | *(헤더 없음 — git 기준)* | ? |
-| [references/vit_accel/experiments/deit_tiny_baseline/full_deit_tiny_fit/step2_hls_resource_summary.md](../hardware/docs/references/vit_accel/experiments/deit_tiny_baseline/full_deit_tiny_fit/step2_hls_resource_summary.md) | 2026-07-15 | 2026-07-15 | *(헤더 없음 — git 기준)* | ? |
-| [references/vit_accel/experiments/README.md](../hardware/docs/references/vit_accel/experiments/README.md) | 2026-07-15 | 2026-07-15 | *(헤더 없음 — git 기준)* | ? |
-| [references/vit_accel/VIVADO_ONLY_FLOW.md](../hardware/docs/references/vit_accel/VIVADO_ONLY_FLOW.md) | 2026-07-15 | 2026-07-15 | *(헤더 없음 — git 기준)* | ? |
-| [references/vit_accel/VCK190_ZU15EG_PARAMETER_COMPARISON.md](../hardware/docs/references/vit_accel/VCK190_ZU15EG_PARAMETER_COMPARISON.md) | 2026-07-15 | 2026-07-15 | *(헤더 없음 — git 기준)* | ? |
-| [references/vit_accel/VCK190_DOCKER_BASELINE.md](../hardware/docs/references/vit_accel/VCK190_DOCKER_BASELINE.md) | 2026-07-15 | 2026-07-15 | *(헤더 없음 — git 기준)* | ? |
-| [references/vit_accel/TRAINING_EVALUATION_AND_METRICS.md](../hardware/docs/references/vit_accel/TRAINING_EVALUATION_AND_METRICS.md) | 2026-07-15 | 2026-07-15 | *(헤더 없음 — git 기준)* | ? |
-| [references/vit_accel/SRC_CASE_PARALLELISM_TUNING.md](../hardware/docs/references/vit_accel/SRC_CASE_PARALLELISM_TUNING.md) | 2026-07-15 | 2026-07-15 | *(헤더 없음 — git 기준)* | ? |
-| [references/vit_accel/SRC_CASE_MODULE_GUIDE.md](../hardware/docs/references/vit_accel/SRC_CASE_MODULE_GUIDE.md) | 2026-07-15 | 2026-07-15 | *(헤더 없음 — git 기준)* | ? |
-| [references/vit_accel/SRC_CASE_MICROARCH.md](../hardware/docs/references/vit_accel/SRC_CASE_MICROARCH.md) | 2026-07-15 | 2026-07-15 | *(헤더 없음 — git 기준)* | ? |
-| [references/vit_accel/SRC_CASE_DIAGRAMS.md](../hardware/docs/references/vit_accel/SRC_CASE_DIAGRAMS.md) | 2026-07-15 | 2026-07-15 | *(헤더 없음 — git 기준)* | ? |
-| [references/vit_accel/SRC_CASE_ANALYSIS.md](../hardware/docs/references/vit_accel/SRC_CASE_ANALYSIS.md) | 2026-07-15 | 2026-07-15 | *(헤더 없음 — git 기준)* | ? |
-| [references/vit_accel/README.md](../hardware/docs/references/vit_accel/README.md) | 2026-07-15 | 2026-07-15 | *(헤더 없음 — git 기준)* | ? |
-| [references/vit_accel/PROJECT_STRUCTURE.md](../hardware/docs/references/vit_accel/PROJECT_STRUCTURE.md) | 2026-07-15 | 2026-07-15 | *(헤더 없음 — git 기준)* | ? |
-| [references/vit_accel/PROGRESS_2026_04_15.md](../hardware/docs/references/vit_accel/PROGRESS_2026_04_15.md) | 2026-07-15 | 2026-07-15 | *(헤더 없음 — git 기준)* | ? |
-| [references/vit_accel/PLAN.md](../hardware/docs/references/vit_accel/PLAN.md) | 2026-07-15 | 2026-07-15 | *(헤더 없음 — git 기준)* | ? |
-| [references/vit_accel/PIPELINE_OVERVIEW.md](../hardware/docs/references/vit_accel/PIPELINE_OVERVIEW.md) | 2026-07-15 | 2026-07-15 | *(헤더 없음 — git 기준)* | ? |
-| [references/vit_accel/MULTI_BOARD_VALIDATION.md](../hardware/docs/references/vit_accel/MULTI_BOARD_VALIDATION.md) | 2026-07-15 | 2026-07-15 | *(헤더 없음 — git 기준)* | ? |
-| [references/vit_accel/MERGE_STATUS.md](../hardware/docs/references/vit_accel/MERGE_STATUS.md) | 2026-07-15 | 2026-07-15 | *(헤더 없음 — git 기준)* | ? |
-| [references/vit_accel/LOCAL_SETUP.md](../hardware/docs/references/vit_accel/LOCAL_SETUP.md) | 2026-07-15 | 2026-07-15 | *(헤더 없음 — git 기준)* | ? |
-| [references/vit_accel/HISTORY.md](../hardware/docs/references/vit_accel/HISTORY.md) | 2026-07-15 | 2026-07-15 | *(헤더 없음 — git 기준)* | ? |
-| [references/vit_accel/FUNCTION_CALL_STACK.md](../hardware/docs/references/vit_accel/FUNCTION_CALL_STACK.md) | 2026-07-15 | 2026-07-15 | *(헤더 없음 — git 기준)* | ? |
-| [references/vit_accel/DEPLOYMENT_RUN_SCRIPTS.md](../hardware/docs/references/vit_accel/DEPLOYMENT_RUN_SCRIPTS.md) | 2026-07-15 | 2026-07-15 | *(헤더 없음 — git 기준)* | ? |
-| [references/vit_accel/CHECKLIST.md](../hardware/docs/references/vit_accel/CHECKLIST.md) | 2026-07-15 | 2026-07-15 | *(헤더 없음 — git 기준)* | ? |
-| [references/vit_accel/BOARD_RUNBOOKS.md](../hardware/docs/references/vit_accel/BOARD_RUNBOOKS.md) | 2026-07-15 | 2026-07-15 | *(헤더 없음 — git 기준)* | ? |
-| [architecture/xr_accel/HBTXR_CYCLIC_IMPLEMENTATION.md](../hardware/docs/architecture/xr_accel/HBTXR_CYCLIC_IMPLEMENTATION.md) | 2026-07-15 | 2026-07-15 | *(헤더 없음 — git 기준)* | ? |
-| [architecture/xr_accel/HBTXR_ARCH_FREEZE.md](../hardware/docs/architecture/xr_accel/HBTXR_ARCH_FREEZE.md) | 2026-07-15 | 2026-07-15 | *(헤더 없음 — git 기준)* | ? |
-| [track/log.md](../hardware/docs/track/log.md) | 2026-07-05 | 2026-07-05 | frozen — 2026-07-15 이후 활동 없음 | hardware |
-| [track/ZCU104_FULL_LEARNED_PHYSICAL_EXPERIMENT_PLAN_2026_07_01.md](../hardware/docs/track/ZCU104_FULL_LEARNED_PHYSICAL_EXPERIMENT_PLAN_2026_07_01.md) | 2026-07-05 | 2026-07-05 | *(헤더 없음 — git 기준)* | ? |
-| [track/WORK_PROGRESS_EXPERIMENT_SUMMARY_2026_06_27.md](../hardware/docs/track/WORK_PROGRESS_EXPERIMENT_SUMMARY_2026_06_27.md) | 2026-07-05 | 2026-07-05 | *(헤더 없음 — git 기준)* | ? |
-| [track/TODO.md](../hardware/docs/track/TODO.md) | 2026-07-05 | 2026-07-05 | frozen — 2026-07-15 이후 활동 없음 | hardware |
-| [track/THIRD_GOAL_REQUIREMENTS_2026_06_16.md](../hardware/docs/track/THIRD_GOAL_REQUIREMENTS_2026_06_16.md) | 2026-07-05 | 2026-07-05 | *(헤더 없음 — git 기준)* | ? |
-| [track/THIRD_GOAL_ACHIEVEMENT_CHECKLIST_2026_06_16.md](../hardware/docs/track/THIRD_GOAL_ACHIEVEMENT_CHECKLIST_2026_06_16.md) | 2026-07-05 | 2026-07-05 | *(헤더 없음 — git 기준)* | ? |
-| [track/SESSION_PROGRESS_AND_CONVERSATION_2026_07_05.md](../hardware/docs/track/SESSION_PROGRESS_AND_CONVERSATION_2026_07_05.md) | 2026-07-05 | 2026-07-05 | *(헤더 없음 — git 기준)* | ? |
-| [track/RUNTIME_MODE_FULL_AXI_WEIGHT_PATH_2026_06_28.md](../hardware/docs/track/RUNTIME_MODE_FULL_AXI_WEIGHT_PATH_2026_06_28.md) | 2026-07-05 | 2026-07-05 | *(헤더 없음 — git 기준)* | ? |
-| [track/RUNTIME_MODE_E2E_SHARED_TOP_2026_06_27.md](../hardware/docs/track/RUNTIME_MODE_E2E_SHARED_TOP_2026_06_27.md) | 2026-07-05 | 2026-07-05 | *(헤더 없음 — git 기준)* | ? |
-| [track/HANDOVER_2026_06_27.md](../hardware/docs/track/HANDOVER_2026_06_27.md) | 2026-07-05 | 2026-07-05 | *(헤더 없음 — git 기준)* | ? |
-| [track/HANDOVER.md](../hardware/docs/track/HANDOVER.md) | 2026-07-05 | 2026-07-05 | *(헤더 없음 — git 기준)* | ? |
-| [track/EIGHT_QUESTION_HYBRID_RUNTIME_REPORT_2026_06_28.md](../hardware/docs/track/EIGHT_QUESTION_HYBRID_RUNTIME_REPORT_2026_06_28.md) | 2026-07-05 | 2026-07-05 | *(헤더 없음 — git 기준)* | ? |
-| [track/EIGHT_QUESTION_FULL_LEARNED_VIVADO_EXPERIMENT_2026_06_28.md](../hardware/docs/track/EIGHT_QUESTION_FULL_LEARNED_VIVADO_EXPERIMENT_2026_06_28.md) | 2026-07-05 | 2026-07-05 | *(헤더 없음 — git 기준)* | ? |
-| [track/CONVERSATION.md](../hardware/docs/track/CONVERSATION.md) | 2026-07-05 | 2026-07-05 | *(헤더 없음 — git 기준)* | ? |
-| [track/CLEANUP_2026_06_17.md](../hardware/docs/track/CLEANUP_2026_06_17.md) | 2026-07-05 | 2026-07-05 | *(헤더 없음 — git 기준)* | ? |
-| [track/AQ2_SEARCH_TRACK_METRIC_CHECKLIST_2026_07_01.md](../hardware/docs/track/AQ2_SEARCH_TRACK_METRIC_CHECKLIST_2026_07_01.md) | 2026-07-05 | 2026-07-05 | *(헤더 없음 — git 기준)* | ? |
-| [track/AQ2_SEARCH_TRACK_MEASUREMENT_2026_06_30.md](../hardware/docs/track/AQ2_SEARCH_TRACK_MEASUREMENT_2026_06_30.md) | 2026-07-05 | 2026-07-05 | *(헤더 없음 — git 기준)* | ? |
-| [track/AQ2_REQUESTED_SEARCH_TRACK_METRICS_2026_07_01.md](../hardware/docs/track/AQ2_REQUESTED_SEARCH_TRACK_METRICS_2026_07_01.md) | 2026-07-05 | 2026-07-05 | *(헤더 없음 — git 기준)* | ? |
-| [track/ADR.md](../hardware/docs/track/ADR.md) | 2026-07-05 | 2026-07-05 | frozen — 2026-07-15 이후 활동 없음 | hardware |
-| [reports/c3b_resource_power_latency_tables_2026_06_23.md](../hardware/docs/reports/c3b_resource_power_latency_tables_2026_06_23.md) | 2026-07-05 | 2026-07-05 | *(헤더 없음 — git 기준)* | ? |
-| [reports/c3b_board_measurement_attempt_2026_06_23.md](../hardware/docs/reports/c3b_board_measurement_attempt_2026_06_23.md) | 2026-07-05 | 2026-07-05 | *(헤더 없음 — git 기준)* | ? |
-| [reports/c3b_attention_qkv_mlp_block_resource_report_2026_06_23.md](../hardware/docs/reports/c3b_attention_qkv_mlp_block_resource_report_2026_06_23.md) | 2026-07-05 | 2026-07-05 | *(헤더 없음 — git 기준)* | ? |
-| [legacy/legacy_experiment_analysis_2026_06_12.md](../hardware/docs/legacy/legacy_experiment_analysis_2026_06_12.md) | 2026-07-05 | 2026-07-05 | *(헤더 없음 — git 기준)* | ? |
-| [architecture/DIRECTORY_LAYOUT.md](../hardware/docs/architecture/DIRECTORY_LAYOUT.md) | 2026-07-05 | 2026-07-05 | *(헤더 없음 — git 기준)* | ? |
-| [analysis/no-board-results/p0_report_collection_2026_06_27/summary.md](../hardware/docs/analysis/no-board-results/p0_report_collection_2026_06_27/summary.md) | 2026-07-05 | 2026-07-05 | *(헤더 없음 — git 기준)* | ? |
-| [analysis/no-board-results/p0_report_collection_2026_06_26/summary.md](../hardware/docs/analysis/no-board-results/p0_report_collection_2026_06_26/summary.md) | 2026-07-05 | 2026-07-05 | *(헤더 없음 — git 기준)* | ? |
-| [analysis/no-board-results/p0_mode_profile_2026_06_27/summary.md](../hardware/docs/analysis/no-board-results/p0_mode_profile_2026_06_27/summary.md) | 2026-07-05 | 2026-07-05 | *(헤더 없음 — git 기준)* | ? |
-| [analysis/no-board-results/VIVADO_PROGRESS_2026_06_27.md](../hardware/docs/analysis/no-board-results/VIVADO_PROGRESS_2026_06_27.md) | 2026-07-05 | 2026-07-05 | *(헤더 없음 — git 기준)* | ? |
-| [analysis/no-board-results/P0_PROGRESS_2026_06_26.md](../hardware/docs/analysis/no-board-results/P0_PROGRESS_2026_06_26.md) | 2026-07-05 | 2026-07-05 | *(헤더 없음 — git 기준)* | ? |
-| [analysis/no-board-results/MODE_PROFILE_RESULTS_2026_06_27.md](../hardware/docs/analysis/no-board-results/MODE_PROFILE_RESULTS_2026_06_27.md) | 2026-07-05 | 2026-07-05 | *(헤더 없음 — git 기준)* | ? |
-| [analysis/NO_BOARD_PERFORMANCE_EXPERIMENT_PLAN_2026_06_26.md](../hardware/docs/analysis/NO_BOARD_PERFORMANCE_EXPERIMENT_PLAN_2026_06_26.md) | 2026-07-05 | 2026-07-05 | *(헤더 없음 — git 기준)* | ? |
-| [Validation.md](../hardware/docs/Validation.md) | 2026-07-05 | 2026-07-05 | *(헤더 없음 — git 기준)* | ? |
-| [THIRD_GOAL_PROGRESS_EXPERIMENT_REPORT_2026_06_16.md](../hardware/docs/THIRD_GOAL_PROGRESS_EXPERIMENT_REPORT_2026_06_16.md) | 2026-07-05 | 2026-07-05 | *(헤더 없음 — git 기준)* | ? |
-| [THIRD_GOAL_FUTURE_EXPERIMENTS_2026_06_16.md](../hardware/docs/THIRD_GOAL_FUTURE_EXPERIMENTS_2026_06_16.md) | 2026-07-05 | 2026-07-05 | *(헤더 없음 — git 기준)* | ? |
-| [Sub-Plan.md](../hardware/docs/Sub-Plan.md) | 2026-07-05 | 2026-07-05 | *(헤더 없음 — git 기준)* | ? |
-| [Spec.md](../hardware/docs/Spec.md) | 2026-07-05 | 2026-07-05 | *(헤더 없음 — git 기준)* | ? |
-| [SRC_CASE_MODULE_GUIDE.md](../hardware/docs/SRC_CASE_MODULE_GUIDE.md) | 2026-07-05 | 2026-07-05 | *(헤더 없음 — git 기준)* | ? |
-| [Master-Plan.md](../hardware/docs/Master-Plan.md) | 2026-07-05 | 2026-07-05 | *(헤더 없음 — git 기준)* | ? |
-| [HARDWARE_IMPORT_MANIFEST.md](../hardware/docs/HARDWARE_IMPORT_MANIFEST.md) | 2026-07-05 | 2026-07-05 | *(헤더 없음 — git 기준)* | ? |
-| [Execution.md](../hardware/docs/Execution.md) | 2026-07-05 | 2026-07-05 | *(헤더 없음 — git 기준)* | ? |
-| [CHOICE.md](../hardware/docs/CHOICE.md) | 2026-07-05 | 2026-07-05 | *(헤더 없음 — git 기준)* | ? |
+
+## archive — `archive/hardware/docs/`
+
+| 문서 | 작성 | 갱신 | 상태 | 소유 |
+|---|---|---|---|---|
+| [validation/xr_accel/MULTI_BOARD_VALIDATION.md](../archive/hardware/docs/validation/xr_accel/MULTI_BOARD_VALIDATION.md) | ? | ? | *(헤더 없음 — git 기준)* | ? |
+| [validation/xr_accel/DEIT_CYCLIC_VERIFICATION.md](../archive/hardware/docs/validation/xr_accel/DEIT_CYCLIC_VERIFICATION.md) | ? | ? | *(헤더 없음 — git 기준)* | ? |
+| [track/ZCU104_FULL_LEARNED_PHYSICAL_EXPERIMENT_PLAN_2026_07_01.md](../archive/hardware/docs/track/ZCU104_FULL_LEARNED_PHYSICAL_EXPERIMENT_PLAN_2026_07_01.md) | ? | ? | *(헤더 없음 — git 기준)* | ? |
+| [track/WORK_PROGRESS_EXPERIMENT_SUMMARY_2026_06_27.md](../archive/hardware/docs/track/WORK_PROGRESS_EXPERIMENT_SUMMARY_2026_06_27.md) | ? | ? | *(헤더 없음 — git 기준)* | ? |
+| [track/THIRD_GOAL_REQUIREMENTS_2026_06_16.md](../archive/hardware/docs/track/THIRD_GOAL_REQUIREMENTS_2026_06_16.md) | ? | ? | *(헤더 없음 — git 기준)* | ? |
+| [track/THIRD_GOAL_ACHIEVEMENT_CHECKLIST_2026_06_16.md](../archive/hardware/docs/track/THIRD_GOAL_ACHIEVEMENT_CHECKLIST_2026_06_16.md) | ? | ? | *(헤더 없음 — git 기준)* | ? |
+| [track/SESSION_PROGRESS_AND_CONVERSATION_2026_07_05.md](../archive/hardware/docs/track/SESSION_PROGRESS_AND_CONVERSATION_2026_07_05.md) | ? | ? | *(헤더 없음 — git 기준)* | ? |
+| [track/RUNTIME_MODE_FULL_AXI_WEIGHT_PATH_2026_06_28.md](../archive/hardware/docs/track/RUNTIME_MODE_FULL_AXI_WEIGHT_PATH_2026_06_28.md) | ? | ? | *(헤더 없음 — git 기준)* | ? |
+| [track/RUNTIME_MODE_E2E_SHARED_TOP_2026_06_27.md](../archive/hardware/docs/track/RUNTIME_MODE_E2E_SHARED_TOP_2026_06_27.md) | ? | ? | *(헤더 없음 — git 기준)* | ? |
+| [track/IMPL_REPOS_HANDOVER_IMPORT_2026_07_08.md](../archive/hardware/docs/track/IMPL_REPOS_HANDOVER_IMPORT_2026_07_08.md) | ? | ? | *(헤더 없음 — git 기준)* | ? |
+| [track/HANDOVER_2026_06_27.md](../archive/hardware/docs/track/HANDOVER_2026_06_27.md) | ? | ? | *(헤더 없음 — git 기준)* | ? |
+| [track/HANDOVER.md](../archive/hardware/docs/track/HANDOVER.md) | ? | ? | *(헤더 없음 — git 기준)* | ? |
+| [track/EIGHT_QUESTION_HYBRID_RUNTIME_REPORT_2026_06_28.md](../archive/hardware/docs/track/EIGHT_QUESTION_HYBRID_RUNTIME_REPORT_2026_06_28.md) | ? | ? | *(헤더 없음 — git 기준)* | ? |
+| [track/EIGHT_QUESTION_FULL_LEARNED_VIVADO_EXPERIMENT_2026_06_28.md](../archive/hardware/docs/track/EIGHT_QUESTION_FULL_LEARNED_VIVADO_EXPERIMENT_2026_06_28.md) | ? | ? | *(헤더 없음 — git 기준)* | ? |
+| [track/CONVERSATION.md](../archive/hardware/docs/track/CONVERSATION.md) | ? | ? | *(헤더 없음 — git 기준)* | ? |
+| [track/CLEANUP_2026_06_17.md](../archive/hardware/docs/track/CLEANUP_2026_06_17.md) | ? | ? | *(헤더 없음 — git 기준)* | ? |
+| [track/AQ2_SEARCH_TRACK_METRIC_CHECKLIST_2026_07_01.md](../archive/hardware/docs/track/AQ2_SEARCH_TRACK_METRIC_CHECKLIST_2026_07_01.md) | ? | ? | *(헤더 없음 — git 기준)* | ? |
+| [track/AQ2_SEARCH_TRACK_MEASUREMENT_2026_06_30.md](../archive/hardware/docs/track/AQ2_SEARCH_TRACK_MEASUREMENT_2026_06_30.md) | ? | ? | *(헤더 없음 — git 기준)* | ? |
+| [track/AQ2_REQUESTED_SEARCH_TRACK_METRICS_2026_07_01.md](../archive/hardware/docs/track/AQ2_REQUESTED_SEARCH_TRACK_METRICS_2026_07_01.md) | ? | ? | *(헤더 없음 — git 기준)* | ? |
+| [status/xr_accel/ZCU104_CYCLIC_MAXPERF_PROGRESS.md](../archive/hardware/docs/status/xr_accel/ZCU104_CYCLIC_MAXPERF_PROGRESS.md) | ? | ? | *(헤더 없음 — git 기준)* | ? |
+| [status/xr_accel/ZCU104_CYCLIC_MAXPERF_HANDOVER.md](../archive/hardware/docs/status/xr_accel/ZCU104_CYCLIC_MAXPERF_HANDOVER.md) | ? | ? | *(헤더 없음 — git 기준)* | ? |
+| [status/xr_accel/PLAN.md](../archive/hardware/docs/status/xr_accel/PLAN.md) | ? | ? | *(헤더 없음 — git 기준)* | ? |
+| [status/xr_accel/MERGE_STATUS.md](../archive/hardware/docs/status/xr_accel/MERGE_STATUS.md) | ? | ? | *(헤더 없음 — git 기준)* | ? |
+| [reports/c3b_resource_power_latency_tables_2026_06_23.md](../archive/hardware/docs/reports/c3b_resource_power_latency_tables_2026_06_23.md) | ? | ? | *(헤더 없음 — git 기준)* | ? |
+| [reports/c3b_board_measurement_attempt_2026_06_23.md](../archive/hardware/docs/reports/c3b_board_measurement_attempt_2026_06_23.md) | ? | ? | *(헤더 없음 — git 기준)* | ? |
+| [reports/c3b_attention_qkv_mlp_block_resource_report_2026_06_23.md](../archive/hardware/docs/reports/c3b_attention_qkv_mlp_block_resource_report_2026_06_23.md) | ? | ? | *(헤더 없음 — git 기준)* | ? |
+| [references/vit_accel/experiments/zu15eg/deit_tiny_baseline/full_deit_tiny_fit/step2_hls_resource_summary.md](../archive/hardware/docs/references/vit_accel/experiments/zu15eg/deit_tiny_baseline/full_deit_tiny_fit/step2_hls_resource_summary.md) | ? | ? | *(헤더 없음 — git 기준)* | ? |
+| [references/vit_accel/experiments/vck190/deit_tiny_baseline/full_deit_tiny_fit/step5_vck190_pnr_summary.md](../archive/hardware/docs/references/vit_accel/experiments/vck190/deit_tiny_baseline/full_deit_tiny_fit/step5_vck190_pnr_summary.md) | ? | ? | *(헤더 없음 — git 기준)* | ? |
+| [references/vit_accel/experiments/pnr/zu15eg_deit_tiny_full_status_20260410.md](../archive/hardware/docs/references/vit_accel/experiments/pnr/zu15eg_deit_tiny_full_status_20260410.md) | ? | ? | *(헤더 없음 — git 기준)* | ? |
+| [references/vit_accel/experiments/pnr/zcu102_step4_bitstream_status_20260408.md](../archive/hardware/docs/references/vit_accel/experiments/pnr/zcu102_step4_bitstream_status_20260408.md) | ? | ? | *(헤더 없음 — git 기준)* | ? |
+| [references/vit_accel/experiments/pnr/zcu102_deit_tiny_full_status_20260410.md](../archive/hardware/docs/references/vit_accel/experiments/pnr/zcu102_deit_tiny_full_status_20260410.md) | ? | ? | *(헤더 없음 — git 기준)* | ? |
+| [references/vit_accel/experiments/pnr/vck190_step4_ooc_status_20260408.md](../archive/hardware/docs/references/vit_accel/experiments/pnr/vck190_step4_ooc_status_20260408.md) | ? | ? | *(헤더 없음 — git 기준)* | ? |
+| [references/vit_accel/experiments/pnr/vck190_deit_tiny_full_status_20260410.md](../archive/hardware/docs/references/vit_accel/experiments/pnr/vck190_deit_tiny_full_status_20260410.md) | ? | ? | *(헤더 없음 — git 기준)* | ? |
+| [references/vit_accel/experiments/pnr/deit_tiny_full_multi_board_status_20260410.md](../archive/hardware/docs/references/vit_accel/experiments/pnr/deit_tiny_full_multi_board_status_20260410.md) | ? | ? | *(헤더 없음 — git 기준)* | ? |
+| [references/vit_accel/experiments/deit_tiny_baseline_ooc_rerun/full_deit_tiny_fit/step2_hls_resource_summary.md](../archive/hardware/docs/references/vit_accel/experiments/deit_tiny_baseline_ooc_rerun/full_deit_tiny_fit/step2_hls_resource_summary.md) | ? | ? | *(헤더 없음 — git 기준)* | ? |
+| [references/vit_accel/experiments/deit_tiny_baseline/full_deit_tiny_fit/step2_hls_resource_summary.md](../archive/hardware/docs/references/vit_accel/experiments/deit_tiny_baseline/full_deit_tiny_fit/step2_hls_resource_summary.md) | ? | ? | *(헤더 없음 — git 기준)* | ? |
+| [references/vit_accel/experiments/README.md](../archive/hardware/docs/references/vit_accel/experiments/README.md) | ? | ? | *(헤더 없음 — git 기준)* | ? |
+| [references/vit_accel/VIVADO_ONLY_FLOW.md](../archive/hardware/docs/references/vit_accel/VIVADO_ONLY_FLOW.md) | ? | ? | *(헤더 없음 — git 기준)* | ? |
+| [references/vit_accel/VCK190_ZU15EG_PARAMETER_COMPARISON.md](../archive/hardware/docs/references/vit_accel/VCK190_ZU15EG_PARAMETER_COMPARISON.md) | ? | ? | *(헤더 없음 — git 기준)* | ? |
+| [references/vit_accel/VCK190_DOCKER_BASELINE.md](../archive/hardware/docs/references/vit_accel/VCK190_DOCKER_BASELINE.md) | ? | ? | *(헤더 없음 — git 기준)* | ? |
+| [references/vit_accel/TRAINING_EVALUATION_AND_METRICS.md](../archive/hardware/docs/references/vit_accel/TRAINING_EVALUATION_AND_METRICS.md) | ? | ? | *(헤더 없음 — git 기준)* | ? |
+| [references/vit_accel/SRC_CASE_PARALLELISM_TUNING.md](../archive/hardware/docs/references/vit_accel/SRC_CASE_PARALLELISM_TUNING.md) | ? | ? | *(헤더 없음 — git 기준)* | ? |
+| [references/vit_accel/SRC_CASE_MODULE_GUIDE.md](../archive/hardware/docs/references/vit_accel/SRC_CASE_MODULE_GUIDE.md) | ? | ? | *(헤더 없음 — git 기준)* | ? |
+| [references/vit_accel/SRC_CASE_MICROARCH.md](../archive/hardware/docs/references/vit_accel/SRC_CASE_MICROARCH.md) | ? | ? | *(헤더 없음 — git 기준)* | ? |
+| [references/vit_accel/SRC_CASE_DIAGRAMS.md](../archive/hardware/docs/references/vit_accel/SRC_CASE_DIAGRAMS.md) | ? | ? | *(헤더 없음 — git 기준)* | ? |
+| [references/vit_accel/SRC_CASE_ANALYSIS.md](../archive/hardware/docs/references/vit_accel/SRC_CASE_ANALYSIS.md) | ? | ? | *(헤더 없음 — git 기준)* | ? |
+| [references/vit_accel/README.md](../archive/hardware/docs/references/vit_accel/README.md) | ? | ? | *(헤더 없음 — git 기준)* | ? |
+| [references/vit_accel/PROJECT_STRUCTURE.md](../archive/hardware/docs/references/vit_accel/PROJECT_STRUCTURE.md) | ? | ? | *(헤더 없음 — git 기준)* | ? |
+| [references/vit_accel/PROGRESS_2026_04_15.md](../archive/hardware/docs/references/vit_accel/PROGRESS_2026_04_15.md) | ? | ? | *(헤더 없음 — git 기준)* | ? |
+| [references/vit_accel/PLAN.md](../archive/hardware/docs/references/vit_accel/PLAN.md) | ? | ? | *(헤더 없음 — git 기준)* | ? |
+| [references/vit_accel/PIPELINE_OVERVIEW.md](../archive/hardware/docs/references/vit_accel/PIPELINE_OVERVIEW.md) | ? | ? | *(헤더 없음 — git 기준)* | ? |
+| [references/vit_accel/MULTI_BOARD_VALIDATION.md](../archive/hardware/docs/references/vit_accel/MULTI_BOARD_VALIDATION.md) | ? | ? | *(헤더 없음 — git 기준)* | ? |
+| [references/vit_accel/MERGE_STATUS.md](../archive/hardware/docs/references/vit_accel/MERGE_STATUS.md) | ? | ? | *(헤더 없음 — git 기준)* | ? |
+| [references/vit_accel/LOCAL_SETUP.md](../archive/hardware/docs/references/vit_accel/LOCAL_SETUP.md) | ? | ? | *(헤더 없음 — git 기준)* | ? |
+| [references/vit_accel/HISTORY.md](../archive/hardware/docs/references/vit_accel/HISTORY.md) | ? | ? | *(헤더 없음 — git 기준)* | ? |
+| [references/vit_accel/FUNCTION_CALL_STACK.md](../archive/hardware/docs/references/vit_accel/FUNCTION_CALL_STACK.md) | ? | ? | *(헤더 없음 — git 기준)* | ? |
+| [references/vit_accel/DEPLOYMENT_RUN_SCRIPTS.md](../archive/hardware/docs/references/vit_accel/DEPLOYMENT_RUN_SCRIPTS.md) | ? | ? | *(헤더 없음 — git 기준)* | ? |
+| [references/vit_accel/CHECKLIST.md](../archive/hardware/docs/references/vit_accel/CHECKLIST.md) | ? | ? | *(헤더 없음 — git 기준)* | ? |
+| [references/vit_accel/BOARD_RUNBOOKS.md](../archive/hardware/docs/references/vit_accel/BOARD_RUNBOOKS.md) | ? | ? | *(헤더 없음 — git 기준)* | ? |
+| [legacy/legacy_experiment_analysis_2026_06_12.md](../archive/hardware/docs/legacy/legacy_experiment_analysis_2026_06_12.md) | ? | ? | *(헤더 없음 — git 기준)* | ? |
+| [architecture/xr_accel/HBTXR_CYCLIC_IMPLEMENTATION.md](../archive/hardware/docs/architecture/xr_accel/HBTXR_CYCLIC_IMPLEMENTATION.md) | ? | ? | *(헤더 없음 — git 기준)* | ? |
+| [architecture/xr_accel/HBTXR_ARCH_FREEZE.md](../archive/hardware/docs/architecture/xr_accel/HBTXR_ARCH_FREEZE.md) | ? | ? | *(헤더 없음 — git 기준)* | ? |
+| [architecture/DIRECTORY_LAYOUT.md](../archive/hardware/docs/architecture/DIRECTORY_LAYOUT.md) | ? | ? | *(헤더 없음 — git 기준)* | ? |
+| [analysis/no-board-results/p0_report_collection_2026_06_27/summary.md](../archive/hardware/docs/analysis/no-board-results/p0_report_collection_2026_06_27/summary.md) | ? | ? | *(헤더 없음 — git 기준)* | ? |
+| [analysis/no-board-results/p0_report_collection_2026_06_26/summary.md](../archive/hardware/docs/analysis/no-board-results/p0_report_collection_2026_06_26/summary.md) | ? | ? | *(헤더 없음 — git 기준)* | ? |
+| [analysis/no-board-results/p0_mode_profile_2026_06_27/summary.md](../archive/hardware/docs/analysis/no-board-results/p0_mode_profile_2026_06_27/summary.md) | ? | ? | *(헤더 없음 — git 기준)* | ? |
+| [analysis/no-board-results/VIVADO_PROGRESS_2026_06_27.md](../archive/hardware/docs/analysis/no-board-results/VIVADO_PROGRESS_2026_06_27.md) | ? | ? | *(헤더 없음 — git 기준)* | ? |
+| [analysis/no-board-results/P0_PROGRESS_2026_06_26.md](../archive/hardware/docs/analysis/no-board-results/P0_PROGRESS_2026_06_26.md) | ? | ? | *(헤더 없음 — git 기준)* | ? |
+| [analysis/no-board-results/MODE_PROFILE_RESULTS_2026_06_27.md](../archive/hardware/docs/analysis/no-board-results/MODE_PROFILE_RESULTS_2026_06_27.md) | ? | ? | *(헤더 없음 — git 기준)* | ? |
+| [analysis/NO_BOARD_PERFORMANCE_EXPERIMENT_PLAN_2026_06_26.md](../archive/hardware/docs/analysis/NO_BOARD_PERFORMANCE_EXPERIMENT_PLAN_2026_06_26.md) | ? | ? | *(헤더 없음 — git 기준)* | ? |
+| [Validation.md](../archive/hardware/docs/Validation.md) | ? | ? | *(헤더 없음 — git 기준)* | ? |
+| [THIRD_GOAL_PROGRESS_EXPERIMENT_REPORT_2026_06_16.md](../archive/hardware/docs/THIRD_GOAL_PROGRESS_EXPERIMENT_REPORT_2026_06_16.md) | ? | ? | *(헤더 없음 — git 기준)* | ? |
+| [THIRD_GOAL_FUTURE_EXPERIMENTS_2026_06_16.md](../archive/hardware/docs/THIRD_GOAL_FUTURE_EXPERIMENTS_2026_06_16.md) | ? | ? | *(헤더 없음 — git 기준)* | ? |
+| [Sub-Plan.md](../archive/hardware/docs/Sub-Plan.md) | ? | ? | *(헤더 없음 — git 기준)* | ? |
+| [Spec.md](../archive/hardware/docs/Spec.md) | ? | ? | *(헤더 없음 — git 기준)* | ? |
+| [SRC_CASE_MODULE_GUIDE.md](../archive/hardware/docs/SRC_CASE_MODULE_GUIDE.md) | ? | ? | *(헤더 없음 — git 기준)* | ? |
+| [Master-Plan.md](../archive/hardware/docs/Master-Plan.md) | ? | ? | *(헤더 없음 — git 기준)* | ? |
+| [HARDWARE_IMPORT_MANIFEST.md](../archive/hardware/docs/HARDWARE_IMPORT_MANIFEST.md) | ? | ? | *(헤더 없음 — git 기준)* | ? |
+| [Execution.md](../archive/hardware/docs/Execution.md) | ? | ? | *(헤더 없음 — git 기준)* | ? |
+| [CHOICE.md](../archive/hardware/docs/CHOICE.md) | ? | ? | *(헤더 없음 — git 기준)* | ? |
+| [snapshots/2026-07-29-semantic-census/README.md](../archive/hardware/docs/snapshots/2026-07-29-semantic-census/README.md) | 2026-07-29 | 2026-07-29 | frozen — 스냅샷, 갱신하지 않음 | hardware |
+| [reports/2026-07-29-hardware-census.md](../archive/hardware/docs/reports/2026-07-29-hardware-census.md) | 2026-07-29 | 2026-07-29 | active — 재작성 착수 전 기준선 | hardware |
+| [plans/active/2026-07-29-hardware-reconstruction.md](../archive/hardware/docs/plans/active/2026-07-29-hardware-reconstruction.md) | 2026-07-29 | 2026-07-29 | active — 승인 대기 | hardware |
+| [STATUS.md](../archive/hardware/docs/STATUS.md) | 2026-07-29 | 2026-07-29 | active | hardware |
+| [track/PROGRESS.md](../archive/hardware/docs/track/PROGRESS.md) | 2026-07-05 | 2026-07-15 | frozen — 2026-07-15 이후 활동 없음 | hardware |
+| [track/log.md](../archive/hardware/docs/track/log.md) | 2026-07-05 | 2026-07-05 | frozen — 2026-07-15 이후 활동 없음 | hardware |
+| [track/TODO.md](../archive/hardware/docs/track/TODO.md) | 2026-07-05 | 2026-07-05 | frozen — 2026-07-15 이후 활동 없음 | hardware |
+| [track/ADR.md](../archive/hardware/docs/track/ADR.md) | 2026-07-05 | 2026-07-05 | frozen — 2026-07-15 이후 활동 없음 | hardware |
 
 ## 접힌 군집
 
@@ -214,6 +223,6 @@ python scripts/build_docs_index.py
 | 경로 | 문서 | 최종 | 내용 |
 |---|---:|---|---|
 | `docs/reference/external/2026-06-26/` | 119 | 2026-07-29 | 외부 코드베이스·논문 서베이 — 우리 코드로는 틀려지지 않음 |
-| `hardware/docs/resources/hgtxr_handover_additional/` | 53 | 2026-07-15 | HGTXR 인계 증거 — 불변. hardware/tools가 경로로 읽으므로 이동 금지 |
-| `hardware/docs/resources/hgtxr_final_evidence/` | 15 | 2026-07-07 | HGTXR 최종 증거 — 불변. hardware/tools가 경로로 읽으므로 이동 금지 |
+| `archive/hardware/docs/resources/hgtxr_handover_additional/` | 53 | ? | HGTXR 인계 증거 — 불변. hardware/tools가 경로로 읽으므로 이동 금지 |
+| `archive/hardware/docs/resources/hgtxr_final_evidence/` | 15 | ? | HGTXR 최종 증거 — 불변. hardware/tools가 경로로 읽으므로 이동 금지 |
 

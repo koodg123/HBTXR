@@ -10,7 +10,8 @@
 | 서브시스템 | STATUS | 마지막 활동 |
 |---|---|---|
 | algorithm | [algorithm/docs/STATUS.md](../algorithm/docs/STATUS.md) | **2026-07-29** (활발) |
-| hardware | [hardware/docs/STATUS.md](../hardware/docs/STATUS.md) | 2026-07-15 (휴지) |
+| hardware (신규) | [hardware/docs/STATUS.md](../hardware/docs/STATUS.md) | **2026-07-29** — 재구성 중, 거의 비어 있음 |
+| archive/hardware (구) | [archive/hardware/docs/STATUS.md](../archive/hardware/docs/STATUS.md) | 2026-07-15 — **동작하는 유일한 구현, 읽기 전용** |
 | repo (거버넌스·구조) | 이 파일 | 2026-07-29 |
 
 전체 문서 색인: [INDEX.md](INDEX.md) · 문서 규약: [governance/DOC-CONVENTIONS.md](governance/DOC-CONVENTIONS.md)
@@ -41,7 +42,7 @@ forgotten이 구분되지 않습니다 — 아래 백로그 41건이 정확히 �
 |---|---|---|
 | docs 6단계 — `contracts/NUMERICS-CONTRACT.md` | 중간 | 조사 필요 |
 | **RC-/CL-/SI-/T- 백로그 상태 감사** | 중간 | — |
-| **`hardware/docs/` 재구조화** | 중간 | **하드웨어 소유** — `hardware/tools/`가 경로로 고정하고 테스트 10개+가 읽으므로 도구·테스트를 같이 고쳐야 함. [DOC-CONVENTIONS §11](governance/DOC-CONVENTIONS.md) |
+| **`hardware/docs/` 재구조화** | 중간 | **하드웨어 소유** — `archive/hardware/tools/`가 경로로 고정하고 테스트 10개+가 읽으므로 도구·테스트를 같이 고쳐야 함. [DOC-CONVENTIONS §11](governance/DOC-CONVENTIONS.md) |
 | hardware 테스트 49건 실패 조사 | 중간 | 하드웨어 소유. 문서 이동 전부터 실패 중 |
 
 > **RC-/CL-/SI-/T- 감사가 왜 필요한가**: AM 섹션이 6일간 "미착수"로 표기되어 있었는데
@@ -62,12 +63,14 @@ forgotten이 구분되지 않습니다 — 아래 백로그 41건이 정확히 �
 
 ## 이 저장소의 구조적 사실 (자주 잊힘)
 
-- **문서 트리는 3개**: `docs/` (횡단) · `algorithm/docs/` · `hardware/docs/`.
-  `.agents/`는 네 번째였고 2026-07-29에 `docs/handoff/`·`docs/snapshots/`·`docs/plans/done/`로
-  흡수되어 사라졌습니다.
-- **`hardware/docs/`는 자기 툴체인에 고정**되어 있습니다 — `hardware/tools/`가 경로로 읽고
-  테스트 10개+가 의존하므로 `docs/`처럼 재배치할 수 없습니다.
-- **`hardware/`는 문서 트리가 아니라 코드 서브시스템**입니다 — HLS/RTL/Vivado/PYNQ.
-  ViT 가속기(`hgtxr_e2e_vit.hpp`)가 있습니다.
-- **같은 HG-PIPE 커널이 두 서브시스템에 각각 구현**되어 있고 교차 참조가 0건입니다.
-  → [hardware/docs/STATUS.md](../hardware/docs/STATUS.md) 하단
+- **문서 트리는 3개 + 아카이브 1개**: `docs/` (횡단) · `algorithm/docs/` ·
+  `hardware/docs/` (신규, 비어가는 중) · `archive/hardware/docs/` (읽기 전용).
+  `.agents/`는 네 번째였고 2026-07-29에 흡수되어 사라졌습니다.
+- **`hardware/`가 둘입니다.** 신규 `hardware/`는 골격만 있고, **실제로 도는 코드는
+  `archive/hardware/`**입니다 (`pytest archive/hardware/tests` → 426 passed).
+  재구성이 끝나 검증되기 전까지 archive를 지우지 않습니다.
+- **`archive/hardware/docs/`는 자기 툴체인에 고정**되어 있습니다 —
+  `archive/hardware/tools/`가 경로로 읽고 테스트 10개+가 의존합니다. **신규 `hardware/docs/`는
+  이 제약이 없습니다** — 도구를 이관할 때 결합을 `config/`로 빼기 때문입니다.
+- **같은 HG-PIPE 커널이 두 서브시스템에 각각 구현**되어 있고 교차 참조가 0건입니다
+  (`algorithm/quantization/i_ops.py` ↔ `archive/hardware/hls/include/hgtxr_cyclic_math.hpp`).

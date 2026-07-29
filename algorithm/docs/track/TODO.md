@@ -32,7 +32,7 @@
 
 ## 조사 필요
 
-- [ ] **`i_ops` ↔ `hardware/hls/include/hgtxr_cyclic_math.hpp` 대조.** 둘 다 HG-PIPE에서
+- [ ] **`i_ops` ↔ `archive/hardware/hls/include/hgtxr_cyclic_math.hpp` 대조.** 둘 다 HG-PIPE에서
       온 같은 커널(2세그먼트 reciprocal, dyadic requant, PoT 인덱스 테이블)인데 교차 참조가
       0건이고 수치 규약이 다릅니다(ap_fixed<16,6> vs int8 affine, HLS LayerNorm에 rsqrt 없음,
       softmax 출력 3비트 vs int8). `i_ops.table_quantize`에 HLS의 `(b,s,bound)`와 테이블을

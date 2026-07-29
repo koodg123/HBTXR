@@ -33,7 +33,7 @@ cd algorithm && PYTHONIOENCODING=utf-8 ~/hbtxr-venv/Scripts/python.exe -m pytest
 **주의할 것**
 - `algorithm/docs/track/`은 이번에 신설됐습니다. 2026-07-24~29의 33커밋은 **소급 기록**
   이며 근거는 커밋 메시지입니다. 앞으로는 커밋마다 갱신해야 합니다.
-- `i_ops.py`와 `hardware/hls/include/hgtxr_cyclic_math.hpp`가 **같은 HG-PIPE 커널의 두
+- `i_ops.py`와 `archive/hardware/hls/include/hgtxr_cyclic_math.hpp`가 **같은 HG-PIPE 커널의 두
   구현**인데 교차 참조가 0건이고 수치 규약이 다릅니다. 조사 필요 — [TODO.md](TODO.md).
 - 테스트를 추가할 때는 **뮤테이션 게이트 필수**(ADR-002). 이번에도 뮤테이션 생존이
   4건 있었고 전부 테스트가 약한 것이었습니다.

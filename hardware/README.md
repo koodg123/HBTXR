@@ -1,64 +1,46 @@
-# HGTXR Hardware
+> **작성** 2026-07-29 · **갱신** 2026-07-29
+> **상태** active — 재구성 중, 대부분 비어 있음
+> **소유** hardware
 
-This directory contains the hardware-oriented implementation of HGTXR.
+# hardware — HBTXR 가속기
 
-The current code is a portable HLS skeleton that fixes the HW/SW interface and
-module boundaries. It is intentionally conservative: numerical kernels are
-simple C++ loops first, so C simulation and software reference matching can be
-established before aggressive pragma tuning.
+**2026-07-29에 처음부터 다시 구성하는 중입니다.** 구 트리는
+[`archive/hardware/`](../archive/hardware/)에 그대로 보존되어 있고 **기준(reference)이자
+동작하는 코드**입니다. 새 트리가 완성될 때까지 실제로 도는 것은 archive 쪽입니다.
 
-## Module Map
+- 왜 이렇게 하는가 · 무엇을 어디로 : [docs/plans/active/2026-07-29-hardware-reconstruction.md](docs/plans/active/2026-07-29-hardware-reconstruction.md)
+- 구 트리 전수 조사 : [docs/reports/2026-07-29-hardware-census.md](docs/reports/2026-07-29-hardware-census.md)
+- 지금 무엇이 진행 중인가 : [docs/STATUS.md](docs/STATUS.md)
 
-- `hls/include/`: fixed-point types, tensor dimensions, shared interfaces.
-- `hls/src/hgtxr_top.cpp`: top-level pipeline.
-- `hls/src/frame_patch_embed.cpp`: frame patch embedding stub.
-- `hls/src/event_patch_embed.cpp`: event patch embedding stub.
-- `hls/src/matmul.cpp`: reusable matrix multiply.
-- `hls/src/attention.cpp`: attention stage placeholder.
-- `hls/src/mlp.cpp`: MLP stage placeholder.
-- `hls/src/fusion.cpp`: previous-state and modality fusion.
-- `hls/src/search_head.cpp`: search/event pupil head.
-- `hls/src/track_head.cpp`: track refinement head.
-- `hls/src/runtime_fsm.cpp`: Search/Track runtime state policy.
-- `hls/tb/`: C simulation testbenches.
-- `vivado/`: board and flow Tcl skeletons.
+## 구조 — 한 역할은 한 디렉토리
 
-## Directory Layout
+| 디렉토리 | 담는 것 | 이관 |
+|---|---|---|
+| [`config/`](config/README.md) | 보드 설정 · HLS 설계 파라미터 | ⬜ |
+| [`module/`](module/README.md) | HLS 소스 · 테스트벤치 · 골든 벡터 | ⬜ |
+| [`build/`](build/README.md) | 합성 · P&R · 비트스트림 | ⬜ |
+| [`deploy/`](deploy/README.md) | PYNQ 오버레이 · 호스트 | ⬜ |
+| [`tools/`](tools/README.md) | 감사 · 검증 · 패키징 자동화 | ⬜ |
+| `docs/` | 문서 | 🟨 계획·census만 |
+| [`workspace/`](workspace/README.md) | 산출물 (**gitignore**) | ⬜ |
 
-- `docs/architecture/DIRECTORY_LAYOUT.md`: target hardware directory layout,
-  cleanup policy, compatibility paths, and deferred migration gates.
-- `artifacts/`: preserved bitstreams, HWH files, reports, manifests, and smoke
-  evidence that are worth keeping as reproducibility artifacts.
-- `generated/`: rebuildable HLS/Vivado/PYNQ/signoff outputs and logs.
-- `experiments/`: active, completed, blocked, and template experiment
-  definitions.
-- `external/`: external papers, codebase summaries, and legacy references.
-- `archive/`: deprecated or migration-only material.
+## 왜 `tools/`가 7번째인가
 
-## Legacy Evidence
+87개 스크립트가 읽는 대상이 전방위입니다 — `generated` 339회 · `docs` 208 · `pynq` 206 ·
+`hls` 128 · `vivado` 64 · `refs` 52 · `configs` 28. 이들이 하는 일은 **서명·게이팅 프로세스
+자동화**이고, `build/`나 `deploy/` 안에 넣으면 그 디렉토리의 정의가 틀려집니다.
 
-- `docs/legacy/legacy_experiment_analysis_2026_06_12.md`: consolidated
-  ViT_Accel, XR_Accel, and HG_PIPE_MERGE historical experiment analysis.
-- `docs/legacy/legacy_artifact_index_2026_06_12.json`: source artifact index
-  with evidence boundaries for current DSP/URAM/LUTRAM/parallelism decisions.
+## 각 README는 이관 체크리스트입니다
 
-## ViT Accelerator Reference Analysis
+구 트리에는 `.gitkeep`만 든 **빈 디렉토리가 24개** 있었습니다 — 설계됐지만 아무도 채우지
+않았고, 무엇이 들어가야 하는지 적힌 곳이 없었기 때문입니다. 그래서 이번에는 디렉토리마다
+**무엇이 들어가고, 무엇이 들어가지 않으며, archive의 어디서 오는지**를 README에 적습니다.
 
-- `analysis/vit-accel/README.md`: per-codebase and per-paper reference analysis
-  index.
-- `analysis/vit-accel/experiment_extensions_2026_06_15.md`: prioritized
-  HGTXR experiment extensions derived from ViT accelerator papers/codebases.
-- `analysis/vit-accel/third_goal_integration_2026_06_15.md`: integration policy
-  for adding those experiments without replacing the current C3b board-smoke
-  gate.
+## archive/hardware/ 를 지우지 않는 이유
 
-## Third-Goal Tracking
+- **동작하는 유일한 구현입니다.** `pytest archive/hardware/tests` → 426 passed
+  (49 failed는 Xilinx 설치 경로·형제 저장소를 단언하는 환경 결합, 이동 전과 동일).
+- 비트스트림 9개와 합성 리포트가 거기에만 있습니다.
+- 새 트리의 각 항목은 archive의 무엇을 옮긴 것인지 추적되어야 합니다.
 
-- `docs/Master-Plan.md`: third-goal scope, priority order, and non-regression
-  gates.
-- `docs/Sub-Plan.md`: task cards for C3b, P2-ViT PoT calibration, and ME-ViT
-  buffer audit.
-- `docs/Spec.md`: reference-integration scope and acceptance criteria.
-- `docs/Execution.md`: active execution decision and next work.
-- `docs/Validation.md`: validation gates and remaining evidence gaps.
-- `docs/track/PROGRESS.md`: plan-versus-progress checklist.
+재구성이 끝나고 검증되기 전까지 archive는 **읽기 전용 기준**입니다.
