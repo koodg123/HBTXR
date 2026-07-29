@@ -21,7 +21,7 @@
 | [`build/`](build/README.md) | 합성 · P&R · 비트스트림 | ⬜ |
 | [`deploy/`](deploy/README.md) | PYNQ 오버레이 · 호스트 | ⬜ |
 | [`tools/`](tools/README.md) | 감사 · 검증 · 패키징 자동화 | ⬜ |
-| `docs/` | 문서 | 🟨 계획·census만 |
+| [`docs/`](docs/STATUS.md) | 문서 | ✅ **완료 (D1~D5)** — 상태는 [docs/STATUS.md](docs/STATUS.md) |
 | [`workspace/`](workspace/README.md) | 산출물 (**gitignore**) | ⬜ |
 
 ## 왜 `tools/`가 7번째인가

@@ -12,4 +12,16 @@
 | [2026-07-29-hardware-census.md](2026-07-29-hardware-census.md) | **전수 semantic 검사** — 642 파일·285,261줄, 세 구현·생사 판정 |
 | [2026-06-16-multi-board-validation.md](2026-06-16-multi-board-validation.md) | 다중 보드 검증 |
 | [2026-06-16-deit-cyclic-verification.md](2026-06-16-deit-cyclic-verification.md) | DeiT cyclic 검증 |
-| [2026-06-17-cleanup.md](2026-06-17-cleanup.md) | 정리 기록 |
+| [2026-06-17-cleanup.md](2026-06-17-cleanup.md) | 디렉토리 정리 기록 — **예외**, 아래 |
+
+## `2026-06-17-cleanup.md`가 왜 여기 있나
+
+이 문서는 실험 해석이 아니라 **파일 이동 기록**입니다. 원래대로면
+[../track/CHANGELOG.md](../track/CHANGELOG.md)에 들어갈 내용입니다.
+
+옮기지 않는 이유: `archive/hardware/docs/`에서 **무변경 복사**한 frozen 문서이고,
+내용을 CHANGELOG의 한 항목으로 접으면 그건 이관이 아니라 재작성입니다. 그리고
+2026-06-17 시점에는 hardware에 `CHANGELOG.md`가 없었습니다 — 변경 이력이
+`PROGRESS.md`와 `log.md`에 섞여 있었고 이 문서가 그 증거입니다.
+
+**2026-07-29 이후의 정리 기록은 `track/CHANGELOG.md`로 갑니다.**

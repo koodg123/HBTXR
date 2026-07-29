@@ -21,7 +21,6 @@
 
 | 주제 | 문서 | 데이터 | 내용 |
 |---|---:|---:|---|
-| [`data/`](data/) | 0 | 0 |  |
 | [`gates/`](gates/) | 3 | 3 | 게이트 감사 — XR-VITs·C3b 물리 스모크 |
 | [`operator/`](operator/) | 2 | 2 | HG-PIPE 연산자 감사 · P2 ViT 스케일 캘리브레이션 |
 | [`requirements/`](requirements/) | 8 | 4 | 요구사항 감사 req1/5/6/9 + 3차 목표 체크리스트 |

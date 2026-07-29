@@ -32,7 +32,7 @@ census가 확인한 실제 설계 문서를 가리킵니다.
 
 | 문서 | 내용 |
 |---|---|
-| [MODULE-GUIDE.md](MODULE-GUIDE.md) | **모듈별 상세** (1,234줄) — 각 모듈의 분석·다이어그램·마이크로아키텍처를 한 섹션에 통합 |
+| [MODULE-GUIDE.md](MODULE-GUIDE.md) | **모듈별 상세** — 각 모듈의 분석·다이어그램·마이크로아키텍처를 한 섹션에 통합 |
 | [architecture/2026-06-16-cyclic-streaming-accelerator.md](architecture/2026-06-16-cyclic-streaming-accelerator.md) | cyclic 스트리밍 가속기 개요 |
 | [architecture/2026-06-16-hbtxr-arch-freeze.md](architecture/2026-06-16-hbtxr-arch-freeze.md) | 아키텍처 동결과 DeiT 등가성 |
 | [SPEC.md](SPEC.md) | 사양 — 보드·양자화·파라미터 계약 |
