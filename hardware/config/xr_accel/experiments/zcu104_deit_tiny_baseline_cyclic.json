@@ -1,0 +1,22 @@
+{
+  "name": "zcu104_deit_tiny_baseline_cyclic",
+  "model": "configs/models/deit_tiny_baseline_cyclic.json",
+  "target": "configs/targets/zcu104.json",
+  "design": "configs/designs/deit_tiny_cyclic_zcu104.json",
+  "artifacts": {
+    "instances_subdir": [
+      "target",
+      "model",
+      "design"
+    ],
+    "reports_subdir": [
+      "target",
+      "model",
+      "design"
+    ],
+    "build_subdir": [
+      "target",
+      "experiment"
+    ]
+  }
+}

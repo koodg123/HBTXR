@@ -1,0 +1,6 @@
+{
+  "name": "zcu104_full_deit_tiny_fit",
+  "model": "configs/models/deit_tiny_baseline.json",
+  "target": "configs/targets/zcu104.json",
+  "design": "configs/designs/full_deit_tiny_fit.json"
+}

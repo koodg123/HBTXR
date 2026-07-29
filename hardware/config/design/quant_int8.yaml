@@ -1,0 +1,7 @@
+quantization:
+  activation_bits: 8
+  weight_bits: 8
+  accumulator_bits: 32
+  symmetric: true
+  per_channel_weights: true
+

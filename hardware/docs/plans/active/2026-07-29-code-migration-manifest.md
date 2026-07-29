@@ -95,7 +95,7 @@ python scripts/check_migration_manifest.py --check
 
 | | 디렉토리 | 대상 | 상태 |
 |---|---|---:|---|
-| **M1** | `config/` | 33 | ⬜ |
+| **M1** | `config/` | 33 | ✅ 완료 |
 | **M2** | `module/` | 91 (+ undecided 5) | ⬜ |
 | **M3** | `build/` | 42 | ⬜ |
 | **M4** | `deploy/` | 9 | ⬜ |

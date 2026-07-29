@@ -15,12 +15,13 @@
 
 ## Active
 
-**hardware 재구성** — 골격 완성, 이관 착수 전.
-계획: [plans/active/2026-07-29-hardware-reconstruction.md](plans/active/2026-07-29-hardware-reconstruction.md)
+**hardware 재구성** — 문서 완료 · **코드 이관 M1/5 진행 중**.
+계획: [plans/active/2026-07-29-hardware-reconstruction.md](plans/active/2026-07-29-hardware-reconstruction.md) ·
+대장: [plans/active/2026-07-29-code-migration-manifest.md](plans/active/2026-07-29-code-migration-manifest.md)
 
 | 디렉토리 | 상태 | 다음 |
 |---|---|---|
-| `config/` | ⬜ 비어 있음 | `archive/hardware/configs/` 33개 이관 |
+| `config/` | ✅ **M1 완료** | 33/33. M5까지는 사본 — 도구는 아직 archive를 읽습니다 |
 | `module/` | ⬜ 비어 있음 | `archive/hardware/hls/` 67 + `refs/` 29 |
 | `build/` | ⬜ 비어 있음 | `archive/hardware/vivado/scripts/` 31 + `scripts/run/` |
 | `deploy/` | 🟨 런타임 가이드만 | `archive/hardware/pynq/*.py` 9 (비트스트림 제외) |
@@ -46,11 +47,12 @@
 
 **검증**: archive md 159개를 내용 해시로 대조해 미이관 0건.
 
+`ARCHITECTURE.md`는 유일하게 새로 쓴 문서입니다 — 이관 대상이던
+`DIRECTORY_LAYOUT.md`가 **구 레이아웃**을 정의하고 있어 그대로 두면 즉시 거짓이 됩니다.
+
 > **D1~D5는 `.md`만 대상으로 했습니다.** P0의 전수 대장이 **데이터 11개 미이관**을
 > 찾아냈습니다 — 3개 캠페인이 `data/` 없이 문서만 있었고, census 원자료 9개는
 > `archive/`에 남아 있었습니다. 2026-07-29 보완 완료.
-`ARCHITECTURE.md`는 유일하게 새로 쓴 문서입니다 — 이관 대상이던
-`DIRECTORY_LAYOUT.md`가 **구 레이아웃**을 정의하고 있어 그대로 두면 즉시 거짓이 됩니다.
 
 ## Blocked
 
@@ -70,8 +72,8 @@
 
 | | 디렉토리 | 대상 | 상태 |
 |---|---|---:|---|
-| **M1** | `config/` | 33 | ⬜ **다음** |
-| **M2** | `module/` | 91 (+ 미결 5 선결) | ⬜ |
+| **M1** | `config/` | 33 | ✅ **완료** — 해시 대조 33/33 |
+| **M2** | `module/` | 91 (+ 미결 5 선결) | ⬜ **다음** |
 | **M3** | `build/` | 42 | ⬜ |
 | **M4** | `deploy/` | 9 | ⬜ |
 | **M5** | `tools/` | 147 | ⬜ |
@@ -82,6 +84,8 @@
 
 | 날짜 | 내용 |
 |---|---|
+| 2026-07-29 | **M1** `config/` 이관 — 33/33 해시 대조, 테스트 426 불변 |
+| 2026-07-29 | **P0** 이관 대장 625행 전수 판정 + 문서 데이터 11개 구멍 발견·보완 |
 | 2026-07-29 | 문서 이름 규약 적용 — 87개 개명, 링크 126개 재작성, 중복·스텁 4개 삭제 |
 | 2026-07-29 | 큰 캠페인 디렉토리 분할 (최대 34 → 12항목) |
 | 2026-07-29 | 구 트리 → `archive/hardware/` 이동, 새 골격 생성 (테스트 49/426 불변) |
