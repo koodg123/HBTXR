@@ -247,6 +247,12 @@ integer, and the difference matters for anyone porting this to RTL:
   function, so a variance dynamic range much wider than `entries`:1 cannot be served to a
   few percent. The index is now fitted to the observed distribution (≈1.6× better RMS
   than the [min,max] envelope) and the payload carries `metrics` so the error is visible.
+  That last clause was false until R4 — the metrics were computed and then dropped before
+  export. Now measured and closed: the observed variance dynamic range is under 2:1, the
+  residual rsqrt error is ~1e-4 relative, and a simulated third segment buys 1.5–1.7× on a
+  quantity four orders of magnitude below the graph's end-to-end error. A third segment
+  would cost a new golden, payload and export format; it is not justified. See the Part
+  C/D report.
 
 The transport item is closed. The route it took is worth recording because it is the
 pattern the next such change should follow: D4 promoted the inline operators to seams

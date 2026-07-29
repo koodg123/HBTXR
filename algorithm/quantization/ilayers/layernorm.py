@@ -70,8 +70,16 @@ class ILayerNorm(nn.Module):
         output_scale: float,
         in_dtype: QuantDtype = INT8,
         rsqrt_table_two: Sequence[int] | None = None,
+        metrics: dict | None = None,
     ) -> None:
         super().__init__()
+        # How well the (necessarily linear) PoT index fits the variance distribution it
+        # was fitted to. Diagnostic, not arithmetic — a plain attribute, not a buffer, and
+        # the forward never reads it. It is carried because the fit quality is not
+        # recoverable from the tables afterwards: ``rows_above_range`` in particular is
+        # documented as "a warning about the fit", and a warning nobody can read after
+        # calibration is not a warning.
+        self.metrics = dict(metrics or {})
         values = [int(v) for v in scalars]
         if len(values) not in (7, 10):
             raise ValueError(f"ILayerNorm expects 7 or 10 scalars, got {len(values)}")
@@ -130,6 +138,7 @@ class ILayerNorm(nn.Module):
             output_scale=payload["output_scale"],
             in_dtype=payload.get("input_dtype", INT8),
             rsqrt_table_two=payload.get("rsqrt_table_two"),
+            metrics=payload.get("metrics"),
         )
 
     @classmethod

@@ -300,6 +300,13 @@ def _int_layernorm_entry(m: ILayerNorm) -> dict[str, Any]:
         entry["scalars_two"] = [int(m.b_two), int(m.s1_two), int(m.bound_two)]
         entry["rsqrt_table_two"] = _int_list(m.rsqrt_table_two)
         entry["table_entries_two"] = int(m.rsqrt_table_two.numel())
+    # How well the linear PoT index fits the variance it was fitted to. Not replayed and
+    # not part of the kernel — carried because it is not recoverable from the tables
+    # afterwards, and because ``rows_above_range`` is documented as a warning about the
+    # fit. A warning nobody can read after export is not a warning.
+    if getattr(m, "metrics", None):
+        entry["metrics"] = {k: (float(v) if isinstance(v, float) else v)
+                            for k, v in m.metrics.items()}
     entry.update(_dtype_fields(m.in_dtype, "input"))
     entry.update(_dtype_fields(m.out_dtype, "output"))
     return entry

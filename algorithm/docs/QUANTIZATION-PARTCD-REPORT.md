@@ -181,13 +181,56 @@ characterises the mechanism (union-of-ranges, and the two effects that oppose ea
 and bounds nothing about a trained network. That is the same A2 dependency as everywhere
 else in this report.
 
+## The rsqrt segment count — measured, then closed (R4)
+
+D3 left the index as "a mitigation, not a cure", which reads as an open invitation to add
+a third segment. Measured before building anything, because a third segment is not cheap:
+`i_ops.layernorm_quantize_segmented` is fixed at exactly two (10 scalars), so a third
+needs a new golden, a new payload and an export-format change — D3's cost again.
+
+| LayerNorm | var dynamic range | rsqrt rel RMS | rel max | rows outside index |
+|---|---|---|---|---|
+| `blocks.0.norm1` | 1.72 | 0.00017 | 0.00041 | 0 |
+| `blocks.0.norm2` | 1.45 | 0.00014 | 0.00026 | 0 |
+| `blocks.1.norm1` | 1.43 | 0.00010 | 0.00021 | 0 |
+| `blocks.1.norm2` | 1.45 | 0.00012 | 0.00027 | 1 below |
+| `backbone.norm` | 1.47 | 0.00015 | 0.00029 | 0 |
+
+The observed variance dynamic range is **under 2:1** — nowhere near the `bound+1`:1 that
+D3 identified as where a linear index over a log-domain function breaks down — so two
+segments are already almost exact. A simulated third segment (same index shape, same
+threshold rule, greedily re-splitting whichever half carries more squared error) improves
+RMS by **1.5–1.7×**, from ~2e-4 to ~1.3e-4, on a quantity four orders of magnitude below
+the graph's ~2e-2 end-to-end error. **No third segment is justified.**
+
+Ablating the integer LayerNorms entirely (original `nn.LayerNorm` restored, everything else
+integer) moves RMS error by **+0.0031 on average over 16 runs**, ~10–15% of the total — so
+the LayerNorm does cost something, but at 1e-4 the rsqrt index cannot be where it comes
+from. Its int8 input and output ports are.
+
+**The caveat, again:** randomly-initialised weights. A trained model's variance spread is
+plausibly wider than 2:1, and that is the one thing that would reopen this. Which is why
+the fit metrics now survive to the export (below) — so the question is answerable from an
+artifact rather than by re-deriving the calibration.
+
+### A defect found on the way
+
+This report previously said of the rsqrt index that "the payload carries `metrics` so the
+error is visible". **It did not.** `calibrate_int_layernorm` computed the whole fit report,
+`ILayerNorm` dropped it on construction, and `export.py` builds its entry from the module —
+so nothing reached the artifact. Fit quality is not recoverable from the exported tables,
+and `rows_above_range` is documented as *"a warning about the fit"*: a warning nobody can
+read after calibration is not a warning. Fixed, with the metric family now checked for
+internal consistency (`rms ≥ max/√rows`) because "0.0" is the value a fabricated metric
+reaches for — and this subsystem has shipped exactly that once, in `verify_export`.
+
 ## Verification
 
 ```bash
 cd algorithm && python -m pytest tests -q
 ```
 
-**574 passed.** (507 at the close of Part D; A1, B1, B2 and B6 added the rest.)
+**594 passed.** (507 at the close of Part D; A1, B1, B2, B6 and R1–R4 added the rest.)
 Historical breakdown at the Part D close: Breakdown: 19 config-matrix · 18 entrypoint · 56 export · 6 export-txt ·
 76 conv-padding · 28 int-graph · 64 int-layernorm · 35 int-layernorm-segmented ·
 50 int-softmax · 23 int-vit-graph · 29 per-channel-scales · 3 qat-to-integer ·
