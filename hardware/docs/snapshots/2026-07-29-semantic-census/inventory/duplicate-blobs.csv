@@ -1,0 +1,4 @@
+group_id,sha256,git_blob,bytes,zones,path,zone
+53,60e5fbde5ae51b8ad24198f06605a57874784bb7d1795c7d219f32bef813fd15,d4cf107eb6dada64a873d5de1eca5dfb07452831,152,artifact;maintained,hardware/refs/inputs/prev_state.npy,maintained
+53,60e5fbde5ae51b8ad24198f06605a57874784bb7d1795c7d219f32bef813fd15,d4cf107eb6dada64a873d5de1eca5dfb07452831,152,artifact;maintained,hardware/refs/outputs/target_state.npy,artifact
+75,90495791e6103be30268320d3b17dce2eaa52d003dd6f341393262745c1c3b79,5706eca54aff12f15b2c067792b27d73a5c846bb,69712,docs;reference,hardware/docs/DeiT-Tiny C-Syn Results.png,docs

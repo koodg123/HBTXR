@@ -10,7 +10,7 @@
 python scripts/build_docs_index.py
 ```
 
-총 **345개** 문서. 날짜·상태·소유는 각 문서의 3줄 헤더에서 읽고, 헤더가 없으면 git 이력으로 대체합니다 — 그 경우 *(헤더 없음 — git 기준)*으로 표시되므로 상태 칸이 추정임을 알 수 있습니다.
+총 **347개** 문서. 날짜·상태·소유는 각 문서의 3줄 헤더에서 읽고, 헤더가 없으면 git 이력으로 대체합니다 — 그 경우 *(헤더 없음 — git 기준)*으로 표시되므로 상태 칸이 추정임을 알 수 있습니다.
 
 규약: [governance/DOC-CONVENTIONS.md](governance/DOC-CONVENTIONS.md)
 
@@ -18,9 +18,9 @@ python scripts/build_docs_index.py
 
 | 트리 | 경로 | 문서 | 최종 활동 | 내용 |
 |---|---|---:|---|---|
-| **repo** | `docs/` | 175 | ? | 횡단·거버넌스·외부 조사 |
-| **algorithm** | `algorithm/docs/` | 17 | ? | 학습·평가·양자화·정수 그래프 |
-| **hardware** | `hardware/docs/` | 153 | 2026-07-29 | HLS·RTL·Vivado·PYNQ 가속기 |
+| **repo** | `docs/` | 175 | 2026-07-29 | 횡단·거버넌스·외부 조사 |
+| **algorithm** | `algorithm/docs/` | 17 | 2026-07-29 | 학습·평가·양자화·정수 그래프 |
+| **hardware** | `hardware/docs/` | 155 | 2026-07-29 | HLS·RTL·Vivado·PYNQ 가속기 |
 
 ## 먼저 볼 것
 
@@ -35,44 +35,44 @@ python scripts/build_docs_index.py
 
 | 문서 | 작성 | 갱신 | 상태 | 소유 |
 |---|---|---|---|---|
-| [snapshots/2026-07-21-algorithm-modular-ownership-execution/90-evidence.md](snapshots/2026-07-21-algorithm-modular-ownership-execution/90-evidence.md) | ? | ? | *(헤더 없음 — git 기준)* | ? |
-| [snapshots/2026-07-15-semantic-census/codebase-recon.md](snapshots/2026-07-15-semantic-census/codebase-recon.md) | ? | ? | *(헤더 없음 — git 기준)* | ? |
-| [snapshots/2026-07-15-follow-up-baseline/README.md](snapshots/2026-07-15-follow-up-baseline/README.md) | ? | ? | *(헤더 없음 — git 기준)* | ? |
-| [snapshots/2026-07-15-code-file-integration/90-evidence.md](snapshots/2026-07-15-code-file-integration/90-evidence.md) | ? | ? | *(헤더 없음 — git 기준)* | ? |
-| [snapshots/2026-07-14-hbtxr-commit-handover-analysis/90-evidence.md](snapshots/2026-07-14-hbtxr-commit-handover-analysis/90-evidence.md) | ? | ? | *(헤더 없음 — git 기준)* | ? |
-| [reference/handover-audit-2026-07-15/HANDOVER-SOFTWARE-AUDIT.md](reference/handover-audit-2026-07-15/HANDOVER-SOFTWARE-AUDIT.md) | ? | ? | *(헤더 없음 — git 기준)* | ? |
-| [reference/handover-audit-2026-07-15/HANDOVER-RECOMMENDATIONS.md](reference/handover-audit-2026-07-15/HANDOVER-RECOMMENDATIONS.md) | ? | ? | *(헤더 없음 — git 기준)* | ? |
-| [reference/handover-audit-2026-07-15/HANDOVER-LICENSE-ARTIFACT-AUDIT.md](reference/handover-audit-2026-07-15/HANDOVER-LICENSE-ARTIFACT-AUDIT.md) | ? | ? | *(헤더 없음 — git 기준)* | ? |
-| [reference/handover-audit-2026-07-15/HANDOVER-INVENTORY.md](reference/handover-audit-2026-07-15/HANDOVER-INVENTORY.md) | ? | ? | *(헤더 없음 — git 기준)* | ? |
-| [reference/handover-audit-2026-07-15/HANDOVER-INTEGRATION-MATRIX.md](reference/handover-audit-2026-07-15/HANDOVER-INTEGRATION-MATRIX.md) | ? | ? | *(헤더 없음 — git 기준)* | ? |
-| [reference/handover-audit-2026-07-15/HANDOVER-HARDWARE-AUDIT.md](reference/handover-audit-2026-07-15/HANDOVER-HARDWARE-AUDIT.md) | ? | ? | *(헤더 없음 — git 기준)* | ? |
-| [plans/done/2026-07-21-algorithm-modular-ownership-refactor.md](plans/done/2026-07-21-algorithm-modular-ownership-refactor.md) | ? | ? | *(헤더 없음 — git 기준)* | ? |
-| [plans/done/2026-07-15-standalone-hbtxr-selective-integration.md](plans/done/2026-07-15-standalone-hbtxr-selective-integration.md) | ? | ? | *(헤더 없음 — git 기준)* | ? |
-| [plans/done/2026-07-15-hbtxr-semantic-refactor-cleanup.md](plans/done/2026-07-15-hbtxr-semantic-refactor-cleanup.md) | ? | ? | *(헤더 없음 — git 기준)* | ? |
-| [plans/done/2026-07-15-hbtxr-follow-up-implementation.md](plans/done/2026-07-15-hbtxr-follow-up-implementation.md) | ? | ? | *(헤더 없음 — git 기준)* | ? |
-| [plans/done/2026-07-14-hbtxr-commit-handover-analysis.md](plans/done/2026-07-14-hbtxr-commit-handover-analysis.md) | ? | ? | *(헤더 없음 — git 기준)* | ? |
-| [handoff/2026-07-21-algorithm-modular-refactor-prompt.md](handoff/2026-07-21-algorithm-modular-refactor-prompt.md) | ? | ? | *(헤더 없음 — git 기준)* | ? |
-| [handoff/2026-07-16-hbtxr-semantic-refactor-planning.md](handoff/2026-07-16-hbtxr-semantic-refactor-planning.md) | ? | ? | *(헤더 없음 — git 기준)* | ? |
-| [handoff/2026-07-16-hbtxr-semantic-refactor-planning-prompt.md](handoff/2026-07-16-hbtxr-semantic-refactor-planning-prompt.md) | ? | ? | *(헤더 없음 — git 기준)* | ? |
-| [handoff/2026-07-15-hbtxr-follow-up.md](handoff/2026-07-15-hbtxr-follow-up.md) | ? | ? | *(헤더 없음 — git 기준)* | ? |
-| [handoff/2026-07-15-hbtxr-follow-up-prompt.md](handoff/2026-07-15-hbtxr-follow-up-prompt.md) | ? | ? | *(헤더 없음 — git 기준)* | ? |
-| [governance/provenance/HANDOVER-NOTICE-PLAN.md](governance/provenance/HANDOVER-NOTICE-PLAN.md) | ? | ? | *(헤더 없음 — git 기준)* | ? |
-| [governance/provenance/HANDOVER-LICENSE-MATRIX.md](governance/provenance/HANDOVER-LICENSE-MATRIX.md) | ? | ? | *(헤더 없음 — git 기준)* | ? |
-| [archive/2026-07/2026-07-21-algorithm-modular-ownership-execution/20-checkpoint.md](archive/2026-07/2026-07-21-algorithm-modular-ownership-execution/20-checkpoint.md) | ? | ? | *(헤더 없음 — git 기준)* | ? |
-| [archive/2026-07/2026-07-21-algorithm-modular-ownership-execution/10-intent.md](archive/2026-07/2026-07-21-algorithm-modular-ownership-execution/10-intent.md) | ? | ? | *(헤더 없음 — git 기준)* | ? |
-| [archive/2026-07/2026-07-15-code-file-integration/99-reflection.md](archive/2026-07/2026-07-15-code-file-integration/99-reflection.md) | ? | ? | *(헤더 없음 — git 기준)* | ? |
-| [archive/2026-07/2026-07-15-code-file-integration/20-checkpoint.md](archive/2026-07/2026-07-15-code-file-integration/20-checkpoint.md) | ? | ? | *(헤더 없음 — git 기준)* | ? |
-| [archive/2026-07/2026-07-15-code-file-integration/10-intent.md](archive/2026-07/2026-07-15-code-file-integration/10-intent.md) | ? | ? | *(헤더 없음 — git 기준)* | ? |
-| [archive/2026-07/2026-07-14-hbtxr-commit-handover-analysis/99-reflection.md](archive/2026-07/2026-07-14-hbtxr-commit-handover-analysis/99-reflection.md) | ? | ? | *(헤더 없음 — git 기준)* | ? |
-| [archive/2026-07/2026-07-14-hbtxr-commit-handover-analysis/20-checkpoint.md](archive/2026-07/2026-07-14-hbtxr-commit-handover-analysis/20-checkpoint.md) | ? | ? | *(헤더 없음 — git 기준)* | ? |
-| [archive/2026-07/2026-07-14-hbtxr-commit-handover-analysis/10-intent.md](archive/2026-07/2026-07-14-hbtxr-commit-handover-analysis/10-intent.md) | ? | ? | *(헤더 없음 — git 기준)* | ? |
 | [track/TODO.md](track/TODO.md) | 2026-07-14 | 2026-07-29 | active | repo |
 | [track/PROGRESS.md](track/PROGRESS.md) | 2026-07-14 | 2026-07-29 | active | repo |
 | [snapshots/README.md](snapshots/README.md) | 2026-07-29 | 2026-07-29 | active — 안내 | repo |
+| [snapshots/2026-07-21-algorithm-modular-ownership-execution/90-evidence.md](snapshots/2026-07-21-algorithm-modular-ownership-execution/90-evidence.md) | 2026-07-29 | 2026-07-29 | *(헤더 없음 — git 기준)* | ? |
+| [snapshots/2026-07-15-semantic-census/codebase-recon.md](snapshots/2026-07-15-semantic-census/codebase-recon.md) | 2026-07-29 | 2026-07-29 | *(헤더 없음 — git 기준)* | ? |
+| [snapshots/2026-07-15-follow-up-baseline/README.md](snapshots/2026-07-15-follow-up-baseline/README.md) | 2026-07-29 | 2026-07-29 | *(헤더 없음 — git 기준)* | ? |
+| [snapshots/2026-07-15-code-file-integration/90-evidence.md](snapshots/2026-07-15-code-file-integration/90-evidence.md) | 2026-07-29 | 2026-07-29 | *(헤더 없음 — git 기준)* | ? |
+| [snapshots/2026-07-14-hbtxr-commit-handover-analysis/90-evidence.md](snapshots/2026-07-14-hbtxr-commit-handover-analysis/90-evidence.md) | 2026-07-29 | 2026-07-29 | *(헤더 없음 — git 기준)* | ? |
+| [reference/handover-audit-2026-07-15/HANDOVER-SOFTWARE-AUDIT.md](reference/handover-audit-2026-07-15/HANDOVER-SOFTWARE-AUDIT.md) | 2026-07-29 | 2026-07-29 | *(헤더 없음 — git 기준)* | ? |
+| [reference/handover-audit-2026-07-15/HANDOVER-RECOMMENDATIONS.md](reference/handover-audit-2026-07-15/HANDOVER-RECOMMENDATIONS.md) | 2026-07-29 | 2026-07-29 | *(헤더 없음 — git 기준)* | ? |
+| [reference/handover-audit-2026-07-15/HANDOVER-LICENSE-ARTIFACT-AUDIT.md](reference/handover-audit-2026-07-15/HANDOVER-LICENSE-ARTIFACT-AUDIT.md) | 2026-07-29 | 2026-07-29 | *(헤더 없음 — git 기준)* | ? |
+| [reference/handover-audit-2026-07-15/HANDOVER-INVENTORY.md](reference/handover-audit-2026-07-15/HANDOVER-INVENTORY.md) | 2026-07-29 | 2026-07-29 | *(헤더 없음 — git 기준)* | ? |
+| [reference/handover-audit-2026-07-15/HANDOVER-INTEGRATION-MATRIX.md](reference/handover-audit-2026-07-15/HANDOVER-INTEGRATION-MATRIX.md) | 2026-07-29 | 2026-07-29 | *(헤더 없음 — git 기준)* | ? |
+| [reference/handover-audit-2026-07-15/HANDOVER-HARDWARE-AUDIT.md](reference/handover-audit-2026-07-15/HANDOVER-HARDWARE-AUDIT.md) | 2026-07-29 | 2026-07-29 | *(헤더 없음 — git 기준)* | ? |
 | [reference/COMPARISON-TSR-FPGA.md](reference/COMPARISON-TSR-FPGA.md) | 2026-07-29 | 2026-07-29 | reference — 조사 완료, 실행 항목은 §7 | repo |
+| [plans/done/2026-07-21-algorithm-modular-ownership-refactor.md](plans/done/2026-07-21-algorithm-modular-ownership-refactor.md) | 2026-07-29 | 2026-07-29 | *(헤더 없음 — git 기준)* | ? |
+| [plans/done/2026-07-15-standalone-hbtxr-selective-integration.md](plans/done/2026-07-15-standalone-hbtxr-selective-integration.md) | 2026-07-29 | 2026-07-29 | *(헤더 없음 — git 기준)* | ? |
+| [plans/done/2026-07-15-hbtxr-semantic-refactor-cleanup.md](plans/done/2026-07-15-hbtxr-semantic-refactor-cleanup.md) | 2026-07-29 | 2026-07-29 | *(헤더 없음 — git 기준)* | ? |
+| [plans/done/2026-07-15-hbtxr-follow-up-implementation.md](plans/done/2026-07-15-hbtxr-follow-up-implementation.md) | 2026-07-29 | 2026-07-29 | *(헤더 없음 — git 기준)* | ? |
+| [plans/done/2026-07-14-hbtxr-commit-handover-analysis.md](plans/done/2026-07-14-hbtxr-commit-handover-analysis.md) | 2026-07-29 | 2026-07-29 | *(헤더 없음 — git 기준)* | ? |
 | [handoff/README.md](handoff/README.md) | 2026-07-29 | 2026-07-29 | active — 안내 | repo |
+| [handoff/2026-07-21-algorithm-modular-refactor-prompt.md](handoff/2026-07-21-algorithm-modular-refactor-prompt.md) | 2026-07-29 | 2026-07-29 | *(헤더 없음 — git 기준)* | ? |
+| [handoff/2026-07-16-hbtxr-semantic-refactor-planning.md](handoff/2026-07-16-hbtxr-semantic-refactor-planning.md) | 2026-07-29 | 2026-07-29 | *(헤더 없음 — git 기준)* | ? |
+| [handoff/2026-07-16-hbtxr-semantic-refactor-planning-prompt.md](handoff/2026-07-16-hbtxr-semantic-refactor-planning-prompt.md) | 2026-07-29 | 2026-07-29 | *(헤더 없음 — git 기준)* | ? |
+| [handoff/2026-07-15-hbtxr-follow-up.md](handoff/2026-07-15-hbtxr-follow-up.md) | 2026-07-29 | 2026-07-29 | *(헤더 없음 — git 기준)* | ? |
+| [handoff/2026-07-15-hbtxr-follow-up-prompt.md](handoff/2026-07-15-hbtxr-follow-up-prompt.md) | 2026-07-29 | 2026-07-29 | *(헤더 없음 — git 기준)* | ? |
+| [governance/provenance/HANDOVER-NOTICE-PLAN.md](governance/provenance/HANDOVER-NOTICE-PLAN.md) | 2026-07-29 | 2026-07-29 | *(헤더 없음 — git 기준)* | ? |
+| [governance/provenance/HANDOVER-LICENSE-MATRIX.md](governance/provenance/HANDOVER-LICENSE-MATRIX.md) | 2026-07-29 | 2026-07-29 | *(헤더 없음 — git 기준)* | ? |
 | [governance/DOC-CONVENTIONS.md](governance/DOC-CONVENTIONS.md) | 2026-07-29 | 2026-07-29 | active — governance | repo |
 | [archive/README.md](archive/README.md) | 2026-07-29 | 2026-07-29 | active — 안내 | repo |
+| [archive/2026-07/2026-07-21-algorithm-modular-ownership-execution/20-checkpoint.md](archive/2026-07/2026-07-21-algorithm-modular-ownership-execution/20-checkpoint.md) | 2026-07-29 | 2026-07-29 | *(헤더 없음 — git 기준)* | ? |
+| [archive/2026-07/2026-07-21-algorithm-modular-ownership-execution/10-intent.md](archive/2026-07/2026-07-21-algorithm-modular-ownership-execution/10-intent.md) | 2026-07-29 | 2026-07-29 | *(헤더 없음 — git 기준)* | ? |
+| [archive/2026-07/2026-07-15-code-file-integration/99-reflection.md](archive/2026-07/2026-07-15-code-file-integration/99-reflection.md) | 2026-07-29 | 2026-07-29 | *(헤더 없음 — git 기준)* | ? |
+| [archive/2026-07/2026-07-15-code-file-integration/20-checkpoint.md](archive/2026-07/2026-07-15-code-file-integration/20-checkpoint.md) | 2026-07-29 | 2026-07-29 | *(헤더 없음 — git 기준)* | ? |
+| [archive/2026-07/2026-07-15-code-file-integration/10-intent.md](archive/2026-07/2026-07-15-code-file-integration/10-intent.md) | 2026-07-29 | 2026-07-29 | *(헤더 없음 — git 기준)* | ? |
+| [archive/2026-07/2026-07-14-hbtxr-commit-handover-analysis/99-reflection.md](archive/2026-07/2026-07-14-hbtxr-commit-handover-analysis/99-reflection.md) | 2026-07-29 | 2026-07-29 | *(헤더 없음 — git 기준)* | ? |
+| [archive/2026-07/2026-07-14-hbtxr-commit-handover-analysis/20-checkpoint.md](archive/2026-07/2026-07-14-hbtxr-commit-handover-analysis/20-checkpoint.md) | 2026-07-29 | 2026-07-29 | *(헤더 없음 — git 기준)* | ? |
+| [archive/2026-07/2026-07-14-hbtxr-commit-handover-analysis/10-intent.md](archive/2026-07/2026-07-14-hbtxr-commit-handover-analysis/10-intent.md) | 2026-07-29 | 2026-07-29 | *(헤더 없음 — git 기준)* | ? |
 | [STATUS.md](STATUS.md) | 2026-07-29 | 2026-07-29 | active | repo |
 | [INDEX.md](INDEX.md) | 2026-07-29 | 2026-07-29 | active — 자동 생성 | repo |
 | [track/log.md](track/log.md) | 2026-07-14 | 2026-07-23 | active | repo |
@@ -96,11 +96,6 @@ python scripts/build_docs_index.py
 
 | 문서 | 작성 | 갱신 | 상태 | 소유 |
 |---|---|---|---|---|
-| [reports/2026-07-23-standalone-integration-matrix.md](../algorithm/docs/reports/2026-07-23-standalone-integration-matrix.md) | ? | ? | *(헤더 없음 — git 기준)* | ? |
-| [reports/2026-07-23-refactor-cleanup-matrix.md](../algorithm/docs/reports/2026-07-23-refactor-cleanup-matrix.md) | ? | ? | *(헤더 없음 — git 기준)* | ? |
-| [reports/2026-07-21-modular-baseline.md](../algorithm/docs/reports/2026-07-21-modular-baseline.md) | ? | ? | *(헤더 없음 — git 기준)* | ? |
-| [reports/2026-07-21-import-consumers.md](../algorithm/docs/reports/2026-07-21-import-consumers.md) | ? | ? | *(헤더 없음 — git 기준)* | ? |
-| [reports/2026-07-15-semantic-census.md](../algorithm/docs/reports/2026-07-15-semantic-census.md) | ? | ? | *(헤더 없음 — git 기준)* | ? |
 | [track/log.md](../algorithm/docs/track/log.md) | 2026-07-29 | 2026-07-29 | active | algorithm |
 | [track/TODO.md](../algorithm/docs/track/TODO.md) | 2026-07-29 | 2026-07-29 | active | algorithm |
 | [track/PROGRESS.md](../algorithm/docs/track/PROGRESS.md) | 2026-07-29 | 2026-07-29 | active | algorithm |
@@ -108,6 +103,11 @@ python scripts/build_docs_index.py
 | [track/CHANGELOG.md](../algorithm/docs/track/CHANGELOG.md) | 2026-07-29 | 2026-07-29 | active | algorithm |
 | [track/ADR.md](../algorithm/docs/track/ADR.md) | 2026-07-29 | 2026-07-29 | active | algorithm |
 | [reports/2026-07-27-quantization-part-c-d.md](../algorithm/docs/reports/2026-07-27-quantization-part-c-d.md) | 2026-07-27 | 2026-07-29 | active — R4까지 반영 | algorithm/quantization |
+| [reports/2026-07-23-standalone-integration-matrix.md](../algorithm/docs/reports/2026-07-23-standalone-integration-matrix.md) | 2026-07-29 | 2026-07-29 | *(헤더 없음 — git 기준)* | ? |
+| [reports/2026-07-23-refactor-cleanup-matrix.md](../algorithm/docs/reports/2026-07-23-refactor-cleanup-matrix.md) | 2026-07-29 | 2026-07-29 | *(헤더 없음 — git 기준)* | ? |
+| [reports/2026-07-21-modular-baseline.md](../algorithm/docs/reports/2026-07-21-modular-baseline.md) | 2026-07-29 | 2026-07-29 | *(헤더 없음 — git 기준)* | ? |
+| [reports/2026-07-21-import-consumers.md](../algorithm/docs/reports/2026-07-21-import-consumers.md) | 2026-07-29 | 2026-07-29 | *(헤더 없음 — git 기준)* | ? |
+| [reports/2026-07-15-semantic-census.md](../algorithm/docs/reports/2026-07-15-semantic-census.md) | 2026-07-29 | 2026-07-29 | *(헤더 없음 — git 기준)* | ? |
 | [plans/done/2026-07-27-quantization-part-d.md](../algorithm/docs/plans/done/2026-07-27-quantization-part-d.md) | 2026-07-27 | 2026-07-29 | frozen — D0~D6 완료 | algorithm/quantization |
 | [plans/active/2026-07-25-quantization-build-plan.md](../algorithm/docs/plans/active/2026-07-25-quantization-build-plan.md) | 2026-07-25 | 2026-07-29 | active | algorithm/quantization |
 | [STATUS.md](../algorithm/docs/STATUS.md) | 2026-07-29 | 2026-07-29 | active | algorithm |
@@ -118,6 +118,8 @@ python scripts/build_docs_index.py
 
 | 문서 | 작성 | 갱신 | 상태 | 소유 |
 |---|---|---|---|---|
+| [snapshots/2026-07-29-semantic-census/README.md](../hardware/docs/snapshots/2026-07-29-semantic-census/README.md) | 2026-07-29 | 2026-07-29 | frozen — 스냅샷, 갱신하지 않음 | hardware |
+| [reports/2026-07-29-hardware-census.md](../hardware/docs/reports/2026-07-29-hardware-census.md) | 2026-07-29 | 2026-07-29 | active — 재작성 착수 전 기준선 | hardware |
 | [STATUS.md](../hardware/docs/STATUS.md) | 2026-07-29 | 2026-07-29 | active | hardware |
 | [validation/xr_accel/MULTI_BOARD_VALIDATION.md](../hardware/docs/validation/xr_accel/MULTI_BOARD_VALIDATION.md) | 2026-07-15 | 2026-07-15 | *(헤더 없음 — git 기준)* | ? |
 | [validation/xr_accel/DEIT_CYCLIC_VERIFICATION.md](../hardware/docs/validation/xr_accel/DEIT_CYCLIC_VERIFICATION.md) | 2026-07-15 | 2026-07-15 | *(헤더 없음 — git 기준)* | ? |
@@ -210,7 +212,7 @@ python scripts/build_docs_index.py
 
 | 경로 | 문서 | 최종 | 내용 |
 |---|---:|---|---|
-| `docs/reference/external/2026-06-26/` | 119 | ? | 외부 코드베이스·논문 서베이 — 우리 코드로는 틀려지지 않음 |
+| `docs/reference/external/2026-06-26/` | 119 | 2026-07-29 | 외부 코드베이스·논문 서베이 — 우리 코드로는 틀려지지 않음 |
 | `hardware/docs/resources/hgtxr_handover_additional/` | 53 | 2026-07-15 | HGTXR 인계 증거 — 불변. hardware/tools가 경로로 읽으므로 이동 금지 |
 | `hardware/docs/resources/hgtxr_final_evidence/` | 15 | 2026-07-07 | HGTXR 최종 증거 — 불변. hardware/tools가 경로로 읽으므로 이동 금지 |
 

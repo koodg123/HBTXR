@@ -1,0 +1,733 @@
+path,line,end_line,zone,symbol,rule,severity,claim_type,confidence,evidence
+hardware/pynq/hgtxr/e2e_axis_dma_overlay.py,38,278,maintained,HgtxrE2EAxisDmaOverlay,large-class,medium,fact,high,class spans 241 lines
+hardware/pynq/hgtxr/e2e_axis_dma_overlay.py,38,278,maintained,HgtxrE2EAxisDmaOverlay,high-branch-density,high,inference,medium,AST branch proxy=43
+hardware/pynq/hgtxr/e2e_axis_dma_overlay.py,182,278,maintained,HgtxrE2EAxisDmaOverlay.run_profiled,large-function,medium,fact,high,function spans 97 lines
+hardware/pynq/hgtxr/e2e_axis_dma_overlay.py,15,17,maintained,<module>,broad-except,medium,fact,high,catches Exception
+hardware/pynq/hgtxr/e2e_axis_dma_overlay.py,275,275,maintained,HgtxrE2EAxisDmaOverlay.run_profiled,very-long-line,low,fact,high,line length=161
+hardware/pynq/hgtxr/e2e_m_axi_overlay.py,36,153,maintained,HgtxrE2EMaxiOverlay,high-branch-density,high,inference,medium,AST branch proxy=27
+hardware/pynq/hgtxr/e2e_m_axi_overlay.py,14,16,maintained,<module>,broad-except,medium,fact,high,catches Exception
+hardware/pynq/hgtxr/hgtxr_overlay.py,103,209,maintained,HgtxrOverlay,high-branch-density,medium,inference,medium,AST branch proxy=24
+hardware/pynq/hgtxr/hgtxr_overlay.py,37,78,maintained,parse_registers_from_hwh,high-branch-density,medium,inference,medium,AST branch proxy=21
+hardware/pynq/hgtxr/hgtxr_overlay.py,13,15,maintained,<module>,broad-except,medium,fact,high,catches Exception
+hardware/pynq/hgtxr/run_e2e_axis_dma_hybrid_smoke.py,170,255,maintained,run_hybrid_smoke,large-function,medium,fact,high,function spans 86 lines
+hardware/pynq/hgtxr/run_e2e_axis_dma_hybrid_smoke.py,170,255,maintained,run_hybrid_smoke,high-branch-density,medium,inference,medium,AST branch proxy=21
+hardware/pynq/hgtxr/run_e2e_axis_dma_hybrid_smoke.py,267,267,maintained,main,library-print,low,inference,medium,print call in maintained non-script module
+hardware/pynq/hgtxr/run_e2e_axis_dma_smoke.py,154,261,maintained,run_smoke,large-function,medium,fact,high,function spans 108 lines
+hardware/pynq/hgtxr/run_e2e_axis_dma_smoke.py,154,261,maintained,run_smoke,high-branch-density,medium,inference,medium,AST branch proxy=23
+hardware/pynq/hgtxr/run_e2e_axis_dma_smoke.py,273,273,maintained,main,library-print,low,inference,medium,print call in maintained non-script module
+hardware/pynq/hgtxr/run_e2e_m_axi_smoke.py,116,116,maintained,main,library-print,low,inference,medium,print call in maintained non-script module
+hardware/scripts/report/collect_no_board_reports.py,156,223,maintained,parse_hls_xml,large-function,medium,fact,high,function spans 68 lines
+hardware/scripts/report/collect_no_board_reports.py,313,397,maintained,write_markdown,large-function,medium,fact,high,function spans 85 lines
+hardware/scripts/report/collect_no_board_reports.py,340,340,maintained,write_markdown,very-long-line,low,fact,high,line length=170
+hardware/scripts/report/collect_no_board_reports.py,345,345,maintained,write_markdown,very-long-line,low,fact,high,line length=188
+hardware/tests/test_check_c3b_board_smoke_readiness.py,23,201,test,CheckC3bBoardSmokeReadinessTests,large-class,medium,fact,high,class spans 179 lines
+hardware/tests/test_check_c3b_board_smoke_readiness.py,24,92,test,CheckC3bBoardSmokeReadinessTests.make_bundle,large-function,medium,fact,high,function spans 69 lines
+hardware/tests/test_check_final_blocker_closure_readiness.py,74,297,test,CheckFinalBlockerClosureReadinessTests,large-class,medium,fact,high,class spans 224 lines
+hardware/tests/test_check_final_blocker_closure_readiness.py,36,36,test,smoke_payload,hard-coded-absolute-path,high,fact,high,"""bitfile"": ""/tmp/hgtxr_e2e_axis_dma_c3b_mem16.bit"","
+hardware/tests/test_check_final_blocker_closure_readiness.py,37,37,test,smoke_payload,hard-coded-absolute-path,high,fact,high,"""hwhfile"": ""/tmp/hgtxr_e2e_axis_dma_c3b_mem16.hwh"","
+hardware/tests/test_check_third_goal_preflight.py,63,1137,test,ThirdGoalPreflightTests,large-class,high,fact,high,class spans 1075 lines
+hardware/tests/test_check_third_goal_preflight.py,63,1137,test,ThirdGoalPreflightTests,high-branch-density,high,inference,medium,AST branch proxy=47
+hardware/tests/test_check_third_goal_preflight.py,82,434,test,ThirdGoalPreflightTests.make_root,large-function,high,fact,high,function spans 353 lines
+hardware/tests/test_check_third_goal_preflight.py,82,434,test,ThirdGoalPreflightTests.make_root,high-branch-density,medium,inference,medium,AST branch proxy=23
+hardware/tests/test_check_third_goal_preflight.py,82,434,test,ThirdGoalPreflightTests.make_root,too-many-parameters,medium,fact,high,parameter count=14
+hardware/tests/test_check_third_goal_preflight.py,843,960,test,ThirdGoalPreflightTests.test_qkv_uram_successor_smoke_artifacts_validate_bundle_session,large-function,medium,fact,high,function spans 118 lines
+hardware/tests/test_check_third_goal_preflight.py,69,69,test,ThirdGoalPreflightTests.parse_stdout_summary,hard-coded-absolute-path,high,fact,high,"raise AssertionError(f""summary line not found in output:\n{output}"")"
+hardware/tests/test_check_third_goal_preflight.py,313,313,test,ThirdGoalPreflightTests.make_root,hard-coded-absolute-path,high,fact,high,"""python3 tools/run_third_goal_final_signoff.py --root /home/kjm26/project/PRJXR/XR-VIT/HGTXR --import-c3b-smoke-json /path/to/e2e_axis_dma_c3b_mem16_file_smoke.json --dry-run-import-c3b-smoke --allow-blocked"","
+hardware/tests/test_check_third_goal_preflight.py,313,313,test,ThirdGoalPreflightTests.make_root,very-long-line,low,fact,high,line length=241
+hardware/tests/test_check_third_goal_preflight.py,314,314,test,ThirdGoalPreflightTests.make_root,hard-coded-absolute-path,high,fact,high,"""python3 tools/run_third_goal_final_signoff.py --root /home/kjm26/project/PRJXR/XR-VIT/HGTXR --import-c3b-smoke-json /path/to/e2e_axis_dma_c3b_mem16_file_smoke.json --allow-blocked"","
+hardware/tests/test_check_third_goal_preflight.py,314,314,test,ThirdGoalPreflightTests.make_root,very-long-line,low,fact,high,line length=214
+hardware/tests/test_check_third_goal_preflight.py,315,315,test,ThirdGoalPreflightTests.make_root,hard-coded-absolute-path,high,fact,high,"""python3 tools/check_third_goal_preflight.py --root /home/kjm26/project/PRJXR/XR-VIT/HGTXR --mode final-signoff"","
+hardware/tests/test_check_third_goal_preflight.py,941,941,test,ThirdGoalPreflightTests.test_qkv_uram_successor_smoke_artifacts_validate_bundle_session,very-long-line,low,fact,high,line length=190
+hardware/tests/test_check_third_goal_preflight.py,942,942,test,ThirdGoalPreflightTests.test_qkv_uram_successor_smoke_artifacts_validate_bundle_session,hard-coded-absolute-path,high,fact,high,"""python3 tools/check_third_goal_preflight.py --root /home/kjm26/project/PRJXR/XR-VIT/HGTXR --mode final-signoff"","
+hardware/tests/test_create_xr_vits_replacement_policy.py,20,321,test,CreateXrVitsReplacementPolicyTests,large-class,high,fact,high,class spans 302 lines
+hardware/tests/test_create_xr_vits_replacement_policy.py,296,296,test,CreateXrVitsReplacementPolicyTests.test_policy_integrity_detects_approval_event_drift,hard-coded-absolute-path,high,fact,high,"policy[""approval_event""][""replacement_path""] = ""/tmp/wrong"""
+hardware/tests/test_discover_c3b_smoke_candidates.py,40,40,test,smoke_payload,hard-coded-absolute-path,high,fact,high,"""bitfile"": ""/tmp/hgtxr_e2e_axis_dma_c3b_mem16.bit"","
+hardware/tests/test_discover_c3b_smoke_candidates.py,41,41,test,smoke_payload,hard-coded-absolute-path,high,fact,high,"""hwhfile"": ""/tmp/hgtxr_e2e_axis_dma_c3b_mem16.hwh"","
+hardware/tests/test_discover_pynq_smoke_candidates.py,52,252,test,DiscoverPynqSmokeCandidatesTests,large-class,medium,fact,high,class spans 201 lines
+hardware/tests/test_discover_pynq_smoke_candidates.py,47,47,test,smoke_payload,hard-coded-absolute-path,high,fact,high,"""bitfile"": f""/tmp/{prefix}.bit"","
+hardware/tests/test_discover_pynq_smoke_candidates.py,48,48,test,smoke_payload,hard-coded-absolute-path,high,fact,high,"""hwhfile"": f""/tmp/{prefix}.hwh"","
+hardware/tests/test_import_pynq_smoke_result.py,28,259,test,ImportPynqSmokeResultTests,large-class,medium,fact,high,class spans 232 lines
+hardware/tests/test_import_pynq_smoke_result.py,28,259,test,ImportPynqSmokeResultTests,high-branch-density,medium,inference,medium,AST branch proxy=13
+hardware/tests/test_package_e2e_axis_dma_pynq_bundle.py,17,266,test,E2EAxisDmaPynqBundleTests,large-class,medium,fact,high,class spans 250 lines
+hardware/tests/test_package_e2e_axis_dma_pynq_bundle.py,17,266,test,E2EAxisDmaPynqBundleTests,high-branch-density,medium,inference,medium,AST branch proxy=18
+hardware/tests/test_run_runtime_mode_board_latency.py,78,268,test,RuntimeModeBoardLatencyRunnerTests,large-class,medium,fact,high,class spans 191 lines
+hardware/tests/test_run_runtime_mode_board_latency.py,78,268,test,RuntimeModeBoardLatencyRunnerTests,high-branch-density,medium,inference,medium,AST branch proxy=17
+hardware/tests/test_run_runtime_mode_board_latency.py,100,100,test,RuntimeModeBoardLatencyRunnerTests.make_profile_configs,hard-coded-absolute-path,high,fact,high,"""remote_dir"": f""/home/xilinx/hgtxr_runtime_{mode}"","
+hardware/tests/test_run_runtime_mode_board_latency.py,131,131,test,RuntimeModeBoardLatencyRunnerTests.make_par32_rom_compute_configs,hard-coded-absolute-path,high,fact,high,"""remote_dir"": f""/home/xilinx/hgtxr_par32_rom_compute_300_{mode}"","
+hardware/tests/test_run_third_goal_final_signoff.py,18,1604,test,RunThirdGoalFinalSignoffTests,large-class,high,fact,high,class spans 1587 lines
+hardware/tests/test_run_third_goal_final_signoff.py,18,1604,test,RunThirdGoalFinalSignoffTests,high-branch-density,high,inference,medium,AST branch proxy=80
+hardware/tests/test_run_third_goal_final_signoff.py,22,785,test,RunThirdGoalFinalSignoffTests.make_tools,large-function,high,fact,high,function spans 764 lines
+hardware/tests/test_run_third_goal_final_signoff.py,22,785,test,RunThirdGoalFinalSignoffTests.make_tools,high-branch-density,high,inference,medium,AST branch proxy=45
+hardware/tests/test_run_third_goal_final_signoff.py,787,1014,test,RunThirdGoalFinalSignoffTests.test_blocked_run_writes_summary_and_returns_one,large-function,high,fact,high,function spans 228 lines
+hardware/tests/test_run_third_goal_final_signoff.py,1385,1555,test,RunThirdGoalFinalSignoffTests.test_final_refresh_uses_fresh_evidence_manifest_contract,large-function,high,fact,high,function spans 171 lines
+hardware/tests/test_run_third_goal_final_signoff.py,577,577,test,RunThirdGoalFinalSignoffTests.make_tools.req1_environment,hard-coded-absolute-path,high,fact,high,"{""name"": ""hardware_root_expected_prefix"", ""status"": ""pass"", ""detail"": ""/home/kjm26/project""},"
+hardware/tests/test_run_third_goal_final_signoff.py,624,624,test,RunThirdGoalFinalSignoffTests.make_tools.xr_vits_gate,hard-coded-absolute-path,high,fact,high,"""exact"": {""exists"": False, ""path"": ""/tmp/XR-VITs""},"
+hardware/tests/test_run_third_goal_final_signoff.py,625,625,test,RunThirdGoalFinalSignoffTests.make_tools.xr_vits_gate,hard-coded-absolute-path,high,fact,high,"""replacement_candidate"": {""exists"": True, ""path"": ""/tmp/XR_Accel""},"
+hardware/tests/test_run_third_goal_final_signoff.py,1045,1045,test,RunThirdGoalFinalSignoffTests.test_execute_zcu104_smoke_forwards_remote_options,hard-coded-absolute-path,high,fact,high,"zcu104_remote_dir=""/home/xilinx/custom_hgtxr"","
+hardware/tests/test_run_third_goal_final_signoff.py,1058,1058,test,RunThirdGoalFinalSignoffTests.test_execute_zcu104_smoke_forwards_remote_options,hard-coded-absolute-path,high,fact,high,"self.assertIn(""/home/xilinx/custom_hgtxr"", zcu104_step[""argv""])"
+hardware/tests/test_run_third_goal_final_signoff.py,1069,1069,test,RunThirdGoalFinalSignoffTests.test_require_vref_successor_smoke_runs_profile_dry_run_without_remote_dir_override,hard-coded-absolute-path,high,fact,high,"zcu104_remote_dir=""/home/xilinx/c3b_only"","
+hardware/tests/test_run_third_goal_final_signoff.py,1081,1081,test,RunThirdGoalFinalSignoffTests.test_require_vref_successor_smoke_runs_profile_dry_run_without_remote_dir_override,hard-coded-absolute-path,high,fact,high,"self.assertNotIn(""/home/xilinx/c3b_only"", vref_step[""argv""])"
+hardware/tests/test_run_third_goal_final_signoff.py,1099,1099,test,RunThirdGoalFinalSignoffTests.test_execute_vref_successor_smoke_forwards_remote_options,hard-coded-absolute-path,high,fact,high,"vref_successor_remote_dir=""/home/xilinx/vref_hgtxr"","
+hardware/tests/test_run_third_goal_final_signoff.py,1113,1113,test,RunThirdGoalFinalSignoffTests.test_execute_vref_successor_smoke_forwards_remote_options,hard-coded-absolute-path,high,fact,high,"self.assertIn(""/home/xilinx/vref_hgtxr"", vref_step[""argv""])"
+hardware/tests/test_run_third_goal_final_signoff.py,1124,1124,test,RunThirdGoalFinalSignoffTests.test_require_qkv_uram_smoke_runs_profile_dry_run_and_blocks_when_missing,hard-coded-absolute-path,high,fact,high,"zcu104_remote_dir=""/home/xilinx/c3b_only"","
+hardware/tests/test_run_third_goal_final_signoff.py,1137,1137,test,RunThirdGoalFinalSignoffTests.test_require_qkv_uram_smoke_runs_profile_dry_run_and_blocks_when_missing,hard-coded-absolute-path,high,fact,high,"self.assertNotIn(""/home/xilinx/c3b_only"", qkv_step[""argv""])"
+hardware/tests/test_run_third_goal_final_signoff.py,1153,1153,test,RunThirdGoalFinalSignoffTests.test_execute_qkv_uram_smoke_forwards_remote_options,hard-coded-absolute-path,high,fact,high,"qkv_uram_remote_dir=""/home/xilinx/qkv_hgtxr"","
+hardware/tests/test_run_third_goal_final_signoff.py,1167,1167,test,RunThirdGoalFinalSignoffTests.test_execute_qkv_uram_smoke_forwards_remote_options,hard-coded-absolute-path,high,fact,high,"self.assertIn(""/home/xilinx/qkv_hgtxr"", qkv_step[""argv""])"
+hardware/tests/test_run_zcu104_c3b_smoke_remote.py,21,498,test,RunZcu104C3bSmokeRemoteTests,large-class,high,fact,high,class spans 478 lines
+hardware/tests/test_run_zcu104_c3b_smoke_remote.py,316,378,test,RunZcu104C3bSmokeRemoteTests.test_execute_imports_valid_vref_successor_result_with_fake_runner,large-function,medium,fact,high,function spans 63 lines
+hardware/tests/test_run_zcu104_c3b_smoke_remote.py,46,46,test,RunZcu104C3bSmokeRemoteTests.test_dry_run_builds_remote_commands_without_network,hard-coded-absolute-path,high,fact,high,"remote_dir=""/home/xilinx/hgtxr"","
+hardware/tests/test_run_zcu104_c3b_smoke_remote.py,69,69,test,RunZcu104C3bSmokeRemoteTests.test_dry_run_builds_vref_successor_remote_commands,hard-coded-absolute-path,high,fact,high,"remote_dir=""/home/xilinx/hgtxr_vref"","
+hardware/tests/test_run_zcu104_c3b_smoke_remote.py,101,101,test,RunZcu104C3bSmokeRemoteTests.test_dry_run_builds_qkv_uram_remote_commands,hard-coded-absolute-path,high,fact,high,"remote_dir=""/home/xilinx/hgtxr_qkv"","
+hardware/tests/test_run_zcu104_c3b_smoke_remote.py,133,133,test,RunZcu104C3bSmokeRemoteTests.test_dry_run_builds_runtime_mode_search_remote_commands,hard-coded-absolute-path,high,fact,high,"remote_dir=""/home/xilinx/hgtxr_runtime_search"","
+hardware/tests/test_run_zcu104_c3b_smoke_remote.py,165,165,test,RunZcu104C3bSmokeRemoteTests.test_dry_run_builds_runtime_mode_track_remote_commands,hard-coded-absolute-path,high,fact,high,"remote_dir=""/home/xilinx/hgtxr_runtime_track"","
+hardware/tests/test_run_zcu104_c3b_smoke_remote.py,197,197,test,RunZcu104C3bSmokeRemoteTests.test_dry_run_builds_par32_prefetchall4_hybrid_remote_commands,hard-coded-absolute-path,high,fact,high,"remote_dir=""/home/xilinx/hgtxr_prefetchall4_hybrid"","
+hardware/tests/test_run_zcu104_c3b_smoke_remote.py,301,301,test,RunZcu104C3bSmokeRemoteTests.test_execute_imports_valid_result_with_fake_runner,hard-coded-absolute-path,high,fact,high,"remote_dir=""/home/xilinx/hgtxr"","
+hardware/tests/test_run_zcu104_c3b_smoke_remote.py,352,352,test,RunZcu104C3bSmokeRemoteTests.test_execute_imports_valid_vref_successor_result_with_fake_runner,hard-coded-absolute-path,high,fact,high,"remote_dir=""/home/xilinx/hgtxr_vref"","
+hardware/tests/test_run_zcu104_c3b_smoke_remote.py,416,416,test,RunZcu104C3bSmokeRemoteTests.test_execute_imports_valid_qkv_uram_result_with_fake_runner,hard-coded-absolute-path,high,fact,high,"remote_dir=""/home/xilinx/hgtxr_qkv"","
+hardware/tests/test_validate_final_operator_handoff.py,766,1257,test,ValidateFinalOperatorHandoffTests,large-class,high,fact,high,class spans 492 lines
+hardware/tests/test_validate_final_operator_handoff.py,766,1257,test,ValidateFinalOperatorHandoffTests,high-branch-density,high,inference,medium,AST branch proxy=41
+hardware/tests/test_validate_final_operator_handoff.py,660,736,test,validator_command_card,large-function,medium,fact,high,function spans 77 lines
+hardware/tests/test_validate_final_operator_handoff.py,402,402,test,write_live_current_audit,hard-coded-absolute-path,high,fact,high,"""requested XR-VITs sibling"": ""/home/kjm26/project/PRJXR/XR-VITs"","
+hardware/tests/test_validate_final_operator_handoff.py,415,415,test,write_live_current_audit,hard-coded-absolute-path,high,fact,high,"""path"": ""/home/kjm26/project/PRJXR/XR-VITs"","
+hardware/tests/test_validate_final_operator_handoff.py,488,488,test,write_live_closeout_packet,hard-coded-absolute-path,high,fact,high,"""python3 tools/run_third_goal_final_signoff.py --import-qkv-uram-smoke-json /tmp/qkv.json --dry-run-import-qkv-uram-smoke --allow-blocked"","
+hardware/tests/test_validate_final_operator_handoff.py,505,505,test,write_live_closeout_packet,hard-coded-absolute-path,high,fact,high,"""validate_command"": ""python3 tools/validate_pynq_smoke_result.py /tmp/smoke.json --preset axis-c3b-mem16"","
+hardware/tests/test_validate_final_operator_handoff.py,595,595,test,write_live_xr_vits_gate,hard-coded-absolute-path,high,fact,high,"""path"": ""/home/kjm26/project/PRJXR/XR-VITs"","
+hardware/tests/test_validate_final_operator_handoff.py,600,600,test,write_live_xr_vits_gate,hard-coded-absolute-path,high,fact,high,"""path"": ""/home/kjm26/project/PRJXR/XR-VIT/XR_Accel"","
+hardware/tests/test_validate_final_operator_handoff.py,695,695,test,validator_command_card,hard-coded-absolute-path,high,fact,high,"{""id"": ""U2a"", ""commands"": [""test -d /home/kjm26/project/PRJXR/XR-VITs""]},"
+hardware/tests/test_validate_final_operator_handoff.py,714,714,test,validator_command_card,hard-coded-absolute-path,high,fact,high,"""python3 tools/run_third_goal_final_signoff.py --root /tmp/HGTXR --import-c3b-smoke-json /path/to/e2e_axis_dma_c3b_mem16_file_smoke.json"""
+hardware/tests/test_validate_final_operator_handoff.py,714,714,test,validator_command_card,very-long-line,low,fact,high,line length=165
+hardware/tests/test_validate_final_signoff_bundle.py,787,1508,test,ValidateFinalSignoffBundleTests,large-class,high,fact,high,class spans 722 lines
+hardware/tests/test_validate_final_signoff_bundle.py,787,1508,test,ValidateFinalSignoffBundleTests,high-branch-density,high,inference,medium,AST branch proxy=91
+hardware/tests/test_validate_final_signoff_bundle.py,478,678,test,evidence_manifest,large-function,high,fact,high,function spans 201 lines
+hardware/tests/test_validate_final_signoff_bundle.py,721,784,test,populate_bundle,large-function,medium,fact,high,function spans 64 lines
+hardware/tests/test_validate_final_signoff_bundle.py,279,279,test,current_audit_payload,hard-coded-absolute-path,high,fact,high,"""requested XR-VITs sibling"": ""/home/kjm26/project/PRJXR/XR-VITs"","
+hardware/tests/test_validate_final_signoff_bundle.py,292,292,test,current_audit_payload,hard-coded-absolute-path,high,fact,high,"""path"": ""/home/kjm26/project/PRJXR/XR-VITs"","
+hardware/tests/test_validate_final_signoff_bundle.py,359,359,test,closeout_packet_payload,hard-coded-absolute-path,high,fact,high,"""python3 tools/run_third_goal_final_signoff.py --import-qkv-uram-smoke-json /tmp/qkv.json --dry-run-import-qkv-uram-smoke --allow-blocked"","
+hardware/tests/test_validate_final_signoff_bundle.py,376,376,test,closeout_packet_payload,hard-coded-absolute-path,high,fact,high,"""validate_command"": ""python3 tools/validate_pynq_smoke_result.py /tmp/smoke.json --preset axis-c3b-mem16"","
+hardware/tests/test_validate_final_signoff_bundle.py,456,456,test,xr_vits_gate_payload,hard-coded-absolute-path,high,fact,high,"""path"": ""/home/kjm26/project/PRJXR/XR-VITs"","
+hardware/tests/test_validate_final_signoff_bundle.py,461,461,test,xr_vits_gate_payload,hard-coded-absolute-path,high,fact,high,"""path"": ""/home/kjm26/project/PRJXR/XR-VIT/XR_Accel"","
+hardware/tests/test_validate_final_unblock_closeout_packet.py,21,126,test,sample_packet,large-function,medium,fact,high,function spans 106 lines
+hardware/tests/test_validate_final_unblock_closeout_packet.py,24,24,test,sample_packet,hard-coded-absolute-path,high,fact,high,"""root"": ""/tmp/HGTXR"","
+hardware/tests/test_validate_final_unblock_closeout_packet.py,42,42,test,sample_packet,hard-coded-absolute-path,high,fact,high,"""canonical_result_path"": ""/tmp/HGTXR/hardware/pynq/hgtxr/e2e_axis_dma_c3b_mem16_file_smoke.json"","
+hardware/tests/test_validate_final_unblock_closeout_packet.py,46,46,test,sample_packet,very-long-line,low,fact,high,line length=164
+hardware/tests/test_validate_final_unblock_closeout_packet.py,52,52,test,sample_packet,hard-coded-absolute-path,high,fact,high,"""candidate_replacement_path"": ""/tmp/XR-VIT/XR_Accel"","
+hardware/tests/test_validate_final_unblock_closeout_packet.py,55,55,test,sample_packet,hard-coded-absolute-path,high,fact,high,"""policy_path"": ""/tmp/HGTXR/docs/resources/xr_vits_replacement_policy.json"","
+hardware/tests/test_validate_final_unblock_closeout_packet.py,56,56,test,sample_packet,hard-coded-absolute-path,high,fact,high,"""candidate_audit"": ""/tmp/HGTXR/docs/resources/xr_vits_candidate_audit_2026_06_10.json"","
+hardware/tests/test_validate_final_unblock_closeout_packet.py,71,71,test,sample_packet,hard-coded-absolute-path,high,fact,high,"""candidate_audit_path"": ""/tmp/HGTXR/docs/resources/xr_vits_candidate_audit_2026_06_10.json"","
+hardware/tests/test_validate_final_unblock_closeout_packet.py,85,85,test,sample_packet,hard-coded-absolute-path,high,fact,high,"""expected_result_json"": ""/tmp/HGTXR/hardware/pynq/hgtxr/e2e_axis_dma_vref_p0_softmax_input_x2_dsp_mixed_stream_file_smoke.json"","
+hardware/tests/test_validate_final_unblock_closeout_packet.py,97,97,test,sample_packet,hard-coded-absolute-path,high,fact,high,"""expected_result_json"": ""/tmp/HGTXR/hardware/pynq/hgtxr/e2e_axis_dma_vref_p0_softmax_input_x2_qkv_uram_file_smoke.json"","
+hardware/tests/test_validate_final_unblock_closeout_packet.py,101,101,test,sample_packet,hard-coded-absolute-path,high,fact,high,"""python3 tools/check_final_blocker_closure_readiness.py --root /tmp/HGTXR"","
+hardware/tests/test_validate_final_unblock_closeout_packet.py,102,102,test,sample_packet,hard-coded-absolute-path,high,fact,high,"""python3 tools/check_final_blocker_closure_readiness.py --root /tmp/HGTXR --xr-vits-mode exact"","
+hardware/tests/test_validate_final_unblock_closeout_packet.py,103,103,test,sample_packet,hard-coded-absolute-path,high,fact,high,"""python3 tools/check_final_blocker_closure_readiness.py --root /tmp/HGTXR --xr-vits-mode replacement"","
+hardware/tests/test_validate_final_unblock_closeout_packet.py,116,116,test,sample_packet,hard-coded-absolute-path,high,fact,high,"""python3 tools/run_third_goal_final_signoff.py --import-qkv-uram-smoke-json /tmp/qkv.json --dry-run-import-qkv-uram-smoke --allow-blocked"","
+hardware/tests/test_validate_pynq_bundle_package.py,22,173,test,ValidatePynqBundlePackageTests,large-class,medium,fact,high,class spans 152 lines
+hardware/tests/test_validate_pynq_bundle_package.py,22,173,test,ValidatePynqBundlePackageTests,high-branch-density,medium,inference,medium,AST branch proxy=16
+hardware/tests/test_validate_pynq_smoke_result.py,225,367,test,ValidatePynqSmokeResultTests,high-branch-density,medium,inference,medium,AST branch proxy=18
+hardware/tests/test_write_c3b_smoke_transfer_manifest.py,23,94,test,WriteC3bSmokeTransferManifestTests.make_bundle,large-function,medium,fact,high,function spans 72 lines
+hardware/tests/test_write_c3b_smoke_transfer_manifest.py,58,58,test,WriteC3bSmokeTransferManifestTests.make_bundle,very-long-line,low,fact,high,line length=180
+hardware/tests/test_write_final_evidence_manifest.py,20,1876,test,WriteFinalEvidenceManifestTests,large-class,high,fact,high,class spans 1857 lines
+hardware/tests/test_write_final_evidence_manifest.py,20,1876,test,WriteFinalEvidenceManifestTests,high-branch-density,high,inference,medium,AST branch proxy=109
+hardware/tests/test_write_final_evidence_manifest.py,89,152,test,WriteFinalEvidenceManifestTests.write_runner_summary,large-function,medium,fact,high,function spans 64 lines
+hardware/tests/test_write_final_evidence_manifest.py,171,890,test,WriteFinalEvidenceManifestTests.payload_for_artifact,large-function,high,fact,high,function spans 720 lines
+hardware/tests/test_write_final_evidence_manifest.py,171,890,test,WriteFinalEvidenceManifestTests.payload_for_artifact,high-branch-density,high,inference,medium,AST branch proxy=38
+hardware/tests/test_write_final_evidence_manifest.py,892,1024,test,WriteFinalEvidenceManifestTests.populate_required,large-function,high,fact,high,function spans 133 lines
+hardware/tests/test_write_final_evidence_manifest.py,1026,1095,test,WriteFinalEvidenceManifestTests.test_build_manifest_hashes_required_artifacts,large-function,medium,fact,high,function spans 70 lines
+hardware/tests/test_write_final_evidence_manifest.py,76,76,test,WriteFinalEvidenceManifestTests.write_policy_tool_contract,work-marker,low,fact,high,"""PLACEHOLDER_APPROVER_VALUES = {'<approved-by>', '<name>', 'todo', 'tbd'}"","
+hardware/tests/test_write_final_evidence_manifest.py,203,203,test,WriteFinalEvidenceManifestTests.payload_for_artifact,hard-coded-absolute-path,high,fact,high,"""path"": ""/tmp/HGTXR/hardware/generated/pynq/e2e_axis_dma_c3b_mem16_smoke_bundle.tar.gz"","
+hardware/tests/test_write_final_evidence_manifest.py,205,205,test,WriteFinalEvidenceManifestTests.payload_for_artifact,hard-coded-absolute-path,high,fact,high,"""sha256_file"": ""/tmp/HGTXR/docs/resources/e2e_axis_dma_c3b_mem16_smoke_bundle.tar.gz.sha256"","
+hardware/tests/test_write_final_evidence_manifest.py,236,236,test,WriteFinalEvidenceManifestTests.payload_for_artifact,hard-coded-absolute-path,high,fact,high,"""candidate_audit_recommendation_snapshot"": {""path"": ""/tmp/XR_Accel""},"
+hardware/tests/test_write_final_evidence_manifest.py,326,326,test,WriteFinalEvidenceManifestTests.payload_for_artifact,hard-coded-absolute-path,high,fact,high,"""path"": ""/tmp/HGTXR/hardware/generated/pynq/e2e_axis_dma_c3b_mem16_smoke_bundle.tar.gz"","
+hardware/tests/test_write_final_evidence_manifest.py,333,333,test,WriteFinalEvidenceManifestTests.payload_for_artifact,hard-coded-absolute-path,high,fact,high,"""/tmp/HGTXR/hardware/generated/pynq/e2e_axis_dma_c3b_mem16_smoke_bundle.tar.gz"","
+hardware/tests/test_write_final_evidence_manifest.py,334,334,test,WriteFinalEvidenceManifestTests.payload_for_artifact,hard-coded-absolute-path,high,fact,high,"""/tmp/HGTXR/hardware/generated/signoff/e2e_axis_dma_c3b_mem16_smoke_bundle.tar.gz.sha256"","
+hardware/tests/test_write_final_evidence_manifest.py,353,353,test,WriteFinalEvidenceManifestTests.payload_for_artifact,hard-coded-absolute-path,high,fact,high,"Path(""/tmp/HGTXR"")"
+hardware/tests/test_write_final_evidence_manifest.py,360,360,test,WriteFinalEvidenceManifestTests.payload_for_artifact,very-long-line,low,fact,high,line length=173
+hardware/tests/test_write_final_evidence_manifest.py,430,430,test,WriteFinalEvidenceManifestTests.payload_for_artifact,hard-coded-absolute-path,high,fact,high,"{""name"": ""hardware_root_expected_prefix"", ""status"": ""pass"", ""detail"": ""/home/kjm26/project""},"
+hardware/tests/test_write_final_evidence_manifest.py,538,538,test,WriteFinalEvidenceManifestTests.payload_for_artifact,very-long-line,low,fact,high,line length=163
+hardware/tests/test_write_final_evidence_manifest.py,632,632,test,WriteFinalEvidenceManifestTests.payload_for_artifact,very-long-line,low,fact,high,line length=179
+hardware/tests/test_write_final_evidence_manifest.py,633,633,test,WriteFinalEvidenceManifestTests.payload_for_artifact,very-long-line,low,fact,high,line length=191
+hardware/tests/test_write_final_evidence_manifest.py,635,635,test,WriteFinalEvidenceManifestTests.payload_for_artifact,very-long-line,low,fact,high,line length=207
+hardware/tests/test_write_final_evidence_manifest.py,636,636,test,WriteFinalEvidenceManifestTests.payload_for_artifact,very-long-line,low,fact,high,line length=188
+hardware/tests/test_write_final_evidence_manifest.py,645,645,test,WriteFinalEvidenceManifestTests.payload_for_artifact,hard-coded-absolute-path,high,fact,high,"""exact"": {""exists"": False, ""path"": ""/home/kjm26/project/PRJXR/XR-VITs""},"
+hardware/tests/test_write_final_evidence_manifest.py,646,646,test,WriteFinalEvidenceManifestTests.payload_for_artifact,hard-coded-absolute-path,high,fact,high,"""replacement_candidate"": {""exists"": True, ""path"": ""/home/kjm26/project/PRJXR/XR-VIT/XR_Accel""},"
+hardware/tests/test_write_final_evidence_manifest.py,798,798,test,WriteFinalEvidenceManifestTests.payload_for_artifact,hard-coded-absolute-path,high,fact,high,"""python3 tools/run_third_goal_final_signoff.py --import-qkv-uram-smoke-json /tmp/qkv.json --dry-run-import-qkv-uram-smoke --allow-blocked"","
+hardware/tests/test_write_final_evidence_manifest.py,798,798,test,WriteFinalEvidenceManifestTests.payload_for_artifact,very-long-line,low,fact,high,line length=167
+hardware/tests/test_write_final_evidence_manifest.py,985,985,test,WriteFinalEvidenceManifestTests.populate_required,very-long-line,low,fact,high,line length=248
+hardware/tests/test_write_final_evidence_manifest.py,1200,1200,test,WriteFinalEvidenceManifestTests.test_pynq_validator_basename_logic_failure_fails_manifest,hard-coded-absolute-path,high,fact,high,"path.write_text(""artifact_prefix = 'present'\nif require_paths:\n    pass\n"")"
+hardware/tests/test_write_final_evidence_manifest.py,1252,1252,test,WriteFinalEvidenceManifestTests.test_xr_vits_policy_preview_failure_fails_manifest,hard-coded-absolute-path,high,fact,high,"payload[""policy""][""approval_event""][""replacement_path""] = ""/tmp/alternate"""
+hardware/tests/test_write_final_evidence_manifest.py,1671,1671,test,WriteFinalEvidenceManifestTests.test_unblock_intake_path_drift_fails_manifest,hard-coded-absolute-path,high,fact,high,"payload[""blocker_status""][""C3b AXIS/DMA physical smoke result""][""next_input_path""] = ""/tmp/wrong.json"""
+hardware/tests/test_write_final_evidence_manifest.py,1672,1672,test,WriteFinalEvidenceManifestTests.test_unblock_intake_path_drift_fails_manifest,hard-coded-absolute-path,high,fact,high,"payload[""next_inputs""][0][""path""] = ""/tmp/wrong.json"""
+hardware/tests/test_write_final_operator_handoff.py,31,31,test,sample_readiness,hard-coded-absolute-path,high,fact,high,"""physical_result"": {""path"": ""/tmp/HGTXR/hardware/pynq/hgtxr/e2e_axis_dma_c3b_mem16_file_smoke.json""},"
+hardware/tests/test_write_final_operator_handoff.py,32,32,test,sample_readiness,hard-coded-absolute-path,high,fact,high,"""tar"": {""path"": ""/tmp/bundle.tar.gz"", ""sha256"": ""abc123""},"
+hardware/tests/test_write_final_operator_handoff.py,47,47,test,sample_trace,hard-coded-absolute-path,high,fact,high,"""path"": ""/tmp/HGTXR/docs/resources/final_evidence_manifest_2026_06_10.json"","
+hardware/tests/test_write_final_operator_handoff.py,65,65,test,WriteFinalOperatorHandoffTests.test_build_handoff_summarizes_operator_actions_without_side_effects,hard-coded-absolute-path,high,fact,high,"root=Path(""/tmp/HGTXR""),"
+hardware/tests/test_write_final_unblock_closeout_packet.py,20,314,test,WriteFinalUnblockCloseoutPacketTests,large-class,medium,fact,high,class spans 295 lines
+hardware/tests/test_write_final_unblock_closeout_packet.py,26,214,test,WriteFinalUnblockCloseoutPacketTests.populate,large-function,high,fact,high,function spans 189 lines
+hardware/tests/test_write_final_unblock_closeout_packet.py,52,52,test,WriteFinalUnblockCloseoutPacketTests.populate,hard-coded-absolute-path,high,fact,high,"""python3 tools/check_final_blocker_closure_readiness.py --root /tmp/HGTXR"","
+hardware/tests/test_write_final_unblock_closeout_packet.py,53,53,test,WriteFinalUnblockCloseoutPacketTests.populate,hard-coded-absolute-path,high,fact,high,"""python3 tools/check_final_blocker_closure_readiness.py --root /tmp/HGTXR --xr-vits-mode exact"","
+hardware/tests/test_write_final_unblock_closeout_packet.py,63,63,test,WriteFinalUnblockCloseoutPacketTests.populate,hard-coded-absolute-path,high,fact,high,"{""id"": ""U2a"", ""commands"": [""test -d /tmp/XR-VITs""]},"
+hardware/tests/test_write_final_unblock_closeout_packet.py,95,95,test,WriteFinalUnblockCloseoutPacketTests.populate,hard-coded-absolute-path,high,fact,high,"""python3 tools/run_third_goal_final_signoff.py --import-qkv-uram-smoke-json /tmp/qkv.json --dry-run-import-qkv-uram-smoke --allow-blocked"","
+hardware/tests/test_write_final_unblock_closeout_packet.py,95,95,test,WriteFinalUnblockCloseoutPacketTests.populate,very-long-line,low,fact,high,line length=167
+hardware/tests/test_write_final_unblock_closeout_packet.py,125,125,test,WriteFinalUnblockCloseoutPacketTests.populate,hard-coded-absolute-path,high,fact,high,"""tar"": {""path"": ""/tmp/bundle.tar.gz"", ""sha256"": ""a"" * 64},"
+hardware/tests/test_write_final_unblock_closeout_packet.py,137,137,test,WriteFinalUnblockCloseoutPacketTests.populate,hard-coded-absolute-path,high,fact,high,"""requested_path"": ""/tmp/XR-VITs"","
+hardware/tests/test_write_final_unblock_closeout_packet.py,139,139,test,WriteFinalUnblockCloseoutPacketTests.populate,hard-coded-absolute-path,high,fact,high,"""candidate"": {""status"": ""pass"", ""replacement_path"": ""/tmp/XR_Accel"", ""score"": 99},"
+hardware/tests/test_write_final_unblock_commands.py,20,198,test,WriteFinalUnblockCommandsTests,large-class,medium,fact,high,class spans 179 lines
+hardware/tests/test_write_final_unblock_commands.py,30,112,test,WriteFinalUnblockCommandsTests.test_build_commands_covers_known_blockers_without_side_effects,large-function,medium,fact,high,function spans 83 lines
+hardware/tests/test_write_final_unblock_commands.py,132,198,test,WriteFinalUnblockCommandsTests.test_cli_writes_json_and_markdown,large-function,medium,fact,high,function spans 67 lines
+hardware/tests/test_write_final_unblock_commands.py,31,31,test,WriteFinalUnblockCommandsTests.test_build_commands_covers_known_blockers_without_side_effects,hard-coded-absolute-path,high,fact,high,"root = Path(""/tmp/XR-VIT/HGTXR"")"
+hardware/tests/test_write_final_unblock_commands.py,41,41,test,WriteFinalUnblockCommandsTests.test_build_commands_covers_known_blockers_without_side_effects,hard-coded-absolute-path,high,fact,high,"""canonical_result_path"": ""/tmp/XR-VIT/HGTXR/hardware/pynq/hgtxr/e2e_axis_dma_c3b_mem16_file_smoke.json"","
+hardware/tests/test_write_final_unblock_commands.py,45,45,test,WriteFinalUnblockCommandsTests.test_build_commands_covers_known_blockers_without_side_effects,very-long-line,low,fact,high,line length=172
+hardware/tests/test_write_final_unblock_commands.py,46,46,test,WriteFinalUnblockCommandsTests.test_build_commands_covers_known_blockers_without_side_effects,very-long-line,low,fact,high,line length=161
+hardware/tests/test_write_final_unblock_commands.py,99,99,test,WriteFinalUnblockCommandsTests.test_build_commands_covers_known_blockers_without_side_effects,hard-coded-absolute-path,high,fact,high,"self.assertIn(""test -d /home/kjm26/project/PRJXR/XR-VITs"", card[""sections""][3][""options""][0][""commands""][0])"
+hardware/tests/test_write_final_unblock_commands.py,115,115,test,WriteFinalUnblockCommandsTests.test_build_commands_ready_when_no_blockers,hard-coded-absolute-path,high,fact,high,"root = Path(""/tmp/XR-VIT/HGTXR"")"
+hardware/tests/test_write_final_unblock_commands.py,154,154,test,WriteFinalUnblockCommandsTests.test_cli_writes_json_and_markdown,very-long-line,low,fact,high,line length=166
+hardware/tests/test_write_final_unblock_commands.py,155,155,test,WriteFinalUnblockCommandsTests.test_cli_writes_json_and_markdown,very-long-line,low,fact,high,line length=180
+hardware/tests/test_write_final_unblock_commands.py,156,156,test,WriteFinalUnblockCommandsTests.test_cli_writes_json_and_markdown,very-long-line,low,fact,high,line length=169
+hardware/tests/test_write_p2_vit_scale_calibration_report.py,25,90,test,P2VitScaleCalibrationReportTests.make_hardware,large-function,medium,fact,high,function spans 66 lines
+hardware/tests/test_write_spec_plan_conformance_audit.py,20,327,test,WriteSpecPlanConformanceAuditTests,large-class,high,fact,high,class spans 308 lines
+hardware/tests/test_write_spec_plan_conformance_audit.py,20,327,test,WriteSpecPlanConformanceAuditTests,high-branch-density,medium,inference,medium,AST branch proxy=22
+hardware/tests/test_write_spec_plan_conformance_audit.py,31,115,test,WriteSpecPlanConformanceAuditTests.populate_minimal_root,large-function,medium,fact,high,function spans 85 lines
+hardware/tests/test_write_third_goal_completion_audit.py,125,656,test,WriteThirdGoalCompletionAuditTests,large-class,high,fact,high,class spans 532 lines
+hardware/tests/test_write_third_goal_completion_audit.py,125,656,test,WriteThirdGoalCompletionAuditTests,high-branch-density,medium,inference,medium,AST branch proxy=13
+hardware/tests/test_write_third_goal_completion_audit.py,130,514,test,WriteThirdGoalCompletionAuditTests.make_root,large-function,high,fact,high,function spans 385 lines
+hardware/tests/test_write_third_goal_completion_audit.py,179,179,test,WriteThirdGoalCompletionAuditTests.make_root,hard-coded-absolute-path,high,fact,high,"{""name"": ""hardware_root_expected_prefix"", ""status"": ""pass"", ""detail"": ""/home/kjm26/project""},"
+hardware/tests/test_write_third_goal_completion_audit.py,290,290,test,WriteThirdGoalCompletionAuditTests.make_root,hard-coded-absolute-path,high,fact,high,"""python3 tools/run_third_goal_final_signoff.py --import-qkv-uram-smoke-json /tmp/qkv.json --dry-run-import-qkv-uram-smoke --allow-blocked"","
+hardware/tests/test_write_third_goal_completion_audit.py,290,290,test,WriteThirdGoalCompletionAuditTests.make_root,very-long-line,low,fact,high,line length=163
+hardware/tests/test_write_third_goal_current_audit.py,19,680,test,ThirdGoalCurrentAuditTests,large-class,high,fact,high,class spans 662 lines
+hardware/tests/test_write_third_goal_current_audit.py,28,537,test,ThirdGoalCurrentAuditTests.make_hardware_root,large-function,high,fact,high,function spans 510 lines
+hardware/tests/test_write_third_goal_current_audit.py,539,648,test,ThirdGoalCurrentAuditTests.test_build_audit_marks_external_blockers,large-function,medium,fact,high,function spans 110 lines
+hardware/tests/test_write_third_goal_current_audit.py,80,80,test,ThirdGoalCurrentAuditTests.make_hardware_root,hard-coded-absolute-path,high,fact,high,"""python3 tools/run_third_goal_final_signoff.py --import-qkv-uram-smoke-json /tmp/qkv.json --dry-run-import-qkv-uram-smoke --allow-blocked"","
+hardware/tests/test_write_third_goal_current_audit.py,80,80,test,ThirdGoalCurrentAuditTests.make_hardware_root,very-long-line,low,fact,high,line length=163
+hardware/tests/test_write_third_goal_requirements_trace.py,63,63,test,sample_command_card,hard-coded-absolute-path,high,fact,high,"""policy_path"": ""/tmp/HGTXR/docs/resources/xr_vits_replacement_policy.json"","
+hardware/tests/test_write_third_goal_requirements_trace.py,64,64,test,sample_command_card,hard-coded-absolute-path,high,fact,high,"""candidate_audit"": ""/tmp/HGTXR/docs/resources/xr_vits_candidate_audit_2026_06_10.json"","
+hardware/tests/test_write_third_goal_requirements_trace.py,129,129,test,sample_xr_vits_resolution,hard-coded-absolute-path,high,fact,high,"""requested_path"": ""/tmp/XR-VITs"","
+hardware/tests/test_write_third_goal_requirements_trace.py,134,134,test,sample_xr_vits_resolution,hard-coded-absolute-path,high,fact,high,"""replacement_path"": ""/tmp/XR-VIT/XR_Accel"","
+hardware/tests/test_write_third_goal_requirements_trace.py,179,179,test,WriteThirdGoalRequirementsTraceTests.test_build_trace_links_requirements_resources_and_actions,hard-coded-absolute-path,high,fact,high,"root=Path(""/tmp/HGTXR""),"
+hardware/tests/test_write_third_goal_requirements_trace.py,198,198,test,WriteThirdGoalRequirementsTraceTests.test_build_trace_links_requirements_resources_and_actions,very-long-line,low,fact,high,line length=173
+hardware/tests/test_write_third_goal_requirements_trace.py,202,202,test,WriteThirdGoalRequirementsTraceTests.test_build_trace_links_requirements_resources_and_actions,very-long-line,low,fact,high,line length=168
+hardware/tests/test_write_third_goal_requirements_trace.py,229,229,test,WriteThirdGoalRequirementsTraceTests.test_build_trace_blocks_on_failed_evidence_manifest_contract,hard-coded-absolute-path,high,fact,high,"root=Path(""/tmp/HGTXR""),"
+hardware/tests/test_write_third_goal_unblock_checklist.py,46,46,test,WriteThirdGoalUnblockChecklistTests.test_build_checklist_covers_two_known_blockers,hard-coded-absolute-path,high,fact,high,"root = Path(""/tmp/XR-VIT/HGTXR"")"
+hardware/tests/test_write_third_goal_unblock_checklist.py,62,62,test,WriteThirdGoalUnblockChecklistTests.test_build_checklist_ready_when_no_blockers,hard-coded-absolute-path,high,fact,high,"root = Path(""/tmp/XR-VIT/HGTXR"")"
+hardware/tests/test_write_vref_p0_pot_scale_successor.py,20,251,test,WriteVrefP0PotScaleSuccessorTests,large-class,medium,fact,high,class spans 232 lines
+hardware/tests/test_xr_accel_config_schema.py,32,247,test,XRAccelConfigTests,large-class,medium,fact,high,class spans 216 lines
+hardware/tests/test_xr_accel_config_schema.py,32,247,test,XRAccelConfigTests,high-branch-density,medium,inference,medium,AST branch proxy=23
+hardware/tests/test_xr_accel_config_schema.py,58,58,test,XRAccelConfigTests.test_schema_policy_is_explicit_and_has_no_defaults,hard-coded-absolute-path,high,fact,high,"self.assertEqual(""https://json-schema.org/draft/2020-12/schema"", schema[""$schema""])"
+hardware/tests/test_xr_accel_config_schema.py,171,171,test,XRAccelConfigTests.test_unsafe_path_variants_are_rejected,hard-coded-absolute-path,high,fact,high,"""/tmp/model.json"", ""C:/tmp/model.json"", ""C:\\tmp\\model.json"","
+hardware/tools/audit_final_unblock_candidates.py,196,199,maintained,main,library-print,low,inference,medium,print call in maintained non-script module
+hardware/tools/audit_reference_inputs.py,143,143,maintained,main,library-print,low,inference,medium,print call in maintained non-script module
+hardware/tools/audit_reference_inputs.py,86,86,maintained,build_audit,hard-coded-absolute-path,high,fact,high,"""mkdir -p /home/kjm26/project/PRJXR/XR-VIT/PAPER_PRJXR/05_RESOURCES"","
+hardware/tools/audit_reference_inputs.py,87,87,maintained,build_audit,hard-coded-absolute-path,high,fact,high,"""cp -a /home/kjm26/project/PRJXR/XR-VIT/HGPIPE/DeiT-Tiny\\ C-Syn\\ Results.png /home/kjm26/project/PRJXR/XR-VIT/PAPER_PRJXR/05_RESOURCES/DeiT-Tiny\\ C-Syn\\ Results.png"","
+hardware/tools/audit_reference_inputs.py,87,87,maintained,build_audit,very-long-line,low,fact,high,line length=182
+hardware/tools/audit_reference_inputs.py,88,88,maintained,build_audit,hard-coded-absolute-path,high,fact,high,"""# restore or clone the requested /home/kjm26/project/PRJXR/XR-VITs checkout"","
+hardware/tools/audit_xr_vits_candidates.py,29,70,maintained,candidate_report,high-branch-density,medium,inference,medium,AST branch proxy=20
+hardware/tools/audit_xr_vits_candidates.py,152,152,maintained,main,library-print,low,inference,medium,print call in maintained non-script module
+hardware/tools/check_c3b_board_smoke_readiness.py,53,193,maintained,build_readiness,large-function,high,fact,high,function spans 141 lines
+hardware/tools/check_c3b_board_smoke_readiness.py,53,193,maintained,build_readiness,high-branch-density,high,inference,medium,AST branch proxy=35
+hardware/tools/check_c3b_board_smoke_readiness.py,292,296,maintained,main,library-print,low,inference,medium,print call in maintained non-script module
+hardware/tools/check_c3b_board_smoke_readiness.py,227,227,maintained,render_markdown,hard-coded-absolute-path,high,fact,high,"""python3 tools/import_pynq_smoke_result.py /path/to/e2e_axis_dma_c3b_mem16_file_smoke.json --preset axis-c3b-mem16 --json-out /tmp/hgtxr_c3b_smoke_import.json --validation-out /tmp/hgtxr_c3b_smoke_validation.json"","
+hardware/tools/check_c3b_board_smoke_readiness.py,227,227,maintained,render_markdown,very-long-line,low,fact,high,line length=222
+hardware/tools/check_final_blocker_closure_readiness.py,207,304,maintained,build_operator_unblock_plan,large-function,medium,fact,high,function spans 98 lines
+hardware/tools/check_final_blocker_closure_readiness.py,307,407,maintained,build_readiness,large-function,medium,fact,high,function spans 101 lines
+hardware/tools/check_final_blocker_closure_readiness.py,410,481,maintained,render_markdown,large-function,medium,fact,high,function spans 72 lines
+hardware/tools/check_final_blocker_closure_readiness.py,410,481,maintained,render_markdown,high-branch-density,medium,inference,medium,AST branch proxy=13
+hardware/tools/check_final_blocker_closure_readiness.py,513,516,maintained,main,library-print,low,inference,medium,print call in maintained non-script module
+hardware/tools/check_hls_axis_payload_contract.py,243,243,maintained,main,library-print,low,inference,medium,print call in maintained non-script module
+hardware/tools/check_hls_axis_payload_contract.py,214,214,maintained,render_markdown,very-long-line,low,fact,high,line length=182
+hardware/tools/check_hls_xsimk_direct_probe.py,69,132,maintained,compare_tv_outputs,large-function,medium,fact,high,function spans 64 lines
+hardware/tools/check_hls_xsimk_direct_probe.py,69,132,maintained,compare_tv_outputs,high-branch-density,medium,inference,medium,AST branch proxy=13
+hardware/tools/check_hls_xsimk_direct_probe.py,142,191,maintained,classify_probe,high-branch-density,medium,inference,medium,AST branch proxy=14
+hardware/tools/check_hls_xsimk_direct_probe.py,194,266,maintained,build_probe,large-function,medium,fact,high,function spans 73 lines
+hardware/tools/check_hls_xsimk_direct_probe.py,332,332,maintained,main,library-print,low,inference,medium,print call in maintained non-script module
+hardware/tools/check_hls_xsimk_progress_probe.py,80,220,maintained,build_probe,large-function,high,fact,high,function spans 141 lines
+hardware/tools/check_hls_xsimk_progress_probe.py,80,220,maintained,build_probe,high-branch-density,medium,inference,medium,AST branch proxy=17
+hardware/tools/check_hls_xsimk_progress_probe.py,285,285,maintained,main,library-print,low,inference,medium,print call in maintained non-script module
+hardware/tools/check_hls_xsimk_progress_probe.py,24,24,maintained,<module>,hard-coded-absolute-path,high,fact,high,"DEFAULT_WORKDIR = Path(""/tmp/hgtxr_xsim_progress_probe_full_300"")"
+hardware/tools/check_hls_xsimk_progress_probe.py,127,127,maintained,build_probe,very-long-line,low,fact,high,line length=188
+hardware/tools/check_hls_xsimk_progress_probe.py,216,216,maintained,build_probe,very-long-line,low,fact,high,line length=162
+hardware/tools/check_runtime_mode_board_latency_gate.py,210,234,maintained,main,high-branch-density,medium,inference,medium,AST branch proxy=13
+hardware/tools/check_runtime_mode_board_latency_gate.py,233,233,maintained,main,library-print,low,inference,medium,print call in maintained non-script module
+hardware/tools/check_third_goal_preflight.py,62,132,maintained,check_xr_vits_reference,large-function,medium,fact,high,function spans 71 lines
+hardware/tools/check_third_goal_preflight.py,334,455,maintained,check_pynq_overlay_artifacts,large-function,high,fact,high,function spans 122 lines
+hardware/tools/check_third_goal_preflight.py,334,455,maintained,check_pynq_overlay_artifacts,high-branch-density,high,inference,medium,AST branch proxy=28
+hardware/tools/check_third_goal_preflight.py,458,607,maintained,check_e2e_weight_artifacts,large-function,high,fact,high,function spans 150 lines
+hardware/tools/check_third_goal_preflight.py,458,607,maintained,check_e2e_weight_artifacts,high-branch-density,high,inference,medium,AST branch proxy=37
+hardware/tools/check_third_goal_preflight.py,610,703,maintained,check_c3b_axis_dma_smoke_bundle,large-function,medium,fact,high,function spans 94 lines
+hardware/tools/check_third_goal_preflight.py,610,703,maintained,check_c3b_axis_dma_smoke_bundle,high-branch-density,medium,inference,medium,AST branch proxy=20
+hardware/tools/check_third_goal_preflight.py,706,814,maintained,check_c3b_smoke_session,large-function,medium,fact,high,function spans 109 lines
+hardware/tools/check_third_goal_preflight.py,706,814,maintained,check_c3b_smoke_session,high-branch-density,high,inference,medium,AST branch proxy=33
+hardware/tools/check_third_goal_preflight.py,817,889,maintained,check_vref_successor_smoke_bundle,large-function,medium,fact,high,function spans 73 lines
+hardware/tools/check_third_goal_preflight.py,892,1051,maintained,check_qkv_uram_successor_smoke_artifacts,large-function,high,fact,high,function spans 160 lines
+hardware/tools/check_third_goal_preflight.py,892,1051,maintained,check_qkv_uram_successor_smoke_artifacts,high-branch-density,high,inference,medium,AST branch proxy=36
+hardware/tools/check_third_goal_preflight.py,1283,1361,maintained,main,large-function,medium,fact,high,function spans 79 lines
+hardware/tools/check_third_goal_preflight.py,1354,1354,maintained,main,library-print,low,inference,medium,print call in maintained non-script module
+hardware/tools/check_third_goal_preflight.py,1347,1347,maintained,main,library-print,low,inference,medium,print call in maintained non-script module
+hardware/tools/check_third_goal_preflight.py,74,74,maintained,check_xr_vits_reference,hard-coded-absolute-path,high,fact,high,"""--root /home/kjm26/project/PRJXR/XR-VIT/HGTXR --approve --approved-by <approved-by> """
+hardware/tools/check_third_goal_preflight.py,280,280,maintained,check_generated_artifacts,very-long-line,low,fact,high,line length=162
+hardware/tools/check_third_goal_preflight.py,996,996,maintained,check_qkv_uram_successor_smoke_artifacts,very-long-line,low,fact,high,line length=164
+hardware/tools/check_third_goal_preflight.py,1065,1065,maintained,check_c3b_physical_smoke_result,hard-coded-absolute-path,high,fact,high,"""--root /home/kjm26/project/PRJXR/XR-VIT/HGTXR """
+hardware/tools/check_third_goal_preflight.py,1291,1291,maintained,main,very-long-line,low,fact,high,line length=161
+hardware/tools/check_xr_vits_reference_resolution.py,34,81,maintained,check_candidate_audit,high-branch-density,medium,inference,medium,AST branch proxy=15
+hardware/tools/check_xr_vits_reference_resolution.py,84,144,maintained,build_resolution,large-function,medium,fact,high,function spans 61 lines
+hardware/tools/check_xr_vits_reference_resolution.py,200,203,maintained,main,library-print,low,inference,medium,print call in maintained non-script module
+hardware/tools/check_xsim_snapshot_smoke.py,98,172,maintained,run_xsimk_mi_sequence,large-function,medium,fact,high,function spans 75 lines
+hardware/tools/check_xsim_snapshot_smoke.py,98,172,maintained,run_xsimk_mi_sequence,high-branch-density,medium,inference,medium,AST branch proxy=16
+hardware/tools/check_xsim_snapshot_smoke.py,175,275,maintained,run_smoke,large-function,medium,fact,high,function spans 101 lines
+hardware/tools/check_xsim_snapshot_smoke.py,175,275,maintained,run_smoke,high-branch-density,medium,inference,medium,AST branch proxy=19
+hardware/tools/check_xsim_snapshot_smoke.py,317,317,maintained,main,library-print,low,inference,medium,print call in maintained non-script module
+hardware/tools/compare_hw_sw.py,25,25,maintained,main,library-print,low,inference,medium,print call in maintained non-script module
+hardware/tools/create_xr_vits_replacement_policy.py,269,319,maintained,validate_inputs,high-branch-density,medium,inference,medium,AST branch proxy=15
+hardware/tools/create_xr_vits_replacement_policy.py,456,522,maintained,main,large-function,medium,fact,high,function spans 67 lines
+hardware/tools/create_xr_vits_replacement_policy.py,456,522,maintained,main,high-branch-density,medium,inference,medium,AST branch proxy=13
+hardware/tools/create_xr_vits_replacement_policy.py,518,518,maintained,main,library-print,low,inference,medium,print call in maintained non-script module
+hardware/tools/create_xr_vits_replacement_policy.py,471,471,maintained,main,library-print,low,inference,medium,print call in maintained non-script module
+hardware/tools/create_xr_vits_replacement_policy.py,492,492,maintained,main,library-print,low,inference,medium,print call in maintained non-script module
+hardware/tools/create_xr_vits_replacement_policy.py,26,26,maintained,<module>,work-marker,low,fact,high,"""todo"","
+hardware/tools/create_xr_vits_replacement_policy.py,402,402,maintained,render_preview_markdown,very-long-line,low,fact,high,line length=163
+hardware/tools/diagnose_hls_cosim_xsim.py,62,231,maintained,build_diagnosis,large-function,high,fact,high,function spans 170 lines
+hardware/tools/diagnose_hls_cosim_xsim.py,298,298,maintained,main,library-print,low,inference,medium,print call in maintained non-script module
+hardware/tools/diagnose_hls_cosim_xsim.py,56,56,maintained,extract_estimated_fmax,hard-coded-absolute-path,high,fact,high,"match = re.search(r""Estimated Fmax:\s*([0-9]+(?:\.[0-9]+)?)\s*MHz"", solution_log)"
+hardware/tools/diagnose_hls_cosim_xsim.py,225,225,maintained,build_diagnosis,very-long-line,low,fact,high,line length=194
+hardware/tools/discover_c3b_smoke_candidates.py,186,189,maintained,main,library-print,low,inference,medium,print call in maintained non-script module
+hardware/tools/discover_pynq_smoke_candidates.py,248,252,maintained,main,library-print,low,inference,medium,print call in maintained non-script module
+hardware/tools/export_e2e_m_axi_weights.py,98,98,maintained,main,library-print,low,inference,medium,print call in maintained non-script module
+hardware/tools/export_s2_pytorch_golden.py,68,129,maintained,s2_approx_outputs,large-function,medium,fact,high,function spans 62 lines
+hardware/tools/export_s2_pytorch_golden.py,155,227,maintained,main,large-function,medium,fact,high,function spans 73 lines
+hardware/tools/export_s2_pytorch_golden.py,41,41,maintained,load_model,dynamic-execution,high,fact,high,eval
+hardware/tools/export_s2_pytorch_golden.py,226,226,maintained,main,library-print,low,inference,medium,print call in maintained non-script module
+hardware/tools/export_s2_pytorch_golden.py,211,211,maintained,main,very-long-line,low,fact,high,line length=196
+hardware/tools/export_test_vectors.py,26,26,maintained,main,library-print,low,inference,medium,print call in maintained non-script module
+hardware/tools/export_weights.py,22,22,maintained,main,library-print,low,inference,medium,print call in maintained non-script module
+hardware/tools/extract_resource_metrics.py,102,168,maintained,main,large-function,medium,fact,high,function spans 67 lines
+hardware/tools/extract_resource_metrics.py,167,167,maintained,main,library-print,low,inference,medium,print call in maintained non-script module
+hardware/tools/gen_cleanup_dry_run_2026_06_09.py,42,157,maintained,classify,large-function,medium,fact,high,function spans 116 lines
+hardware/tools/gen_cleanup_dry_run_2026_06_09.py,42,157,maintained,classify,high-branch-density,medium,inference,medium,AST branch proxy=14
+hardware/tools/gen_cleanup_dry_run_2026_06_09.py,160,299,maintained,main,large-function,high,fact,high,function spans 140 lines
+hardware/tools/gen_cleanup_dry_run_2026_06_09.py,160,299,maintained,main,high-branch-density,medium,inference,medium,AST branch proxy=19
+hardware/tools/gen_cleanup_dry_run_2026_06_09.py,22,23,maintained,du_bytes,broad-except,medium,fact,high,catches Exception
+hardware/tools/gen_cleanup_dry_run_2026_06_09.py,38,39,maintained,mtime,broad-except,medium,fact,high,catches Exception
+hardware/tools/gen_cleanup_dry_run_2026_06_09.py,296,296,maintained,main,library-print,low,inference,medium,print call in maintained non-script module
+hardware/tools/gen_cleanup_dry_run_2026_06_09.py,297,297,maintained,main,library-print,low,inference,medium,print call in maintained non-script module
+hardware/tools/gen_cleanup_dry_run_2026_06_09.py,298,298,maintained,main,library-print,low,inference,medium,print call in maintained non-script module
+hardware/tools/gen_cleanup_dry_run_2026_06_09.py,299,299,maintained,main,library-print,low,inference,medium,print call in maintained non-script module
+hardware/tools/gen_cleanup_dry_run_2026_06_09.py,10,10,maintained,<module>,hard-coded-absolute-path,high,fact,high,"ROOT = Path(""/home/user/project/PRJXR"")"
+hardware/tools/gen_cleanup_dry_run_2026_06_09.py,226,226,maintained,main,hard-coded-absolute-path,high,fact,high,"""- /home/user/project/PRJXR"","
+hardware/tools/gen_cleanup_dry_run_2026_06_09.py,227,227,maintained,main,hard-coded-absolute-path,high,fact,high,"""- /home/user/project/PRJXR/HGTXR"","
+hardware/tools/gen_cleanup_dry_run_2026_06_09.py,259,259,maintained,main,very-long-line,low,fact,high,line length=198
+hardware/tools/generate_hls_config.py,18,18,maintained,main,library-print,low,inference,medium,print call in maintained non-script module
+hardware/tools/hgtxr_sweep_expand.py,141,243,maintained,main,large-function,medium,fact,high,function spans 103 lines
+hardware/tools/hgtxr_sweep_expand.py,141,243,maintained,main,high-branch-density,medium,inference,medium,AST branch proxy=19
+hardware/tools/hgtxr_sweep_expand.py,242,242,maintained,main,library-print,low,inference,medium,print call in maintained non-script module
+hardware/tools/hgtxr_sweep_expand.py,178,178,maintained,main,library-print,low,inference,medium,print call in maintained non-script module
+hardware/tools/hgtxr_sweep_expand.py,235,235,maintained,main,library-print,low,inference,medium,print call in maintained non-script module
+hardware/tools/import_pynq_smoke_result.py,102,173,maintained,import_result,large-function,medium,fact,high,function spans 72 lines
+hardware/tools/import_pynq_smoke_result.py,200,200,maintained,main,library-print,low,inference,medium,print call in maintained non-script module
+hardware/tools/pack_cyclic_weights.py,195,236,maintained,tensor_for_block,high-branch-density,medium,inference,medium,AST branch proxy=17
+hardware/tools/pack_cyclic_weights.py,503,596,maintained,main,large-function,medium,fact,high,function spans 94 lines
+hardware/tools/pack_cyclic_weights.py,500,500,maintained,self_test,library-print,low,inference,medium,print call in maintained non-script module
+hardware/tools/pack_cyclic_weights.py,595,595,maintained,main,library-print,low,inference,medium,print call in maintained non-script module
+hardware/tools/pack_cyclic_weights.py,176,176,maintained,linear_tile,very-long-line,low,fact,high,line length=163
+hardware/tools/pack_cyclic_weights.py,195,195,maintained,tensor_for_block,very-long-line,low,fact,high,line length=172
+hardware/tools/pack_cyclic_weights.py,288,288,maintained,tensor_for_pair,very-long-line,low,fact,high,line length=187
+hardware/tools/pack_cyclic_weights.py,340,340,maintained,build_pair_block,very-long-line,low,fact,high,line length=177
+hardware/tools/pack_cyclic_weights.py,350,350,maintained,build_s2_channel_pair_blocks,very-long-line,low,fact,high,line length=177
+hardware/tools/pack_cyclic_weights.py,369,369,maintained,build_s2_mlp_w1_block,very-long-line,low,fact,high,line length=182
+hardware/tools/pack_cyclic_weights.py,377,377,maintained,build_s2_mlp_w2_block,very-long-line,low,fact,high,line length=183
+hardware/tools/pack_cyclic_weights.py,385,385,maintained,build_s2_mlp_hidden_pair_blocks,very-long-line,low,fact,high,line length=186
+hardware/tools/pack_cyclic_weights.py,417,417,maintained,build_s2_block_first_step_blocks,very-long-line,low,fact,high,line length=187
+hardware/tools/pack_cyclic_weights.py,500,500,maintained,self_test,very-long-line,low,fact,high,line length=229
+hardware/tools/pack_cyclic_weights.py,595,595,maintained,main,very-long-line,low,fact,high,line length=172
+hardware/tools/package_e2e_axis_dma_pynq_bundle.py,197,228,maintained,validation_preset,high-branch-density,medium,inference,medium,AST branch proxy=15
+hardware/tools/package_e2e_axis_dma_pynq_bundle.py,259,349,maintained,build_bundle,large-function,medium,fact,high,function spans 91 lines
+hardware/tools/package_e2e_axis_dma_pynq_bundle.py,364,364,maintained,main,library-print,low,inference,medium,print call in maintained non-script module
+hardware/tools/package_e2e_axis_dma_pynq_bundle.py,244,244,maintained,bundle_readme_text,hard-coded-absolute-path,high,fact,high,"+ f""\n\nBundle-local {variant} AXIS/DMA smoke:\n\n"""
+hardware/tools/package_e2e_axis_dma_pynq_bundle.py,246,246,maintained,bundle_readme_text,hard-coded-absolute-path,high,fact,high,"+ f""\nBundle-local {variant} AXIS/DMA result validation:\n\n"""
+hardware/tools/package_e2e_m_axi_pynq_bundle.py,141,141,maintained,main,library-print,low,inference,medium,print call in maintained non-script module
+hardware/tools/package_e2e_m_axi_pynq_bundle.py,62,62,maintained,bundle_readme_text,hard-coded-absolute-path,high,fact,high,"""Exported packed-weight smoke:\n\n"""
+hardware/tools/prepare_zcu104_smoke_session.py,167,167,maintained,main,library-print,low,inference,medium,print call in maintained non-script module
+hardware/tools/prepare_zcu104_smoke_session.py,53,53,maintained,host_copyback_steps,hard-coded-absolute-path,high,fact,high,"f""python3 tools/import_pynq_smoke_result.py /path/to/{result_json} --preset {preset} --dry-run --json-out /tmp/hgtxr_{variant_tag}_smoke_import_dry_run.json --validation-out /tmp/hgtxr_{variant_tag}_smoke_validation_dry_run.json"","
+hardware/tools/prepare_zcu104_smoke_session.py,53,53,maintained,host_copyback_steps,very-long-line,low,fact,high,line length=242
+hardware/tools/prepare_zcu104_smoke_session.py,54,54,maintained,host_copyback_steps,hard-coded-absolute-path,high,fact,high,"f""python3 tools/import_pynq_smoke_result.py /path/to/{result_json} --preset {preset} --json-out /tmp/hgtxr_{variant_tag}_smoke_import.json --validation-out /tmp/hgtxr_{variant_tag}_smoke_validation.json"","
+hardware/tools/prepare_zcu104_smoke_session.py,54,54,maintained,host_copyback_steps,very-long-line,low,fact,high,line length=216
+hardware/tools/repair_hls_to_pynq.py,98,98,maintained,print_smoke_commands,library-print,low,inference,medium,print call in maintained non-script module
+hardware/tools/repair_hls_to_pynq.py,99,99,maintained,print_smoke_commands,library-print,low,inference,medium,print call in maintained non-script module
+hardware/tools/repair_hls_to_pynq.py,100,100,maintained,print_smoke_commands,library-print,low,inference,medium,print call in maintained non-script module
+hardware/tools/repair_hls_to_pynq.py,110,110,maintained,main,library-print,low,inference,medium,print call in maintained non-script module
+hardware/tools/repair_hls_to_pynq.py,31,31,maintained,patch_tcl,library-print,low,inference,medium,print call in maintained non-script module
+hardware/tools/repair_hls_to_pynq.py,36,36,maintained,patch_tcl,library-print,low,inference,medium,print call in maintained non-script module
+hardware/tools/repair_hls_to_pynq.py,39,39,maintained,patch_tcl,library-print,low,inference,medium,print call in maintained non-script module
+hardware/tools/repair_hls_to_pynq.py,44,44,maintained,patch_tcl,library-print,low,inference,medium,print call in maintained non-script module
+hardware/tools/repair_hls_to_pynq.py,46,46,maintained,patch_tcl,library-print,low,inference,medium,print call in maintained non-script module
+hardware/tools/repair_hls_to_pynq.py,52,52,maintained,copy_if_present,library-print,low,inference,medium,print call in maintained non-script module
+hardware/tools/repair_hls_to_pynq.py,57,57,maintained,copy_if_present,library-print,low,inference,medium,print call in maintained non-script module
+hardware/tools/repair_hls_to_pynq.py,59,59,maintained,copy_if_present,library-print,low,inference,medium,print call in maintained non-script module
+hardware/tools/run_runtime_mode_board_latency.py,73,149,maintained,build_runtime_mode_summary,large-function,medium,fact,high,function spans 77 lines
+hardware/tools/run_runtime_mode_board_latency.py,73,149,maintained,build_runtime_mode_summary,high-branch-density,medium,inference,medium,AST branch proxy=13
+hardware/tools/run_runtime_mode_board_latency.py,73,149,maintained,build_runtime_mode_summary,too-many-parameters,medium,fact,high,parameter count=11
+hardware/tools/run_runtime_mode_board_latency.py,243,246,maintained,main,library-print,low,inference,medium,print call in maintained non-script module
+hardware/tools/run_third_goal_final_signoff.py,91,175,maintained,build_mirror_integrity,large-function,medium,fact,high,function spans 85 lines
+hardware/tools/run_third_goal_final_signoff.py,91,175,maintained,build_mirror_integrity,high-branch-density,medium,inference,medium,AST branch proxy=16
+hardware/tools/run_third_goal_final_signoff.py,178,387,maintained,default_paths,large-function,high,fact,high,function spans 210 lines
+hardware/tools/run_third_goal_final_signoff.py,408,501,maintained,render_markdown,large-function,medium,fact,high,function spans 94 lines
+hardware/tools/run_third_goal_final_signoff.py,513,594,maintained,build_remaining_blocker_details,large-function,medium,fact,high,function spans 82 lines
+hardware/tools/run_third_goal_final_signoff.py,597,2315,maintained,run_pipeline,large-function,high,fact,high,function spans 1719 lines
+hardware/tools/run_third_goal_final_signoff.py,597,2315,maintained,run_pipeline,high-branch-density,high,inference,medium,AST branch proxy=163
+hardware/tools/run_third_goal_final_signoff.py,597,2315,maintained,run_pipeline,too-many-parameters,medium,fact,high,parameter count=30
+hardware/tools/run_third_goal_final_signoff.py,1235,1334,maintained,run_pipeline.write_summary,large-function,medium,fact,high,function spans 100 lines
+hardware/tools/run_third_goal_final_signoff.py,1235,1334,maintained,run_pipeline.write_summary,too-many-parameters,medium,fact,high,parameter count=19
+hardware/tools/run_third_goal_final_signoff.py,2383,2387,maintained,main,library-print,low,inference,medium,print call in maintained non-script module
+hardware/tools/run_third_goal_final_signoff.py,2333,2333,maintained,parse_args,very-long-line,low,fact,high,line length=161
+hardware/tools/run_third_goal_final_signoff.py,2335,2335,maintained,parse_args,very-long-line,low,fact,high,line length=183
+hardware/tools/run_third_goal_final_signoff.py,2336,2336,maintained,parse_args,very-long-line,low,fact,high,line length=175
+hardware/tools/run_third_goal_final_signoff.py,2337,2337,maintained,parse_args,very-long-line,low,fact,high,line length=171
+hardware/tools/run_third_goal_final_signoff.py,2340,2340,maintained,parse_args,very-long-line,low,fact,high,line length=168
+hardware/tools/run_third_goal_final_signoff.py,2341,2341,maintained,parse_args,very-long-line,low,fact,high,line length=163
+hardware/tools/run_zcu104_c3b_smoke_remote.py,423,469,maintained,build_commands,too-many-parameters,medium,fact,high,parameter count=13
+hardware/tools/run_zcu104_c3b_smoke_remote.py,486,567,maintained,build_summary,large-function,medium,fact,high,function spans 82 lines
+hardware/tools/run_zcu104_c3b_smoke_remote.py,486,567,maintained,build_summary,too-many-parameters,medium,fact,high,parameter count=18
+hardware/tools/run_zcu104_c3b_smoke_remote.py,658,661,maintained,main,library-print,low,inference,medium,print call in maintained non-script module
+hardware/tools/run_zcu104_c3b_smoke_remote.py,25,25,maintained,<module>,hard-coded-absolute-path,high,fact,high,"DEFAULT_REMOTE_DIR = ""/home/xilinx/hgtxr_c3b_smoke"""
+hardware/tools/run_zcu104_c3b_smoke_remote.py,62,62,maintained,<module>,hard-coded-absolute-path,high,fact,high,"""remote_dir"": ""/home/xilinx/hgtxr_runtime_mode_search_smoke"","
+hardware/tools/run_zcu104_c3b_smoke_remote.py,86,86,maintained,<module>,hard-coded-absolute-path,high,fact,high,"""remote_dir"": ""/home/xilinx/hgtxr_runtime_mode_track_smoke"","
+hardware/tools/run_zcu104_c3b_smoke_remote.py,113,113,maintained,<module>,hard-coded-absolute-path,high,fact,high,"""remote_dir"": ""/home/xilinx/hgtxr_par32_rom_compute_300_search_smoke"","
+hardware/tools/run_zcu104_c3b_smoke_remote.py,140,140,maintained,<module>,hard-coded-absolute-path,high,fact,high,"""remote_dir"": ""/home/xilinx/hgtxr_par32_rom_compute_300_track_smoke"","
+hardware/tools/run_zcu104_c3b_smoke_remote.py,167,167,maintained,<module>,hard-coded-absolute-path,high,fact,high,"""remote_dir"": ""/home/xilinx/hgtxr_par32_prefetchall4_300_search_smoke"","
+hardware/tools/run_zcu104_c3b_smoke_remote.py,194,194,maintained,<module>,hard-coded-absolute-path,high,fact,high,"""remote_dir"": ""/home/xilinx/hgtxr_par32_prefetchall4_300_track_smoke"","
+hardware/tools/run_zcu104_c3b_smoke_remote.py,221,221,maintained,<module>,hard-coded-absolute-path,high,fact,high,"""remote_dir"": ""/home/xilinx/hgtxr_par32_prefetchall4_300_hybrid_10_90_smoke"","
+hardware/tools/run_zcu104_c3b_smoke_remote.py,248,248,maintained,<module>,hard-coded-absolute-path,high,fact,high,"""remote_dir"": ""/home/xilinx/hgtxr_par32_patch32_dtok4_300_search_smoke"","
+hardware/tools/run_zcu104_c3b_smoke_remote.py,275,275,maintained,<module>,hard-coded-absolute-path,high,fact,high,"""remote_dir"": ""/home/xilinx/hgtxr_par32_patch32_dtok4_300_track_smoke"","
+hardware/tools/run_zcu104_c3b_smoke_remote.py,302,302,maintained,<module>,hard-coded-absolute-path,high,fact,high,"""remote_dir"": ""/home/xilinx/hgtxr_par32_patch32_dtok4_300_hybrid_10_90_smoke"","
+hardware/tools/run_zcu104_c3b_smoke_remote.py,332,332,maintained,<module>,hard-coded-absolute-path,high,fact,high,"""remote_dir"": ""/home/xilinx/hgtxr_vref_p0_softmax_input_x2_smoke"","
+hardware/tools/run_zcu104_c3b_smoke_remote.py,362,362,maintained,<module>,hard-coded-absolute-path,high,fact,high,"""remote_dir"": ""/home/xilinx/hgtxr_vref_p0_qkv_uram_smoke"","
+hardware/tools/static_validate_hgtxr.py,469,469,maintained,check_tcl_patch,library-print,low,inference,medium,print call in maintained non-script module
+hardware/tools/static_validate_hgtxr.py,481,481,maintained,main,library-print,low,inference,medium,print call in maintained non-script module
+hardware/tools/static_validate_hgtxr.py,494,494,maintained,main,library-print,low,inference,medium,print call in maintained non-script module
+hardware/tools/static_validate_hgtxr.py,359,359,maintained,check_markers,library-print,low,inference,medium,print call in maintained non-script module
+hardware/tools/static_validate_hgtxr.py,452,452,maintained,check_spec_kit_status,library-print,low,inference,medium,print call in maintained non-script module
+hardware/tools/static_validate_hgtxr.py,463,463,maintained,check_tcl_patch,library-print,low,inference,medium,print call in maintained non-script module
+hardware/tools/static_validate_hgtxr.py,467,467,maintained,check_tcl_patch,library-print,low,inference,medium,print call in maintained non-script module
+hardware/tools/static_validate_hgtxr.py,492,492,maintained,main,library-print,low,inference,medium,print call in maintained non-script module
+hardware/tools/static_validate_hgtxr.py,346,346,maintained,check_exists,library-print,low,inference,medium,print call in maintained non-script module
+hardware/tools/static_validate_hgtxr.py,365,365,maintained,check_markers,library-print,low,inference,medium,print call in maintained non-script module
+hardware/tools/static_validate_hgtxr.py,367,367,maintained,check_markers,library-print,low,inference,medium,print call in maintained non-script module
+hardware/tools/static_validate_hgtxr.py,454,454,maintained,check_spec_kit_status,library-print,low,inference,medium,print call in maintained non-script module
+hardware/tools/static_validate_hgtxr.py,456,456,maintained,check_spec_kit_status,library-print,low,inference,medium,print call in maintained non-script module
+hardware/tools/static_validate_hgtxr.py,348,348,maintained,check_exists,library-print,low,inference,medium,print call in maintained non-script module
+hardware/tools/static_validate_hgtxr.py,351,351,maintained,check_exists,library-print,low,inference,medium,print call in maintained non-script module
+hardware/tools/update_e2e_docs_2026_06_09.py,25,25,maintained,<module>,very-long-line,low,fact,high,line length=161
+hardware/tools/update_e2e_docs_2026_06_09.py,57,57,maintained,<module>,very-long-line,low,fact,high,line length=317
+hardware/tools/update_e2e_docs_2026_06_09.py,59,59,maintained,<module>,very-long-line,low,fact,high,line length=192
+hardware/tools/update_e2e_docs_2026_06_09.py,68,68,maintained,<module>,very-long-line,low,fact,high,line length=277
+hardware/tools/update_e2e_docs_2026_06_09.py,70,70,maintained,<module>,very-long-line,low,fact,high,line length=270
+hardware/tools/update_e2e_docs_2026_06_09.py,80,80,maintained,<module>,very-long-line,low,fact,high,line length=208
+hardware/tools/validate_e2e_axis_vector.py,70,105,maintained,load_spec,high-branch-density,medium,inference,medium,AST branch proxy=13
+hardware/tools/validate_e2e_axis_vector.py,115,163,maintained,validate_entries,high-branch-density,medium,inference,medium,AST branch proxy=21
+hardware/tools/validate_e2e_axis_vector.py,536,601,maintained,build_reference,large-function,medium,fact,high,function spans 66 lines
+hardware/tools/validate_e2e_axis_vector.py,536,601,maintained,build_reference,high-branch-density,medium,inference,medium,AST branch proxy=24
+hardware/tools/validate_e2e_axis_vector.py,711,711,maintained,main,library-print,low,inference,medium,print call in maintained non-script module
+hardware/tools/validate_e2e_axis_vector.py,709,709,maintained,main,library-print,low,inference,medium,print call in maintained non-script module
+hardware/tools/validate_final_operator_handoff.py,394,1569,maintained,validate_handoff,large-function,high,fact,high,function spans 1176 lines
+hardware/tools/validate_final_operator_handoff.py,394,1569,maintained,validate_handoff,high-branch-density,high,inference,medium,AST branch proxy=230
+hardware/tools/validate_final_operator_handoff.py,1620,1620,maintained,main,library-print,low,inference,medium,print call in maintained non-script module
+hardware/tools/validate_final_operator_handoff.py,481,481,maintained,validate_handoff,very-long-line,low,fact,high,line length=183
+hardware/tools/validate_final_operator_handoff.py,482,482,maintained,validate_handoff,very-long-line,low,fact,high,line length=186
+hardware/tools/validate_final_operator_handoff.py,483,483,maintained,validate_handoff,very-long-line,low,fact,high,line length=203
+hardware/tools/validate_final_operator_handoff.py,487,487,maintained,validate_handoff,very-long-line,low,fact,high,line length=222
+hardware/tools/validate_final_operator_handoff.py,1549,1549,maintained,validate_handoff,very-long-line,low,fact,high,line length=286
+hardware/tools/validate_final_signoff_bundle.py,518,1425,maintained,validate_bundle,large-function,high,fact,high,function spans 908 lines
+hardware/tools/validate_final_signoff_bundle.py,518,1425,maintained,validate_bundle,high-branch-density,high,inference,medium,AST branch proxy=113
+hardware/tools/validate_final_signoff_bundle.py,1488,1488,maintained,main,library-print,low,inference,medium,print call in maintained non-script module
+hardware/tools/validate_final_unblock_closeout_packet.py,81,343,maintained,validate_packet,large-function,high,fact,high,function spans 263 lines
+hardware/tools/validate_final_unblock_closeout_packet.py,81,343,maintained,validate_packet,high-branch-density,high,inference,medium,AST branch proxy=57
+hardware/tools/validate_final_unblock_closeout_packet.py,385,388,maintained,main,library-print,low,inference,medium,print call in maintained non-script module
+hardware/tools/validate_final_unblock_closeout_packet.py,245,245,maintained,validate_packet,very-long-line,low,fact,high,line length=161
+hardware/tools/validate_hgpipe_lut_math.py,87,157,maintained,validate_cursor_table_refs,large-function,medium,fact,high,function spans 71 lines
+hardware/tools/validate_hgpipe_lut_math.py,87,157,maintained,validate_cursor_table_refs,high-branch-density,medium,inference,medium,AST branch proxy=15
+hardware/tools/validate_hgpipe_lut_math.py,159,323,maintained,validate_softmax_refs,large-function,high,fact,high,function spans 165 lines
+hardware/tools/validate_hgpipe_lut_math.py,159,323,maintained,validate_softmax_refs,high-branch-density,high,inference,medium,AST branch proxy=29
+hardware/tools/validate_hgpipe_lut_math.py,325,464,maintained,validate_layernorm_refs,large-function,high,fact,high,function spans 140 lines
+hardware/tools/validate_hgpipe_lut_math.py,325,464,maintained,validate_layernorm_refs,high-branch-density,high,inference,medium,AST branch proxy=32
+hardware/tools/validate_hgpipe_lut_math.py,466,534,maintained,validate_contract,large-function,medium,fact,high,function spans 69 lines
+hardware/tools/validate_hgpipe_lut_math.py,466,534,maintained,validate_contract,high-branch-density,medium,inference,medium,AST branch proxy=25
+hardware/tools/validate_hgpipe_lut_math.py,583,583,maintained,main,library-print,low,inference,medium,print call in maintained non-script module
+hardware/tools/validate_pynq_bundle_package.py,331,415,maintained,validate_bundle,large-function,medium,fact,high,function spans 85 lines
+hardware/tools/validate_pynq_bundle_package.py,331,415,maintained,validate_bundle,high-branch-density,high,inference,medium,AST branch proxy=38
+hardware/tools/validate_pynq_bundle_package.py,438,438,maintained,main,library-print,low,inference,medium,print call in maintained non-script module
+hardware/tools/validate_pynq_smoke_result.py,202,247,maintained,validate_measurement_fields,high-branch-density,high,inference,medium,AST branch proxy=26
+hardware/tools/validate_pynq_smoke_result.py,292,348,maintained,validate_result,high-branch-density,medium,inference,medium,AST branch proxy=25
+hardware/tools/validate_pynq_smoke_result.py,351,447,maintained,validate_hybrid_result,large-function,medium,fact,high,function spans 97 lines
+hardware/tools/validate_pynq_smoke_result.py,351,447,maintained,validate_hybrid_result,high-branch-density,high,inference,medium,AST branch proxy=37
+hardware/tools/validate_pynq_smoke_result.py,470,470,maintained,main,library-print,low,inference,medium,print call in maintained non-script module
+hardware/tools/validate_s2_block_full.py,304,408,maintained,run_validation,large-function,medium,fact,high,function spans 105 lines
+hardware/tools/validate_s2_block_full.py,304,408,maintained,run_validation,too-many-parameters,medium,fact,high,parameter count=11
+hardware/tools/validate_s2_block_full.py,411,472,maintained,main,large-function,medium,fact,high,function spans 62 lines
+hardware/tools/validate_s2_block_full.py,471,471,maintained,main,library-print,low,inference,medium,print call in maintained non-script module
+hardware/tools/validate_s2_block_preln.py,182,182,maintained,main,library-print,low,inference,medium,print call in maintained non-script module
+hardware/tools/write_c3b_physical_smoke_gate_audit.py,74,189,maintained,build_audit,large-function,medium,fact,high,function spans 116 lines
+hardware/tools/write_c3b_physical_smoke_gate_audit.py,74,189,maintained,build_audit,high-branch-density,medium,inference,medium,AST branch proxy=18
+hardware/tools/write_c3b_physical_smoke_gate_audit.py,249,261,maintained,main,library-print,low,inference,medium,print call in maintained non-script module
+hardware/tools/write_c3b_protection_checklist.py,157,486,maintained,build_checklist,large-function,high,fact,high,function spans 330 lines
+hardware/tools/write_c3b_protection_checklist.py,157,486,maintained,build_checklist,high-branch-density,high,inference,medium,AST branch proxy=34
+hardware/tools/write_c3b_protection_checklist.py,537,537,maintained,main,library-print,low,inference,medium,print call in maintained non-script module
+hardware/tools/write_c3b_protection_checklist.py,371,371,maintained,build_checklist,very-long-line,low,fact,high,line length=211
+hardware/tools/write_c3b_protection_checklist.py,380,380,maintained,build_checklist,very-long-line,low,fact,high,line length=211
+hardware/tools/write_c3b_protection_checklist.py,537,537,maintained,main,very-long-line,low,fact,high,line length=193
+hardware/tools/write_c3b_smoke_result_contract.py,20,85,maintained,build_contract,large-function,medium,fact,high,function spans 66 lines
+hardware/tools/write_c3b_smoke_result_contract.py,152,152,maintained,main,library-print,low,inference,medium,print call in maintained non-script module
+hardware/tools/write_c3b_smoke_result_contract.py,49,49,maintained,build_contract,hard-coded-absolute-path,high,fact,high,"f""--json-out /tmp/c3b_smoke_import_{DATE_TAG}.json """
+hardware/tools/write_c3b_smoke_result_contract.py,50,50,maintained,build_contract,hard-coded-absolute-path,high,fact,high,"f""--validation-out /tmp/c3b_smoke_import_validation_{DATE_TAG}.json"""
+hardware/tools/write_c3b_smoke_result_contract.py,55,55,maintained,build_contract,hard-coded-absolute-path,high,fact,high,"f""--json-out /tmp/c3b_smoke_import_{DATE_TAG}.json """
+hardware/tools/write_c3b_smoke_result_contract.py,56,56,maintained,build_contract,hard-coded-absolute-path,high,fact,high,"f""--validation-out /tmp/c3b_smoke_import_validation_{DATE_TAG}.json"""
+hardware/tools/write_c3b_smoke_transfer_manifest.py,149,152,maintained,main,library-print,low,inference,medium,print call in maintained non-script module
+hardware/tools/write_c3b_smoke_transfer_manifest.py,74,74,maintained,build_manifest,hard-coded-absolute-path,high,fact,high,"""import_command"": f""python3 tools/import_pynq_smoke_result.py /path/to/{result_json} --preset axis-c3b-mem16 --json-out /tmp/hgtxr_c3b_smoke_import.json --validation-out /tmp/hgtxr_c3b_smoke_validation.json"","
+hardware/tools/write_c3b_smoke_transfer_manifest.py,74,74,maintained,build_manifest,very-long-line,low,fact,high,line length=220
+hardware/tools/write_c3b_smoke_transfer_manifest.py,76,76,maintained,build_manifest,hard-coded-absolute-path,high,fact,high,"""final_signoff_command"": ""python3 tools/check_third_goal_preflight.py --root /home/kjm26/project/PRJXR/XR-VIT/HGTXR --mode final-signoff"","
+hardware/tools/write_e2e_resource_matrix.py,158,224,maintained,build_matrix,large-function,medium,fact,high,function spans 67 lines
+hardware/tools/write_e2e_resource_matrix.py,235,299,maintained,render_markdown,large-function,medium,fact,high,function spans 65 lines
+hardware/tools/write_e2e_resource_matrix.py,317,321,maintained,main,library-print,low,inference,medium,print call in maintained non-script module
+hardware/tools/write_e2e_resource_matrix.py,23,23,maintained,<module>,very-long-line,low,fact,high,line length=176
+hardware/tools/write_e2e_resource_matrix.py,24,24,maintained,<module>,very-long-line,low,fact,high,line length=166
+hardware/tools/write_e2e_resource_matrix.py,37,37,maintained,<module>,very-long-line,low,fact,high,line length=185
+hardware/tools/write_e2e_resource_matrix.py,38,38,maintained,<module>,very-long-line,low,fact,high,line length=175
+hardware/tools/write_e2e_resource_matrix.py,51,51,maintained,<module>,very-long-line,low,fact,high,line length=203
+hardware/tools/write_e2e_resource_matrix.py,52,52,maintained,<module>,very-long-line,low,fact,high,line length=193
+hardware/tools/write_e2e_resource_matrix.py,65,65,maintained,<module>,very-long-line,low,fact,high,line length=215
+hardware/tools/write_e2e_resource_matrix.py,66,66,maintained,<module>,very-long-line,low,fact,high,line length=205
+hardware/tools/write_e2e_resource_policy_audit.py,84,259,maintained,build_audit,large-function,high,fact,high,function spans 176 lines
+hardware/tools/write_e2e_resource_policy_audit.py,84,259,maintained,build_audit,high-branch-density,high,inference,medium,AST branch proxy=27
+hardware/tools/write_e2e_resource_policy_audit.py,302,305,maintained,main,library-print,low,inference,medium,print call in maintained non-script module
+hardware/tools/write_e2e_resource_policy_audit.py,134,134,maintained,build_audit,very-long-line,low,fact,high,line length=165
+hardware/tools/write_e2e_resource_policy_audit.py,135,135,maintained,build_audit,very-long-line,low,fact,high,line length=167
+hardware/tools/write_e2e_resource_policy_audit.py,136,136,maintained,build_audit,very-long-line,low,fact,high,line length=209
+hardware/tools/write_e2e_resource_policy_audit.py,137,137,maintained,build_audit,very-long-line,low,fact,high,line length=206
+hardware/tools/write_e2e_resource_policy_audit.py,138,138,maintained,build_audit,very-long-line,low,fact,high,line length=197
+hardware/tools/write_e2e_resource_policy_audit.py,143,143,maintained,build_audit,very-long-line,low,fact,high,line length=200
+hardware/tools/write_e2e_resource_policy_audit.py,144,144,maintained,build_audit,very-long-line,low,fact,high,line length=207
+hardware/tools/write_e2e_resource_policy_audit.py,154,154,maintained,build_audit,very-long-line,low,fact,high,line length=216
+hardware/tools/write_e2e_resource_policy_audit.py,157,157,maintained,build_audit,very-long-line,low,fact,high,line length=221
+hardware/tools/write_e2e_resource_policy_audit.py,158,158,maintained,build_audit,very-long-line,low,fact,high,line length=219
+hardware/tools/write_e2e_resource_policy_audit.py,160,160,maintained,build_audit,very-long-line,low,fact,high,line length=180
+hardware/tools/write_final_evidence_manifest.py,242,317,maintained,resource_policy_artifact_set,large-function,medium,fact,high,function spans 76 lines
+hardware/tools/write_final_evidence_manifest.py,242,317,maintained,resource_policy_artifact_set,high-branch-density,medium,inference,medium,AST branch proxy=17
+hardware/tools/write_final_evidence_manifest.py,457,582,maintained,add_final_runner_blocker_summary_checks,large-function,high,fact,high,function spans 126 lines
+hardware/tools/write_final_evidence_manifest.py,457,582,maintained,add_final_runner_blocker_summary_checks,high-branch-density,high,inference,medium,AST branch proxy=51
+hardware/tools/write_final_evidence_manifest.py,601,2554,maintained,build_consistency_checks,large-function,high,fact,high,function spans 1954 lines
+hardware/tools/write_final_evidence_manifest.py,601,2554,maintained,build_consistency_checks,high-branch-density,high,inference,medium,AST branch proxy=375
+hardware/tools/write_final_evidence_manifest.py,2557,2614,maintained,build_manifest,high-branch-density,medium,inference,medium,AST branch proxy=15
+hardware/tools/write_final_evidence_manifest.py,2683,2686,maintained,main,library-print,low,inference,medium,print call in maintained non-script module
+hardware/tools/write_final_evidence_manifest.py,754,754,maintained,build_consistency_checks,very-long-line,low,fact,high,line length=171
+hardware/tools/write_final_evidence_manifest.py,767,767,maintained,build_consistency_checks,very-long-line,low,fact,high,line length=174
+hardware/tools/write_final_evidence_manifest.py,1128,1128,maintained,build_consistency_checks,very-long-line,low,fact,high,line length=322
+hardware/tools/write_final_evidence_manifest.py,1254,1254,maintained,build_consistency_checks,very-long-line,low,fact,high,line length=243
+hardware/tools/write_final_evidence_manifest.py,2242,2242,maintained,build_consistency_checks,very-long-line,low,fact,high,line length=200
+hardware/tools/write_final_evidence_manifest.py,2256,2256,maintained,build_consistency_checks,very-long-line,low,fact,high,line length=224
+hardware/tools/write_final_operator_handoff.py,88,210,maintained,build_handoff,large-function,high,fact,high,function spans 123 lines
+hardware/tools/write_final_operator_handoff.py,88,210,maintained,build_handoff,high-branch-density,medium,inference,medium,AST branch proxy=25
+hardware/tools/write_final_operator_handoff.py,213,342,maintained,render_markdown,large-function,high,fact,high,function spans 130 lines
+hardware/tools/write_final_operator_handoff.py,379,382,maintained,main,library-print,low,inference,medium,print call in maintained non-script module
+hardware/tools/write_final_operator_handoff.py,153,153,maintained,build_handoff,hard-coded-absolute-path,high,fact,high,"""requested_path"": candidate_xr.get(""requested_path"", ""/home/kjm26/project/PRJXR/XR-VITs""),"
+hardware/tools/write_final_signoff_audit.py,147,147,maintained,main,library-print,low,inference,medium,print call in maintained non-script module
+hardware/tools/write_final_unblock_closeout_packet.py,226,358,maintained,build_packet,large-function,high,fact,high,function spans 133 lines
+hardware/tools/write_final_unblock_closeout_packet.py,226,358,maintained,build_packet,high-branch-density,medium,inference,medium,AST branch proxy=15
+hardware/tools/write_final_unblock_closeout_packet.py,361,444,maintained,render_markdown,large-function,medium,fact,high,function spans 84 lines
+hardware/tools/write_final_unblock_closeout_packet.py,361,444,maintained,render_markdown,high-branch-density,medium,inference,medium,AST branch proxy=13
+hardware/tools/write_final_unblock_closeout_packet.py,467,470,maintained,main,library-print,low,inference,medium,print call in maintained non-script module
+hardware/tools/write_final_unblock_commands.py,34,397,maintained,build_commands,large-function,high,fact,high,function spans 364 lines
+hardware/tools/write_final_unblock_commands.py,34,397,maintained,build_commands,high-branch-density,medium,inference,medium,AST branch proxy=13
+hardware/tools/write_final_unblock_commands.py,504,507,maintained,main,library-print,low,inference,medium,print call in maintained non-script module
+hardware/tools/write_final_unblock_commands.py,99,99,maintained,build_commands,hard-coded-absolute-path,high,fact,high,"""--json-out /tmp/hgtxr_final_blocker_readiness_current.json """
+hardware/tools/write_final_unblock_commands.py,100,100,maintained,build_commands,hard-coded-absolute-path,high,fact,high,"""--markdown-out /tmp/hgtxr_final_blocker_readiness_current.md"""
+hardware/tools/write_final_unblock_commands.py,107,107,maintained,build_commands,hard-coded-absolute-path,high,fact,high,"""--json-out /tmp/hgtxr_final_blocker_readiness_exact.json """
+hardware/tools/write_final_unblock_commands.py,108,108,maintained,build_commands,hard-coded-absolute-path,high,fact,high,"""--markdown-out /tmp/hgtxr_final_blocker_readiness_exact.md"""
+hardware/tools/write_final_unblock_commands.py,117,117,maintained,build_commands,hard-coded-absolute-path,high,fact,high,"""--json-out /tmp/hgtxr_final_blocker_readiness_replacement.json """
+hardware/tools/write_final_unblock_commands.py,118,118,maintained,build_commands,hard-coded-absolute-path,high,fact,high,"""--markdown-out /tmp/hgtxr_final_blocker_readiness_replacement.md"""
+hardware/tools/write_final_unblock_commands.py,133,133,maintained,build_commands,hard-coded-absolute-path,high,fact,high,"""python3 tools/check_c3b_board_smoke_readiness.py --root /home/kjm26/project/PRJXR/XR-VIT/HGTXR"","
+hardware/tools/write_final_unblock_commands.py,138,138,maintained,build_commands,hard-coded-absolute-path,high,fact,high,"""--root /home/kjm26/project/PRJXR/XR-VIT/HGTXR """
+hardware/tools/write_final_unblock_commands.py,144,144,maintained,build_commands,hard-coded-absolute-path,high,fact,high,"""--root /home/kjm26/project/PRJXR/XR-VIT/HGTXR """
+hardware/tools/write_final_unblock_commands.py,149,149,maintained,build_commands,hard-coded-absolute-path,high,fact,high,"""--root /home/kjm26/project/PRJXR/XR-VIT/HGTXR """
+hardware/tools/write_final_unblock_commands.py,187,187,maintained,build_commands,hard-coded-absolute-path,high,fact,high,"""test -d /home/kjm26/project/PRJXR/XR-VITs"","
+hardware/tools/write_final_unblock_commands.py,188,188,maintained,build_commands,hard-coded-absolute-path,high,fact,high,"""python3 tools/check_third_goal_preflight.py --root /home/kjm26/project/PRJXR/XR-VIT/HGTXR --mode final-signoff"","
+hardware/tools/write_final_unblock_commands.py,190,190,maintained,build_commands,hard-coded-absolute-path,high,fact,high,"""evidence_after"": [""/home/kjm26/project/PRJXR/XR-VITs""],"
+hardware/tools/write_final_unblock_commands.py,198,198,maintained,build_commands,hard-coded-absolute-path,high,fact,high,"""--root /home/kjm26/project/PRJXR/XR-VIT/HGTXR """
+hardware/tools/write_final_unblock_commands.py,206,206,maintained,build_commands,hard-coded-absolute-path,high,fact,high,"""--root /home/kjm26/project/PRJXR/XR-VIT/HGTXR """
+hardware/tools/write_final_unblock_commands.py,213,213,maintained,build_commands,hard-coded-absolute-path,high,fact,high,"""--root /home/kjm26/project/PRJXR/XR-VIT/HGTXR """
+hardware/tools/write_final_unblock_commands.py,219,219,maintained,build_commands,hard-coded-absolute-path,high,fact,high,"""--root /home/kjm26/project/PRJXR/XR-VIT/HGTXR """
+hardware/tools/write_final_unblock_commands.py,248,248,maintained,build_commands,hard-coded-absolute-path,high,fact,high,"""test -d /home/kjm26/project/PRJXR/XR-VITs"","
+hardware/tools/write_final_unblock_commands.py,251,251,maintained,build_commands,hard-coded-absolute-path,high,fact,high,"""--root /home/kjm26/project/PRJXR/XR-VIT/HGTXR """
+hardware/tools/write_final_unblock_commands.py,257,257,maintained,build_commands,hard-coded-absolute-path,high,fact,high,"""/home/kjm26/project/PRJXR/XR-VITs"","
+hardware/tools/write_final_unblock_commands.py,267,267,maintained,build_commands,hard-coded-absolute-path,high,fact,high,"""--root /home/kjm26/project/PRJXR/XR-VIT/HGTXR """
+hardware/tools/write_final_unblock_commands.py,277,277,maintained,build_commands,hard-coded-absolute-path,high,fact,high,"""--root /home/kjm26/project/PRJXR/XR-VIT/HGTXR """
+hardware/tools/write_final_unblock_commands.py,284,284,maintained,build_commands,hard-coded-absolute-path,high,fact,high,"""--root /home/kjm26/project/PRJXR/XR-VIT/HGTXR """
+hardware/tools/write_final_unblock_commands.py,290,290,maintained,build_commands,hard-coded-absolute-path,high,fact,high,"""--root /home/kjm26/project/PRJXR/XR-VIT/HGTXR """
+hardware/tools/write_final_unblock_commands.py,319,319,maintained,build_commands,hard-coded-absolute-path,high,fact,high,"""--root /home/kjm26/project/PRJXR/XR-VIT/HGTXR """
+hardware/tools/write_final_unblock_commands.py,325,325,maintained,build_commands,hard-coded-absolute-path,high,fact,high,"""--root /home/kjm26/project/PRJXR/XR-VIT/HGTXR """
+hardware/tools/write_final_unblock_commands.py,336,336,maintained,build_commands,hard-coded-absolute-path,high,fact,high,"""--root /home/kjm26/project/PRJXR/XR-VIT/HGTXR """
+hardware/tools/write_final_unblock_commands.py,342,342,maintained,build_commands,hard-coded-absolute-path,high,fact,high,"""--root /home/kjm26/project/PRJXR/XR-VIT/HGTXR """
+hardware/tools/write_final_unblock_commands.py,363,363,maintained,build_commands,hard-coded-absolute-path,high,fact,high,"""python3 tools/run_third_goal_final_signoff.py --root /home/kjm26/project/PRJXR/XR-VIT/HGTXR"","
+hardware/tools/write_final_unblock_intake.py,19,95,maintained,build_intake,large-function,medium,fact,high,function spans 77 lines
+hardware/tools/write_final_unblock_intake.py,223,286,maintained,render_markdown,large-function,medium,fact,high,function spans 64 lines
+hardware/tools/write_final_unblock_intake.py,318,321,maintained,main,library-print,low,inference,medium,print call in maintained non-script module
+hardware/tools/write_final_unblock_intake.py,193,193,maintained,build_candidate_audit_command,hard-coded-absolute-path,high,fact,high,"f""/tmp/final_unblock_candidate_audit_{DATE_TAG}.json"","
+hardware/tools/write_final_unblock_intake.py,195,195,maintained,build_candidate_audit_command,hard-coded-absolute-path,high,fact,high,"f""/tmp/final_unblock_candidate_audit_{DATE_TAG}.md"","
+hardware/tools/write_hgpipe_operator_audit.py,168,273,maintained,build_property_checks,large-function,medium,fact,high,function spans 106 lines
+hardware/tools/write_hgpipe_operator_audit.py,168,273,maintained,build_property_checks,high-branch-density,high,inference,medium,AST branch proxy=42
+hardware/tools/write_hgpipe_operator_audit.py,276,397,maintained,build_operator_audit,large-function,high,fact,high,function spans 122 lines
+hardware/tools/write_hgpipe_operator_audit.py,276,397,maintained,build_operator_audit,high-branch-density,medium,inference,medium,AST branch proxy=17
+hardware/tools/write_hgpipe_operator_audit.py,459,469,maintained,main,library-print,low,inference,medium,print call in maintained non-script module
+hardware/tools/write_p2_vit_scale_calibration_report.py,37,166,maintained,build_report,large-function,high,fact,high,function spans 130 lines
+hardware/tools/write_p2_vit_scale_calibration_report.py,37,166,maintained,build_report,high-branch-density,medium,inference,medium,AST branch proxy=17
+hardware/tools/write_p2_vit_scale_calibration_report.py,220,220,maintained,main,library-print,low,inference,medium,print call in maintained non-script module
+hardware/tools/write_patch32_dtok4_300_goal_status.py,126,153,maintained,parse_timing,high-branch-density,medium,inference,medium,AST branch proxy=14
+hardware/tools/write_patch32_dtok4_300_goal_status.py,225,349,maintained,build_status,large-function,high,fact,high,function spans 125 lines
+hardware/tools/write_patch32_dtok4_300_goal_status.py,225,349,maintained,build_status,high-branch-density,medium,inference,medium,AST branch proxy=19
+hardware/tools/write_patch32_dtok4_300_goal_status.py,360,458,maintained,render_markdown,large-function,medium,fact,high,function spans 99 lines
+hardware/tools/write_patch32_dtok4_300_goal_status.py,475,475,maintained,main,library-print,low,inference,medium,print call in maintained non-script module
+hardware/tools/write_prefetchall4_300_contract_audit.py,61,340,maintained,build_audit,large-function,high,fact,high,function spans 280 lines
+hardware/tools/write_prefetchall4_300_contract_audit.py,61,340,maintained,build_audit,high-branch-density,medium,inference,medium,AST branch proxy=17
+hardware/tools/write_prefetchall4_300_contract_audit.py,382,382,maintained,main,library-print,low,inference,medium,print call in maintained non-script module
+hardware/tools/write_prefetchall4_300_goal_status.py,259,400,maintained,build_board_measurements,large-function,high,fact,high,function spans 142 lines
+hardware/tools/write_prefetchall4_300_goal_status.py,259,400,maintained,build_board_measurements,high-branch-density,high,inference,medium,AST branch proxy=41
+hardware/tools/write_prefetchall4_300_goal_status.py,403,587,maintained,build_status,large-function,high,fact,high,function spans 185 lines
+hardware/tools/write_prefetchall4_300_goal_status.py,403,587,maintained,build_status,high-branch-density,high,inference,medium,AST branch proxy=46
+hardware/tools/write_prefetchall4_300_goal_status.py,594,719,maintained,render_markdown,large-function,high,fact,high,function spans 126 lines
+hardware/tools/write_prefetchall4_300_goal_status.py,594,719,maintained,render_markdown,high-branch-density,medium,inference,medium,AST branch proxy=16
+hardware/tools/write_prefetchall4_300_goal_status.py,736,736,maintained,main,library-print,low,inference,medium,print call in maintained non-script module
+hardware/tools/write_prefetchall4_300_goal_status.py,443,443,maintained,build_status,very-long-line,low,fact,high,line length=164
+hardware/tools/write_prefetchall4_300_goal_status.py,449,449,maintained,build_status,very-long-line,low,fact,high,line length=171
+hardware/tools/write_prefetchall4_300_goal_status.py,465,465,maintained,build_status,very-long-line,low,fact,high,line length=169
+hardware/tools/write_prefetchall4_300_goal_status.py,489,489,maintained,build_status,very-long-line,low,fact,high,line length=237
+hardware/tools/write_prefetchall4_300_goal_status.py,491,491,maintained,build_status,very-long-line,low,fact,high,line length=202
+hardware/tools/write_prefetchall4_300_goal_status.py,504,504,maintained,build_status,very-long-line,low,fact,high,line length=179
+hardware/tools/write_prefetchall4_300_goal_status.py,664,664,maintained,render_markdown,very-long-line,low,fact,high,line length=221
+hardware/tools/write_prefetchall4_300_resource_breakdown.py,137,163,maintained,parse_hierarchical_table,high-branch-density,medium,inference,medium,AST branch proxy=15
+hardware/tools/write_prefetchall4_300_resource_breakdown.py,396,396,maintained,main,library-print,low,inference,medium,print call in maintained non-script module
+hardware/tools/write_req1_environment_audit.py,51,114,maintained,build_audit,large-function,medium,fact,high,function spans 64 lines
+hardware/tools/write_req1_environment_audit.py,157,157,maintained,main,library-print,low,inference,medium,print call in maintained non-script module
+hardware/tools/write_req1_environment_audit.py,17,17,maintained,<module>,hard-coded-absolute-path,high,fact,high,"EXPECTED_PROJECT_PREFIX = ""/home/kjm26/project/"""
+hardware/tools/write_req1_environment_audit.py,56,56,maintained,build_audit,hard-coded-absolute-path,high,fact,high,"legacy_markers = [""/mnt/c"", ""/mnt/d"", ""C:\\"", ""/opt/Xilinx""]"
+hardware/tools/write_req2_spec_subagent_gate_audit.py,39,201,maintained,build_audit,large-function,high,fact,high,function spans 163 lines
+hardware/tools/write_req2_spec_subagent_gate_audit.py,39,201,maintained,build_audit,high-branch-density,medium,inference,medium,AST branch proxy=18
+hardware/tools/write_req2_spec_subagent_gate_audit.py,248,259,maintained,main,library-print,low,inference,medium,print call in maintained non-script module
+hardware/tools/write_req5_q4q8_swhw_match_audit.py,87,140,maintained,manifest_checks,high-branch-density,medium,inference,medium,AST branch proxy=22
+hardware/tools/write_req5_q4q8_swhw_match_audit.py,143,241,maintained,build_audit,large-function,medium,fact,high,function spans 99 lines
+hardware/tools/write_req5_q4q8_swhw_match_audit.py,143,241,maintained,build_audit,high-branch-density,medium,inference,medium,AST branch proxy=15
+hardware/tools/write_req5_q4q8_swhw_match_audit.py,288,288,maintained,main,library-print,low,inference,medium,print call in maintained non-script module
+hardware/tools/write_req5_q4q8_swhw_match_audit.py,230,230,maintained,build_audit,very-long-line,low,fact,high,line length=179
+hardware/tools/write_req6_parameterization_audit.py,107,356,maintained,build_audit,large-function,high,fact,high,function spans 250 lines
+hardware/tools/write_req6_parameterization_audit.py,107,356,maintained,build_audit,high-branch-density,high,inference,medium,AST branch proxy=30
+hardware/tools/write_req6_parameterization_audit.py,409,409,maintained,main,library-print,low,inference,medium,print call in maintained non-script module
+hardware/tools/write_req6_parameterization_audit.py,85,85,maintained,sweep_has_values,hard-coded-absolute-path,high,fact,high,"pattern = rf""{re.escape(name)}:\s*(?:\n\s+.*)*?\n\s+values:\s*\[([^\]]+)\]"""
+hardware/tools/write_req6_parameterization_audit.py,243,243,maintained,build_audit,very-long-line,low,fact,high,line length=161
+hardware/tools/write_req6_parameterization_audit.py,244,244,maintained,build_audit,very-long-line,low,fact,high,line length=208
+hardware/tools/write_req6_parameterization_audit.py,245,245,maintained,build_audit,very-long-line,low,fact,high,line length=175
+hardware/tools/write_req6_parameterization_audit.py,247,247,maintained,build_audit,very-long-line,low,fact,high,line length=168
+hardware/tools/write_req6_parameterization_audit.py,249,249,maintained,build_audit,very-long-line,low,fact,high,line length=177
+hardware/tools/write_req6_parameterization_audit.py,250,250,maintained,build_audit,very-long-line,low,fact,high,line length=165
+hardware/tools/write_req6_parameterization_audit.py,252,252,maintained,build_audit,very-long-line,low,fact,high,line length=180
+hardware/tools/write_req6_parameterization_audit.py,340,340,maintained,build_audit,very-long-line,low,fact,high,line length=167
+hardware/tools/write_req6_parameterization_audit.py,343,343,maintained,build_audit,very-long-line,low,fact,high,line length=193
+hardware/tools/write_req9_deit_image_reference_audit.py,55,117,maintained,build_audit,large-function,medium,fact,high,function spans 63 lines
+hardware/tools/write_req9_deit_image_reference_audit.py,166,166,maintained,main,library-print,low,inference,medium,print call in maintained non-script module
+hardware/tools/write_selected_path_execution_audit.py,65,156,maintained,build_audit,large-function,medium,fact,high,function spans 92 lines
+hardware/tools/write_selected_path_execution_audit.py,216,219,maintained,main,library-print,low,inference,medium,print call in maintained non-script module
+hardware/tools/write_selected_path_execution_audit.py,99,99,maintained,build_audit,very-long-line,low,fact,high,line length=192
+hardware/tools/write_spec_plan_conformance_audit.py,96,418,maintained,build_audit,large-function,high,fact,high,function spans 323 lines
+hardware/tools/write_spec_plan_conformance_audit.py,96,418,maintained,build_audit,high-branch-density,high,inference,medium,AST branch proxy=62
+hardware/tools/write_spec_plan_conformance_audit.py,472,472,maintained,main,library-print,low,inference,medium,print call in maintained non-script module
+hardware/tools/write_spec_plan_conformance_audit.py,132,132,maintained,build_audit,very-long-line,low,fact,high,line length=162
+hardware/tools/write_spec_plan_conformance_audit.py,157,157,maintained,build_audit,very-long-line,low,fact,high,line length=259
+hardware/tools/write_spec_plan_conformance_audit.py,160,160,maintained,build_audit,very-long-line,low,fact,high,line length=319
+hardware/tools/write_spec_plan_conformance_audit.py,162,162,maintained,build_audit,very-long-line,low,fact,high,line length=249
+hardware/tools/write_spec_plan_conformance_audit.py,163,163,maintained,build_audit,very-long-line,low,fact,high,line length=229
+hardware/tools/write_spec_plan_conformance_audit.py,176,176,maintained,build_audit,very-long-line,low,fact,high,line length=396
+hardware/tools/write_spec_plan_conformance_audit.py,177,177,maintained,build_audit,very-long-line,low,fact,high,line length=208
+hardware/tools/write_spec_plan_conformance_audit.py,178,178,maintained,build_audit,very-long-line,low,fact,high,line length=218
+hardware/tools/write_third_goal_completion_audit.py,109,356,maintained,build_audit,large-function,high,fact,high,function spans 248 lines
+hardware/tools/write_third_goal_completion_audit.py,109,356,maintained,build_audit,high-branch-density,high,inference,medium,AST branch proxy=38
+hardware/tools/write_third_goal_completion_audit.py,434,437,maintained,main,library-print,low,inference,medium,print call in maintained non-script module
+hardware/tools/write_third_goal_current_audit.py,737,1214,maintained,build_audit,large-function,high,fact,high,function spans 478 lines
+hardware/tools/write_third_goal_current_audit.py,737,1214,maintained,build_audit,high-branch-density,high,inference,medium,AST branch proxy=59
+hardware/tools/write_third_goal_current_audit.py,1217,1408,maintained,render_markdown,large-function,high,fact,high,function spans 192 lines
+hardware/tools/write_third_goal_current_audit.py,1217,1408,maintained,render_markdown,high-branch-density,high,inference,medium,AST branch proxy=35
+hardware/tools/write_third_goal_current_audit.py,1430,1430,maintained,main,library-print,low,inference,medium,print call in maintained non-script module
+hardware/tools/write_third_goal_current_audit.py,1044,1044,maintained,build_audit,hard-coded-absolute-path,high,fact,high,"""Use /home/kjm26/project/PRJXR/XR-VITs HLS code for ZCU104 fit/low latency"","
+hardware/tools/write_third_goal_current_audit.py,1059,1059,maintained,build_audit,hard-coded-absolute-path,high,fact,high,"else [""/home/kjm26/project/PRJXR/XR-VITs or approved replacement policy""],"
+hardware/tools/write_third_goal_requirements_trace.py,269,337,maintained,blocker_resolution_conditions,large-function,medium,fact,high,function spans 69 lines
+hardware/tools/write_third_goal_requirements_trace.py,340,416,maintained,build_trace,large-function,medium,fact,high,function spans 77 lines
+hardware/tools/write_third_goal_requirements_trace.py,419,552,maintained,render_markdown,large-function,high,fact,high,function spans 134 lines
+hardware/tools/write_third_goal_requirements_trace.py,419,552,maintained,render_markdown,high-branch-density,medium,inference,medium,AST branch proxy=19
+hardware/tools/write_third_goal_requirements_trace.py,598,601,maintained,main,library-print,low,inference,medium,print call in maintained non-script module
+hardware/tools/write_third_goal_requirements_trace.py,303,303,maintained,blocker_resolution_conditions,hard-coded-absolute-path,high,fact,high,"""/home/kjm26/project/PRJXR/XR-VITs"","
+hardware/tools/write_third_goal_requirements_trace.py,312,312,maintained,blocker_resolution_conditions,very-long-line,low,fact,high,line length=169
+hardware/tools/write_third_goal_source_audit.py,120,216,maintained,required_sources,large-function,medium,fact,high,function spans 97 lines
+hardware/tools/write_third_goal_source_audit.py,333,344,maintained,main,library-print,low,inference,medium,print call in maintained non-script module
+hardware/tools/write_third_goal_source_audit.py,110,110,maintained,discover_optional,work-marker,low,fact,high,"""todo"","
+hardware/tools/write_third_goal_unblock_checklist.py,33,129,maintained,build_checklist,large-function,medium,fact,high,function spans 97 lines
+hardware/tools/write_third_goal_unblock_checklist.py,202,205,maintained,main,library-print,low,inference,medium,print call in maintained non-script module
+hardware/tools/write_third_goal_unblock_checklist.py,50,50,maintained,build_checklist,hard-coded-absolute-path,high,fact,high,"""test -d /home/kjm26/project/PRJXR/XR-VITs"","
+hardware/tools/write_third_goal_unblock_checklist.py,51,51,maintained,build_checklist,hard-coded-absolute-path,high,fact,high,"""python3 tools/check_third_goal_preflight.py --root /home/kjm26/project/PRJXR/XR-VIT/HGTXR --mode final-signoff"","
+hardware/tools/write_third_goal_unblock_checklist.py,58,58,maintained,build_checklist,hard-coded-absolute-path,high,fact,high,"""python3 tools/create_xr_vits_replacement_policy.py --root /home/kjm26/project/PRJXR/XR-VIT/HGTXR --approve --approved-by <name> --reason \""Approve XR_Accel as XR-VITs replacement for HGTXR third-goal signoff\"" --dry-run"","
+hardware/tools/write_third_goal_unblock_checklist.py,58,58,maintained,build_checklist,very-long-line,low,fact,high,line length=250
+hardware/tools/write_third_goal_unblock_checklist.py,59,59,maintained,build_checklist,hard-coded-absolute-path,high,fact,high,"""python3 tools/create_xr_vits_replacement_policy.py --root /home/kjm26/project/PRJXR/XR-VIT/HGTXR --approve --approved-by <name> --reason \""Approve XR_Accel as XR-VITs replacement for HGTXR third-goal signoff\"""","
+hardware/tools/write_third_goal_unblock_checklist.py,59,59,maintained,build_checklist,very-long-line,low,fact,high,line length=240
+hardware/tools/write_third_goal_unblock_checklist.py,60,60,maintained,build_checklist,hard-coded-absolute-path,high,fact,high,"""python3 tools/check_third_goal_preflight.py --root /home/kjm26/project/PRJXR/XR-VIT/HGTXR --mode final-signoff"","
+hardware/tools/write_third_goal_unblock_checklist.py,66,66,maintained,build_checklist,hard-coded-absolute-path,high,fact,high,"""/home/kjm26/project/PRJXR/XR-VITs"","
+hardware/tools/write_third_goal_unblock_checklist.py,89,89,maintained,build_checklist,hard-coded-absolute-path,high,fact,high,"""python3 tools/run_third_goal_final_signoff.py --root /home/kjm26/project/PRJXR/XR-VIT/HGTXR --import-c3b-smoke-json /path/to/e2e_axis_dma_c3b_mem16_file_smoke.json --dry-run-import-c3b-smoke --allow-blocked"","
+hardware/tools/write_third_goal_unblock_checklist.py,89,89,maintained,build_checklist,very-long-line,low,fact,high,line length=229
+hardware/tools/write_third_goal_unblock_checklist.py,90,90,maintained,build_checklist,hard-coded-absolute-path,high,fact,high,"""python3 tools/run_third_goal_final_signoff.py --root /home/kjm26/project/PRJXR/XR-VIT/HGTXR --import-c3b-smoke-json /path/to/e2e_axis_dma_c3b_mem16_file_smoke.json --allow-blocked"","
+hardware/tools/write_third_goal_unblock_checklist.py,90,90,maintained,build_checklist,very-long-line,low,fact,high,line length=202
+hardware/tools/write_third_goal_unblock_checklist.py,92,92,maintained,build_checklist,hard-coded-absolute-path,high,fact,high,"""python3 tools/check_third_goal_preflight.py --root /home/kjm26/project/PRJXR/XR-VIT/HGTXR --mode final-signoff"","
+hardware/tools/write_third_goal_unblock_checklist.py,109,109,maintained,build_checklist,hard-coded-absolute-path,high,fact,high,"""python3 tools/check_third_goal_preflight.py --root /home/kjm26/project/PRJXR/XR-VIT/HGTXR --mode final-signoff --json-out generated/signoff/third_goal_final_signoff_2026_06_10.json"","
+hardware/tools/write_third_goal_unblock_checklist.py,109,109,maintained,build_checklist,very-long-line,low,fact,high,line length=199
+hardware/tools/write_third_goal_unblock_checklist.py,110,110,maintained,build_checklist,very-long-line,low,fact,high,line length=269
+hardware/tools/write_third_goal_unblock_checklist.py,111,111,maintained,build_checklist,hard-coded-absolute-path,high,fact,high,"""python3 tools/write_third_goal_completion_audit.py --root /home/kjm26/project/PRJXR/XR-VIT/HGTXR --json-out generated/signoff/third_goal_completion_audit_2026_06_10.json --markdown-out generated/signoff/third_goal_completion_audit_2026_06_"
+hardware/tools/write_third_goal_unblock_checklist.py,111,111,maintained,build_checklist,very-long-line,low,fact,high,line length=263
+hardware/tools/write_vref_p0_buffer_lifetime_audit.py,121,281,maintained,build_audit,large-function,high,fact,high,function spans 161 lines
+hardware/tools/write_vref_p0_buffer_lifetime_audit.py,121,281,maintained,build_audit,high-branch-density,high,inference,medium,AST branch proxy=31
+hardware/tools/write_vref_p0_buffer_lifetime_audit.py,332,332,maintained,main,library-print,low,inference,medium,print call in maintained non-script module
+hardware/tools/write_vref_p0_buffer_lifetime_audit.py,183,183,maintained,build_audit,very-long-line,low,fact,high,line length=164
+hardware/tools/write_vref_p0_buffer_lifetime_audit.py,199,199,maintained,build_audit,very-long-line,low,fact,high,line length=168
+hardware/tools/write_vref_p0_buffer_lifetime_audit.py,202,202,maintained,build_audit,very-long-line,low,fact,high,line length=197
+hardware/tools/write_vref_p0_buffer_lifetime_audit.py,203,203,maintained,build_audit,very-long-line,low,fact,high,line length=178
+hardware/tools/write_vref_p0_buffer_lifetime_audit.py,204,204,maintained,build_audit,very-long-line,low,fact,high,line length=188
+hardware/tools/write_vref_p0_buffer_lifetime_audit.py,205,205,maintained,build_audit,very-long-line,low,fact,high,line length=169
+hardware/tools/write_vref_p0_buffer_lifetime_audit.py,206,206,maintained,build_audit,very-long-line,low,fact,high,line length=220
+hardware/tools/write_vref_p0_buffer_lifetime_audit.py,212,212,maintained,build_audit,very-long-line,low,fact,high,line length=221
+hardware/tools/write_vref_p0_buffer_lifetime_audit.py,213,213,maintained,build_audit,very-long-line,low,fact,high,line length=219
+hardware/tools/write_vref_p0_buffer_lifetime_audit.py,214,214,maintained,build_audit,very-long-line,low,fact,high,line length=180
+hardware/tools/write_vref_p0_buffer_lifetime_audit.py,239,239,maintained,build_audit,very-long-line,low,fact,high,line length=276
+hardware/tools/write_vref_p0_pot_scale_audit.py,55,117,maintained,build_audit,large-function,medium,fact,high,function spans 63 lines
+hardware/tools/write_vref_p0_pot_scale_audit.py,162,162,maintained,main,library-print,low,inference,medium,print call in maintained non-script module
+hardware/tools/write_vref_p0_pot_scale_audit.py,70,70,maintained,build_audit,very-long-line,low,fact,high,line length=221
+hardware/tools/write_vref_p0_pot_scale_audit.py,102,102,maintained,build_audit,very-long-line,low,fact,high,line length=174
+hardware/tools/write_vref_p0_pot_scale_successor.py,361,423,maintained,read_vivado_overlay_result,large-function,medium,fact,high,function spans 63 lines
+hardware/tools/write_vref_p0_pot_scale_successor.py,497,561,maintained,build_c3b_projection,large-function,medium,fact,high,function spans 65 lines
+hardware/tools/write_vref_p0_pot_scale_successor.py,497,561,maintained,build_c3b_projection,high-branch-density,medium,inference,medium,AST branch proxy=13
+hardware/tools/write_vref_p0_pot_scale_successor.py,610,773,maintained,build_package,large-function,high,fact,high,function spans 164 lines
+hardware/tools/write_vref_p0_pot_scale_successor.py,610,773,maintained,build_package,high-branch-density,medium,inference,medium,AST branch proxy=15
+hardware/tools/write_vref_p0_pot_scale_successor.py,776,922,maintained,render_markdown,large-function,high,fact,high,function spans 147 lines
+hardware/tools/write_vref_p0_pot_scale_successor.py,952,952,maintained,main,library-print,low,inference,medium,print call in maintained non-script module
+hardware/tools/write_vref_p0_pot_scale_successor.py,916,916,maintained,render_markdown,very-long-line,low,fact,high,line length=203
+hardware/tools/write_vref_p0_pot_scale_successor.py,952,952,maintained,main,very-long-line,low,fact,high,line length=173
+hardware/tools/write_vref_p0_pot_scale_sweep.py,94,101,maintained,score_candidate,broad-except,medium,fact,high,catches Exception
+hardware/tools/write_vref_p0_pot_scale_sweep.py,265,265,maintained,main,library-print,low,inference,medium,print call in maintained non-script module
+hardware/tools/write_vref_p0_qkv_uram_cache_successor.py,222,280,maintained,read_overlay_evidence,high-branch-density,medium,inference,medium,AST branch proxy=16
+hardware/tools/write_vref_p0_qkv_uram_cache_successor.py,334,509,maintained,build_audit,large-function,high,fact,high,function spans 176 lines
+hardware/tools/write_vref_p0_qkv_uram_cache_successor.py,334,509,maintained,build_audit,high-branch-density,high,inference,medium,AST branch proxy=26
+hardware/tools/write_vref_p0_qkv_uram_cache_successor.py,512,580,maintained,render_markdown,large-function,medium,fact,high,function spans 69 lines
+hardware/tools/write_vref_p0_qkv_uram_cache_successor.py,598,601,maintained,main,library-print,low,inference,medium,print call in maintained non-script module
+hardware/tools/write_xr_vits_gate_audit.py,160,250,maintained,build_audit,large-function,medium,fact,high,function spans 91 lines
+hardware/tools/write_xr_vits_gate_audit.py,311,322,maintained,main,library-print,low,inference,medium,print call in maintained non-script module
+hardware/tools/write_xr_vits_gate_audit.py,241,241,maintained,build_audit,hard-coded-absolute-path,high,fact,high,"""Restore exact /home/kjm26/project/PRJXR/XR-VITs checkout."","
+hardware/tools/write_xr_vits_unblock_packet.py,39,119,maintained,build_packet,large-function,medium,fact,high,function spans 81 lines
+hardware/tools/write_xr_vits_unblock_packet.py,190,194,maintained,main,library-print,low,inference,medium,print call in maintained non-script module
+hardware/tools/write_xr_vits_unblock_packet.py,103,103,maintained,build_packet,hard-coded-absolute-path,high,fact,high,"""test -d /home/kjm26/project/PRJXR/XR-VITs"","
+hardware/tools/write_xr_vits_unblock_packet.py,104,104,maintained,build_packet,hard-coded-absolute-path,high,fact,high,"""python3 tools/run_third_goal_final_signoff.py --root /home/kjm26/project/PRJXR/XR-VIT/HGTXR --allow-blocked"","
+hardware/tools/write_xr_vits_unblock_packet.py,112,112,maintained,build_packet,hard-coded-absolute-path,high,fact,high,"f""python3 tools/create_xr_vits_replacement_policy.py --root /home/kjm26/project/PRJXR/XR-VIT/HGTXR --replacement-path {replacement_path} --approve --approved-by {approved_by_placeholder} --reason \""{reason}\"" --dry-run"","
+hardware/tools/write_xr_vits_unblock_packet.py,112,112,maintained,build_packet,very-long-line,low,fact,high,line length=240
+hardware/tools/write_xr_vits_unblock_packet.py,113,113,maintained,build_packet,hard-coded-absolute-path,high,fact,high,"f""python3 tools/create_xr_vits_replacement_policy.py --root /home/kjm26/project/PRJXR/XR-VIT/HGTXR --replacement-path {replacement_path} --approve --approved-by {approved_by_placeholder} --reason \""{reason}\"""","
+hardware/tools/write_xr_vits_unblock_packet.py,113,113,maintained,build_packet,very-long-line,low,fact,high,line length=230
+hardware/tools/write_xr_vits_unblock_packet.py,114,114,maintained,build_packet,hard-coded-absolute-path,high,fact,high,"""python3 tools/run_third_goal_final_signoff.py --root /home/kjm26/project/PRJXR/XR-VIT/HGTXR --allow-blocked"","
+hardware/tools/write_xr_vits_unblock_packet.py,118,118,maintained,build_packet,very-long-line,low,fact,high,line length=163
+hardware/tools/xr_accel_config.py,178,222,maintained,_validate_model,high-branch-density,medium,inference,medium,AST branch proxy=18
+hardware/tools/xr_accel_config.py,397,482,maintained,validate_normalized_manifest,large-function,medium,fact,high,function spans 86 lines
+hardware/tools/xr_accel_config.py,397,482,maintained,validate_normalized_manifest,high-branch-density,high,inference,medium,AST branch proxy=36
+hardware/tools/xr_accel_config.py,512,512,maintained,main,library-print,low,inference,medium,print call in maintained non-script module

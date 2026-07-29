@@ -1,0 +1,546 @@
+path,zone,language,kind,name,line
+hardware/hls/include/common.h,maintained,C/C++ Header,function,frame_patch_embed,19
+hardware/hls/include/common.h,maintained,C/C++ Header,function,event_patch_embed,20
+hardware/hls/include/common.h,maintained,C/C++ Header,function,pool_tokens,21
+hardware/hls/include/common.h,maintained,C/C++ Header,function,matmul,22
+hardware/hls/include/common.h,maintained,C/C++ Header,function,attention_stage,23
+hardware/hls/include/common.h,maintained,C/C++ Header,function,mlp_stage,24
+hardware/hls/include/common.h,maintained,C/C++ Header,function,fusion,25
+hardware/hls/include/common.h,maintained,C/C++ Header,function,search_head,26
+hardware/hls/include/common.h,maintained,C/C++ Header,function,track_head,27
+hardware/hls/include/common.h,maintained,C/C++ Header,function,runtime_fsm,28
+hardware/hls/include/common.h,maintained,C/C++ Header,function,hgtxr_top,30
+hardware/hls/include/common.h,maintained,C/C++ Header,function,hgtxr_top,32
+hardware/hls/include/common.h,maintained,C/C++ Header,function,global_buffer_write_search,35
+hardware/hls/include/common.h,maintained,C/C++ Header,function,global_buffer_write_track,36
+hardware/hls/include/common.h,maintained,C/C++ Header,function,noc_route_tokens,37
+hardware/hls/include/common.h,maintained,C/C++ Header,function,weight_prefetcher,38
+hardware/hls/include/common.h,maintained,C/C++ Header,function,controller_active_tokens,39
+hardware/hls/include/common.h,maintained,C/C++ Header,function,controller_depth_limit,40
+hardware/hls/include/common.h,maintained,C/C++ Header,function,layernorm_stage,41
+hardware/hls/include/common.h,maintained,C/C++ Header,function,softmax_stage,42
+hardware/hls/include/common.h,maintained,C/C++ Header,function,gelu_stage,43
+hardware/hls/include/common.h,maintained,C/C++ Header,function,rmu_projection_stage,44
+hardware/hls/include/common.h,maintained,C/C++ Header,function,smu_relation_stage,45
+hardware/hls/include/hgtxr_cyclic_mac.hpp,maintained,C++ Header,function,zero_tile,10
+hardware/hls/include/hgtxr_cyclic_math.hpp,maintained,C++ Header,function,hgtxr_clamp_int,17
+hardware/hls/include/hgtxr_cyclic_math.hpp,maintained,C++ Header,function,hgtxr_clamp_int,34
+hardware/hls/include/hgtxr_cyclic_math.hpp,maintained,C++ Header,function,hgtxr_hgpipe_mlp0_geluq64_int,48
+hardware/hls/include/hgtxr_cyclic_math.hpp,maintained,C++ Header,function,hgtxr_hgpipe_mlp1_geluq64_int,59
+hardware/hls/include/hgtxr_cyclic_math.hpp,maintained,C++ Header,function,hgtxr_hgpipe_mlp2_geluq64_int,70
+hardware/hls/include/hgtxr_cyclic_math.hpp,maintained,C++ Header,function,hgtxr_hgpipe_mlp3_geluq64_int,82
+hardware/hls/include/hgtxr_cyclic_math.hpp,maintained,C++ Header,function,hgtxr_hgpipe_mlp4_geluq64_int,94
+hardware/hls/include/hgtxr_cyclic_math.hpp,maintained,C++ Header,function,hgtxr_hgpipe_mlp5_geluq64_int,106
+hardware/hls/include/hgtxr_cyclic_math.hpp,maintained,C++ Header,function,hgtxr_hgpipe_mlp6_geluq64_int,118
+hardware/hls/include/hgtxr_cyclic_math.hpp,maintained,C++ Header,function,hgtxr_hgpipe_mlp7_geluq64_int,130
+hardware/hls/include/hgtxr_cyclic_math.hpp,maintained,C++ Header,function,hgtxr_hgpipe_mlp8_geluq64_int,142
+hardware/hls/include/hgtxr_cyclic_math.hpp,maintained,C++ Header,function,hgtxr_hgpipe_mlp9_geluq64_int,154
+hardware/hls/include/hgtxr_cyclic_math.hpp,maintained,C++ Header,function,hgtxr_hgpipe_mlp10_geluq64_int,165
+hardware/hls/include/hgtxr_cyclic_math.hpp,maintained,C++ Header,function,hgtxr_hgpipe_mlp11_geluq64_int,176
+hardware/hls/include/hgtxr_cyclic_math.hpp,maintained,C++ Header,function,hgtxr_hgpipe_geluq64_int,187
+hardware/hls/include/hgtxr_cyclic_math.hpp,maintained,C++ Header,function,hgtxr_hgpipe_mlp1_geluq64_int,189
+hardware/hls/include/hgtxr_cyclic_math.hpp,maintained,C++ Header,function,hgtxr_hgpipe_attn0_q_quant64_int,192
+hardware/hls/include/hgtxr_cyclic_math.hpp,maintained,C++ Header,function,hgtxr_hgpipe_attn0_k_quant64_int,204
+hardware/hls/include/hgtxr_cyclic_math.hpp,maintained,C++ Header,function,hgtxr_hgpipe_attn0_v_quant64_int,215
+hardware/hls/include/hgtxr_cyclic_math.hpp,maintained,C++ Header,function,hgtxr_hgpipe_attn0_a_quant64_int,226
+hardware/hls/include/hgtxr_cyclic_math.hpp,maintained,C++ Header,function,hgtxr_hgpipe_attn1_q_quant64_int,237
+hardware/hls/include/hgtxr_cyclic_math.hpp,maintained,C++ Header,function,hgtxr_hgpipe_attn1_k_quant64_int,248
+hardware/hls/include/hgtxr_cyclic_math.hpp,maintained,C++ Header,function,hgtxr_hgpipe_attn1_v_quant64_int,259
+hardware/hls/include/hgtxr_cyclic_math.hpp,maintained,C++ Header,function,hgtxr_hgpipe_attn1_a_quant64_int,270
+hardware/hls/include/hgtxr_cyclic_math.hpp,maintained,C++ Header,function,hgtxr_hgpipe_attn2_q_quant64_int,281
+hardware/hls/include/hgtxr_cyclic_math.hpp,maintained,C++ Header,function,hgtxr_hgpipe_attn2_k_quant64_int,292
+hardware/hls/include/hgtxr_cyclic_math.hpp,maintained,C++ Header,function,hgtxr_hgpipe_attn2_v_quant64_int,303
+hardware/hls/include/hgtxr_cyclic_math.hpp,maintained,C++ Header,function,hgtxr_hgpipe_attn2_a_quant64_int,314
+hardware/hls/include/hgtxr_cyclic_math.hpp,maintained,C++ Header,function,hgtxr_hgpipe_attn3_q_quant64_int,325
+hardware/hls/include/hgtxr_cyclic_math.hpp,maintained,C++ Header,function,hgtxr_hgpipe_attn3_k_quant64_int,337
+hardware/hls/include/hgtxr_cyclic_math.hpp,maintained,C++ Header,function,hgtxr_hgpipe_attn3_v_quant64_int,349
+hardware/hls/include/hgtxr_cyclic_math.hpp,maintained,C++ Header,function,hgtxr_hgpipe_attn3_a_quant64_int,361
+hardware/hls/include/hgtxr_cyclic_math.hpp,maintained,C++ Header,function,hgtxr_hgpipe_attn4_q_quant64_int,373
+hardware/hls/include/hgtxr_cyclic_math.hpp,maintained,C++ Header,function,hgtxr_hgpipe_attn4_k_quant64_int,385
+hardware/hls/include/hgtxr_cyclic_math.hpp,maintained,C++ Header,function,hgtxr_hgpipe_attn4_v_quant64_int,397
+hardware/hls/include/hgtxr_cyclic_math.hpp,maintained,C++ Header,function,hgtxr_hgpipe_attn4_a_quant64_int,409
+hardware/hls/include/hgtxr_cyclic_math.hpp,maintained,C++ Header,function,hgtxr_hgpipe_attn5_q_quant64_int,421
+hardware/hls/include/hgtxr_cyclic_math.hpp,maintained,C++ Header,function,hgtxr_hgpipe_attn5_k_quant64_int,433
+hardware/hls/include/hgtxr_cyclic_math.hpp,maintained,C++ Header,function,hgtxr_hgpipe_attn5_v_quant64_int,445
+hardware/hls/include/hgtxr_cyclic_math.hpp,maintained,C++ Header,function,hgtxr_hgpipe_attn5_a_quant64_int,457
+hardware/hls/include/hgtxr_cyclic_math.hpp,maintained,C++ Header,function,hgtxr_hgpipe_attn6_q_quant64_int,469
+hardware/hls/include/hgtxr_cyclic_math.hpp,maintained,C++ Header,function,hgtxr_hgpipe_attn6_k_quant64_int,481
+hardware/hls/include/hgtxr_cyclic_math.hpp,maintained,C++ Header,function,hgtxr_hgpipe_attn6_v_quant64_int,493
+hardware/hls/include/hgtxr_cyclic_math.hpp,maintained,C++ Header,function,hgtxr_hgpipe_attn6_a_quant64_int,505
+hardware/hls/include/hgtxr_cyclic_math.hpp,maintained,C++ Header,function,hgtxr_hgpipe_attn7_q_quant64_int,517
+hardware/hls/include/hgtxr_cyclic_math.hpp,maintained,C++ Header,function,hgtxr_hgpipe_attn7_k_quant64_int,529
+hardware/hls/include/hgtxr_cyclic_math.hpp,maintained,C++ Header,function,hgtxr_hgpipe_attn7_v_quant64_int,541
+hardware/hls/include/hgtxr_cyclic_math.hpp,maintained,C++ Header,function,hgtxr_hgpipe_attn7_a_quant64_int,553
+hardware/hls/include/hgtxr_cyclic_math.hpp,maintained,C++ Header,function,hgtxr_hgpipe_attn8_q_quant64_int,565
+hardware/hls/include/hgtxr_cyclic_math.hpp,maintained,C++ Header,function,hgtxr_hgpipe_attn8_k_quant64_int,577
+hardware/hls/include/hgtxr_cyclic_math.hpp,maintained,C++ Header,function,hgtxr_hgpipe_attn8_v_quant64_int,589
+hardware/hls/include/hgtxr_cyclic_math.hpp,maintained,C++ Header,function,hgtxr_hgpipe_attn8_a_quant64_int,601
+hardware/hls/include/hgtxr_cyclic_math.hpp,maintained,C++ Header,function,hgtxr_hgpipe_attn9_q_quant64_int,613
+hardware/hls/include/hgtxr_cyclic_math.hpp,maintained,C++ Header,function,hgtxr_hgpipe_attn9_k_quant64_int,625
+hardware/hls/include/hgtxr_cyclic_math.hpp,maintained,C++ Header,function,hgtxr_hgpipe_attn9_v_quant64_int,637
+hardware/hls/include/hgtxr_cyclic_math.hpp,maintained,C++ Header,function,hgtxr_hgpipe_attn9_a_quant64_int,649
+hardware/hls/include/hgtxr_cyclic_math.hpp,maintained,C++ Header,function,hgtxr_hgpipe_attn10_q_quant64_int,661
+hardware/hls/include/hgtxr_cyclic_math.hpp,maintained,C++ Header,function,hgtxr_hgpipe_attn10_k_quant64_int,673
+hardware/hls/include/hgtxr_cyclic_math.hpp,maintained,C++ Header,function,hgtxr_hgpipe_attn10_v_quant64_int,685
+hardware/hls/include/hgtxr_cyclic_math.hpp,maintained,C++ Header,function,hgtxr_hgpipe_attn10_a_quant64_int,697
+hardware/hls/include/hgtxr_cyclic_math.hpp,maintained,C++ Header,function,hgtxr_hgpipe_attn11_q_quant64_int,709
+hardware/hls/include/hgtxr_cyclic_math.hpp,maintained,C++ Header,function,hgtxr_hgpipe_attn11_k_quant64_int,721
+hardware/hls/include/hgtxr_cyclic_math.hpp,maintained,C++ Header,function,hgtxr_hgpipe_attn11_v_quant64_int,733
+hardware/hls/include/hgtxr_cyclic_math.hpp,maintained,C++ Header,function,hgtxr_hgpipe_attn11_a_quant64_int,745
+hardware/hls/include/hgtxr_cyclic_math.hpp,maintained,C++ Header,function,hgtxr_hgpipe_attn0_softmax_exp32_int,759
+hardware/hls/include/hgtxr_cyclic_math.hpp,maintained,C++ Header,function,hgtxr_hgpipe_attn0_softmax_recip_uses_table_two,771
+hardware/hls/include/hgtxr_cyclic_math.hpp,maintained,C++ Header,function,hgtxr_hgpipe_attn0_softmax_recip_int,776
+hardware/hls/include/hgtxr_cyclic_math.hpp,maintained,C++ Header,function,hgtxr_clamp_int,813
+hardware/hls/include/hgtxr_cyclic_math.hpp,maintained,C++ Header,function,hgtxr_hgpipe_attn1_softmax_exp32_int,816
+hardware/hls/include/hgtxr_cyclic_math.hpp,maintained,C++ Header,function,hgtxr_hgpipe_attn1_softmax_recip_uses_table_two,828
+hardware/hls/include/hgtxr_cyclic_math.hpp,maintained,C++ Header,function,hgtxr_hgpipe_attn1_softmax_recip_int,833
+hardware/hls/include/hgtxr_cyclic_math.hpp,maintained,C++ Header,function,hgtxr_clamp_int,870
+hardware/hls/include/hgtxr_cyclic_math.hpp,maintained,C++ Header,function,hgtxr_hgpipe_attn2_softmax_exp32_int,873
+hardware/hls/include/hgtxr_cyclic_math.hpp,maintained,C++ Header,function,hgtxr_hgpipe_attn2_softmax_recip_uses_table_two,885
+hardware/hls/include/hgtxr_cyclic_math.hpp,maintained,C++ Header,function,hgtxr_hgpipe_attn2_softmax_recip_int,890
+hardware/hls/include/hgtxr_cyclic_math.hpp,maintained,C++ Header,function,hgtxr_clamp_int,927
+hardware/hls/include/hgtxr_cyclic_math.hpp,maintained,C++ Header,function,hgtxr_hgpipe_attn3_softmax_exp32_int,930
+hardware/hls/include/hgtxr_cyclic_math.hpp,maintained,C++ Header,function,hgtxr_hgpipe_attn3_softmax_recip_uses_table_two,942
+hardware/hls/include/hgtxr_cyclic_math.hpp,maintained,C++ Header,function,hgtxr_hgpipe_attn3_softmax_recip_int,947
+hardware/hls/include/hgtxr_cyclic_math.hpp,maintained,C++ Header,function,hgtxr_clamp_int,984
+hardware/hls/include/hgtxr_cyclic_math.hpp,maintained,C++ Header,function,hgtxr_hgpipe_attn4_softmax_exp32_int,987
+hardware/hls/include/hgtxr_cyclic_math.hpp,maintained,C++ Header,function,hgtxr_hgpipe_attn4_softmax_recip_uses_table_two,999
+hardware/hls/include/hgtxr_cyclic_math.hpp,maintained,C++ Header,function,hgtxr_hgpipe_attn4_softmax_recip_int,1004
+hardware/hls/include/hgtxr_cyclic_math.hpp,maintained,C++ Header,function,hgtxr_clamp_int,1041
+hardware/hls/include/hgtxr_cyclic_math.hpp,maintained,C++ Header,function,hgtxr_hgpipe_attn5_softmax_exp32_int,1044
+hardware/hls/include/hgtxr_cyclic_math.hpp,maintained,C++ Header,function,hgtxr_hgpipe_attn5_softmax_recip_uses_table_two,1056
+hardware/hls/include/hgtxr_cyclic_math.hpp,maintained,C++ Header,function,hgtxr_hgpipe_attn5_softmax_recip_int,1061
+hardware/hls/include/hgtxr_cyclic_math.hpp,maintained,C++ Header,function,hgtxr_clamp_int,1098
+hardware/hls/include/hgtxr_cyclic_math.hpp,maintained,C++ Header,function,hgtxr_hgpipe_attn6_softmax_exp32_int,1101
+hardware/hls/include/hgtxr_cyclic_math.hpp,maintained,C++ Header,function,hgtxr_hgpipe_attn6_softmax_recip_uses_table_two,1113
+hardware/hls/include/hgtxr_cyclic_math.hpp,maintained,C++ Header,function,hgtxr_hgpipe_attn6_softmax_recip_int,1118
+hardware/hls/include/hgtxr_cyclic_math.hpp,maintained,C++ Header,function,hgtxr_clamp_int,1155
+hardware/hls/include/hgtxr_cyclic_math.hpp,maintained,C++ Header,function,hgtxr_hgpipe_attn7_softmax_exp32_int,1158
+hardware/hls/include/hgtxr_cyclic_math.hpp,maintained,C++ Header,function,hgtxr_hgpipe_attn7_softmax_recip_uses_table_two,1170
+hardware/hls/include/hgtxr_cyclic_math.hpp,maintained,C++ Header,function,hgtxr_hgpipe_attn7_softmax_recip_int,1175
+hardware/hls/include/hgtxr_cyclic_math.hpp,maintained,C++ Header,function,hgtxr_clamp_int,1212
+hardware/hls/include/hgtxr_cyclic_math.hpp,maintained,C++ Header,function,hgtxr_hgpipe_attn8_softmax_exp32_int,1215
+hardware/hls/include/hgtxr_cyclic_math.hpp,maintained,C++ Header,function,hgtxr_hgpipe_attn8_softmax_recip_uses_table_two,1227
+hardware/hls/include/hgtxr_cyclic_math.hpp,maintained,C++ Header,function,hgtxr_hgpipe_attn8_softmax_recip_int,1232
+hardware/hls/include/hgtxr_cyclic_math.hpp,maintained,C++ Header,function,hgtxr_clamp_int,1269
+hardware/hls/include/hgtxr_cyclic_math.hpp,maintained,C++ Header,function,hgtxr_hgpipe_attn9_softmax_exp32_int,1272
+hardware/hls/include/hgtxr_cyclic_math.hpp,maintained,C++ Header,function,hgtxr_hgpipe_attn9_softmax_recip_uses_table_two,1284
+hardware/hls/include/hgtxr_cyclic_math.hpp,maintained,C++ Header,function,hgtxr_hgpipe_attn9_softmax_recip_int,1289
+hardware/hls/include/hgtxr_cyclic_math.hpp,maintained,C++ Header,function,hgtxr_clamp_int,1326
+hardware/hls/include/hgtxr_cyclic_math.hpp,maintained,C++ Header,function,hgtxr_hgpipe_attn10_softmax_exp32_int,1329
+hardware/hls/include/hgtxr_cyclic_math.hpp,maintained,C++ Header,function,hgtxr_hgpipe_attn10_softmax_recip_uses_table_two,1341
+hardware/hls/include/hgtxr_cyclic_math.hpp,maintained,C++ Header,function,hgtxr_hgpipe_attn10_softmax_recip_int,1346
+hardware/hls/include/hgtxr_cyclic_math.hpp,maintained,C++ Header,function,hgtxr_clamp_int,1383
+hardware/hls/include/hgtxr_cyclic_math.hpp,maintained,C++ Header,function,hgtxr_hgpipe_attn11_softmax_exp32_int,1386
+hardware/hls/include/hgtxr_cyclic_math.hpp,maintained,C++ Header,function,hgtxr_hgpipe_attn11_softmax_recip_uses_table_two,1398
+hardware/hls/include/hgtxr_cyclic_math.hpp,maintained,C++ Header,function,hgtxr_hgpipe_attn11_softmax_recip_int,1403
+hardware/hls/include/hgtxr_cyclic_math.hpp,maintained,C++ Header,function,hgtxr_clamp_int,1440
+hardware/hls/include/hgtxr_cyclic_math.hpp,maintained,C++ Header,function,hgtxr_hgpipe_attn0_lnq_rsqrt128_int,1445
+hardware/hls/include/hgtxr_cyclic_math.hpp,maintained,C++ Header,function,hgtxr_hgpipe_attn0_lnq_mean_int,1469
+hardware/hls/include/hgtxr_cyclic_math.hpp,maintained,C++ Header,function,hgtxr_clamp_int,1485
+hardware/hls/include/hgtxr_cyclic_math.hpp,maintained,C++ Header,function,hgtxr_hgpipe_attn1_lnq_rsqrt128_int,1488
+hardware/hls/include/hgtxr_cyclic_math.hpp,maintained,C++ Header,function,hgtxr_hgpipe_attn1_lnq_mean_int,1512
+hardware/hls/include/hgtxr_cyclic_math.hpp,maintained,C++ Header,function,hgtxr_clamp_int,1528
+hardware/hls/include/hgtxr_cyclic_math.hpp,maintained,C++ Header,function,hgtxr_hgpipe_attn2_lnq_rsqrt128_int,1531
+hardware/hls/include/hgtxr_cyclic_math.hpp,maintained,C++ Header,function,hgtxr_hgpipe_attn2_lnq_mean_int,1555
+hardware/hls/include/hgtxr_cyclic_math.hpp,maintained,C++ Header,function,hgtxr_clamp_int,1571
+hardware/hls/include/hgtxr_cyclic_math.hpp,maintained,C++ Header,function,hgtxr_hgpipe_attn3_lnq_rsqrt128_int,1574
+hardware/hls/include/hgtxr_cyclic_math.hpp,maintained,C++ Header,function,hgtxr_hgpipe_attn3_lnq_mean_int,1598
+hardware/hls/include/hgtxr_cyclic_math.hpp,maintained,C++ Header,function,hgtxr_clamp_int,1614
+hardware/hls/include/hgtxr_cyclic_math.hpp,maintained,C++ Header,function,hgtxr_hgpipe_attn4_lnq_rsqrt128_int,1617
+hardware/hls/include/hgtxr_cyclic_math.hpp,maintained,C++ Header,function,hgtxr_hgpipe_attn4_lnq_mean_int,1641
+hardware/hls/include/hgtxr_cyclic_math.hpp,maintained,C++ Header,function,hgtxr_clamp_int,1657
+hardware/hls/include/hgtxr_cyclic_math.hpp,maintained,C++ Header,function,hgtxr_hgpipe_attn5_lnq_rsqrt128_int,1660
+hardware/hls/include/hgtxr_cyclic_math.hpp,maintained,C++ Header,function,hgtxr_hgpipe_attn5_lnq_mean_int,1684
+hardware/hls/include/hgtxr_cyclic_math.hpp,maintained,C++ Header,function,hgtxr_clamp_int,1700
+hardware/hls/include/hgtxr_cyclic_math.hpp,maintained,C++ Header,function,hgtxr_hgpipe_attn6_lnq_rsqrt128_int,1703
+hardware/hls/include/hgtxr_cyclic_math.hpp,maintained,C++ Header,function,hgtxr_hgpipe_attn6_lnq_mean_int,1727
+hardware/hls/include/hgtxr_cyclic_math.hpp,maintained,C++ Header,function,hgtxr_clamp_int,1743
+hardware/hls/include/hgtxr_cyclic_math.hpp,maintained,C++ Header,function,hgtxr_hgpipe_attn7_lnq_rsqrt128_int,1746
+hardware/hls/include/hgtxr_cyclic_math.hpp,maintained,C++ Header,function,hgtxr_hgpipe_attn7_lnq_mean_int,1770
+hardware/hls/include/hgtxr_cyclic_math.hpp,maintained,C++ Header,function,hgtxr_clamp_int,1786
+hardware/hls/include/hgtxr_cyclic_math.hpp,maintained,C++ Header,function,hgtxr_hgpipe_attn8_lnq_rsqrt128_int,1789
+hardware/hls/include/hgtxr_cyclic_math.hpp,maintained,C++ Header,function,hgtxr_hgpipe_attn8_lnq_mean_int,1813
+hardware/hls/include/hgtxr_cyclic_math.hpp,maintained,C++ Header,function,hgtxr_clamp_int,1829
+hardware/hls/include/hgtxr_cyclic_math.hpp,maintained,C++ Header,function,hgtxr_hgpipe_attn9_lnq_rsqrt128_int,1832
+hardware/hls/include/hgtxr_cyclic_math.hpp,maintained,C++ Header,function,hgtxr_hgpipe_attn9_lnq_mean_int,1856
+hardware/hls/include/hgtxr_cyclic_math.hpp,maintained,C++ Header,function,hgtxr_clamp_int,1872
+hardware/hls/include/hgtxr_cyclic_math.hpp,maintained,C++ Header,function,hgtxr_hgpipe_attn10_lnq_rsqrt128_int,1875
+hardware/hls/include/hgtxr_cyclic_math.hpp,maintained,C++ Header,function,hgtxr_hgpipe_attn10_lnq_mean_int,1899
+hardware/hls/include/hgtxr_cyclic_math.hpp,maintained,C++ Header,function,hgtxr_clamp_int,1915
+hardware/hls/include/hgtxr_cyclic_math.hpp,maintained,C++ Header,function,hgtxr_hgpipe_attn11_lnq_rsqrt128_int,1918
+hardware/hls/include/hgtxr_cyclic_math.hpp,maintained,C++ Header,function,hgtxr_hgpipe_attn11_lnq_mean_int,1942
+hardware/hls/include/hgtxr_cyclic_math.hpp,maintained,C++ Header,function,hgtxr_clamp_int,1958
+hardware/hls/include/hgtxr_cyclic_math.hpp,maintained,C++ Header,function,hgtxr_hgpipe_mlp0_lnq_rsqrt128_int,1961
+hardware/hls/include/hgtxr_cyclic_math.hpp,maintained,C++ Header,function,hgtxr_hgpipe_mlp0_lnq_mean_int,1985
+hardware/hls/include/hgtxr_cyclic_math.hpp,maintained,C++ Header,function,hgtxr_clamp_int,2001
+hardware/hls/include/hgtxr_cyclic_math.hpp,maintained,C++ Header,function,hgtxr_hgpipe_mlp1_lnq_rsqrt128_int,2004
+hardware/hls/include/hgtxr_cyclic_math.hpp,maintained,C++ Header,function,hgtxr_hgpipe_mlp1_lnq_mean_int,2028
+hardware/hls/include/hgtxr_cyclic_math.hpp,maintained,C++ Header,function,hgtxr_clamp_int,2044
+hardware/hls/include/hgtxr_cyclic_math.hpp,maintained,C++ Header,function,hgtxr_hgpipe_mlp2_lnq_rsqrt128_int,2047
+hardware/hls/include/hgtxr_cyclic_math.hpp,maintained,C++ Header,function,hgtxr_hgpipe_mlp2_lnq_mean_int,2071
+hardware/hls/include/hgtxr_cyclic_math.hpp,maintained,C++ Header,function,hgtxr_clamp_int,2087
+hardware/hls/include/hgtxr_cyclic_math.hpp,maintained,C++ Header,function,hgtxr_hgpipe_mlp3_lnq_rsqrt128_int,2090
+hardware/hls/include/hgtxr_cyclic_math.hpp,maintained,C++ Header,function,hgtxr_hgpipe_mlp3_lnq_mean_int,2114
+hardware/hls/include/hgtxr_cyclic_math.hpp,maintained,C++ Header,function,hgtxr_clamp_int,2130
+hardware/hls/include/hgtxr_cyclic_math.hpp,maintained,C++ Header,function,hgtxr_hgpipe_mlp4_lnq_rsqrt128_int,2133
+hardware/hls/include/hgtxr_cyclic_math.hpp,maintained,C++ Header,function,hgtxr_hgpipe_mlp4_lnq_mean_int,2157
+hardware/hls/include/hgtxr_cyclic_math.hpp,maintained,C++ Header,function,hgtxr_clamp_int,2173
+hardware/hls/include/hgtxr_cyclic_math.hpp,maintained,C++ Header,function,hgtxr_hgpipe_mlp5_lnq_rsqrt128_int,2176
+hardware/hls/include/hgtxr_cyclic_math.hpp,maintained,C++ Header,function,hgtxr_hgpipe_mlp5_lnq_mean_int,2200
+hardware/hls/include/hgtxr_cyclic_math.hpp,maintained,C++ Header,function,hgtxr_clamp_int,2216
+hardware/hls/include/hgtxr_cyclic_math.hpp,maintained,C++ Header,function,hgtxr_hgpipe_mlp6_lnq_rsqrt128_int,2219
+hardware/hls/include/hgtxr_cyclic_math.hpp,maintained,C++ Header,function,hgtxr_hgpipe_mlp6_lnq_mean_int,2243
+hardware/hls/include/hgtxr_cyclic_math.hpp,maintained,C++ Header,function,hgtxr_clamp_int,2259
+hardware/hls/include/hgtxr_cyclic_math.hpp,maintained,C++ Header,function,hgtxr_hgpipe_mlp7_lnq_rsqrt128_int,2262
+hardware/hls/include/hgtxr_cyclic_math.hpp,maintained,C++ Header,function,hgtxr_hgpipe_mlp7_lnq_mean_int,2286
+hardware/hls/include/hgtxr_cyclic_math.hpp,maintained,C++ Header,function,hgtxr_clamp_int,2302
+hardware/hls/include/hgtxr_cyclic_math.hpp,maintained,C++ Header,function,hgtxr_hgpipe_mlp8_lnq_rsqrt128_int,2305
+hardware/hls/include/hgtxr_cyclic_math.hpp,maintained,C++ Header,function,hgtxr_hgpipe_mlp8_lnq_mean_int,2329
+hardware/hls/include/hgtxr_cyclic_math.hpp,maintained,C++ Header,function,hgtxr_clamp_int,2345
+hardware/hls/include/hgtxr_cyclic_math.hpp,maintained,C++ Header,function,hgtxr_hgpipe_mlp9_lnq_rsqrt128_int,2348
+hardware/hls/include/hgtxr_cyclic_math.hpp,maintained,C++ Header,function,hgtxr_hgpipe_mlp9_lnq_mean_int,2372
+hardware/hls/include/hgtxr_cyclic_math.hpp,maintained,C++ Header,function,hgtxr_clamp_int,2388
+hardware/hls/include/hgtxr_cyclic_math.hpp,maintained,C++ Header,function,hgtxr_hgpipe_mlp10_lnq_rsqrt128_int,2391
+hardware/hls/include/hgtxr_cyclic_math.hpp,maintained,C++ Header,function,hgtxr_hgpipe_mlp10_lnq_mean_int,2415
+hardware/hls/include/hgtxr_cyclic_math.hpp,maintained,C++ Header,function,hgtxr_clamp_int,2431
+hardware/hls/include/hgtxr_cyclic_math.hpp,maintained,C++ Header,function,hgtxr_hgpipe_mlp11_lnq_rsqrt128_int,2434
+hardware/hls/include/hgtxr_cyclic_math.hpp,maintained,C++ Header,function,hgtxr_hgpipe_mlp11_lnq_mean_int,2458
+hardware/hls/include/hgtxr_cyclic_math.hpp,maintained,C++ Header,function,hgtxr_clamp_int,2474
+hardware/hls/include/hgtxr_cyclic_math.hpp,maintained,C++ Header,function,hgtxr_hgpipe_head_lnq_rsqrt128_int,2477
+hardware/hls/include/hgtxr_cyclic_math.hpp,maintained,C++ Header,function,hgtxr_hgpipe_head_lnq_mean_int,2501
+hardware/hls/include/hgtxr_cyclic_math.hpp,maintained,C++ Header,function,hgtxr_clamp_int,2517
+hardware/hls/include/hgtxr_cyclic_math.hpp,maintained,C++ Header,function,hgtxr_hgpipe_gelu_lut,2520
+hardware/hls/include/hgtxr_cyclic_math.hpp,maintained,C++ Header,function,hgtxr_hgpipe_exp_lut,2537
+hardware/hls/include/hgtxr_cyclic_math.hpp,maintained,C++ Header,function,hgtxr_hgpipe_rsqrt_lut,2558
+hardware/hls/include/hgtxr_cyclic_math.hpp,maintained,C++ Header,function,hgtxr_rsqrt_approx,2609
+hardware/hls/include/hgtxr_cyclic_math.hpp,maintained,C++ Header,function,hgtxr_hgpipe_rsqrt_lut,2612
+hardware/hls/include/hgtxr_cyclic_math.hpp,maintained,C++ Header,function,hgtxr_relu,2619
+hardware/hls/include/hgtxr_cyclic_math.hpp,maintained,C++ Header,function,hgtxr_hard_sigmoid,2624
+hardware/hls/include/hgtxr_cyclic_math.hpp,maintained,C++ Header,function,hgtxr_gelu_approx,2636
+hardware/hls/include/hgtxr_cyclic_math.hpp,maintained,C++ Header,function,hgtxr_hgpipe_gelu_lut,2639
+hardware/hls/include/hgtxr_cyclic_math.hpp,maintained,C++ Header,function,hgtxr_hard_sigmoid,2641
+hardware/hls/include/hgtxr_cyclic_math.hpp,maintained,C++ Header,function,hgtxr_score_exp_approx,2645
+hardware/hls/include/hgtxr_cyclic_math.hpp,maintained,C++ Header,function,hgtxr_hgpipe_exp_lut,2648
+hardware/hls/include/hgtxr_cyclic_math.hpp,maintained,C++ Header,function,row_max_tile,2663
+hardware/hls/include/hgtxr_cyclic_norm.hpp,maintained,C++ Header,function,identity_norm_tile,10
+hardware/hls/include/hgtxr_cyclic_norm.hpp,maintained,C++ Header,function,mean_center_tile,23
+hardware/hls/include/hgtxr_cyclic_scheduler.hpp,maintained,C++ Header,class,HgtxrSchedulerLimits,31
+hardware/hls/include/hgtxr_cyclic_scheduler.hpp,maintained,C++ Header,class,HgtxrSchedulerCounters,38
+hardware/hls/include/hgtxr_cyclic_scheduler.hpp,maintained,C++ Header,function,hgtxr_is_last,45
+hardware/hls/include/hgtxr_cyclic_transformer_params.hpp,maintained,C++ Header,class,HgtxrRuntimeConfig,250
+hardware/hls/include/hgtxr_cyclic_weight_layout.hpp,maintained,C++ Header,function,hgtxr_unpack_weight_word,79
+hardware/hls/include/hgtxr_cyclic_weight_layout.hpp,maintained,C++ Header,function,hgtxr_unpack_weight_word,93
+hardware/hls/include/hgtxr_e2e_vit.hpp,maintained,C++ Header,class,HgtxrGlobalBuffer,471
+hardware/hls/include/hgtxr_e2e_vit.hpp,maintained,C++ Header,class,HgtxrRuntimeSchedule,487
+hardware/hls/include/hgtxr_e2e_vit.hpp,maintained,C++ Header,function,hgtxr_e2e_min_int,495
+hardware/hls/include/hgtxr_e2e_vit.hpp,maintained,C++ Header,function,hgtxr_e2e_runtime_mode_from_control,500
+hardware/hls/include/hgtxr_e2e_vit.hpp,maintained,C++ Header,function,hgtxr_e2e_mode_active_tokens,516
+hardware/hls/include/hgtxr_e2e_vit.hpp,maintained,C++ Header,function,hgtxr_e2e_min_int,520
+hardware/hls/include/hgtxr_e2e_vit.hpp,maintained,C++ Header,function,hgtxr_e2e_mode_depth_limit,523
+hardware/hls/include/hgtxr_e2e_vit.hpp,maintained,C++ Header,function,hgtxr_e2e_min_int,527
+hardware/hls/include/hgtxr_e2e_vit.hpp,maintained,C++ Header,function,hgtxr_e2e_make_runtime_schedule,530
+hardware/hls/include/hgtxr_e2e_vit.hpp,maintained,C++ Header,function,hgtxr_e2e_data_from_scaled_int,544
+hardware/hls/include/hgtxr_e2e_vit.hpp,maintained,C++ Header,function,hgtxr_e2e_data_from_scaled_int_ct,552
+hardware/hls/include/hgtxr_e2e_vit.hpp,maintained,C++ Header,function,hgtxr_e2e_data_to_scaled_int,559
+hardware/hls/include/hgtxr_e2e_vit.hpp,maintained,C++ Header,function,hgtxr_e2e_data_to_scaled_int_ct,567
+hardware/hls/include/hgtxr_e2e_vit.hpp,maintained,C++ Header,function,hgtxr_e2e_data_div_int,574
+hardware/hls/include/hgtxr_e2e_vit.hpp,maintained,C++ Header,function,hgtxr_e2e_data_div_int_ct,582
+hardware/hls/include/hgtxr_e2e_vit.hpp,maintained,C++ Header,function,hgtxr_e2e_acc_div_int_ct,590
+hardware/hls/include/hgtxr_e2e_vit.hpp,maintained,C++ Header,function,hgtxr_e2e_data_from_scaled_int,608
+hardware/hls/include/hgtxr_e2e_vit.hpp,maintained,C++ Header,function,hgtxr_e2e_data_div_int,624
+hardware/hls/include/hgtxr_e2e_vit.hpp,maintained,C++ Header,function,hgtxr_axis_to_data,644
+hardware/hls/include/hgtxr_e2e_vit.hpp,maintained,C++ Header,function,hgtxr_data_to_axis,650
+hardware/hls/include/hgtxr_e2e_vit.hpp,maintained,C++ Header,function,hgtxr_e2e_raw_to_weight,763
+hardware/hls/include/hgtxr_e2e_vit.hpp,maintained,C++ Header,function,hgtxr_e2e_param_pattern_rom_raw,772
+hardware/hls/include/hgtxr_e2e_vit.hpp,maintained,C++ Header,function,hgtxr_e2e_structured_block_rom_raw,785
+hardware/hls/include/hgtxr_e2e_vit.hpp,maintained,C++ Header,function,hgtxr_e2e_is_track_rom_block_weight,829
+hardware/hls/include/hgtxr_e2e_vit.hpp,maintained,C++ Header,function,hgtxr_e2e_is_onchip_param_rom_weight,839
+hardware/hls/include/hgtxr_e2e_vit.hpp,maintained,C++ Header,function,hgtxr_e2e_onchip_param_rom_raw,853
+hardware/hls/include/hgtxr_e2e_vit.hpp,maintained,C++ Header,function,hgtxr_e2e_structured_block_rom_raw,859
+hardware/hls/include/hgtxr_e2e_vit.hpp,maintained,C++ Header,function,hgtxr_e2e_param_pattern_rom_raw,874
+hardware/hls/include/hgtxr_e2e_vit.hpp,maintained,C++ Header,function,hgtxr_e2e_onchip_param_rom_raw,891
+hardware/hls/include/hgtxr_e2e_vit.hpp,maintained,C++ Header,function,hgtxr_e2e_onchip_param_rom_raw,895
+hardware/hls/include/hgtxr_e2e_vit.hpp,maintained,C++ Header,function,hgtxr_e2e_load_weight_axi_raw,901
+hardware/hls/include/hgtxr_e2e_vit.hpp,maintained,C++ Header,function,hgtxr_e2e_pack_weight_word_from_rom,933
+hardware/hls/include/hgtxr_e2e_vit.hpp,maintained,C++ Header,function,hgtxr_e2e_pack_weight_word_from_rom,938
+hardware/hls/include/hgtxr_e2e_vit.hpp,maintained,C++ Header,function,hgtxr_e2e_dispatch_prefetch_bank,949
+hardware/hls/include/hgtxr_e2e_vit.hpp,maintained,C++ Header,function,hgtxr_e2e_prefetch_trace_reset,965
+hardware/hls/include/hgtxr_e2e_vit.hpp,maintained,C++ Header,function,hgtxr_e2e_prefetch_trace_done,978
+hardware/hls/include/hgtxr_e2e_vit.hpp,maintained,C++ Header,function,hgtxr_e2e_prefetch_trace_load_hit,987
+hardware/hls/include/hgtxr_e2e_vit.hpp,maintained,C++ Header,function,hgtxr_e2e_prefetch_trace_block_end,1038
+hardware/hls/include/hgtxr_e2e_vit.hpp,maintained,C++ Header,function,hgtxr_e2e_prefetch_trace_report,1047
+hardware/hls/include/hgtxr_e2e_vit.hpp,maintained,C++ Header,function,hgtxr_e2e_load_weight_word,1091
+hardware/hls/include/hgtxr_e2e_vit.hpp,maintained,C++ Header,function,hgtxr_e2e_unpack_weight_word,1272
+hardware/hls/include/hgtxr_e2e_vit.hpp,maintained,C++ Header,function,hgtxr_e2e_fabric_mul,1334
+hardware/hls/include/hgtxr_e2e_vit.hpp,maintained,C++ Header,function,hgtxr_e2e_dsp_mul,1336
+hardware/hls/include/hgtxr_e2e_vit.hpp,maintained,C++ Header,function,hgtxr_e2e_fabric_mul,1367
+hardware/hls/include/hgtxr_e2e_vit.hpp,maintained,C++ Header,function,hgtxr_e2e_dsp_mul,1369
+hardware/hls/include/hgtxr_e2e_vit.hpp,maintained,C++ Header,function,hgtxr_e2e_fabric_mul,1378
+hardware/hls/include/hgtxr_e2e_vit.hpp,maintained,C++ Header,function,hgtxr_e2e_fabric_mul,1381
+hardware/hls/include/hgtxr_e2e_vit.hpp,maintained,C++ Header,function,hgtxr_e2e_fabric_mul,1385
+hardware/hls/include/hgtxr_e2e_vit.hpp,maintained,C++ Header,function,hgtxr_e2e_dsp_mul,1388
+hardware/hls/include/hgtxr_e2e_vit.hpp,maintained,C++ Header,function,hgtxr_e2e_fabric_mul,1464
+hardware/hls/include/hgtxr_e2e_vit.hpp,maintained,C++ Header,function,hgtxr_e2e_fabric_mul,1467
+hardware/hls/include/hgtxr_e2e_vit.hpp,maintained,C++ Header,function,hgtxr_e2e_fabric_mul,1471
+hardware/hls/include/hgtxr_e2e_vit.hpp,maintained,C++ Header,function,hgtxr_e2e_dsp_mul,1476
+hardware/hls/include/hgtxr_e2e_vit.hpp,maintained,C++ Header,function,hgtxr_e2e_fabric_mul,1486
+hardware/hls/include/hgtxr_e2e_vit.hpp,maintained,C++ Header,function,hgtxr_e2e_core_lane_mul,1489
+hardware/hls/include/hgtxr_e2e_vit.hpp,maintained,C++ Header,function,hgtxr_e2e_fabric_mul,1496
+hardware/hls/include/hgtxr_e2e_vit.hpp,maintained,C++ Header,function,hgtxr_e2e_dsp_mul,1498
+hardware/hls/include/hgtxr_e2e_vit.hpp,maintained,C++ Header,function,hgtxr_e2e_clip_lut_index,1560
+hardware/hls/include/hgtxr_e2e_vit.hpp,maintained,C++ Header,function,hgtxr_e2e_gelu_rom,1572
+hardware/hls/include/hgtxr_e2e_vit.hpp,maintained,C++ Header,function,hgtxr_e2e_softmax_exp_rom,1591
+hardware/hls/include/hgtxr_e2e_vit.hpp,maintained,C++ Header,function,hgtxr_e2e_layernorm_rsqrt_rom,1610
+hardware/hls/include/hgtxr_e2e_vit.hpp,maintained,C++ Header,function,hgtxr_e2e_prefetch_block_elem_base,1638
+hardware/hls/include/hgtxr_e2e_vit.hpp,maintained,C++ Header,function,hgtxr_e2e_prefetch_block_word_base,1664
+hardware/hls/include/hgtxr_e2e_vit.hpp,maintained,C++ Header,function,hgtxr_e2e_hgpipe_geluq_raw,1742
+hardware/hls/include/hgtxr_e2e_vit.hpp,maintained,C++ Header,function,hgtxr::cyclic_transformer::hgtxr_hgpipe_mlp0_geluq64_int,1746
+hardware/hls/include/hgtxr_e2e_vit.hpp,maintained,C++ Header,function,hgtxr::cyclic_transformer::hgtxr_hgpipe_mlp1_geluq64_int,1748
+hardware/hls/include/hgtxr_e2e_vit.hpp,maintained,C++ Header,function,hgtxr::cyclic_transformer::hgtxr_hgpipe_mlp2_geluq64_int,1750
+hardware/hls/include/hgtxr_e2e_vit.hpp,maintained,C++ Header,function,hgtxr::cyclic_transformer::hgtxr_hgpipe_mlp3_geluq64_int,1752
+hardware/hls/include/hgtxr_e2e_vit.hpp,maintained,C++ Header,function,hgtxr::cyclic_transformer::hgtxr_hgpipe_mlp4_geluq64_int,1754
+hardware/hls/include/hgtxr_e2e_vit.hpp,maintained,C++ Header,function,hgtxr::cyclic_transformer::hgtxr_hgpipe_mlp5_geluq64_int,1756
+hardware/hls/include/hgtxr_e2e_vit.hpp,maintained,C++ Header,function,hgtxr::cyclic_transformer::hgtxr_hgpipe_mlp6_geluq64_int,1758
+hardware/hls/include/hgtxr_e2e_vit.hpp,maintained,C++ Header,function,hgtxr::cyclic_transformer::hgtxr_hgpipe_mlp7_geluq64_int,1760
+hardware/hls/include/hgtxr_e2e_vit.hpp,maintained,C++ Header,function,hgtxr::cyclic_transformer::hgtxr_hgpipe_mlp8_geluq64_int,1762
+hardware/hls/include/hgtxr_e2e_vit.hpp,maintained,C++ Header,function,hgtxr::cyclic_transformer::hgtxr_hgpipe_mlp9_geluq64_int,1764
+hardware/hls/include/hgtxr_e2e_vit.hpp,maintained,C++ Header,function,hgtxr::cyclic_transformer::hgtxr_hgpipe_mlp10_geluq64_int,1766
+hardware/hls/include/hgtxr_e2e_vit.hpp,maintained,C++ Header,function,hgtxr::cyclic_transformer::hgtxr_hgpipe_mlp11_geluq64_int,1768
+hardware/hls/include/hgtxr_e2e_vit.hpp,maintained,C++ Header,function,hgtxr_e2e_gelu,1772
+hardware/hls/include/hgtxr_e2e_vit.hpp,maintained,C++ Header,function,hgtxr_e2e_gelu_rom,1776
+hardware/hls/include/hgtxr_e2e_vit.hpp,maintained,C++ Header,function,hgtxr_e2e_exp_approx,1790
+hardware/hls/include/hgtxr_e2e_vit.hpp,maintained,C++ Header,function,hgtxr_e2e_softmax_exp_rom,1793
+hardware/hls/include/hgtxr_e2e_vit.hpp,maintained,C++ Header,function,hgtxr_e2e_hgpipe_softmax_exp_raw,1810
+hardware/hls/include/hgtxr_e2e_vit.hpp,maintained,C++ Header,function,hgtxr::cyclic_transformer::hgtxr_hgpipe_attn0_softmax_exp32_int,1813
+hardware/hls/include/hgtxr_e2e_vit.hpp,maintained,C++ Header,function,hgtxr::cyclic_transformer::hgtxr_hgpipe_attn1_softmax_exp32_int,1814
+hardware/hls/include/hgtxr_e2e_vit.hpp,maintained,C++ Header,function,hgtxr::cyclic_transformer::hgtxr_hgpipe_attn2_softmax_exp32_int,1815
+hardware/hls/include/hgtxr_e2e_vit.hpp,maintained,C++ Header,function,hgtxr::cyclic_transformer::hgtxr_hgpipe_attn3_softmax_exp32_int,1816
+hardware/hls/include/hgtxr_e2e_vit.hpp,maintained,C++ Header,function,hgtxr::cyclic_transformer::hgtxr_hgpipe_attn4_softmax_exp32_int,1817
+hardware/hls/include/hgtxr_e2e_vit.hpp,maintained,C++ Header,function,hgtxr::cyclic_transformer::hgtxr_hgpipe_attn5_softmax_exp32_int,1818
+hardware/hls/include/hgtxr_e2e_vit.hpp,maintained,C++ Header,function,hgtxr::cyclic_transformer::hgtxr_hgpipe_attn6_softmax_exp32_int,1819
+hardware/hls/include/hgtxr_e2e_vit.hpp,maintained,C++ Header,function,hgtxr::cyclic_transformer::hgtxr_hgpipe_attn7_softmax_exp32_int,1820
+hardware/hls/include/hgtxr_e2e_vit.hpp,maintained,C++ Header,function,hgtxr::cyclic_transformer::hgtxr_hgpipe_attn8_softmax_exp32_int,1821
+hardware/hls/include/hgtxr_e2e_vit.hpp,maintained,C++ Header,function,hgtxr::cyclic_transformer::hgtxr_hgpipe_attn9_softmax_exp32_int,1822
+hardware/hls/include/hgtxr_e2e_vit.hpp,maintained,C++ Header,function,hgtxr::cyclic_transformer::hgtxr_hgpipe_attn10_softmax_exp32_int,1823
+hardware/hls/include/hgtxr_e2e_vit.hpp,maintained,C++ Header,function,hgtxr::cyclic_transformer::hgtxr_hgpipe_attn11_softmax_exp32_int,1824
+hardware/hls/include/hgtxr_e2e_vit.hpp,maintained,C++ Header,function,hgtxr_e2e_hgpipe_softmax_uses_table_two,1828
+hardware/hls/include/hgtxr_e2e_vit.hpp,maintained,C++ Header,function,hgtxr::cyclic_transformer::hgtxr_hgpipe_attn0_softmax_recip_uses_table_two,1831
+hardware/hls/include/hgtxr_e2e_vit.hpp,maintained,C++ Header,function,hgtxr::cyclic_transformer::hgtxr_hgpipe_attn1_softmax_recip_uses_table_two,1832
+hardware/hls/include/hgtxr_e2e_vit.hpp,maintained,C++ Header,function,hgtxr::cyclic_transformer::hgtxr_hgpipe_attn2_softmax_recip_uses_table_two,1833
+hardware/hls/include/hgtxr_e2e_vit.hpp,maintained,C++ Header,function,hgtxr::cyclic_transformer::hgtxr_hgpipe_attn3_softmax_recip_uses_table_two,1834
+hardware/hls/include/hgtxr_e2e_vit.hpp,maintained,C++ Header,function,hgtxr::cyclic_transformer::hgtxr_hgpipe_attn4_softmax_recip_uses_table_two,1835
+hardware/hls/include/hgtxr_e2e_vit.hpp,maintained,C++ Header,function,hgtxr::cyclic_transformer::hgtxr_hgpipe_attn5_softmax_recip_uses_table_two,1836
+hardware/hls/include/hgtxr_e2e_vit.hpp,maintained,C++ Header,function,hgtxr::cyclic_transformer::hgtxr_hgpipe_attn6_softmax_recip_uses_table_two,1837
+hardware/hls/include/hgtxr_e2e_vit.hpp,maintained,C++ Header,function,hgtxr::cyclic_transformer::hgtxr_hgpipe_attn7_softmax_recip_uses_table_two,1838
+hardware/hls/include/hgtxr_e2e_vit.hpp,maintained,C++ Header,function,hgtxr::cyclic_transformer::hgtxr_hgpipe_attn8_softmax_recip_uses_table_two,1839
+hardware/hls/include/hgtxr_e2e_vit.hpp,maintained,C++ Header,function,hgtxr::cyclic_transformer::hgtxr_hgpipe_attn9_softmax_recip_uses_table_two,1840
+hardware/hls/include/hgtxr_e2e_vit.hpp,maintained,C++ Header,function,hgtxr::cyclic_transformer::hgtxr_hgpipe_attn10_softmax_recip_uses_table_two,1841
+hardware/hls/include/hgtxr_e2e_vit.hpp,maintained,C++ Header,function,hgtxr::cyclic_transformer::hgtxr_hgpipe_attn11_softmax_recip_uses_table_two,1842
+hardware/hls/include/hgtxr_e2e_vit.hpp,maintained,C++ Header,function,hgtxr_e2e_hgpipe_softmax_recip_raw,1846
+hardware/hls/include/hgtxr_e2e_vit.hpp,maintained,C++ Header,function,hgtxr::cyclic_transformer::hgtxr_hgpipe_attn0_softmax_recip_int,1849
+hardware/hls/include/hgtxr_e2e_vit.hpp,maintained,C++ Header,function,hgtxr::cyclic_transformer::hgtxr_hgpipe_attn1_softmax_recip_int,1850
+hardware/hls/include/hgtxr_e2e_vit.hpp,maintained,C++ Header,function,hgtxr::cyclic_transformer::hgtxr_hgpipe_attn2_softmax_recip_int,1851
+hardware/hls/include/hgtxr_e2e_vit.hpp,maintained,C++ Header,function,hgtxr::cyclic_transformer::hgtxr_hgpipe_attn3_softmax_recip_int,1852
+hardware/hls/include/hgtxr_e2e_vit.hpp,maintained,C++ Header,function,hgtxr::cyclic_transformer::hgtxr_hgpipe_attn4_softmax_recip_int,1853
+hardware/hls/include/hgtxr_e2e_vit.hpp,maintained,C++ Header,function,hgtxr::cyclic_transformer::hgtxr_hgpipe_attn5_softmax_recip_int,1854
+hardware/hls/include/hgtxr_e2e_vit.hpp,maintained,C++ Header,function,hgtxr::cyclic_transformer::hgtxr_hgpipe_attn6_softmax_recip_int,1855
+hardware/hls/include/hgtxr_e2e_vit.hpp,maintained,C++ Header,function,hgtxr::cyclic_transformer::hgtxr_hgpipe_attn7_softmax_recip_int,1856
+hardware/hls/include/hgtxr_e2e_vit.hpp,maintained,C++ Header,function,hgtxr::cyclic_transformer::hgtxr_hgpipe_attn8_softmax_recip_int,1857
+hardware/hls/include/hgtxr_e2e_vit.hpp,maintained,C++ Header,function,hgtxr::cyclic_transformer::hgtxr_hgpipe_attn9_softmax_recip_int,1858
+hardware/hls/include/hgtxr_e2e_vit.hpp,maintained,C++ Header,function,hgtxr::cyclic_transformer::hgtxr_hgpipe_attn10_softmax_recip_int,1859
+hardware/hls/include/hgtxr_e2e_vit.hpp,maintained,C++ Header,function,hgtxr::cyclic_transformer::hgtxr_hgpipe_attn11_softmax_recip_int,1860
+hardware/hls/include/hgtxr_e2e_vit.hpp,maintained,C++ Header,function,hgtxr::cyclic_transformer::hgtxr_hgpipe_attn0_softmax_requant_uint3_int,1870
+hardware/hls/include/hgtxr_e2e_vit.hpp,maintained,C++ Header,function,hgtxr::cyclic_transformer::hgtxr_hgpipe_attn1_softmax_requant_uint3_int,1871
+hardware/hls/include/hgtxr_e2e_vit.hpp,maintained,C++ Header,function,hgtxr::cyclic_transformer::hgtxr_hgpipe_attn2_softmax_requant_uint3_int,1872
+hardware/hls/include/hgtxr_e2e_vit.hpp,maintained,C++ Header,function,hgtxr::cyclic_transformer::hgtxr_hgpipe_attn3_softmax_requant_uint3_int,1873
+hardware/hls/include/hgtxr_e2e_vit.hpp,maintained,C++ Header,function,hgtxr::cyclic_transformer::hgtxr_hgpipe_attn4_softmax_requant_uint3_int,1874
+hardware/hls/include/hgtxr_e2e_vit.hpp,maintained,C++ Header,function,hgtxr::cyclic_transformer::hgtxr_hgpipe_attn5_softmax_requant_uint3_int,1875
+hardware/hls/include/hgtxr_e2e_vit.hpp,maintained,C++ Header,function,hgtxr::cyclic_transformer::hgtxr_hgpipe_attn6_softmax_requant_uint3_int,1876
+hardware/hls/include/hgtxr_e2e_vit.hpp,maintained,C++ Header,function,hgtxr::cyclic_transformer::hgtxr_hgpipe_attn7_softmax_requant_uint3_int,1877
+hardware/hls/include/hgtxr_e2e_vit.hpp,maintained,C++ Header,function,hgtxr::cyclic_transformer::hgtxr_hgpipe_attn8_softmax_requant_uint3_int,1878
+hardware/hls/include/hgtxr_e2e_vit.hpp,maintained,C++ Header,function,hgtxr::cyclic_transformer::hgtxr_hgpipe_attn9_softmax_requant_uint3_int,1879
+hardware/hls/include/hgtxr_e2e_vit.hpp,maintained,C++ Header,function,hgtxr::cyclic_transformer::hgtxr_hgpipe_attn10_softmax_requant_uint3_int,1880
+hardware/hls/include/hgtxr_e2e_vit.hpp,maintained,C++ Header,function,hgtxr::cyclic_transformer::hgtxr_hgpipe_attn11_softmax_requant_uint3_int,1881
+hardware/hls/include/hgtxr_e2e_vit.hpp,maintained,C++ Header,function,hgtxr_e2e_fast_channel_gain,3924
+hardware/hls/include/hgtxr_e2e_vit.hpp,maintained,C++ Header,function,hgtxr_e2e_fast_token_gain,3930
+hardware/hls/include/hgtxr_e2e_vit.hpp,maintained,C++ Header,function,hgtxr_e2e_fast_gelu,4110
+hardware/hls/include/hgtxr_e2e_vit.hpp,maintained,C++ Header,function,hgtxr_e2e_fast_attn_unit,4131
+hardware/hls/include/hgtxr_e2e_vit.hpp,maintained,C++ Header,function,hgtxr_e2e_fast_mlp_unit,4169
+hardware/hls/include/hgtxr_e2e_vit.hpp,maintained,C++ Header,function,hgtxr_e2e_observe_value,4421
+hardware/hls/include/quant.h,maintained,C/C++ Header,function,clamp_data,5
+hardware/hls/include/stream_types.h,maintained,C/C++ Header,class,HGTXRState,5
+hardware/hls/include/stream_types.h,maintained,C/C++ Header,class,HGTXRDecision,9
+hardware/hls/src/attention.cpp,maintained,C++,function,attention_stage,3
+hardware/hls/src/controller.cpp,maintained,C++,function,controller_active_tokens,3
+hardware/hls/src/controller.cpp,maintained,C++,function,controller_depth_limit,7
+hardware/hls/src/event_patch_embed.cpp,maintained,C++,function,event_patch_embed,3
+hardware/hls/src/frame_patch_embed.cpp,maintained,C++,function,frame_patch_embed,3
+hardware/hls/src/fusion.cpp,maintained,C++,function,pool_tokens,3
+hardware/hls/src/fusion.cpp,maintained,C++,function,fusion,11
+hardware/hls/src/global_buffer.cpp,maintained,C++,function,global_buffer_write_search,3
+hardware/hls/src/global_buffer.cpp,maintained,C++,function,global_buffer_write_track,8
+hardware/hls/src/hgtxr_mode_profile_top.cpp,maintained,C++,function,mode_profile_dsp_mul,16
+hardware/hls/src/hgtxr_mode_profile_top.cpp,maintained,C++,function,mode_channel_gain,24
+hardware/hls/src/hgtxr_mode_profile_top.cpp,maintained,C++,function,mode_token_gain,31
+hardware/hls/src/hgtxr_mode_profile_top.cpp,maintained,C++,function,mode_layernorm_active,112
+hardware/hls/src/hgtxr_mode_profile_top.cpp,maintained,C++,function,mode_projection_active,151
+hardware/hls/src/hgtxr_mode_profile_top.cpp,maintained,C++,function,mode_relation_active,187
+hardware/hls/src/hgtxr_mode_profile_top.cpp,maintained,C++,function,mode_gelu_active,275
+hardware/hls/src/hgtxr_mode_profile_top.cpp,maintained,C++,function,mode_attention_active,298
+hardware/hls/src/hgtxr_mode_profile_top.cpp,maintained,C++,function,mode_mlp_active,349
+hardware/hls/src/hgtxr_mode_profile_top.cpp,maintained,C++,function,mode_transformer_profile,435
+hardware/hls/src/hgtxr_top.cpp,maintained,C++,function,hgtxr_unpack_cyclic_weight_word,126
+hardware/hls/src/hgtxr_top.cpp,maintained,C++,function,hgtxr_s2_block_rsqrt_approx,455
+hardware/hls/src/hgtxr_top.cpp,maintained,C++,function,hgtxr_cyclic_transformer_stage,762
+hardware/hls/src/hgtxr_top.cpp,maintained,C++,function,hgtxr_cyclic_transformer_stage,764
+hardware/hls/src/matmul.cpp,maintained,C++,function,matmul,7
+hardware/hls/src/mlp.cpp,maintained,C++,function,mlp_stage,3
+hardware/hls/src/noc.cpp,maintained,C++,function,noc_route_tokens,3
+hardware/hls/src/nonlinear.cpp,maintained,C++,function,hgtxr_rsqrt_approx,3
+hardware/hls/src/nonlinear.cpp,maintained,C++,function,hgtxr_exp_neg_approx,13
+hardware/hls/src/nonlinear.cpp,maintained,C++,function,hgtxr_tanh_approx,25
+hardware/hls/src/nonlinear.cpp,maintained,C++,function,layernorm_stage,32
+hardware/hls/src/nonlinear.cpp,maintained,C++,function,softmax_stage,54
+hardware/hls/src/nonlinear.cpp,maintained,C++,function,gelu_stage,80
+hardware/hls/src/rmu_smu.cpp,maintained,C++,function,rmu_smu_dsp_mul,3
+hardware/hls/src/rmu_smu.cpp,maintained,C++,function,rmu_smu_dsp_mul_acc,11
+hardware/hls/src/rmu_smu.cpp,maintained,C++,function,channel_gain,19
+hardware/hls/src/rmu_smu.cpp,maintained,C++,function,token_gain,24
+hardware/hls/src/rmu_smu.cpp,maintained,C++,function,rmu_projection_stage,29
+hardware/hls/src/rmu_smu.cpp,maintained,C++,function,smu_relation_stage,56
+hardware/hls/src/runtime_fsm.cpp,maintained,C++,function,runtime_fsm,3
+hardware/hls/src/search_head.cpp,maintained,C++,function,positive_clamp,3
+hardware/hls/src/search_head.cpp,maintained,C++,function,search_head,9
+hardware/hls/src/track_head.cpp,maintained,C++,function,clamp_range,3
+hardware/hls/src/track_head.cpp,maintained,C++,function,track_head,9
+hardware/hls/src/weight_prefetcher.cpp,maintained,C++,function,weight_prefetcher,3
+hardware/hls/tb/e2e_axis_vector_active128_ff768_golden.hpp,test,C++ Header,class,HgtxrPatchEntry,5
+hardware/hls/tb/e2e_axis_vector_active128_ff768_golden.hpp,test,C++ Header,class,HgtxrQkvEntry,6
+hardware/hls/tb/e2e_axis_vector_active128_ff768_golden.hpp,test,C++ Header,class,HgtxrMatrixEntry,7
+hardware/hls/tb/e2e_axis_vector_active16_ff128_golden.hpp,test,C++ Header,class,HgtxrPatchEntry,5
+hardware/hls/tb/e2e_axis_vector_active16_ff128_golden.hpp,test,C++ Header,class,HgtxrQkvEntry,6
+hardware/hls/tb/e2e_axis_vector_active16_ff128_golden.hpp,test,C++ Header,class,HgtxrMatrixEntry,7
+hardware/hls/tb/e2e_axis_vector_active16_ff256_golden.hpp,test,C++ Header,class,HgtxrPatchEntry,5
+hardware/hls/tb/e2e_axis_vector_active16_ff256_golden.hpp,test,C++ Header,class,HgtxrQkvEntry,6
+hardware/hls/tb/e2e_axis_vector_active16_ff256_golden.hpp,test,C++ Header,class,HgtxrMatrixEntry,7
+hardware/hls/tb/e2e_axis_vector_active16_ff64_golden.hpp,test,C++ Header,class,HgtxrPatchEntry,5
+hardware/hls/tb/e2e_axis_vector_active16_ff64_golden.hpp,test,C++ Header,class,HgtxrQkvEntry,6
+hardware/hls/tb/e2e_axis_vector_active16_ff64_golden.hpp,test,C++ Header,class,HgtxrMatrixEntry,7
+hardware/hls/tb/e2e_axis_vector_active16_ff768_golden.hpp,test,C++ Header,class,HgtxrPatchEntry,5
+hardware/hls/tb/e2e_axis_vector_active16_ff768_golden.hpp,test,C++ Header,class,HgtxrQkvEntry,6
+hardware/hls/tb/e2e_axis_vector_active16_ff768_golden.hpp,test,C++ Header,class,HgtxrMatrixEntry,7
+hardware/hls/tb/e2e_axis_vector_active16_golden.hpp,test,C++ Header,class,HgtxrPatchEntry,5
+hardware/hls/tb/e2e_axis_vector_active16_golden.hpp,test,C++ Header,class,HgtxrQkvEntry,6
+hardware/hls/tb/e2e_axis_vector_active16_golden.hpp,test,C++ Header,class,HgtxrMatrixEntry,7
+hardware/hls/tb/e2e_axis_vector_active196_b6_ff768_golden.hpp,test,C++ Header,class,HgtxrPatchEntry,5
+hardware/hls/tb/e2e_axis_vector_active196_b6_ff768_golden.hpp,test,C++ Header,class,HgtxrQkvEntry,6
+hardware/hls/tb/e2e_axis_vector_active196_b6_ff768_golden.hpp,test,C++ Header,class,HgtxrMatrixEntry,7
+hardware/hls/tb/e2e_axis_vector_active196_ff768_golden.hpp,test,C++ Header,class,HgtxrPatchEntry,5
+hardware/hls/tb/e2e_axis_vector_active196_ff768_golden.hpp,test,C++ Header,class,HgtxrQkvEntry,6
+hardware/hls/tb/e2e_axis_vector_active196_ff768_golden.hpp,test,C++ Header,class,HgtxrMatrixEntry,7
+hardware/hls/tb/e2e_axis_vector_active32_ff768_golden.hpp,test,C++ Header,class,HgtxrPatchEntry,5
+hardware/hls/tb/e2e_axis_vector_active32_ff768_golden.hpp,test,C++ Header,class,HgtxrQkvEntry,6
+hardware/hls/tb/e2e_axis_vector_active32_ff768_golden.hpp,test,C++ Header,class,HgtxrMatrixEntry,7
+hardware/hls/tb/e2e_axis_vector_active64_ff768_golden.hpp,test,C++ Header,class,HgtxrPatchEntry,5
+hardware/hls/tb/e2e_axis_vector_active64_ff768_golden.hpp,test,C++ Header,class,HgtxrQkvEntry,6
+hardware/hls/tb/e2e_axis_vector_active64_ff768_golden.hpp,test,C++ Header,class,HgtxrMatrixEntry,7
+hardware/hls/tb/e2e_axis_vector_active8_golden.hpp,test,C++ Header,class,HgtxrPatchEntry,5
+hardware/hls/tb/e2e_axis_vector_active8_golden.hpp,test,C++ Header,class,HgtxrQkvEntry,6
+hardware/hls/tb/e2e_axis_vector_active8_golden.hpp,test,C++ Header,class,HgtxrMatrixEntry,7
+hardware/hls/tb/e2e_axis_vector_golden.hpp,test,C++ Header,class,HgtxrPatchEntry,5
+hardware/hls/tb/e2e_axis_vector_golden.hpp,test,C++ Header,class,HgtxrQkvEntry,6
+hardware/hls/tb/e2e_axis_vector_golden.hpp,test,C++ Header,class,HgtxrMatrixEntry,7
+hardware/hls/tb/e2e_axis_vector_hgpipe_math_golden.hpp,test,C++ Header,class,HgtxrPatchEntry,5
+hardware/hls/tb/e2e_axis_vector_hgpipe_math_golden.hpp,test,C++ Header,class,HgtxrQkvEntry,6
+hardware/hls/tb/e2e_axis_vector_hgpipe_math_golden.hpp,test,C++ Header,class,HgtxrMatrixEntry,7
+hardware/hls/tb/e2e_axis_vector_hgpipe_math_lnq_active16_golden.hpp,test,C++ Header,class,HgtxrPatchEntry,5
+hardware/hls/tb/e2e_axis_vector_hgpipe_math_lnq_active16_golden.hpp,test,C++ Header,class,HgtxrQkvEntry,6
+hardware/hls/tb/e2e_axis_vector_hgpipe_math_lnq_active16_golden.hpp,test,C++ Header,class,HgtxrMatrixEntry,7
+hardware/hls/tb/e2e_axis_vector_hgpipe_math_lnq_active8_golden.hpp,test,C++ Header,class,HgtxrPatchEntry,5
+hardware/hls/tb/e2e_axis_vector_hgpipe_math_lnq_active8_golden.hpp,test,C++ Header,class,HgtxrQkvEntry,6
+hardware/hls/tb/e2e_axis_vector_hgpipe_math_lnq_active8_golden.hpp,test,C++ Header,class,HgtxrMatrixEntry,7
+hardware/hls/tb/e2e_axis_vector_hgpipe_math_lnq_golden.hpp,test,C++ Header,class,HgtxrPatchEntry,5
+hardware/hls/tb/e2e_axis_vector_hgpipe_math_lnq_golden.hpp,test,C++ Header,class,HgtxrQkvEntry,6
+hardware/hls/tb/e2e_axis_vector_hgpipe_math_lnq_golden.hpp,test,C++ Header,class,HgtxrMatrixEntry,7
+hardware/hls/tb/e2e_axis_vector_vref_p0_hgpipe_lnq_active16_softmax_input_x2_golden.hpp,test,C++ Header,class,HgtxrPatchEntry,5
+hardware/hls/tb/e2e_axis_vector_vref_p0_hgpipe_lnq_active16_softmax_input_x2_golden.hpp,test,C++ Header,class,HgtxrQkvEntry,6
+hardware/hls/tb/e2e_axis_vector_vref_p0_hgpipe_lnq_active16_softmax_input_x2_golden.hpp,test,C++ Header,class,HgtxrMatrixEntry,7
+hardware/hls/tb/tb_attention.cpp,test,C++,function,main,3
+hardware/hls/tb/tb_cyclic_head_attention.cpp,test,C++,function,clamp_int,14
+hardware/hls/tb/tb_cyclic_head_attention.cpp,test,C++,function,ref_exp_lut,24
+hardware/hls/tb/tb_cyclic_head_attention.cpp,test,C++,function,abs_diff,128
+hardware/hls/tb/tb_cyclic_head_attention.cpp,test,C++,function,main,134
+hardware/hls/tb/tb_cyclic_primitives.cpp,test,C++,function,check,10
+hardware/hls/tb/tb_cyclic_primitives.cpp,test,C++,function,main,19
+hardware/hls/tb/tb_cyclic_s2_block_vector.cpp,test,C++,function,open_input_file,28
+hardware/hls/tb/tb_cyclic_s2_block_vector.cpp,test,C++,function,load_weights,46
+hardware/hls/tb/tb_cyclic_s2_block_vector.cpp,test,C++,function,load_expected,70
+hardware/hls/tb/tb_cyclic_s2_block_vector.cpp,test,C++,function,init_tokens,84
+hardware/hls/tb/tb_cyclic_s2_block_vector.cpp,test,C++,function,compare_layer,102
+hardware/hls/tb/tb_cyclic_s2_block_vector.cpp,test,C++,function,hgtxr_s2_block_vector_debug,136
+hardware/hls/tb/tb_cyclic_s2_block_vector.cpp,test,C++,function,main,165
+hardware/hls/tb/tb_cyclic_s2_block_vector.cpp,test,C++,function,pool_tokens,173
+hardware/hls/tb/tb_cyclic_s2_block_vector.cpp,test,C++,function,attention_stage,176
+hardware/hls/tb/tb_cyclic_s2_block_vector.cpp,test,C++,function,mlp_stage,177
+hardware/hls/tb/tb_cyclic_s2_block_vector.cpp,test,C++,function,search_head,180
+hardware/hls/tb/tb_cyclic_s2_block_vector.cpp,test,C++,function,global_buffer_write_search,190
+hardware/hls/tb/tb_cyclic_s2_block_vector.cpp,test,C++,function,global_buffer_write_track,191
+hardware/hls/tb/tb_cyclic_s2_block_vector.cpp,test,C++,function,noc_route_tokens,192
+hardware/hls/tb/tb_cyclic_s2_block_vector.cpp,test,C++,function,weight_prefetcher,193
+hardware/hls/tb/tb_cyclic_s2_block_vector.cpp,test,C++,function,controller_active_tokens,194
+hardware/hls/tb/tb_cyclic_s2_block_vector.cpp,test,C++,function,controller_depth_limit,195
+hardware/hls/tb/tb_cyclic_s2_block_vector.cpp,test,C++,function,layernorm_stage,196
+hardware/hls/tb/tb_cyclic_s2_block_vector.cpp,test,C++,function,softmax_stage,197
+hardware/hls/tb/tb_cyclic_s2_block_vector.cpp,test,C++,function,gelu_stage,198
+hardware/hls/tb/tb_cyclic_s2_block_vector.cpp,test,C++,function,rmu_projection_stage,199
+hardware/hls/tb/tb_cyclic_s2_block_vector.cpp,test,C++,function,smu_relation_stage,200
+hardware/hls/tb/tb_cyclic_s2_block_vector_hls_main.cpp,test,C++,function,main,3
+hardware/hls/tb/tb_cyclic_s2_projection.cpp,test,C++,function,check,7
+hardware/hls/tb/tb_cyclic_s2_projection.cpp,test,C++,function,pack_lane_word,16
+hardware/hls/tb/tb_cyclic_s2_projection.cpp,test,C++,function,main,30
+hardware/hls/tb/tb_hgtxr_e2e_axis_top.cpp,test,C++,function,main,229
+hardware/hls/tb/tb_hgtxr_e2e_m_axi_top.cpp,test,C++,function,init_frame,207
+hardware/hls/tb/tb_hgtxr_e2e_m_axi_top.cpp,test,C++,function,main,218
+hardware/hls/tb/tb_hgtxr_mode_profile_top.cpp,test,C++,function,main,17
+hardware/hls/tb/tb_hgtxr_top.cpp,test,C++,function,main,4
+hardware/hls/tb/tb_mlp.cpp,test,C++,function,main,3
+hardware/hls/tb/tb_runtime_fsm.cpp,test,C++,function,main,4
+hardware/vivado/scripts/build_bitstream.tcl,maintained,Tcl,proc,hgtxr_log,3
+hardware/vivado/scripts/build_bitstream.tcl,maintained,Tcl,proc,hgtxr_fail,4
+hardware/vivado/scripts/build_bitstream.tcl,maintained,Tcl,proc,hgtxr_warn,5
+hardware/vivado/scripts/build_bitstream.tcl,maintained,Tcl,proc,hgtxr_arg,7
+hardware/vivado/scripts/build_bitstream.tcl,maintained,Tcl,proc,hgtxr_connect_clk_rst,15
+hardware/vivado/scripts/build_e2e_axis_dma_bitstream.tcl,maintained,Tcl,proc,hgtxr_log,4
+hardware/vivado/scripts/build_e2e_axis_dma_bitstream.tcl,maintained,Tcl,proc,hgtxr_fail,5
+hardware/vivado/scripts/build_e2e_axis_dma_bitstream.tcl,maintained,Tcl,proc,hgtxr_warn,6
+hardware/vivado/scripts/build_e2e_axis_dma_bitstream.tcl,maintained,Tcl,proc,hgtxr_arg,8
+hardware/vivado/scripts/build_e2e_axis_dma_bitstream.tcl,maintained,Tcl,proc,hgtxr_connect_clk_rst,16
+hardware/vivado/scripts/build_e2e_axis_dma_bitstream.tcl,maintained,Tcl,proc,hgtxr_intf_pin,27
+hardware/vivado/scripts/build_e2e_m_axi_bitstream.tcl,maintained,Tcl,proc,hgtxr_log,4
+hardware/vivado/scripts/build_e2e_m_axi_bitstream.tcl,maintained,Tcl,proc,hgtxr_fail,5
+hardware/vivado/scripts/build_e2e_m_axi_bitstream.tcl,maintained,Tcl,proc,hgtxr_warn,6
+hardware/vivado/scripts/build_e2e_m_axi_bitstream.tcl,maintained,Tcl,proc,hgtxr_arg,8
+hardware/vivado/scripts/build_e2e_m_axi_bitstream.tcl,maintained,Tcl,proc,hgtxr_connect_clk_rst,16
+hardware/vivado/scripts/build_mode_profile_bitstream.tcl,maintained,Tcl,proc,hgtxr_log,4
+hardware/vivado/scripts/build_mode_profile_bitstream.tcl,maintained,Tcl,proc,hgtxr_fail,5
+hardware/vivado/scripts/build_mode_profile_bitstream.tcl,maintained,Tcl,proc,hgtxr_warn,6
+hardware/vivado/scripts/build_mode_profile_bitstream.tcl,maintained,Tcl,proc,hgtxr_arg,8
+hardware/vivado/scripts/build_mode_profile_bitstream.tcl,maintained,Tcl,proc,hgtxr_net_or_pin,16
+hardware/vivado/scripts/build_mode_profile_bitstream.tcl,maintained,Tcl,proc,hgtxr_connect_clk_rst,22
+hardware/vivado/scripts/build_mode_profile_bitstream.tcl,maintained,Tcl,proc,hgtxr_intf_pin,33
+hardware/vivado/scripts/build_mode_profile_bitstream.tcl,maintained,Tcl,proc,hgtxr_master_axi_pins,41
+hardware/vivado/scripts/create_hls_project.tcl,maintained,Tcl,proc,hgtxr_hls_arg,3
+hardware/vivado/scripts/create_hls_project.tcl,maintained,Tcl,proc,hgtxr_env_default,11
+hardware/vivado/scripts/package_e2e_axis_ip.tcl,maintained,Tcl,proc,hgtxr_should_guard_hls_module,17
+hardware/vivado/scripts/package_e2e_axis_ip.tcl,maintained,Tcl,proc,hgtxr_guard_hls_verilog_modules,33
+hardware/vivado/scripts/report_e2e_axis_dma_impl_utilization.tcl,maintained,Tcl,proc,hgtxr_log,3
+hardware/vivado/scripts/report_e2e_axis_dma_impl_utilization.tcl,maintained,Tcl,proc,hgtxr_fail,4
+hardware/vivado/scripts/report_e2e_axis_dma_impl_utilization.tcl,maintained,Tcl,proc,hgtxr_arg,6
+hardware/vivado/scripts/run_cyclic_s2_block_vector_csim.tcl,maintained,Tcl,proc,hgtxr_env_default,15
+hardware/vivado/scripts/run_e2e_q4w8a_csim.tcl,maintained,Tcl,proc,hgtxr_env_default,7
+hardware/vivado/scripts/run_e2e_q4w8a_csim.tcl,maintained,Tcl,proc,hgtxr_e2e_project_name,13
+hardware/vivado/scripts/run_e2e_q4w8a_csynth.tcl,maintained,Tcl,proc,hgtxr_env_default,7
+hardware/vivado/scripts/run_e2e_q4w8a_csynth.tcl,maintained,Tcl,proc,hgtxr_e2e_project_name,13
+hardware/vivado/scripts/run_mode_profile_q4w8a_csim.tcl,maintained,Tcl,proc,hgtxr_env_default,8
+hardware/vivado/scripts/run_mode_profile_q4w8a_csynth.tcl,maintained,Tcl,proc,hgtxr_env_default,8
