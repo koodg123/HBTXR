@@ -32,12 +32,16 @@
 
 | | |
 |---|---|
-| `references/vit-accel/` | 30 — 선행 프로젝트. 이름은 규약 적용, **내용 무편집**. 스텁 3개 삭제 |
+| `references/vit-accel/` | 30 — 선행 프로젝트. 이름·계층 정리, **내용 무편집**(27/30 바이트 동일) |
 | `experiments/` | **13캠페인 · 문서 77 · 데이터 73** |
 | `track/` | 6종 (구 21개에서 실험 12·핸드오프 4 분리) |
 | `handoff/` | 5 — 전부 만료 고지 부착 |
-| `plans/{active,done}/` | 8 |
-| `reports/` · `architecture/` · `snapshots/` | 4 · 2 · 2 |
+| `plans/{active,done}/` | 9 (README 포함) — active 1 · done 7 |
+| `reports/` · `architecture/` · `snapshots/` | 4 · 2 · 3 (README 포함) |
+
+> `reports/2026-06-16-multi-board-validation.md`와 `plans/done/2026-07-15-xr-accel-execution-plan.md`는
+> **2026-07-29 삭제**했습니다. 우리 문서가 아니라 ViT_Accel 문서에 프로젝트명만 치환한
+> 사본이었습니다 ([references/README.md](references/README.md)).
 | `SPEC.md` `ARCHITECTURE.md` `MODULE-GUIDE.md` | 승격 |
 
 **검증**: archive md 159개를 내용 해시로 대조해 미이관 0건.

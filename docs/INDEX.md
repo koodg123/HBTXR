@@ -10,7 +10,7 @@
 python scripts/build_docs_index.py
 ```
 
-총 **506개** 문서. 날짜·상태·소유는 각 문서의 3줄 헤더에서 읽고, 헤더가 없으면 git 이력으로 대체합니다 — 그 경우 *(헤더 없음 — git 기준)*으로 표시되므로 상태 칸이 추정임을 알 수 있습니다.
+총 **504개** 문서. 날짜·상태·소유는 각 문서의 3줄 헤더에서 읽고, 헤더가 없으면 git 이력으로 대체합니다 — 그 경우 *(헤더 없음 — git 기준)*으로 표시되므로 상태 칸이 추정임을 알 수 있습니다.
 
 규약: [governance/DOC-CONVENTIONS.md](governance/DOC-CONVENTIONS.md)
 
@@ -20,7 +20,7 @@ python scripts/build_docs_index.py
 |---|---|---:|---|---|
 | **repo** | `docs/` | 175 | 2026-07-29 | 횡단·거버넌스·외부 조사 |
 | **algorithm** | `algorithm/docs/` | 17 | 2026-07-29 | 학습·평가·양자화·정수 그래프 |
-| **hardware** | `hardware/docs/` | 158 | 2026-07-29 | HLS·RTL·Vivado·PYNQ 가속기 (재구성 중) |
+| **hardware** | `hardware/docs/` | 156 | ? | HLS·RTL·Vivado·PYNQ 가속기 (재구성 중) |
 | **archive** | `archive/hardware/docs/` | 156 | 2026-07-29 | 구 hardware 트리 — 읽기 전용 기준 |
 
 ## 먼저 볼 것
@@ -119,6 +119,16 @@ python scripts/build_docs_index.py
 
 | 문서 | 작성 | 갱신 | 상태 | 소유 |
 |---|---|---|---|---|
+| [references/vit-accel/experiments/zu15eg-deit-tiny-baseline-step2-hls-resource-summary.md](../hardware/docs/references/vit-accel/experiments/zu15eg-deit-tiny-baseline-step2-hls-resource-summary.md) | ? | ? | *(헤더 없음 — git 기준)* | ? |
+| [references/vit-accel/experiments/vck190-deit-tiny-baseline-step5-pnr-summary.md](../hardware/docs/references/vit-accel/experiments/vck190-deit-tiny-baseline-step5-pnr-summary.md) | ? | ? | *(헤더 없음 — git 기준)* | ? |
+| [references/vit-accel/experiments/deit-tiny-baseline-step2-hls-resource-summary.md](../hardware/docs/references/vit-accel/experiments/deit-tiny-baseline-step2-hls-resource-summary.md) | ? | ? | *(헤더 없음 — git 기준)* | ? |
+| [references/vit-accel/experiments/deit-tiny-baseline-ooc-rerun-step2-hls-resource-summary.md](../hardware/docs/references/vit-accel/experiments/deit-tiny-baseline-ooc-rerun-step2-hls-resource-summary.md) | ? | ? | *(헤더 없음 — git 기준)* | ? |
+| [references/vit-accel/experiments/2026-04-10-zu15eg-deit-tiny-full-status-pnr.md](../hardware/docs/references/vit-accel/experiments/2026-04-10-zu15eg-deit-tiny-full-status-pnr.md) | ? | ? | *(헤더 없음 — git 기준)* | ? |
+| [references/vit-accel/experiments/2026-04-10-zcu102-deit-tiny-full-status-pnr.md](../hardware/docs/references/vit-accel/experiments/2026-04-10-zcu102-deit-tiny-full-status-pnr.md) | ? | ? | *(헤더 없음 — git 기준)* | ? |
+| [references/vit-accel/experiments/2026-04-10-vck190-deit-tiny-full-status-pnr.md](../hardware/docs/references/vit-accel/experiments/2026-04-10-vck190-deit-tiny-full-status-pnr.md) | ? | ? | *(헤더 없음 — git 기준)* | ? |
+| [references/vit-accel/experiments/2026-04-10-deit-tiny-full-multi-board-status-pnr.md](../hardware/docs/references/vit-accel/experiments/2026-04-10-deit-tiny-full-multi-board-status-pnr.md) | ? | ? | *(헤더 없음 — git 기준)* | ? |
+| [references/vit-accel/experiments/2026-04-08-zcu102-step4-bitstream-status-pnr.md](../hardware/docs/references/vit-accel/experiments/2026-04-08-zcu102-step4-bitstream-status-pnr.md) | ? | ? | *(헤더 없음 — git 기준)* | ? |
+| [references/vit-accel/experiments/2026-04-08-vck190-step4-ooc-status-pnr.md](../hardware/docs/references/vit-accel/experiments/2026-04-08-vck190-step4-ooc-status-pnr.md) | ? | ? | *(헤더 없음 — git 기준)* | ? |
 | [track/CHANGELOG.md](../hardware/docs/track/CHANGELOG.md) | 2026-07-29 | 2026-07-29 | active | hardware |
 | [snapshots/README.md](../hardware/docs/snapshots/README.md) | 2026-07-29 | 2026-07-29 | active — 안내 | hardware |
 | [snapshots/2026-07-15-xr-accel-merge-status.md](../hardware/docs/snapshots/2026-07-15-xr-accel-merge-status.md) | 2026-07-15 | 2026-07-29 | frozen — 스냅샷, 갱신하지 않음 | hardware |
@@ -126,18 +136,7 @@ python scripts/build_docs_index.py
 | [reports/README.md](../hardware/docs/reports/README.md) | 2026-07-29 | 2026-07-29 | active — 안내 | hardware |
 | [reports/2026-07-29-hardware-census.md](../hardware/docs/reports/2026-07-29-hardware-census.md) | 2026-07-29 | 2026-07-29 | active — 재작성 착수 전 기준선 | hardware |
 | [reports/2026-06-17-cleanup.md](../hardware/docs/reports/2026-06-17-cleanup.md) | 2026-06-17 | 2026-07-29 | frozen | hardware |
-| [reports/2026-06-16-multi-board-validation.md](../hardware/docs/reports/2026-06-16-multi-board-validation.md) | 2026-06-16 | 2026-07-29 | frozen — 검증 결과 | hardware |
 | [reports/2026-06-16-deit-cyclic-verification.md](../hardware/docs/reports/2026-06-16-deit-cyclic-verification.md) | 2026-06-16 | 2026-07-29 | frozen — 검증 결과 | hardware |
-| [references/vit-accel/experiments/zu15eg/deit-tiny-baseline/full-deit-tiny-fit/step2-hls-resource-summary.md](../hardware/docs/references/vit-accel/experiments/zu15eg/deit-tiny-baseline/full-deit-tiny-fit/step2-hls-resource-summary.md) | 2026-07-29 | 2026-07-29 | *(헤더 없음 — git 기준)* | ? |
-| [references/vit-accel/experiments/vck190/deit-tiny-baseline/full-deit-tiny-fit/step5-vck190-pnr-summary.md](../hardware/docs/references/vit-accel/experiments/vck190/deit-tiny-baseline/full-deit-tiny-fit/step5-vck190-pnr-summary.md) | 2026-07-29 | 2026-07-29 | *(헤더 없음 — git 기준)* | ? |
-| [references/vit-accel/experiments/pnr/2026-04-10-zu15eg-deit-tiny-full-status.md](../hardware/docs/references/vit-accel/experiments/pnr/2026-04-10-zu15eg-deit-tiny-full-status.md) | 2026-07-29 | 2026-07-29 | *(헤더 없음 — git 기준)* | ? |
-| [references/vit-accel/experiments/pnr/2026-04-10-zcu102-deit-tiny-full-status.md](../hardware/docs/references/vit-accel/experiments/pnr/2026-04-10-zcu102-deit-tiny-full-status.md) | 2026-07-29 | 2026-07-29 | *(헤더 없음 — git 기준)* | ? |
-| [references/vit-accel/experiments/pnr/2026-04-10-vck190-deit-tiny-full-status.md](../hardware/docs/references/vit-accel/experiments/pnr/2026-04-10-vck190-deit-tiny-full-status.md) | 2026-07-29 | 2026-07-29 | *(헤더 없음 — git 기준)* | ? |
-| [references/vit-accel/experiments/pnr/2026-04-10-deit-tiny-full-multi-board-status.md](../hardware/docs/references/vit-accel/experiments/pnr/2026-04-10-deit-tiny-full-multi-board-status.md) | 2026-07-29 | 2026-07-29 | *(헤더 없음 — git 기준)* | ? |
-| [references/vit-accel/experiments/pnr/2026-04-08-zcu102-step4-bitstream-status.md](../hardware/docs/references/vit-accel/experiments/pnr/2026-04-08-zcu102-step4-bitstream-status.md) | 2026-07-29 | 2026-07-29 | *(헤더 없음 — git 기준)* | ? |
-| [references/vit-accel/experiments/pnr/2026-04-08-vck190-step4-ooc-status.md](../hardware/docs/references/vit-accel/experiments/pnr/2026-04-08-vck190-step4-ooc-status.md) | 2026-07-29 | 2026-07-29 | *(헤더 없음 — git 기준)* | ? |
-| [references/vit-accel/experiments/deit-tiny-baseline/full-deit-tiny-fit/step2-hls-resource-summary.md](../hardware/docs/references/vit-accel/experiments/deit-tiny-baseline/full-deit-tiny-fit/step2-hls-resource-summary.md) | 2026-07-29 | 2026-07-29 | *(헤더 없음 — git 기준)* | ? |
-| [references/vit-accel/experiments/deit-tiny-baseline-ooc-rerun/full-deit-tiny-fit/step2-hls-resource-summary.md](../hardware/docs/references/vit-accel/experiments/deit-tiny-baseline-ooc-rerun/full-deit-tiny-fit/step2-hls-resource-summary.md) | 2026-07-29 | 2026-07-29 | *(헤더 없음 — git 기준)* | ? |
 | [references/vit-accel/experiments/README.md](../hardware/docs/references/vit-accel/experiments/README.md) | 2026-07-29 | 2026-07-29 | *(헤더 없음 — git 기준)* | ? |
 | [references/vit-accel/VIVADO-ONLY-FLOW.md](../hardware/docs/references/vit-accel/VIVADO-ONLY-FLOW.md) | 2026-07-29 | 2026-07-29 | *(헤더 없음 — git 기준)* | ? |
 | [references/vit-accel/VCK190-ZU15EG-PARAMETER-COMPARISON.md](../hardware/docs/references/vit-accel/VCK190-ZU15EG-PARAMETER-COMPARISON.md) | 2026-07-29 | 2026-07-29 | *(헤더 없음 — git 기준)* | ? |
@@ -160,7 +159,6 @@ python scripts/build_docs_index.py
 | [references/vit-accel/2026-04-15-progress.md](../hardware/docs/references/vit-accel/2026-04-15-progress.md) | 2026-07-29 | 2026-07-29 | *(헤더 없음 — git 기준)* | ? |
 | [references/README.md](../hardware/docs/references/README.md) | 2026-07-29 | 2026-07-29 | active | hardware |
 | [plans/done/2026-07-29-docs-migration-map.md](../hardware/docs/plans/done/2026-07-29-docs-migration-map.md) | 2026-07-29 | 2026-07-29 | frozen — D1~D5 실행 완료 (§6). 결과: [../../STATUS.md](../../STATUS.md) 문서 이관 결과 | hardware |
-| [plans/done/2026-07-15-xr-accel-execution-plan.md](../hardware/docs/plans/done/2026-07-15-xr-accel-execution-plan.md) | 2026-07-15 | 2026-07-29 | frozen — **반입만 됨. 실행 기록 없음** (완료가 아닙니다) | hardware |
 | [plans/done/2026-06-17-directory-layout.md](../hardware/docs/plans/done/2026-06-17-directory-layout.md) | 2026-06-17 | 2026-07-29 | superseded-by:../../../README.md | hardware |
 | [plans/done/2026-06-16-third-goal/Validation.md](../hardware/docs/plans/done/2026-06-16-third-goal/Validation.md) | 2026-06-16 | 2026-07-29 | frozen — 완료된 계획. 결과는 experiments/2026-06-16-third-goal-audit/ | hardware |
 | [plans/done/2026-06-16-third-goal/Sub-Plan.md](../hardware/docs/plans/done/2026-06-16-third-goal/Sub-Plan.md) | 2026-06-16 | 2026-07-29 | frozen — 완료된 계획. 결과는 experiments/2026-06-16-third-goal-audit/ | hardware |

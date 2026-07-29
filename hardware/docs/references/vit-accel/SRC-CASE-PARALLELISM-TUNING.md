@@ -36,7 +36,7 @@
 
 ## 2. 코드 기준 cost model
 
-실제 자원 증가는 대부분 [matmul.h](../workspace/hardware/src/matmul.h) 의 아래 구조에서 결정된다.
+실제 자원 증가는 대부분 `../workspace/hardware/src/matmul.h` 의 아래 구조에서 결정된다.
 
 ### 2.1 `Matmul`의 기본 scaling
 
@@ -65,7 +65,7 @@
 
 ### 2.2 왜 `COP`가 자주 첫 번째 knob인가
 
-[matmul.h](../workspace/hardware/src/matmul.h) 를 보면:
+`../workspace/hardware/src/matmul.h` 를 보면:
 
 - `weight_arr`는 `COP`, `CIP` 둘 다에 따라 array reshape 된다.
 - `bias_arr`는 `COP` 방향으로 reshape 된다.
@@ -87,7 +87,7 @@
 
 대표 코드:
 
-- [patch_embed.h](../workspace/hardware/src/patch_embed.h)
+- `../workspace/hardware/src/patch_embed.h`
 
 핵심 상수:
 
@@ -125,7 +125,7 @@
 
 대표 코드:
 
-- [mlp.h](../workspace/hardware/src/mlp.h)
+- `../workspace/hardware/src/mlp.h`
 
 핵심 상수:
 
@@ -162,9 +162,9 @@
 
 대표 코드:
 
-- [attn.h](../workspace/hardware/src/attn.h)
-- [head_split.h](../workspace/hardware/src/head_split.h)
-- [reshaper.h](../workspace/hardware/src/reshaper.h)
+- `../workspace/hardware/src/attn.h`
+- `../workspace/hardware/src/head_split.h`
+- `../workspace/hardware/src/reshaper.h`
 
 핵심 상수:
 
@@ -232,13 +232,13 @@
 
 ### 즉시 확인해야 할 위치
 
-- [matmul.h](../workspace/hardware/src/matmul.h)
+- `../workspace/hardware/src/matmul.h`
   - `wb`는 `LUTRAM`
   - `bias_arr`도 `LUTRAM`
   - `WEIGHT_RAM_STYLE`에 따라 weight는 `BRAM/LUTRAM`
-- [reshaper.h](../workspace/hardware/src/reshaper.h)
+- `../workspace/hardware/src/reshaper.h`
   - `buffer`가 `lutram`
-- [patch_embed.h](../workspace/hardware/src/patch_embed.h)
+- `../workspace/hardware/src/patch_embed.h`
   - `wb`가 `LUTRAM`
   - weight는 `HGPIPE_PATCH_EMBED_WEIGHT_STORAGE_STYLE`로 제어
 

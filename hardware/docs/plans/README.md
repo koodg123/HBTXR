@@ -22,5 +22,10 @@
 |---|---|
 | [2026-06-16-third-goal/](done/2026-06-16-third-goal/) | [experiments/2026-06-16-third-goal-audit/](../experiments/2026-06-16-third-goal-audit/) |
 | [2026-06-17-directory-layout.md](done/2026-06-17-directory-layout.md) | **대체됨** — 정의한 24개 디렉토리가 비어 있었음 |
-| [2026-07-15-xr-accel-execution-plan.md](done/2026-07-15-xr-accel-execution-plan.md) | **결과 없음** — 계획만 반입됐고 실행 기록은 없습니다. 여러 단계가 Vivado를 요구하는데 [STATUS.md](../STATUS.md)에서 Blocked입니다 |
+
+> **`2026-07-15-xr-accel-execution-plan.md`는 2026-07-29에 삭제했습니다.** 우리 계획이 아니라
+> ViT_Accel의 [`PLAN.md`](../references/vit-accel/PLAN.md)에 저장소 이름
+> (`koodg123/ViT_Accel`→`koodg123/XR_Accel`) 3곳을 치환한 사본이었습니다 — 128줄 중 실질
+> 차이 4줄. 실행 기록도 결과를 가리킬 실험 디렉토리도 없었습니다.
+> 원본은 `archive/hardware/docs/`에 남아 있습니다.
 | [2026-07-29-docs-migration-map.md](done/2026-07-29-docs-migration-map.md) | [STATUS.md 문서 이관 결과](../STATUS.md) — archive md 159개 해시 대조, 미이관 0건 |

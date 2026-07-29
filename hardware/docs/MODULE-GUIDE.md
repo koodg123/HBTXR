@@ -2,7 +2,19 @@
 > **상태** active
 > **소유** hardware
 >
-> **모듈별 상세 설계.** `archive/hardware/docs/` 에서 복사, 내용 무변경.
+> **모듈별 상세 설계.**
+>
+> **출처**: 선행 프로젝트 ViT_Accel의
+> [`SRC-CASE-MODULE-GUIDE.md`](references/vit-accel/SRC-CASE-MODULE-GUIDE.md)에서 파생했습니다.
+> 그쪽이 상위집합이고, 여기서는 그 프로젝트 안에서의 탐색 안내 두 절(§15 "현재
+> `ViT_Accel`에서 이 문서를 읽는 방법" · §16 "병렬도 튜닝 다음 읽기")이 빠져 있습니다.
+> 그 외 본문은 같습니다.
+>
+> **그런데도 `references/`가 아니라 여기 있는 이유**: 이 문서는 **우리가 갱신할 문서**입니다.
+> census가 정본으로 판정한 `hgtxr_e2e_vit.hpp` 4,503줄을 언젠가 분해하면
+> ([계획 §5](plans/active/2026-07-29-hardware-reconstruction.md)) 모듈 구성이 ViT_Accel과
+> 갈라지고, 그때 갱신되는 쪽은 이 파일입니다. 갱신할 생각이 없어지면 삭제하고
+> `references/` 원본을 가리키는 것이 맞습니다.
 
 # HG-PIPE `src/` + `case/` 모듈 통합 가이드
 
