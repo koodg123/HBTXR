@@ -213,7 +213,7 @@ files"). Each is available on a later, separately approved request:
 
 - Add a pointer bullet to `docs/track/CONTRIBUTING.md`.
 - Add an index row to `docs/aegis/INDEX.md`
-  (`2026-07-16 | protocol | Task-Card operating protocol | docs/track/TASK-CARD-PROTOCOL.md | adopted`).
+  (`2026-07-16 | protocol | Task-Card operating protocol | docs/governance/TASK-CARD-PROTOCOL.md | adopted`).
 - Add **ADR-008** to `docs/track/ADR.md` (adopt protocol; augment schema; fix operating root;
   encode single-subagent-level runtime).
 - Add dated entries to `docs/track/PROGRESS.md`, `docs/track/log.md`, and

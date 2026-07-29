@@ -356,7 +356,7 @@ reviewer may clear `LICENSE_BLOCKED`.
 
 **Files**
 
-- `docs/Artifact-Policy.md`
+- `docs/governance/ARTIFACT-POLICY.md`
 - `docs/provenance/artifact-manifest.schema.json`
 - `docs/provenance/examples/external-artifact-manifest.example.json`
 - `tools/provenance/validate_artifact_manifest.py`
@@ -1128,7 +1128,7 @@ task_card:
   sub_agent: codex-native
   role: artifact governance implementer
   objective: define external artifact manifests and prohibited Git payloads
-  file_ownership: [docs/Artifact-Policy.md, docs/provenance/artifact-manifest.schema.json, docs/provenance/examples/external-artifact-manifest.example.json, tools/provenance/validate_artifact_manifest.py, tests/provenance/test_artifact_manifest.py, conditional .gitignore]
+  file_ownership: [docs/governance/ARTIFACT-POLICY.md, docs/provenance/artifact-manifest.schema.json, docs/provenance/examples/external-artifact-manifest.example.json, tools/provenance/validate_artifact_manifest.py, tests/provenance/test_artifact_manifest.py, conditional .gitignore]
   assigned_skill: [artifact-provenance-manager]
   inputs: [current tracked artifacts, expected training and FPGA outputs]
   outputs: [artifact policy, schema, validator, ignore rules]

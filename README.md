@@ -38,7 +38,7 @@ accelerator, assembled from the three source branches in `HBTXR-Pool`.
 
 Large checkpoints, row-level prediction tables, HDF5 files, and local run outputs are
 intentionally excluded or routed to artifact storage paths — see
-[docs/Artifact-Policy.md](docs/Artifact-Policy.md).
+[docs/governance/ARTIFACT-POLICY.md](docs/governance/ARTIFACT-POLICY.md).
 
 > **2026-07-29 정정.** 이 파일은 이전까지 루트에 `quantization/` 디렉토리가 있다고
 > 안내했으나 **존재하지 않습니다** — Q7에서 `references/hardware/hg-pipe-quantization/`으로

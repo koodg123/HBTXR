@@ -8,7 +8,7 @@ Part C built the I-tier kernels and Part D made them reachable, correct on real
 distributions, and exportable. This report records what the integer tier converts, what
 it does not, and every number that was measured rather than assumed.
 
-Companion to `docs/QUANTIZATION-PARTB-REPORT.md`, which covers the configurable
+Companion to `algorithm/docs/reports/2026-07-25-quantization-part-b.md`, which covers the configurable
 fake-quant tier.
 
 ## What the integer tier converts

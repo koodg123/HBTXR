@@ -71,7 +71,7 @@
 - **Part B** (`d65dbcf` `1725ec8` `1d0f288`) 완전지정 config — spec/grouping/AffineObserver,
   레이어별 override, config-matrix 검증 + PTQ 리포트.
 - **Part A** (`665ae48`) q/i 티어 재구조화 (동작 변경 없음).
-- **전체 계획 확정** (`a5b33fb`) `QUANTIZATION-PLAN.md`.
+- **전체 계획 확정** (`a5b33fb`) `plans/active/2026-07-25-quantization-build-plan.md`.
 
 ## 2026-07-24
 

@@ -4,7 +4,7 @@ With ``cut_point < depth`` the first ``c`` blocks are traversed by BOTH paths â€
 the search path, event voxels on the track path â€” and one activation observer sees both
 distributions. Conversion was exercised but no number had ever been put on that.
 
-The result, measured below and in ``docs/QUANTIZATION-PARTCD-REPORT.md``: the two
+The result, measured below and in ``algorithm/docs/reports/2026-07-27-quantization-part-c-d.md``: the two
 modalities' ranges really do differ (up to 2.21x on ``blocks.0.attn.proj``, where the
 event range is under half the frame range), and a max-abs observer resolves the conflict
 by taking the wider of the two. That costs the narrower modality up to 1.14 bits of

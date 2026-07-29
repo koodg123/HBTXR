@@ -1,7 +1,7 @@
 """R4: the rsqrt index's fit quality must survive calibration, and here is why it matters.
 
 R4 set out to answer whether the two-segment rsqrt index leaves accuracy on the table.
-The measurement says no — see ``docs/QUANTIZATION-PARTCD-REPORT.md`` — but getting to it
+The measurement says no — see ``algorithm/docs/reports/2026-07-27-quantization-part-c-d.md`` — but getting to it
 turned up something else: the Part C/D report claimed "the payload carries ``metrics`` so
 the error is visible", and it did not. ``calibrate_int_layernorm`` computes a full fit
 report (``rsqrt_rel_rms/p99/max``, the observed variance range, and how many rows fall

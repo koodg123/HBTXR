@@ -21,7 +21,7 @@ verified pure-integer inference graph.
 - **Progress**: Part A ✅ (`665ae48`, 12/12 regression). Part B ✅ (`d65dbcf` core +
   `1725ec8` overrides/entrypoint) — granularity / sym-asym / scale_type / calibration
   (minmax·percentile·mse·kl) + per-layer overrides; matrix report in
-  `docs/QUANTIZATION-PARTB-REPORT.md`. Part C 🔵 in progress:
+  `algorithm/docs/reports/2026-07-25-quantization-part-b.md`. Part C 🔵 in progress:
   - C0 ✅ (`6762e74`) QTensor + i_ops golden (requant/int_matmul/int_conv2d/dyadic_params)
     + torch int_functional, bit-exact.
   - C1 ✅ (`97a38d2`) ILinear (per-tensor/per-channel weight, asym-act zp fold) + IConv2d.

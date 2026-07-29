@@ -19,8 +19,7 @@
 
 ## Active
 
-- **docs 3-트리 구조 개편** — 1~4단계 진행 중 (track 신설·정합성 정정 / STATUS·헤더 /
-  INDEX 생성 / 규약 성문화). 5단계(파일 이동)와 6단계(NUMERICS-CONTRACT)는 미착수.
+없음. docs 구조 개편 1~5단계 완료. 6단계(`contracts/NUMERICS-CONTRACT.md`)는 아래 Next.
 
 ## Blocked
 
@@ -40,9 +39,10 @@ forgotten이 구분되지 않습니다 — 아래 백로그 41건이 정확히 �
 
 | 항목 | 규모 | 의존 |
 |---|---|---|
-| docs 5단계 — 실제 파일 이동 + 참조 갱신 | 큼 | 3단계(INDEX) 완료 후 권장 |
 | docs 6단계 — `contracts/NUMERICS-CONTRACT.md` | 중간 | 조사 필요 |
 | **RC-/CL-/SI-/T- 백로그 상태 감사** | 중간 | — |
+| **`hardware/docs/` 재구조화** | 중간 | **하드웨어 소유** — `hardware/tools/`가 경로로 고정하고 테스트 10개+가 읽으므로 도구·테스트를 같이 고쳐야 함. [DOC-CONVENTIONS §11](governance/DOC-CONVENTIONS.md) |
+| hardware 테스트 49건 실패 조사 | 중간 | 하드웨어 소유. 문서 이동 전부터 실패 중 |
 
 > **RC-/CL-/SI-/T- 감사가 왜 필요한가**: AM 섹션이 6일간 "미착수"로 표기되어 있었는데
 > 실제로는 AM-900까지 실행되고 대체된 상태였습니다 ([track/TODO.md](track/TODO.md) 참조).
@@ -52,6 +52,8 @@ forgotten이 구분되지 않습니다 — 아래 백로그 41건이 정확히 �
 
 | 날짜 | 내용 |
 |---|---|
+| 2026-07-29 | docs 5단계 — 188개 `git mv`, `.agents/` 해소(트리 4→3), 얼어붙은 문서는 경로 미변경 |
+| 2026-07-29 | docs 2~4단계 — STATUS×3, `INDEX.md` 자동생성, `DOC-CONVENTIONS.md` |
 | 2026-07-29 | docs 1단계 — `algorithm/docs/track/` 신설·33커밋 소급, AM 상태 충돌 해소, README 정정 |
 | 2026-07-29 | TSR_FPGA(외부 INT8 CNN 가속기) 전수 분석 |
 | 2026-07-24~29 | 양자화 Part A~D · A1 · B1 · B2 · B6 · R1~R4 (33커밋, 594 tests) |
@@ -61,7 +63,10 @@ forgotten이 구분되지 않습니다 — 아래 백로그 41건이 정확히 �
 ## 이 저장소의 구조적 사실 (자주 잊힘)
 
 - **문서 트리는 3개**: `docs/` (횡단) · `algorithm/docs/` · `hardware/docs/`.
-  `.agents/`는 네 번째였고 `docs/handoff/`·`docs/snapshots/`로 흡수 예정(5단계).
+  `.agents/`는 네 번째였고 2026-07-29에 `docs/handoff/`·`docs/snapshots/`·`docs/plans/done/`로
+  흡수되어 사라졌습니다.
+- **`hardware/docs/`는 자기 툴체인에 고정**되어 있습니다 — `hardware/tools/`가 경로로 읽고
+  테스트 10개+가 의존하므로 `docs/`처럼 재배치할 수 없습니다.
 - **`hardware/`는 문서 트리가 아니라 코드 서브시스템**입니다 — HLS/RTL/Vivado/PYNQ.
   ViT 가속기(`hgtxr_e2e_vit.hpp`)가 있습니다.
 - **같은 HG-PIPE 커널이 두 서브시스템에 각각 구현**되어 있고 교차 참조가 0건입니다.

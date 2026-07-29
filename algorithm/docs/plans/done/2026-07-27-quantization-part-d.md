@@ -5,7 +5,7 @@
 # HBTXR Quantization — Part D plan (closing the Part C gaps)
 
 Parts A/B/C are committed and green (`pytest tests/quantization` = **245 passed**). This
-plan covers everything `QUANTIZATION-PLAN.md` §9 left open, plus three **live bugs** that
+plan covers everything `plans/active/2026-07-25-quantization-build-plan.md` §9 left open, plus three **live bugs** that
 the scoping survey found and that were not on anyone's list.
 
 Every claim below is grounded in code that was read and, where it is a claim about
@@ -417,7 +417,7 @@ flag next to `--export-int`.
 
 ### D5.2 Part C/D report (A6)
 
-Mirror `docs/QUANTIZATION-PARTB-REPORT.md`'s five sections, substituting §2 → "what the
+Mirror `algorithm/docs/reports/2026-07-25-quantization-part-b.md`'s five sections, substituting §2 → "what the
 integer tier converts and what it does not" and §3 → the conversion-stage error table.
 
 **Numbers that already exist — cite, do not re-run:** end-to-end converted-graph rel-err

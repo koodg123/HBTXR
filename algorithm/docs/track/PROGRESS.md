@@ -13,8 +13,8 @@
 
 ## 양자화 서브시스템 — 계획 대비
 
-계획 문서: [QUANTIZATION-PLAN.md](../QUANTIZATION-PLAN.md) ·
-[QUANTIZATION-PARTD-PLAN.md](../QUANTIZATION-PARTD-PLAN.md)
+계획 문서: [plans/active/2026-07-25-quantization-build-plan.md](../plans/active/2026-07-25-quantization-build-plan.md) ·
+[plans/done/2026-07-27-quantization-part-d.md](../plans/done/2026-07-27-quantization-part-d.md)
 
 | 단계 | 범위 | 상태 |
 |---|---|---|

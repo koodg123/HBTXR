@@ -41,17 +41,16 @@ TREES = [
     ("repo", "docs", "횡단·거버넌스·외부 조사"),
     ("algorithm", "algorithm/docs", "학습·평가·양자화·정수 그래프"),
     ("hardware", "hardware/docs", "HLS·RTL·Vivado·PYNQ 가속기"),
-    ("agents", ".agents", "handoff·recon (docs/로 흡수 예정)"),
 ]
 
 # 개별 나열이 가치를 더하지 않는 대량 군집: 요약 한 줄로 접는다.
 COLLAPSE = {
-    "hardware/docs/analysis/integrated-2026-06-26":
-        "외부 코드베이스·논문 서베이 (우리 코드로는 틀려지지 않음 → docs/reference/external/ 이동 대상)",
+    "docs/reference/external/2026-06-26":
+        "외부 코드베이스·논문 서베이 — 우리 코드로는 틀려지지 않음",
     "hardware/docs/resources/hgtxr_handover_additional":
-        "HGTXR 인계 증거 — 불변 (→ hardware/docs/evidence/ 이동 대상)",
+        "HGTXR 인계 증거 — 불변. hardware/tools가 경로로 읽으므로 이동 금지",
     "hardware/docs/resources/hgtxr_final_evidence":
-        "HGTXR 최종 증거 — 불변 (→ hardware/docs/evidence/ 이동 대상)",
+        "HGTXR 최종 증거 — 불변. hardware/tools가 경로로 읽으므로 이동 금지",
 }
 
 HEADER_RE = re.compile(

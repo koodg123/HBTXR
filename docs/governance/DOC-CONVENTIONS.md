@@ -37,7 +37,7 @@
 
 **판정 예시**
 
-- `QUANTIZATION-PARTCD-REPORT.md` — 양자화 코드가 바뀌면 수치가 틀려짐 → `algorithm/docs/`
+- `reports/2026-07-27-quantization-part-c-d.md` — 양자화 코드가 바뀌면 수치가 틀려짐 → `algorithm/docs/`
 - `ARTIFACT-POLICY` — 어떤 코드로도 안 틀려짐, 결정으로만 → `docs/governance/`
 - P&R 리포트 — HLS/제약이 바뀌면 틀려짐 → `hardware/docs/`
 - `COMPARISON-TSR-FPGA.md` — 외부 저장소가 대상이고 양쪽 서브시스템에 걸침 → `docs/reference/`
@@ -187,7 +187,7 @@ python scripts/build_docs_index.py --check  # 최신이 아니면 exit 1
 
 ### 규칙 F — Scope는 독립 문서가 아니라 Spec의 섹션입니다
 
-분리하면 반드시 어긋납니다. `QUANTIZATION-PARTCD-REPORT.md`의 "What it does NOT do"가
+분리하면 반드시 어긋납니다. `reports/2026-07-27-quantization-part-c-d.md`의 "What it does NOT do"가
 본문 바로 옆에 있었기 때문에 2026-07-29에 거짓 주장 4건이 잡혔습니다.
 
 ### 규칙 G — HANDOVER는 소비되면 만료됩니다
@@ -227,19 +227,54 @@ docs/reference/COMPARISON-*.md    외부 프로젝트와의 비교 분석
 
 ---
 
-## 11. 아직 적용되지 않은 것
+## 11. 적용 현황 (2026-07-29, 5단계 완료)
 
-이 규약은 2026-07-29에 성문화됐고 **파일 이동(5단계)은 아직 하지 않았습니다.** 따라서
-현재 트리는 규약과 다음이 다릅니다:
+파일 188개를 `git mv`로 이동했습니다 (이력 보존). `.agents/` 트리는 해소되어 **문서 트리가
+넷에서 셋으로** 줄었습니다.
 
-- `docs/{Master-Plan,Sub-Plan,Spec,Execution,Validation}.md` → `docs/plans/done/`로 가야 함
-  (`hardware/docs/`에 같은 이름이 있어 파일명만으로 구분 불가)
-- `docs/Artifact-Policy.md` `docs/track/CONTRIBUTING.md` → `docs/governance/`
-- `docs/aegis/**` → `plans/` `snapshots/` `archive/`로 분해
-- `.agents/**` → `docs/handoff/` `docs/snapshots/`
-- `hardware/docs/analysis/integrated-2026-06-26/**` (~140개) → `docs/reference/external/`
-- `hardware/docs/resources/hgtxr_*` (68개) → `hardware/docs/{snapshots,evidence}/`
-- `algorithm/docs/COMPARISON-TSR-FPGA.md` → `docs/reference/`
+### 옮긴 것
 
-**색인(`docs/INDEX.md`)이 먼저 있는 이유가 이것입니다** — 이동 중 깨진 참조를
-`--check`로 바로 찾을 수 있습니다.
+| 이동 | 대상 |
+|---|---|
+| `docs/Artifact-Policy.md` · `track/CONTRIBUTING.md` · `track/TASK-CARD-PROTOCOL.md` · `aegis/{README,BASELINE-GOVERNANCE}.md` · `provenance/**` | → `docs/governance/` |
+| `docs/aegis/plans/*` (4) · `.agents/plans/*` | → `docs/plans/done/` |
+| `docs/aegis/baseline/*` · `aegis/work/*/90-evidence.md` · `.agents/recon/**` | → `docs/snapshots/` |
+| `docs/HANDOVER*.md` · `.agents/handoff/*` | → `docs/handoff/` |
+| `docs/aegis/INDEX.md` · `aegis/work/*/{10-intent,20-checkpoint,99-reflection}.md` | → `docs/archive/2026-07/` |
+| `docs/analysis/HANDOVER-*.md` (6) | → `docs/reference/handover-audit-2026-07-15/` |
+| `hardware/docs/analysis/integrated-2026-06-26/**` (~140) | → `docs/reference/external/2026-06-26/` |
+| `algorithm/docs/COMPARISON-TSR-FPGA.md` | → `docs/reference/` |
+| `docs/analysis/{ALGORITHM-IMPORT-CONSUMERS,HBTXR-SEMANTIC-CENSUS,*-MATRIX}.md` · `track/algorithm-modular-baseline.md` | → `algorithm/docs/reports/` (날짜 접두사) |
+| `algorithm/docs/QUANTIZATION-*.md` (4) | → `algorithm/docs/{plans/active,plans/done,reports}/` (날짜 접두사) |
+
+### 옮기지 않은 것 — 이유 있음
+
+**`hardware/docs/**` 전체와 루트 `docs/{Master-Plan,Sub-Plan,Spec,Execution,Validation}.md`
+는 그대로 둡니다.** 정리가 덜 된 게 아니라 **하드웨어 툴체인이 경로로 고정**하고 있기
+때문입니다:
+
+```python
+# hardware/tools/write_spec_plan_conformance_audit.py
+DOCS = {"master_plan": "docs/Master-Plan.md", "spec": "docs/Spec.md", ...}
+docs = {name: root / rel for name, rel in DOCS.items()}     # root = HBTXR/  → 루트 docs/
+current_doc_base = root/"hardware" if (root/"hardware"/"docs"/"Spec.md").exists() else root
+```
+
+- 루트 `docs/{5종}`은 `DOCS` dict가 **존재 여부와 내용을 검사**합니다.
+- `hardware/docs/{5종}`은 `current_doc_base` **분기 조건 자체**입니다.
+- `hardware/docs/track/{PROGRESS,HANDOVER,log}.md`와 `hardware/docs/resources/**`도
+  같은 도구와 **10개 이상의 테스트**가 읽습니다.
+
+`hardware/tests`는 **손대기 전부터 475개 중 49개가 실패** 중입니다. 이미 취약한 감사
+툴체인을, 그것도 휴지 중이라 검증할 수 없는 서브시스템에서, 정돈을 위해 더 망가뜨리는 것은
+나쁜 교환입니다. **이동은 하드웨어 소유 작업으로 남깁니다** — 도구와 테스트를 같이 고쳐야
+합니다.
+
+### 얼어붙은 문서 안의 경로는 고치지 않았습니다
+
+`docs/{archive,snapshots,handoff}/**` 안의 링크는 **당시 경로 그대로**입니다. 규칙 G·H의
+직접적 귀결입니다 — 어느 시점의 기록을 지금 참이 되도록 고쳐 쓰면 그것이 존재한 이유가
+사라집니다. 각 디렉토리의 `README.md`가 이 사실을 알립니다.
+
+**색인이 먼저 있었던 이유가 이것입니다** — 이동 후 `--check`와 링크 검사로 깨진 참조를
+바로 찾았습니다.
