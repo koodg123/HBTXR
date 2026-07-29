@@ -1,3 +1,7 @@
+> **작성** 2026-07-23 · **갱신** 2026-07-23
+> **상태** active — governance
+> **소유** repo
+
 # Task-Card Operating Protocol (HBTXR)
 
 > **Status:** adopted 2026-07-16 · **Scope:** standing operating protocol for the `HBTXR`

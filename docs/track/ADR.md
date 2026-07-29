@@ -1,3 +1,7 @@
+> **작성** 2026-07-14 · **갱신** 2026-07-23
+> **상태** active
+> **소유** repo
+
 # Architecture Decision Records
 
 ## ADR-001: Semantic Integration Instead Of Bulk Copy

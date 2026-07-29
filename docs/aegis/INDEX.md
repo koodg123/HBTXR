@@ -1,3 +1,7 @@
+> **작성** 2026-07-15 · **갱신** 2026-07-23
+> **상태** superseded-by:docs/INDEX.md
+> **소유** repo
+
 # Aegis Artifact Index
 
 | Date | Kind | Title | Path | Status |

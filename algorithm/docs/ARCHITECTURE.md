@@ -1,3 +1,7 @@
+> **작성** 2026-07-23 · **갱신** 2026-07-23
+> **상태** active
+> **소유** algorithm
+
 # HBTXR Architecture
 
 Design overview of the flat-functional reimplementation. Paper reference: HBTXR

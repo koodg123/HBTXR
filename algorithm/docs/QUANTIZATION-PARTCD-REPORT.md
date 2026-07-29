@@ -1,3 +1,7 @@
+> **작성** 2026-07-27 · **갱신** 2026-07-29
+> **상태** active — R4까지 반영
+> **소유** algorithm/quantization
+
 # Quantization Parts C & D — the integer tier: verification report
 
 Part C built the I-tier kernels and Part D made them reachable, correct on real

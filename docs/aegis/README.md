@@ -1,3 +1,7 @@
+> **작성** 2026-07-15 · **갱신** 2026-07-15
+> **상태** active — governance
+> **소유** repo
+
 # Aegis Planning Workspace
 
 This directory stores durable HBTXR plans, baseline snapshots, and work evidence.

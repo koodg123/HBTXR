@@ -1,3 +1,7 @@
+> **작성** 2026-07-27 · **갱신** 2026-07-29
+> **상태** frozen — D0~D6 완료
+> **소유** algorithm/quantization
+
 # HBTXR Quantization — Part D plan (closing the Part C gaps)
 
 Parts A/B/C are committed and green (`pytest tests/quantization` = **245 passed**). This

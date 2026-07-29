@@ -1,3 +1,7 @@
+> **작성** 2026-07-25 · **갱신** 2026-07-29
+> **상태** active
+> **소유** algorithm/quantization
+
 # HBTXR Quantization — Full Build Plan (HW-faithful · configurable · q/i tiers)
 
 Confirmed plan for extending `algorithm/quantization/` from the current fake-quant

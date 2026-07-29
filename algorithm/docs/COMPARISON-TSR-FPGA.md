@@ -1,6 +1,10 @@
+> **작성** 2026-07-29 · **갱신** 2026-07-29
+> **상태** reference — 조사 완료, 실행 항목은 §7
+> **소유** repo
+
 # TSR_FPGA (SICDL) — quantization/integer analysis, and what it says about HBTXR
 
-> **작성** 2026-07-29 · **상태** reference (조사 완료, 실행 항목은 §7) · **대상** `C:\Users\User\Downloads\SICDL\TSR_FPGA` @ `.git` 기준 스냅샷
+**조사 대상**: `C:\Users\User\Downloads\SICDL\TSR_FPGA` @ `.git` 기준 스냅샷 (외부 저장소)
 
 An external, **completed-through-silicon** INT8 CNN accelerator project, read end to end and
 compared against this repo's quantization stack. It is the closest thing available to a

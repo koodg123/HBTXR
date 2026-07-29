@@ -1,3 +1,7 @@
+> **작성** 2026-07-05 · **갱신** 2026-07-05
+> **상태** frozen — 2026-07-15 이후 활동 없음
+> **소유** hardware
+
 # HGTXR Hardware ADR
 
 ## ADR-2026-06-15-01: Keep C3b As Third-Goal Gate While Adding VREF Experiments

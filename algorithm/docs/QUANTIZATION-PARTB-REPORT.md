@@ -1,3 +1,7 @@
+> **작성** 2026-07-25 · **갱신** 2026-07-25
+> **상태** frozen — 측정 결과
+> **소유** algorithm/quantization
+
 # Quantization Part B — Configurable Quant: verification report
 
 Part B makes the HBTXR fake-quant stack **fully specifiable** and verifies every

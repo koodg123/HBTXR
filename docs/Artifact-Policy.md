@@ -1,3 +1,7 @@
+> **작성** 2026-07-15 · **갱신** 2026-07-15
+> **상태** active — governance
+> **소유** repo
+
 # External Artifact Policy
 
 HBTXR keeps source code, configuration, schemas, and compact metadata in Git.

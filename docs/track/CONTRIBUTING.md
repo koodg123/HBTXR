@@ -1,3 +1,7 @@
+> **작성** 2026-07-14 · **갱신** 2026-07-14
+> **상태** active — governance
+> **소유** repo
+
 # Collaboration Rules
 
 - Use `HBTXR` as the Git root; never stage sibling repositories.

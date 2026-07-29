@@ -1,3 +1,7 @@
+> **작성** 2026-07-14 · **갱신** 2026-07-23
+> **상태** active
+> **소유** repo
+
 # Continuation Log
 
 ## 2026-07-14 Planning Checkpoint
