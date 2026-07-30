@@ -28,10 +28,26 @@ census가 확인한 실제 설계 문서를 가리킵니다.
   없어 보류했습니다 ([재구성 계획 §5](plans/active/2026-07-29-hardware-reconstruction.md)).
 - **보드 실측** — ZCU104 물리 접근이 필요합니다.
 
+## ★ 논문 ↔ 코드 대응 — 여기부터 읽으십시오
+
+[2026-07-31-paper-to-hardware-mapping.md](architecture/2026-07-31-paper-to-hardware-mapping.md)
+
+논문(`PAPERS/JETCAS_REVISION1_FINAL_MAIN.pdf` §IV, Table III)이 정의한 블록과 코드를
+대조한 문서입니다. **결론 셋:**
+
+1. **두 구현이 논문의 서로 다른 절반을 갖고 있습니다.** 정본 `hgtxr_e2e_vit.hpp`에는
+   논문의 핵심 프리미티브 **RMU/SMU가 0회**이고 **NoC·Weight Prefetcher도 없습니다.**
+   그 셋은 비정본 `hgtxr_top`의 `src/*.cpp`에만 있습니다.
+2. 반대로 **4개 cyclic core**(MHA0/1·MLP0/1)는 정본에만 있습니다 —
+   `attn_unit<0/1>`·`mlp_unit<0/1>` 템플릿 인스턴스로.
+3. **Table III의 수치를 산출하는 빌드가 저장소에 없습니다.** URAM 5배·클럭 1.5배·
+   GOPS 10배 차이입니다.
+
 ## 설계 문서
 
 | 문서 | 내용 |
 |---|---|
+| [architecture/2026-07-31-paper-to-hardware-mapping.md](architecture/2026-07-31-paper-to-hardware-mapping.md) | **논문 ↔ 코드 대응표 · 구현 계획 H1~H7** |
 | [MODULE-GUIDE.md](MODULE-GUIDE.md) | **모듈별 상세** — 각 모듈의 분석·다이어그램·마이크로아키텍처를 한 섹션에 통합 |
 | [architecture/2026-06-16-cyclic-streaming-accelerator.md](architecture/2026-06-16-cyclic-streaming-accelerator.md) | cyclic 스트리밍 가속기 개요 |
 | [architecture/2026-06-16-hbtxr-arch-freeze.md](architecture/2026-06-16-hbtxr-arch-freeze.md) | 아키텍처 동결과 DeiT 등가성 |

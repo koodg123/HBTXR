@@ -10,7 +10,7 @@
 python scripts/build_docs_index.py
 ```
 
-총 **506개** 문서. 날짜·상태·소유는 각 문서의 3줄 헤더에서 읽고, 헤더가 없으면 git 이력으로 대체합니다 — 그 경우 *(헤더 없음 — git 기준)*으로 표시되므로 상태 칸이 추정임을 알 수 있습니다.
+총 **507개** 문서. 날짜·상태·소유는 각 문서의 3줄 헤더에서 읽고, 헤더가 없으면 git 이력으로 대체합니다 — 그 경우 *(헤더 없음 — git 기준)*으로 표시되므로 상태 칸이 추정임을 알 수 있습니다.
 
 규약: [governance/DOC-CONVENTIONS.md](governance/DOC-CONVENTIONS.md)
 
@@ -20,7 +20,7 @@ python scripts/build_docs_index.py
 |---|---|---:|---|---|
 | **repo** | `docs/` | 175 | 2026-07-31 | 횡단·거버넌스·외부 조사 |
 | **algorithm** | `algorithm/docs/` | 17 | 2026-07-29 | 학습·평가·양자화·정수 그래프 |
-| **hardware** | `hardware/docs/` | 158 | 2026-07-30 | HLS·RTL·Vivado·PYNQ 가속기 (재구성 중) |
+| **hardware** | `hardware/docs/` | 159 | 2026-07-31 | HLS·RTL·Vivado·PYNQ 가속기 (재구성 중) |
 | **archive** | `archive/hardware/docs/` | 156 | 2026-07-29 | 구 hardware 트리 — 읽기 전용 기준 |
 
 ## 먼저 볼 것
@@ -119,6 +119,7 @@ python scripts/build_docs_index.py
 
 | 문서 | 작성 | 갱신 | 상태 | 소유 |
 |---|---|---|---|---|
+| [architecture/2026-07-31-paper-to-hardware-mapping.md](../hardware/docs/architecture/2026-07-31-paper-to-hardware-mapping.md) | 2026-07-31 | 2026-07-31 | active — 논문 구현의 기준 문서 | hardware |
 | [reports/2026-07-30-module-code-analysis.md](../hardware/docs/reports/2026-07-30-module-code-analysis.md) | 2026-07-30 | 2026-07-30 | active — 조사 결과. 조치는 "지금 가능"만 실행, 나머지는 목록 | hardware |
 | [plans/active/2026-07-29-code-migration-manifest.md](../hardware/docs/plans/active/2026-07-29-code-migration-manifest.md) | 2026-07-29 | 2026-07-30 | active — M1~M5 진행에 따라 갱신 | hardware |
 | [track/CHANGELOG.md](../hardware/docs/track/CHANGELOG.md) | 2026-07-29 | 2026-07-29 | active | hardware |
