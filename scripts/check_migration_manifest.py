@@ -50,6 +50,9 @@ def main() -> int:
     for p in new_files:
         new_hashes.setdefault(digest(p), []).append(p.relative_to(ROOT).as_posix())
 
+    # [repointed] = 이관 후 의도적으로 편집됨(경로 재지정). 해시가 아니라 파일명으로 대조합니다.
+    new_names = {p.name for p in new_files}
+
     # 방향 1 — migrate 인데 새 트리에 없는 것
     missing = []
     for r in rows:
@@ -58,19 +61,25 @@ def main() -> int:
         src = ARCHIVE / r["archive_path"]
         if not src.exists():
             missing.append((r["archive_path"], "archive에 원본이 없습니다"))
+        elif "[repointed]" in r["reason"]:
+            if src.name not in new_names:
+                missing.append((r["archive_path"], f"→ {r['dest']} 예정, 아직 없음 (repointed)"))
         elif digest(src) not in new_hashes:
             missing.append((r["archive_path"], f"→ {r['dest']} 예정, 아직 없음"))
 
     # 방향 2 — 새 트리에 있는데 대장이 설명 못 하는 것
     accounted = set()
+    accounted_names = set()
     for r in rows:
         src = ARCHIVE / r["archive_path"]
         if src.exists():
             accounted.add(digest(src))
+            if "[repointed]" in r["reason"]:
+                accounted_names.add(src.name)
     orphan = []
     for p in new_files:
         rel = p.relative_to(NEW).as_posix()
-        if is_native(rel):
+        if is_native(rel) or p.name in accounted_names:
             continue
         if digest(p) not in accounted:
             orphan.append(rel)

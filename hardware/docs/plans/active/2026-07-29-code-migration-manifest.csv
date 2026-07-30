@@ -435,17 +435,17 @@ refs/weights/e2e_m_axi_active196_b6_ff768_q4_u32.bin,.bin,migrate,hardware/modul
 refs/weights/e2e_m_axi_active196_b6_ff768_q4_u32_manifest.json,.json,migrate,hardware/module/golden/weights/,위 .bin의 매니페스트. 짝으로 유지
 reports/csim/hw_sw_compare.json,.json,skip,hardware/workspace/,생성물
 rtl/README.md,.md,skip,-,새 트리의 README는 이관 체크리스트로 새로 작성했습니다
-scripts/_common.sh,.sh,migrate,hardware/build/,빌드 진입점
-scripts/export_hw_refs.sh,.sh,migrate,hardware/build/,빌드 진입점
-scripts/overlay_preview.sh,.sh,migrate,hardware/build/,빌드 진입점
-scripts/report/collect_no_board_reports.py,.py,migrate,hardware/build/,빌드 진입점
-scripts/run/run_e2e_axis_dma_vivado_no_board.sh,.sh,migrate,hardware/build/,빌드 진입점
-scripts/run/run_e2e_q4w8a_no_board.sh,.sh,migrate,hardware/build/,빌드 진입점
-scripts/run/run_mode_profile_no_board.sh,.sh,migrate,hardware/build/,빌드 진입점
-scripts/run/run_mode_profile_vivado_no_board.sh,.sh,migrate,hardware/build/,빌드 진입점
-scripts/run_hls_csim.sh,.sh,migrate,hardware/build/,빌드 진입점
-scripts/run_hls_csynth.sh,.sh,migrate,hardware/build/,빌드 진입점
-scripts/run_hw_sw_compare.sh,.sh,migrate,hardware/build/,빌드 진입점
+scripts/_common.sh,.sh,migrate,hardware/build/,빌드 진입점 [repointed] M3-2에서 경로 재지정 — 내용이 archive와 다릅니다. 파일명으로 대조
+scripts/export_hw_refs.sh,.sh,migrate,hardware/build/,빌드 진입점 [repointed] M3-2에서 경로 재지정 — 내용이 archive와 다릅니다. 파일명으로 대조
+scripts/overlay_preview.sh,.sh,migrate,hardware/build/,빌드 진입점 [repointed] M3-2에서 경로 재지정 — 내용이 archive와 다릅니다. 파일명으로 대조
+scripts/report/collect_no_board_reports.py,.py,migrate,hardware/build/,빌드 진입점 [repointed] M3-2에서 경로 재지정 — 내용이 archive와 다릅니다. 파일명으로 대조
+scripts/run/run_e2e_axis_dma_vivado_no_board.sh,.sh,migrate,hardware/build/,빌드 진입점 [repointed] M3-2에서 경로 재지정 — 내용이 archive와 다릅니다. 파일명으로 대조
+scripts/run/run_e2e_q4w8a_no_board.sh,.sh,migrate,hardware/build/,빌드 진입점 [repointed] M3-2에서 경로 재지정 — 내용이 archive와 다릅니다. 파일명으로 대조
+scripts/run/run_mode_profile_no_board.sh,.sh,migrate,hardware/build/,빌드 진입점 [repointed] M3-2에서 경로 재지정 — 내용이 archive와 다릅니다. 파일명으로 대조
+scripts/run/run_mode_profile_vivado_no_board.sh,.sh,migrate,hardware/build/,빌드 진입점 [repointed] M3-2에서 경로 재지정 — 내용이 archive와 다릅니다. 파일명으로 대조
+scripts/run_hls_csim.sh,.sh,migrate,hardware/build/,빌드 진입점 [repointed] M3-2에서 경로 재지정 — 내용이 archive와 다릅니다. 파일명으로 대조
+scripts/run_hls_csynth.sh,.sh,migrate,hardware/build/,빌드 진입점 [repointed] M3-2에서 경로 재지정 — 내용이 archive와 다릅니다. 파일명으로 대조
+scripts/run_hw_sw_compare.sh,.sh,migrate,hardware/build/,빌드 진입점 [repointed] M3-2에서 경로 재지정 — 내용이 archive와 다릅니다. 파일명으로 대조
 tests/test_audit_final_unblock_candidates.py,.py,migrate,hardware/tools/tests/,회귀 기준선 426
 tests/test_audit_reference_inputs.py,.py,migrate,hardware/tools/tests/,회귀 기준선 426
 tests/test_audit_xr_vits_candidates.py,.py,migrate,hardware/tools/tests/,회귀 기준선 426
@@ -593,34 +593,34 @@ tools/write_vref_p0_qkv_uram_cache_successor.py,.py,migrate,hardware/tools/,argp
 tools/write_xr_vits_gate_audit.py,.py,migrate,hardware/tools/,argparse 진입점. 역할별 재배치는 P2
 tools/write_xr_vits_unblock_packet.py,.py,migrate,hardware/tools/,argparse 진입점. 역할별 재배치는 P2
 tools/xr_accel_config.py,.py,migrate,hardware/tools/,argparse 진입점. 역할별 재배치는 P2
-vivado/boards/vck190.tcl,.tcl,migrate,hardware/build/vivado/,합성·P&R·비트스트림 스크립트
-vivado/boards/zcu104.tcl,.tcl,migrate,hardware/build/vivado/,합성·P&R·비트스트림 스크립트
-vivado/scripts/build_bitstream.tcl,.tcl,migrate,hardware/build/vivado/,합성·P&R·비트스트림 스크립트
-vivado/scripts/build_e2e_axis_dma_bitstream.tcl,.tcl,migrate,hardware/build/vivado/,합성·P&R·비트스트림 스크립트
-vivado/scripts/build_e2e_m_axi_bitstream.tcl,.tcl,migrate,hardware/build/vivado/,합성·P&R·비트스트림 스크립트
-vivado/scripts/build_mode_profile_bitstream.tcl,.tcl,migrate,hardware/build/vivado/,합성·P&R·비트스트림 스크립트
-vivado/scripts/create_hls_project.tcl,.tcl,migrate,hardware/build/vivado/,합성·P&R·비트스트림 스크립트
-vivado/scripts/package_e2e_axis_ip.tcl,.tcl,migrate,hardware/build/vivado/,합성·P&R·비트스트림 스크립트
-vivado/scripts/package_e2e_m_axi_ip.tcl,.tcl,migrate,hardware/build/vivado/,합성·P&R·비트스트림 스크립트
-vivado/scripts/package_ip.tcl,.tcl,migrate,hardware/build/vivado/,합성·P&R·비트스트림 스크립트
-vivado/scripts/package_mode_profile_ip.tcl,.tcl,migrate,hardware/build/vivado/,합성·P&R·비트스트림 스크립트
-vivado/scripts/report_e2e_axis_dma_impl_utilization.tcl,.tcl,migrate,hardware/build/vivado/,합성·P&R·비트스트림 스크립트
-vivado/scripts/run_csim.tcl,.tcl,migrate,hardware/build/vivado/,합성·P&R·비트스트림 스크립트
-vivado/scripts/run_csynth.tcl,.tcl,migrate,hardware/build/vivado/,합성·P&R·비트스트림 스크립트
-vivado/scripts/run_cyclic_s0_csynth.tcl,.tcl,migrate,hardware/build/vivado/,합성·P&R·비트스트림 스크립트
-vivado/scripts/run_cyclic_s1_weight_csynth.tcl,.tcl,migrate,hardware/build/vivado/,합성·P&R·비트스트림 스크립트
-vivado/scripts/run_cyclic_s2_attn_first_step_csynth.tcl,.tcl,migrate,hardware/build/vivado/,합성·P&R·비트스트림 스크립트
-vivado/scripts/run_cyclic_s2_block_first_step_csynth.tcl,.tcl,migrate,hardware/build/vivado/,합성·P&R·비트스트림 스크립트
-vivado/scripts/run_cyclic_s2_block_q4w8a_csim.tcl,.tcl,migrate,hardware/build/vivado/,합성·P&R·비트스트림 스크립트
-vivado/scripts/run_cyclic_s2_block_q4w8a_csynth.tcl,.tcl,migrate,hardware/build/vivado/,합성·P&R·비트스트림 스크립트
-vivado/scripts/run_cyclic_s2_block_vector_csim.tcl,.tcl,migrate,hardware/build/vivado/,합성·P&R·비트스트림 스크립트
-vivado/scripts/run_cyclic_s2_first_step_csynth.tcl,.tcl,migrate,hardware/build/vivado/,합성·P&R·비트스트림 스크립트
-vivado/scripts/run_cyclic_s2_mlp_first_step_csynth.tcl,.tcl,migrate,hardware/build/vivado/,합성·P&R·비트스트림 스크립트
-vivado/scripts/run_cyclic_s2_qkv_first_step_csynth.tcl,.tcl,migrate,hardware/build/vivado/,합성·P&R·비트스트림 스크립트
-vivado/scripts/run_e2e_m_axi_q4w8a_csim.tcl,.tcl,migrate,hardware/build/vivado/,합성·P&R·비트스트림 스크립트
-vivado/scripts/run_e2e_m_axi_q4w8a_csynth.tcl,.tcl,migrate,hardware/build/vivado/,합성·P&R·비트스트림 스크립트
-vivado/scripts/run_e2e_q4w8a_cosim.tcl,.tcl,migrate,hardware/build/vivado/,합성·P&R·비트스트림 스크립트
-vivado/scripts/run_e2e_q4w8a_csim.tcl,.tcl,migrate,hardware/build/vivado/,합성·P&R·비트스트림 스크립트
-vivado/scripts/run_e2e_q4w8a_csynth.tcl,.tcl,migrate,hardware/build/vivado/,합성·P&R·비트스트림 스크립트
-vivado/scripts/run_mode_profile_q4w8a_csim.tcl,.tcl,migrate,hardware/build/vivado/,합성·P&R·비트스트림 스크립트
-vivado/scripts/run_mode_profile_q4w8a_csynth.tcl,.tcl,migrate,hardware/build/vivado/,합성·P&R·비트스트림 스크립트
+vivado/boards/vck190.tcl,.tcl,migrate,hardware/build/vivado/,합성·P&R·비트스트림 스크립트 [repointed] M3-2에서 경로 재지정 — 내용이 archive와 다릅니다. 파일명으로 대조
+vivado/boards/zcu104.tcl,.tcl,migrate,hardware/build/vivado/,합성·P&R·비트스트림 스크립트 [repointed] M3-2에서 경로 재지정 — 내용이 archive와 다릅니다. 파일명으로 대조
+vivado/scripts/build_bitstream.tcl,.tcl,migrate,hardware/build/vivado/,합성·P&R·비트스트림 스크립트 [repointed] M3-2에서 경로 재지정 — 내용이 archive와 다릅니다. 파일명으로 대조
+vivado/scripts/build_e2e_axis_dma_bitstream.tcl,.tcl,migrate,hardware/build/vivado/,합성·P&R·비트스트림 스크립트 [repointed] M3-2에서 경로 재지정 — 내용이 archive와 다릅니다. 파일명으로 대조
+vivado/scripts/build_e2e_m_axi_bitstream.tcl,.tcl,migrate,hardware/build/vivado/,합성·P&R·비트스트림 스크립트 [repointed] M3-2에서 경로 재지정 — 내용이 archive와 다릅니다. 파일명으로 대조
+vivado/scripts/build_mode_profile_bitstream.tcl,.tcl,migrate,hardware/build/vivado/,합성·P&R·비트스트림 스크립트 [repointed] M3-2에서 경로 재지정 — 내용이 archive와 다릅니다. 파일명으로 대조
+vivado/scripts/create_hls_project.tcl,.tcl,migrate,hardware/build/vivado/,합성·P&R·비트스트림 스크립트 [repointed] M3-2에서 경로 재지정 — 내용이 archive와 다릅니다. 파일명으로 대조
+vivado/scripts/package_e2e_axis_ip.tcl,.tcl,migrate,hardware/build/vivado/,합성·P&R·비트스트림 스크립트 [repointed] M3-2에서 경로 재지정 — 내용이 archive와 다릅니다. 파일명으로 대조
+vivado/scripts/package_e2e_m_axi_ip.tcl,.tcl,migrate,hardware/build/vivado/,합성·P&R·비트스트림 스크립트 [repointed] M3-2에서 경로 재지정 — 내용이 archive와 다릅니다. 파일명으로 대조
+vivado/scripts/package_ip.tcl,.tcl,migrate,hardware/build/vivado/,합성·P&R·비트스트림 스크립트 [repointed] M3-2에서 경로 재지정 — 내용이 archive와 다릅니다. 파일명으로 대조
+vivado/scripts/package_mode_profile_ip.tcl,.tcl,migrate,hardware/build/vivado/,합성·P&R·비트스트림 스크립트 [repointed] M3-2에서 경로 재지정 — 내용이 archive와 다릅니다. 파일명으로 대조
+vivado/scripts/report_e2e_axis_dma_impl_utilization.tcl,.tcl,migrate,hardware/build/vivado/,합성·P&R·비트스트림 스크립트 [repointed] M3-2에서 경로 재지정 — 내용이 archive와 다릅니다. 파일명으로 대조
+vivado/scripts/run_csim.tcl,.tcl,migrate,hardware/build/vivado/,합성·P&R·비트스트림 스크립트 [repointed] M3-2에서 경로 재지정 — 내용이 archive와 다릅니다. 파일명으로 대조
+vivado/scripts/run_csynth.tcl,.tcl,migrate,hardware/build/vivado/,합성·P&R·비트스트림 스크립트 [repointed] M3-2에서 경로 재지정 — 내용이 archive와 다릅니다. 파일명으로 대조
+vivado/scripts/run_cyclic_s0_csynth.tcl,.tcl,migrate,hardware/build/vivado/,합성·P&R·비트스트림 스크립트 [repointed] M3-2에서 경로 재지정 — 내용이 archive와 다릅니다. 파일명으로 대조
+vivado/scripts/run_cyclic_s1_weight_csynth.tcl,.tcl,migrate,hardware/build/vivado/,합성·P&R·비트스트림 스크립트 [repointed] M3-2에서 경로 재지정 — 내용이 archive와 다릅니다. 파일명으로 대조
+vivado/scripts/run_cyclic_s2_attn_first_step_csynth.tcl,.tcl,migrate,hardware/build/vivado/,합성·P&R·비트스트림 스크립트 [repointed] M3-2에서 경로 재지정 — 내용이 archive와 다릅니다. 파일명으로 대조
+vivado/scripts/run_cyclic_s2_block_first_step_csynth.tcl,.tcl,migrate,hardware/build/vivado/,합성·P&R·비트스트림 스크립트 [repointed] M3-2에서 경로 재지정 — 내용이 archive와 다릅니다. 파일명으로 대조
+vivado/scripts/run_cyclic_s2_block_q4w8a_csim.tcl,.tcl,migrate,hardware/build/vivado/,합성·P&R·비트스트림 스크립트 [repointed] M3-2에서 경로 재지정 — 내용이 archive와 다릅니다. 파일명으로 대조
+vivado/scripts/run_cyclic_s2_block_q4w8a_csynth.tcl,.tcl,migrate,hardware/build/vivado/,합성·P&R·비트스트림 스크립트 [repointed] M3-2에서 경로 재지정 — 내용이 archive와 다릅니다. 파일명으로 대조
+vivado/scripts/run_cyclic_s2_block_vector_csim.tcl,.tcl,migrate,hardware/build/vivado/,합성·P&R·비트스트림 스크립트 [repointed] M3-2에서 경로 재지정 — 내용이 archive와 다릅니다. 파일명으로 대조
+vivado/scripts/run_cyclic_s2_first_step_csynth.tcl,.tcl,migrate,hardware/build/vivado/,합성·P&R·비트스트림 스크립트 [repointed] M3-2에서 경로 재지정 — 내용이 archive와 다릅니다. 파일명으로 대조
+vivado/scripts/run_cyclic_s2_mlp_first_step_csynth.tcl,.tcl,migrate,hardware/build/vivado/,합성·P&R·비트스트림 스크립트 [repointed] M3-2에서 경로 재지정 — 내용이 archive와 다릅니다. 파일명으로 대조
+vivado/scripts/run_cyclic_s2_qkv_first_step_csynth.tcl,.tcl,migrate,hardware/build/vivado/,합성·P&R·비트스트림 스크립트 [repointed] M3-2에서 경로 재지정 — 내용이 archive와 다릅니다. 파일명으로 대조
+vivado/scripts/run_e2e_m_axi_q4w8a_csim.tcl,.tcl,migrate,hardware/build/vivado/,합성·P&R·비트스트림 스크립트 [repointed] M3-2에서 경로 재지정 — 내용이 archive와 다릅니다. 파일명으로 대조
+vivado/scripts/run_e2e_m_axi_q4w8a_csynth.tcl,.tcl,migrate,hardware/build/vivado/,합성·P&R·비트스트림 스크립트 [repointed] M3-2에서 경로 재지정 — 내용이 archive와 다릅니다. 파일명으로 대조
+vivado/scripts/run_e2e_q4w8a_cosim.tcl,.tcl,migrate,hardware/build/vivado/,합성·P&R·비트스트림 스크립트 [repointed] M3-2에서 경로 재지정 — 내용이 archive와 다릅니다. 파일명으로 대조
+vivado/scripts/run_e2e_q4w8a_csim.tcl,.tcl,migrate,hardware/build/vivado/,합성·P&R·비트스트림 스크립트 [repointed] M3-2에서 경로 재지정 — 내용이 archive와 다릅니다. 파일명으로 대조
+vivado/scripts/run_e2e_q4w8a_csynth.tcl,.tcl,migrate,hardware/build/vivado/,합성·P&R·비트스트림 스크립트 [repointed] M3-2에서 경로 재지정 — 내용이 archive와 다릅니다. 파일명으로 대조
+vivado/scripts/run_mode_profile_q4w8a_csim.tcl,.tcl,migrate,hardware/build/vivado/,합성·P&R·비트스트림 스크립트 [repointed] M3-2에서 경로 재지정 — 내용이 archive와 다릅니다. 파일명으로 대조
+vivado/scripts/run_mode_profile_q4w8a_csynth.tcl,.tcl,migrate,hardware/build/vivado/,합성·P&R·비트스트림 스크립트 [repointed] M3-2에서 경로 재지정 — 내용이 archive와 다릅니다. 파일명으로 대조
