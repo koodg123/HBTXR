@@ -24,7 +24,7 @@ MANIFEST = NEW / "docs" / "plans" / "active" / "2026-07-29-code-migration-manife
 # 새 트리에만 있는 것이 정상 — 이관한 게 아니라 새로 쓴 것
 NATIVE_PREFIX = ("docs/", "workspace/")
 NATIVE_NAME = {"README.md", ".gitignore"}
-NATIVE_EXACT = {"deploy/RUNTIME-GUIDE.md"}
+NATIVE_EXACT = {"deploy/RUNTIME-GUIDE.md", "build/run_cyclic_tb.sh"}
 
 
 def is_native(rel: str) -> bool:

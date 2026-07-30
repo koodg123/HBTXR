@@ -15,16 +15,16 @@
 
 ## Active
 
-**hardware 재구성** — 문서 완료 · **코드 이관 M3/5 완료** (171/325).
+**hardware 재구성** — 문서 완료 · **코드 이관 M4/5 완료** (180/325).
 계획: [plans/active/2026-07-29-hardware-reconstruction.md](plans/active/2026-07-29-hardware-reconstruction.md) ·
 대장: [plans/active/2026-07-29-code-migration-manifest.md](plans/active/2026-07-29-code-migration-manifest.md)
 
 | 디렉토리 | 상태 | 다음 |
 |---|---|---|
 | `config/` | ✅ **M1 완료** | 33/33. M5까지는 사본 — 도구는 아직 archive를 읽습니다 |
-| `module/` | ✅ **M2 완료 · M3에서 정본화** | 96/96. **컴파일러 자체가 없어** 실행 검증 0 |
-| `build/` | ✅ **M3 완료** | 42/42 + 경로 재지정. **`module/`이 정본**. 단 C++ 컴파일러가 없어 실행 검증 0 |
-| `deploy/` | 🟨 런타임 가이드만 | `archive/hardware/pynq/*.py` 9 (비트스트림 제외) |
+| `module/` | ✅ **M2 완료 · M3에서 정본화** | 96/96. cyclic tb 3개 **PASS**. 정본 top 3개는 csim 미실행 |
+| `build/` | ✅ **M3 완료** | 42/42 + 경로 재지정. **`module/`이 정본**. tcl 자체는 미실행 (Vitis HLS 실행 필요) |
+| `deploy/` | ✅ **M4 완료** | 9/9. 재지정 불필요(경로가 전부 인자). 테스트 24개는 M5 후 |
 | `tools/` | ⬜ 비어 있음 | `archive/hardware/tools/` 87 + `tests/` 60 — `_lib/` 공용화 포함 |
 | `docs/` | ✅ **완료 (D1~D5)** | 159개 전수 대조 완료 |
 | `workspace/` | ⬜ 골격만 | gitignore 정책 적용됨 |
@@ -59,8 +59,9 @@
 | 항목 | 무엇이 막고 있나 | 누가 풀 수 있나 |
 |---|---|---|
 | 보드 검증 (C3b smoke, AQ2 히스토그램) | ZCU104 물리 접근 | **사용자 승인** |
-| **C++ 컴파일러 부재** | `g++` `clang++` `cl` `gcc` 전부 없음 | **사용자** — 아무 컴파일러 하나. 그것만으로 cyclic tb 3개가 돌고 **트리 최초의 HLS측 검증**이 생깁니다 |
-| Xilinx 툴 실행 | Vitis HLS / Vivado 2023.2 미설치 | **사용자** — 환경 구성 |
+| **`.sh` 106개가 CRLF 로 커밋됨** | WSL `sh` 가 `set -eu
+` 에서 죽습니다. 셸 러너 계층 전체가 WSL 에서 실행 불가 | `.gitattributes` 에 `*.sh text eol=lf` + `git add --renormalize`. **M5에서** — 지금 106파일을 건드리면 M4 검증과 섞입니다 |
+| Vitis HLS **실행** (csim/csynth) | 헤더는 쓰고 있지만 툴 실행은 미검증 | **사용자** — WSL `/tools/Xilinx/Vitis_HLS/{2023.2,2024.1}` 확인됨 |
 | `hgtxr_e2e_vit.hpp` 4,503줄 분해 | 합성 결과 검증 불가 (보드 없음) | **사용자** — 위 두 행이 풀리면 자동으로 풀립니다. 그 전에는 착수 금지 |
 
 ## Next
@@ -77,8 +78,8 @@
 | **M2** | `module/` | 96 | ✅ **완료** — 해시 대조 96/96 |
 | **M3-1** | `build/` 복사 | 42 | ✅ **완료** — 해시 대조 42/42 |
 | **M3-2** | 경로 재지정 + `-I …/golden` | 26파일 | ✅ **완료** — 구 경로 참조 0줄 |
-| **M4** | `deploy/` | 9 | ⬜ **다음** |
-| **M5** | `tools/` | 147 | ⬜ |
+| **M4** | `deploy/` | 9 | ✅ **완료** — 해시 대조 9/9 |
+| **M5** | `tools/` | 147 | ⬜ **다음** — `.sh` CRLF 정규화 · `generated/`→`workspace/` 포함 |
 
 이관이 끝나면 계획 §6의 P1~P8.
 
@@ -86,6 +87,8 @@
 
 | 날짜 | 내용 |
 |---|---|
+| 2026-07-30 | **M4** `deploy/` 이관 — 9/9. **기준선이 426이 아니라 450**임을 발견 (overlay 테스트 24개가 `tests/` 밖) |
+| 2026-07-30 | **cyclic tb 3개 최초 실행 — 전부 PASS.** `build/run_cyclic_tb.sh` (WSL g++ + Vitis HLS 헤더) |
 | 2026-07-30 | **M3** `build/` 이관 — 42/42 복사 + 26파일 경로 재지정. `module/`이 정본, M2 `-I golden` 부채 청산 |
 | 2026-07-30 | `module/` 전수 분석 — 45건 제기·21확정. csim이 float라는 발견, 어서션 0 테스트 2개 삭제 |
 | 2026-07-30 | **M2** `module/` 이관 — 96/96 해시 대조, 미결 5건 판정, 테스트 426 불변 |
@@ -101,5 +104,14 @@
 
 - **archive는 읽기 전용 기준입니다.** 수정하지 않습니다.
 - 각 이관은 **archive의 무엇을 옮겼는지** 추적 가능해야 합니다.
-- **`archive/hardware/tests`의 426 passed가 회귀 기준선입니다.** 이관 중 새 트리에서
-  같은 테스트를 돌렸을 때 이 숫자가 줄면 멈춥니다.
+- **회귀 기준선은 `49 failed / 450 passed`입니다.** 이 숫자가 줄면 멈춥니다.
+
+  ```bash
+  python -m pytest archive/hardware/tests archive/hardware/pynq/hgtxr/test_hgtxr_overlay.py -q
+  ```
+
+  종전에 426이라고 적었던 것은 **`archive/hardware/tests`만** 센 것입니다.
+  `test_hgtxr_overlay.py`의 **24개는 `tests/` 밖(`pynq/`)에 있어 2026-07-30까지
+  아무도 세지 않았습니다.** 보드도 필요 없습니다 — `unittest.mock` 기반입니다.
+- **cyclic 테스트벤치 3개**는 WSL 에서 실행 가능합니다: `sh hardware/build/run_cyclic_tb.sh`
+  (g++ + `/tools/Xilinx/Vitis_HLS/2023.2/include`). 2026-07-30 최초 실행, 전부 PASS.

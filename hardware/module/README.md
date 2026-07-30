@@ -1,5 +1,5 @@
 > **작성** 2026-07-29 · **갱신** 2026-07-30
-> **상태** active — **M2 이관 완료 (96/96). 합성 검증은 안 됐습니다** (아래)
+> **상태** active — **M2 완료 · M3에서 정본화.** cyclic tb 3개 PASS · 정본 top 3개는 csim 미실행
 > **소유** hardware
 
 # module — HLS 소스와 테스트벤치
@@ -36,12 +36,15 @@ census 판정이고 재구성 전에 알아야 합니다
 분해는 [계획 §5](../docs/plans/active/2026-07-29-hardware-reconstruction.md)의 P7이고,
 합성 결과를 검증할 보드가 없어 **착수 금지**입니다.
 
-## ⚠️ 이 디렉토리는 합성 검증되지 않았습니다
+## 무엇이 검증됐고 무엇이 아닌가
 
-`archive/hardware/tests`의 **426 passed는 전부 Python 도구 테스트**입니다.
-**HLS 빌드 입력을 검증하는 테스트는 0건입니다.** 이관이 옳다는 것은 `.cpp`/`.hpp`가
-archive와 **바이트 동일**하다는 것까지만 증명하며, **컴파일되는지는 증명하지 않습니다** —
-Vitis HLS가 없습니다.
+| | |
+|---|---|
+| ✅ **cyclic tb 3개 컴파일·실행 PASS** | `sh hardware/build/run_cyclic_tb.sh` (WSL). 2026-07-30 최초. `include/hgtxr_cyclic_{mac,attention,norm,mlp,s2_projection}.hpp` 가 실제로 컴파일된다는 뜻입니다 |
+| ❌ 정본 top 3개 (`hgtxr_e2e_axis_top` 등) | csim 미실행 — Vitis HLS **실행**이 필요합니다 |
+| ❌ `hgtxr_e2e_vit.hpp` 4,503줄 | 위와 같음 |
+
+파이썬 도구 테스트(기준선 450)는 **HLS 빌드 입력을 하나도 검증하지 않습니다.**
 
 ## 전수 분석 결과 (2026-07-30)
 
@@ -55,11 +58,12 @@ Vitis HLS가 없습니다.
 | **`hgtxr_data_to_axis` 부호확장 없음** | `BIT_WIDTH<16`에서 상위 비트가 0으로 남는데 호스트는 16비트 부호로 디코드 → **음수 출력 전부 오독** |
 | **cyclic 라이브러리 8개 헤더가 dark** | `hgtxr_top.cpp:57`의 매크로를 세우는 `run_cyclic_*.tcl` 9개를 호출하는 셸이 없습니다. 마지막 증거는 2026-06-08 수동 실행 |
 | **LUT 48개 호출 0건** | `hgtxr_cyclic_math.hpp:192-756`. LayerNorm·softmax는 레이어별 캘리브레이션을 쓰는데 Q/K/V·attn 출력은 안 씁니다. **삭제 금지** — `golden/hgpipe_lut_math_contract.json`이 미러링을 강제 |
-| **테스트벤치 12→6만 빌드에 걸림** | 그리고 **가장 잘 만든 3개가 안 걸린 쪽**입니다 (`tb_cyclic_{head_attention,s2_projection,primitives}.cpp`) |
+| **테스트벤치 12→6만 빌드에 걸림** | 가장 잘 만든 3개가 안 걸린 쪽이었습니다. **2026-07-30 실행 성공 — 전부 PASS**: `sh hardware/build/run_cyclic_tb.sh` (WSL) |
 
-**위 결함들은 고치지 않았습니다** — Vitis HLS가 없어 고친 결과를 판정할 수 없습니다.
-특히 `fixed_types.h`를 고치면 기존 golden이 전부 실패할 수 있고, 그게 정상인지 회귀인지
-구분할 방법이 없습니다.
+**위 결함들은 고치지 않았습니다.** cyclic tb 3개는 돌지만 그 셋은 **정본 경로를 안 지납니다** —
+`quant.h`·`fixed_types.h`·`hgtxr_data_to_axis`는 전부 `hgtxr_e2e_vit.hpp` 쪽이고, 거기를 고친
+결과를 판정하려면 **Vitis HLS 실행(csim)**이 필요합니다. 특히 `fixed_types.h`를 고치면 기존
+golden 이 전부 실패할 수 있고, 그게 정상인지 회귀인지 구분할 방법이 지금은 없습니다.
 
 ### 2026-07-30 삭제 2건
 
@@ -67,12 +71,10 @@ Vitis HLS가 없습니다.
 초기화 없는 버퍼로 스테이지를 한 번 호출한 뒤 결과를 확인하지 않고 `return 0`합니다.
 **DUT가 빈 함수여도 통과**하므로 없는 것보다 나쁩니다.
 
-### M3에서 갚아야 하는 부채 — golden 분리
+### golden 분리 부채 — **M3-2에서 청산 완료**
 
-테스트벤치가 golden을 `#include "e2e_axis_vector_*_golden.hpp"`로 **무수식 상대 경로**
-참조합니다. M2에서 `tb/`와 `golden/`을 나눴으므로 **새 트리에서는 이 include가 실패**합니다
-(archive는 같은 디렉토리라 무해, 빌드도 아직 archive를 읽습니다).
-분리 자체는 옳지만 공짜가 아니었고, **M3에서 tcl에 `-I ../golden`을 추가**해야 합니다.
+테스트벤치가 golden 을 무수식 상대 경로로 include 해서, M2 의 `tb/`·`golden/` 분리가
+그걸 깨뜨렸습니다. M3-2 가 모든 `cxx_flags` 에 `-I…/module/golden` 을 넣어 갚았습니다.
 
 ## 알려진 결함 — 이관하며 확인, **고치지 않음**
 
