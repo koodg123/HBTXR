@@ -252,7 +252,7 @@ progress:    docs/track/PROGRESS.md
 |---|---|---|---|
 | **M1** | `config/` | `configs/` 33 | 아무것도 참조하지 않음. 다른 것들이 여기를 참조 |
 | **M2** | `module/` | `hls/` 67 + `refs/` 29 → `golden/` | 본체. 경로가 확정돼야 build가 가리킬 수 있음 |
-| **M3** | `build/` | `vivado/scripts/` 31 + `scripts/` 16 | M2의 경로를 소비 |
+| **M3** | `build/` | `vivado/scripts/` 31 + `scripts/` 16 | M2의 경로를 소비. **필수: tcl에 `-I ../golden` 추가** — M2의 tb/golden 분리로 무수식 include가 깨졌습니다. 그리고 `tb_cyclic_{head_attention,s2_projection,primitives}.cpp` 러너를 만드는 것이 가장 값싼 품질 개선입니다 ([분석](../../reports/2026-07-30-module-code-analysis.md)) |
 | **M4** | `deploy/` | `pynq/*.py` 9 (비트스트림 `.bit`/`.hwh` 제외 → `workspace/`) | M2·M3와 독립이지만 보드 없이는 검증 불가 |
 | **M5** | `tools/` | `tools/` 87 + `tests/` 60 | **마지막.** 87개가 전방위를 읽음(`generated` 339회·`docs` 208·`pynq` 206·`hls` 128). 대상 경로가 다 정해진 뒤라야 함 |
 

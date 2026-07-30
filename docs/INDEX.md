@@ -10,7 +10,7 @@
 python scripts/build_docs_index.py
 ```
 
-총 **505개** 문서. 날짜·상태·소유는 각 문서의 3줄 헤더에서 읽고, 헤더가 없으면 git 이력으로 대체합니다 — 그 경우 *(헤더 없음 — git 기준)*으로 표시되므로 상태 칸이 추정임을 알 수 있습니다.
+총 **506개** 문서. 날짜·상태·소유는 각 문서의 3줄 헤더에서 읽고, 헤더가 없으면 git 이력으로 대체합니다 — 그 경우 *(헤더 없음 — git 기준)*으로 표시되므로 상태 칸이 추정임을 알 수 있습니다.
 
 규약: [governance/DOC-CONVENTIONS.md](governance/DOC-CONVENTIONS.md)
 
@@ -18,9 +18,9 @@ python scripts/build_docs_index.py
 
 | 트리 | 경로 | 문서 | 최종 활동 | 내용 |
 |---|---|---:|---|---|
-| **repo** | `docs/` | 175 | 2026-07-29 | 횡단·거버넌스·외부 조사 |
+| **repo** | `docs/` | 175 | 2026-07-30 | 횡단·거버넌스·외부 조사 |
 | **algorithm** | `algorithm/docs/` | 17 | 2026-07-29 | 학습·평가·양자화·정수 그래프 |
-| **hardware** | `hardware/docs/` | 157 | 2026-07-30 | HLS·RTL·Vivado·PYNQ 가속기 (재구성 중) |
+| **hardware** | `hardware/docs/` | 158 | 2026-07-30 | HLS·RTL·Vivado·PYNQ 가속기 (재구성 중) |
 | **archive** | `archive/hardware/docs/` | 156 | 2026-07-29 | 구 hardware 트리 — 읽기 전용 기준 |
 
 ## 먼저 볼 것
@@ -36,6 +36,7 @@ python scripts/build_docs_index.py
 
 | 문서 | 작성 | 갱신 | 상태 | 소유 |
 |---|---|---|---|---|
+| [INDEX.md](INDEX.md) | 2026-07-29 | 2026-07-30 | active — 자동 생성 | repo |
 | [track/TODO.md](track/TODO.md) | 2026-07-14 | 2026-07-29 | active | repo |
 | [track/PROGRESS.md](track/PROGRESS.md) | 2026-07-14 | 2026-07-29 | active | repo |
 | [snapshots/README.md](snapshots/README.md) | 2026-07-29 | 2026-07-29 | active — 안내 | repo |
@@ -75,7 +76,6 @@ python scripts/build_docs_index.py
 | [archive/2026-07/2026-07-14-hbtxr-commit-handover-analysis/20-checkpoint.md](archive/2026-07/2026-07-14-hbtxr-commit-handover-analysis/20-checkpoint.md) | 2026-07-29 | 2026-07-29 | *(헤더 없음 — git 기준)* | ? |
 | [archive/2026-07/2026-07-14-hbtxr-commit-handover-analysis/10-intent.md](archive/2026-07/2026-07-14-hbtxr-commit-handover-analysis/10-intent.md) | 2026-07-29 | 2026-07-29 | *(헤더 없음 — git 기준)* | ? |
 | [STATUS.md](STATUS.md) | 2026-07-29 | 2026-07-29 | active | repo |
-| [INDEX.md](INDEX.md) | 2026-07-29 | 2026-07-29 | active — 자동 생성 | repo |
 | [track/log.md](track/log.md) | 2026-07-14 | 2026-07-23 | active | repo |
 | [track/CONVERSATION.md](track/CONVERSATION.md) | 2026-07-14 | 2026-07-23 | active | repo |
 | [track/CHANGELOG.md](track/CHANGELOG.md) | 2026-07-14 | 2026-07-23 | active | repo |
@@ -119,6 +119,7 @@ python scripts/build_docs_index.py
 
 | 문서 | 작성 | 갱신 | 상태 | 소유 |
 |---|---|---|---|---|
+| [reports/2026-07-30-module-code-analysis.md](../hardware/docs/reports/2026-07-30-module-code-analysis.md) | 2026-07-30 | 2026-07-30 | active — 조사 결과. 조치는 "지금 가능"만 실행, 나머지는 목록 | hardware |
 | [plans/active/2026-07-29-code-migration-manifest.md](../hardware/docs/plans/active/2026-07-29-code-migration-manifest.md) | 2026-07-29 | 2026-07-30 | active — M1~M5 진행에 따라 갱신 | hardware |
 | [track/CHANGELOG.md](../hardware/docs/track/CHANGELOG.md) | 2026-07-29 | 2026-07-29 | active | hardware |
 | [snapshots/README.md](../hardware/docs/snapshots/README.md) | 2026-07-29 | 2026-07-29 | active — 안내 | hardware |

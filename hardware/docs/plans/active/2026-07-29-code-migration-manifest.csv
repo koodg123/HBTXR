@@ -363,7 +363,7 @@ hls/tb/e2e_axis_vector_hgpipe_math_lnq_active16_golden.hpp,.hpp,migrate,hardware
 hls/tb/e2e_axis_vector_hgpipe_math_lnq_active8_golden.hpp,.hpp,migrate,hardware/module/golden/,골든 벡터 (P5에서 분리)
 hls/tb/e2e_axis_vector_hgpipe_math_lnq_golden.hpp,.hpp,migrate,hardware/module/golden/,골든 벡터 (P5에서 분리)
 hls/tb/e2e_axis_vector_vref_p0_hgpipe_lnq_active16_softmax_input_x2_golden.hpp,.hpp,migrate,hardware/module/golden/,골든 벡터 (P5에서 분리)
-hls/tb/tb_attention.cpp,.cpp,migrate,hardware/module/tb/,테스트벤치
+hls/tb/tb_attention.cpp,.cpp,skip,-,"2026-07-30 삭제 — 어서션 0, 빌드 참조 0. DUT가 빈 함수여도 통과하므로 없는 것보다 나쁨"
 hls/tb/tb_cyclic_head_attention.cpp,.cpp,migrate,hardware/module/tb/,테스트벤치
 hls/tb/tb_cyclic_primitives.cpp,.cpp,migrate,hardware/module/tb/,테스트벤치
 hls/tb/tb_cyclic_s2_block_vector.cpp,.cpp,migrate,hardware/module/tb/,테스트벤치
@@ -373,7 +373,7 @@ hls/tb/tb_hgtxr_e2e_axis_top.cpp,.cpp,migrate,hardware/module/tb/,테스트벤�
 hls/tb/tb_hgtxr_e2e_m_axi_top.cpp,.cpp,migrate,hardware/module/tb/,테스트벤치
 hls/tb/tb_hgtxr_mode_profile_top.cpp,.cpp,migrate,hardware/module/tb/,테스트벤치
 hls/tb/tb_hgtxr_top.cpp,.cpp,migrate,hardware/module/tb/,테스트벤치
-hls/tb/tb_mlp.cpp,.cpp,migrate,hardware/module/tb/,테스트벤치
+hls/tb/tb_mlp.cpp,.cpp,skip,-,"2026-07-30 삭제 — 어서션 0, 빌드 참조 0. DUT가 빈 함수여도 통과하므로 없는 것보다 나쁨"
 hls/tb/tb_runtime_fsm.cpp,.cpp,migrate,hardware/module/tb/,테스트벤치
 pynq/hgtxr/__init__.py,.py,migrate,hardware/deploy/,PYNQ 오버레이·스모크 러너
 pynq/hgtxr/e2e_axis_dma_overlay.py,.py,migrate,hardware/deploy/,PYNQ 오버레이·스모크 러너
