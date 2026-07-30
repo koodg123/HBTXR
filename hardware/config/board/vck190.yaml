@@ -1,5 +1,0 @@
-target: vck190
-part: xcvc1902-vsva2197-2MP-e-S
-board: xilinx.com:vck190:part0:3.0
-clock_period_ns: 4.0
-
