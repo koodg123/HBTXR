@@ -15,7 +15,7 @@
 
 ## Active
 
-**hardware 재구성** — 문서 완료 · **코드 이관 M1/5 진행 중**.
+**hardware 재구성** — 문서 완료 · **코드 이관 M3-1/5 진행 중** (171/327).
 계획: [plans/active/2026-07-29-hardware-reconstruction.md](plans/active/2026-07-29-hardware-reconstruction.md) ·
 대장: [plans/active/2026-07-29-code-migration-manifest.md](plans/active/2026-07-29-code-migration-manifest.md)
 
@@ -23,7 +23,7 @@
 |---|---|---|
 | `config/` | ✅ **M1 완료** | 33/33. M5까지는 사본 — 도구는 아직 archive를 읽습니다 |
 | `module/` | ✅ **M2 완료** | 96/96. **합성 검증 안 됨** — Vitis HLS 없음 |
-| `build/` | ⬜ 비어 있음 | `archive/hardware/vivado/scripts/` 31 + `scripts/run/` |
+| `build/` | 🟨 **M3-1 완료** | 42/42 복사됨. **경로 재지정(M3-2) 미실행** — 아직 아무것도 빌드 안 함 |
 | `deploy/` | 🟨 런타임 가이드만 | `archive/hardware/pynq/*.py` 9 (비트스트림 제외) |
 | `tools/` | ⬜ 비어 있음 | `archive/hardware/tools/` 87 + `tests/` 60 — `_lib/` 공용화 포함 |
 | `docs/` | ✅ **완료 (D1~D5)** | 159개 전수 대조 완료 |
@@ -65,8 +65,8 @@
 ## Next
 
 **P0 완료** — 이관 대장 625행 전수 판정
-([대장](plans/active/2026-07-29-code-migration-manifest.md) · `migrate` 322 · `done` 234 ·
-`skip` 64 · `undecided` 5). 검증: `python scripts/check_migration_manifest.py --check`
+([대장](plans/active/2026-07-29-code-migration-manifest.md) · `migrate` 325 · `done` 234 ·
+`skip` 66 · `undecided` 0). 검증: `python scripts/check_migration_manifest.py --check`
 
 디렉토리별 순차 이관:
 
@@ -74,7 +74,8 @@
 |---|---|---:|---|
 | **M1** | `config/` | 33 | ✅ **완료** — 해시 대조 33/33 |
 | **M2** | `module/` | 96 | ✅ **완료** — 해시 대조 96/96 |
-| **M3** | `build/` | 42 | ⬜ **다음** |
+| **M3-1** | `build/` 복사 | 42 | ✅ **완료** — 해시 대조 42/42 |
+| **M3-2** | 경로 재지정 + `-I ../golden` + cyclic 러너 | — | ⬜ **다음** — 이걸로 `module/`이 정본 |
 | **M4** | `deploy/` | 9 | ⬜ |
 | **M5** | `tools/` | 147 | ⬜ |
 
@@ -84,6 +85,8 @@
 
 | 날짜 | 내용 |
 |---|---|
+| 2026-07-30 | **M3-1** `build/` 복사 — 42/42 해시 대조. **경로 재지정은 별도 커밋** |
+| 2026-07-30 | `module/` 전수 분석 — 45건 제기·21확정. csim이 float라는 발견, 어서션 0 테스트 2개 삭제 |
 | 2026-07-30 | **M2** `module/` 이관 — 96/96 해시 대조, 미결 5건 판정, 테스트 426 불변 |
 | 2026-07-29 | **M1** `config/` 이관 — 33/33 해시 대조, 테스트 426 불변 |
 | 2026-07-29 | **P0** 이관 대장 625행 전수 판정 + 문서 데이터 11개 구멍 발견·보완 |
