@@ -1,4 +1,4 @@
-> **작성** 2026-07-29 · **갱신** 2026-07-30
+> **작성** 2026-07-29 · **갱신** 2026-07-31
 > **상태** active — 자동 생성
 > **소유** repo
 
@@ -18,7 +18,7 @@ python scripts/build_docs_index.py
 
 | 트리 | 경로 | 문서 | 최종 활동 | 내용 |
 |---|---|---:|---|---|
-| **repo** | `docs/` | 175 | 2026-07-30 | 횡단·거버넌스·외부 조사 |
+| **repo** | `docs/` | 175 | 2026-07-31 | 횡단·거버넌스·외부 조사 |
 | **algorithm** | `algorithm/docs/` | 17 | 2026-07-29 | 학습·평가·양자화·정수 그래프 |
 | **hardware** | `hardware/docs/` | 158 | 2026-07-30 | HLS·RTL·Vivado·PYNQ 가속기 (재구성 중) |
 | **archive** | `archive/hardware/docs/` | 156 | 2026-07-29 | 구 hardware 트리 — 읽기 전용 기준 |
@@ -36,7 +36,7 @@ python scripts/build_docs_index.py
 
 | 문서 | 작성 | 갱신 | 상태 | 소유 |
 |---|---|---|---|---|
-| [INDEX.md](INDEX.md) | 2026-07-29 | 2026-07-30 | active — 자동 생성 | repo |
+| [INDEX.md](INDEX.md) | 2026-07-29 | 2026-07-31 | active — 자동 생성 | repo |
 | [track/TODO.md](track/TODO.md) | 2026-07-14 | 2026-07-29 | active | repo |
 | [track/PROGRESS.md](track/PROGRESS.md) | 2026-07-14 | 2026-07-29 | active | repo |
 | [snapshots/README.md](snapshots/README.md) | 2026-07-29 | 2026-07-29 | active — 안내 | repo |

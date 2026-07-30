@@ -24,7 +24,7 @@ MANIFEST = NEW / "docs" / "plans" / "active" / "2026-07-29-code-migration-manife
 # 새 트리에만 있는 것이 정상 — 이관한 게 아니라 새로 쓴 것
 NATIVE_PREFIX = ("docs/", "workspace/")
 NATIVE_NAME = {"README.md", ".gitignore"}
-NATIVE_EXACT = {"deploy/RUNTIME-GUIDE.md", "build/run_cyclic_tb.sh"}
+NATIVE_EXACT = {"deploy/RUNTIME-GUIDE.md", "build/run_cyclic_tb.sh", "tools/tests/conftest.py"}
 
 
 def is_native(rel: str) -> bool:
@@ -45,7 +45,8 @@ def main() -> int:
     rows = list(csv.DictReader(MANIFEST.open(encoding="utf-8")))
     by_decision = Counter(r["decision"] for r in rows)
 
-    new_files = [p for p in NEW.rglob("*") if p.is_file()]
+    new_files = [p for p in NEW.rglob("*")
+                 if p.is_file() and "__pycache__" not in p.parts]
     new_hashes = {}
     for p in new_files:
         new_hashes.setdefault(digest(p), []).append(p.relative_to(ROOT).as_posix())

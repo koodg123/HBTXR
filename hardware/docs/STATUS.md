@@ -15,7 +15,7 @@
 
 ## Active
 
-**hardware 재구성** — 문서 완료 · **코드 이관 M4/5 완료** (180/325).
+**hardware 재구성** — 문서 완료 · **복사 이관 5/5 완료** (325/325). **재지정은 M5-2가 미완**.
 계획: [plans/active/2026-07-29-hardware-reconstruction.md](plans/active/2026-07-29-hardware-reconstruction.md) ·
 대장: [plans/active/2026-07-29-code-migration-manifest.md](plans/active/2026-07-29-code-migration-manifest.md)
 
@@ -25,7 +25,7 @@
 | `module/` | ✅ **M2 완료 · M3에서 정본화** | 96/96. cyclic tb 3개 **PASS**. 정본 top 3개는 csim 미실행 |
 | `build/` | ✅ **M3 완료** | 42/42 + 경로 재지정. **`module/`이 정본**. tcl 자체는 미실행 (Vitis HLS 실행 필요) |
 | `deploy/` | ✅ **M4 완료** | 9/9. 재지정 불필요(경로가 전부 인자). 테스트 24개는 M5 후 |
-| `tools/` | ⬜ 비어 있음 | `archive/hardware/tools/` 87 + `tests/` 60 — `_lib/` 공용화 포함 |
+| `tools/` | 🟨 **M5-1 완료** | 147/147 복사. **재지정 실패·되돌림** — 새 트리 67 failed vs archive 48. archive 가 아직 정본 |
 | `docs/` | ✅ **완료 (D1~D5)** | 159개 전수 대조 완료 |
 | `workspace/` | ⬜ 골격만 | gitignore 정책 적용됨 |
 
@@ -59,8 +59,7 @@
 | 항목 | 무엇이 막고 있나 | 누가 풀 수 있나 |
 |---|---|---|
 | 보드 검증 (C3b smoke, AQ2 히스토그램) | ZCU104 물리 접근 | **사용자 승인** |
-| **`.sh` 106개가 CRLF 로 커밋됨** | WSL `sh` 가 `set -eu
-` 에서 죽습니다. 셸 러너 계층 전체가 WSL 에서 실행 불가 | `.gitattributes` 에 `*.sh text eol=lf` + `git add --renormalize`. **M5에서** — 지금 106파일을 건드리면 M4 검증과 섞입니다 |
+| **`.sh` 106개가 CRLF 로 커밋됨** | WSL `sh` 가 `set -eu` + CR 에서 죽습니다. 셸 러너 계층 전체가 WSL 에서 실행 불가 | `.gitattributes` 에 `*.sh text eol=lf` + `git add --renormalize`. **P2에서** — 이관 검증과 섞으면 원인 분리가 안 됩니다 |
 | Vitis HLS **실행** (csim/csynth) | 헤더는 쓰고 있지만 툴 실행은 미검증 | **사용자** — WSL `/tools/Xilinx/Vitis_HLS/{2023.2,2024.1}` 확인됨 |
 | `hgtxr_e2e_vit.hpp` 4,503줄 분해 | 합성 결과 검증 불가 (보드 없음) | **사용자** — 위 두 행이 풀리면 자동으로 풀립니다. 그 전에는 착수 금지 |
 
@@ -79,7 +78,13 @@
 | **M3-1** | `build/` 복사 | 42 | ✅ **완료** — 해시 대조 42/42 |
 | **M3-2** | 경로 재지정 + `-I …/golden` | 26파일 | ✅ **완료** — 구 경로 참조 0줄 |
 | **M4** | `deploy/` | 9 | ✅ **완료** — 해시 대조 9/9 |
-| **M5** | `tools/` | 147 | ⬜ **다음** — `.sh` CRLF 정규화 · `generated/`→`workspace/` 포함 |
+| **M5-1** | `tools/` 복사 | 147 | ✅ **완료** — 해시 대조 147/147 |
+| **M5-2** | 도구+테스트 재지정 · `generated/`→`workspace/` · `.sh` CRLF | — | ⛔ **P2로 이월** — 아래 |
+
+**M5-2가 P2로 넘어간 이유**: `tools/` 27개가 `ROOT / "hls" / …` 로 구 경로를 조립하고,
+그 테스트들이 **같은 구 경로를 단언**합니다. 도구만 재지정했더니 67 → **83 failed**로
+악화됐습니다 (되돌림). 둘을 함께 고쳐야 하고, 그게 P2(패키지화 · `sys.path` 70곳 제거)의
+일입니다. **그때까지 `tools/`는 archive 사본이 정본입니다.**
 
 이관이 끝나면 계획 §6의 P1~P8.
 
@@ -87,6 +92,7 @@
 
 | 날짜 | 내용 |
 |---|---|
+| 2026-07-31 | **M5-1** `tools/` 복사 — 147/147. 재지정은 실패해 되돌림, P2로 이월 |
 | 2026-07-30 | **M4** `deploy/` 이관 — 9/9. **기준선이 426이 아니라 450**임을 발견 (overlay 테스트 24개가 `tests/` 밖) |
 | 2026-07-30 | **cyclic tb 3개 최초 실행 — 전부 PASS.** `build/run_cyclic_tb.sh` (WSL g++ + Vitis HLS 헤더) |
 | 2026-07-30 | **M3** `build/` 이관 — 42/42 복사 + 26파일 경로 재지정. `module/`이 정본, M2 `-I golden` 부채 청산 |
