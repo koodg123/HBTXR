@@ -29,6 +29,13 @@ forgotten이 구분되지 않습니다.
 
 ## Next (승인 대기)
 
+- **`dyadic_params` 에 승수 폭 제한 추가** —
+  [리포트](reports/2026-07-31-requant-multiplier-width.md). 하드웨어 쪽(S1)이 실측한 요구입니다:
+  현재 `shift_max=31` 이 항상 이겨서 `M` 이 **33비트**, `acc·M` 이 **53비트** 라 DSP48E2 하나에
+  안 들어갑니다. **`M ≤ 16b` 까지는 골든이 비트 동일**이라 무손실이고, 18b 를 권합니다.
+  단 **`shift_max` 를 자르면 안 됩니다** — 작은 비율 엣지가 큰 shift 를 필요로 해서
+  `shift_max=17` 은 최대 상대오차 1.58e-02 를 냅니다. **A2 와 무관, 즉시 가능.**
+  `ilayers/int_functional._dyadic_params` (의도적 사본)도 같이 고쳐야 합니다.
 - `i_ops` ↔ `archive/hardware/hls/include/hgtxr_cyclic_math.hpp` 대조 → `docs/contracts/NUMERICS-CONTRACT.md`
   (둘 다 HG-PIPE 커널인데 교차 참조 0건, 수치 규약 상이)
 - 입력 활성 그리드 `2⁻⁸` 고정 (A2 무관, 즉시 가능)

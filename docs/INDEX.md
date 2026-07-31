@@ -10,7 +10,7 @@
 python scripts/build_docs_index.py
 ```
 
-총 **508개** 문서. 날짜·상태·소유는 각 문서의 3줄 헤더에서 읽고, 헤더가 없으면 git 이력으로 대체합니다 — 그 경우 *(헤더 없음 — git 기준)*으로 표시되므로 상태 칸이 추정임을 알 수 있습니다.
+총 **509개** 문서. 날짜·상태·소유는 각 문서의 3줄 헤더에서 읽고, 헤더가 없으면 git 이력으로 대체합니다 — 그 경우 *(헤더 없음 — git 기준)*으로 표시되므로 상태 칸이 추정임을 알 수 있습니다.
 
 규약: [governance/DOC-CONVENTIONS.md](governance/DOC-CONVENTIONS.md)
 
@@ -19,7 +19,7 @@ python scripts/build_docs_index.py
 | 트리 | 경로 | 문서 | 최종 활동 | 내용 |
 |---|---|---:|---|---|
 | **repo** | `docs/` | 175 | 2026-07-31 | 횡단·거버넌스·외부 조사 |
-| **algorithm** | `algorithm/docs/` | 17 | 2026-07-29 | 학습·평가·양자화·정수 그래프 |
+| **algorithm** | `algorithm/docs/` | 18 | 2026-07-31 | 학습·평가·양자화·정수 그래프 |
 | **hardware** | `hardware/docs/` | 160 | 2026-07-31 | HLS·RTL·Vivado·PYNQ 가속기 (재구성 중) |
 | **archive** | `archive/hardware/docs/` | 156 | 2026-07-29 | 구 hardware 트리 — 읽기 전용 기준 |
 
@@ -97,6 +97,7 @@ python scripts/build_docs_index.py
 
 | 문서 | 작성 | 갱신 | 상태 | 소유 |
 |---|---|---|---|---|
+| [reports/2026-07-31-requant-multiplier-width.md](../algorithm/docs/reports/2026-07-31-requant-multiplier-width.md) | 2026-07-31 | 2026-07-31 | active — 결정 대기 | algorithm/quantization |
 | [track/log.md](../algorithm/docs/track/log.md) | 2026-07-29 | 2026-07-29 | active | algorithm |
 | [track/TODO.md](../algorithm/docs/track/TODO.md) | 2026-07-29 | 2026-07-29 | active | algorithm |
 | [track/PROGRESS.md](../algorithm/docs/track/PROGRESS.md) | 2026-07-29 | 2026-07-29 | active | algorithm |
