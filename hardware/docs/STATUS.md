@@ -15,7 +15,7 @@
 
 | 단계 | 내용 | 상태 |
 |---|---|---|
-| **S0** | [SPEC.md](SPEC.md) 작성 | ✅ **완료** |
+| **S0** | [SPEC.md](SPEC.md) + [ViT_Accel 참조 분석](references/2026-07-31-vit-accel-hls-analysis.md) | ✅ **완료** |
 | **S1** | 골든 생성기 `tools/export_hls_golden.py` | ⬜ **다음** |
 | **S2** | RMU · SMU | ⬜ |
 | **S3** | 비선형 LUT (RSQRT64·EXP32·RECIP128·GeLU32, 전부 16b) | ⬜ |
