@@ -39,11 +39,11 @@ _pkg.__path__ = [str(_ROOT / "algorithm" / "quantization")]
 sys.modules.setdefault("quantization", _pkg)
 
 from quantization.i_block import (                    # noqa: E402
-    AddSpec, BlockSpec, ConvSpec, LayerNormSpec, LinearSpec, MatMulSpec, SoftmaxSpec,
-    TableSpec, replay_block_int, rescale,
+    AddSpec, BlockSpec, ConvSpec, HeadSpec, LayerNormSpec, LinearSpec, MatMulSpec,
+    ModelSpec, SoftmaxSpec, TableSpec, replay_block_int, replay_model_int, rescale,
     # privates: the oracle's own composition helpers. Imported rather than re-written —
     # a second copy of "_linear" here is a second thing that can drift from the golden.
-    _conv_tokens, _flat, _linear, _linear_acc, _requant_columns, _rows,
+    _conv_tokens, _flat, _linear, _linear_acc, _pool_tokens, _requant_columns, _rows,
 )
 from quantization.i_ops import dyadic_params, int_matmul, requant, table_quantize  # noqa: E402
 from quantization.scheme import QuantDtype, clamp_int                     # noqa: E402
@@ -58,6 +58,27 @@ MODES: dict[str, dict] = {
     "track":  dict(img=(2,  64,  64), patch=16, dim=192, heads=3, ff=768),
     # tiny is the development preset: same graph, minutes -> seconds.
     "tiny":   dict(img=(1,  32,  32), patch=16, dim=24,  heads=2, ff=48),
+}
+
+# --- the whole model ----------------------------------------------------------
+#
+# ONE shared backbone (models/backbones/vit.py): search runs B_1:depth, track runs B_1:cut
+# on the SAME blocks and the SAME final norm. Two stems and two heads differ.
+#
+#   search:  Conv-F(1, 128x128) -> B_1:8 -> norm -> PupilBox(192->192->5)
+#   track:   Conv-E(2,  64x64)  -> B_1:4 -> norm -> PupilEllipse(197->197->5)
+#                                 \_____ the same weights _____/
+
+ANCHOR_DIM = 5      # PupilEllipseHead's (dx, dy, da, db, dtheta), supplied by the HOST
+OUTPUT_FRAC = 16    # host-visible fixed point for the head accumulator
+
+MODELS: dict[str, dict] = {
+    "hbtxr": dict(dim=192, heads=3, ff=768, patch=16, depth=8, cut=4,
+                  paths={"search": dict(img=(1, 128, 128), out=5, anchor=0),
+                         "track":  dict(img=(2,  64,  64), out=5, anchor=ANCHOR_DIM)}),
+    "tiny":  dict(dim=24, heads=2, ff=48, patch=16, depth=4, cut=2,
+                  paths={"search": dict(img=(1, 64, 64), out=5, anchor=0),
+                         "track":  dict(img=(2, 32, 32), out=5, anchor=ANCHOR_DIM)}),
 }
 
 # SPEC §3 LUT sizes. RECIP 128 is the storage figure and the kernel has two segments,
@@ -181,11 +202,16 @@ def _layernorm_payload(x_int: list[int], channels: int, input_scale: float,
                          input_scale, affine_scale * (1 << s2))
 
 
-def _softmax_payload(scores: list[int], tokens: int, input_scale: float,
+def _softmax_payload(rows: list[list[int]], input_scale: float,
                      out_bits: int = 8) -> SoftmaxSpec:
-    """Fit the 14-scalar softmax payload: exp table + a two-segment reciprocal."""
+    """Fit the 14-scalar softmax payload: exp table + a two-segment reciprocal.
+
+    Takes rows rather than a flat tensor and a token count, because a SHARED block is fit
+    over paths whose rows have different lengths. That matters: the reciprocal index spans
+    the accumulator range and the accumulator is a sum over the row, so a payload fit on
+    64-token rows alone puts every 16-token row below its first entry.
+    """
     qmax_out = (1 << out_bits) - 1
-    rows = [scores[i:i + tokens] for i in range(0, len(scores), tokens)]
     b1, s1, bound1 = _pot_index(0, max(max(r) - min(r) for r in rows), ENTRIES["exp"])
 
     # exp is evaluated at the bin MIDPOINT: the index floors, so the lower edge would
@@ -247,108 +273,135 @@ def _gelu_payload(x_int: list[int], input_scale: float, out_bits: int) -> TableS
 _NUDGE = (0.91, 0.87, 1.13)
 
 
-def build_block(x_int: list[int], tokens: int, cfg: dict, dtype: QuantDtype,
-                stream_scale: float, rng: random.Random) -> tuple[BlockSpec, dict]:
+def build_block(streams: list[tuple[list[int], int]], cfg: dict, dtype: QuantDtype,
+                stream_scale: float, rng: random.Random) -> tuple[BlockSpec, list[list[int]], dict]:
+    """One block, calibrated over EVERY path that runs through it.
+
+    ``streams`` is one ``(tokens_int, token_count)`` per path. The backbone is shared
+    (``vit.py``: search runs ``B_1:8``, track runs ``B_1:4`` on the SAME blocks), so a
+    block before the cut point sees both, and one set of scales has to serve both. Values
+    are therefore per-stream lists; anything that OBSERVES a range sees all of them at
+    once, anything that transforms maps over each.
+
+    Returns the spec, each path's output, and the first path's intermediates (the
+    stage-level goldens).
+    """
     dim, heads = cfg["dim"], cfg["heads"]
     head_dim, ff = dim // heads, cfg["ff"]
-    tap: dict[str, list[int]] = {"block_x": list(x_int)}
+    xs = [s[0] for s in streams]
+    ns = [s[1] for s in streams]
+    tap: dict[str, list[int]] = {"block_x": list(xs[0])}
 
     def linear(out_f, in_f, in_scale):
         return _linear_spec(out_f, in_f, in_scale, dtype.bits, rng)
 
+    def every(per_stream):
+        """Flatten across paths — the calibration view."""
+        return [v for stream in per_stream for v in stream]
+
     # --- attention ------------------------------------------------------------
-    ln1_in = rescale(x_int, stream_scale, stream_scale * _NUDGE[0], dtype=dtype)
-    norm1 = _layernorm_payload(ln1_in, dim, stream_scale * _NUDGE[0], dtype.bits, rng)
-    normed = norm1.apply(ln1_in)
-    tap["ln1_x"], tap["ln1_y"] = ln1_in, normed
+    s_ln1 = stream_scale * _NUDGE[0]
+    ln1_in = [rescale(x, stream_scale, s_ln1, dtype=dtype) for x in xs]
+    norm1 = _layernorm_payload(every(ln1_in), dim, s_ln1, dtype.bits, rng)
+    normed = [norm1.apply(v) for v in ln1_in]
+    tap["ln1_x"], tap["ln1_y"] = ln1_in[0], normed[0]
 
     qkv = linear(3 * heads * head_dim, dim, norm1.output_scale * _NUDGE[1])
-    qkv_in = rescale(normed, norm1.output_scale, qkv.input_scale, dtype=dtype)
-    qkv_acc = _linear_acc(qkv, _rows(qkv_in, dim))
+    qkv_in = [rescale(v, norm1.output_scale, qkv.input_scale, dtype=dtype) for v in normed]
+    qkv_acc = [_linear_acc(qkv, _rows(v, dim)) for v in qkv_in]
 
-    def part(index: int) -> tuple[float, list[list[list[int]]]]:
-        span = range(index * heads * head_dim, (index + 1) * heads * head_dim)
-        scale = _grid((qkv_acc[t][oc] for t in range(tokens) for oc in span),
+    def part(index: int) -> tuple[float, list[list[list[list[int]]]]]:
+        base = index * heads * head_dim
+        span = range(base, base + heads * head_dim)
+        scale = _grid((row[oc] for acc in qkv_acc for row in acc for oc in span),
                       max(qkv.out_scale(oc) for oc in span), dtype)
-        return scale, [_requant_columns(qkv, qkv_acc, scale, dtype,
-                                        columns=range(index * heads * head_dim + h * head_dim,
-                                                      index * heads * head_dim + (h + 1) * head_dim))
-                       for h in range(heads)]
+        return scale, [[_requant_columns(qkv, acc, scale, dtype,
+                                         columns=range(base + h * head_dim,
+                                                       base + (h + 1) * head_dim))
+                        for h in range(heads)] for acc in qkv_acc]
 
     (s_q, query), (s_k, key), (s_v, value) = part(0), part(1), part(2)
-    qk, av_b = MatMulSpec(s_q, s_k), s_v
+    qk = MatMulSpec(s_q, s_k)
     attn_scale = 1.0 / math.sqrt(head_dim)
 
-    score_acc = [int_matmul(query[h], [list(c) for c in zip(*key[h])]) for h in range(heads)]
-    flat_scores = [v for acc in score_acc for v in _flat(acc)]
-    s_score = _grid(flat_scores, qk.out_scale * attn_scale, dtype)
-    scores = rescale(flat_scores, qk.out_scale, s_score, dtype=dtype, extra=attn_scale)
-    softmax = _softmax_payload(scores, tokens, s_score)
-    probs = softmax.apply(scores, tokens=tokens, heads=heads)
-    tap["qkv_x"], tap["qkv_y"] = qkv_in, _flat(_rows([v for h in query for r in h for v in r], head_dim))
-    tap["smu_a"] = [v for h in query for r in h for v in r]
-    tap["smu_b"] = [v for h in key for r in h for v in r]
-    tap["smu_y"] = scores
-    tap["softmax_x"], tap["softmax_y"] = scores, probs
+    score_acc = [[int_matmul(q[h], [list(c) for c in zip(*k[h])]) for h in range(heads)]
+                 for q, k in zip(query, key)]
+    flat_scores = [[v for acc in per for v in _flat(acc)] for per in score_acc]
+    s_score = _grid(every(flat_scores), qk.out_scale * attn_scale, dtype)
+    scores = [rescale(f, qk.out_scale, s_score, dtype=dtype, extra=attn_scale)
+              for f in flat_scores]
+    softmax = _softmax_payload([r for sc, n in zip(scores, ns) for r in _rows(sc, n)], s_score)
+    probs = [softmax.apply(sc, tokens=n, heads=heads) for sc, n in zip(scores, ns)]
+
+    tap["qkv_x"] = qkv_in[0]
+    tap["smu_a"] = [v for h in query[0] for r in h for v in r]
+    tap["smu_b"] = [v for h in key[0] for r in h for v in r]
+    tap["smu_y"], tap["softmax_x"], tap["softmax_y"] = scores[0], scores[0], probs[0]
 
     # softmax output is unsigned 8-bit; map its full scale onto the operand grid
-    av = MatMulSpec(softmax.output_scale * ((1 << 8) - 1) / dtype.qmax, av_b)
-    context_acc, ctx_flat = [], []
-    for h in range(heads):
-        block = probs[h * tokens * tokens:(h + 1) * tokens * tokens]
-        rows = _rows(rescale(block, softmax.output_scale, av.scale_a, dtype=dtype), tokens)
-        acc = int_matmul(rows, value[h])
-        context_acc.append(acc)
-        ctx_flat.extend(_flat(acc))
-    s_ctx = _grid(ctx_flat, av.out_scale, dtype)
-    heads_int = [_rows(rescale(_flat(a), av.out_scale, s_ctx, dtype=dtype), head_dim)
-                 for a in context_acc]
-    context = [[heads_int[h][t][c] for h in range(heads) for c in range(head_dim)]
-               for t in range(tokens)]
+    av = MatMulSpec(softmax.output_scale * ((1 << 8) - 1) / dtype.qmax, s_v)
+    context_acc = []
+    for i, n in enumerate(ns):
+        per_head = []
+        for h in range(heads):
+            block = probs[i][h * n * n:(h + 1) * n * n]
+            rows = _rows(rescale(block, softmax.output_scale, av.scale_a, dtype=dtype), n)
+            per_head.append(int_matmul(rows, value[i][h]))
+        context_acc.append(per_head)
+    s_ctx = _grid(every([_flat(a) for per in context_acc for a in per]), av.out_scale, dtype)
+    context = []
+    for i, n in enumerate(ns):
+        hs = [_rows(rescale(_flat(a), av.out_scale, s_ctx, dtype=dtype), head_dim)
+              for a in context_acc[i]]
+        context.append([[hs[h][t][c] for h in range(heads) for c in range(head_dim)]
+                        for t in range(n)])
 
     proj = linear(dim, dim, s_ctx)
-    s_proj = _grid(_flat(_linear_acc(proj, context)),
+    s_proj = _grid(every([_flat(_linear_acc(proj, c)) for c in context]),
                    max(proj.out_scale(oc) for oc in range(dim)), dtype)
-    tap["rmu_x"], tap["rmu_y"] = _flat(context), _flat(_linear(proj, context, s_proj, dtype))
+    proj_out = [_flat(_linear(proj, c, s_proj, dtype)) for c in context]
+    tap["rmu_x"], tap["rmu_y"] = _flat(context[0]), proj_out[0]
     attn_residual = AddSpec(stream_scale, s_proj,
-                            _sum_grid(x_int, stream_scale, tap["rmu_y"], s_proj, dtype))
+                            _sum_grid(every(xs), stream_scale, every(proj_out), s_proj, dtype))
 
     # --- MLP ------------------------------------------------------------------
     from quantization.i_block import _add                       # same import rationale
-    residual = _add(attn_residual, x_int, tap["rmu_y"], dtype)
-    tap["mha_y"] = residual
+    residual = [_add(attn_residual, x, p, dtype) for x, p in zip(xs, proj_out)]
+    tap["mha_y"] = residual[0]
 
-    ln2_in = rescale(residual, attn_residual.scale_out, attn_residual.scale_out * _NUDGE[2],
-                     dtype=dtype)
-    norm2 = _layernorm_payload(ln2_in, dim, attn_residual.scale_out * _NUDGE[2],
-                               dtype.bits, rng)
+    s_ln2 = attn_residual.scale_out * _NUDGE[2]
+    ln2_in = [rescale(r, attn_residual.scale_out, s_ln2, dtype=dtype) for r in residual]
+    norm2 = _layernorm_payload(every(ln2_in), dim, s_ln2, dtype.bits, rng)
+
     fc1 = linear(ff, dim, norm2.output_scale * _NUDGE[0])
-    fc1_in = _rows(rescale(norm2.apply(ln2_in), norm2.output_scale, fc1.input_scale,
-                           dtype=dtype), dim)
-    s_hidden = _grid(_flat(_linear_acc(fc1, fc1_in)),
+    fc1_in = [_rows(rescale(norm2.apply(v), norm2.output_scale, fc1.input_scale, dtype=dtype),
+                    dim) for v in ln2_in]
+    s_hidden = _grid(every([_flat(_linear_acc(fc1, v)) for v in fc1_in]),
                      max(fc1.out_scale(oc) for oc in range(ff)), dtype)
-    hidden = _flat(_linear(fc1, fc1_in, s_hidden, dtype))
+    hidden = [_flat(_linear(fc1, v, s_hidden, dtype)) for v in fc1_in]
     # The LUT emits hbtxr_nl_t (16-bit, SPEC §3); the narrowing to the fc2 operand grid is
     # the requant on the edge below, not the table. Wiring the table to dtype.bits instead
     # collapses GeLU to 2 distinct outputs at 4-bit — check() catches it.
-    gelu = _gelu_payload(hidden, s_hidden, NL_BITS)
-    activated = gelu.apply(hidden)
-    tap["gelu_x"], tap["gelu_y"] = hidden, activated
+    gelu = _gelu_payload(every(hidden), s_hidden, NL_BITS)
+    activated = [gelu.apply(v) for v in hidden]
+    tap["gelu_x"], tap["gelu_y"] = hidden[0], activated[0]
 
     fc2 = linear(dim, ff, gelu.output_scale * _NUDGE[1])
-    fc2_in = _rows(rescale(activated, gelu.output_scale, fc2.input_scale, dtype=dtype), ff)
-    s_mlp = _grid(_flat(_linear_acc(fc2, fc2_in)),
+    fc2_in = [_rows(rescale(v, gelu.output_scale, fc2.input_scale, dtype=dtype), ff)
+              for v in activated]
+    s_mlp = _grid(every([_flat(_linear_acc(fc2, v)) for v in fc2_in]),
                   max(fc2.out_scale(oc) for oc in range(dim)), dtype)
-    mlp_out = _flat(_linear(fc2, fc2_in, s_mlp, dtype))
+    mlp_out = [_flat(_linear(fc2, v, s_mlp, dtype)) for v in fc2_in]
     mlp_residual = AddSpec(attn_residual.scale_out, s_mlp,
-                           _sum_grid(residual, attn_residual.scale_out, mlp_out, s_mlp, dtype))
-    tap["mlp_x"] = residual
-    tap["mlp_y"] = _add(mlp_residual, residual, mlp_out, dtype)
+                           _sum_grid(every(residual), attn_residual.scale_out,
+                                     every(mlp_out), s_mlp, dtype))
+    outs = [_add(mlp_residual, r, m, dtype) for r, m in zip(residual, mlp_out)]
+    tap["mlp_x"], tap["mlp_y"] = residual[0], outs[0]
 
     spec = BlockSpec(heads, head_dim, norm1, qkv, qk, attn_scale, softmax,
                      MatMulSpec(av.scale_a, av.scale_b), proj, attn_residual,
                      norm2, fc1, gelu, fc2, mlp_residual, dtype)
-    return spec, tap
+    return spec, outs, tap
 
 
 def build_patch_embed(cfg: dict, out_scale: float, dtype: QuantDtype,
@@ -358,8 +411,22 @@ def build_patch_embed(cfg: dict, out_scale: float, dtype: QuantDtype,
     The image grid is asymmetric, so a real zero is the zero-point and NOT 0 — the
     ``- zp*sum(w)`` correction in ``_conv_tokens`` depends on it.
     """
-    channels, height, width = cfg["img"]
-    patch, dim = cfg["patch"], cfg["dim"]
+    spec, image = _stem_spec(cfg["img"], cfg["patch"], cfg["dim"], rng)
+    tokens = _conv_tokens(spec, image, out_scale, dtype, channels=cfg["img"][0],
+                          height=cfg["img"][1], width=cfg["img"][2])
+    return spec, image, tokens
+
+
+# Wide enough that _conv_tokens cannot clamp — used to read an accumulator's real peak
+# back out through the oracle instead of re-deriving the zero-point correction here.
+_WIDE = QuantDtype(64, signed=True)
+_PROBE = 1e-12
+
+
+def _stem_spec(img: tuple[int, int, int], patch: int, dim: int,
+               rng: random.Random) -> tuple[ConvSpec, list[int]]:
+    """Weights (8-bit, per out-channel) and one uint8 image for a modality stem."""
+    channels, height, width = img
     qmax = (1 << 7) - 1
     real = [[[[rng.gauss(0.0, 0.05) for _ in range(patch)] for _ in range(patch)]
              for _ in range(channels)] for _ in range(dim)]
@@ -369,10 +436,174 @@ def build_patch_embed(cfg: dict, out_scale: float, dtype: QuantDtype,
                for plane in oc] for oc, s in zip(real, scales)]
     spec = ConvSpec(weight, scales, 1.0 / 255.0, 128, patch, (0, 0),
                     [rng.gauss(0.0, 0.01) for _ in range(dim)])
-    image = [rng.randrange(0, 256) for _ in range(channels * height * width)]
-    tokens = _conv_tokens(spec, image, out_scale, dtype,
-                          channels=channels, height=height, width=width)
-    return spec, image, tokens
+    return spec, [rng.randrange(0, 256) for _ in range(channels * height * width)]
+
+
+def _stem_peak(spec: ConvSpec, image: list[int], img: tuple[int, int, int]) -> float:
+    """Real-valued peak of the stem's output, read through a grid that cannot clamp."""
+    probe = _conv_tokens(spec, image, _PROBE, _WIDE, channels=img[0],
+                         height=img[1], width=img[2])
+    return max(abs(v) for row in probe for v in row) * _PROBE
+
+
+def build_head(pooled: list[int], in_scale: float, out_dim: int, dtype: QuantDtype,
+               rng: random.Random, *, anchor: list[int] | None = None,
+               anchor_scale: float = 0.0) -> tuple[HeadSpec, dict]:
+    """``pool -> Linear -> GeLU -> Linear``, the shape EVERY HBTXR head has.
+
+    ``models/heads/common.py:mlp_head`` is ``Linear(in, hidden=in) -> GELU -> Linear(.., out)``
+    and every head wraps it, so PupilBox and PupilEllipse differ only in ``out_dim`` and in
+    whether an anchor state is concatenated.
+
+    ``anchor`` is the track head's 5-dim state (``PupilEllipseHead.condition_on_state``).
+    It is a HOST input, not a feature: it arrives on its own grid and has to be requantized
+    onto the pooled feature's grid before the concat, because ``LinearSpec`` — and a real
+    Linear — has ONE input grid.
+    """
+    tap: dict[str, object] = {}
+    feat = list(pooled)
+    if anchor is not None:
+        moved = rescale(anchor, anchor_scale, in_scale, dtype=dtype)
+        tap["anchor_x"], tap["anchor_q"] = list(anchor), moved
+        tap["anchor_ratio"] = anchor_scale / in_scale
+        feat = feat + moved
+    hidden_in = len(feat)
+
+    fc1 = _linear_spec(hidden_in, hidden_in, in_scale, dtype.bits, rng)
+    s_hidden = _grid(_flat(_linear_acc(fc1, [feat])),
+                     max(fc1.out_scale(oc) for oc in range(hidden_in)), dtype)
+    hidden = _flat(_linear(fc1, [feat], s_hidden, dtype))
+    gelu = _gelu_payload(hidden, s_hidden, NL_BITS)
+    activated = gelu.apply(hidden)
+
+    fc2 = _linear_spec(out_dim, hidden_in, gelu.output_scale * _NUDGE[1], dtype.bits, rng)
+    fc2_in = rescale(activated, gelu.output_scale, fc2.input_scale, dtype=dtype)
+    tap["head_x"], tap["head_hidden"] = feat, activated
+    # The last accumulator is returned UN-requantized, exactly as replay_model_int does:
+    # its consumer is the host, there is no calibrated output grid, and inventing one
+    # would round the answer for nothing. The dyadic pair onto OUTPUT_UNIT is emitted
+    # alongside so the accelerator can stream fixed point instead of an int32 + a float.
+    tap["head_y_acc"] = _linear_acc(fc2, [fc2_in])[0]
+    return HeadSpec(fc1, gelu, fc2), tap
+
+
+def build_model(cfg: dict, blk_dtype: QuantDtype, seam_dtype: QuantDtype,
+                head_dtype: QuantDtype, rng: random.Random) -> dict:
+    """The whole deployed model in integers: two stems, ONE shared stack, two heads.
+
+    The paper's precision is mixed — 8-bit patch/head, 4-bit MHA/MLP, 16-bit nonlinear —
+    and ``ModelSpec`` carries a single dtype for every seam, so this composes the seams
+    itself rather than calling ``replay_model_int``. Each block still goes through
+    ``replay_block_int`` (``BlockSpec.dtype`` IS per-block), and ``crosscheck`` recovers
+    the model-level oracle by running this same composition at a uniform dtype.
+    """
+    dim, patch, depth, cut = cfg["dim"], cfg["patch"], cfg["depth"], cfg["cut"]
+    paths = cfg["paths"]
+    order = list(paths)                                   # ["search", "track"]
+
+    # --- stems: modality-specific, both 8-bit, both projecting into the same D ---
+    stems, images = {}, {}
+    for name in order:
+        stems[name], images[name] = _stem_spec(paths[name]["img"], patch, dim, rng)
+    # ONE residual-stream grid for both modalities. The blocks are shared, so their input
+    # port is shared, so the two stems have to land on the same grid.
+    stream_scale = max(_stem_peak(stems[n], images[n], paths[n]["img"])
+                       for n in order) / seam_dtype.qmax
+    tokens = {n: _conv_tokens(stems[n], images[n], stream_scale, seam_dtype,
+                              channels=paths[n]["img"][0], height=paths[n]["img"][1],
+                              width=paths[n]["img"][2]) for n in order}
+
+    # --- the shared stack -----------------------------------------------------
+    stream = {n: _flat(tokens[n]) for n in order}
+    ntok = {n: len(tokens[n]) for n in order}
+    blocks, taps, trace = [], [], {n: [] for n in order}
+    scale = stream_scale
+    for i in range(depth):
+        active = order if i < cut else order[:1]          # track exits at the cut point
+        spec, outs, tap = build_block([(stream[n], ntok[n]) for n in active],
+                                      cfg, blk_dtype, scale, rng)
+        for name, out in zip(active, outs):
+            stream[name] = out
+            trace[name].append(out)
+        blocks.append(spec)
+        taps.append(tap)
+        # No block-to-block requant: each block's input port IS the previous block's
+        # output grid, because they are calibrated in sequence. replay_model_int bridges
+        # here only because it assumes independently calibrated blocks.
+        scale = spec.mlp_residual.scale_out
+
+    # --- the shared final norm ------------------------------------------------
+    # Both paths land here from DIFFERENT producers — track leaves block cut-1, search
+    # leaves block depth-1 — so they arrive on different grids and each needs its own
+    # requant into the norm's single input port. That is a mode-dependent requant, not a
+    # detail: the hardware has to switch it with the mode.
+    exit_scale = {n: blocks[(cut if n == "track" else depth) - 1].mlp_residual.scale_out
+                  for n in order}
+    s_fn = max(exit_scale.values()) * _NUDGE[2]
+    fn_in = {n: rescale(stream[n], exit_scale[n], s_fn, dtype=seam_dtype) for n in order}
+    # clamp_bits is the HEAD's width: this norm's output is what the 8-bit head consumes.
+    final_norm = _layernorm_payload([v for n in order for v in fn_in[n]], dim, s_fn,
+                                    head_dtype.bits, rng)
+    normed = {n: final_norm.apply(fn_in[n]) for n in order}
+    pooled = {n: _pool_tokens(_rows(normed[n], dim), head_dtype) for n in order}
+
+    # --- heads ----------------------------------------------------------------
+    s_head = final_norm.output_scale * _NUDGE[0]
+    heads, head_taps = {}, {}
+    for n in order:
+        anchor, anchor_scale = None, 0.0
+        if paths[n]["anchor"]:
+            anchor = [rng.randrange(-100, 101) for _ in range(paths[n]["anchor"])]
+            anchor_scale = s_head * 1.7          # the host's grid, unrelated to the features
+        feat = rescale(pooled[n], final_norm.output_scale, s_head, dtype=head_dtype)
+        heads[n], head_taps[n] = build_head(feat, s_head, paths[n]["out"], head_dtype, rng,
+                                            anchor=anchor, anchor_scale=anchor_scale)
+    return dict(cfg=cfg, order=order, stems=stems, images=images, tokens=tokens,
+                stream_scale=stream_scale, blocks=blocks, taps=taps, trace=trace,
+                exit_scale=exit_scale, final_norm=final_norm, fn_in=fn_in,
+                normed=normed, pooled=pooled, s_head=s_head, heads=heads,
+                head_taps=head_taps, ntok=ntok,
+                dtypes=(blk_dtype, seam_dtype, head_dtype))
+
+
+def crosscheck(cfg: dict, dtype: QuantDtype, seed: int) -> None:
+    """Confirm ``replay_model_int`` reproduces ``build_model``'s seams at a UNIFORM dtype.
+
+    This is what buys back the oracle the mixed-precision build gives up. The seam
+    composition is identical in both cases — only the clamp widths differ — so agreeing
+    here proves the composition, and the mixed build then differs only in arguments this
+    check has already exercised. BOTH paths run: track exits at the cut point and reaches
+    the shared final norm on a different grid than search does, and that bridge is a real
+    seam that only the track run touches.
+
+    The anchor concat is removed for the check, because ``replay_model_int`` has no host
+    input. It is therefore the ONE seam with no oracle — ``check_model`` rebuilds it from
+    the emitted files instead.
+
+    Two seams are unverifiable HERE no matter what, and no amount of end-to-end comparison
+    will change that:
+
+    - a scale error immediately upstream of a LayerNorm (``e01``, ``e09``) is invisible,
+      because LayerNorm normalises it away. Halving the block-0 LN input changes nothing
+      at the output. A testbench has to probe the LN input directly;
+    - a sub-LSB error anywhere: the requant shifts are 27..31, so the accumulator LSB sits
+      far below the output LSB. Halving a seam IS caught; nudging one is not.
+    """
+    stripped = dict(cfg, paths={n: dict(p, anchor=0) for n, p in cfg["paths"].items()})
+    m = build_model(stripped, dtype, dtype, dtype, random.Random(seed))
+    for name in m["order"]:
+        img = stripped["paths"][name]["img"]
+        used = stripped["depth"] if name == "search" else stripped["cut"]
+        spec = ModelSpec(m["stems"][name], m["blocks"][:used], m["final_norm"],
+                         m["heads"][name], dtype)
+        want = replay_model_int(spec, m["images"][name],
+                                channels=img[0], height=img[1], width=img[2])
+        got = m["head_taps"][name]["head_y_acc"]
+        if got != want:
+            bad = next((i for i, (a, b) in enumerate(zip(got, want)) if a != b), len(want))
+            raise AssertionError(
+                f"{name}: seam composition != replay_model_int at {dtype.bits}-bit, "
+                f"index {bad}: {got[bad:bad + 1]} vs {want[bad:bad + 1]}")
 
 
 # --- emission -----------------------------------------------------------------
@@ -392,7 +623,8 @@ class Writer:
         (self.dest / f"{name}.txt").write_text(",".join(map(str, flat)) + ",", encoding="ascii")
         self.index.append(f"{name}.txt\t{len(flat)}\t{shape}\t{note}")
 
-    def requant(self, name: str, ratios: list[float], note: str) -> None:
+    def requant(self, name: str, ratios: list[float], note: str, *,
+                per_channel: bool = False) -> None:
         """A dyadic (multiplier, shift) pair per output channel — what the HW unit holds.
 
         A per-tensor edge may legitimately be identity: ``rescale`` short-circuits ratio
@@ -400,8 +632,12 @@ class Writer:
         so the pair is emitted either way and the testbench needs no special case. A
         PER-CHANNEL edge cannot be: those grids are derived from the accumulator, and a
         unit ratio there means the derivation collapsed.
+
+        ``per_channel`` is declared rather than inferred from the length: at model scope a
+        per-TENSOR edge is concatenated across ``depth`` blocks, and inferring would then
+        reject every legitimately-identity residual join in the stack.
         """
-        if len(ratios) > 1 and any(r == 1.0 for r in ratios):
+        if per_channel and any(r == 1.0 for r in ratios):
             raise AssertionError(f"{name}: a per-channel requant ratio is exactly 1.0 — "
                                  "the output grid was not derived from the accumulator")
         if any(r == 1.0 for r in ratios):
@@ -420,6 +656,46 @@ def _bias_int(spec: LinearSpec) -> list[int]:
     return [round(float(spec.bias[oc]) / spec.out_scale(oc)) for oc in range(len(spec.weight))]
 
 
+def _block_edges(spec: BlockSpec) -> list[tuple[str, list[float], str]]:
+    """Every requant in one block, in forward order.
+
+    All of them, not the interesting ones: a golden a testbench cannot reproduce is not a
+    golden, and dropping an edge means ``block_y`` cannot be rebuilt.
+    """
+    heads, head_dim = spec.num_heads, spec.head_dim
+    qkv_out = 3 * heads * head_dim
+    ar, mr, sm = spec.attn_residual, spec.mlp_residual, spec.softmax
+
+    def ch(lin: LinearSpec, target: float, span: range | None = None) -> list[float]:
+        return [lin.out_scale(oc) / target
+                for oc in (span if span is not None else range(len(lin.weight)))]
+
+    return [
+        ("e01_stream_to_ln1", [ar.scale_a / spec.norm1.input_scale], "per tensor"),
+        ("e02_ln1_to_qkv", [spec.norm1.output_scale / spec.qkv.input_scale], "per tensor"),
+        ("e03_qkv_q", ch(spec.qkv, spec.qk.scale_a, range(0, heads * head_dim)),
+         "from the accumulator DIRECTLY; a shared Q/K/V grid clamps K and V"),
+        ("e03_qkv_k", ch(spec.qkv, spec.qk.scale_b,
+                         range(heads * head_dim, 2 * heads * head_dim)), "as above"),
+        ("e03_qkv_v", ch(spec.qkv, spec.av.scale_b,
+                         range(2 * heads * head_dim, qkv_out)), "as above"),
+        ("e04_smu_to_softmax", [spec.qk.out_scale * spec.attn_scale / sm.input_scale],
+         "per tensor; 1/sqrt(d) is folded in here, it is not a separate multiply"),
+        ("e05_softmax_to_av", [sm.output_scale / spec.av.scale_a], "per tensor"),
+        ("e06_av_to_proj", [spec.av.out_scale / spec.proj.input_scale], "per tensor"),
+        ("e07_proj_acc", ch(spec.proj, ar.scale_b), "per out-channel"),
+        ("e08_resid1_a", [ar.scale_a / ar.scale_out], "residual side of the attention join"),
+        ("e08_resid1_b", [ar.scale_b / ar.scale_out], "branch side"),
+        ("e09_stream_to_ln2", [ar.scale_out / spec.norm2.input_scale], "per tensor"),
+        ("e10_ln2_to_fc1", [spec.norm2.output_scale / spec.fc1.input_scale], "per tensor"),
+        ("e11_fc1_acc", ch(spec.fc1, spec.gelu.input_scale), "per out-channel"),
+        ("e12_gelu_to_fc2", [spec.gelu.output_scale / spec.fc2.input_scale], "per tensor"),
+        ("e13_fc2_acc", ch(spec.fc2, mr.scale_b), "per out-channel"),
+        ("e14_resid2_a", [mr.scale_a / mr.scale_out], "residual side of the MLP join"),
+        ("e14_resid2_b", [mr.scale_b / mr.scale_out], "branch side"),
+    ]
+
+
 def emit(dest: Path, mode: str, bits: int, seed: int) -> tuple[Path, dict]:
     cfg = MODES[mode]
     dim, heads = cfg["dim"], cfg["heads"]
@@ -431,7 +707,7 @@ def emit(dest: Path, mode: str, bits: int, seed: int) -> tuple[Path, dict]:
 
     stem, image, token_rows = build_patch_embed(cfg, stream_scale, dtype, rng)
     x_int = _flat(token_rows)
-    spec, tap = build_block(x_int, tokens, cfg, dtype, stream_scale, rng)
+    spec, _outs, tap = build_block([(x_int, tokens)], cfg, dtype, stream_scale, rng)
     golden = replay_block_int(spec, x_int, tokens=tokens, channels=dim)
 
     w = Writer(dest)
@@ -448,7 +724,7 @@ def emit(dest: Path, mode: str, bits: int, seed: int) -> tuple[Path, dict]:
     w.put("patch_zp_correction", [stem.zero_point * sum(v for p in stem.weight[oc] for r in p for v in r)
                                   for oc in range(dim)], f"[{dim}]", "zp * sum(w), subtracted from acc")
     w.requant("patch", [stem.out_scale(oc) / stream_scale for oc in range(dim)],
-              "per out-channel, acc -> token grid")
+              "per out-channel, acc -> token grid", per_channel=True)
     w.put("patch_y", x_int, f"[{tokens},{dim}]", "tokens, row-major — the block input")
 
     # LayerNorm (x2), softmax, GeLU: payload + vector for the S3 testbenches
@@ -494,38 +770,8 @@ def emit(dest: Path, mode: str, bits: int, seed: int) -> tuple[Path, dict]:
     w.put("smu_b", tap["smu_b"], f"[{heads},{tokens},{head_dim}]", "K, transposed by the SMU")
     w.put("smu_y", tap["smu_y"], f"[{heads},{tokens},{tokens}]", "expected")
 
-    # Every requant in the block, in forward order. A golden a testbench cannot reproduce
-    # is not a golden, so this is the whole set, not the interesting ones.
-    def channels(lin: LinearSpec, target: float, span: range | None = None):
-        return [lin.out_scale(oc) / target for oc in (span or range(len(lin.weight)))]
-
-    ar, mr, sm = spec.attn_residual, spec.mlp_residual, spec.softmax
-    edges: list[tuple[str, list[float], str]] = [
-        ("e01_stream_to_ln1", [ar.scale_a / spec.norm1.input_scale], "per tensor"),
-        ("e02_ln1_to_qkv", [spec.norm1.output_scale / spec.qkv.input_scale], "per tensor"),
-        ("e03_qkv_q", channels(spec.qkv, spec.qk.scale_a, range(0, heads * head_dim)),
-         "from the accumulator DIRECTLY; a shared Q/K/V grid clamps K and V"),
-        ("e03_qkv_k", channels(spec.qkv, spec.qk.scale_b,
-                               range(heads * head_dim, 2 * heads * head_dim)), "as above"),
-        ("e03_qkv_v", channels(spec.qkv, spec.av.scale_b,
-                               range(2 * heads * head_dim, qkv_out)), "as above"),
-        ("e04_smu_to_softmax", [spec.qk.out_scale * spec.attn_scale / sm.input_scale],
-         "per tensor; 1/sqrt(d) is folded in here, it is not a separate multiply"),
-        ("e05_softmax_to_av", [sm.output_scale / spec.av.scale_a], "per tensor"),
-        ("e06_av_to_proj", [spec.av.out_scale / spec.proj.input_scale], "per tensor"),
-        ("e07_proj_acc", channels(spec.proj, ar.scale_b), "per out-channel"),
-        ("e08_resid1_a", [ar.scale_a / ar.scale_out], "residual side of the attention join"),
-        ("e08_resid1_b", [ar.scale_b / ar.scale_out], "branch side"),
-        ("e09_stream_to_ln2", [ar.scale_out / spec.norm2.input_scale], "per tensor"),
-        ("e10_ln2_to_fc1", [spec.norm2.output_scale / spec.fc1.input_scale], "per tensor"),
-        ("e11_fc1_acc", channels(spec.fc1, spec.gelu.input_scale), "per out-channel"),
-        ("e12_gelu_to_fc2", [spec.gelu.output_scale / spec.fc2.input_scale], "per tensor"),
-        ("e13_fc2_acc", channels(spec.fc2, mr.scale_b), "per out-channel"),
-        ("e14_resid2_a", [mr.scale_a / mr.scale_out], "residual side of the MLP join"),
-        ("e14_resid2_b", [mr.scale_b / mr.scale_out], "branch side"),
-    ]
-    for name, ratios, note in edges:
-        w.requant(name, ratios, note)
+    for name, ratios, note in _block_edges(spec):
+        w.requant(name, ratios, note, per_channel=len(ratios) > 1)
 
     # whole-sublayer and whole-block goldens
     w.put("mha_x", x_int, f"[{tokens},{dim}]", "block input")
@@ -539,6 +785,207 @@ def emit(dest: Path, mode: str, bits: int, seed: int) -> tuple[Path, dict]:
 
 
 # --- the check ----------------------------------------------------------------
+
+def emit_model(dest: Path, model: str, blk_bits: int, seam_bits: int, head_bits: int,
+               seed: int) -> tuple[Path, dict]:
+    """The whole model at the paper's bit-widths: two stems, ONE shared stack, two heads.
+
+    Per-block tensors carry a leading depth axis (``[L, ...]``) rather than living in 8
+    directories: the weight prefetcher streams them per block from DRAM, so that is the
+    layout it wants, and it keeps the file count the same as one block's.
+    """
+    cfg = MODELS[model]
+    dim, heads, ff = cfg["dim"], cfg["heads"], cfg["ff"]
+    head_dim, depth, cut = dim // heads, cfg["depth"], cfg["cut"]
+    paths, order = cfg["paths"], list(cfg["paths"])
+    blk_dtype = QuantDtype(blk_bits, signed=True)
+    seam_dtype = QuantDtype(seam_bits, signed=True)
+    head_dtype = QuantDtype(head_bits, signed=True)
+
+    m = build_model(cfg, blk_dtype, seam_dtype, head_dtype, random.Random(seed))
+    blocks, fnorm = m["blocks"], m["final_norm"]
+
+    w = Writer(dest)
+    w.put("meta", [dim, heads, head_dim, ff, cfg["patch"], depth, cut,
+                   blk_bits, seam_bits, head_bits, seed], "[11]",
+          "dim heads head_dim ff patch depth cut blk_bits seam_bits head_bits seed")
+
+    # --- stems, one per modality ---------------------------------------------
+    for name in order:
+        stem, img = m["stems"][name], paths[name]["img"]
+        n = m["ntok"][name]
+        w.put(f"{name}_meta", [img[0], img[1], img[2], n, depth if name == "search" else cut,
+                               len(m["heads"][name].fc1.weight), paths[name]["out"],
+                               paths[name]["anchor"]], "[8]",
+              "img_c img_h img_w tokens blocks_used head_in head_out anchor_dim")
+        w.put(f"stem_{name}_image", m["images"][name], f"[{img[0]},{img[1]},{img[2]}]",
+              "uint8 row-major, zero_point 128")
+        w.put(f"stem_{name}_weight",
+              [v for oc in stem.weight for p in oc for r in p for v in r],
+              f"[{dim},{img[0]},{cfg['patch']},{cfg['patch']}]", "int8 [Cout,Cin,kh,kw]")
+        w.put(f"stem_{name}_bias_acc",
+              [round(float(stem.bias[oc]) / stem.out_scale(oc)) for oc in range(dim)],
+              f"[{dim}]", "accumulator grid")
+        w.put(f"stem_{name}_zp_correction",
+              [stem.zero_point * sum(v for p in stem.weight[oc] for r in p for v in r)
+               for oc in range(dim)], f"[{dim}]", "zp * sum(w), subtracted from the acc")
+        w.requant(f"stem_{name}", [stem.out_scale(oc) / m["stream_scale"] for oc in range(dim)],
+                  "per out-channel; BOTH stems land on the one shared residual grid",
+                  per_channel=True)
+        w.put(f"stem_{name}_y", _flat(m["tokens"][name]), f"[{n},{dim}]", "tokens")
+
+    # --- the shared stack, depth-major ---------------------------------------
+    qkv_out = 3 * heads * head_dim
+    for key, shape, note in (("qkv", f"[{depth},{qkv_out},{dim}]", "out laid out (3,H,d)"),
+                             ("proj", f"[{depth},{dim},{dim}]", "output projection"),
+                             ("fc1", f"[{depth},{ff},{dim}]", "MLP expand"),
+                             ("fc2", f"[{depth},{dim},{ff}]", "MLP contract")):
+        lins = [getattr(b, key) for b in blocks]
+        w.put(f"blk_{key}_weight", [v for lin in lins for row in lin.weight for v in row],
+              shape, f"int{blk_bits} [out,in], {note}")
+        w.put(f"blk_{key}_bias_acc", [v for lin in lins for v in _bias_int(lin)],
+              f"[{depth},{len(lins[0].weight)}]", "accumulator grid")
+
+    for tag, pick in (("ln1", lambda b: b.norm1), ("ln2", lambda b: b.norm2)):
+        lns = [pick(b) for b in blocks]
+        w.put(f"blk_{tag}_scalars", [v for ln in lns for v in ln.scalars], f"[{depth},7]",
+              "c_1_m c_1_s b s1 bound s2 clamp_bits")
+        w.put(f"blk_{tag}_lnw", [v for ln in lns for v in ln.lnw], f"[{depth},{dim}]", "int16")
+        w.put(f"blk_{tag}_lnb", [v for ln in lns for v in ln.lnb], f"[{depth},{dim}]",
+              "int16, on the affine grid")
+        w.put(f"blk_{tag}_rsqrt_table", [v for ln in lns for v in ln.rsqrt_table],
+              f"[{depth},{ENTRIES['rsqrt']}]", "int16")
+
+    sms = [b.softmax for b in blocks]
+    w.put("blk_softmax_scalars", [v for s in sms for v in s.scalars], f"[{depth},14]",
+          "b1 s1 bound1 | b2/s2/bound2/b3/s3 per recip segment | clamp_bits")
+    for field, entries in (("exp_table", "exp"), ("recip_table_one", "recip"),
+                           ("recip_table_two", "recip")):
+        w.put(f"blk_softmax_{field}", [v for s in sms for v in getattr(s, field)],
+              f"[{depth},{ENTRIES[entries]}]",
+              "int16; blocks 0..cut-1 are fit over BOTH token counts")
+    gls = [b.gelu for b in blocks]
+    w.put("blk_gelu_scalars", [v for g in gls for v in g.scalars], f"[{depth},3]", "b s bound")
+    w.put("blk_gelu_table", [v for g in gls for v in g.table],
+          f"[{depth},{ENTRIES['gelu']}]", "int16")
+
+    per_block = [_block_edges(b) for b in blocks]
+    for i, (name, _, note) in enumerate(per_block[0]):
+        w.requant(f"blk_{name}", [r for edges in per_block for r in edges[i][1]],
+                  f"[{depth} x ...] {note}", per_channel=len(per_block[0][i][1]) > 1)
+
+    # --- the shared final norm ------------------------------------------------
+    w.put("fnorm_scalars", fnorm.scalars, "[7]", "clamp_bits is the HEAD's width")
+    w.put("fnorm_lnw", fnorm.lnw, f"[{dim}]", "int16")
+    w.put("fnorm_lnb", fnorm.lnb, f"[{dim}]", "int16, on the affine grid")
+    w.put("fnorm_rsqrt_table", fnorm.rsqrt_table, f"[{ENTRIES['rsqrt']}]", "int16")
+
+    # --- per path: block trace, the exit bridge, the head ---------------------
+    for name in order:
+        used, n = (depth if name == "search" else cut), m["ntok"][name]
+        head, tap = m["heads"][name], m["head_taps"][name]
+        hin = len(head.fc1.weight)
+        w.put(f"{name}_block_out", [v for out in m["trace"][name] for v in out],
+              f"[{used},{n},{dim}]", "every block's output — locates the first mismatch")
+        # search leaves block depth-1, track leaves block cut-1, so the two arrive at the
+        # SHARED norm on different grids. This requant is mode-dependent.
+        w.requant(f"{name}_e_exit_to_fnorm",
+                  [m["exit_scale"][name] / fnorm.input_scale],
+                  f"per tensor; from block {used - 1}'s output grid")
+        w.put(f"{name}_fnorm_y", m["normed"][name], f"[{n},{dim}]", "expected")
+        w.put(f"{name}_pooled", m["pooled"][name], f"[{dim}]",
+              "integer mean over tokens, round-half-away-from-zero")
+        w.requant(f"{name}_e_fnorm_to_head", [fnorm.output_scale / m["s_head"]], "per tensor")
+        if paths[name]["anchor"]:
+            w.put(f"{name}_anchor_x", tap["anchor_x"], f"[{paths[name]['anchor']}]",
+                  "HOST input — PupilEllipseHead.condition_on_state")
+            w.requant(f"{name}_e_anchor", [tap["anchor_ratio"]],
+                      "the host's anchor grid -> the pooled feature's grid, before the concat")
+        w.put(f"{name}_head_x", tap["head_x"], f"[{hin}]",
+              "pooled feature" + (" ++ requantized anchor" if paths[name]["anchor"] else ""))
+        for key, shape in (("fc1", f"[{hin},{hin}]"), ("fc2", f"[{paths[name]['out']},{hin}]")):
+            lin = getattr(head, key)
+            w.put(f"{name}_head_{key}_weight", [v for row in lin.weight for v in row],
+                  shape, f"int{head_bits} [out,in]")
+            w.put(f"{name}_head_{key}_bias_acc", _bias_int(lin), f"[{len(lin.weight)}]",
+                  "accumulator grid")
+        w.requant(f"{name}_head_e_fc1_acc",
+                  [head.fc1.out_scale(oc) / head.gelu.input_scale for oc in range(hin)],
+                  "per out-channel", per_channel=True)
+        w.put(f"{name}_head_gelu_scalars", head.gelu.scalars, "[3]", "b s bound")
+        w.put(f"{name}_head_gelu_table", head.gelu.table, f"[{ENTRIES['gelu']}]", "int16")
+        w.requant(f"{name}_head_e_gelu_to_fc2",
+                  [head.gelu.output_scale / head.fc2.input_scale], "per tensor")
+        w.put(f"{name}_head_y_acc", tap["head_y_acc"], f"[{paths[name]['out']}]",
+              "UN-requantized, as replay_model_int returns it — the host owns this grid")
+        w.requant(f"{name}_head_out",
+                  [head.fc2.out_scale(oc) * (1 << OUTPUT_FRAC)
+                   for oc in range(paths[name]["out"])],
+                  f"per out-channel; acc -> Q.{OUTPUT_FRAC} fixed point for the AXIS output",
+                  per_channel=True)
+    w.close()
+    return dest, dict(model=m, dest=dest, order=order,
+                      dtypes=(blk_dtype, seam_dtype, head_dtype))
+
+
+def check_model(dest: Path, result: dict) -> None:
+    """Degenerate-golden guards plus a file-only rebuild of the stem.
+
+    The stem is the piece the block-scope check never sees, and its zero-point correction
+    is the easiest thing in this graph to get subtly wrong: padding is absent here, so the
+    uniform ``- zp*sum(w)`` term is the ONLY place the asymmetric input grid is handled.
+    """
+    m = result["model"]
+    dim = m["cfg"]["dim"]
+    for name in result["order"]:
+        img = m["cfg"]["paths"][name]["img"]
+        weight = _read(dest, f"stem_{name}_weight")
+        bias = _read(dest, f"stem_{name}_bias_acc")
+        zp = _read(dest, f"stem_{name}_zp_correction")
+        mult, shift = _read(dest, f"stem_{name}_mult"), _read(dest, f"stem_{name}_shift")
+        image = _read(dest, f"stem_{name}_image")
+        patch, seam_bits = m["cfg"]["patch"], result["dtypes"][1].bits
+        taps = patch * patch * img[0]
+        cols = []
+        for oc in range(dim):
+            base = oc * taps
+            acc = []
+            for ty in range(img[1] // patch):
+                for tx in range(img[2] // patch):
+                    total = 0
+                    for c in range(img[0]):
+                        for ky in range(patch):
+                            row = (c * img[1] + ty * patch + ky) * img[2] + tx * patch
+                            for kx in range(patch):
+                                total += image[row + kx] * weight[base + (c * patch + ky) * patch + kx]
+                    acc.append(total - zp[oc] + bias[oc])
+            cols.append(requant(acc, mult[oc], shift[oc], bits=seam_bits, signed=True))
+        rebuilt = [cols[oc][t] for t in range(len(cols[0])) for oc in range(dim)]
+        if rebuilt != _read(dest, f"stem_{name}_y"):
+            raise AssertionError(f"stem_{name}_y is not reproducible from the emitted files")
+
+        # The anchor concat is the one seam crosscheck cannot reach (replay_model_int has
+        # no host input), so it is rebuilt from the files instead.
+        if m["cfg"]["paths"][name]["anchor"]:
+            (am,), (ash,) = _read(dest, f"{name}_e_anchor_mult"), \
+                _read(dest, f"{name}_e_anchor_shift")
+            moved = requant(_read(dest, f"{name}_anchor_x"), am, ash,
+                            bits=result["dtypes"][2].bits, signed=True)
+            if moved != _read(dest, f"{name}_head_x")[dim:]:
+                raise AssertionError(f"{name}: the anchor does not requantize onto the "
+                                     "pooled feature's grid as emitted")
+
+        for field in (f"stem_{name}_y", f"{name}_fnorm_y", f"{name}_head_y_acc"):
+            values = _read(dest, field)
+            if len(set(values)) < 3:
+                raise AssertionError(f"{field}: {len(set(values))} distinct values — degenerate")
+
+    written = {p.stem for p in dest.glob("*.txt")}
+    indexed = {line.split("\t")[0][:-4]
+               for line in (dest / "index.tsv").read_text("utf-8").splitlines()[1:]}
+    if written != indexed:
+        raise AssertionError(f"index.tsv disagrees with the directory: {written ^ indexed}")
+
 
 def _read(dest: Path, name: str) -> list[int]:
     """Parse one emitted file. The trailing comma makes a naive split yield an empty field."""
@@ -622,19 +1069,43 @@ def check(dest: Path, result: dict) -> None:
 
 def main(argv=None) -> int:
     ap = argparse.ArgumentParser(description=__doc__.splitlines()[0])
-    ap.add_argument("--mode", choices=sorted(MODES), default="search")
+    ap.add_argument("--scope", choices=("block", "model"), default="block",
+                    help="block: one block + stage vectors (S2-S5). "
+                         "model: the whole deployed model at the paper's bit-widths (S8)")
+    ap.add_argument("--mode", choices=sorted(MODES), default="search",
+                    help="block scope: which path's token count to size the block for")
+    ap.add_argument("--model", choices=sorted(MODELS), default="hbtxr",
+                    help="model scope: hbtxr (L=8, c=4) or tiny")
     ap.add_argument("--bits", type=int, default=4,
-                    help="activation/weight width of the MHA and MLP matmuls (SPEC §3)")
+                    help="W/A width of the MHA and MLP matmuls (SPEC §3)")
+    ap.add_argument("--seam-bits", type=int, default=4,
+                    help="model scope: stem output and the residual stream between blocks")
+    ap.add_argument("--head-bits", type=int, default=8,
+                    help="model scope: final norm output, pooling and the head (paper §V-B-2)")
     ap.add_argument("--seed", type=int, default=0)
     ap.add_argument("--out", type=Path,
                     default=_ROOT / "hardware" / "workspace" / "golden")
     args = ap.parse_args(argv)
 
-    dest = args.out / f"{args.mode}-a{args.bits}"
-    _, result = emit(dest, args.mode, args.bits, args.seed)
-    check(dest, result)
-    print(f"{dest}  {len(list(dest.glob('*.txt')))} files  "
-          f"tokens={result['tokens']} dim={result['dim']} bits={args.bits}  OK")
+    if args.scope == "block":
+        dest = args.out / f"{args.mode}-a{args.bits}"
+        _, result = emit(dest, args.mode, args.bits, args.seed)
+        check(dest, result)
+        extra = f"tokens={result['tokens']} dim={result['dim']} bits={args.bits}"
+    else:
+        # The seam composition is size-independent, so the uniform-dtype cross-check
+        # against replay_model_int runs on `tiny` and covers every model build. Running it
+        # at full size would cost a second 8-block replay and prove nothing new.
+        crosscheck(MODELS["tiny"], QuantDtype(args.head_bits, signed=True), args.seed)
+        dest = args.out / (f"model-{args.model}-w{args.bits}"
+                           f"s{args.seam_bits}h{args.head_bits}")
+        _, result = emit_model(dest, args.model, args.bits, args.seam_bits,
+                               args.head_bits, args.seed)
+        check_model(dest, result)
+        cfg = MODELS[args.model]
+        extra = (f"depth={cfg['depth']} cut={cfg['cut']} dim={cfg['dim']} "
+                 f"blk=a{args.bits} seam=a{args.seam_bits} head=a{args.head_bits}")
+    print(f"{dest}  {len(list(dest.glob('*.txt')))} files  {extra}  OK")
     return 0
 
 

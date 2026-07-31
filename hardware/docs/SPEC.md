@@ -320,6 +320,28 @@ DRAM 에서 on-demand**. 첫 search 레이어 가중치가 도착하면 **즉시
 **한 설계 안에서 라우팅합니다.** 모드별 비트스트림을 따로 만들지 않습니다 — 구 구현이
 `search_profile_top` / `track_profile_top` 두 개로 나뉘어 있던 것이 논문 구조와 다릅니다.
 
+### 백본은 **공유**입니다 — 두 벌이 아닙니다
+
+`models/backbones/vit.py` 는 블록 리스트를 **하나**만 만듭니다. `HybridModel` 도 "ONE shared
+backbone" 이라고 명시합니다.
+
+```
+search:  Conv-F(1,128²) → B₁:₈ → norm → PupilBox(192→192→5)
+track:   Conv-E(2, 64²) → B₁:₄ → norm → PupilEllipse(197→197→5)
+                          └──── 같은 가중치·같은 norm ────┘
+```
+
+**따라오는 제약 셋** (S1 모델 골든에서 전부 확인했습니다):
+
+| | |
+|---|---|
+| **블록 0~3 은 `N=64` 와 `N=16` 을 둘 다 봅니다** | LayerNorm 은 채널 방향이라 무관하지만 **softmax 는 다릅니다** — reciprocal 인덱스가 누산기 범위로 잡히고 그 범위가 행 길이에 비례합니다. 64토큰만 보고 맞춘 페이로드는 16토큰 행을 **전부 첫 엔트리 아래로** 보냅니다. 두 토큰 수를 **같이** 캘리브레이션해야 합니다 |
+| **두 스템은 같은 잔차 격자에 착지해야 합니다** | 블록 입력 포트가 공유이므로 |
+| **final norm 진입 requant 는 모드 의존입니다** | track 은 블록 3, search 는 블록 7 에서 나와 **서로 다른 격자**로 도착하는데 norm 의 입력 포트는 하나입니다 |
+
+> S1 실측: 공유 블록 4개의 softmax 가 track 경로에서 reciprocal 64빈 중 **48~64빈**을 씁니다.
+> 붕괴하지 않습니다.
+
 ---
 
 ## 8. 최상위 인터페이스
@@ -330,10 +352,22 @@ void hbtxr_top(
     hls::stream<hbtxr_axis_t> &out_stream,    // AXIS   → 출력 DMA
     const volatile hbtxr_axi_word_t *weights, // M-AXI  ← DRAM (search 가중치)
     int  mode,                                // s_axilite  0=search 1=track
+    const hbtxr_anchor_t anchor[5],           // s_axilite  ← 호스트, track 전용
     int *status);                             // s_axilite
 ```
 
 제어는 `s_axilite`, 데이터는 AXIS, 가중치는 M-AXI. PS–PL 경계는 이 셋입니다.
+
+### `anchor` 포트 — S1 에서 발견, 원래 빠져 있었습니다
+
+`PupilEllipseHead` 는 `condition_on_state=True` 라 **anchor state 5차원을 pooled feature 에
+concat** 합니다 (`heads/ellipse.py`). 그래서 track 헤드는 `192→192` 가 아니라 **`197→197`** 이고,
+그 5개는 **이미지에서 나오지 않습니다 — 호스트가 줍니다.**
+
+concat 전에 **호스트 격자에서 pooled feature 격자로 requant** 해야 합니다. `Linear` 의 입력
+격자는 하나뿐입니다.
+
+> search 경로는 이 포트를 안 씁니다. `mode==0` 이면 무시합니다.
 
 ---
 
@@ -373,6 +407,33 @@ sh hardware/build/make_golden.sh          # 프리셋 6벌 -> hardware/workspace
 > **음성 대조로 확인한 한계**: 출력만 비교하면 `bias_acc` 오차 **±8 까지는 안 보입니다**
 > (`n`이 27~31이라 누산기 LSB가 출력 LSB 한참 아래). ±64부터 잡힙니다. bias 를 LSB 단위로
 > 검증하려면 tb 가 **누산기 자체**를 봐야 합니다.
+
+### 모델 전체 골든 — 두 스템 · 공유 스택 · 두 헤드
+
+```bash
+sh hardware/build/make_golden.sh model      # 논문 비트폭, 13 초, 9.8 MB
+```
+
+논문 정밀도가 혼합(8b 스템·헤드 / 4b MHA·MLP)이고 `ModelSpec` 은 이음새 dtype 이 **하나**라
+(§3), 이 골든은 **`replay_model_int` 을 쓰지 않고 이음새를 직접 조합**합니다. 블록은 여전히
+`replay_block_int` 을 지납니다 — `BlockSpec.dtype` 은 블록별이니까요.
+
+**포기한 모델층 오라클은 이렇게 되찾습니다**: 같은 조합을 **단일 dtype 으로 한 번 더** 돌려
+`replay_model_int` 과 대조합니다. 이음새 로직은 동일하고 클램프 폭만 다르므로, 여기서 일치하면
+조합이 증명됩니다. **두 경로 다** 돌립니다 (track 의 exit 브리지는 track 을 돌려야 닿습니다).
+크기 무관한 로직이라 `tiny` 에서만 돌립니다.
+
+블록별 텐서는 디렉토리 8개가 아니라 **선행 depth 축**(`[L, ...]`)으로 냅니다. Weight Prefetcher 가
+블록 단위로 DRAM 에서 스트리밍할 레이아웃이 그것이고, 파일 수도 블록 하나일 때와 같습니다.
+
+#### 끝까지 검증할 수 없는 이음새 둘 — 음성 대조로 확인
+
+| | 왜 |
+|---|---|
+| **LayerNorm 직전 스케일 오차** (`e01`·`e09`·exit→fnorm) | **LayerNorm 이 정규화해서 지웁니다.** 블록 0 의 LN 입력을 **반으로 줄여도 출력이 그대로**입니다. tb 가 LN 입력을 **직접 프로브**해야 합니다 |
+| **anchor concat** | `replay_model_int` 에 호스트 입력이 없습니다. 유일하게 오라클이 없는 이음새라, 생성기가 **파일만 읽어서** 재구성해 확인합니다 |
+
+나머지 이음새는 절반으로 깎으면 전부 잡힙니다 (6개 중 5개 확인, 못 잡은 하나가 위의 LN 건).
 
 ### 스테이지 프로브 — `hbtxr_check_stream`
 

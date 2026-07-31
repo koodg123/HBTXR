@@ -5,13 +5,26 @@
 # tools — 골든 생성
 
 ```bash
-sh hardware/build/make_golden.sh          # 프리셋 6벌 전부
-sh hardware/build/make_golden.sh tiny-4   # 하나만
+sh hardware/build/make_golden.sh          # 8벌 전부 (23 초, 20 MB)
+sh hardware/build/make_golden.sh tiny-4   # 블록 하나
+sh hardware/build/make_golden.sh model    # 모델 전체, 논문 비트폭
 ```
 
-`export_hls_golden.py` 가 `algorithm/quantization` 정수 오라클로 스테이지별 골든 벡터를
-`hardware/workspace/golden/<mode>-a<bits>/` 에 냅니다. **생성물이라 git 에 없습니다** —
-seed 로 재현됩니다. 파일 목록과 계약은 [SPEC §9](../docs/SPEC.md).
+`export_hls_golden.py` 가 `algorithm/quantization` 정수 오라클로 골든 벡터를
+`hardware/workspace/golden/` 에 냅니다. **생성물이라 git 에 없습니다** — seed 로 재현됩니다.
+파일 목록과 계약은 [SPEC §9](../docs/SPEC.md).
+
+## 두 가지 스코프
+
+| | 무엇 | 쓰는 곳 |
+|---|---|---|
+| `--scope block` | 블록 1개 + 스테이지 벡터(rmu·smu·ln·softmax·gelu) | **S2~S5** |
+| `--scope model` | **두 스템 · 공유 블록 스택 · 두 헤드** 전체 | **S8** |
+
+모델 스코프는 논문 비트폭을 그대로 씁니다 — `--bits 4`(MHA·MLP) ·
+`--seam-bits 4`(스템 출력·잔차 스트림) · `--head-bits 8`(final norm·pooling·헤드).
+**백본은 공유**입니다: search 가 `B₁:₈`, track 이 `B₁:₄` 를 **같은 가중치로** 돕니다
+([SPEC §7](../docs/SPEC.md)).
 
 ## 알아둘 것
 
@@ -27,14 +40,20 @@ seed 로 재현됩니다. 파일 목록과 계약은 [SPEC §9](../docs/SPEC.md)
 
 ## 프리셋
 
-| | 토큰 | `D` | `F` | 용도 |
+| 블록 스코프 | 토큰 | `D` | `F` | 용도 |
 |---|---:|---:|---:|---|
-| `search` | 64 | 192 | 768 | 논문 search 경로 |
-| `track` | 16 | 192 | 768 | 논문 track 경로 |
-| `tiny` | 4 | 24 | 48 | 개발용 — 같은 그래프, 초 단위 |
+| `search-4` `search-8` | 64 | 192 | 768 | search 경로 크기의 블록 |
+| `track-4` `track-8` | 16 | 192 | 768 | track 경로 크기의 블록 |
+| `tiny-4` `tiny-8` | 4 | 24 | 48 | 개발용 — 같은 그래프, 초 단위 |
 
-`-4` / `-8` 은 MHA·MLP matmul 폭입니다. **두 벌이 필요한 이유**는
-[SPEC §3 혼합정밀](../docs/SPEC.md) — 현재 오라클이 엣지별 dtype 을 표현하지 못합니다.
+`-4` / `-8` 은 MHA·MLP matmul 폭입니다. 블록 스코프에서 **두 벌이 필요한 이유**는
+[SPEC §3 혼합정밀](../docs/SPEC.md) — 블록 안에서는 오라클이 엣지별 dtype 을 표현하지 못해
+GeLU LUT 입력이 4비트에 눌립니다.
+
+| 모델 스코프 | 깊이 | cut | `D` | |
+|---|---:|---:|---:|---|
+| `model` | 8 | 4 | 192 | 논문 그대로. 13 초 · 9.8 MB |
+| `model-tiny` | 4 | 2 | 24 | `replay_model_int` 대조가 여기서 돕니다 |
 
 감사 스크립트는 여기 두지 않습니다.
 계획: [../docs/plans/active/2026-07-31-hls-rewrite-plan.md](../docs/plans/active/2026-07-31-hls-rewrite-plan.md)
