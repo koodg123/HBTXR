@@ -16,10 +16,12 @@ command -v "$PY" >/dev/null 2>&1 || PY=python
 GOLDEN="$PY hardware/tools/export_hls_golden.py"
 
 presets="$*"
-[ -n "$presets" ] || presets="search-4 search-8 track-4 track-8 tiny-4 tiny-8 model model-tiny"
+[ -n "$presets" ] || presets="requant search-4 search-8 track-4 track-8 tiny-4 tiny-8 model model-tiny"
 
 for preset in $presets; do
   case "$preset" in
+    # direct cases for the requant primitive, over its whole domain.
+    requant)    $GOLDEN --scope requant ;;
     # model scope: two stems, ONE shared block stack, two heads, at the paper's widths
     # (4-bit MHA/MLP, 4-bit residual stream, 8-bit final norm + head).
     model)      $GOLDEN --scope model --model hbtxr ;;

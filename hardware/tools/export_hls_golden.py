@@ -643,8 +643,12 @@ class Writer:
         if any(r == 1.0 for r in ratios):
             note += " [identity]"
         pairs = [dyadic_params(r) for r in ratios]
-        self.put(f"{name}_mult", [m for m, _, _ in pairs], f"[{len(pairs)}]", note)
-        self.put(f"{name}_shift", [s for _, s, _ in pairs], f"[{len(pairs)}]", note)
+        self.requant_raw(name, [m for m, _, _ in pairs], [s for _, s, _ in pairs], note)
+
+    def requant_raw(self, name: str, mult: list[int], shift: list[int], note: str) -> None:
+        """The same two files from (M, n) already chosen, for cases with no ratio."""
+        self.put(f"{name}_mult", mult, f"[{len(mult)}]", note)
+        self.put(f"{name}_shift", shift, f"[{len(shift)}]", note)
 
     def close(self) -> None:
         (self.dest / "index.tsv").write_text(
@@ -928,6 +932,72 @@ def emit_model(dest: Path, model: str, blk_bits: int, seam_bits: int, head_bits:
                       dtypes=(blk_dtype, seam_dtype, head_dtype))
 
 
+def emit_requant(dest: Path, seed: int, *, acc_bits: int = 20, m_bits: int = 33,
+                 n_max: int = 31, out_bits: int = 4) -> tuple[Path, dict]:
+    """Direct cases for the requant primitive — the one op every matmul unit ends with.
+
+    The block golden exercises it only with the ratios the design happens to present:
+    near 1, never a tie, rarely saturating. This covers the domain instead. It matters —
+    the first version of this drew multipliers uniformly over the whole range, produced
+    five distinct outputs out of sixteen because almost everything saturated, and passed
+    while the interesting arithmetic went untested.
+    """
+    acc_lo, acc_hi = -(1 << (acc_bits - 1)), (1 << (acc_bits - 1)) - 1
+    m_hi = (1 << m_bits) - 1
+    rng = random.Random(seed)
+    accs: list[int] = []
+    mults: list[int] = []
+    shifts: list[int] = []
+    want: list[int] = []
+    skipped = 0
+
+    def add(a: int, m: int, n: int) -> None:
+        """Reject what the CONFIG cannot represent, rather than emitting it.
+
+        REQ_M_BITS is a property of the ratios the design presents, not of dyadic_params:
+        ratio 1.15 needs 33 bits at shift 31, ratio 4.5 needs 34. An oversized multiplier
+        is silently truncated by ap_uint<REQ_M_BITS>, and the mismatch then reads as a
+        kernel bug instead of an out-of-domain case.
+        """
+        nonlocal skipped
+        if not (acc_lo <= a <= acc_hi and 0 < m <= m_hi and 1 <= n <= n_max):
+            skipped += 1
+            return
+        accs.append(a)
+        mults.append(m)
+        shifts.append(n)
+        want.append(requant([a], m, n, bits=out_bits, signed=True)[0])
+
+    for _ in range(3000):          # in range: this is what exercises rounding and the shift
+        a = rng.choice([rng.randrange(acc_lo, acc_hi), rng.randrange(-300, 300)]) or 1
+        m, n, _ = dyadic_params(abs(rng.uniform(-9.0, 9.0) / a))
+        add(a, m, n)
+    for _ in range(600):           # saturating, both directions
+        add(rng.randrange(acc_lo, acc_hi), rng.randrange(1, m_hi), rng.randrange(1, n_max + 1))
+    qmax = (1 << (out_bits - 1)) - 1
+    for k in range(-qmax - 1, qmax + 1):   # exact ties, both signs
+        for n in (1, 2, 8, 15):
+            add(k * (1 << n) + (1 << (n - 1)), 1, n)
+            add(k * (1 << n) - (1 << (n - 1)), 1, n)
+    for a, m, n in ((0, 1, 1), (acc_lo, m_hi, n_max), (acc_hi, 1, n_max),
+                    (-1, 2, 1), (1, 2, 1), (acc_lo, 1, 1)):
+        add(a, m, n)
+
+    w = Writer(dest)
+    w.put("meta", [len(accs), acc_bits, m_bits, n_max, out_bits, seed], "[6]",
+          "cases acc_bits m_bits n_max out_bits seed")
+    w.put("acc", accs, f"[{len(accs)}]", f"int{acc_bits}")
+    w.requant_raw("edge", mults, shifts, "one (M, n) per case, not per channel")
+    w.put("want", want, f"[{len(accs)}]", f"expected, int{out_bits}")
+    w.close()
+    distinct = len(set(want))
+    span = 1 << out_bits
+    if distinct < span:
+        raise AssertionError(f"only {distinct}/{span} distinct outputs — the cases do not "
+                             "cover the output range and the arithmetic goes untested")
+    return dest, dict(cases=len(accs), skipped=skipped, distinct=distinct)
+
+
 def check_model(dest: Path, result: dict) -> None:
     """Degenerate-golden guards plus a file-only rebuild of the stem.
 
@@ -1069,9 +1139,10 @@ def check(dest: Path, result: dict) -> None:
 
 def main(argv=None) -> int:
     ap = argparse.ArgumentParser(description=__doc__.splitlines()[0])
-    ap.add_argument("--scope", choices=("block", "model"), default="block",
+    ap.add_argument("--scope", choices=("block", "model", "requant"), default="block",
                     help="block: one block + stage vectors (S2-S5). "
-                         "model: the whole deployed model at the paper's bit-widths (S8)")
+                         "model: the whole deployed model at the paper's bit-widths (S8). "
+                         "requant: direct cases for the requant primitive")
     ap.add_argument("--mode", choices=sorted(MODES), default="search",
                     help="block scope: which path's token count to size the block for")
     ap.add_argument("--model", choices=sorted(MODELS), default="hbtxr",
@@ -1087,7 +1158,12 @@ def main(argv=None) -> int:
                     default=_ROOT / "hardware" / "workspace" / "golden")
     args = ap.parse_args(argv)
 
-    if args.scope == "block":
+    if args.scope == "requant":
+        dest = args.out / "requant"
+        _, result = emit_requant(dest, args.seed)
+        extra = (f"{result['cases']} cases  {result['distinct']}/16 outputs  "
+                 f"{result['skipped']} out-of-domain rejected")
+    elif args.scope == "block":
         dest = args.out / f"{args.mode}-a{args.bits}"
         _, result = emit(dest, args.mode, args.bits, args.seed)
         check(dest, result)

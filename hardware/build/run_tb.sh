@@ -1,0 +1,45 @@
+#!/bin/sh
+# V1 — compile and run a testbench against the integer golden (SPEC §9).
+#
+# g++ with the Vitis HLS headers, not vitis_hls: hls::stream and hls::vector compile and
+# run under plain g++, so V1 needs no tool licence and no project. csim/csynth (V2/V3)
+# come with S8/S9.
+#
+#   sh hardware/build/run_tb.sh              # every testbench
+#   sh hardware/build/run_tb.sh requant      # one
+set -eu
+cd "$(CDPATH= cd -- "$(dirname -- "$0")/../.." && pwd)"
+
+XILINX_INCLUDE=${XILINX_INCLUDE:-/tools/Xilinx/Vitis_HLS/2023.2/include}
+[ -d "$XILINX_INCLUDE" ] || {
+  echo "no Vitis HLS headers at $XILINX_INCLUDE" >&2
+  echo "  set XILINX_INCLUDE, or run this under WSL where they are installed" >&2
+  exit 2
+}
+
+GOLDEN=hardware/workspace/golden
+[ -d "$GOLDEN/requant" ] && [ -d "$GOLDEN/search-a4" ] || {
+  echo "golden missing -- generating"
+  sh hardware/build/make_golden.sh requant search-4
+}
+
+OUT=hardware/workspace/tb
+mkdir -p "$OUT"
+fail=0
+
+for tb in ${*:-requant}; do
+  src="hardware/module/tb/tb_$tb.cpp"
+  [ -f "$src" ] || { echo "no such testbench: $src" >&2; exit 2; }
+  # -isystem, not -I: the Vitis headers emit -Wall noise of their own (multi-line comment
+  # art, signed/unsigned loops) that would bury a warning in OUR code.
+  # -Wno-unknown-pragmas: g++ does not know `#pragma HLS`, which is the point.
+  # -Wno-unused-label: HLS loop labels are read by directives and the schedule report;
+  # to g++ they are dead.
+  g++ -std=c++17 -O1 -Wall -Wextra -Wno-unknown-pragmas -Wno-unused-label \
+      -isystem "$XILINX_INCLUDE" \
+      -Ihardware/config/design -Ihardware/module/include -Ihardware/module/tb \
+      "$src" -o "$OUT/tb_$tb"
+  "$OUT/tb_$tb" || fail=1
+done
+
+[ "$fail" = 0 ] || { echo "SOME TESTBENCHES FAILED" >&2; exit 1; }

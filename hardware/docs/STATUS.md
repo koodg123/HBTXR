@@ -17,8 +17,8 @@
 |---|---|---|
 | **S0** | [SPEC.md](SPEC.md) + [ViT_Accel 참조 분석](references/2026-07-31-vit-accel-hls-analysis.md) | ✅ **완료** |
 | **S1** | 골든 생성기 [`tools/export_hls_golden.py`](../tools/export_hls_golden.py) | ✅ **완료** |
-| **S2** | RMU · SMU | ⬜ **다음** — 착수 전 `shift_max` 결정 필요 |
-| **S3** | 비선형 LUT (RSQRT64·EXP32·RECIP128·GeLU32, 전부 16b) | ⬜ |
+| **S2** | RMU · SMU | ✅ **완료** — tb 3개 PASS |
+| **S3** | 비선형 LUT (RSQRT64·EXP32·RECIP128·GeLU32, 전부 16b) | ⬜ **다음** |
 | **S4** | MHA Core (9단계) | ⬜ |
 | **S5** | MLP Core (6단계) | ⬜ |
 | **S6** | Patch Embedding (Conv-F/Conv-E + shuffler) | ⬜ |
@@ -38,10 +38,19 @@ S2~S7은 독립입니다. **S8이 처음으로 전체를 묶습니다.**
 ## 검증 환경 (WSL)
 
 ```bash
-sh hardware/build/make_golden.sh                  # 골든 6벌 (생성물, git 에 없음)
-sh hardware/build/run_<blk>_tb.sh                 # V1  g++ + ap_int
-vitis_hls -f hardware/build/hls/<blk>_csim.tcl    # V2  /tools/Xilinx/Vitis_HLS/2023.2
+sh hardware/build/make_golden.sh                  # 골든 (생성물, git 에 없음)
+sh hardware/build/run_tb.sh                       # V1  g++ + ap_int/hls::stream
+vitis_hls -f hardware/build/hls/<blk>_csim.tcl    # V2  S8 부터
 ```
+
+| tb | 대조 | 규모 |
+|---|---|---|
+| `tb_requant` | `i_ops.py:requant` 직접 | 3,733 케이스 · 출력 16/16 · 포화 35% |
+| `tb_rmu` | `rmu_y` (출력 프로젝션 `[192,192]`) | 12,288 값 |
+| `tb_smu` | `smu_y` (`Q×Kᵀ`, 3헤드) | 12,288 값 |
+
+전부 **원소별 `==` + 스트림 배수 + 음성 대조**. 같은 바이너리가 track 골든(`N=16`)도
+통과합니다 — 공유 백본의 런타임 토큰 수가 실제로 동작합니다.
 
 ## Blocked
 
@@ -50,11 +59,11 @@ vitis_hls -f hardware/build/hls/<blk>_csim.tcl    # V2  /tools/Xilinx/Vitis_HLS/
 | 보드 실측 | ZCU104 물리 접근 | **사용자** |
 | Table III 재현 | **범위 밖** ([SPEC §10](SPEC.md)) | — |
 
-## S2 착수 전 결정할 것 — S1 이 남긴 것
+## 결정 대기 — 하드웨어를 막지는 않습니다
 
-| | 무엇 | 왜 지금 |
+| | 무엇 | 상태 |
 |---|---|---|
-| **requant `shift_max`** | `dyadic_params` 가 거의 항상 `n=31` 을 골라 `M` 이 **33비트**, `acc·M` 이 **53비트** | RMU 의 requant 유닛 폭이 여기서 정해집니다. 조이려면 `i_block.rescale` 변경 = algorithm 쪽 작업 |
+| **requant 승수 폭** | `M` 이 33비트, `acc·M` 이 53비트라 DSP48E2 하나에 안 들어감. **`M ≤ 16b` 까지 골든 비트 동일**이 실측됨 (`algorithm/docs/reports/2026-07-31-requant-multiplier-width.md`, 브랜치 `rewrite/flat-functional`) | algorithm 대기. 하드웨어는 `REQ_M_BITS=33` 으로 **이미 통과** — 바뀌면 상수 하나 |
 | **엣지별 dtype** | `BlockSpec.dtype` 이 하나라 블록 안에서 **matmul 4비트 + 비선형 16비트**를 표현 못 함. GeLU LUT 입력 알파벳이 16개로 붕괴 | S4·S5 전. 지금은 `-a4`/`-a8` 두 벌로 우회 중 |
 | **`anchor` 포트** | track 헤드가 호스트에서 **5차원 anchor state** 를 받습니다 (`197→197→5`). §8 인터페이스에 없었습니다 | S7 컨트롤러 · S8 top |
 
@@ -71,6 +80,7 @@ Pupil Ellipse 두 개만 냅니다. 배포 모델(`HybridModel`)에는 셋 다 �
 
 | 날짜 | 내용 |
 |---|---|
+| 2026-07-31 | **S2** RMU · SMU · requant — tb 3개 PASS. 첫 HLS 구현이 골든을 통과했습니다 |
 | 2026-07-31 | **S1+** 모델 전체 골든 — 두 스템·**공유** 블록 스택·두 헤드, 논문 비트폭. 공유 백본 제약 3건·`anchor` 포트 누락 발견 |
 | 2026-07-31 | **S1** 골든 생성기 — 스테이지 10 · 프리셋 6벌 · 파일 84개/벌. stdlib 만, `M` 33비트 실측 |
 | 2026-07-31 | **S0** SPEC — 파라미터 계약·traits 방식·유도 규칙·금지 관용구·검증 계약 |

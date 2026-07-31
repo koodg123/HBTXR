@@ -82,16 +82,21 @@ search  TRB0..TRB7 = 4 순환        track  TRB0..TRB3 = 2 순환
 struct HbtxrCfgBase {                       // config/design/hbtxr_config.hpp
   static constexpr int N = 64, D = 192, H = 3, HD = 64, F = 768;
   static constexpr int TP = 4;              // 토큰 병렬도 — 전 설계에서 하나
-  static constexpr int QKV_CIP = 8, QKV_COP = 8;   // 스테이지별 채널 병렬도
-  static constexpr int R_CIP = 8,  R_COP  = 8;
-  static constexpr int A_CIP = 8,  A_COP  = 8;
-  static constexpr int O_CIP = 8,  O_COP  = 8;
-  using act_t = ap_int<4>;  using acc_t = ap_int<20>;
+  static constexpr int O_CIP = 8, O_COP = 8;   // 출력 프로젝션 RMU   (S2)
+  static constexpr int R_CIP = 8, R_COP = 8;   // relation SMU (Q×Kᵀ) (S2)
+  // QKV_* · A_* · MLP_* 는 그 스테이지를 만드는 S4·S5 에서 붙입니다 — 쓰지 않는 상수는
+  // 두지 않습니다.
+  using act_t = ap_int<4>;  using w_t = ap_int<4>;
+  using acc_t = ap_int<20>; using nl_t = ap_int<16>;
+  static constexpr int REQ_M_BITS = 33, REQ_N_MAX = 31;   // requant 승수·시프트 폭
 };
 struct HbtxrCfgTrack : HbtxrCfgBase { static constexpr int N = 16; };
 
-template <class CFG> class HbtxrMhaCore { /* ... */ };
+template <class CFG> struct HbtxrRmu { /* ... */ };
 ```
+
+`HbtxrCfgCheck<CFG>` 가 config 전역 불변식(2의 거듭제곱·나눗셈·`D == H·HD`)을 검사하고,
+**각 유닛이 자기 `CI` 로 유도한 누산기 폭을** `static_assert` 합니다 — 폭을 아는 곳이 거기라서.
 
 | 규칙 | 이유 |
 |---|---|
@@ -162,11 +167,28 @@ S1 골든의 requant 쌍 1,932개 실측:
 | search-a4 | 2,468,372,009 | **32b** | 2 – 31 | **52b** |
 | search-a8 | 4,461,753,799 | **33b** | 20 – 31 | **53b** |
 
-> **`ap_int<20>` 누산기에 33비트 승수를 곱하면 53비트 곱입니다.** DSP48E2 한 개로 안 됩니다.
-> 데이터패스를 넓히는 것이 답이 아니라 **`shift_max` 를 조이는 것**이 답입니다 — `shift_max=17`
-> 이면 `M` 이 18비트에 들어가고, 상대오차 `2⁻¹⁷` 는 4비트 출력 격자에서 무의미합니다.
-> **다만 `shift_max` 는 `i_block.rescale` 이 정하므로 이건 algorithm 쪽 변경입니다.**
-> S2 착수 전 결정해야 합니다: 조이든지, 53비트 곱을 감수하든지.
+> **`ap_int<20>` 누산기에 33비트 승수를 곱하면 53비트 곱입니다.** DSP48E2(`27×18`) 한 개로
+> 안 들어갑니다.
+
+**조이는 지점은 shift 가 아니라 `M` 의 폭입니다.** 처음엔 `shift_max` 를 자르면 된다고 봤는데
+한 엣지만 보면 맞고 전체를 보면 틀립니다 — **비율이 작은 엣지가 큰 shift 를 필요로 합니다.**
+`ratio ≈ 1e-6` 인 엣지는 `n=17` 에서 `M` 이 1 로 바닥을 쳐 유효 비율이 7배 틀립니다.
+
+| | `acc·M` | 최대 상대오차 | 골든 |
+|---|---:|---:|---|
+| `shift_max=17` | 38b | **1.58e-02** | **바뀜** (9/9 벡터) |
+| **`M ≤ 18b`** | **38b** | 3.81e-06 | **비트 동일** |
+| `M ≤ 16b` | 36b | 1.50e-05 | **비트 동일** |
+| `M ≤ 14b` | 34b | — | 바뀜 (6/9) |
+
+`M ≤ W` 로 두면 **shift 범위는 2~30 으로 그대로 남습니다** — 잘리는 것은 승수뿐입니다.
+**16비트까지 무손실**이고 `M ≤ 18b` 면 DSP48E2 의 B 포트에 그대로 들어갑니다.
+
+> `dyadic_params` 는 `algorithm/quantization` 소유라 이건 algorithm 쪽 변경입니다.
+> 근거·측정·영향 범위: `algorithm/docs/reports/2026-07-31-requant-multiplier-width.md`
+> (브랜치 `rewrite/flat-functional`)
+> **하드웨어는 기다리지 않습니다** — `REQ_M_BITS` 를 traits 파라미터로 두면 결정이 바뀌어도
+> 상수 하나가 바뀝니다 (§2-A).
 
 ### 비선형 LUT — 연산자별 크기 (논문 §V-C)
 
