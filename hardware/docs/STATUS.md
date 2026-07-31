@@ -16,8 +16,8 @@
 | 단계 | 내용 | 상태 |
 |---|---|---|
 | **S0** | [SPEC.md](SPEC.md) + [ViT_Accel 참조 분석](references/2026-07-31-vit-accel-hls-analysis.md) | ✅ **완료** |
-| **S1** | 골든 생성기 `tools/export_hls_golden.py` | ⬜ **다음** |
-| **S2** | RMU · SMU | ⬜ |
+| **S1** | 골든 생성기 [`tools/export_hls_golden.py`](../tools/export_hls_golden.py) | ✅ **완료** |
+| **S2** | RMU · SMU | ⬜ **다음** — 착수 전 `shift_max` 결정 필요 |
 | **S3** | 비선형 LUT (RSQRT64·EXP32·RECIP128·GeLU32, 전부 16b) | ⬜ |
 | **S4** | MHA Core (9단계) | ⬜ |
 | **S5** | MLP Core (6단계) | ⬜ |
@@ -38,6 +38,7 @@ S2~S7은 독립입니다. **S8이 처음으로 전체를 묶습니다.**
 ## 검증 환경 (WSL)
 
 ```bash
+sh hardware/build/make_golden.sh                  # 골든 6벌 (생성물, git 에 없음)
 sh hardware/build/run_<blk>_tb.sh                 # V1  g++ + ap_int
 vitis_hls -f hardware/build/hls/<blk>_csim.tcl    # V2  /tools/Xilinx/Vitis_HLS/2023.2
 ```
@@ -49,10 +50,20 @@ vitis_hls -f hardware/build/hls/<blk>_csim.tcl    # V2  /tools/Xilinx/Vitis_HLS/
 | 보드 실측 | ZCU104 물리 접근 | **사용자** |
 | Table III 재현 | **범위 밖** ([SPEC §10](SPEC.md)) | — |
 
+## S2 착수 전 결정할 것 — S1 이 남긴 두 가지
+
+| | 무엇 | 왜 지금 |
+|---|---|---|
+| **requant `shift_max`** | `dyadic_params` 가 거의 항상 `n=31` 을 골라 `M` 이 **33비트**, `acc·M` 이 **53비트** | RMU 의 requant 유닛 폭이 여기서 정해집니다. 조이려면 `i_block.rescale` 변경 = algorithm 쪽 작업 |
+| **엣지별 dtype** | `BlockSpec.dtype` 이 하나라 **matmul 4비트 + 비선형 16비트**를 표현 못 함. GeLU LUT 입력 알파벳이 16개로 붕괴 | S4·S5 전. 지금은 `-a4`/`-a8` 두 벌로 우회 중 |
+
+둘 다 [SPEC §3](SPEC.md) 에 근거와 실측이 있습니다.
+
 ## Done
 
 | 날짜 | 내용 |
 |---|---|
+| 2026-07-31 | **S1** 골든 생성기 — 스테이지 10 · 프리셋 6벌 · 파일 84개/벌. stdlib 만, `M` 33비트 실측 |
 | 2026-07-31 | **S0** SPEC — 파라미터 계약·traits 방식·유도 규칙·금지 관용구·검증 계약 |
 | 2026-07-31 | ViT_Accel HLS 참조 분석 — 35건 제기·26 확정 (채택 9·회피 4·적응 8) |
 | 2026-07-31 | worktree `hardware-new` 생성, 코드 6개 디렉토리 비움 (286 삭제) |

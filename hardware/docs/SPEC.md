@@ -151,6 +151,23 @@ out = clamp( (acc * M + (1 << (n-1))) >> n , qmin, qmax )
 `(M, n)`은 채널별 dyadic 파라미터입니다. **이 식은 `algorithm/quantization/i_ops.py`의
 정의이고 하드웨어가 그것을 따릅니다** — 반대가 아닙니다. 원소별 `==`로 검증합니다.
 
+#### `M` 은 33비트까지 옵니다 — S1 실측
+
+`dyadic_params(scale, shift_max=31)` 은 **오차가 계속 줄기 때문에 거의 항상 `n=31`을 고릅니다.**
+그러면 `M = round(scale·2³¹)` 이라 **비율이 1을 넘는 엣지에서 `M` 이 2³¹을 넘습니다.**
+S1 골든의 requant 쌍 1,932개 실측:
+
+| 프리셋 | `M` 최대 | 폭 | `n` 범위 | `acc·M` |
+|---|---:|---:|---|---:|
+| search-a4 | 2,468,372,009 | **32b** | 2 – 31 | **52b** |
+| search-a8 | 4,461,753,799 | **33b** | 20 – 31 | **53b** |
+
+> **`ap_int<20>` 누산기에 33비트 승수를 곱하면 53비트 곱입니다.** DSP48E2 한 개로 안 됩니다.
+> 데이터패스를 넓히는 것이 답이 아니라 **`shift_max` 를 조이는 것**이 답입니다 — `shift_max=17`
+> 이면 `M` 이 18비트에 들어가고, 상대오차 `2⁻¹⁷` 는 4비트 출력 격자에서 무의미합니다.
+> **다만 `shift_max` 는 `i_block.rescale` 이 정하므로 이건 algorithm 쪽 변경입니다.**
+> S2 착수 전 결정해야 합니다: 조이든지, 53비트 곱을 감수하든지.
+
 ### 비선형 LUT — 연산자별 크기 (논문 §V-C)
 
 | | 엔트리 | 폭 |
@@ -162,6 +179,21 @@ out = clamp( (acc * M + (1 << (n-1))) >> n , qmin, qmax )
 
 인덱싱 `idx = clamp((u - u_min) >> s, 0, K-1)`. **테이블 값의 정본은
 `algorithm/quantization` export**이고 HLS는 헤더 배열로 받습니다.
+
+> **LUT 의 입출력은 `hbtxr_nl_t`(16b)이지 matmul 폭이 아닙니다.** GeLU 테이블 출력을
+> `dtype.bits` 로 묶었더니 4비트에서 **서로 다른 값이 2개**로 붕괴했습니다 (S1 `check()` 가 잡음).
+> 좁히는 것은 테이블이 아니라 **그 다음 엣지의 requant** 입니다.
+
+#### 혼합정밀은 현재 오라클이 표현하지 못합니다 — S1 미결
+
+논문은 **matmul 피연산자 4비트 · 비선형 16비트**입니다. 그런데 `i_block.BlockSpec` 은 `dtype`
+**하나**를 모든 엣지에 씁니다. 그래서 `fc1 → GeLU` 엣지가 4비트로 클램프되고, **GeLU 의 입력
+알파벳이 16개**가 됩니다 — 32엔트리 테이블의 절반이 영영 안 닿습니다.
+
+S1 은 이걸 우회하지 않고 **`--bits 4` 와 `--bits 8` 두 벌을 냅니다**: 4비트 벌은 RMU/SMU/qkv
+(진짜 W4A4 피연산자)용이고, 8비트 벌은 LUT 입력에 여유가 있는 벌입니다.
+**S4·S5 전에 결정해야 합니다** — `BlockSpec` 에 엣지별 dtype 을 넣을지, 하드웨어를 8비트 LUT
+입력으로 갈지.
 
 > **`HBTXR_FIXED_CSIM`은 항상 켭니다.** float 폴백을 두지 않습니다 — 구 구현이 기본
 > float csim으로 양자화를 전혀 검증하지 못했던 것이 이 규칙의 이유입니다.
@@ -315,6 +347,32 @@ void hbtxr_top(
 
 **골든의 정본은 `algorithm/quantization`** 입니다 — 순수 파이썬 임의정밀 정수 오라클이고
 허용오차가 아니라 `==` 로 비교합니다. `tools/export_hls_golden.py`(S1)가 블록별 벡터를 냅니다.
+
+### 골든 파일 계약 — S1 산출
+
+```bash
+sh hardware/build/make_golden.sh          # 프리셋 6벌 -> hardware/workspace/golden/<mode>-a<bits>/
+```
+
+**생성물이라 git 에 없습니다.** seed 로 재현되고 6벌이 9 MB 라 커밋할 이유가 없습니다.
+한 디렉토리에 84개 `.txt`(정수 CSV, 후행 콤마) + `index.tsv`(파일·개수·모양·설명).
+
+| 무엇 | 파일 |
+|---|---|
+| 스테이지 벡터 | `<stage>_x` · `<stage>_y` — `patch` `ln1` `softmax` `gelu` `rmu` `smu` `qkv` `mha` `mlp` `block` |
+| 상주 가중치 | `{rmu,qkv,fc1,fc2}_weight` + `_bias_acc` (**누산기 격자**에 있습니다) |
+| LUT 페이로드 | `ln{1,2}_{scalars,lnw,lnb,rsqrt_table}` · `softmax_{scalars,exp_table,recip_table_one,recip_table_two}` · `gelu_{scalars,table}` |
+| **모든** requant | `e01`~`e14` 각각 `_mult`/`_shift`. 순전파 순서로 번호를 매겼습니다 |
+
+> **requant 를 전수로 내는 이유**: 재현 못 하는 골든은 골든이 아닙니다. 18개 엣지 중
+> 흥미로운 몇 개만 내면 tb 가 `block_y` 를 만들 수 없습니다.
+
+생성기는 매 실행마다 **파일만 읽어서** `rmu_y`·`gelu_y`·`smu_y` 를 스펙 객체 없이 재구성하고
+`==` 로 확인합니다. **tb 가 할 일과 정확히 같은 일**이라, 통과하면 파일이 tb 에 충분합니다.
+
+> **음성 대조로 확인한 한계**: 출력만 비교하면 `bias_acc` 오차 **±8 까지는 안 보입니다**
+> (`n`이 27~31이라 누산기 LSB가 출력 LSB 한참 아래). ±64부터 잡힙니다. bias 를 LSB 단위로
+> 검증하려면 tb 가 **누산기 자체**를 봐야 합니다.
 
 ### 스테이지 프로브 — `hbtxr_check_stream`
 
