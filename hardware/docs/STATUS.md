@@ -53,6 +53,7 @@ vitis_hls -f hardware/build/hls/<blk>_csim.tcl    # V2  /tools/Xilinx/Vitis_HLS/
 
 | 날짜 | 내용 |
 |---|---|
-| 2026-07-31 | **S0** SPEC 작성 — 파라미터 계약·스테이지 체인·검증 계약 |
+| 2026-07-31 | **S0** SPEC — 파라미터 계약·traits 방식·유도 규칙·금지 관용구·검증 계약 |
+| 2026-07-31 | ViT_Accel HLS 참조 분석 — 35건 제기·26 확정 (채택 9·회피 4·적응 8) |
 | 2026-07-31 | worktree `hardware-new` 생성, 코드 6개 디렉토리 비움 (286 삭제) |
 | 2026-07-31 | `.gitignore`의 `build/`가 `hardware/build/` 44개를 삼키던 것 수정 |
