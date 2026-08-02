@@ -93,6 +93,17 @@ struct HbtxrCfgPatch : HbtxrCfgBase {
   using acc_t = ap_int<27>;    // 25 + margin
 };
 
+/// Terminal decode: pooling and the two heads are 8-bit (paper §V-B-2).
+///
+/// `head_in` is 192 for Pupil Box and 197 for Pupil Ellipse, which concatenates a 5-dim
+/// anchor state from the host. 197 tiles by nothing, which is why the head is a direct
+/// dense loop rather than the RMU's tiled PE array.
+struct HbtxrCfgHead : HbtxrCfgBase {
+  using act_t = ap_int<8>;
+  using w_t   = ap_int<8>;
+  using acc_t = ap_int<26>;    // 8 + 8 + clog2(197) = 24, + margin
+};
+
 // --- checks that hold for any config -----------------------------------------
 // Per-stage reduction widths are asserted inside the unit that knows its own CI.
 template <class CFG>

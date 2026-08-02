@@ -29,7 +29,7 @@ OUT=hardware/workspace/tb
 mkdir -p "$OUT"
 fail=0
 
-for tb in ${*:-requant gelu layernorm rmu smu softmax patch mha mlp block backbone}; do
+for tb in ${*:-requant gelu layernorm rmu smu softmax patch mha mlp block backbone top}; do
   src="hardware/module/tb/tb_$tb.cpp"
   [ -f "$src" ] || { echo "no such testbench: $src" >&2; exit 2; }
   # -isystem, not -I: the Vitis headers emit -Wall noise of their own (multi-line comment
@@ -49,7 +49,7 @@ for tb in ${*:-requant gelu layernorm rmu smu softmax patch mha mlp block backbo
     # The backbone runs the eight-block stack, so it needs the MODEL golden -- and it
     # runs search/track/search itself, because state that only matters at the other
     # token count is invisible in one order.
-    backbone) "$OUT/tb_$tb" "$MODEL" || fail=1 ;;
+    backbone|top) "$OUT/tb_$tb" "$MODEL" || fail=1 ;;
     *) for g in search-a4 track-a4; do "$OUT/tb_$tb" "$GOLDEN/$g" || fail=1; done ;;
   esac
 done

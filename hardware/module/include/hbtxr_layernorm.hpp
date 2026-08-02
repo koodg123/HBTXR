@@ -23,7 +23,10 @@ namespace hbtxr {
 ///
 /// Beat layout `v[p * P + c]` = token `t0 + p`, channel `c0 + c` — the same convention the
 /// RMU and SMU use.
-template <class CFG, int C, int P>
+/// `OUT` defaults to the activation type. The shared FINAL norm is the exception: its
+/// input is the 4-bit residual stream and its `clamp_bits` is the 8-bit head grid, because
+/// its consumer is the head (SPEC §3, mixed precision).
+template <class CFG, int C, int P, class OUT = typename CFG::act_t>
 struct HbtxrLayerNorm {
   static constexpr int TP = CFG::TP;
   typedef typename CFG::act_t act_t;
@@ -49,7 +52,8 @@ struct HbtxrLayerNorm {
   typedef ap_int<dr_t::width + nl_t::width> drw_t;              // (d * rsqrt) * lnw
   typedef ap_int<drw_t::width + 2> affine_t;                    // + lnb, on THIS grid
 
-  typedef hls::vector<act_t, TP * P> beat_t;
+  typedef hls::vector<act_t, TP * P> in_beat_t;
+  typedef hls::vector<OUT, TP * P> beat_t;   // output; `beat_t` keeps the caller's name
 
   // Payload. lnb is affine_t, not nl_t: measured at ~30 signed bits on the golden.
   nl_t lnw[C];
@@ -60,7 +64,7 @@ struct HbtxrLayerNorm {
   c1m_t c_1_m = 0;
   int c_1_s = 1, b = 0, s1 = 0, bound = 0, s2 = 0, clamp_bits = 0;
 
-  void run(hls::stream<beat_t> &in, hls::stream<beat_t> &out, int rows) {
+  void run(hls::stream<in_beat_t> &in, hls::stream<beat_t> &out, int rows) {
 #pragma HLS INLINE off
   row_tile:
     for (int t0 = 0; t0 < rows; t0 += TP) {
@@ -76,7 +80,7 @@ struct HbtxrLayerNorm {
     fill:
       for (int c0 = 0; c0 < C; c0 += P) {
 #pragma HLS pipeline II = 1
-        const beat_t v = in.read();
+        const in_beat_t v = in.read();
         for (int p = 0; p < TP; ++p)
 #pragma HLS unroll
           for (int c = 0; c < P; ++c)
@@ -130,9 +134,9 @@ struct HbtxrLayerNorm {
             const dr_t dr = d * rq[p];               // 6 x 16
             const drw_t drw = dr * lnw[c0 + c];      // 22 x 16 -- never affine_t x affine_t
             const affine_t sh = (affine_t(drw) + lnb[c0 + c]) >> s2;
-            y[p * P + c] = sh < qrange<act_t>::lo   ? act_t(qrange<act_t>::lo)
-                           : sh > qrange<act_t>::hi ? act_t(qrange<act_t>::hi)
-                                                    : act_t(sh);
+            y[p * P + c] = sh < qrange<OUT>::lo   ? OUT(qrange<OUT>::lo)
+                           : sh > qrange<OUT>::hi ? OUT(qrange<OUT>::hi)
+                                                  : OUT(sh);
           }
         out.write(y);
       }

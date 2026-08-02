@@ -23,10 +23,13 @@ sh hardware/build/run_tb.sh rmu          # 하나
 | `include/hbtxr_mlp_core.hpp` | **MLP Core** — 6단계. SMU·score buffer·reorder **없음** |
 | `include/hbtxr_patch_embed.hpp` | **Patch Embedding** — line buffer + windower + PE 배열 |
 | `include/hbtxr_backbone.hpp` | **Backbone** — 컨트롤러 · global buffer · prefetcher · 코어 순회 |
+| `include/hbtxr_head.hpp` | 토큰 풀링 + 2층 회귀 헤드. **RMU 아니라 dense 루프** (197은 안 나뉨) |
+| `include/hbtxr_top.hpp` | **top** — stem · 백본 · terminal decode, 모드 하나로 라우팅 |
+| `tb/hbtxr_model.hpp` | 모델 스코프 골든 적재 공용 (`tb_backbone`·`tb_top`) |
 | `tb/hbtxr_load.hpp` | 페이로드 적재 공용. tb 3개가 같은 블록을 읽습니다 |
 | `tb/hbtxr_probe.hpp` | 스테이지 프로브 — 비교 · **배수 단언** · **골든 재충전**. tb 전용 |
 | `tb/hbtxr_golden.hpp` | 골든 `.txt` 리더 + 비교 + 음성 대조. **tb 전용** |
-| `tb/tb_{requant,gelu,layernorm,rmu,smu,softmax,patch,mha,mlp,block,backbone}.cpp` | V1 테스트벤치 11개 |
+| `tb/tb_{requant,gelu,layernorm,rmu,smu,softmax,patch,mha,mlp,block,backbone,top}.cpp` | V1 테스트벤치 12개 |
 
 `src/` 는 S4(코어)부터입니다. `golden/` 은 쓰지 않습니다 — 골든은 생성물이라
 `hardware/workspace/golden/` 에 있습니다.
@@ -63,6 +66,16 @@ SMU out  v[p*COP + c] = 행   t0+p, 열         j0+c
 넓은 타입으로 먼저 캐스팅하고 곱하면 **그 넓은 타입들의** 합만큼 곱셈기를 요구합니다.
 5곳에서 걸렸습니다 — requant(54×54→108), LN 의 mean·variance·affine, softmax 의 `e*recip`.
 **항상 좁은 피연산자끼리 곱하고 결과 타입을 유도**합니다.
+
+## 모드 의존인 것은 정확히 넷입니다
+
+stem · **최종 norm 진입 requant** · 헤드(+anchor) · **출력 requant**. 가운데 둘이 놓치기 쉽습니다 —
+두 경로가 서로 다른 블록에서 나와 **같은 norm 하나**로 들어가고, 두 헤드의 마지막 linear 는
+**서로 다른 누산기 격자**를 갖습니다.
+
+출력 requant 를 배열 하나로 뒀더니 **누산기 골든은 계속 통과**하면서(누산기가 그 위에 있으니까)
+두 번째로 돈 모드의 고정소수점 값만 조용히 틀렸습니다. `tb_top` 의
+**search → track → search 재현성 검사**가 그걸 잡았습니다.
 
 ## 순회가 곧 더블 버퍼링입니다
 

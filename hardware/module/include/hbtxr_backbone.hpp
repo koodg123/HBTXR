@@ -19,6 +19,14 @@
 
 namespace hbtxr {
 
+/// A probe-shaped nothing, for callers that want only the block trace and for the
+/// synthesis path. `if (probe)` is a runtime test, so a null `int *` would still have to
+/// compile a `check` call — it needs a type that has one.
+struct HbtxrNoProbe {
+  template <class NAME, class S>
+  void check(const NAME &, S &, int) {}
+};
+
 /// What the mode selects (SPEC §7). The backbone only needs the depth; the stem and the
 /// terminal decode are the top's business (S8).
 struct HbtxrSchedule {
