@@ -16,8 +16,11 @@ sh hardware/build/run_tb.sh rmu          # 하나
 | `include/hbtxr_requant.hpp` | dyadic requant. **`i_ops.py:requant` 와 비트 단위로 같습니다** |
 | `include/hbtxr_rmu.hpp` | **RMU** — 가중치 상주(런타임 적재), 활성만 스트림 |
 | `include/hbtxr_smu.hpp` | **SMU** — **두 피연산자 다 스트림.** B 를 유닛이 전치 |
+| `include/hbtxr_lut.hpp` | PoT 커서 + GeLU. **커서는 signed·클램프 전 범위** |
+| `include/hbtxr_layernorm.hpp` | 정수 LayerNorm (7 scalar, rsqrt 1세그먼트) |
+| `include/hbtxr_softmax.hpp` | 정수 Softmax (14 scalar, reciprocal 2세그먼트) |
 | `tb/hbtxr_golden.hpp` | 골든 `.txt` 리더 + 비교 + 음성 대조. **tb 전용** |
-| `tb/tb_{requant,rmu,smu}.cpp` | V1 테스트벤치 |
+| `tb/tb_{requant,gelu,layernorm,rmu,smu,softmax}.cpp` | V1 테스트벤치 6개 |
 
 `src/` 는 S4(코어)부터입니다. `golden/` 은 쓰지 않습니다 — 골든은 생성물이라
 `hardware/workspace/golden/` 에 있습니다.
@@ -48,6 +51,12 @@ RMU out  v[p*COP + c] = 토큰 t0+p, 출력채널   o0+c
 SMU a,b  v[p*CIP + c] = 행   t0+p, 리덕션채널 k0+c
 SMU out  v[p*COP + c] = 행   t0+p, 열         j0+c
 ```
+
+## `ap_int::operator*` 는 피연산자 폭의 **합**을 냅니다
+
+넓은 타입으로 먼저 캐스팅하고 곱하면 **그 넓은 타입들의** 합만큼 곱셈기를 요구합니다.
+5곳에서 걸렸습니다 — requant(54×54→108), LN 의 mean·variance·affine, softmax 의 `e*recip`.
+**항상 좁은 피연산자끼리 곱하고 결과 타입을 유도**합니다.
 
 ## 완료 조건
 

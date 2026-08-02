@@ -27,7 +27,7 @@ OUT=hardware/workspace/tb
 mkdir -p "$OUT"
 fail=0
 
-for tb in ${*:-requant}; do
+for tb in ${*:-requant gelu layernorm rmu smu softmax}; do
   src="hardware/module/tb/tb_$tb.cpp"
   [ -f "$src" ] || { echo "no such testbench: $src" >&2; exit 2; }
   # -isystem, not -I: the Vitis headers emit -Wall noise of their own (multi-line comment

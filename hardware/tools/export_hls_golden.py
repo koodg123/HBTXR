@@ -735,16 +735,21 @@ def emit(dest: Path, mode: str, bits: int, seed: int) -> tuple[Path, dict]:
     for name, ln in (("ln1", spec.norm1), ("ln2", spec.norm2)):
         w.put(f"{name}_scalars", ln.scalars, "[7]", "c_1_m c_1_s b s1 bound s2 clamp_bits")
         w.put(f"{name}_lnw", ln.lnw, f"[{dim}]", "int16")
-        w.put(f"{name}_lnb", ln.lnb, f"[{dim}]", "int16, on the affine grid")
+        # lnb is NOT a 16-bit table entry: it lives on the AFFINE accumulator grid
+        # (diff * rsqrt * lnw), which is ~33 bits, so it needs ~30 signed bits of its own.
+        w.put(f"{name}_lnb", ln.lnb, f"[{dim}]", "on the affine grid, ~30b signed -- NOT int16")
         w.put(f"{name}_rsqrt_table", ln.rsqrt_table, f"[{ENTRIES['rsqrt']}]", "int16")
     w.put("ln1_x", tap["ln1_x"], f"[{tokens},{dim}]", "on norm1.input_scale")
     w.put("ln1_y", tap["ln1_y"], f"[{tokens},{dim}]", "expected")
 
     w.put("softmax_scalars", spec.softmax.scalars, "[14]",
           "b1 s1 bound1 | b2/s2/bound2/b3/s3 per recip segment | clamp_bits")
-    w.put("softmax_exp_table", spec.softmax.exp_table, f"[{ENTRIES['exp']}]", "int16")
-    w.put("softmax_recip_table_one", spec.softmax.recip_table_one, f"[{ENTRIES['recip']}]", "int16")
-    w.put("softmax_recip_table_two", spec.softmax.recip_table_two, f"[{ENTRIES['recip']}]", "int16")
+    w.put("softmax_exp_table", spec.softmax.exp_table, f"[{ENTRIES['exp']}]",
+          "UNSIGNED 16b -- exp's max entry is 32768, which int16 cannot hold")
+    w.put("softmax_recip_table_one", spec.softmax.recip_table_one, f"[{ENTRIES['recip']}]",
+          "UNSIGNED 16b -- exp's max entry is 32768, which int16 cannot hold")
+    w.put("softmax_recip_table_two", spec.softmax.recip_table_two, f"[{ENTRIES['recip']}]",
+          "UNSIGNED 16b -- exp's max entry is 32768, which int16 cannot hold")
     w.put("softmax_x", tap["softmax_x"], f"[{heads},{tokens},{tokens}]", "scores")
     w.put("softmax_y", tap["softmax_y"], f"[{heads},{tokens},{tokens}]", "expected, uint8")
 
@@ -856,7 +861,7 @@ def emit_model(dest: Path, model: str, blk_bits: int, seam_bits: int, head_bits:
               "c_1_m c_1_s b s1 bound s2 clamp_bits")
         w.put(f"blk_{tag}_lnw", [v for ln in lns for v in ln.lnw], f"[{depth},{dim}]", "int16")
         w.put(f"blk_{tag}_lnb", [v for ln in lns for v in ln.lnb], f"[{depth},{dim}]",
-              "int16, on the affine grid")
+              "on the affine grid, ~30b signed -- NOT int16")
         w.put(f"blk_{tag}_rsqrt_table", [v for ln in lns for v in ln.rsqrt_table],
               f"[{depth},{ENTRIES['rsqrt']}]", "int16")
 
@@ -867,7 +872,8 @@ def emit_model(dest: Path, model: str, blk_bits: int, seam_bits: int, head_bits:
                            ("recip_table_two", "recip")):
         w.put(f"blk_softmax_{field}", [v for s in sms for v in getattr(s, field)],
               f"[{depth},{ENTRIES[entries]}]",
-              "int16; blocks 0..cut-1 are fit over BOTH token counts")
+              "UNSIGNED 16b (exp's max entry is 32768, which int16 cannot hold); "
+              "blocks 0..cut-1 are fit over BOTH token counts")
     gls = [b.gelu for b in blocks]
     w.put("blk_gelu_scalars", [v for g in gls for v in g.scalars], f"[{depth},3]", "b s bound")
     w.put("blk_gelu_table", [v for g in gls for v in g.table],
@@ -881,7 +887,7 @@ def emit_model(dest: Path, model: str, blk_bits: int, seam_bits: int, head_bits:
     # --- the shared final norm ------------------------------------------------
     w.put("fnorm_scalars", fnorm.scalars, "[7]", "clamp_bits is the HEAD's width")
     w.put("fnorm_lnw", fnorm.lnw, f"[{dim}]", "int16")
-    w.put("fnorm_lnb", fnorm.lnb, f"[{dim}]", "int16, on the affine grid")
+    w.put("fnorm_lnb", fnorm.lnb, f"[{dim}]", "on the affine grid, ~30b signed")
     w.put("fnorm_rsqrt_table", fnorm.rsqrt_table, f"[{ENTRIES['rsqrt']}]", "int16")
 
     # --- per path: block trace, the exit bridge, the head ---------------------

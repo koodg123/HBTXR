@@ -37,13 +37,23 @@ struct HbtxrCfgBase {
   static constexpr int TP    = 4;               // token parallelism, one number design-wide
   static constexpr int O_CIP = 8, O_COP = 8;    // output-projection RMU
   static constexpr int R_CIP = 8, R_COP = 8;    // relation SMU (Q x K^T)
+  static constexpr int NL_P  = 8;               // lanes of a pointwise / row-wise op
   // qkv / attention / MLP pairs arrive with the stages that instantiate them (S4, S5).
 
   // --- numeric system (SPEC §3) --------------------------------------------
   using act_t = ap_int<4>;     // MHA / MLP activations
   using w_t   = ap_int<4>;     // MHA / MLP weights
   using acc_t = ap_int<20>;    // every MAC accumulator
-  using nl_t  = ap_int<16>;    // nonlinear LUT I/O
+
+  // Nonlinear LUT entries are 16 bits, but the SIGN is per operator and getting it wrong
+  // is silent. rsqrt and GeLU are signed; exp and reciprocal are not — and exp's largest
+  // entry is its numerator, 1<<15 = 32768, which ap_int<16> CANNOT hold. Measured on the
+  // golden: exp max 32768, recip max 46075.
+  using nl_t  = ap_int<16>;    // GeLU, rsqrt      (signed)
+  using nlu_t = ap_uint<16>;   // exp, reciprocal  (non-negative by construction)
+  // lnb is NOT a table entry: it lives on the affine accumulator grid, ~30 signed bits.
+  // The LayerNorm unit derives its width there rather than assuming a 16-bit payload.
+  using prob_t = ap_uint<8>;   // softmax output, the grid the S x V operand requants from
 
   // --- requant (SPEC §3) ----------------------------------------------------
   // 33 is what the golden carries TODAY: dyadic_params picks shift 31 almost always, so

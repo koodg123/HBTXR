@@ -86,8 +86,12 @@ struct HbtxrCfgBase {                       // config/design/hbtxr_config.hpp
   static constexpr int R_CIP = 8, R_COP = 8;   // relation SMU (Q×Kᵀ) (S2)
   // QKV_* · A_* · MLP_* 는 그 스테이지를 만드는 S4·S5 에서 붙입니다 — 쓰지 않는 상수는
   // 두지 않습니다.
-  using act_t = ap_int<4>;  using w_t = ap_int<4>;
-  using acc_t = ap_int<20>; using nl_t = ap_int<16>;
+  static constexpr int NL_P = 8;               // 포인트와이즈·행 단위 연산의 레인 수
+  using act_t = ap_int<4>;   using w_t   = ap_int<4>;
+  using acc_t = ap_int<20>;
+  using nl_t  = ap_int<16>;  // GeLU · rsqrt   (signed)
+  using nlu_t = ap_uint<16>; // exp · reciprocal — exp 의 최대 엔트리 32768 이 int16 초과
+  using prob_t = ap_uint<8>;
   static constexpr int REQ_M_BITS = 33, REQ_N_MAX = 31;   // requant 승수·시프트 폭
 };
 struct HbtxrCfgTrack : HbtxrCfgBase { static constexpr int N = 16; };
@@ -126,7 +130,8 @@ hls::vector<act_t, TP*CIP>                                   // 스트림 폭
 |---|---|---|
 | `hbtxr_a8_t` `hbtxr_w8_t` | `ap_int<8>` | Patch Embedding · Head |
 | `hbtxr_a4_t` `hbtxr_w4_t` | `ap_int<4>` | MHA · MLP |
-| `hbtxr_nl_t` | `ap_int<16>` | 비선형 LUT 입출력 |
+| `nl_t` / `nlu_t` | `ap_int<16>` / **`ap_uint<16>`** | 비선형 LUT — **부호는 연산자별**, 아래 |
+| `prob_t` | `ap_uint<8>` | softmax 출력 (S×V 피연산자가 여기서 requant) |
 | `hbtxr_acc_t` | `ap_int<20>` | 모든 MAC 누산 — 아래에서 **유도** |
 
 ### 중간 폭은 전사하지 않고 **유도하고 `static_assert` 로 고정합니다**
@@ -137,9 +142,9 @@ hls::vector<act_t, TP*CIP>                                   // 스트림 폭
 | 폭 | 식 | HBTXR 값 |
 |---|---|---|
 | MAC 누산 | `W + A + ceil(log2(CI))` | `4+4+10` = 18 → **`ap_int<20>`** (최악 `CI=F=768`) |
-| LN `diff` | `width(if_t) + 1` | |
-| LN `var` | `2·width(diff) + ceil(log2(D))` | `2·14+8` = **36** |
-| LN `affine` | `width(diff)+width(rsqrt)+width(lnw)+1` | |
+| LN `diff` | `width(입력) + 1` | `4+1` = **5** |
+| LN `var` | `2·width(diff) + ceil(log2(D))` | `2·5+8` = 18 → **`ap_int<19>`** (S3 실측 15b) |
+| LN `affine` | `width(diff)+width(rsqrt)+width(lnw)+1` | `5+16+16+2` = **39** (S3 실측 33b) |
 | **LUT 커서** | **클램프 전** 인덱스의 도달 가능 범위. **반드시 signed** | |
 
 > **커서를 좁게 잡으면 클램프가 무의미해집니다.** 좁혀진 타입 위에서 `clamp()` 를 돌리면 범위 밖
@@ -192,12 +197,19 @@ S1 골든의 requant 쌍 1,932개 실측:
 
 ### 비선형 LUT — 연산자별 크기 (논문 §V-C)
 
-| | 엔트리 | 폭 |
-|---|---:|---|
-| RSQRT | **64** | 16-bit |
-| EXP | **32** | 16-bit |
-| RECIP | **128** | 16-bit |
-| GeLU | **32** | 16-bit |
+| | 엔트리 | 폭 | **부호** |
+|---|---:|---|---|
+| RSQRT | **64** | 16-bit | signed (`ap_int<16>`) |
+| EXP | **32** | 16-bit | **unsigned** |
+| RECIP | **128** (64×2 세그먼트) | 16-bit | **unsigned** |
+| GeLU | **32** | 16-bit | signed (`ap_int<16>`) |
+
+> **부호를 틀리면 조용히 wrap 합니다 — S3 실측.** `exp` 의 최대 엔트리는 분자 그 자체인
+> `1<<15 = 32768` 인데 **`ap_int<16>` 의 상한은 32767** 입니다. recip 도 최대 46,075 로
+> 넘칩니다. 둘 다 구성상 음수가 없으므로 `ap_uint<16>` 입니다.
+>
+> **`lnb` 는 테이블 엔트리가 아닙니다.** affine 누산기 격자(≈33b)에 있어 **30비트 signed**
+> 가 필요합니다. 16비트로 받으면 wrap 합니다.
 
 인덱싱 `idx = clamp((u - u_min) >> s, 0, K-1)`. **테이블 값의 정본은
 `algorithm/quantization` export**이고 HLS는 헤더 배열로 받습니다.

@@ -18,8 +18,8 @@
 | **S0** | [SPEC.md](SPEC.md) + [ViT_Accel 참조 분석](references/2026-07-31-vit-accel-hls-analysis.md) | ✅ **완료** |
 | **S1** | 골든 생성기 [`tools/export_hls_golden.py`](../tools/export_hls_golden.py) | ✅ **완료** |
 | **S2** | RMU · SMU | ✅ **완료** — tb 3개 PASS |
-| **S3** | 비선형 LUT (RSQRT64·EXP32·RECIP128·GeLU32, 전부 16b) | ⬜ **다음** |
-| **S4** | MHA Core (9단계) | ⬜ |
+| **S3** | 비선형 LUT (RSQRT64·EXP32·RECIP128·GeLU32, 전부 16b) | ✅ **완료** — tb 3개 PASS |
+| **S4** | MHA Core (9단계) | ⬜ **다음** |
 | **S5** | MLP Core (6단계) | ⬜ |
 | **S6** | Patch Embedding (Conv-F/Conv-E + shuffler) | ⬜ |
 | **S7** | Global Buffer · interconnect · Weight Prefetcher · Controller | ⬜ |
@@ -48,6 +48,9 @@ vitis_hls -f hardware/build/hls/<blk>_csim.tcl    # V2  S8 부터
 | `tb_requant` | `i_ops.py:requant` 직접 | 3,733 케이스 · 출력 16/16 · 포화 35% |
 | `tb_rmu` | `rmu_y` (출력 프로젝션 `[192,192]`) | 12,288 값 |
 | `tb_smu` | `smu_y` (`Q×Kᵀ`, 3헤드) | 12,288 값 |
+| `tb_gelu` | `gelu_y` (`table_quantize`) | 49,152 값 + 포화 직접 검증 |
+| `tb_layernorm` | `ln1_y` (7-scalar 커널) | 12,288 값 |
+| `tb_softmax` | `softmax_y` (14-scalar, 2세그먼트) | 12,288 값 · **두 세그먼트 다 사용** |
 
 전부 **원소별 `==` + 스트림 배수 + 음성 대조**. 같은 바이너리가 track 골든(`N=16`)도
 통과합니다 — 공유 백본의 런타임 토큰 수가 실제로 동작합니다.
@@ -80,6 +83,7 @@ Pupil Ellipse 두 개만 냅니다. 배포 모델(`HybridModel`)에는 셋 다 �
 
 | 날짜 | 내용 |
 |---|---|
+| 2026-07-31 | **S3** 비선형 LUT — GeLU·LayerNorm·Softmax tb PASS. `exp`/`recip` 는 **unsigned**, `lnb` 는 30b 임을 실측 |
 | 2026-07-31 | **S2** RMU · SMU · requant — tb 3개 PASS. 첫 HLS 구현이 골든을 통과했습니다 |
 | 2026-07-31 | **S1+** 모델 전체 골든 — 두 스템·**공유** 블록 스택·두 헤드, 논문 비트폭. 공유 백본 제약 3건·`anchor` 포트 누락 발견 |
 | 2026-07-31 | **S1** 골든 생성기 — 스테이지 10 · 프리셋 6벌 · 파일 84개/벌. stdlib 만, `M` 33비트 실측 |
