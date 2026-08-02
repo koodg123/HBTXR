@@ -48,8 +48,6 @@ struct HbtxrMlpCore {
   HbtxrEdge e09_stream_to_ln2, e10_ln2_to_fc1, e12_gelu_to_fc2;
   HbtxrEdge e14_resid2_a, e14_resid2_b;
 
-  act_t hidden_buf[N][F];   // FC1's output; pointwise from here, so no reorder
-
   /// `x` and `y` are [tokens, D] on the residual-stream grid.
   template <class PROBE>
   void run(const act_t *x, act_t *y, int tokens, PROBE *probe) {

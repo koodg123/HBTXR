@@ -113,7 +113,12 @@ struct HbtxrSmu {
             acc[p][c] = 0;  // no bias: a score matrix has none
 
       reduce:
-        for (int k0 = 0; k0 < K; k0 += CIP) {
+        // `kdim`, NOT `K`. K is the compile-time maximum; the reduction length is a
+        // runtime argument because S x V reduces over TOKENS. Running to K reads whatever
+        // the buffer held from the PREVIOUS call, and that is invisible whenever
+        // kdim == K — so Q x K^T (kdim = HD = K) is always right, and only a 16-token run
+        // after a 64-token one sees it.
+        for (int k0 = 0; k0 < kdim; k0 += CIP) {
 #pragma HLS pipeline II = 1
           for (int p = 0; p < TP; ++p)
 #pragma HLS unroll

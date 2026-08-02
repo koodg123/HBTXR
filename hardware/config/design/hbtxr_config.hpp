@@ -29,6 +29,12 @@ struct HbtxrCfgBase {
   static constexpr int HD = 64;    // D / H
   static constexpr int F  = 768;   // MLP hidden
 
+  // Depth is the mode's, not the block's. ONE backbone: search runs B_1:8, track runs
+  // B_1:4 over the SAME blocks (SPEC §7).
+  static constexpr int SEARCH_DEPTH = 8;
+  static constexpr int TRACK_DEPTH  = 4;   // the cut point c
+  static constexpr int TRACK_TOKENS = 16;
+
   // --- parallelism ----------------------------------------------------------
   // Three numbers must agree per stage: the hls::vector width, the unroll factor and the
   // array_reshape cyclic factor. They are named, never positional — the reference took

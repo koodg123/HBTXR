@@ -22,8 +22,8 @@
 | **S4** | MHA Core (9단계) | ✅ **완료** — 9단계 체인 + 스테이지 프로브 7개 |
 | **S5** | MLP Core (6단계) | ✅ **완료** — 6단계 + **블록 전체** `block_y` 통과 |
 | **S6** | Patch Embedding (Conv-F/Conv-E + shuffler) | ✅ **완료** — 두 스템 PASS |
-| **S7** | Global Buffer · interconnect · Weight Prefetcher · Controller | ⬜ **다음** |
-| **S8** | 4코어 cyclic top + mode별 terminal decode | ⬜ |
+| **S7** | Global Buffer · interconnect · Weight Prefetcher · Controller | ✅ **완료** — 8 TRB / 코어쌍 2개 |
+| **S8** | 4코어 cyclic top + mode별 terminal decode | ⬜ **다음** |
 | **S9** | csynth · 자원 리포트 | ⬜ |
 
 S2~S7은 독립입니다. **S8이 처음으로 전체를 묶습니다.**
@@ -55,10 +55,11 @@ vitis_hls -f hardware/build/hls/<blk>_csim.tcl    # V2  S8 부터
 | `tb_mlp` | `mlp_y` (6단계 전체) | 12,288 값 · **프로브 5개** + 고장 주입 |
 | `tb_patch` | `patch_y` (Conv-F · Conv-E) | 12,288 / 3,072 값 |
 | `tb_block` | **`block_y` — 블록 하나 통째** | 12,288 값 · **프로브 12개**(두 코어) |
+| `tb_backbone` | **`{search,track}_block_out` — 8 TRB** | 코어쌍 2개 재사용 · prefetch 태그 · 고장 주입 |
 
 전부 **원소별 `==` + 스트림 배수 + 음성 대조**. 러너가 **모든 tb 를 두 토큰 수로** 돌립니다
 (search `N=64` · track `N=16`, 같은 바이너리) — 공유 백본이 주장이지 한쪽만 되는 게 아니니까요.
-클린 트리에서 **19개 실행 전부 PASS**.
+클린 트리에서 **20개 실행 전부 PASS** (`tb_backbone` 은 자기 안에서 search·track·search 3회).
 
 ## Blocked
 
@@ -88,6 +89,7 @@ Pupil Ellipse 두 개만 냅니다. 배포 모델(`HybridModel`)에는 셋 다 �
 
 | 날짜 | 내용 |
 |---|---|
+| 2026-07-31 | **S7** Backbone — 8 TRB 가 **코어쌍 2개** 위를 돌며 가중치 교체. `bt` 리덕션이 런타임 길이 아닌 컴파일 최대치를 돌던 버그를 track 이 잡음 |
 | 2026-07-31 | **S6** Patch Embedding — Conv-F·Conv-E PASS. PE 배열이 곧 RMU(kernel==stride 라 im2col 이 주소 계산), 스템만 `ap_int<27>` |
 | 2026-07-31 | **S5** MLP Core — 6단계 PASS. 두 코어를 이어 **블록 하나 전체**가 `block_y` 와 비트 일치 |
 | 2026-07-31 | **S4** MHA Core — 9단계 체인 PASS. 스테이지 프로브(비교·배수·재충전) 도입, 고장 주입으로 국소화 확인 |

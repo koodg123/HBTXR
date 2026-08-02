@@ -22,10 +22,11 @@ sh hardware/build/run_tb.sh rmu          # 하나
 | `include/hbtxr_mha_core.hpp` | **MHA Core** — 9단계 체인 |
 | `include/hbtxr_mlp_core.hpp` | **MLP Core** — 6단계. SMU·score buffer·reorder **없음** |
 | `include/hbtxr_patch_embed.hpp` | **Patch Embedding** — line buffer + windower + PE 배열 |
+| `include/hbtxr_backbone.hpp` | **Backbone** — 컨트롤러 · global buffer · prefetcher · 코어 순회 |
 | `tb/hbtxr_load.hpp` | 페이로드 적재 공용. tb 3개가 같은 블록을 읽습니다 |
 | `tb/hbtxr_probe.hpp` | 스테이지 프로브 — 비교 · **배수 단언** · **골든 재충전**. tb 전용 |
 | `tb/hbtxr_golden.hpp` | 골든 `.txt` 리더 + 비교 + 음성 대조. **tb 전용** |
-| `tb/tb_{requant,gelu,layernorm,rmu,smu,softmax,patch,mha,mlp,block}.cpp` | V1 테스트벤치 10개 |
+| `tb/tb_{requant,gelu,layernorm,rmu,smu,softmax,patch,mha,mlp,block,backbone}.cpp` | V1 테스트벤치 11개 |
 
 `src/` 는 S4(코어)부터입니다. `golden/` 은 쓰지 않습니다 — 골든은 생성물이라
 `hardware/workspace/golden/` 에 있습니다.
@@ -62,6 +63,22 @@ SMU out  v[p*COP + c] = 행   t0+p, 열         j0+c
 넓은 타입으로 먼저 캐스팅하고 곱하면 **그 넓은 타입들의** 합만큼 곱셈기를 요구합니다.
 5곳에서 걸렸습니다 — requant(54×54→108), LN 의 mean·variance·affine, softmax 의 `e*recip`.
 **항상 좁은 피연산자끼리 곱하고 결과 타입을 유도**합니다.
+
+## 순회가 곧 더블 버퍼링입니다
+
+코어쌍이 **2개**고 TRB 8개가 그 위를 돕니다. `i mod 2` 쌍이 TRB i 를 계산하는 동안
+`(i+1) mod 2` 쌍은 놀고 있으므로 **가중치를 그때 갈아끼웁니다** — prefetcher 가 자기 버퍼를
+따로 들 필요가 없습니다. 참조가 하드웨어 인스턴스를 12개 만들어야 했던 이유(ROM 초기화
+가중치, SPEC §4)가 여기서 2개가 됩니다.
+
+Global buffer 가 필요한 것도 **코어를 재사용하기 때문**입니다 — 블록마다 코어가 따로 있으면
+잔차 스트림은 dataflow FIFO 에 머물고 저장될 일이 없습니다.
+
+## 런타임 길이와 컴파일 최대치를 헷갈리면 한쪽 토큰 수에서만 보입니다
+
+S×V 의 리덕션이 `kdim`(런타임 = 토큰 수)이 아니라 `K`(컴파일 최대 = 64)까지 돌고 있었습니다.
+**search 는 `kdim == K` 라 완벽히 가려지고**, 64토큰 실행 뒤의 16토큰 실행만 stale 48열을
+읽습니다. `tb_backbone` 이 **search → track → search** 를 도는 이유가 이것입니다.
 
 ## 패치 임베딩의 PE 배열은 **RMU 입니다**
 

@@ -18,16 +18,18 @@ XILINX_INCLUDE=${XILINX_INCLUDE:-/tools/Xilinx/Vitis_HLS/2023.2/include}
 }
 
 GOLDEN=hardware/workspace/golden
-[ -d "$GOLDEN/requant" ] && [ -d "$GOLDEN/search-a4" ] && [ -d "$GOLDEN/track-a4" ] || {
+MODEL=$GOLDEN/model-hbtxr-w4s4h8
+[ -d "$GOLDEN/requant" ] && [ -d "$GOLDEN/search-a4" ] && [ -d "$GOLDEN/track-a4" ] &&
+  [ -d "$MODEL" ] || {
   echo "golden missing -- generating"
-  sh hardware/build/make_golden.sh requant search-4 track-4
+  sh hardware/build/make_golden.sh requant search-4 track-4 model
 }
 
 OUT=hardware/workspace/tb
 mkdir -p "$OUT"
 fail=0
 
-for tb in ${*:-requant gelu layernorm rmu smu softmax patch mha mlp block}; do
+for tb in ${*:-requant gelu layernorm rmu smu softmax patch mha mlp block backbone}; do
   src="hardware/module/tb/tb_$tb.cpp"
   [ -f "$src" ] || { echo "no such testbench: $src" >&2; exit 2; }
   # -isystem, not -I: the Vitis headers emit -Wall noise of their own (multi-line comment
@@ -43,7 +45,11 @@ for tb in ${*:-requant gelu layernorm rmu smu softmax patch mha mlp block}; do
   # Both token counts, same binary. The backbone is SHARED (SPEC §7): search runs it at
   # N=64 and track at N=16 on the same weights, so "it works at one N" is not the claim.
   case "$tb" in
-    requant) "$OUT/tb_$tb" || fail=1 ;;
+    requant)  "$OUT/tb_$tb" || fail=1 ;;
+    # The backbone runs the eight-block stack, so it needs the MODEL golden -- and it
+    # runs search/track/search itself, because state that only matters at the other
+    # token count is invisible in one order.
+    backbone) "$OUT/tb_$tb" "$MODEL" || fail=1 ;;
     *) for g in search-a4 track-a4; do "$OUT/tb_$tb" "$GOLDEN/$g" || fail=1; done ;;
   esac
 done
