@@ -20,8 +20,8 @@
 | **S2** | RMU · SMU | ✅ **완료** — tb 3개 PASS |
 | **S3** | 비선형 LUT (RSQRT64·EXP32·RECIP128·GeLU32, 전부 16b) | ✅ **완료** — tb 3개 PASS |
 | **S4** | MHA Core (9단계) | ✅ **완료** — 9단계 체인 + 스테이지 프로브 7개 |
-| **S5** | MLP Core (6단계) | ⬜ **다음** |
-| **S6** | Patch Embedding (Conv-F/Conv-E + shuffler) | ⬜ |
+| **S5** | MLP Core (6단계) | ✅ **완료** — 6단계 + **블록 전체** `block_y` 통과 |
+| **S6** | Patch Embedding (Conv-F/Conv-E + shuffler) | ⬜ **다음** |
 | **S7** | Global Buffer · interconnect · Weight Prefetcher · Controller | ⬜ |
 | **S8** | 4코어 cyclic top + mode별 terminal decode | ⬜ |
 | **S9** | csynth · 자원 리포트 | ⬜ |
@@ -51,11 +51,13 @@ vitis_hls -f hardware/build/hls/<blk>_csim.tcl    # V2  S8 부터
 | `tb_gelu` | `gelu_y` (`table_quantize`) | 49,152 값 + 포화 직접 검증 |
 | `tb_layernorm` | `ln1_y` (7-scalar 커널) | 12,288 값 |
 | `tb_softmax` | `softmax_y` (14-scalar, 2세그먼트) | 12,288 값 · **두 세그먼트 다 사용** |
-| `tb_mha` | `mha_y` (9단계 전체) | 12,288 값 · **스테이지 프로브 7개** + 고장 주입 |
+| `tb_mha` | `mha_y` (9단계 전체) | 12,288 값 · **프로브 7개** + 고장 주입 |
+| `tb_mlp` | `mlp_y` (6단계 전체) | 12,288 값 · **프로브 5개** + 고장 주입 |
+| `tb_block` | **`block_y` — 블록 하나 통째** | 12,288 값 · **프로브 12개**(두 코어) |
 
 전부 **원소별 `==` + 스트림 배수 + 음성 대조**. 러너가 **모든 tb 를 두 토큰 수로** 돌립니다
 (search `N=64` · track `N=16`, 같은 바이너리) — 공유 백본이 주장이지 한쪽만 되는 게 아니니까요.
-클린 트리에서 **13개 실행 전부 PASS**.
+클린 트리에서 **17개 실행 전부 PASS**.
 
 ## Blocked
 
@@ -85,6 +87,7 @@ Pupil Ellipse 두 개만 냅니다. 배포 모델(`HybridModel`)에는 셋 다 �
 
 | 날짜 | 내용 |
 |---|---|
+| 2026-07-31 | **S5** MLP Core — 6단계 PASS. 두 코어를 이어 **블록 하나 전체**가 `block_y` 와 비트 일치 |
 | 2026-07-31 | **S4** MHA Core — 9단계 체인 PASS. 스테이지 프로브(비교·배수·재충전) 도입, 고장 주입으로 국소화 확인 |
 | 2026-07-31 | **S3** 비선형 LUT — GeLU·LayerNorm·Softmax tb PASS. `exp`/`recip` 는 **unsigned**, `lnb` 는 30b 임을 실측 |
 | 2026-07-31 | **S2** RMU · SMU · requant — tb 3개 PASS. 첫 HLS 구현이 골든을 통과했습니다 |

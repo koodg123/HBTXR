@@ -39,9 +39,11 @@ struct HbtxrCfgBase {
   static constexpr int R_CIP = 8, R_COP = 8;    // relation SMU (Q x K^T)
   static constexpr int Q_CIP = 8, Q_COP = 8;    // qkv projection RMU
   static constexpr int A_CIP = 8, A_COP = 8;    // attention SMU (S x V)
+  static constexpr int M1_CIP = 8, M1_COP = 8;  // MLP expand   D -> F
+  static constexpr int M2_CIP = 8, M2_COP = 8;  // MLP contract F -> D
   static constexpr int NL_P  = 8;               // lanes of a pointwise / row-wise op
-  // Every factor is 8, so every act_t beat in the MHA core is TP*8 = 32 lanes and no
-  // width adapter is needed between stages. The MLP pair arrives with S5.
+  // Every factor is 8, so every act_t beat in either core is TP*8 = 32 lanes and no width
+  // adapter is needed between stages.
 
   // --- numeric system (SPEC §3) --------------------------------------------
   using act_t = ap_int<4>;     // MHA / MLP activations
@@ -88,6 +90,8 @@ struct HbtxrCfgCheck {
   static_assert(CFG::HD % CFG::R_CIP == 0, "HD vs R_CIP");
   static_assert(CFG::D % CFG::Q_CIP == 0 && (3 * CFG::D) % CFG::Q_COP == 0, "D vs Q_*P");
   static_assert(CFG::N % CFG::A_CIP == 0 && CFG::HD % CFG::A_COP == 0, "N/HD vs A_*P");
+  static_assert(CFG::D % CFG::M1_CIP == 0 && CFG::F % CFG::M1_COP == 0, "D/F vs M1_*P");
+  static_assert(CFG::F % CFG::M2_CIP == 0 && CFG::D % CFG::M2_COP == 0, "F/D vs M2_*P");
   static_assert(CFG::Q_CIP == CFG::O_CIP && CFG::Q_COP == CFG::O_COP
                     && CFG::R_CIP == CFG::O_CIP && CFG::A_COP == CFG::O_COP
                     && CFG::NL_P == CFG::O_CIP,

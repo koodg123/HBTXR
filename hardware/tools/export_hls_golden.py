@@ -373,9 +373,12 @@ def build_block(streams: list[tuple[list[int], int]], cfg: dict, dtype: QuantDty
     ln2_in = [rescale(r, attn_residual.scale_out, s_ln2, dtype=dtype) for r in residual]
     norm2 = _layernorm_payload(every(ln2_in), dim, s_ln2, dtype.bits, rng)
 
+    normed2 = [norm2.apply(v) for v in ln2_in]
+    tap["ln2_x"], tap["ln2_y"] = ln2_in[0], normed2[0]
+
     fc1 = linear(ff, dim, norm2.output_scale * _NUDGE[0])
-    fc1_in = [_rows(rescale(norm2.apply(v), norm2.output_scale, fc1.input_scale, dtype=dtype),
-                    dim) for v in ln2_in]
+    fc1_in = [_rows(rescale(v, norm2.output_scale, fc1.input_scale, dtype=dtype), dim)
+              for v in normed2]
     s_hidden = _grid(every([_flat(_linear_acc(fc1, v)) for v in fc1_in]),
                      max(fc1.out_scale(oc) for oc in range(ff)), dtype)
     hidden = [_flat(_linear(fc1, v, s_hidden, dtype)) for v in fc1_in]
@@ -392,6 +395,7 @@ def build_block(streams: list[tuple[list[int], int]], cfg: dict, dtype: QuantDty
     s_mlp = _grid(every([_flat(_linear_acc(fc2, v)) for v in fc2_in]),
                   max(fc2.out_scale(oc) for oc in range(dim)), dtype)
     mlp_out = [_flat(_linear(fc2, v, s_mlp, dtype)) for v in fc2_in]
+    tap["fc2_y"] = mlp_out[0]
     mlp_residual = AddSpec(attn_residual.scale_out, s_mlp,
                            _sum_grid(every(residual), attn_residual.scale_out,
                                      every(mlp_out), s_mlp, dtype))
@@ -741,6 +745,8 @@ def emit(dest: Path, mode: str, bits: int, seed: int) -> tuple[Path, dict]:
         w.put(f"{name}_rsqrt_table", ln.rsqrt_table, f"[{ENTRIES['rsqrt']}]", "int16")
     w.put("ln1_x", tap["ln1_x"], f"[{tokens},{dim}]", "on norm1.input_scale")
     w.put("ln1_y", tap["ln1_y"], f"[{tokens},{dim}]", "expected")
+    w.put("ln2_x", tap["ln2_x"], f"[{tokens},{dim}]", "on norm2.input_scale")
+    w.put("ln2_y", tap["ln2_y"], f"[{tokens},{dim}]", "expected")
 
     w.put("softmax_scalars", spec.softmax.scalars, "[14]",
           "b1 s1 bound1 | b2/s2/bound2/b3/s3 per recip segment | clamp_bits")
@@ -786,6 +792,7 @@ def emit(dest: Path, mode: str, bits: int, seed: int) -> tuple[Path, dict]:
     w.put("mha_x", x_int, f"[{tokens},{dim}]", "block input")
     w.put("mha_y", tap["mha_y"], f"[{tokens},{dim}]", "attention sublayer incl. residual merge")
     w.put("mlp_x", tap["mlp_x"], f"[{tokens},{dim}]", "= mha_y")
+    w.put("fc2_y", tap["fc2_y"], f"[{tokens},{dim}]", "MLP branch before the residual merge")
     w.put("mlp_y", tap["mlp_y"], f"[{tokens},{dim}]", "MLP sublayer incl. residual merge")
     w.put("block_x", x_int, f"[{tokens},{dim}]", "block input")
     w.put("block_y", golden, f"[{tokens},{dim}]", "replay_block_int — the S8 reference")

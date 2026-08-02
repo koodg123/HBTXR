@@ -50,6 +50,26 @@ inline typename CFG::nl_t gelu(X x, const typename CFG::nl_t table[ENTRIES], int
   return table[lut_index(raw, bound)];
 }
 
+/// GeLU over a stream. Pointwise, so unlike LayerNorm and softmax it buffers nothing.
+///
+/// The output beat carries `nl_t`, not the activation width: narrowing to the next
+/// operand's grid is the requant on the edge after this, not the table.
+template <class CFG, int ENTRIES, class IN_BEAT, class OUT_BEAT>
+void gelu_stream(hls::stream<IN_BEAT> &in, hls::stream<OUT_BEAT> &out, int beats, int lanes,
+                 const typename CFG::nl_t table[ENTRIES], int b, int s, int bound) {
+#pragma HLS INLINE off
+gelu_beats:
+  for (int i = 0; i < beats; ++i) {
+#pragma HLS pipeline II = 1
+    const IN_BEAT v = in.read();
+    OUT_BEAT y;
+    for (int l = 0; l < lanes; ++l)
+#pragma HLS unroll
+      y[l] = gelu<CFG, ENTRIES>(v[l], table, b, s, bound);
+    out.write(y);
+  }
+}
+
 }  // namespace hbtxr
 
 #endif  // HBTXR_LUT_HPP

@@ -20,9 +20,11 @@ sh hardware/build/run_tb.sh rmu          # 하나
 | `include/hbtxr_layernorm.hpp` | 정수 LayerNorm (7 scalar, rsqrt 1세그먼트) |
 | `include/hbtxr_softmax.hpp` | 정수 Softmax (14 scalar, reciprocal 2세그먼트) |
 | `include/hbtxr_mha_core.hpp` | **MHA Core** — 9단계 체인 |
+| `include/hbtxr_mlp_core.hpp` | **MLP Core** — 6단계. SMU·score buffer·reorder **없음** |
+| `tb/hbtxr_load.hpp` | 페이로드 적재 공용. tb 3개가 같은 블록을 읽습니다 |
 | `tb/hbtxr_probe.hpp` | 스테이지 프로브 — 비교 · **배수 단언** · **골든 재충전**. tb 전용 |
 | `tb/hbtxr_golden.hpp` | 골든 `.txt` 리더 + 비교 + 음성 대조. **tb 전용** |
-| `tb/tb_{requant,gelu,layernorm,rmu,smu,softmax,mha}.cpp` | V1 테스트벤치 7개 |
+| `tb/tb_{requant,gelu,layernorm,rmu,smu,softmax,mha,mlp,block}.cpp` | V1 테스트벤치 9개 |
 
 `src/` 는 S4(코어)부터입니다. `golden/` 은 쓰지 않습니다 — 골든은 생성물이라
 `hardware/workspace/golden/` 에 있습니다.
@@ -59,6 +61,12 @@ SMU out  v[p*COP + c] = 행   t0+p, 열         j0+c
 넓은 타입으로 먼저 캐스팅하고 곱하면 **그 넓은 타입들의** 합만큼 곱셈기를 요구합니다.
 5곳에서 걸렸습니다 — requant(54×54→108), LN 의 mean·variance·affine, softmax 의 `e*recip`.
 **항상 좁은 피연산자끼리 곱하고 결과 타입을 유도**합니다.
+
+## 두 코어 사이에는 이음새가 없습니다
+
+`tb_block` 이 처음으로 그걸 시험하고, 답은 **requant 가 없다**입니다 — MLP 코어의 입력 포트가
+곧 attention residual 의 출력 격자라 `mlp_x == mha_y` 입니다. 여기에 브리지를 넣으면
+최적화가 아니라 **버그**이고, 골든이 그렇게 말합니다.
 
 ## 프로브가 첫 실패 지점을 특정합니다
 
