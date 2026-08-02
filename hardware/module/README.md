@@ -21,10 +21,11 @@ sh hardware/build/run_tb.sh rmu          # 하나
 | `include/hbtxr_softmax.hpp` | 정수 Softmax (14 scalar, reciprocal 2세그먼트) |
 | `include/hbtxr_mha_core.hpp` | **MHA Core** — 9단계 체인 |
 | `include/hbtxr_mlp_core.hpp` | **MLP Core** — 6단계. SMU·score buffer·reorder **없음** |
+| `include/hbtxr_patch_embed.hpp` | **Patch Embedding** — line buffer + windower + PE 배열 |
 | `tb/hbtxr_load.hpp` | 페이로드 적재 공용. tb 3개가 같은 블록을 읽습니다 |
 | `tb/hbtxr_probe.hpp` | 스테이지 프로브 — 비교 · **배수 단언** · **골든 재충전**. tb 전용 |
 | `tb/hbtxr_golden.hpp` | 골든 `.txt` 리더 + 비교 + 음성 대조. **tb 전용** |
-| `tb/tb_{requant,gelu,layernorm,rmu,smu,softmax,mha,mlp,block}.cpp` | V1 테스트벤치 9개 |
+| `tb/tb_{requant,gelu,layernorm,rmu,smu,softmax,patch,mha,mlp,block}.cpp` | V1 테스트벤치 10개 |
 
 `src/` 는 S4(코어)부터입니다. `golden/` 은 쓰지 않습니다 — 골든은 생성물이라
 `hardware/workspace/golden/` 에 있습니다.
@@ -61,6 +62,21 @@ SMU out  v[p*COP + c] = 행   t0+p, 열         j0+c
 넓은 타입으로 먼저 캐스팅하고 곱하면 **그 넓은 타입들의** 합만큼 곱셈기를 요구합니다.
 5곳에서 걸렸습니다 — requant(54×54→108), LN 의 mean·variance·affine, softmax 의 `e*recip`.
 **항상 좁은 피연산자끼리 곱하고 결과 타입을 유도**합니다.
+
+## 패치 임베딩의 PE 배열은 **RMU 입니다**
+
+`kernel == stride == patch` 라 윈도우가 겹치지 않고, **im2col 이 순수 주소 계산**입니다.
+그래서 conv 가 `[tokens, Cin·K·K] × [D, Cin·K·K]ᵀ` matmul 이고, SPEC §5-3 의
+"Do 개 PE, PE당 K·K·Ui 곱셈기" 가 그 matmul 의 PE 배열입니다. **스템 고유는 windower 뿐**입니다.
+
+공유하지 않는 것 둘:
+
+- **누산기.** 8비트 피연산자 × `Cin·K·K` 탭 = **25비트** 로 코어의 20비트에 안 들어갑니다.
+  골든 실측은 20비트에 **들어가고**, 그게 함정입니다 — 측정값으로 타입을 잡으면 오늘 모든
+  테스트를 통과하고 실데이터에서 wrap 합니다. `HbtxrRmu` 의 `static_assert` 가 실제로
+  좁히기를 **컴파일 단계에서 거부**하는 것을 확인했습니다
+- **입력 격자가 비대칭.** 진짜 0 이 zero-point 라 창마다 `- zp·Σw` 가 붙는데, 출력채널별
+  상수라 **RMU 가 이미 더하는 bias 에 접힙니다** — 상주 숫자 하나, 런타임 뺄셈 없음
 
 ## 두 코어 사이에는 이음새가 없습니다
 

@@ -74,6 +74,19 @@ struct HbtxrCfgBase {
 /// Track path: the SAME backbone weights, fewer tokens (SPEC §7).
 struct HbtxrCfgTrack : HbtxrCfgBase { static constexpr int N = 16; };
 
+/// Patch-embedding stem: 8-bit, so it needs a WIDER accumulator than the 4-bit cores.
+///
+/// Measured on the golden, the stem's accumulator peaks at 20 bits and would fit the
+/// shared `ap_int<20>` — and that is exactly the trap SPEC §3 describes. The worst case
+/// is `8 + 8 + clog2(Cin*K*K)` = 25 bits for Conv-E, reachable with saturated pixels and
+/// aligned weights, so sizing from the measurement passes every test today and wraps on
+/// real data. The formula sizes the type; the measurement only says the margin is real.
+struct HbtxrCfgPatch : HbtxrCfgBase {
+  using act_t = ap_uint<8>;    // pixels are UNSIGNED with a zero-point, not int8
+  using w_t   = ap_int<8>;
+  using acc_t = ap_int<27>;    // 25 + margin
+};
+
 // --- checks that hold for any config -----------------------------------------
 // Per-stage reduction widths are asserted inside the unit that knows its own CI.
 template <class CFG>

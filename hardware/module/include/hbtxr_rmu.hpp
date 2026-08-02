@@ -26,7 +26,9 @@ namespace hbtxr {
 /// CIP/COP/TP are named template parameters, never positional — the reference took 126
 /// parameters of which 76 were plain `int`, so a swapped slot compiled and c-simulated
 /// clean and only surfaced in cosim.
-template <class CFG, int CI, int CO, int CIP, int COP>
+/// `OUT` defaults to the activation type but is not always it: the patch-embedding stem
+/// reads uint8 pixels and writes 4-bit residual-stream tokens.
+template <class CFG, int CI, int CO, int CIP, int COP, class OUT = typename CFG::act_t>
 struct HbtxrRmu {
   static constexpr int TP = CFG::TP;
   typedef typename CFG::act_t act_t;
@@ -40,7 +42,7 @@ struct HbtxrRmu {
   static_assert(is_pow2(CIP) && is_pow2(COP) && is_pow2(TP), "factors must be powers of two");
 
   typedef hls::vector<act_t, TP * CIP> in_beat_t;
-  typedef hls::vector<act_t, TP * COP> out_beat_t;
+  typedef hls::vector<OUT, TP * COP> out_beat_t;
 
   // Resident state. The reshape factor MUST equal the unroll factor and the stream lane
   // count — three numbers, one value (SPEC §2-A). It is `array_reshape`, not
@@ -119,7 +121,7 @@ struct HbtxrRmu {
 #pragma HLS unroll
           for (int c = 0; c < COP; ++c)
 #pragma HLS unroll
-            y[p * COP + c] = requant<CFG, act_t>(acc[p][c], mult[o0 + c], shift[o0 + c]);
+            y[p * COP + c] = requant<CFG, OUT>(acc[p][c], mult[o0 + c], shift[o0 + c]);
         out.write(y);
       }
     }
