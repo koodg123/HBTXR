@@ -23,10 +23,21 @@ namespace hbtxr {
 /// folding happens in `algorithm/quantization`, and it is folded rather than applied as a
 /// separate multiply because in hardware it is not a separate multiply (SPEC §5-1).
 ///
+/// `TRANSPOSE_B` picks which of the two attention matmuls this is, at COMPILE time — a
+/// runtime branch here would violate the dataflow canonical form (SPEC §3-A):
+///
+///   Q x K^T   TRANSPOSE_B = true   B arrives as [cols][K], reduction over the head dim
+///   S x V     TRANSPOSE_B = false  B arrives as [K][cols], reduction over tokens
+///
+/// Only the LOAD differs. B lands in `bt[col][k]` either way, so the MAC array is one
+/// piece of hardware serving both.
+///
 /// Beat layout:
-///   a, b  `v[p * CIP + c]` = row `t0 + p`, reduction channel `k0 + c`
+///   a     `v[p * CIP + c]` = row `t0 + p`, reduction channel `k0 + c`
+///   b     transposed: row `t0 + p`, channel `k0 + c`; plain: reduction row `k0 + p`,
+///         column `j0 + c`
 ///   out   `v[p * COP + c]` = row `t0 + p`, column `j0 + c`
-template <class CFG, int K, int ROWS_MAX, int CIP, int COP>
+template <class CFG, int K, int ROWS_MAX, int CIP, int COP, bool TRANSPOSE_B = true>
 struct HbtxrSmu {
   static constexpr int TP = CFG::TP;
   typedef typename CFG::act_t act_t;
@@ -46,28 +57,42 @@ struct HbtxrSmu {
 #pragma HLS array_reshape variable = bt cyclic factor = CIP dim = 2
 
   void run(hls::stream<in_beat_t> &a, hls::stream<in_beat_t> &b,
-           hls::stream<out_beat_t> &out, int rows, ap_uint<CFG::REQ_M_BITS> mult,
-           ap_uint<5> shift) {
+           hls::stream<out_beat_t> &out, int rows, int cols, int kdim,
+           ap_uint<CFG::REQ_M_BITS> mult, ap_uint<5> shift) {
 #pragma HLS INLINE off
     // --- B first, in full. This is the token-global dependency. ---
   load_b:
-    for (int t0 = 0; t0 < rows; t0 += TP)
-      for (int k0 = 0; k0 < K; k0 += CIP) {
+    if (TRANSPOSE_B) {
+      for (int t0 = 0; t0 < cols; t0 += TP)
+        for (int k0 = 0; k0 < kdim; k0 += CIP) {
 #pragma HLS pipeline II = 1
-        const in_beat_t v = b.read();
-        for (int p = 0; p < TP; ++p)
+          const in_beat_t v = b.read();
+          for (int p = 0; p < TP; ++p)
 #pragma HLS unroll
-          for (int c = 0; c < CIP; ++c)
+            for (int c = 0; c < CIP; ++c)
 #pragma HLS unroll
-            bt[t0 + p][k0 + c] = v[p * CIP + c];
-      }
+              bt[t0 + p][k0 + c] = v[p * CIP + c];
+        }
+    } else {
+      // B is [K][cols]; the write transposes so the MAC array still sees bt[col][k].
+      for (int k0 = 0; k0 < kdim; k0 += TP)
+        for (int j0 = 0; j0 < cols; j0 += CIP) {
+#pragma HLS pipeline II = 1
+          const in_beat_t v = b.read();
+          for (int p = 0; p < TP; ++p)
+#pragma HLS unroll
+            for (int c = 0; c < CIP; ++c)
+#pragma HLS unroll
+              bt[j0 + c][k0 + p] = v[p * CIP + c];
+        }
+    }
 
   row_tile:
     for (int t0 = 0; t0 < rows; t0 += TP) {
       act_t at[TP][K];
 #pragma HLS array_reshape variable = at cyclic factor = CIP dim = 2
     fill_a:
-      for (int k0 = 0; k0 < K; k0 += CIP) {
+      for (int k0 = 0; k0 < kdim; k0 += CIP) {
 #pragma HLS pipeline II = 1
         const in_beat_t v = a.read();
         for (int p = 0; p < TP; ++p)
@@ -78,7 +103,7 @@ struct HbtxrSmu {
       }
 
     col_tile:
-      for (int j0 = 0; j0 < rows; j0 += COP) {
+      for (int j0 = 0; j0 < cols; j0 += COP) {
         acc_t acc[TP][COP];
 #pragma HLS array_partition variable = acc complete dim = 0
         for (int p = 0; p < TP; ++p)

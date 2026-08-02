@@ -37,8 +37,11 @@ struct HbtxrCfgBase {
   static constexpr int TP    = 4;               // token parallelism, one number design-wide
   static constexpr int O_CIP = 8, O_COP = 8;    // output-projection RMU
   static constexpr int R_CIP = 8, R_COP = 8;    // relation SMU (Q x K^T)
+  static constexpr int Q_CIP = 8, Q_COP = 8;    // qkv projection RMU
+  static constexpr int A_CIP = 8, A_COP = 8;    // attention SMU (S x V)
   static constexpr int NL_P  = 8;               // lanes of a pointwise / row-wise op
-  // qkv / attention / MLP pairs arrive with the stages that instantiate them (S4, S5).
+  // Every factor is 8, so every act_t beat in the MHA core is TP*8 = 32 lanes and no
+  // width adapter is needed between stages. The MLP pair arrives with S5.
 
   // --- numeric system (SPEC §3) --------------------------------------------
   using act_t = ap_int<4>;     // MHA / MLP activations
@@ -83,6 +86,12 @@ struct HbtxrCfgCheck {
   static_assert(CFG::N % CFG::TP == 0, "N must divide into whole token tiles");
   static_assert(CFG::D % CFG::O_CIP == 0 && CFG::D % CFG::O_COP == 0, "D vs O_*P");
   static_assert(CFG::HD % CFG::R_CIP == 0, "HD vs R_CIP");
+  static_assert(CFG::D % CFG::Q_CIP == 0 && (3 * CFG::D) % CFG::Q_COP == 0, "D vs Q_*P");
+  static_assert(CFG::N % CFG::A_CIP == 0 && CFG::HD % CFG::A_COP == 0, "N/HD vs A_*P");
+  static_assert(CFG::Q_CIP == CFG::O_CIP && CFG::Q_COP == CFG::O_COP
+                    && CFG::R_CIP == CFG::O_CIP && CFG::A_COP == CFG::O_COP
+                    && CFG::NL_P == CFG::O_CIP,
+                "the MHA core assumes one lane count end to end -- see the note above");
   static_assert(CFG::REQ_N_MAX < 32, "the shift must fit ap_uint<5>");
 };
 

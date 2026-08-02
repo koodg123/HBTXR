@@ -19,8 +19,10 @@ sh hardware/build/run_tb.sh rmu          # 하나
 | `include/hbtxr_lut.hpp` | PoT 커서 + GeLU. **커서는 signed·클램프 전 범위** |
 | `include/hbtxr_layernorm.hpp` | 정수 LayerNorm (7 scalar, rsqrt 1세그먼트) |
 | `include/hbtxr_softmax.hpp` | 정수 Softmax (14 scalar, reciprocal 2세그먼트) |
+| `include/hbtxr_mha_core.hpp` | **MHA Core** — 9단계 체인 |
+| `tb/hbtxr_probe.hpp` | 스테이지 프로브 — 비교 · **배수 단언** · **골든 재충전**. tb 전용 |
 | `tb/hbtxr_golden.hpp` | 골든 `.txt` 리더 + 비교 + 음성 대조. **tb 전용** |
-| `tb/tb_{requant,gelu,layernorm,rmu,smu,softmax}.cpp` | V1 테스트벤치 6개 |
+| `tb/tb_{requant,gelu,layernorm,rmu,smu,softmax,mha}.cpp` | V1 테스트벤치 7개 |
 
 `src/` 는 S4(코어)부터입니다. `golden/` 은 쓰지 않습니다 — 골든은 생성물이라
 `hardware/workspace/golden/` 에 있습니다.
@@ -57,6 +59,15 @@ SMU out  v[p*COP + c] = 행   t0+p, 열         j0+c
 넓은 타입으로 먼저 캐스팅하고 곱하면 **그 넓은 타입들의** 합만큼 곱셈기를 요구합니다.
 5곳에서 걸렸습니다 — requant(54×54→108), LN 의 mean·variance·affine, softmax 의 `e*recip`.
 **항상 좁은 피연산자끼리 곱하고 결과 타입을 유도**합니다.
+
+## 프로브가 첫 실패 지점을 특정합니다
+
+각 스테이지 경계에서 **비교 → 스트림이 비었는지 단언 → 골든으로 재충전**을 합니다.
+재충전이 핵심입니다: 앞 단계 오류가 뒤로 전파되면 프로브가 전부 빨개져서 **어디가 원인인지
+알 수 없습니다.**
+
+`tb_mha` 가 이걸 고장 주입으로 확인합니다 — `e02` 승수를 2배로 만들면 **7개 중 1개**
+(`qkv_x`)만 발화하고 위아래는 통과합니다.
 
 ## 완료 조건
 

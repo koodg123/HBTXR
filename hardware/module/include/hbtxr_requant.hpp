@@ -2,7 +2,10 @@
 #ifndef HBTXR_REQUANT_HPP
 #define HBTXR_REQUANT_HPP
 
+#include <type_traits>
+
 #include <ap_int.h>
+#include <hls_stream.h>
 
 #include "hbtxr_config.hpp"
 
@@ -51,6 +54,56 @@ OUT requant(ACC acc, ap_uint<CFG::REQ_M_BITS> mult, ap_uint<5> shift) {
   if (shifted < qrange<OUT>::lo) return OUT(qrange<OUT>::lo);
   if (shifted > qrange<OUT>::hi) return OUT(qrange<OUT>::hi);
   return OUT(shifted);
+}
+
+/// An edge between two stages: one per-tensor requant, lane by lane.
+///
+/// Most of the block's 18 requants are this — the per-channel ones belong to the matmul
+/// that produced the accumulator, and live inside its unit.
+template <class CFG, class IN_BEAT, class OUT_BEAT, class ACC>
+void requant_stream(hls::stream<IN_BEAT> &in, hls::stream<OUT_BEAT> &out, int beats,
+                    int lanes, ap_uint<CFG::REQ_M_BITS> mult, ap_uint<5> shift) {
+#pragma HLS INLINE off
+  // hls::vector::operator[] returns a REFERENCE, so decltype alone gives `T&` and every
+  // trait lookup fails on it. decay is what makes the lane's value type.
+  typedef std::decay_t<decltype(std::declval<OUT_BEAT &>()[0])> out_lane_t;
+edge:
+  for (int i = 0; i < beats; ++i) {
+#pragma HLS pipeline II = 1
+    const IN_BEAT v = in.read();
+    OUT_BEAT y;
+    for (int l = 0; l < lanes; ++l)
+#pragma HLS unroll
+      y[l] = requant<CFG, out_lane_t>(ACC(v[l]), mult, shift);
+    out.write(y);
+  }
+}
+
+/// The residual join: align both sides onto the output grid, add, clamp.
+///
+/// `i_block._add` — and the clamp after the add is part of it, not an afterthought.
+template <class CFG, class BEAT, class ACC>
+void residual_merge(hls::stream<BEAT> &a, hls::stream<BEAT> &b, hls::stream<BEAT> &out,
+                    int beats, int lanes, ap_uint<CFG::REQ_M_BITS> ma, ap_uint<5> sa,
+                    ap_uint<CFG::REQ_M_BITS> mb, ap_uint<5> sb) {
+#pragma HLS INLINE off
+  typedef std::decay_t<decltype(std::declval<BEAT &>()[0])> lane_t;
+merge:
+  for (int i = 0; i < beats; ++i) {
+#pragma HLS pipeline II = 1
+    const BEAT va = a.read(), vb = b.read();
+    BEAT y;
+    for (int l = 0; l < lanes; ++l) {
+#pragma HLS unroll
+      const lane_t x = requant<CFG, lane_t>(ACC(va[l]), ma, sa);
+      const lane_t z = requant<CFG, lane_t>(ACC(vb[l]), mb, sb);
+      const ap_int<lane_t::width + 1> s = ap_int<lane_t::width + 1>(x) + z;
+      y[l] = s < qrange<lane_t>::lo   ? lane_t(qrange<lane_t>::lo)
+             : s > qrange<lane_t>::hi ? lane_t(qrange<lane_t>::hi)
+                                      : lane_t(s);
+    }
+    out.write(y);
+  }
 }
 
 }  // namespace hbtxr

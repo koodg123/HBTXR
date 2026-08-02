@@ -63,7 +63,7 @@ int main(int argc, char **argv) {
         a.write(v);
       }
 
-    smu.run(a, b, out, tokens, mult[0], shift[0]);
+    smu.run(a, b, out, tokens, tokens, HD, mult[0], shift[0]);
 
     for (int t0 = 0; t0 < tokens; t0 += TP)
       for (int j0 = 0; j0 < tokens; j0 += COP) {

@@ -19,8 +19,8 @@
 | **S1** | 골든 생성기 [`tools/export_hls_golden.py`](../tools/export_hls_golden.py) | ✅ **완료** |
 | **S2** | RMU · SMU | ✅ **완료** — tb 3개 PASS |
 | **S3** | 비선형 LUT (RSQRT64·EXP32·RECIP128·GeLU32, 전부 16b) | ✅ **완료** — tb 3개 PASS |
-| **S4** | MHA Core (9단계) | ⬜ **다음** |
-| **S5** | MLP Core (6단계) | ⬜ |
+| **S4** | MHA Core (9단계) | ✅ **완료** — 9단계 체인 + 스테이지 프로브 7개 |
+| **S5** | MLP Core (6단계) | ⬜ **다음** |
 | **S6** | Patch Embedding (Conv-F/Conv-E + shuffler) | ⬜ |
 | **S7** | Global Buffer · interconnect · Weight Prefetcher · Controller | ⬜ |
 | **S8** | 4코어 cyclic top + mode별 terminal decode | ⬜ |
@@ -51,9 +51,11 @@ vitis_hls -f hardware/build/hls/<blk>_csim.tcl    # V2  S8 부터
 | `tb_gelu` | `gelu_y` (`table_quantize`) | 49,152 값 + 포화 직접 검증 |
 | `tb_layernorm` | `ln1_y` (7-scalar 커널) | 12,288 값 |
 | `tb_softmax` | `softmax_y` (14-scalar, 2세그먼트) | 12,288 값 · **두 세그먼트 다 사용** |
+| `tb_mha` | `mha_y` (9단계 전체) | 12,288 값 · **스테이지 프로브 7개** + 고장 주입 |
 
-전부 **원소별 `==` + 스트림 배수 + 음성 대조**. 같은 바이너리가 track 골든(`N=16`)도
-통과합니다 — 공유 백본의 런타임 토큰 수가 실제로 동작합니다.
+전부 **원소별 `==` + 스트림 배수 + 음성 대조**. 러너가 **모든 tb 를 두 토큰 수로** 돌립니다
+(search `N=64` · track `N=16`, 같은 바이너리) — 공유 백본이 주장이지 한쪽만 되는 게 아니니까요.
+클린 트리에서 **13개 실행 전부 PASS**.
 
 ## Blocked
 
@@ -83,6 +85,7 @@ Pupil Ellipse 두 개만 냅니다. 배포 모델(`HybridModel`)에는 셋 다 �
 
 | 날짜 | 내용 |
 |---|---|
+| 2026-07-31 | **S4** MHA Core — 9단계 체인 PASS. 스테이지 프로브(비교·배수·재충전) 도입, 고장 주입으로 국소화 확인 |
 | 2026-07-31 | **S3** 비선형 LUT — GeLU·LayerNorm·Softmax tb PASS. `exp`/`recip` 는 **unsigned**, `lnb` 는 30b 임을 실측 |
 | 2026-07-31 | **S2** RMU · SMU · requant — tb 3개 PASS. 첫 HLS 구현이 골든을 통과했습니다 |
 | 2026-07-31 | **S1+** 모델 전체 골든 — 두 스템·**공유** 블록 스택·두 헤드, 논문 비트폭. 공유 백본 제약 3건·`anchor` 포트 누락 발견 |
