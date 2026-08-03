@@ -1,0 +1,17 @@
+# `core.autocrlf = true` with no attributes file meant every fresh checkout on
+# Windows rewrote the shell scripts to CRLF, and `sh` rejects that outright:
+#
+#   hardware/build/run_tb.sh: 10: set: Illegal option -
+#
+# The blobs were always LF; the working tree was not. It surfaced when the HLS
+# rewrite merge checked `hardware/build/*.sh` out for the first time, but it was
+# never specific to those files — a clone of this repo on Windows could not run
+# any of them.
+*.sh text eol=lf
+
+# archive/ and references/ are frozen as found (DOC-CONVENTIONS §6). `-text`
+# disables EOL conversion entirely, so they check out byte-for-byte whatever was
+# committed — CRLF included, which ten of the archived scripts genuinely are.
+# Normalising them would be rewriting an archive.
+archive/**    -text
+references/** -text
