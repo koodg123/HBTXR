@@ -122,6 +122,60 @@ def test_dyadic_params_approximates(scale):
     assert abs(mult / (1 << shift) - eff) < 1e-12
 
 
+@pytest.mark.parametrize("scale", [0.0131, 0.5, 1.9, 0.002, 7.25, 1.149425, 1e-6, 3.0])
+def test_dyadic_multiplier_fits_its_port(scale):
+    """The multiplier is a hardware register, so it has to fit one.
+
+    Unbounded, the search lands on shift_max every time — the error falls monotonically —
+    so any ratio above 1 produces `round(scale * 2^31)`, 33 bits, and a 53-bit product
+    against a 20-bit accumulator. This is the bound that stops that.
+    """
+    from quantization.i_ops import DYADIC_MULT_BITS
+
+    mult, shift, _ = dyadic_params(scale)
+    assert mult.bit_length() <= DYADIC_MULT_BITS, f"{scale}: {mult} needs {mult.bit_length()} bits"
+    # The SHIFT is not what is bounded, and that distinction is the whole point: a small
+    # ratio still gets a large shift, which is what keeps the bound lossless.
+    assert 1 <= shift <= 31
+
+
+def test_dyadic_copy_matches_golden():
+    """`ilayers` keeps a hand copy of this kernel; the copy may not drift in VALUE.
+
+    The copy is deliberate — a reference that shares code with the thing it validates
+    proves less — but a different multiplier width there means the deployed kernel and the
+    golden are computing different functions, which is the one thing the copy must not buy.
+    """
+    from quantization.i_ops import DYADIC_MULT_BITS
+    from quantization.ilayers.int_functional import _DYADIC_MULT_BITS, _dyadic_params
+
+    assert _DYADIC_MULT_BITS == DYADIC_MULT_BITS
+    for scale in (0.0131, 0.5, 1.9, 0.002, 7.25, 1.149425, 1e-6, 1.0):
+        mult, shift, _ = dyadic_params(scale)
+        assert (mult, shift) == _dyadic_params(scale), scale
+
+
+def test_dyadic_bound_is_on_the_multiplier_not_the_shift():
+    """Capping the shift instead is the intuitive move and it is wrong.
+
+    `max(1, round(scale * 2^n))` bottoms out at 1, so a small ratio under a small
+    shift_max gets an effective ratio off by a factor — measured at 1.58e-02 max relative
+    error over the HLS golden, against 3.81e-06 for the multiplier bound.
+    """
+    tiny = 1e-6
+    mult, shift, eff = dyadic_params(tiny)
+    assert shift > 17, "a small ratio must keep its large shift"
+    # At a ratio this small the accuracy limit is shift_max, not wbits: the multiplier
+    # here is 11 bits of the 18 available. So the bound costs nothing at all, and the
+    # residual error is the same one the unbounded search had.
+    assert mult.bit_length() < 18
+    assert abs(eff - tiny) / tiny < 1e-3
+
+    # What a shift cap would have done instead.
+    _, _, capped = dyadic_params(tiny, shift_max=17, wbits=None)
+    assert abs(capped - tiny) / tiny > 1.0, "the shift cap should be visibly worse"
+
+
 # --- int_conv2d golden vs torch conv (integer-exact) -------------------------
 
 def test_int_conv2d_matches_torch_conv():

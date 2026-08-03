@@ -23,22 +23,50 @@ from quantization.scheme import clamp_int as clamp
 from quantization.scheme import quantize_clamp
 
 
-def dyadic_params(scale: float, *, shift_min: int = 1, shift_max: int = 31) -> tuple[int, int, float]:
+#: Width of the multiplier the requant unit is built for.
+#:
+#: NOT a tuning knob — it is the width of a hardware register, and leaving it unstated is
+#: how it became 33 bits. The search below is monotone: a larger shift always lowers the
+#: error, so an unbounded search lands on ``shift_max`` every time and any ratio above 1
+#: then needs ``round(scale * 2^31)``, which is 33 bits. Against a 20-bit accumulator that
+#: is a 53-bit product, and a DSP48E2 is 27x18.
+#:
+#: Bounding the MULTIPLIER rather than the shift is what makes this free. Capping the
+#: shift is the intuitive move and it is wrong: a small ratio genuinely needs a large
+#: shift, because ``max(1, round(scale * 2^n))`` bottoms out at 1 and the effective ratio
+#: is then off by a factor. Measured over the 1,932 requant pairs of the HLS golden,
+#: ``shift_max=17`` gives a max relative error of 1.58e-02 and changes every output
+#: vector, while ``wbits=16`` leaves the shift range at 2..28 and is BIT-IDENTICAL.
+#: 18 fits a DSP48E2's B port with two bits of margin over the measured-lossless point.
+#:
+#: See algorithm/docs/reports/2026-07-31-requant-multiplier-width.md.
+DYADIC_MULT_BITS = 18
+
+
+def dyadic_params(scale: float, *, shift_min: int = 1, shift_max: int = 31,
+                  wbits: int | None = DYADIC_MULT_BITS) -> tuple[int, int, float]:
     """Best ``(multiplier, shift, effective)`` with ``effective = multiplier / 2^shift``.
 
     Pure-int port of the HG-PIPE ``_dyadic_approx`` (references/): a float scale ratio
-    becomes an integer multiply + right shift for the HW requant unit.
+    becomes an integer multiply + right shift for the HW requant unit. ``wbits`` bounds
+    the multiplier; ``None`` restores the unbounded search, which is only useful for
+    showing what the bound costs.
     """
     if scale <= 0:
         raise ValueError("scale must be positive")
     best: tuple[float, int, int, float] | None = None
     for shift in range(shift_min, shift_max + 1):
         multiplier = max(1, round(scale * (1 << shift)))
+        if wbits is not None and multiplier.bit_length() > wbits:
+            continue                       # this shift does not fit the multiplier port
         effective = multiplier / float(1 << shift)
         error = abs(effective - scale)
         if best is None or error < best[0]:
             best = (error, multiplier, shift, effective)
-    assert best is not None
+    if best is None:
+        # Only reachable for a ratio so large that even shift_min overflows. Raise rather
+        # than clamp: a silently truncated multiplier computes a different function.
+        raise ValueError(f"scale {scale} needs more than {wbits} multiplier bits")
     return int(best[1]), int(best[2]), float(best[3])
 
 
