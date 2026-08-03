@@ -1,71 +1,59 @@
-> **작성** 2026-07-29 · **갱신** 2026-07-31
-> **상태** active — **M5-1 완료 (147/147 복사). 재지정은 실패해서 되돌렸습니다** (아래)
+> **작성** 2026-07-31 · **갱신** 2026-07-31
+> **상태** active
 > **소유** hardware
 
-# tools — 감사·검증·패키징 자동화
+# tools — 골든 생성
 
-```
-tools/         87  argparse 진입점
-└── tests/     60  + conftest.py (새로 쓴 유일한 파일)
-```
-
-출처 `archive/hardware/tools/` 87 + `archive/hardware/tests/` 60 — **147개, 해시 대조 미이관 0.**
-역할별 재배치(`_lib/ audit/ validate/ check/ package/ discover/`)는 **P2**입니다.
-빈 골격 디렉토리는 지웠습니다 — 채울 때 만듭니다.
-
-6개 디렉토리 어디에도 안 들어가서 7번째로 둡니다. 이들은 빌드도 배포도 아닌
-**프로세스 게이팅**입니다.
-
-## ⚠️ 이 사본으로는 테스트가 기준선에 못 미칩니다
-
-```
-archive  48 failed / 437 passed     ← 회귀 기준선
-새 트리  67 failed / 418 passed     ← 통과 19개 감소
+```bash
+sh hardware/build/make_golden.sh          # 8벌 전부 (23 초, 20 MB)
+sh hardware/build/make_golden.sh tiny-4   # 블록 하나
+sh hardware/build/make_golden.sh model    # 모델 전체, 논문 비트폭
 ```
 
-**이관 규칙대로 멈췄습니다.** `tools/`는 아직 **archive 사본이 정본**입니다.
+`export_hls_golden.py` 가 `algorithm/quantization` 정수 오라클로 골든 벡터를
+`hardware/workspace/golden/` 에 냅니다. **생성물이라 git 에 없습니다** — seed 로 재현됩니다.
+파일 목록과 계약은 [SPEC §9](../docs/SPEC.md).
 
-### 원인 — 도구와 테스트가 레이아웃을 **함께** 인코딩합니다
+## 두 가지 스코프
 
-M3-2가 `hardware/hls` → `module`, `configs` → `config/design`,
-`refs` → `module/golden` 으로 바꿨습니다. 그런데:
+| | 무엇 | 쓰는 곳 |
+|---|---|---|
+| `--scope block` | 블록 1개 + 스테이지 벡터(rmu·smu·ln·softmax·gelu) | **S2~S5** |
+| `--scope model` | **두 스템 · 공유 블록 스택 · 두 헤드** 전체 | **S8** |
 
-| | |
-|---|---|
-| 도구 **27개** | `ROOT / "hls" / "include" / …` 형태로 **구 경로를 조립**합니다 |
-| 그 테스트들 | 같은 구 경로로 픽스처를 만들고 **그 경로를 단언**합니다 |
+모델 스코프는 논문 비트폭을 그대로 씁니다 — `--bits 4`(MHA·MLP) ·
+`--seam-bits 4`(스템 출력·잔차 스트림) · `--head-bits 8`(final norm·pooling·헤드).
+**백본은 공유**입니다: search 가 `B₁:₈`, track 이 `B₁:₄` 를 **같은 가중치로** 돕니다
+([SPEC §7](../docs/SPEC.md)).
 
-**한쪽만 고치면 더 나빠집니다.** 실제로 도구 29개를 재지정했더니 67 → **83 failed**가
-됐습니다. 되돌렸습니다.
+## 알아둘 것
 
-> M3-2 때 tcl 재지정이 기계적 sed로 끝난 것과 다릅니다. tcl은 **경로를 소비만** 했고,
-> 여기는 도구와 테스트가 **같은 레이아웃 가정을 양쪽에서** 들고 있습니다.
+- **stdlib 만 씁니다.** 이 머신에도 WSL 에도 numpy·torch 가 없고, `i_ops`/`i_block` 은
+  바로 그래서 의존성 없이 쓰였습니다. `lut_calibrate`·`int_calibrate*`·`export*` 는
+  전부 numpy 라 못 씁니다.
+- **`quantization/__init__.py` 를 우회합니다.** 거기서 torch 백엔드 캘리브레이터를 즉시
+  import 하기 때문에, 패키지를 거치면 의존성 없는 모듈 두 개를 쓰려고 torch 를 끌어옵니다.
+- **페이로드는 캘리브레이션이 아니라 seed 데이터의 관측 범위에 맞춘 것**입니다 —
+  이 레포에 체크포인트가 없습니다. V1 이 재는 것은 **정확도가 아니라 데이터패스 동일성**
+  (HLS 정수 == 파이썬 정수)이라 이걸로 충분합니다. 체크포인트와 export 덤프가 생기면
+  `build_block` 을 manifest 리더로 바꿉니다 — **파일 레이아웃이 계약이고 그건 안 바뀝니다.**
 
-→ 도구와 테스트를 **함께** 재지정해야 하고, 그건 **P2(패키지화)**의 일입니다.
-P2가 `sys.path` 조작 70곳을 없애면서 경로 계산을 한 곳으로 모읍니다.
+## 프리셋
 
-### `conftest.py` — 새로 쓴 유일한 파일
+| 블록 스코프 | 토큰 | `D` | `F` | 용도 |
+|---|---:|---:|---:|---|
+| `search-4` `search-8` | 64 | 192 | 768 | search 경로 크기의 블록 |
+| `track-4` `track-8` | 16 | 192 | 768 | track 경로 크기의 블록 |
+| `tiny-4` `tiny-8` | 4 | 24 | 48 | 개발용 — 같은 그래프, 초 단위 |
 
-테스트가 `parents[1] / "tools"` 로 도구를 찾습니다. 구 트리에서 `tests/`와 `tools/`가
-**형제**였기 때문입니다. 새 트리는 `tests/`가 `tools/` **안**이라 그 경로가 빗나갑니다.
-**60개 파일을 고치는 대신** conftest 한 줄로 넣습니다 — 파일들은 archive와 바이트 동일을
-유지하고, `check_migration_manifest.py`의 증명이 살아 있습니다.
+`-4` / `-8` 은 MHA·MLP matmul 폭입니다. 블록 스코프에서 **두 벌이 필요한 이유**는
+[SPEC §3 혼합정밀](../docs/SPEC.md) — 블록 안에서는 오라클이 엣지별 dtype 을 표현하지 못해
+GeLU LUT 입력이 4비트에 눌립니다.
 
-`test_xr_accel_config_schema.py`는 `collect_ignore`입니다. 모듈 최상위에서
-`REPO/"hardware"/"tools"/…`를 조립해 **파일 경로로 import**하는데, 깊이가 한 단계 달라
-`hardware/hardware/…`가 되고 **수집 단계에서 전체 실행을 막습니다.**
-archive 사본에서는 수집은 되고 1건 실패합니다.
+| 모델 스코프 | 깊이 | cut | `D` | |
+|---|---:|---:|---:|---|
+| `model` | 8 | 4 | 192 | 논문 그대로. 13 초 · 9.8 MB |
+| `model-tiny` | 4 | 2 | 24 | `replay_model_int` 대조가 여기서 돕니다 |
 
-## M5에 남은 것 — 전부 한 덩어리입니다
-
-| | 왜 아직 안 했나 |
-|---|---|
-| 도구+테스트 경로 재지정 | 위 — **P2** |
-| `generated/` → `workspace/` (93곳) | 도구가 **339번** 읽습니다. 위와 같은 커밋이어야 갈라지지 않습니다 |
-| `.sh` 106개 CRLF 정규화 | `.gitattributes` 에 `*.sh text eol=lf` + `git add --renormalize`. 이관 검증과 섞으면 원인 분리가 안 됩니다 |
-| `deploy/hgtxr/test_hgtxr_overlay.py` 새 트리 복구 | `TOOLS_DIR`가 여기를 봅니다. 위가 풀리면 같이 풀립니다 |
-
----
-
-계획: [docs/plans/active/2026-07-29-hardware-reconstruction.md](../docs/plans/active/2026-07-29-hardware-reconstruction.md) ·
-대장: [docs/plans/active/2026-07-29-code-migration-manifest.md](../docs/plans/active/2026-07-29-code-migration-manifest.md)
+감사 스크립트는 여기 두지 않습니다.
+계획: [../docs/plans/active/2026-07-31-hls-rewrite-plan.md](../docs/plans/active/2026-07-31-hls-rewrite-plan.md)

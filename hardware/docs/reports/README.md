@@ -9,15 +9,17 @@
 
 | 리포트 | 내용 |
 |---|---|
+| [2026-08-03-s9-csynth.md](2026-08-03-s9-csynth.md) | **S9 csynth** — 데이터패스 315 MHz·II=1 확인, 자원 3.5배 초과. 무시되고 있던 pragma 2개 |
+| [2026-07-30-module-code-analysis.md](2026-07-30-module-code-analysis.md) | 구 모듈 코드 분석 |
 | [2026-07-29-hardware-census.md](2026-07-29-hardware-census.md) | **전수 semantic 검사** — 642 파일·285,261줄, 세 구현·생사 판정 |
+| [2026-06-16-deit-cyclic-verification.md](2026-06-16-deit-cyclic-verification.md) | DeiT cyclic 검증 |
+| [2026-06-17-cleanup.md](2026-06-17-cleanup.md) | 디렉토리 정리 기록 — **예외**, 아래 |
 
 **다중 보드 검증**은 여기 없습니다 →
 [references/vit-accel/MULTI-BOARD-VALIDATION.md](../references/vit-accel/MULTI-BOARD-VALIDATION.md).
 우리가 수행한 검증이 아니라 **선행 프로젝트의 것**입니다. 2026-07-29까지 이 표에
 `2026-06-16-multi-board-validation.md`로 올라와 있었는데, 그 파일은 ViT_Accel 문서에
 `ViT_Accel`→`XR_Accel` 한 줄을 치환한 사본이었습니다 (248줄 중 실질 차이 2줄).
-| [2026-06-16-deit-cyclic-verification.md](2026-06-16-deit-cyclic-verification.md) | DeiT cyclic 검증 |
-| [2026-06-17-cleanup.md](2026-06-17-cleanup.md) | 디렉토리 정리 기록 — **예외**, 아래 |
 
 ## `2026-06-17-cleanup.md`가 왜 여기 있나
 

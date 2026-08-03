@@ -72,6 +72,16 @@ third/DeepVOG/deepvog/model/DeepVOG_weights.h5
 
 # Python build artifacts (T-020 forbids build payloads in Git)
 build/
+# 단, hardware/build/ 는 소스입니다 (합성·비트스트림 스크립트). 위 규칙이 2026-07-31 까지
+# 이걸 조용히 삼켜서 M3 이관 44개가 git 에 한 건도 안 들어갔습니다.
+!hardware/build/
+!hardware/build/**
+# 반대로 hardware/workspace/ 아래 golden/ 과 tb/ 는 생성물입니다. golden 은 seed 로,
+# tb 는 컴파일로 재현됩니다. hardware/workspace/.gitignore 가 이미 `*` 로 막고 있지만
+# 여기에도 둡니다 — 워크스페이스를 통째로 지우면 그 파일도 같이 사라져서, 다음 커밋에
+# 바이너리가 딸려 들어갑니다. (한 번 겪었습니다.)
+hardware/workspace/golden/
+hardware/workspace/tb/
 dist/
 *.egg-info/
 

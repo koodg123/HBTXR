@@ -1,5 +1,0 @@
-target: zcu104
-part: xczu7ev-ffvc1156-2-e
-board: xilinx.com:zcu104:part0:1.1
-clock_period_ns: 5.0
-

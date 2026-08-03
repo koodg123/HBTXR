@@ -1,8 +1,0 @@
-{
-  "inherits": "configs/models/deit_tiny_baseline.json",
-  "name": "deit_tiny_baseline_cyclic",
-  "kind": "cyclic_deit",
-  "class_tokens": 1,
-  "output_packet_words": 1000,
-  "head_output_width": 32
-}

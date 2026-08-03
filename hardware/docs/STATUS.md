@@ -1,123 +1,123 @@
-> **작성** 2026-07-29 · **갱신** 2026-07-29
+> **작성** 2026-07-31 · **갱신** 2026-08-03
 > **상태** active
 > **소유** hardware
 
-# hardware STATUS
+# hardware STATUS — `feat/hls-rewrite`
 
-**이 파일이 "지금 무엇이 진행 중인가"의 단일 출처입니다.**
+**이 브랜치는 논문 §IV 구조를 HLS로 새로 구현합니다.** 이관이 아닙니다.
 
-> **트리가 둘입니다.** `hardware/`는 재구성 중이라 거의 비어 있고, 실제로 도는 코드는
-> [`archive/hardware/`](../../archive/hardware/)에 있습니다. 이 STATUS는 **재구성 작업**의
-> 상태이며, 구 트리의 상태는 [archive/hardware/docs/STATUS.md](../../archive/hardware/docs/STATUS.md)에
-> 그대로 보존되어 있습니다.
+> 이관 작업(M1~M5)과 구 코드 591개는 `rewrite/flat-functional` 브랜치에 있습니다.
+> `archive/hardware/`는 두 브랜치 모두에 있고 **조각을 가져올 원본**입니다.
 
 ---
 
 ## Active
 
-**hardware 재구성** — 문서 완료 · **복사 이관 5/5 완료** (325/325). **재지정은 M5-2가 미완**.
-계획: [plans/active/2026-07-29-hardware-reconstruction.md](plans/active/2026-07-29-hardware-reconstruction.md) ·
-대장: [plans/active/2026-07-29-code-migration-manifest.md](plans/active/2026-07-29-code-migration-manifest.md)
-
-| 디렉토리 | 상태 | 다음 |
+| 단계 | 내용 | 상태 |
 |---|---|---|
-| `config/` | ✅ **M1 완료** | 33/33. M5까지는 사본 — 도구는 아직 archive를 읽습니다 |
-| `module/` | ✅ **M2 완료 · M3에서 정본화** | 96/96. cyclic tb 3개 **PASS**. 정본 top 3개는 csim 미실행 |
-| `build/` | ✅ **M3 완료** | 42/42 + 경로 재지정. **`module/`이 정본**. tcl 자체는 미실행 (Vitis HLS 실행 필요) |
-| `deploy/` | ✅ **M4 완료** | 9/9. 재지정 불필요(경로가 전부 인자). 테스트 24개는 M5 후 |
-| `tools/` | 🟨 **M5-1 완료** | 147/147 복사. **재지정 실패·되돌림** — 새 트리 67 failed vs archive 48. archive 가 아직 정본 |
-| `docs/` | ✅ **완료 (D1~D5)** | 159개 전수 대조 완료 |
-| `workspace/` | ⬜ 골격만 | gitignore 정책 적용됨 |
+| **S0** | [SPEC.md](SPEC.md) + [ViT_Accel 참조 분석](references/2026-07-31-vit-accel-hls-analysis.md) | ✅ **완료** |
+| **S1** | 골든 생성기 [`tools/export_hls_golden.py`](../tools/export_hls_golden.py) | ✅ **완료** |
+| **S2** | RMU · SMU | ✅ **완료** — tb 3개 PASS |
+| **S3** | 비선형 LUT (RSQRT64·EXP32·RECIP128·GeLU32, 전부 16b) | ✅ **완료** — tb 3개 PASS |
+| **S4** | MHA Core (9단계) | ✅ **완료** — 9단계 체인 + 스테이지 프로브 7개 |
+| **S5** | MLP Core (6단계) | ✅ **완료** — 6단계 + **블록 전체** `block_y` 통과 |
+| **S6** | Patch Embedding (Conv-F/Conv-E + shuffler) | ✅ **완료** — 두 스템 PASS |
+| **S7** | Global Buffer · interconnect · Weight Prefetcher · Controller | ✅ **완료** — 8 TRB / 코어쌍 2개 |
+| **S8** | 4코어 cyclic top + mode별 terminal decode | ✅ **완료** — 이미지 in, 5개 out |
+| **S9** | csynth · 자원 리포트 | ✅ **완료** — 유닛 16개 · [리포트](reports/2026-08-03-s9-csynth.md) |
+| **S10** | dataflow 재구조화 · DSP 패킹 · 보드 인터페이스 | ⬜ **다음** |
 
-### 문서 이관 결과 (D1~D5, 2026-07-29)
+**S9 가 답을 셋 냈습니다** ([리포트](reports/2026-08-03-s9-csynth.md)):
 
 | | |
 |---|---|
-| `references/vit-accel/` | 30 — 선행 프로젝트. 이름·계층 정리, **내용 무편집**(27/30 바이트 동일) |
-| `experiments/` | **13캠페인 · 문서 77 · 데이터 84** |
-| `track/` | 6종 (구 21개에서 실험 12·핸드오프 4 분리) |
-| `handoff/` | 5 — 전부 만료 고지 부착 |
-| `plans/{active,done}/` | 9 (README 포함) — active 1 · done 7 |
-| `reports/` · `architecture/` · `snapshots/` | 4 · 2 · 12 (census 원자료 9 포함) |
-| `SPEC.md` `ARCHITECTURE.md` `MODULE-GUIDE.md` | 승격 |
+| 데이터패스 **300 MHz 닫힘** | 최악 3.176 ns (`smu_ctx`) = 315 MHz |
+| 연산 루프 **II=1 확인** | RMU·SMU 의 `reduce`, LayerNorm 3패스, requant `edge` |
+| 자원 **3.5배 초과** | 코어쌍 2 + 스템 2 + 헤드 2 = LUT **350%** · DSP **265%**. MHA 코어 **하나**가 LUT 98% |
 
-> `reports/2026-06-16-multi-board-validation.md`와 `plans/done/2026-07-15-xr-accel-execution-plan.md`는
-> **2026-07-29 삭제**했습니다. 우리 문서가 아니라 ViT_Accel 문서에 프로젝트명만 치환한
-> 사본이었습니다 ([references/README.md](references/README.md)).
+**셋째가 S10 의 입력입니다.** `push2d`/`pop2d` 가 MHA DSP 1,355 중 960개를 쓰는데,
+국소 수정 두 가지를 시도해 **둘 다 측정으로 기각**했습니다 — 단계가 `dataflow` 가 아니라
+완전 버퍼로 이어져 있는 것이 원인이라 재구조화가 필요합니다.
 
-**검증**: archive md 159개를 내용 해시로 대조해 미이관 0건.
+## 규칙
 
-`ARCHITECTURE.md`는 유일하게 새로 쓴 문서입니다 — 이관 대상이던
-`DIRECTORY_LAYOUT.md`가 **구 레이아웃**을 정의하고 있어 그대로 두면 즉시 거짓이 됩니다.
+- **완료 조건은 "골든과 원소별 일치" + "러너에 연결"** 입니다. "컴파일된다"가 아닙니다
+- **`hgtxr` 금지.** 새 코드는 `hbtxr` ([SPEC §0](SPEC.md))
+- **파일 통째 복사 금지.** 조각만, 출처 주석과 함께
+- **`HBTXR_FIXED_CSIM` 항상 켬.** float 폴백 없음
 
-> **D1~D5는 `.md`만 대상으로 했습니다.** P0의 전수 대장이 **데이터 11개 미이관**을
-> 찾아냈습니다 — 3개 캠페인이 `data/` 없이 문서만 있었고, census 원자료 9개는
-> `archive/`에 남아 있었습니다. 2026-07-29 보완 완료.
+## 검증 환경 (WSL)
+
+```bash
+sh hardware/build/make_golden.sh                  # 골든 (생성물, git 에 없음)
+sh hardware/build/run_tb.sh                       # V1  g++ + ap_int/hls::stream
+sh hardware/build/run_csynth.sh                   # V3  csynth 유닛 16개 (vitis_hls)
+python3 hardware/tools/report_csynth.py           # V3  자원 · 타이밍 · II 표
+```
+
+**V1 이 못 보는 것이 있습니다.** g++ 는 `#pragma HLS` 를 버리므로 **적용된 지시자와 무시된
+지시자를 구별하지 못합니다.** S9 의 첫 csynth 가 `array_reshape` 두 개가 여덟 단계 내내
+툴에 닿은 적 없었다는 것을 즉시 냈습니다 — 클래스 스코프 pragma 는 툴이 거부합니다.
+V2(csim)·V4(cosim)는 아직입니다.
+
+| tb | 대조 | 규모 |
+|---|---|---|
+| `tb_requant` | `i_ops.py:requant` 직접 | 3,733 케이스 · 출력 16/16 · 포화 35% |
+| `tb_rmu` | `rmu_y` (출력 프로젝션 `[192,192]`) | 12,288 값 |
+| `tb_smu` | `smu_y` (`Q×Kᵀ`, 3헤드) | 12,288 값 |
+| `tb_gelu` | `gelu_y` (`table_quantize`) | 49,152 값 + 포화 직접 검증 |
+| `tb_layernorm` | `ln1_y` (7-scalar 커널) | 12,288 값 |
+| `tb_softmax` | `softmax_y` (14-scalar, 2세그먼트) | 12,288 값 · **두 세그먼트 다 사용** |
+| `tb_mha` | `mha_y` (9단계 전체) | 12,288 값 · **프로브 7개** + 고장 주입 |
+| `tb_mlp` | `mlp_y` (6단계 전체) | 12,288 값 · **프로브 5개** + 고장 주입 |
+| `tb_patch` | `patch_y` (Conv-F · Conv-E) | 12,288 / 3,072 값 |
+| `tb_block` | **`block_y` — 블록 하나 통째** | 12,288 값 · **프로브 12개**(두 코어) |
+| `tb_backbone` | **`{search,track}_block_out` — 8 TRB** | 코어쌍 2개 재사용 · prefetch 태그 · 고장 주입 |
+| `tb_top` | **`{search,track}_head_y_acc` — 전체** | 이미지 in · 5개 out · 스테이지 12개 · 모드 전환 재현성 |
+
+전부 **원소별 `==` + 스트림 배수 + 음성 대조**. 러너가 **모든 tb 를 두 토큰 수로** 돌립니다
+(search `N=64` · track `N=16`, 같은 바이너리) — 공유 백본이 주장이지 한쪽만 되는 게 아니니까요.
+클린 트리에서 **21개 실행 전부 PASS** (`tb_backbone`·`tb_top` 은 자기 안에서 search·track·search 3회).
 
 ## Blocked
 
-| 항목 | 무엇이 막고 있나 | 누가 풀 수 있나 |
+| 항목 | 무엇이 막나 | 누가 |
 |---|---|---|
-| 보드 검증 (C3b smoke, AQ2 히스토그램) | ZCU104 물리 접근 | **사용자 승인** |
-| **`.sh` 106개가 CRLF 로 커밋됨** | WSL `sh` 가 `set -eu` + CR 에서 죽습니다. 셸 러너 계층 전체가 WSL 에서 실행 불가 | `.gitattributes` 에 `*.sh text eol=lf` + `git add --renormalize`. **P2에서** — 이관 검증과 섞으면 원인 분리가 안 됩니다 |
-| Vitis HLS **실행** (csim/csynth) | 헤더는 쓰고 있지만 툴 실행은 미검증 | **사용자** — WSL `/tools/Xilinx/Vitis_HLS/{2023.2,2024.1}` 확인됨 |
-| `hgtxr_e2e_vit.hpp` 4,503줄 분해 | 합성 결과 검증 불가 (보드 없음) | **사용자** — 위 두 행이 풀리면 자동으로 풀립니다. 그 전에는 착수 금지 |
+| 보드 실측 | ZCU104 물리 접근 | **사용자** |
+| Table III 재현 | **범위 밖** ([SPEC §10](SPEC.md)) | — |
 
-## Next
+## 결정 대기
 
-**P0 완료** — 이관 대장 625행 전수 판정
-([대장](plans/active/2026-07-29-code-migration-manifest.md) · `migrate` 325 · `done` 234 ·
-`skip` 66 · `undecided` 0). 검증: `python scripts/check_migration_manifest.py --check`
+| | 무엇 | 상태 |
+|---|---|---|
+| **엣지별 dtype** | `BlockSpec.dtype` 이 하나라 블록 안에서 **matmul 4비트 + 비선형 16비트**를 표현 못 함. GeLU LUT 입력 알파벳이 16개로 붕괴 | S4·S5 전이었으나 미결. 지금은 `-a4`/`-a8` 두 벌로 우회 중 |
 
-디렉토리별 순차 이관:
+**requant 승수 폭은 해결됐습니다** (2026-08-03) — `i_ops.DYADIC_MULT_BITS = 18`,
+`REQ_M_BITS = 18`, `acc·M` 53 → **38비트**. [SPEC §3](SPEC.md).
 
-| | 디렉토리 | 대상 | 상태 |
-|---|---|---:|---|
-| **M1** | `config/` | 33 | ✅ **완료** — 해시 대조 33/33 |
-| **M2** | `module/` | 96 | ✅ **완료** — 해시 대조 96/96 |
-| **M3-1** | `build/` 복사 | 42 | ✅ **완료** — 해시 대조 42/42 |
-| **M3-2** | 경로 재지정 + `-I …/golden` | 26파일 | ✅ **완료** — 구 경로 참조 0줄 |
-| **M4** | `deploy/` | 9 | ✅ **완료** — 해시 대조 9/9 |
-| **M5-1** | `tools/` 복사 | 147 | ✅ **완료** — 해시 대조 147/147 |
-| **M5-2** | 도구+테스트 재지정 · `generated/`→`workspace/` · `.sh` CRLF | — | ⛔ **P2로 이월** — 아래 |
+## 범위에서 뺀 것
 
-**M5-2가 P2로 넘어간 이유**: `tools/` 27개가 `ROOT / "hls" / …` 로 구 경로를 조립하고,
-그 테스트들이 **같은 구 경로를 단언**합니다. 도구만 재지정했더니 67 → **83 failed**로
-악화됐습니다 (되돌림). 둘을 함께 고쳐야 하고, 그게 P2(패키지화 · `sys.path` 70곳 제거)의
-일입니다. **그때까지 `tools/`는 archive 사본이 정본입니다.**
-
-이관이 끝나면 계획 §6의 P1~P8.
+**보조 헤드 3종**(ROI · Reliability ×2)은 골든에 넣지 않았습니다 — 논문 Fig. 5 의 Pupil Box /
+Pupil Ellipse 두 개만 냅니다. 배포 모델(`HybridModel`)에는 셋 다 있으므로 나중에 붙여야 합니다.
+`ReliabilityHead` 의 `sigmoid` 는 **온칩에 둘 필요가 없습니다** — 스케줄러가 임계값과 비교할
+뿐이고 sigmoid 는 단조라, 로짓을 `sigmoid⁻¹(threshold)` 와 비교하면 됩니다.
 
 ## Done
 
 | 날짜 | 내용 |
 |---|---|
-| 2026-07-31 | **M5-1** `tools/` 복사 — 147/147. 재지정은 실패해 되돌림, P2로 이월 |
-| 2026-07-30 | **M4** `deploy/` 이관 — 9/9. **기준선이 426이 아니라 450**임을 발견 (overlay 테스트 24개가 `tests/` 밖) |
-| 2026-07-30 | **cyclic tb 3개 최초 실행 — 전부 PASS.** `build/run_cyclic_tb.sh` (WSL g++ + Vitis HLS 헤더) |
-| 2026-07-30 | **M3** `build/` 이관 — 42/42 복사 + 26파일 경로 재지정. `module/`이 정본, M2 `-I golden` 부채 청산 |
-| 2026-07-30 | `module/` 전수 분석 — 45건 제기·21확정. csim이 float라는 발견, 어서션 0 테스트 2개 삭제 |
-| 2026-07-30 | **M2** `module/` 이관 — 96/96 해시 대조, 미결 5건 판정, 테스트 426 불변 |
-| 2026-07-29 | **M1** `config/` 이관 — 33/33 해시 대조, 테스트 426 불변 |
-| 2026-07-29 | **P0** 이관 대장 625행 전수 판정 + 문서 데이터 11개 구멍 발견·보완 |
-| 2026-07-29 | 문서 이름 규약 적용 — 87개 개명, 링크 126개 재작성, 중복·스텁 4개 삭제 |
-| 2026-07-29 | 큰 캠페인 디렉토리 분할 (최대 34 → 12항목) |
-| 2026-07-29 | 구 트리 → `archive/hardware/` 이동, 새 골격 생성 (테스트 49/426 불변) |
-| 2026-07-29 | 재구성 계획 — 목표 구조 · 생사 대장 · docs 잠금 해제 순서 |
-| 2026-07-29 | 전수 semantic census — 642 파일 · 285,261줄 |
-
-## 이관 규칙
-
-- **archive는 읽기 전용 기준입니다.** 수정하지 않습니다.
-- 각 이관은 **archive의 무엇을 옮겼는지** 추적 가능해야 합니다.
-- **회귀 기준선은 `49 failed / 450 passed`입니다.** 이 숫자가 줄면 멈춥니다.
-
-  ```bash
-  python -m pytest archive/hardware/tests archive/hardware/pynq/hgtxr/test_hgtxr_overlay.py -q
-  ```
-
-  종전에 426이라고 적었던 것은 **`archive/hardware/tests`만** 센 것입니다.
-  `test_hgtxr_overlay.py`의 **24개는 `tests/` 밖(`pynq/`)에 있어 2026-07-30까지
-  아무도 세지 않았습니다.** 보드도 필요 없습니다 — `unittest.mock` 기반입니다.
-- **cyclic 테스트벤치 3개**는 WSL 에서 실행 가능합니다: `sh hardware/build/run_cyclic_tb.sh`
-  (g++ + `/tools/Xilinx/Vitis_HLS/2023.2/include`). 2026-07-30 최초 실행, 전부 PASS.
+| 2026-08-03 | **S9** csynth — 데이터패스 315 MHz·II=1 확인, 자원 **3.5배 초과** 실측. 클래스 스코프 `array_reshape` 2개가 여덟 단계 내내 무시되고 있었음. softmax 행 최댓값이 클럭을 3배로 늘리고 있었음(9.931→2.405 ns) |
+| 2026-08-03 | **requant 승수 18비트** — algorithm 에 폭 제한 도입. `acc·M` 53→38b. 4비트 전 프리셋·실제 모델 **비트 동일**. 생성기의 `_grid` 잠복 버그도 같이 드러남 |
+| 2026-08-03 | **S8** Top — 이미지 in, 5개 out. 두 모드 한 설계. 출력 requant 도 모드 의존이라는 것을 모드 전환 재현성 검사가 잡음 |
+| 2026-07-31 | **S7** Backbone — 8 TRB 가 **코어쌍 2개** 위를 돌며 가중치 교체. `bt` 리덕션이 런타임 길이 아닌 컴파일 최대치를 돌던 버그를 track 이 잡음 |
+| 2026-07-31 | **S6** Patch Embedding — Conv-F·Conv-E PASS. PE 배열이 곧 RMU(kernel==stride 라 im2col 이 주소 계산), 스템만 `ap_int<27>` |
+| 2026-07-31 | **S5** MLP Core — 6단계 PASS. 두 코어를 이어 **블록 하나 전체**가 `block_y` 와 비트 일치 |
+| 2026-07-31 | **S4** MHA Core — 9단계 체인 PASS. 스테이지 프로브(비교·배수·재충전) 도입, 고장 주입으로 국소화 확인 |
+| 2026-07-31 | **S3** 비선형 LUT — GeLU·LayerNorm·Softmax tb PASS. `exp`/`recip` 는 **unsigned**, `lnb` 는 30b 임을 실측 |
+| 2026-07-31 | **S2** RMU · SMU · requant — tb 3개 PASS. 첫 HLS 구현이 골든을 통과했습니다 |
+| 2026-07-31 | **S1+** 모델 전체 골든 — 두 스템·**공유** 블록 스택·두 헤드, 논문 비트폭. 공유 백본 제약 3건·`anchor` 포트 누락 발견 |
+| 2026-07-31 | **S1** 골든 생성기 — 스테이지 10 · 프리셋 6벌 · 파일 84개/벌. stdlib 만, `M` 33비트 실측 |
+| 2026-07-31 | **S0** SPEC — 파라미터 계약·traits 방식·유도 규칙·금지 관용구·검증 계약 |
+| 2026-07-31 | ViT_Accel HLS 참조 분석 — 35건 제기·26 확정 (채택 9·회피 4·적응 8) |
+| 2026-07-31 | worktree `hardware-new` 생성, 코드 6개 디렉토리 비움 (286 삭제) |
+| 2026-07-31 | `.gitignore`의 `build/`가 `hardware/build/` 44개를 삼키던 것 수정 |

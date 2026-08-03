@@ -1,148 +1,140 @@
-> **작성** 2026-07-29 · **갱신** 2026-07-30
-> **상태** active — **M2 완료 · M3에서 정본화.** cyclic tb 3개 PASS · 정본 top 3개는 csim 미실행
+> **작성** 2026-07-31 · **갱신** 2026-07-31
+> **상태** active
 > **소유** hardware
 
-# module — HLS 소스와 테스트벤치
+# module — HLS 구현
 
-```
-module/
-├── include/  19   템플릿 라이브러리·공통 헤더
-├── src/      19   top + 모듈 구현
-├── tb/       12   테스트벤치 (tb_*.cpp)
-└── golden/   46   골든 벡터 17 + 참조 계약·스펙 19 + inputs/outputs/vref_p0/weights 10
+```bash
+sh hardware/build/run_tb.sh              # 전부
+sh hardware/build/run_tb.sh rmu          # 하나
 ```
 
-출처 `archive/hardware/hls/` 67 + `archive/hardware/refs/` 29 — **96개 전부, 해시 대조 미이관 0.**
-파일명·디렉토리명 무변경 ([M1과 같은 이유](../config/README.md) — 기계가 읽습니다).
-
-## 구현이 셋입니다 — 트리만 봐서는 안 보입니다
-
-census 판정이고 재구성 전에 알아야 합니다
-([census §3.5](../docs/reports/2026-07-29-hardware-census.md)):
-
-| top | 형태 | 비트스트림 | 판정 |
-|---|---|---:|---|
-| `hgtxr_e2e_axis_top` | `include/hgtxr_e2e_vit.hpp` **단일 헤더 4,503줄** | **6** | **정본** |
-| `hgtxr_top` | 모듈 조립 (top + `src/*.cpp` 15) | 1 | 살아 있음 |
-| `hgtxr_search_profile_top` / `hgtxr_track_profile_top` | `src/hgtxr_mode_profile_top.cpp`(파일) 안의 **top 둘**. `HGTXR_MODE_PROFILE_TOP` 환경변수가 고름 | 2 | 살아 있음 |
-
-> **`hgtxr_mode_profile_top`이라는 심볼은 없습니다** — 파일명입니다. 실제 top은
-> `src/hgtxr_mode_profile_top.cpp:446`과 `:471`의 두 함수이고,
-> `run_mode_profile_q4w8a_csynth.tcl:15-17`이 환경변수로 하나를 골라 `set_top`합니다.
-> 선택된 이름이 패키징 IP의 VLNV가 되므로 **비트스트림 2개는 별개 IP 코어**입니다.
-
-**정본인 `hgtxr_e2e_vit.hpp`는 `include/hgtxr_cyclic_*.hpp` 템플릿 라이브러리의
-`cyclic_transformer_block`(106줄)을 0회 사용하고 같은 일을 4,503줄로 재구현합니다.**
-분해는 [계획 §5](../docs/plans/active/2026-07-29-hardware-reconstruction.md)의 P7이고,
-합성 결과를 검증할 보드가 없어 **착수 금지**입니다.
-
-## 무엇이 검증됐고 무엇이 아닌가
+## 있는 것
 
 | | |
 |---|---|
-| ✅ **cyclic tb 3개 컴파일·실행 PASS** | `sh hardware/build/run_cyclic_tb.sh` (WSL). 2026-07-30 최초. `include/hgtxr_cyclic_{mac,attention,norm,mlp,s2_projection}.hpp` 가 실제로 컴파일된다는 뜻입니다 |
-| ❌ 정본 top 3개 (`hgtxr_e2e_axis_top` 등) | csim 미실행 — Vitis HLS **실행**이 필요합니다 |
-| ❌ `hgtxr_e2e_vit.hpp` 4,503줄 | 위와 같음 |
+| `include/hbtxr_requant.hpp` | dyadic requant. **`i_ops.py:requant` 와 비트 단위로 같습니다** |
+| `include/hbtxr_rmu.hpp` | **RMU** — 가중치 상주(런타임 적재), 활성만 스트림 |
+| `include/hbtxr_smu.hpp` | **SMU** — **두 피연산자 다 스트림.** B 를 유닛이 전치 |
+| `include/hbtxr_lut.hpp` | PoT 커서 + GeLU. **커서는 signed·클램프 전 범위** |
+| `include/hbtxr_layernorm.hpp` | 정수 LayerNorm (7 scalar, rsqrt 1세그먼트) |
+| `include/hbtxr_softmax.hpp` | 정수 Softmax (14 scalar, reciprocal 2세그먼트) |
+| `include/hbtxr_mha_core.hpp` | **MHA Core** — 9단계 체인 |
+| `include/hbtxr_mlp_core.hpp` | **MLP Core** — 6단계. SMU·score buffer·reorder **없음** |
+| `include/hbtxr_patch_embed.hpp` | **Patch Embedding** — line buffer + windower + PE 배열 |
+| `include/hbtxr_backbone.hpp` | **Backbone** — 컨트롤러 · global buffer · prefetcher · 코어 순회 |
+| `include/hbtxr_head.hpp` | 토큰 풀링 + 2층 회귀 헤드. **RMU 아니라 dense 루프** (197은 안 나뉨) |
+| `include/hbtxr_top.hpp` | **top** — stem · 백본 · terminal decode, 모드 하나로 라우팅 |
+| `tb/hbtxr_model.hpp` | 모델 스코프 골든 적재 공용 (`tb_backbone`·`tb_top`) |
+| `tb/hbtxr_load.hpp` | 페이로드 적재 공용. tb 3개가 같은 블록을 읽습니다 |
+| `tb/hbtxr_probe.hpp` | 스테이지 프로브 — 비교 · **배수 단언** · **골든 재충전**. tb 전용 |
+| `tb/hbtxr_golden.hpp` | 골든 `.txt` 리더 + 비교 + 음성 대조. **tb 전용** |
+| `tb/tb_{requant,gelu,layernorm,rmu,smu,softmax,patch,mha,mlp,block,backbone,top}.cpp` | V1 테스트벤치 12개 |
+| `syn/hbtxr_syn.cpp` | **V3 합성 top 16개.** 유닛이 전부 템플릿이라 csynth 에 줄 함수가 필요합니다 |
 
-파이썬 도구 테스트(기준선 450)는 **HLS 빌드 입력을 하나도 검증하지 않습니다.**
+`src/` 는 S4(코어)부터입니다. `golden/` 은 쓰지 않습니다 — 골든은 생성물이라
+`hardware/workspace/golden/` 에 있습니다.
 
-## 전수 분석 결과 (2026-07-30)
+## RMU 와 SMU 는 왜 별개인가
 
-전문: [docs/reports/2026-07-30-module-code-analysis.md](../docs/reports/2026-07-30-module-code-analysis.md).
-45건 제기 · 21 확정 · 8 기각 · **16 미검증**(세션 한도). 요약:
+**데이터패스는 같고 두 번째 피연산자의 수명이 다릅니다.** RMU 의 가중치는 블록 간에 상주하고,
+SMU 의 `K` 는 토큰 세트마다 바뀌므로 상주할 수 없습니다. `Q×Kᵀ` 는 **`K` 가 전부 도착하기
+전에 점수 행렬의 0행도 못 냅니다** — SMU 안의 버퍼가 그 제약을 코드로 만든 것이고,
+MHA 코어가 텐서 전체 residual FIFO 를 요구하는 이유도 같습니다 ([SPEC §5](../docs/SPEC.md)).
 
-| | |
-|---|---|
-| **csim 기본이 `float`** | `include/fixed_types.h`는 `HGTXR_HLS_FIXED_CSIM` 없으면 `typedef float`. **"csim이 golden을 통과"는 float 참조모델을 검증한 것**이고 양자화·포화·비트폭에 대해 말하는 바가 없습니다 |
-| **`quant.h` 클램프가 죽어 있음** | ±31/32은 `ap_fixed<16,6>` 범위인데 배포 설정은 `BIT_WIDTH 8` → `ap_fixed<8,4>` → **±8**. ±8에서 이미 넘친 값을 ±31에서 막습니다 |
-| **`hgtxr_data_to_axis` 부호확장 없음** | `BIT_WIDTH<16`에서 상위 비트가 0으로 남는데 호스트는 16비트 부호로 디코드 → **음수 출력 전부 오독** |
-| **cyclic 라이브러리 8개 헤더가 dark** | `hgtxr_top.cpp:57`의 매크로를 세우는 `run_cyclic_*.tcl` 9개를 호출하는 셸이 없습니다. 마지막 증거는 2026-06-08 수동 실행 |
-| **LUT 48개 호출 0건** | `hgtxr_cyclic_math.hpp:192-756`. LayerNorm·softmax는 레이어별 캘리브레이션을 쓰는데 Q/K/V·attn 출력은 안 씁니다. **삭제 금지** — `golden/hgpipe_lut_math_contract.json`이 미러링을 강제 |
-| **테스트벤치 12→6만 빌드에 걸림** | 가장 잘 만든 3개가 안 걸린 쪽이었습니다. **2026-07-30 실행 성공 — 전부 PASS**: `sh hardware/build/run_cyclic_tb.sh` (WSL) |
+## 세 숫자가 일치해야 합니다
 
-**위 결함들은 고치지 않았습니다.** cyclic tb 3개는 돌지만 그 셋은 **정본 경로를 안 지납니다** —
-`quant.h`·`fixed_types.h`·`hgtxr_data_to_axis`는 전부 `hgtxr_e2e_vit.hpp` 쪽이고, 거기를 고친
-결과를 판정하려면 **Vitis HLS 실행(csim)**이 필요합니다. 특히 `fixed_types.h`를 고치면 기존
-golden 이 전부 실패할 수 있고, 그게 정상인지 회귀인지 구분할 방법이 지금은 없습니다.
-
-### 2026-07-30 삭제 2건
-
-`tb/tb_mlp.cpp` · `tb/tb_attention.cpp` (각 8줄). 어떤 tcl·셸·py도 참조하지 않고(전수 확인),
-초기화 없는 버퍼로 스테이지를 한 번 호출한 뒤 결과를 확인하지 않고 `return 0`합니다.
-**DUT가 빈 함수여도 통과**하므로 없는 것보다 나쁩니다.
-
-### golden 분리 부채 — **M3-2에서 청산 완료**
-
-테스트벤치가 golden 을 무수식 상대 경로로 include 해서, M2 의 `tb/`·`golden/` 분리가
-그걸 깨뜨렸습니다. M3-2 가 모든 `cxx_flags` 에 `-I…/module/golden` 을 넣어 갚았습니다.
-
-## 알려진 결함 — 이관하며 확인, **고치지 않음**
-
-### `golden/weights/` 매니페스트 3개는 짝 바이너리가 없습니다
-
-`cyclic_weights_s2_block_software_initial{,_q4,_q4_head64}_manifest.json` 이 선언하는
-
-```json
-"binary": "hardware/refs/weights/cyclic_weights_s2_block_software_initial_q4_head64.bin"
+```cpp
+hls::vector<act_t, TP*CIP>                                    // 스트림 폭
+#pragma HLS unroll                                            // 언롤
+#pragma HLS array_reshape variable=w cyclic factor=CIP dim=2  // reshape
 ```
 
-**그 `.bin`이 저장소에 없습니다.** `.gitignore`도 없으니 커밋되지 않은 것입니다. 그리고
-`tb/tb_cyclic_s2_block_vector.cpp:19`가 바로 그 파일을 읽습니다 — **이 테스트벤치는 돌 수
-없습니다.** 테스트 스위트는 이걸 못 잡습니다 (관련 테스트 0건).
+**`array_partition` 이 아니라 `array_reshape`** 입니다. 그리고 **리덕션은 최내곽** —
+부분합이 `TP*COP` 플립플롭이 되어 II=1 이 공짜로 나옵니다.
+csynth 가 `compute` 의 `reduce` 를 **II=1 로 실제 스케줄**하는 것을 확인했습니다 (S9).
 
-**지우지 않습니다.** 레이아웃 기록으로 값이 있고, 체크포인트가 생기면 재생성 검증의
-기준이 됩니다.
+> ### 멤버 배열의 pragma 는 **선언 옆에 두면 적용되지 않습니다**
+>
+> Vitis HLS 는 **함수 스코프 밖의 `#pragma HLS` 를 거부**합니다 (`207-5512`). 그런데 g++ 는
+> `-Wno-unknown-pragmas` 로 조용히 버립니다. 그래서 `HbtxrRmu::weight` 와 `HbtxrSmu::bt` 의
+> `array_reshape` 는 **S2~S8 여덟 단계 내내 툴에 전달된 적이 없었고**, V1 은 그걸 알 방법이
+> 없습니다. 지금은 그 배열을 만지는 **멤버 함수마다** 다시 적습니다.
+>
+> 위 "세 숫자" 중 하나가 통째로 빠져 있었다는 뜻입니다. **S9 의 첫 csynth 가 낸 첫 에러**입니다.
 
-### `golden/weights/e2e_m_axi_*.bin` (12MB)은 원칙상 산출물인데 재생성 불가입니다
+## 비트 레이아웃 — 생산자·소비자가 합의해야 합니다
 
-`tools/export_e2e_m_axi_weights.py`가 만드는 파일이고 `check_third_goal_preflight.py`가
-게이트 입력으로 읽습니다. 그런데 생성에 필요한 `software_initial_weights.pt`가 저장소에
-없습니다. **다시 만들 수 없는 산출물은 실질적으로 골든**이라 `workspace/`(gitignore)가
-아니라 여기 둡니다 — 옮겼으면 유일본이 사라집니다.
-
-### `include/common.h`의 미호출 선언 3개
-
-`matmul`(22행) · `layernorm_stage`(41) · `softmax_stage`(42). `hgtxr_top.cpp` 호출 0회.
-
-**파일을 편집하지 않았습니다 — 주석조차 달지 않았습니다.** 주석을 달면 archive와 해시가
-달라져 "내용 동일 이관"을 증명하는 `check_migration_manifest.py`가 무력해집니다. 그리고
-계획 §3이 *"census는 삭제 근거가 아니다, 컴파일러로 확인한 뒤"*라고 적어 뒀는데 그 컴파일러가
-없습니다. **코드가 실제로 바뀌는 것은 P7입니다.**
-
-## ⚠️ 아직 살아 있지 않습니다 — 전환은 **M3**
-
-**사본입니다.** tcl이 `hardware/hls/`를 리터럴로 봅니다:
-
-```tcl
-add_files -cflags $cxx_flags [file join $hw_dir hls src hgtxr_e2e_axis_top.cpp]
+```
+RMU in   v[p*CIP + c] = 토큰 t0+p, 입력채널   i0+c
+RMU out  v[p*COP + c] = 토큰 t0+p, 출력채널   o0+c
+SMU a,b  v[p*CIP + c] = 행   t0+p, 리덕션채널 k0+c
+SMU out  v[p*COP + c] = 행   t0+p, 열         j0+c
 ```
 
-**`module/`을 고쳐도 빌드되는 코드는 바뀌지 않습니다.**
+## `ap_int::operator*` 는 피연산자 폭의 **합**을 냅니다
 
-> **정정 (2026-07-30)**: 이 절은 "전환은 M5"라고 적고 있었습니다. **틀렸습니다.**
-> 도구가 읽는 `config/`는 M5가 맞지만, HLS 빌드가 읽는 `module/`은
-> **M3(빌드 스크립트 이관)**에서 정본이 됩니다.
+넓은 타입으로 먼저 캐스팅하고 곱하면 **그 넓은 타입들의** 합만큼 곱셈기를 요구합니다.
+5곳에서 걸렸습니다 — requant(54×54→108), LN 의 mean·variance·affine, softmax 의 `e*recip`.
+**항상 좁은 피연산자끼리 곱하고 결과 타입을 유도**합니다.
 
-그래서 **이름·구조·내부 동작 수정은 전부 M3 이후**입니다. 지금 하면 M3에서 경로가
-바뀔 때 두 번 하게 됩니다.
+## 모드 의존인 것은 정확히 넷입니다
 
-## ponytail 감사 — "지금 안전"이 아니었던 것
+stem · **최종 norm 진입 requant** · 헤드(+anchor) · **출력 requant**. 가운데 둘이 놓치기 쉽습니다 —
+두 경로가 서로 다른 블록에서 나와 **같은 norm 하나**로 들어가고, 두 헤드의 마지막 linear 는
+**서로 다른 누산기 격자**를 갖습니다.
 
-[감사](../docs/reports/2026-07-30-module-code-analysis.md) 후 ponytail로 복잡도만 따로 봤고
-**−2,100줄 · −13파일**이 나왔습니다. 그중 "파일 합치기는 컴파일러 없이 안전"이라고
-판단했던 두 항목은 **확인해 보니 아니었습니다**:
+출력 requant 를 배열 하나로 뒀더니 **누산기 골든은 계속 통과**하면서(누산기가 그 위에 있으니까)
+두 번째로 돈 모드의 고정소수점 값만 조용히 틀렸습니다. `tb_top` 의
+**search → track → search 재현성 검사**가 그걸 잡았습니다.
 
-| 합치려던 것 | 실제 영향 |
-|---|---|
-| 파편 헤더 7개 → `common.h` | `fixed_types.h`를 **4곳**, `config.h`를 **2곳**이 직접 include. 총 11곳 |
-| 얇은 `src/` 4개 → `hgtxr_top.cpp` | 함수 6개가 **각 4~5곳**에서 호출 |
+## 순회가 곧 더블 버퍼링입니다
 
-**11개 include와 17개 호출이 영향받고 컴파일러 없이 확인할 수 없습니다.** 철회했습니다.
+코어쌍이 **2개**고 TRB 8개가 그 위를 돕니다. `i mod 2` 쌍이 TRB i 를 계산하는 동안
+`(i+1) mod 2` 쌍은 놀고 있으므로 **가중치를 그때 갈아끼웁니다** — prefetcher 가 자기 버퍼를
+따로 들 필요가 없습니다. 참조가 하드웨어 인스턴스를 12개 만들어야 했던 이유(ROM 초기화
+가중치, SPEC §4)가 여기서 2개가 됩니다.
 
-**컴파일러 없이 증명 가능한 것은 셋뿐입니다**: 도달 불가 golden 2개(tcl이 세우는 GOLDEN
-플래그 15개 vs 파일 17개) · 짝 없는 `blocks2_spec.json` · 어떤 빌드도 안 세우는 플래그 2개.
+Global buffer 가 필요한 것도 **코어를 재사용하기 때문**입니다 — 블록마다 코어가 따로 있으면
+잔차 스트림은 dataflow FIFO 에 머물고 저장될 일이 없습니다.
 
----
+## 런타임 길이와 컴파일 최대치를 헷갈리면 한쪽 토큰 수에서만 보입니다
 
-계획: [docs/plans/active/2026-07-29-hardware-reconstruction.md](../docs/plans/active/2026-07-29-hardware-reconstruction.md) ·
-대장: [docs/plans/active/2026-07-29-code-migration-manifest.md](../docs/plans/active/2026-07-29-code-migration-manifest.md)
+S×V 의 리덕션이 `kdim`(런타임 = 토큰 수)이 아니라 `K`(컴파일 최대 = 64)까지 돌고 있었습니다.
+**search 는 `kdim == K` 라 완벽히 가려지고**, 64토큰 실행 뒤의 16토큰 실행만 stale 48열을
+읽습니다. `tb_backbone` 이 **search → track → search** 를 도는 이유가 이것입니다.
+
+## 패치 임베딩의 PE 배열은 **RMU 입니다**
+
+`kernel == stride == patch` 라 윈도우가 겹치지 않고, **im2col 이 순수 주소 계산**입니다.
+그래서 conv 가 `[tokens, Cin·K·K] × [D, Cin·K·K]ᵀ` matmul 이고, SPEC §5-3 의
+"Do 개 PE, PE당 K·K·Ui 곱셈기" 가 그 matmul 의 PE 배열입니다. **스템 고유는 windower 뿐**입니다.
+
+공유하지 않는 것 둘:
+
+- **누산기.** 8비트 피연산자 × `Cin·K·K` 탭 = **25비트** 로 코어의 20비트에 안 들어갑니다.
+  골든 실측은 20비트에 **들어가고**, 그게 함정입니다 — 측정값으로 타입을 잡으면 오늘 모든
+  테스트를 통과하고 실데이터에서 wrap 합니다. `HbtxrRmu` 의 `static_assert` 가 실제로
+  좁히기를 **컴파일 단계에서 거부**하는 것을 확인했습니다
+- **입력 격자가 비대칭.** 진짜 0 이 zero-point 라 창마다 `- zp·Σw` 가 붙는데, 출력채널별
+  상수라 **RMU 가 이미 더하는 bias 에 접힙니다** — 상주 숫자 하나, 런타임 뺄셈 없음
+
+## 두 코어 사이에는 이음새가 없습니다
+
+`tb_block` 이 처음으로 그걸 시험하고, 답은 **requant 가 없다**입니다 — MLP 코어의 입력 포트가
+곧 attention residual 의 출력 격자라 `mlp_x == mha_y` 입니다. 여기에 브리지를 넣으면
+최적화가 아니라 **버그**이고, 골든이 그렇게 말합니다.
+
+## 프로브가 첫 실패 지점을 특정합니다
+
+각 스테이지 경계에서 **비교 → 스트림이 비었는지 단언 → 골든으로 재충전**을 합니다.
+재충전이 핵심입니다: 앞 단계 오류가 뒤로 전파되면 프로브가 전부 빨개져서 **어디가 원인인지
+알 수 없습니다.**
+
+`tb_mha` 가 이걸 고장 주입으로 확인합니다 — `e02` 승수를 2배로 만들면 **7개 중 1개**
+(`qkv_x`)만 발화하고 위아래는 통과합니다.
+
+## 완료 조건
+
+**"컴파일된다"가 아니라 "골든과 원소별로 같다"** 입니다. 모든 tb 가 셋을 합니다 —
+원소별 `==` · **스트림 배수 확인**(과생산은 값 비교로 못 잡습니다) · **음성 대조**.
