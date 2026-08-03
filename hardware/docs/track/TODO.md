@@ -42,6 +42,11 @@ DSP **265%**, MHA 코어 **하나**가 LUT 98%.
 
 - [ ] `HbtxrTop`·`HbtxrBackbone` 합성. **합성 가능한 weight SOURCE 가 필요**하고 그건
       산술이 아니라 인터페이스 결정입니다 (M-AXI)
+- [ ] PYNQ 오버레이 런타임을 새로 씁니다. 구 가이드 본문은
+      **`archive/hardware/pynq/hgtxr/README.md`** 에 있습니다 — 구 비트스트림의 파일
+      배치를 기술하므로 그대로 쓸 수 없고, 참조용입니다.
+      (`hardware/deploy/RUNTIME-GUIDE.md` 는 이 파일에 헤더만 붙인 사본이었고 재구조화에서
+      사라집니다. 본문이 archive 에 그대로 있으므로 사본을 하나 더 두지 않았습니다)
 - [ ] 가중치 적재 경로. 지금 II=2 · qkv 적재 **221,186 사이클 = 0.74 ms**/블록 →
       8블록 **6 ms**. 8-wide 워드로 넣으면 1/16
 - [ ] 잔여 II 미달 2건 — `smu_ctx` 의 B 전치 write (II=2, dim 2 reshape 된 메모리의 서로
