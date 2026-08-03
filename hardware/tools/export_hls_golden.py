@@ -45,7 +45,8 @@ from quantization.i_block import (                    # noqa: E402
     # a second copy of "_linear" here is a second thing that can drift from the golden.
     _conv_tokens, _flat, _linear, _linear_acc, _pool_tokens, _requant_columns, _rows,
 )
-from quantization.i_ops import dyadic_params, int_matmul, requant, table_quantize  # noqa: E402
+from quantization.i_ops import (DYADIC_MULT_BITS, dyadic_params, int_conv2d,  # noqa: E402
+                                int_matmul, requant, table_quantize)
 from quantization.scheme import QuantDtype, clamp_int                     # noqa: E402
 
 EPS = 1e-5                       # LayerNorm eps, the same ceiling F.layer_norm has
@@ -138,8 +139,15 @@ def _grid(values, scale: float, dtype: QuantDtype) -> float:
     analytic sqrt(CI) estimate would be within ~2x, and 2x on a 4-bit grid is the
     difference between exercising the datapath and clamping every element flat.
     """
-    peak = max((abs(int(v)) for v in values), default=1) * scale
-    return max(peak, 1e-12) / dtype.qmax
+    peak = max((abs(int(v)) for v in values), default=0)
+    if peak == 0:
+        # Nothing to represent, so any grid is as good as another — take the producer's,
+        # which makes the edge an identity. The 1e-12 floor that used to be here turned a
+        # degenerate accumulator into a ratio of 1.7e11 and a 39-bit multiplier: nonsense
+        # hardware that no test looked at, because it only occurs on the tiny model preset.
+        # Bounding the multiplier is what surfaced it.
+        return scale
+    return peak * scale / dtype.qmax
 
 
 # --- payload builders ---------------------------------------------------------
@@ -421,12 +429,6 @@ def build_patch_embed(cfg: dict, out_scale: float, dtype: QuantDtype,
     return spec, image, tokens
 
 
-# Wide enough that _conv_tokens cannot clamp — used to read an accumulator's real peak
-# back out through the oracle instead of re-deriving the zero-point correction here.
-_WIDE = QuantDtype(64, signed=True)
-_PROBE = 1e-12
-
-
 def _stem_spec(img: tuple[int, int, int], patch: int, dim: int,
                rng: random.Random) -> tuple[ConvSpec, list[int]]:
     """Weights (8-bit, per out-channel) and one uint8 image for a modality stem."""
@@ -444,10 +446,27 @@ def _stem_spec(img: tuple[int, int, int], patch: int, dim: int,
 
 
 def _stem_peak(spec: ConvSpec, image: list[int], img: tuple[int, int, int]) -> float:
-    """Real-valued peak of the stem's output, read through a grid that cannot clamp."""
-    probe = _conv_tokens(spec, image, _PROBE, _WIDE, channels=img[0],
-                         height=img[1], width=img[2])
-    return max(abs(v) for row in probe for v in row) * _PROBE
+    """Real-valued peak of the stem's output ACCUMULATOR, before any requant.
+
+    Computed directly rather than read back through `_conv_tokens` on a near-zero output
+    grid. That trick worked but it asked `dyadic_params` for a ratio of 5.5e6, which is a
+    measurement artefact with no datapath behind it — and once the multiplier is bounded
+    to a real port width it is also unrepresentable. A peak is a max over an accumulator;
+    saying so is shorter than the trick was.
+    """
+    channels, height, width = img
+    inp = [[[int(image[(c * height + y) * width + x]) for x in range(width)]
+            for y in range(height)] for c in range(channels)]
+    acc = int_conv2d(inp, spec.weight, stride=spec.stride, padding=spec.padding,
+                     pad_value=spec.zero_point)
+    peak = 0.0
+    for oc in range(len(spec.weight)):
+        acc_scale = spec.out_scale(oc)
+        wsum = sum(v for plane in spec.weight[oc] for row in plane for v in row)
+        bias = round(float(spec.bias[oc]) / acc_scale) if spec.bias is not None else 0
+        top = max(abs(v - spec.zero_point * wsum + bias) for row in acc[oc] for v in row)
+        peak = max(peak, top * acc_scale)
+    return peak
 
 
 def build_head(pooled: list[int], in_scale: float, out_dim: int, dtype: QuantDtype,
@@ -945,8 +964,9 @@ def emit_model(dest: Path, model: str, blk_bits: int, seam_bits: int, head_bits:
                       dtypes=(blk_dtype, seam_dtype, head_dtype))
 
 
-def emit_requant(dest: Path, seed: int, *, acc_bits: int = 20, m_bits: int = 33,
-                 n_max: int = 31, out_bits: int = 4) -> tuple[Path, dict]:
+def emit_requant(dest: Path, seed: int, *, acc_bits: int = 20,
+                 m_bits: int = DYADIC_MULT_BITS, n_max: int = 31,
+                 out_bits: int = 4) -> tuple[Path, dict]:
     """Direct cases for the requant primitive — the one op every matmul unit ends with.
 
     The block golden exercises it only with the ratios the design happens to present:

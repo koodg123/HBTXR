@@ -69,15 +69,14 @@ vitis_hls -f hardware/build/hls/<blk>_csim.tcl    # V2  S8 부터
 | 보드 실측 | ZCU104 물리 접근 | **사용자** |
 | Table III 재현 | **범위 밖** ([SPEC §10](SPEC.md)) | — |
 
-## 결정 대기 — 하드웨어를 막지는 않습니다
+## 결정 대기
 
 | | 무엇 | 상태 |
 |---|---|---|
-| **requant 승수 폭** | `M` 이 33비트, `acc·M` 이 53비트라 DSP48E2 하나에 안 들어감. **`M ≤ 16b` 까지 골든 비트 동일**이 실측됨 (`algorithm/docs/reports/2026-07-31-requant-multiplier-width.md`, 브랜치 `rewrite/flat-functional`) | algorithm 대기. 하드웨어는 `REQ_M_BITS=33` 으로 **이미 통과** — 바뀌면 상수 하나 |
-| **엣지별 dtype** | `BlockSpec.dtype` 이 하나라 블록 안에서 **matmul 4비트 + 비선형 16비트**를 표현 못 함. GeLU LUT 입력 알파벳이 16개로 붕괴 | S4·S5 전. 지금은 `-a4`/`-a8` 두 벌로 우회 중 |
-| **`anchor` 포트** | track 헤드가 호스트에서 **5차원 anchor state** 를 받습니다 (`197→197→5`). §8 인터페이스에 없었습니다 | S7 컨트롤러 · S8 top |
+| **엣지별 dtype** | `BlockSpec.dtype` 이 하나라 블록 안에서 **matmul 4비트 + 비선형 16비트**를 표현 못 함. GeLU LUT 입력 알파벳이 16개로 붕괴 | S4·S5 전이었으나 미결. 지금은 `-a4`/`-a8` 두 벌로 우회 중 |
 
-셋 다 [SPEC](SPEC.md) 에 근거와 실측이 있습니다 (§3 · §8).
+**requant 승수 폭은 해결됐습니다** (2026-08-03) — `i_ops.DYADIC_MULT_BITS = 18`,
+`REQ_M_BITS = 18`, `acc·M` 53 → **38비트**. [SPEC §3](SPEC.md).
 
 ## 범위에서 뺀 것
 
@@ -90,6 +89,7 @@ Pupil Ellipse 두 개만 냅니다. 배포 모델(`HybridModel`)에는 셋 다 �
 
 | 날짜 | 내용 |
 |---|---|
+| 2026-08-03 | **requant 승수 18비트** — algorithm 에 폭 제한 도입. `acc·M` 53→38b. 4비트 전 프리셋·실제 모델 **비트 동일**. 생성기의 `_grid` 잠복 버그도 같이 드러남 |
 | 2026-08-03 | **S8** Top — 이미지 in, 5개 out. 두 모드 한 설계. 출력 requant 도 모드 의존이라는 것을 모드 전환 재현성 검사가 잡음 |
 | 2026-07-31 | **S7** Backbone — 8 TRB 가 **코어쌍 2개** 위를 돌며 가중치 교체. `bt` 리덕션이 런타임 길이 아닌 컴파일 최대치를 돌던 버그를 track 이 잡음 |
 | 2026-07-31 | **S6** Patch Embedding — Conv-F·Conv-E PASS. PE 배열이 곧 RMU(kernel==stride 라 im2col 이 주소 계산), 스템만 `ap_int<27>` |

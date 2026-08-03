@@ -67,13 +67,15 @@ struct HbtxrCfgBase {
   using prob_t = ap_uint<8>;   // softmax output, the grid the S x V operand requants from
 
   // --- requant (SPEC §3) ----------------------------------------------------
-  // 33 is what the golden carries TODAY: dyadic_params picks shift 31 almost always, so
-  // any ratio above 1 needs 33 bits and acc*M is 53. Bounding the multiplier at 18 is
-  // bit-identical to the current golden — measured, see
-  // algorithm/docs/reports/2026-07-31-requant-multiplier-width.md. When that change lands
-  // this becomes 18 and acc*M drops to 38, which fits a DSP48E2's B port. Nothing else
-  // in the design moves.
-  static constexpr int REQ_M_BITS = 33;
+  // The multiplier port. `i_ops.DYADIC_MULT_BITS` is the other end of this contract and
+  // the two must agree; the testbench loader rejects any golden multiplier that does not
+  // fit, so a mismatch is a load-time failure rather than a silent truncation.
+  //
+  // It was 33 until algorithm bounded it, because an unbounded dyadic search lands on
+  // shift 31 every time and any ratio above 1 then needs 33 bits — a 53-bit product
+  // against this accumulator, which no DSP48E2 holds. At 18 the product is 38 bits and
+  // the multiplier fits the B port.
+  static constexpr int REQ_M_BITS = 18;
   static constexpr int REQ_N_MAX  = 31;
 };
 

@@ -23,16 +23,18 @@ struct HbtxrCfgTrack : HbtxrCfgBase { static constexpr int N = 16; };
 `HbtxrCfgCheck<CFG>` 가 config 전역 불변식을, 각 유닛이 자기 `CI` 로 유도한 누산기 폭을
 검사합니다.
 
-## `REQ_M_BITS` — 지금 33입니다
+## `REQ_M_BITS` — 18
 
-requant 승수 폭입니다. **`dyadic_params` 의 성질이 아니라 설계가 제시하는 비율의 성질**입니다:
-비율 1.15 는 shift 31 에서 33비트, 비율 4.5 는 34비트를 요구합니다. 그래서 tb 로더가
-**들어가지 않는 승수를 거부**합니다 — 안 그러면 `ap_uint<REQ_M_BITS>` 가 조용히 자릅니다.
+requant 승수 포트의 폭입니다. `algorithm` 의 `i_ops.DYADIC_MULT_BITS` 와 **같은 계약의
+양 끝**이고, tb 로더가 안 맞는 승수를 **적재 시점에 거부**하므로 어긋나면 조용한 절단이
+아니라 실패입니다.
 
-18로 내리면 DSP48E2 의 B 포트에 들어가고 곱이 38비트가 됩니다. **16비트까지 골든이 비트
-동일**이라는 것이 실측돼 있습니다 —
-근거는 `algorithm/docs/reports/2026-07-31-requant-multiplier-width.md`
-(브랜치 `rewrite/flat-functional`. 이 워크트리에는 없습니다 — 두 브랜치가 합쳐지면 링크가 됩니다).
-algorithm 쪽 변경이라 대기 중이고, **하드웨어는 기다리지 않습니다**: 상수 하나입니다.
+33이었던 이유는 결정이 아니라 부작용입니다 — dyadic 탐색이 단조라 **언제나 `shift_max`
+에 착지**해서, 비율이 1을 넘는 엣지가 전부 33비트를 요구했습니다. `acc(20b)·M` 이 53비트라
+DSP48E2 에 안 들어갑니다. 18이면 **38비트**이고 B 포트에 그대로 들어갑니다.
+
+**조인 것은 shift 가 아니라 승수입니다** — shift 범위는 2~31 그대로 남습니다.
+근거·측정·무손실 범위: `algorithm/docs/reports/2026-07-31-requant-multiplier-width.md`
+(브랜치 `rewrite/flat-functional`).
 
 구 `config.h`(256×256·256토큰)는 논문과 다릅니다. `board/` 는 아직 비어 있습니다.

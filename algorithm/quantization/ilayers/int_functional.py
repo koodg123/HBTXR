@@ -47,23 +47,38 @@ def requant(
     return out.to(torch.int32)
 
 
-def _dyadic_params(scale: float, *, shift_min: int = 1, shift_max: int = 31) -> tuple[int, int]:
+#: Must equal ``i_ops.DYADIC_MULT_BITS``. The copy below is deliberate; the VALUE is not
+#: allowed to be — a different width here means the deployed kernel and the golden it is
+#: checked against are computing different functions, which is the one thing the copy must
+#: never buy. ``test_dyadic_copy_matches_golden`` pins it.
+_DYADIC_MULT_BITS = 18
+
+
+def _dyadic_params(scale: float, *, shift_min: int = 1, shift_max: int = 31,
+                   wbits: int | None = _DYADIC_MULT_BITS) -> tuple[int, int]:
     """Best ``(multiplier, shift)`` with ``multiplier / 2^shift`` closest to ``scale``.
 
     Deliberately a copy of ``i_ops.dyadic_params`` rather than an import: no module under
     ``ilayers`` imports ``i_ops``, because ``i_ops`` is the golden these kernels are
     checked against and a reference that shares code with the thing it validates proves
     less. Same trade the hand-copied ``_pad_pair`` in ``ilayers/conv.py`` makes.
+
+    ``wbits`` bounds the multiplier so it fits the hardware's multiplier port; see the
+    note on ``i_ops.DYADIC_MULT_BITS`` for why the bound is on the multiplier and not on
+    the shift.
     """
     if scale <= 0:
         raise ValueError("scale must be positive")
     best: tuple[float, int, int] | None = None
     for shift in range(shift_min, shift_max + 1):
         multiplier = max(1, round(scale * (1 << shift)))
+        if wbits is not None and multiplier.bit_length() > wbits:
+            continue
         error = abs(multiplier / float(1 << shift) - scale)
         if best is None or error < best[0]:
             best = (error, multiplier, shift)
-    assert best is not None
+    if best is None:
+        raise ValueError(f"scale {scale} needs more than {wbits} multiplier bits")
     return int(best[1]), int(best[2])
 
 
