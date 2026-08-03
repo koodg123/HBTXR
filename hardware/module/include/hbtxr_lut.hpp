@@ -58,6 +58,23 @@ template <class CFG, int ENTRIES, class IN_BEAT, class OUT_BEAT>
 void gelu_stream(hls::stream<IN_BEAT> &in, hls::stream<OUT_BEAT> &out, int beats, int lanes,
                  const typename CFG::nl_t table[ENTRIES], int b, int s, int bound) {
 #pragma HLS INLINE off
+  // A LOCAL, fully-replicated copy, because every lane indexes the table independently:
+  // `lanes` is TP*P = 32 and `table` as it arrives is a 2-port memory, so reading it
+  // directly costs II=16 instead of 1. csynth measured exactly that. ENTRIES is 32 and an
+  // entry is 16 bits, so this is 64 bytes of registers, and copying them is `ENTRIES`
+  // cycles once per stream against `beats` of 768.
+  //
+  // Local rather than partitioning the parameter: the caller passes a core's resident
+  // member in one place and a top-level port in another, and partitioning a PORT would
+  // split it into 32 ports at whatever level it happens to surface.
+  typename CFG::nl_t tab[ENTRIES];
+#pragma HLS array_partition variable = tab complete dim = 1
+gelu_table_copy:
+  for (int i = 0; i < ENTRIES; ++i) {
+#pragma HLS pipeline II = 1
+    tab[i] = table[i];
+  }
+
 gelu_beats:
   for (int i = 0; i < beats; ++i) {
 #pragma HLS pipeline II = 1
@@ -65,7 +82,7 @@ gelu_beats:
     OUT_BEAT y;
     for (int l = 0; l < lanes; ++l)
 #pragma HLS unroll
-      y[l] = gelu<CFG, ENTRIES>(v[l], table, b, s, bound);
+      y[l] = gelu<CFG, ENTRIES>(v[l], tab, b, s, bound);
     out.write(y);
   }
 }

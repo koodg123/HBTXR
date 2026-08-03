@@ -69,6 +69,24 @@ struct HbtxrMhaCore {
   // --- plumbing --------------------------------------------------------------
   // In the target design these are the FIFOs of SPEC §5-1. Here they are the boundary
   // between two units that each buffer internally anyway.
+  //
+  // THESE ARE THE MOST EXPENSIVE THINGS IN THE MHA CORE, and S9 measured it: the six
+  // instances hold 960 of the core's 1355 DSPs. `(r0 + p) * cols` sits inside two
+  // fully-unrolled loops with a runtime stride, so it becomes TP*P live 37x39 multipliers
+  // — the largest multiplier user in the design is a memcpy.
+  //
+  // TWO LOCAL FIXES WERE TRIED AND BOTH REJECTED BY MEASUREMENT. Do not retry them:
+  //
+  //   - hoisting the row base out of the lane loop: DSP unchanged at 1355. Where the
+  //     multiply sits is not the problem;
+  //   - making `cols` a template parameter (every one of the fifteen call sites passes a
+  //     constant): DSP 1355 -> 1284, but LUT 225,678 -> 294,141, which is PAST the
+  //     device's 230,400. Compile-time strides become shift/add trees and the per-COLS
+  //     specialisation stops the copy loops sharing hardware. Net worse.
+  //
+  // The conclusion is not local. These loops exist because the stages are composed through
+  // full buffers instead of a `dataflow` region; in the target design they are FIFOs and
+  // there is no copy to pay for. That is the restructuring, not a pragma (SPEC §5-1).
   template <class BEAT, class T>
   static void push2d(hls::stream<BEAT> &s, const T *src, int rows, int cols) {
     for (int r0 = 0; r0 < rows; r0 += TP)

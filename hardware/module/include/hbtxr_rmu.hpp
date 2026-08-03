@@ -47,8 +47,13 @@ struct HbtxrRmu {
   // Resident state. The reshape factor MUST equal the unroll factor and the stream lane
   // count — three numbers, one value (SPEC §2-A). It is `array_reshape`, not
   // `array_partition`: the unrolled tile folds into one wide word rather than CIP banks.
+  //
+  // The directive is NOT at this declaration. Vitis HLS rejects `#pragma HLS` outside
+  // function scope (207-5512), so one here is not applied — and g++ discards unknown
+  // pragmas silently, which is why V1 passed for eight stages with the design's central
+  // memory decision never reaching the tool. It is restated in every member function that
+  // touches the array; see `load` and `compute`.
   w_t weight[CO][CI];
-#pragma HLS array_reshape variable = weight cyclic factor = CIP dim = 2
   acc_t bias[CO];
   ap_uint<CFG::REQ_M_BITS> mult[CO];
   ap_uint<5> shift[CO];
@@ -57,6 +62,7 @@ struct HbtxrRmu {
   /// the third RMU mode: the same hardware serves a different block by reloading.
   void load(const w_t w[CO][CI], const acc_t b[CO],
             const ap_uint<CFG::REQ_M_BITS> m[CO], const ap_uint<5> s[CO]) {
+#pragma HLS array_reshape variable = weight cyclic factor = CIP dim = 2
   load_out:
     for (int o = 0; o < CO; ++o) {
     load_in:
@@ -72,6 +78,7 @@ struct HbtxrRmu {
 
   void compute(hls::stream<in_beat_t> &in, hls::stream<out_beat_t> &out, int tokens) {
 #pragma HLS INLINE off
+#pragma HLS array_reshape variable = weight cyclic factor = CIP dim = 2
   token_tile:
     for (int t0 = 0; t0 < tokens; t0 += TP) {
       // The tile is buffered because every output tile re-reads it and a stream is

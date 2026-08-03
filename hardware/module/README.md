@@ -30,6 +30,7 @@ sh hardware/build/run_tb.sh rmu          # 하나
 | `tb/hbtxr_probe.hpp` | 스테이지 프로브 — 비교 · **배수 단언** · **골든 재충전**. tb 전용 |
 | `tb/hbtxr_golden.hpp` | 골든 `.txt` 리더 + 비교 + 음성 대조. **tb 전용** |
 | `tb/tb_{requant,gelu,layernorm,rmu,smu,softmax,patch,mha,mlp,block,backbone,top}.cpp` | V1 테스트벤치 12개 |
+| `syn/hbtxr_syn.cpp` | **V3 합성 top 16개.** 유닛이 전부 템플릿이라 csynth 에 줄 함수가 필요합니다 |
 
 `src/` 는 S4(코어)부터입니다. `golden/` 은 쓰지 않습니다 — 골든은 생성물이라
 `hardware/workspace/golden/` 에 있습니다.
@@ -51,6 +52,16 @@ hls::vector<act_t, TP*CIP>                                    // 스트림 폭
 
 **`array_partition` 이 아니라 `array_reshape`** 입니다. 그리고 **리덕션은 최내곽** —
 부분합이 `TP*COP` 플립플롭이 되어 II=1 이 공짜로 나옵니다.
+csynth 가 `compute` 의 `reduce` 를 **II=1 로 실제 스케줄**하는 것을 확인했습니다 (S9).
+
+> ### 멤버 배열의 pragma 는 **선언 옆에 두면 적용되지 않습니다**
+>
+> Vitis HLS 는 **함수 스코프 밖의 `#pragma HLS` 를 거부**합니다 (`207-5512`). 그런데 g++ 는
+> `-Wno-unknown-pragmas` 로 조용히 버립니다. 그래서 `HbtxrRmu::weight` 와 `HbtxrSmu::bt` 의
+> `array_reshape` 는 **S2~S8 여덟 단계 내내 툴에 전달된 적이 없었고**, V1 은 그걸 알 방법이
+> 없습니다. 지금은 그 배열을 만지는 **멤버 함수마다** 다시 적습니다.
+>
+> 위 "세 숫자" 중 하나가 통째로 빠져 있었다는 뜻입니다. **S9 의 첫 csynth 가 낸 첫 에러**입니다.
 
 ## 비트 레이아웃 — 생산자·소비자가 합의해야 합니다
 

@@ -53,13 +53,15 @@ struct HbtxrSmu {
   typedef hls::vector<act_t, TP * COP> out_beat_t;
 
   // The only buffer. ROWS_MAX x K of 4-bit = 2 KB at N=64, K=64 — one BRAM18.
+  // Its reshape lives in `run`, not here: the tool rejects `#pragma HLS` at class scope
+  // (see the same note in hbtxr_rmu.hpp).
   act_t bt[ROWS_MAX][K];
-#pragma HLS array_reshape variable = bt cyclic factor = CIP dim = 2
 
   void run(hls::stream<in_beat_t> &a, hls::stream<in_beat_t> &b,
            hls::stream<out_beat_t> &out, int rows, int cols, int kdim,
            ap_uint<CFG::REQ_M_BITS> mult, ap_uint<5> shift) {
 #pragma HLS INLINE off
+#pragma HLS array_reshape variable = bt cyclic factor = CIP dim = 2
     // --- B first, in full. This is the token-global dependency. ---
   load_b:
     if (TRANSPOSE_B) {

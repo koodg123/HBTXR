@@ -47,6 +47,14 @@ struct HbtxrSoftmax {
 
   void run(hls::stream<in_beat_t> &in, hls::stream<out_beat_t> &out, int rows, int cols) {
 #pragma HLS INLINE off
+    // `normalise` reads this table ONCE PER LANE — TP*P = 32 reads per beat. Left as a
+    // memory that is a 2-port ROM and II=16, which is what csynth measured before this
+    // line existed: softmax alone estimated 9.931 ns and dragged the whole MHA core to
+    // 100 MHz. 32 entries of 16 bits is 64 bytes, so the replication is free and the fix
+    // is to stop asking one memory for 32 values in a cycle.
+    //
+    // The reciprocal tables are NOT partitioned: they are read once per ROW, not per lane.
+#pragma HLS array_partition variable = exp_table complete dim = 1
   row_tile:
     for (int r0 = 0; r0 < rows; r0 += TP) {
       act_t x[TP][COLS_MAX];
@@ -58,17 +66,37 @@ struct HbtxrSoftmax {
         mx[p] = qrange<act_t>::lo;
 
     // Pass 1 — buffer and find the row max.
+    //
+    // The max is a TREE, and that is a timing decision, not a style one. Written the
+    // obvious way — `if (v[p*P+c] > mx[p]) mx[p] = v[p*P+c]` across the P lanes — it is a
+    // P-deep serial comparator chain that has to settle inside ONE cycle at II=1, and
+    // csynth measured that path at 9.931 ns: 100 MHz, three times the 3.333 ns target, and
+    // the slowest thing in the whole design. It set the clock for the MHA core too.
+    //
+    // `max` is associative, so the same answer costs log2(P) levels. The sum in LayerNorm
+    // is written as the same serial shape and does NOT need this — the tool reassociates
+    // integer `+` on its own and will not reassociate a compare-and-assign.
     fill:
       for (int j0 = 0; j0 < cols; j0 += P) {
 #pragma HLS pipeline II = 1
         const in_beat_t v = in.read();
-        for (int p = 0; p < TP; ++p)
+        for (int p = 0; p < TP; ++p) {
 #pragma HLS unroll
+          act_t t[P];
+#pragma HLS array_partition variable = t complete dim = 1
           for (int c = 0; c < P; ++c) {
 #pragma HLS unroll
-            x[p][j0 + c] = v[p * P + c];
-            if (v[p * P + c] > mx[p]) mx[p] = v[p * P + c];
+            t[c] = v[p * P + c];
+            x[p][j0 + c] = t[c];
           }
+          for (int step = P / 2; step > 0; step >>= 1)
+#pragma HLS unroll
+            for (int c = 0; c < step; ++c) {
+#pragma HLS unroll
+              if (t[c + step] > t[c]) t[c] = t[c + step];
+            }
+          if (t[0] > mx[p]) mx[p] = t[0];
+        }
       }
 
       // Pass 2 — exponent and its sum.

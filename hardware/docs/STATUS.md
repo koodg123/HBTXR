@@ -24,9 +24,20 @@
 | **S6** | Patch Embedding (Conv-F/Conv-E + shuffler) | ✅ **완료** — 두 스템 PASS |
 | **S7** | Global Buffer · interconnect · Weight Prefetcher · Controller | ✅ **완료** — 8 TRB / 코어쌍 2개 |
 | **S8** | 4코어 cyclic top + mode별 terminal decode | ✅ **완료** — 이미지 in, 5개 out |
-| **S9** | csynth · 자원 리포트 | ⬜ **다음** |
+| **S9** | csynth · 자원 리포트 | ✅ **완료** — 유닛 16개 · [리포트](reports/2026-08-03-s9-csynth.md) |
+| **S10** | dataflow 재구조화 · DSP 패킹 · 보드 인터페이스 | ⬜ **다음** |
 
-**S8 이 전체를 묶었습니다.** 남은 것은 S9 — 합성 가능성과 자원.
+**S9 가 답을 셋 냈습니다** ([리포트](reports/2026-08-03-s9-csynth.md)):
+
+| | |
+|---|---|
+| 데이터패스 **300 MHz 닫힘** | 최악 3.176 ns (`smu_ctx`) = 315 MHz |
+| 연산 루프 **II=1 확인** | RMU·SMU 의 `reduce`, LayerNorm 3패스, requant `edge` |
+| 자원 **3.5배 초과** | 코어쌍 2 + 스템 2 + 헤드 2 = LUT **350%** · DSP **265%**. MHA 코어 **하나**가 LUT 98% |
+
+**셋째가 S10 의 입력입니다.** `push2d`/`pop2d` 가 MHA DSP 1,355 중 960개를 쓰는데,
+국소 수정 두 가지를 시도해 **둘 다 측정으로 기각**했습니다 — 단계가 `dataflow` 가 아니라
+완전 버퍼로 이어져 있는 것이 원인이라 재구조화가 필요합니다.
 
 ## 규칙
 
@@ -40,8 +51,14 @@
 ```bash
 sh hardware/build/make_golden.sh                  # 골든 (생성물, git 에 없음)
 sh hardware/build/run_tb.sh                       # V1  g++ + ap_int/hls::stream
-vitis_hls -f hardware/build/hls/<blk>_csim.tcl    # V2  S8 부터
+sh hardware/build/run_csynth.sh                   # V3  csynth 유닛 16개 (vitis_hls)
+python3 hardware/tools/report_csynth.py           # V3  자원 · 타이밍 · II 표
 ```
+
+**V1 이 못 보는 것이 있습니다.** g++ 는 `#pragma HLS` 를 버리므로 **적용된 지시자와 무시된
+지시자를 구별하지 못합니다.** S9 의 첫 csynth 가 `array_reshape` 두 개가 여덟 단계 내내
+툴에 닿은 적 없었다는 것을 즉시 냈습니다 — 클래스 스코프 pragma 는 툴이 거부합니다.
+V2(csim)·V4(cosim)는 아직입니다.
 
 | tb | 대조 | 규모 |
 |---|---|---|
@@ -89,6 +106,7 @@ Pupil Ellipse 두 개만 냅니다. 배포 모델(`HybridModel`)에는 셋 다 �
 
 | 날짜 | 내용 |
 |---|---|
+| 2026-08-03 | **S9** csynth — 데이터패스 315 MHz·II=1 확인, 자원 **3.5배 초과** 실측. 클래스 스코프 `array_reshape` 2개가 여덟 단계 내내 무시되고 있었음. softmax 행 최댓값이 클럭을 3배로 늘리고 있었음(9.931→2.405 ns) |
 | 2026-08-03 | **requant 승수 18비트** — algorithm 에 폭 제한 도입. `acc·M` 53→38b. 4비트 전 프리셋·실제 모델 **비트 동일**. 생성기의 `_grid` 잠복 버그도 같이 드러남 |
 | 2026-08-03 | **S8** Top — 이미지 in, 5개 out. 두 모드 한 설계. 출력 requant 도 모드 의존이라는 것을 모드 전환 재현성 검사가 잡음 |
 | 2026-07-31 | **S7** Backbone — 8 TRB 가 **코어쌍 2개** 위를 돌며 가중치 교체. `bt` 리덕션이 런타임 길이 아닌 컴파일 최대치를 돌던 버그를 track 이 잡음 |
