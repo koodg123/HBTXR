@@ -40,17 +40,25 @@ DSP **265%**, MHA 코어 **하나**가 LUT 98%.
 
 ### S10-4 — 보드 인터페이스
 
-- [ ] `HbtxrTop`·`HbtxrBackbone` 합성. **합성 가능한 weight SOURCE 가 필요**하고 그건
-      산술이 아니라 인터페이스 결정입니다 (M-AXI)
-- [ ] PYNQ 오버레이 런타임을 새로 씁니다. 구 가이드 본문은
-      **`archive/hardware/pynq/hgtxr/README.md`** 에 있습니다 — 구 비트스트림의 파일
-      배치를 기술하므로 그대로 쓸 수 없고, 참조용입니다.
-      (`hardware/deploy/RUNTIME-GUIDE.md` 는 이 파일에 헤더만 붙인 사본이었고 재구조화에서
-      사라집니다. 본문이 archive 에 그대로 있으므로 사본을 하나 더 두지 않았습니다)
+> **페이로드 계약은 끝났습니다** (2026-08-03) — [AXI-PAYLOAD.md](../contracts/AXI-PAYLOAD.md).
+> blob 이 자기 섹션 테이블을 싣고 호스트(`deploy/hbtxr/payload.py`)와 커널
+> (`module/include/hbtxr_payload.hpp`)이 그것을 읽습니다. `tb_payload` 가 코어쌍을 두 경로로
+> 적재해 **8블록 × 32그룹 원소별 일치**를 증명했고, PYNQ 런타임·보드 스모크·`--dry-run` 이
+> 있습니다. **여기서 막고 있던 "weight SOURCE" 는 더 이상 미결이 아닙니다.**
+
+- [ ] `HbtxrTop`·`HbtxrBackbone` 합성. `HbtxrBlobSource` 를 `syn_top` 래퍼에 물리고 csynth.
+      **S10-1 이 먼저입니다** — 지금 자원으로는 배치가 안 됩니다
+- [ ] `HbtxrBlobSource` 에 **스템·헤드·fnorm·모드 로더** 추가. 섹션은 blob 에 다 있고
+      packing 은 `tb_payload` 가 검증했지만, 커널 쪽은 아직 **블록만** 적재합니다
 - [ ] 가중치 적재 경로. 지금 II=2 · qkv 적재 **221,186 사이클 = 0.74 ms**/블록 →
-      8블록 **6 ms**. 8-wide 워드로 넣으면 1/16
+      8블록 **6 ms**. 8-wide 워드로 넣으면 1/16. blob 이 이미 64바이트 정렬입니다
 - [ ] 잔여 II 미달 2건 — `smu_ctx` 의 B 전치 write (II=2, dim 2 reshape 된 메모리의 서로
       다른 행 8개에 씀) · `patch_f` windower (II=4, Conv-E 는 2)
+- [ ] **`overlay.py` 구현** — 지금 있는 것은 **초안**입니다. PL 이 필요 없는 부분
+      (`--dry-run`: 크기·모양·섹션 테이블·기댓값)만 실제로 돌려봤고, DMA 순서 · 레지스터
+      이름 · `AP_DONE` 폴링은 **비트스트림이 나와야 맞는지 알 수 있습니다.**
+      `run_smoke.py` 도 같은 상태 — 골든 오라클은 검증됐지만 실행 경로는 미검증
+- [ ] 보드 스모크 실행. 비트스트림과 보드 대기
 
 ### S10-5 — 결정 대기 (사용자)
 

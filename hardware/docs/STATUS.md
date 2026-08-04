@@ -25,7 +25,9 @@
 | **S7** | Global Buffer · interconnect · Weight Prefetcher · Controller | ✅ **완료** — 8 TRB / 코어쌍 2개 |
 | **S8** | 4코어 cyclic top + mode별 terminal decode | ✅ **완료** — 이미지 in, 5개 out |
 | **S9** | csynth · 자원 리포트 | ✅ **완료** — 유닛 16개 · [리포트](reports/2026-08-03-s9-csynth.md) |
-| **S10** | dataflow 재구조화 · DSP 패킹 · 보드 인터페이스 | ⬜ **다음** |
+| **D1–D2** | 호스트↔커널 페이로드 계약 | ✅ **완료** — [계약](contracts/AXI-PAYLOAD.md) · `tb_payload` 원소별 일치 |
+| **D3** | PYNQ 오버레이 런타임 | 🟨 **초안** — `--dry-run` 만 실제로 돌려봤습니다. 실행 경로는 비트스트림 대기 |
+| **S10** | dataflow 재구조화 · DSP 패킹 · `HbtxrTop` 합성 | ⬜ **다음** |
 
 **S9 가 답을 셋 냈습니다** ([리포트](reports/2026-08-03-s9-csynth.md)):
 
@@ -106,6 +108,7 @@ Pupil Ellipse 두 개만 냅니다. 배포 모델(`HybridModel`)에는 셋 다 �
 
 | 날짜 | 내용 |
 |---|---|
+| 2026-08-03 | **D1–D3** 페이로드 계약 — blob 이 자기 섹션 테이블을 싣고 양쪽이 읽습니다. 249 섹션 2.06 MB, 8블록 × 32그룹 원소별 일치, nibble 하나 뒤집기 거부. PYNQ 런타임 + 보드 스모크 + `--dry-run` |
 | 2026-08-03 | **S9** csynth — 데이터패스 315 MHz·II=1 확인, 자원 **3.5배 초과** 실측. 클래스 스코프 `array_reshape` 2개가 여덟 단계 내내 무시되고 있었음. softmax 행 최댓값이 클럭을 3배로 늘리고 있었음(9.931→2.405 ns) |
 | 2026-08-03 | **requant 승수 18비트** — algorithm 에 폭 제한 도입. `acc·M` 53→38b. 4비트 전 프리셋·실제 모델 **비트 동일**. 생성기의 `_grid` 잠복 버그도 같이 드러남 |
 | 2026-08-03 | **S8** Top — 이미지 in, 5개 out. 두 모드 한 설계. 출력 requant 도 모드 의존이라는 것을 모드 전환 재현성 검사가 잡음 |

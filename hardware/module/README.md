@@ -30,6 +30,8 @@ sh hardware/build/run_tb.sh rmu          # 하나
 | `tb/hbtxr_probe.hpp` | 스테이지 프로브 — 비교 · **배수 단언** · **골든 재충전**. tb 전용 |
 | `tb/hbtxr_golden.hpp` | 골든 `.txt` 리더 + 비교 + 음성 대조. **tb 전용** |
 | `tb/tb_{requant,gelu,layernorm,rmu,smu,softmax,patch,mha,mlp,block,backbone,top}.cpp` | V1 테스트벤치 12개 |
+| `tb/tb_payload.cpp` | **호스트↔커널 계약** — 코어쌍을 골든과 blob 두 경로로 적재해 멤버 전수 비교 |
+| `include/hbtxr_payload.hpp` | **가중치 blob 리더** — 백본이 요구하는 `SOURCE`. 호스트 쪽은 `deploy/hbtxr/payload.py` |
 | `syn/hbtxr_syn.cpp` | **V3 합성 top 16개.** 유닛이 전부 템플릿이라 csynth 에 줄 함수가 필요합니다 |
 
 `src/` 는 S4(코어)부터입니다. `golden/` 은 쓰지 않습니다 — 골든은 생성물이라
